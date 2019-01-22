@@ -1,0 +1,101 @@
+\documentclass[12pt]{memoir}
+\usepackage[a4paper, margin=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{graphicx}
+%\usepackage{amssymb}
+\usepackage{ifthen}
+\usepackage{nicefrac}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+\usepackage{balance}
+%\usepackage{cite}
+\usepackage{ccicons}
+\usepackage{hyperref}
+\usepackage{soul}
+\usepackage{amsfonts}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{cleveref}
+\usepackage[vlined,linesnumbered,boxed]{algorithm2e}
+
+
+%%% Colors ====================================================================
+\definecolor{phdcol0}{RGB}{0,47,107}
+\definecolor{phdcol1}{RGB}{197,12,31}
+
+%%% Tikz ======================================================================
+\usepackage{tikz}
+\usetikzlibrary{calc, chains, decorations.pathmorphing}
+
+%%% Listings ==================================================================
+\usepackage{listings}
+\lstset{
+  basicstyle=\footnotesize,
+  numbers=left,
+  stepnumber=1
+}
+
+%%% Comments ==================================================================
+\newboolean{showcomments}
+\setboolean{showcomments}{true}
+
+\ifthenelse{\boolean{showcomments}}
+           {\overfullrule=1cm
+           	\newcommand{\mynote}[2]{%
+               %\fbox{\color{Red}\bfseries\sffamily\scriptsize#1}
+               {\small\sffamily{\color{Red}#1: \color{Tan} #2}}}}
+           { \newcommand{\mynote}[2]{}}
+
+\newcommand{\hakan}[1]{\mynote{Hakan}{#1}}
+\newcommand{\soheib}[1]{\mynote{Soheib}{#1}}
+\newcommand{\fko}[1]{\mynote{Fabrice}{#1}}
+
+\input{style}
+\input{abbreviations}
+
+\begin{document}
+	
+\frontmatter
+
+
+\input{title}
+\input{preface}
+
+\newpage
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+%\newpage
+%\listoffigures
+%\listoftables
+
+\mainmatter
+
+\input{TODO}
+
+% Chapters
+\input{introduction}
+\input{preliminaries}
+\input{symmetryinsat}
+\input{conclusion}
+
+\balance
+\bibliographystyle{abbrv}
+\bibliography{main}
+
+\end{document}
+
+
+%% Local Variables:
+%% TeX-master: "main.tex"
+%% ispell-dictionary: "en_US"
+%% mode: latex
+%% mode: flyspell
+%% coding: utf-8
+%% End:

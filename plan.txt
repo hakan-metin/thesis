@@ -1,0 +1,34 @@
+- Introduction
+  - Content of the thesis
+
+- State of the Art
+
+  - SAT
+    - What is it ?
+    - How it works
+    - Example NQueen
+
+  - Symmetry Group Theory
+
+  - Symmetry in SAT
+    - How to compute ?
+    - Notion of lex leader
+
+  -Symmetry Breaking
+    - Static symmetry breaking
+      - zChaff symmsat
+      - Shatter
+      - BreakID
+
+    - Dynamic symmetry breaking
+      - SPFS
+
+    - Recap Pros Cons
+
+- Contribution
+  - Cosy
+  - Cosy + SPFS
+
+
+- Conclusion
+  - Future Work

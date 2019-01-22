@@ -1,0 +1,66 @@
+\thispagestyle{empty}
+\newgeometry{top=1.5cm, bottom=3.5cm, left=2.8cm}
+
+\hspace*{-1.15cm}
+\includegraphics[keepaspectratio=true, height=.1\textheight]
+                {img/logo-sorbonne.pdf}
+\hfill
+\includegraphics[keepaspectratio=true, height=.1\textheight]
+                {img/logo-edite.pdf}
+\vspace{1cm}
+
+\textsc{%
+  \textbf{\large\'Ecole doctorale EDITE de Paris (ED130)}%
+  \tikz[remember picture]\node (titleborderup) {};\\
+  {\color{darkgray}Informatique, Télécommunication et \'Electronique}
+  \vspace{1cm}\\
+  \textbf{\Large{}Thèse de doctorat de l'Université Sorbonne Univervité}
+  \vspace{1cm}\\
+  \large{}Spécialité : \textbf{\Large{}Ingénierie / Systèmes Informatiques}
+  \vspace{1cm}\\
+  Présentée par : \textbf{\Large{}\color{phdcol0}Hakan Metin}
+  \vspace{1cm}\\
+  Pour obtenir le grade de :
+  \vspace{.3cm}\\
+  \textbf{\Large{}Docteur de l'Université Sorbonne Université}
+  \vspace{1cm}\\
+  \textbf{Sujet de la thèse :}\\
+  \textbf{\Large{}\color{phdcol0}Exploitation des symétries dynamiques pour
+    la résolution des problèmes SAT}
+  \vspace{1cm}\\
+  Soutenue le :
+  \vspace{.2cm}\\
+  Devant le jury composé de :
+}
+\vspace{.5cm}\\
+\begin{tabular}{rll}
+  \textit{Rapporteurs :}  & \textsc{Y. XXX}  & XXX\\
+                          & \textsc{Y. XXX}  & XXX\\
+  \textit{Examinateurs :} & \textsc{Y. XXX}  & XXX\\
+                          & \textsc{Y. XXX}  & XXX\\
+                          & \textsc{Y. XXX}  & XXX\\
+                          & \textsc{Y. XXX}  & XXX\\
+\end{tabular}\\
+\tikz[remember picture]\node (titleborderdown) {};
+\begin{tikzpicture}[remember picture, overlay]
+  \node (borderse) at ($(titleborderdown.north west) + (-25pt, 2pt)$) {};
+  \path (titleborderup.north west) -| node (tmp0) {} (borderse.center);
+  \node (borderne) at ($(tmp0.center) + (0, 7pt)$) {};
+
+  \node (bordernw) at ($(borderne.center) + (-5pt, 0)$) {};
+  \path (bordernw.center) |- node (bordersw) {} (borderse.center);
+
+  \fill[phdcol0] (borderne.center)
+     -- (borderse.center)
+     -- (bordersw.center)
+     -- (bordernw.center)
+     -- cycle;
+\end{tikzpicture}
+\\
+\vfill
+\hspace*{-1.15cm}
+\includegraphics[keepaspectratio=true, width=.15\textwidth]
+                {img/logo-lip6.png}
+
+\restoregeometry
+\clearpage
