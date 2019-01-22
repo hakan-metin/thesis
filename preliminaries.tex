@@ -100,7 +100,6 @@ The above steps are repeated until the satisfiability status of the formula is d
 
 
 
-
 \clearpage
 \section{Groups basics}
 
@@ -180,24 +179,6 @@ permuted. Two elements $x_1, x_2 \in X$ are equivalent if there exists a permuta
 $g x_1 = x_2$. Then equivalence relation partitions $X$ into \emph{equivalence classes} referred to
 as the \emph{orbits} of $X$ under $G$. \hakan{Add an example}
 
-\hakan{Orbit of the permutation}
 
-
-\subsection{Graph automorphism}
-
-Given a colored graph $G = (V, E, \gamma)$, with vertex set $V \in  [1, n] $, edge set E.
-$\gamma$ is a function that apply a mapping : $V \rightarrow C$ where C is a set of \emph{colors}.
-An automorphism of G is a permutation from its vertices $g = V \rightarrow V$ 
-such that:
-\begin{itemize}
-	\item $\forall (u, v) \in E \implies (g(u), g(v)) \in E$
-	\item $\forall v \in V, \gamma(v) = \gamma(g(v))$
-\end{itemize}
-
-The graph automorphism problem is to find if a given graph has a non trivial automorphism group. 
-The computational complexity of this algorithm is conjectured to be strictly between P and NP.
-Several tools exists to tackle this problem like \saucy~\cite{katebi2010symmetry},
- \bliss~\cite{JunttilaKaski:ALENEX2007}, \nauty~\cite{mckay2003nauty},
- etc.
 
 

@@ -4,28 +4,80 @@ This chapter presents the computation and usage of symmetry in SAT problems.
 
 \section{Symmetry detection in SAT}
 
+
+For the detection of symmetries in SAT, we fist introduce the graph automorphism notion.
+Given a colored graph $G = (V, E, \gamma)$, with vertex set $V \in  [1, n] $, edge set E and
+$\gamma$ a function that apply a mapping : $V \rightarrow C$ where C is a set of \emph{colors}.
+An automorphism of G is a permutation from its vertices $g = V \rightarrow V$ 
+such that:
+\begin{itemize}
+	\item $\forall (u, v) \in E \implies (g(u), g(v)) \in E$
+	\item $\forall v \in V, \gamma(v) = \gamma(g(v))$
+\end{itemize}
+
+The graph automorphism problem is to find if a given graph has a non trivial permutation group. 
+The computational complexity of this algorithm is conjectured to be strictly between P and NP.
+Several tools exists to tackle this problem like \saucy~\cite{katebi2010symmetry},
+\bliss~\cite{JunttilaKaski:ALENEX2007}, \nauty~\cite{mckay2003nauty}, etc.
+
+
+\hakan{syntax semantic symmetries}\\
 To find symmetries in SAT problem, the formula is transformed into colored graph
 and an automophism tool is applied onto. Specifically, given a formula $\varphi$ with
 $m$ clauses and $l$ literals over $n$ variables, the graph is constructed as follows:
-\emph{clause nodes}: represent each of the $m$ clauses by a node with color 0;
-\emph{literals nodes}: represent each of the $l$ literals by a node with color 1;
-\emph{clauses edges}: connect each clause node to the node of the literals that appear in clause
-\emph{boolean consistency edges}: connect each pair of literals that correspond to the same variables.
-
-An automorphism tool detect symmetries in this graph, and outputs a set of permutations that keep the problem
-invariant. This set is a permutation group and generators of the group that acts on the formula $\varphi$.
-
-\hakan{optimisation du graph}
-\hakan{example of graph}
-Example:
-
-\section{Symmetry breaking}
-
-Permutations of a formula keeps the problem invariant. By definition, these permutations forms a group.
-This group acts naturally on set of 
+\begin{itemize}
+	\item \emph{clause nodes}: represent each of the $m$ clauses by a node with color 0;
+	\item \emph{literals nodes}: represent each of the $l$ literals by a node with color 1;
+	\item \emph{clauses edges}: connect each clause node to the node of the literals that appear in clause
+	\item \emph{boolean consistency edges}: connect each pair of literals that correspond to the same variables.
+\end{itemize}
 
 
-It follows an important property, for each assignment $\alpha$ that satisfies the formula $\varphi$ 
+\hakan{optimisation du graph}\\
+\hakan{example of graph}\\
+
+
+
+\subsection{Symmetry Group of a Formula}
+
+The group of permutations of $\Vars$ (i.e. bijections from $\Vars$ to $\Vars$) is noted
+$\Group(\Vars)$. The group $\Group(\Vars)$ naturally acts on the set of literals: for $g
+\in \Group(\Vars)$ and a literal $\ell \in \L $, $g.\ell = g(\ell)$ if $\ell$ is a
+positive literal, $g.\ell = \neg g(\neg \ell)$ if $\ell$ is a negative literal.
+The group $\Group(\Vars)$ also acts on (partial) assignments of $\Vars$ as follows: for
+$g \in \Group(\Vars)$, $\alpha \in \Assignments(\Vars)$, $g.\alpha = \{ g.\ell ~|~ \ell \in \alpha \}$. Let
+$\varphi$ be a formula, and $g \in \Group(\Vars)$. We say that $g\in \Group(\Vars)$ is a
+symmetry of $ \varphi$ if for every \emph{complete} assignment $\alpha$, $\alpha
+\models \varphi$ if and only if $g.\alpha \models \varphi$. The set of symmetries
+of $\varphi$ is noted $S(\varphi) \subseteq \Group(\Vars)$.
+
+Let $G$ be a subgroup of $\Group(\Vars)$. The \emph{orbit of $\alpha$ under $G$} (or
+simply the \emph{orbit of $\alpha$} when $G$ is clear from the context) is the set
+$ [\alpha]_G=\{ g.\alpha \mid g \in G \}$. The lexicographic leader
+(\textit{lex-leader} for short) of an orbit $[\alpha]_G$ is defined by
+$min_<([\alpha]_G)$. This \textit{lex-leader} is unique because the lexicographic
+order is a total order.
+
+
+\section{Usage of symmetries}
+
+Since the set of permutations is obtained from the formula
+
+We say that $g$ is a symmetry of $\varphi$ if $\alpha \models \varphi$ and $ g.\alpha \models \alpha$
+
+
+The optimal approach to solve a symmetric SAT problem would be to explore
+only one assignment per orbit (for instance each lex-leader). However, finding the
+lex-leader of an orbit is computationally hard.\hakan{CITATION}
+
+
+\emph{Symmetry breaking} aims at eliminating symmetry, either
+by \emph{statically} posting symmetry breaking constraints that invalidate symmetric
+assignments, or by altering the search space \emph{dynamically} to avoid symmetric search paths.
+
+
+\emph{Symmetry breaking} aims to eliminate symmetries. Two kind of practice exists: the first one is 
+\emph{static symmetry breaking}: some constraint
 
 \subsection{Lexicographic leader}
 \subsection{Compact CNF encoding of Lexicographic leader}

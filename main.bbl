@@ -1,0 +1,44 @@
+\begin{thebibliography}{1}
+
+\bibitem{barrett2018satisfiability}
+C.~Barrett and C.~Tinelli.
+\newblock Satisfiability modulo theories.
+\newblock In {\em Handbook of Model Checking}, pages 305--343. Springer, 2018.
+
+\bibitem{biere2009handbook}
+A.~Biere, M.~Heule, and H.~van Maaren.
+\newblock {\em Handbook of satisfiability}, volume 185.
+\newblock IOS press, 2009.
+
+\bibitem{dpll_62}
+M.~Davis, G.~Logemann, and D.~Loveland.
+\newblock A machine program for theorem-proving.
+\newblock {\em Commun. ACM}, 5(7):394--397, July 1962.
+
+\bibitem{JunttilaKaski:ALENEX2007}
+T.~Junttila and P.~Kaski.
+\newblock Engineering an efficient canonical labeling tool for large and sparse
+  graphs.
+\newblock In D.~Applegate, G.~S. Brodal, D.~Panario, and R.~Sedgewick, editors,
+  {\em Proceedings of the Ninth Workshop on Algorithm Engineering and
+  Experiments and the Fourth Workshop on Analytic Algorithms and
+  Combinatorics}, pages 135--149. SIAM, 2007.
+
+\bibitem{katebi2010symmetry}
+H.~Katebi, K.~Sakallah, and I.~Markov.
+\newblock Symmetry and satisfiability: An update.
+\newblock {\em Theory and Applications of Satisfiability Testing--SAT 2010},
+  pages 113--127, 2010.
+
+\bibitem{mckay2003nauty}
+B.~D. McKay.
+\newblock nauty user’s guide (version 2.2).
+\newblock Technical report, Technical Report TR-CS-9002, Australian National
+  University, 2003.
+
+\bibitem{rossi2006handbook}
+F.~Rossi, P.~Van~Beek, and T.~Walsh.
+\newblock {\em Handbook of constraint programming}.
+\newblock Elsevier, 2006.
+
+\end{thebibliography}
