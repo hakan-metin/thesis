@@ -1,0 +1,44 @@
+\chapter{Symmetry in SAT}\label{chap:symmetryinsat}
+
+This chapter presents the computation and usage of symmetry in SAT problems.
+
+\section{Symmetry detection in SAT}
+
+To find symmetries in SAT problem, the formula is transformed into colored graph
+and an automophism tool is applied onto. Specifically, given a formula $\varphi$ with
+$m$ clauses and $l$ literals over $n$ variables, the graph is constructed as follows:
+\emph{clause nodes}: represent each of the $m$ clauses by a node with color 0;
+\emph{literals nodes}: represent each of the $l$ literals by a node with color 1;
+\emph{clauses edges}: connect each clause node to the node of the literals that appear in clause
+\emph{boolean consistency edges}: connect each pair of literals that correspond to the same variables.
+
+An automorphism tool detect symmetries in this graph, and outputs a set of permutations that keep the problem
+invariant. This set is a permutation group and generators of the group that acts on the formula $\varphi$.
+
+\hakan{optimisation du graph}
+\hakan{example of graph}
+Example:
+
+\section{Symmetry breaking}
+
+Permutations of a formula keeps the problem invariant. By definition, these permutations forms a group.
+This group acts naturally on set of 
+
+
+It follows an important property, for each assignment $\alpha$ that satisfies the formula $\varphi$ 
+
+\subsection{Lexicographic leader}
+\subsection{Compact CNF encoding of Lexicographic leader}
+
+\subsection{Some special groups}
+
+
+
+
+%% Local Variables:
+%% TeX-master: "main.tex"
+%% ispell-dictionary: "en_US"
+%% mode: latex
+%% mode: flyspell
+%% coding: utf-8
+%% End:
