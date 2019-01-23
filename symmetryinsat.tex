@@ -4,7 +4,6 @@ This chapter presents the computation and usage of symmetry in SAT problems.
 
 \section{Symmetry detection in SAT}
 
-
 For the detection of symmetries in SAT, we fist introduce the graph automorphism notion.
 Given a colored graph $G = (V, E, \gamma)$, with vertex set $V \in  [1, n] $, edge set E and
 $\gamma$ a function that apply a mapping : $V \rightarrow C$ where C is a set of \emph{colors}.
@@ -32,11 +31,17 @@ $m$ clauses and $l$ literals over $n$ variables, the graph is constructed as fol
 	\item \emph{boolean consistency edges}: connect each pair of literals that correspond to the same variables.
 \end{itemize}
 
+An optimization of this graph is possible with the usage of binary clauses i.e. a clause with only two literals.
+The clause node can be omitted and we connect the two literals. 
 
 \hakan{optimisation du graph}\\
+
+\hakan{creation d'un probleme fil conducteur and utilisation de celui dans chaque partie, du calcul des symétries
+jusqu'au SBP}\\
+
 \hakan{example of graph}\\
 
-
+ 
 
 \subsection{Symmetry Group of a Formula}
 
