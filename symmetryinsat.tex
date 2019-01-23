@@ -68,16 +68,17 @@ We say that $g$ is a symmetry of $\varphi$ if $\alpha \models \varphi$ and $ g.\
 
 The optimal approach to solve a symmetric SAT problem would be to explore
 only one assignment per orbit (for instance each lex-leader). However, finding the
-lex-leader of an orbit is computationally hard.\hakan{CITATION}
+lex-leader of an orbit is computationally hard\hakan{CITATION}. 
+However, some practical algorithms exists to solve this problem.
 
 
 \emph{Symmetry breaking} aims at eliminating symmetry, either
 by \emph{statically} posting symmetry breaking constraints that invalidate symmetric
 assignments, or by altering the search space \emph{dynamically} to avoid symmetric search paths.
 
+\emph{static symmetry breaking} acts like a preprocessor which add \emph{symmetry breaking predicates} (SBP)
+at the original formula and solve the augmented problem.
 
-\emph{Symmetry breaking} aims to eliminate symmetries. Two kind of practice exists: the first one is 
-\emph{static symmetry breaking}: some constraint
 
 \subsection{Lexicographic leader}
 \subsection{Compact CNF encoding of Lexicographic leader}
