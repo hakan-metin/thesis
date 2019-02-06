@@ -1,13 +1,53 @@
-\chapter{Symmetry in SAT}\label{chap:symmetryinsat}
+\chapter{Symmetry and SAT}\label{chap:symmetryinsat}
 
-This chapter presents the computation and usage of symmetry in SAT problems.
+%This chapter presents the computation and usage of symmetry in SAT problems.
+
+
+The group of permutations of $\Vars$ (i.e. bijections from $\Vars$ to $\Vars$) is noted
+$\Group(\Vars)$. The group $\Group(\Vars)$ naturally acts on the set of literals: for $g
+\in \Group(\Vars)$ and a literal $\ell \in \Lits $, $g.\ell = g(\ell)$ if $\ell$ is a
+positive literal, $g.\ell = \neg g(\neg \ell)$ if $\ell$ is a negative literal.
+The group $\Group(\Vars)$ also acts on (partial) assignments of $\Vars$ as follows: for
+$g \in \Group(\Vars)$, $\alpha \in \Assignments(\Vars)$, $g.\alpha = \{ g.\ell ~|~ \ell \in \alpha \}$. Let $\varphi$ be a formula, and $g \in \Group(\Vars)$. We say that $g\in \Group(\Vars)$ is a
+symmetry of $ \varphi$ if for every \emph{complete} assignment $\alpha$, $\alpha
+\models \varphi$ if and only if $g.\alpha \models \varphi$. The set of symmetries
+of $\varphi$ is noted $S(\varphi) \subseteq \Group(\Vars)$.
+
+
+
+The previous mathematical definitions of group theory is applied to the CNF formula.
+So, the group of permutations of $\Vars$ (i.e. bijections from $\Vars$ to $\Vars$) is noted
+$\Group(\Vars)$. We say that $g\in \Group(\Vars)$ is a symmetry of $ \varphi$ if following conditions holds:
+\vspace{-1em}
+\begin{itemize}[topsep=1em]
+	\item permutation fixes the formula, $g(\varphi) =  \varphi$ 
+	\item $g$  commutes with the negation: $g(\neg l)  = \neg g(l)$
+\end{itemize}
+
+The set of symmetries of $\varphi$ is noted $S(\varphi) \subseteq \Group(\Vars)$.
+The sets of symmetries of a formula $\varphi$ preserves the satisfaction,
+for every \emph{complete} assignment $\alpha$, 
+$\alpha \models \varphi \leftrightarrow g(\alpha) \models \varphi$ for $g \in S(\varphi)$.
+The group $S(\varphi)$ also acts on (partial) assignments of $\Vars$ as follows: for
+$g \in S(\varphi)$, $\alpha \in \Assignments(\Vars)$, $g.\alpha = \{ g.\ell ~|~ \ell \in \alpha \}$.
+
+
+The next section presents how to compute the set of \emph{generators} of a given formula.
+
+%Let $G$ be a subgroup of $\Group(\Vars)$. The \emph{orbit of $\alpha$ under $G$} (or
+%simply the \emph{orbit of $\alpha$} when $G$ is clear from the context) is the set
+%$ [\alpha]_G=\{ g.\alpha \mid g \in G \}$. The lexicographic leader
+%(\textit{lex-leader} for short) of an orbit $[\alpha]_G$ is defined by
+%$min_<([\alpha]_G)$. This \textit{lex-leader} is unique because the lexicographic
+%order is a total order.
+
 
 \section{Symmetry detection in SAT}
 
 For the detection of symmetries in SAT, we fist introduce the graph automorphism notion.
 Given a colored graph $G = (V, E, \gamma)$, with vertex set $V \in  [1, n] $, edge set E and
 $\gamma$ a function that apply a mapping : $V \rightarrow C$ where C is a set of \emph{colors}.
-An automorphism of G is a permutation from its vertices $g = V \rightarrow V$ 
+An automorphism of G is a permutation from its vertices $g :V \rightarrow V$ 
 such that:
 \begin{itemize}
 	\item $\forall (u, v) \in E \implies (g(u), g(v)) \in E$
@@ -20,47 +60,77 @@ Several tools exists to tackle this problem like \saucy~\cite{katebi2010symmetry
 \bliss~\cite{JunttilaKaski:ALENEX2007}, \nauty~\cite{mckay2003nauty}, etc.
 
 
-\hakan{syntax semantic symmetries}\\
+%\hakan{syntax semantic symmetries}\\
+There exists different ways to encode a SAT problems, which leads to different symmetries in these problem.
+When a symmetry depends on the structure of the problem, we say \emph{syntactic} symmetries. 
+In contrast, symmetries were \emph{semantic}, when it is not inherent to the encoding.
 To find symmetries in SAT problem, the formula is transformed into colored graph
-and an automophism tool is applied onto. Specifically, given a formula $\varphi$ with
-$m$ clauses and $l$ literals over $n$ variables, the graph is constructed as follows:
+and an automorphism tool is applied onto. Specifically, given a formula $\varphi$ with
+$m$ clauses over $n$ variables, the graph is constructed as follows:
 \begin{itemize}
 	\item \emph{clause nodes}: represent each of the $m$ clauses by a node with color 0;
 	\item \emph{literals nodes}: represent each of the $l$ literals by a node with color 1;
-	\item \emph{clauses edges}: connect each clause node to the node of the literals that appear in clause
+	\item \emph{clauses edges}: connect each clause node to the node of the literals that appear in clause;
 	\item \emph{boolean consistency edges}: connect each pair of literals that correspond to the same variables.
 \end{itemize}
 
+
+\begin{figure}[h]
+	\begin{minipage}[c]{.2\textwidth}
+		\lstinputlisting[numbers=none]{cnfs/battleship-3-4-unsat.cnf}
+	\end{minipage}
+	\begin{minipage}[l]{.75\textwidth}
+		\includegraphics[width=4.3in]{cnfs/graph_cnf_no_opt-crop}
+	\end{minipage}
+\caption{Example of constructed symmetry graph for a given CNF}
+\end{figure}
+
+\hakan{Explication du graph + informations num nodes num edges. Probleme reel battleship
+}
+
+
+\hakan{extension of permutation to clauses assignments ...}
+
 An optimization of this graph is possible with the usage of binary clauses i.e. a clause with only two literals.
-The clause node can be omitted and we connect the two literals. Because the edges has no colors, we must check
-if the produced permutations are spurious. To do 
+The clause node can be omitted and we connect the two literals. As we cannot distinguish between the optimized edge 
+and boolean consistency edges, we must check if the produced permutations are spurious. 
+To do so, as we ensure the permutation commutes with the negation it suffice to check:
+$\forall x \in Supp(g), g.\neg x = \neg g.x$.
+Roughly speaking, we check if the image of the negation of $x$ is equals to the negation of the image of $x$,
+for each element $x$ in the support of the permutation.
+In the previous example, the number of nodes in the graph is reduced to \hakan{COUNT NODES}.
+
+\begin{figure}[h]
+	\begin{minipage}[c]{.2\textwidth}
+		\lstinputlisting[numbers=none]{cnfs/battleship-3-4-unsat.cnf}
+	\end{minipage}
+	\begin{minipage}[l]{.75\textwidth}
+		\includegraphics[width=4.3in]{cnfs/graph_cnf_opt-crop}
+	\end{minipage}
+	\caption{Example of constructed symmetry graph for a given CNF}
+\end{figure}
+
 
 \hakan{optimisation du graph}\\
 \hakan{creation d'un probleme fil conducteur and utilisation de celui dans chaque partie, du calcul des symétries
 jusqu'au SBP}\\
-\hakan{example of graph}\\
+
+When these graph is given to an automorphism tool like \bliss, the following \emph{generators} are 
+obtained:\\
+$g_0$: (2 3)(5 6)(8 9)(11 12)(-2 -3)(-5 -6)(-8 -9)(-11 -12)\\
+$g_1$: (4 5 6)(7 9 8)(-4 -5 -6)(-7 -9 -8)\\
+$g_2$: (4 7)(5 8)(6 9)(-4 -7)(-5 -8)(-6 -9)\\
+$g_3$: (1 2)(5 6)(7 9)(10 11)(-1 -2)(-5 -6)(-7 -9)(-10 -11)\\
+$g_4$: (1 10)(2 11)(3 12)(-1 -10)(-2 -11)(-3 -12)\\
 
  
+ 
+ \begin{figure}[h]
+ 	\centering
+ 		\includegraphics[width=\textwidth]{cnfs/orbits}
+ 	\caption{Orbits}
+ \end{figure}
 
-\subsection{Symmetry Group of a Formula}
-
-The group of permutations of $\Vars$ (i.e. bijections from $\Vars$ to $\Vars$) is noted
-$\Group(\Vars)$. The group $\Group(\Vars)$ naturally acts on the set of literals: for $g
-\in \Group(\Vars)$ and a literal $\ell \in \L $, $g.\ell = g(\ell)$ if $\ell$ is a
-positive literal, $g.\ell = \neg g(\neg \ell)$ if $\ell$ is a negative literal.
-The group $\Group(\Vars)$ also acts on (partial) assignments of $\Vars$ as follows: for
-$g \in \Group(\Vars)$, $\alpha \in \Assignments(\Vars)$, $g.\alpha = \{ g.\ell ~|~ \ell \in \alpha \}$. Let
-$\varphi$ be a formula, and $g \in \Group(\Vars)$. We say that $g\in \Group(\Vars)$ is a
-symmetry of $ \varphi$ if for every \emph{complete} assignment $\alpha$, $\alpha
-\models \varphi$ if and only if $g.\alpha \models \varphi$. The set of symmetries
-of $\varphi$ is noted $S(\varphi) \subseteq \Group(\Vars)$.
-
-Let $G$ be a subgroup of $\Group(\Vars)$. The \emph{orbit of $\alpha$ under $G$} (or
-simply the \emph{orbit of $\alpha$} when $G$ is clear from the context) is the set
-$ [\alpha]_G=\{ g.\alpha \mid g \in G \}$. The lexicographic leader
-(\textit{lex-leader} for short) of an orbit $[\alpha]_G$ is defined by
-$min_<([\alpha]_G)$. This \textit{lex-leader} is unique because the lexicographic
-order is a total order.
 
 
 \section{Usage of symmetries}
