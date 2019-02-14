@@ -29,18 +29,10 @@ The sets of symmetries of a formula $\varphi$ preserves the satisfaction,
 for every \emph{complete} assignment $\alpha$, 
 $\alpha \models \varphi \leftrightarrow g(\alpha) \models \varphi$ for $g \in S(\varphi)$.
 The group $S(\varphi)$ also acts on (partial) assignments of $\Vars$ as follows: for
-$g \in S(\varphi)$, $\alpha \in \Assignments(\Vars)$, $g.\alpha = \{ g.\ell ~|~ \ell \in \alpha \}$.
+$g \in S(\varphi)$, $\alpha \in \Assignments(\Vars)$, $g.\alpha = \{ g.\ell ~|~ \ell \in \alpha \}$. \hakan{Permutations acts also on clauses}
 
 
 The next section presents how to compute the set of \emph{generators} of a given formula.
-
-%Let $G$ be a subgroup of $\Group(\Vars)$. The \emph{orbit of $\alpha$ under $G$} (or
-%simply the \emph{orbit of $\alpha$} when $G$ is clear from the context) is the set
-%$ [\alpha]_G=\{ g.\alpha \mid g \in G \}$. The lexicographic leader
-%(\textit{lex-leader} for short) of an orbit $[\alpha]_G$ is defined by
-%$min_<([\alpha]_G)$. This \textit{lex-leader} is unique because the lexicographic
-%order is a total order.
-
 
 \section{Symmetry detection in SAT}
 
@@ -60,8 +52,9 @@ Several tools exists to tackle this problem like \saucy~\cite{katebi2010symmetry
 \bliss~\cite{JunttilaKaski:ALENEX2007}, \nauty~\cite{mckay2003nauty}, etc.
 
 
-%\hakan{syntax semantic symmetries}\\
-There exists different ways to encode a SAT problems, which leads to different symmetries in these problem.
+
+There exists different ways to encode a SAT problems,
+which leads to different symmetries in these problem.
 When a symmetry depends on the structure of the problem, we say \emph{syntactic} symmetries. 
 In contrast, symmetries were \emph{semantic}, when it is not inherent to the encoding.
 To find symmetries in SAT problem, the formula is transformed into colored graph
@@ -75,7 +68,7 @@ $m$ clauses over $n$ variables, the graph is constructed as follows:
 \end{itemize}
 
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\begin{minipage}[c]{.2\textwidth}
 		\lstinputlisting[numbers=none]{cnfs/battleship-3-4-unsat.cnf}
 	\end{minipage}
@@ -88,17 +81,27 @@ $m$ clauses over $n$ variables, the graph is constructed as follows:
 \hakan{Explication du graph + informations num nodes num edges. Probleme reel battleship
 }
 
+The battleship problems place *** and two * in grid 3x4 \\
+1  2  3\\
+4  5  6\\
+7  8  9\\
+10 11 12\\
 
-\hakan{extension of permutation to clauses assignments ...}
+one ship per row.\\
+
+Produced graph contains 12 * 2 = 24  + 21 = 45 nodes and 24 + 36 = 60 edges 
+
+\clearpage
 
 An optimization of this graph is possible with the usage of binary clauses i.e. a clause with only two literals.
 The clause node can be omitted and we connect the two literals. As we cannot distinguish between the optimized edge 
 and boolean consistency edges, we must check if the produced permutations are spurious. 
 To do so, as we ensure the permutation commutes with the negation it suffice to check:
 $\forall x \in Supp(g), g.\neg x = \neg g.x$.
-Roughly speaking, we check if the image of the negation of $x$ is equals to the negation of the image of $x$,
-for each element $x$ in the support of the permutation.
-In the previous example, the number of nodes in the graph is reduced to \hakan{COUNT NODES}.
+Roughly speaking, we check if the image of the negation of $x$ is equals to the negation of the image of $x$, for each element $x$ in the support of the permutation.
+This optimization allows to compute symmetries of the problem more efficiently.
+In the previous example, the graph has deleted 12 nodes and 12 edges. More generally,
+the graph removes as many nodes and edges as binary clauses on the formula.
 
 \begin{figure}[h]
 	\begin{minipage}[c]{.2\textwidth}
@@ -111,53 +114,102 @@ In the previous example, the number of nodes in the graph is reduced to \hakan{C
 \end{figure}
 
 
-\hakan{optimisation du graph}\\
-\hakan{creation d'un probleme fil conducteur and utilisation de celui dans chaque partie, du calcul des symétries
-jusqu'au SBP}\\
+%\hakan{optimisation du graph}\\
+%\hakan{creation d'un probleme fil conducteur and utilisation de celui dans chaque partie, du calcul des symétries
+%jusqu'au SBP}\\
 
 When these graph is given to an automorphism tool like \bliss, the following \emph{generators} are 
-obtained:\\
-$g_0$: (2 3)(5 6)(8 9)(11 12)(-2 -3)(-5 -6)(-8 -9)(-11 -12)\\
-$g_1$: (4 5 6)(7 9 8)(-4 -5 -6)(-7 -9 -8)\\
-$g_2$: (4 7)(5 8)(6 9)(-4 -7)(-5 -8)(-6 -9)\\
-$g_3$: (1 2)(5 6)(7 9)(10 11)(-1 -2)(-5 -6)(-7 -9)(-10 -11)\\
-$g_4$: (1 10)(2 11)(3 12)(-1 -10)(-2 -11)(-3 -12)\\
+obtained:
+\begin{itemize}[topsep=0em]
+\item $g_0$: (2 3)(5 6)(8 9)(11 12)(-2 -3)(-5 -6)(-8 -9)(-11 -12)
+\item $g_1$: (4 5 6)(7 9 8)(-4 -5 -6)(-7 -9 -8)
+\item $g_2$: (4 7)(5 8)(6 9)(-4 -7)(-5 -8)(-6 -9)
+\item $g_3$: (1 2)(5 6)(7 9)(10 11)(-1 -2)(-5 -6)(-7 -9)(-10 -11)
+\item $g_4$: (1 10)(2 11)(3 12)(-1 -10)(-2 -11)(-3 -12)
+\end{itemize}
 
- 
- 
+
+The visualization of the orbits of literals on the problem could be seen in figure~\ref{fig:orbits}, where each node represents a literal. Two literals are 
+linked with an arc if it exists a permutation that maps the literal to the second one.
+By definition of the orbits, each literal belongs to a strongly connected components (SCC).
+
  \begin{figure}[h]
  	\centering
  		\includegraphics[width=\textwidth]{cnfs/orbits}
  	\caption{Orbits}
+ 	\label{fig:orbits}
  \end{figure}
 
 
 
 \section{Usage of symmetries}
 
-Since the set of permutations is obtained from the formula
-
-We say that $g$ is a symmetry of $\varphi$ if $\alpha \models \varphi$ and $ g.\alpha \models \alpha$
-
-
-The optimal approach to solve a symmetric SAT problem would be to explore
-only one assignment per orbit (for instance each lex-leader). However, finding the
-lex-leader of an orbit is computationally hard\hakan{CITATION}. 
-However, some practical algorithms exists to solve this problem.
-
-
 \emph{Symmetry breaking} aims at eliminating symmetry, either
 by \emph{statically} posting symmetry breaking constraints that invalidate symmetric
 assignments, or by altering the search space \emph{dynamically} to avoid symmetric search paths.
 
-\emph{static symmetry breaking} acts like a preprocessor which add \emph{symmetry breaking predicates} (SBP)
-at the original formula and solve the augmented problem.
+
+In order to exploit the symmetry properties of a SAT problem, we need to
+introduce an ordering relation between the assignments.
 
 
-\subsection{Lexicographic leader}
-\subsection{Compact CNF encoding of Lexicographic leader}
+\begin{definition}[Assignments ordering]
+	\label{def:assignment_ordering}
+	We assume a total order, $\prec$, on $\Vars$.  Given two assignments $(\alpha,\beta) \in \Assignments(\Vars)^2 $, we say that $\alpha$ is strictly smaller than $\beta$, noted $\alpha < \beta$, if there exists a variable $v \in \Vars$
+	such that:
+	\begin{itemize}
+		\item for all $v' \prec v$, either $v' \in \alpha \cap \beta$ or $\neg v' \in \alpha \cap
+		\beta$.
+		\item $\neg v \in \alpha$ and $v \in \beta$.\footnote{We could have chosen as well $v \in \alpha$ and $\neg v \in \beta$ without loss of generality.}
+	\end{itemize}
+\end{definition}
 
-\subsection{Some special groups}
+Note that $<$ coincides with the lexicographical order on \emph{complete}
+assignments. Furthermore, the $<$ relation is monotonic as expressed in the following proposition.
+
+\begin{proposition}[Monotonicity of assignments ordering]
+	\label{prop:monocity_assignments_ordering}
+	Let  $(\alpha,\alpha',\beta,\beta') \in \Assignments(\Vars)^4 $ be four assignments.
+	$$\text{If}~\alpha \subseteq \alpha'~\text{and}~\beta \subseteq \beta',~\text{then}~\alpha < \beta \implies \alpha' < \beta'$$
+\end{proposition}
+
+\begin{proof}
+	The proposition follows on directly from Definition \ref{def:assignment_ordering}.
+\end{proof}
+
+
+Let $\varphi$ a formula, and $G$ the group from the formula.
+The \emph{orbit of $\alpha$ under $G$} (or
+simply the \emph{orbit of $\alpha$} when $G$ is clear from the context) is the set
+$ [\alpha]_G=\{ g.\alpha \mid g \in G \}$. The lexicographic leader
+(\textit{lex-leader} for short) of an orbit $[\alpha]_G$ is defined by
+$min_<([\alpha]_G)$. This \textit{lex-leader} is unique because the lexicographic
+order is a total order.
+The optimal approach to solve a symmetric SAT problem would be to explore
+only one assignment per orbit (for instance each lex-leader). However, finding the
+lex-leader of an orbit is computationally hard~\cite{Luks2004}. 
+%However, some practical algorithms exists to solve this problem.
+
+
+The exploitation of symmetries statically is called \emph{static symmetry breaking}.
+It acts like a preprocessor which add \emph{symmetry breaking predicates} (SBP) at the 
+original formula and solve the augmented problem,
+
+
+\begin{proposition}[Satisfiability preservation]
+	\label{prop:equi_satisfiability}
+	 Let $\varphi$ a CNF problem and $\psi$ the computed symmetry breaking predicates.
+	 Solve $\varphi \cup \psi$ is equi-satisfiable to solve $\varphi$.
+\end{proposition}
+
+\begin{proof}
+	On the first case, if the initial formula $\varphi$ is \unsat,
+	then the augmented problem $\varphi \cup \psi$ is trivially \unsat.
+	On the second case, if $\varphi$ is \sat then $\varphi \cup \psi$ is also \sat because 
+	$\psi$ forbids only non lex-leader assignment so the formula still be \sat.
+\end{proof}
+
+
 
 
 

@@ -10,9 +10,9 @@
 \contentsline {subsection}{Permutation groups}{8}{section*.6}
 \contentsline {chapter}{\chapternumberline {3}Symmetry and SAT}{9}{chapter.3}
 \contentsline {section}{\numberline {3.1}Symmetry detection in SAT}{9}{section.3.1}
-\contentsline {section}{\numberline {3.2}Usage of symmetries}{11}{section.3.2}
-\contentsline {subsection}{Lexicographic leader}{12}{section*.7}
-\contentsline {subsection}{Compact CNF encoding of Lexicographic leader}{12}{section*.8}
-\contentsline {subsection}{Some special groups}{12}{section*.9}
-\contentsline {chapter}{\chapternumberline {4}Conclusion}{15}{chapter.4}
-\contentsline {chapter}{Bibliography}{17}{chapter*.10}
+\contentsline {section}{\numberline {3.2}Usage of symmetries}{13}{section.3.2}
+\contentsline {chapter}{\chapternumberline {4}SymmSAT}{15}{chapter.4}
+\contentsline {subsubsection}{Drawbacks of the static-based approaches.}{15}{section*.7}
+\contentsline {subsubsection}{Proposed solution. }{15}{section*.8}
+\contentsline {chapter}{\chapternumberline {5}Conclusion}{19}{chapter.5}
+\contentsline {chapter}{Bibliography}{21}{chapter*.9}

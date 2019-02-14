@@ -1,0 +1,158 @@
+\chapter{SymmSAT}\label{chap:symmSAT}
+
+
+\subsubsection{Drawbacks of the static-based approaches.} In the general case,
+the size of the \textit{sbp} can be exponential in the number of variables of
+the problem so that they cannot be totally computed. Even in more favorable
+situations, the size of the generated \textit{sbp} is often too large to be
+effectively handled by a SAT solver~\cite{Luks2004}. On the other hand, if
+only a subset of the symmetries is considered then the resulting search pruning
+will not be that interesting and its effectiveness depends heavily on the
+heuristically chosen symmetries \cite{biere2009handbook}. Besides, these approaches
+are preprocessors, so their combination with other techniques, such as
+\emph{symmetry propagation}~\cite{Devriendt12}, can be very hard. Also, tuning
+their parameters during the solving turns out to be very difficult. For all
+these reasons, some classes of SAT problems cannot be solved yet despite
+exhibiting symmetries.
+
+
+
+%
+%\emph{static symmetry breaking} has some drawbacks which are
+%\begin{itemize}
+%	\item pre-generation of the constraints
+%	\item maybe unused (larges) clauses by the solver
+%	\item 
+%\end{itemize}
+
+
+\subsubsection{Proposed solution. } To handle these issues, we propose a new
+approach that reuses the principles of the static approaches, but operates
+dynamically: the symmetries are broken during the search process without any
+pre-generation of the \textit{sbp}. To do so, we elaborate the notions of
+\emph{symmetry status tracking} and \emph{effective symmetric breaking
+	predicates} (\emph{esbp}).
+
+The approach is implemented using a couple of components: (1) a
+\textit{Conflict Driven Clauses Learning (CDCL) search engine}; (2) \textit{a
+	symmetry controller}. Roughly speaking, the first component performs the
+classical search activity on the SAT problem, while the second observes the
+engine and maintains the status of the symmetries. When the controller detects
+a situation where the engine is starting to explore a redundant
+part\footnote{Isomorphic to a part that has been/will be explored.}, it orders
+the engine to operate a backjump. The detection is performed thanks to
+\emph{symmetry status tracking} and the backjump order is given by a simple
+injection of an \emph{esbp} computed on the fly.
+
+The main advantage of such an approach is to cope with the heavy (and
+potentially blocking) pre-generation phase of the static-based approaches, but
+also offers opportunities to combine with other dynamic-based approaches, like
+the \textit{symmetry propagation} technique~\cite{Devriendt12}. It also gives
+more flexibility for adjusting some parameters on the fly. Moreover, the
+overhead for non symmetric formulas is reduced to the computation time of the
+graph automorphism.
+
+The extensive evaluation of our approach on the symmetric formulas of the last
+six SAT contests shows that it outperforms the state-of-the-art techniques, in
+particular on unsatisfiable instances, which are the hardest class of the
+problem.
+
+
+
+What we propose here is a best effort approach that tries to eliminate,
+\textit{dynamically}, the \textit{non lex-leading} assignments with a minimal
+computation effort. To do so, we first introduce the notions of
+\textit{reducer}, \textit{inactive} and \textit{active} permutation with
+respect to an assignment $\alpha$.
+
+\begin{definition}[Reducer, inactive and active permutation] A permutation $g$
+	is a \emph{reducer} of an assignment $\alpha$ if $g.\alpha < \alpha$ (hence $\alpha$ cannot be
+	the lex-leader of its orbit. $g$ reduces it and all its extensions). $g$ is
+	\emph{inactive} on $\alpha$ when $\alpha < g.\alpha$ (so, $g$ cannot reduce $\alpha$ and all
+	the extensions). A symmetry is said to be \emph{active} with respect to $\alpha$
+	when it is neither inactive nor a reducer of $\alpha$. \end{definition}
+
+Proposition~\ref{prop:status} restates this definition in terms of variables
+and is the basis of an efficient algorithm to keep track of the status of a
+permutation during the solving. Let us, first, recall that the \emph{support},
+$\Vars_g$, of a permutation $g$ is the set $\{ v \in \Vars \mid g(v) \neq v\}$.
+
+\begin{proposition}
+	\label{prop:status}
+	Let $\alpha \in \Assignments(\Vars)$ be an assignment, $g \in \Group{\Vars}$ a permutation and $ \Vars_g \subseteq  \Vars$ the support of $g$. We say that $g$ is:
+	\begin{enumerate}
+		\item  \emph{a reducer of} $\alpha$  if there exists a variable $v \in \Vars_g$
+		such that:
+		\begin{itemize}
+			\item $\forall\ v' \in \Vars_g$, s. t. $v' \prec v$, either $\{v', g^{-1}(v')\}\subseteq\alpha $ or $\{\neg v', \neg g^{-1}(v')\} \subseteq \alpha $,
+			\item $\{v, \neg g^{-1}(v)\} \subseteq \alpha$;
+		\end{itemize}
+		\item  \emph{inactive} on $\alpha$  if there exists a variable $v \in \Vars_g$
+		such that:
+		\begin{itemize}
+			\item $\forall\ v' \in \Vars_g$, s. t. $v' \prec v$, either $\{v', g^{-1}(v')\}\subseteq\alpha $ or $\{\neg v', \neg g^{-1}(v')\} \subseteq \alpha $,
+			\item $\{\neg v, g^{-1}(v)\} \subseteq \alpha$;
+		\end{itemize}
+		\item  \emph{active} on $\alpha$, otherwise.
+	\end{enumerate}
+\end{proposition}
+
+When $g$ is a \textit{reducer} of $\alpha$ we can define a predicate that contradicts $\alpha$ yet preserves the satisfiability of the formula. Such a predicate will be used to discard $\alpha$, and all its extensions, from a further visit and hence pruning the search tree.
+
+\begin{definition}[Effective Symmetry Breaking Predicate]
+	\label{def:esbp}
+	Let $\alpha \in \Assignments(\Vars)$, and $g \in \Group{\Vars}$.
+	We say that the formula $\psi$ is an effective symmetry breaking predicate (\textit{esbp} for short) for $\alpha$ under $g$ if:
+	$$\alpha \not\models \psi \text{ and for all }\beta \in \Assignments(\Vars), \beta \not\models \psi \Rightarrow g.\beta < \beta$$
+\end{definition}
+
+The next definition gives a way to obtain such an effective symmetry-breaking predicate from an assignment and a reducer.
+
+\begin{definition}[A construction of an \emph{esbp}]
+	\label{def:eta}
+	Let $\varphi$ be a formula.
+	Let $g$ be a symmetry of $\varphi$ that reduces an assignment $\alpha$.
+	Let $v$ be the variable whose existence is given by item 1. in Proposition~\ref{prop:status}.
+	Let $U = \{ v', \neg v' \mid v' \in \Vars_g \text{ and } v'~\preceq~v\}$.
+	We define $\eta(\alpha, g)$ as $(U \cup g^{-1}.U) \setminus \alpha$.
+\end{definition}
+
+\textbf{Example}. Let us consider $\Vars = \{x_1, x_2, x_3, x_4, x_5\}$, $g =
+(x_1\,x_3)(x_2\,x_4)$, and a partial assignment $\alpha = \{x_1, x_2,
+x_3, \neg x_4\}$. Then, $g.\alpha = \{x_1, \neg x_2, x_3, x_4\}$ and $v = x_2$.
+So, $U = \{x_1, \neg x_1, x_2, \neg x_2\}$ and $g^{-1}.U = \{x_3, \neg x_3,
+x_4, \neg x_4\}$ and we can deduce than $\eta(\alpha, g) = (U \cup g^{-1}.U)
+\setminus \alpha = \{\neg x_1, \neg x_2, \neg x_3, x_4\}$.
+
+\begin{proposition}
+	\label{prop:eta}
+	$\eta(\alpha, g)$ is an effective symmetry-breaking predicate.
+\end{proposition}
+\begin{proof}
+	It is immediate that $\alpha \not\models \eta(\alpha, g)$.
+	
+	Let $\beta \in \Assignments(\Vars)$ such that $\beta \wedge \eta(\alpha, g)$ is \unsat. We denote a $\alpha'$
+	and $\beta'$ as the restrictions of $\alpha$ and $\beta$ to the variables in $\{ v' \in
+	\Vars_g \mid v'~\preceq~v \}$. Since $\beta \wedge \eta(\alpha, g)$ is \unsat, $\alpha' = \beta'$.
+	But $g.\alpha' < \alpha'$, and $g.\beta' < \beta'$. By monotonicity of $<$, we thus also have
+	$g.\beta < \beta$. \end{proof}
+
+\medskip\noindent It is important to observe that the notion of \textit{ebsp}
+is a refinement of the classical concept of \textit{sbp} defined in
+\cite{aloul06}. In particular, like \textit{sbp}, \textit{esbp} preserve
+satisfiability.
+
+\begin{theorem}[Satisfiability preservation]
+	Let $\varphi$ be a formula and $\psi$ an \textit{ebsp} for some assignment $\alpha$ under $g \in S(\varphi)$. Then,
+	$$\varphi~and ~\varphi \wedge \psi \text{ are equi-satisfiable}.$$
+\end{theorem}
+
+\begin{proof}
+	
+	If $\varphi \wedge \psi$ is SAT then $\varphi$ is trivially SAT. If
+	$\varphi$ is SAT, then there is some assignment $\beta$ that satisfies $\varphi$.
+	Without loss of generality, $\beta$ can be chosen to be the lex-leader of its
+	orbit under $S(\varphi)$. Thus, $g$ does not reduce $\beta$, which implies that
+	$\beta \models \psi$.
+	
+\end{proof}

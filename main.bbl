@@ -1,4 +1,9 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{aloul06}
+F.~Aloul, K.~Sakallah, and I.~Markov.
+\newblock Efficient symmetry breaking for boolean satisfiability.
+\newblock {\em {IEEE} Trans. Computers}, 55(5):549--558, 2006.
 
 \bibitem{barrett2018satisfiability}
 C.~Barrett and C.~Tinelli.
@@ -15,6 +20,13 @@ M.~Davis, G.~Logemann, and D.~Loveland.
 \newblock A machine program for theorem-proving.
 \newblock {\em Commun. ACM}, 5(7):394--397, July 1962.
 
+\bibitem{Devriendt12}
+J.~Devriendt, B.~Bogaerts, B.~de~Cat, M.~Denecker, and C.~Mears.
+\newblock Symmetry propagation: Improved dynamic symmetry breaking in {SAT}.
+\newblock In {\em {IEEE} 24th International Conference on Tools with Artificial
+  Intelligence, {ICTAI} 2012, Athens, Greece, November 7-9, 2012}, pages
+  49--56, 2012.
+
 \bibitem{JunttilaKaski:ALENEX2007}
 T.~Junttila and P.~Kaski.
 \newblock Engineering an efficient canonical labeling tool for large and sparse
@@ -29,6 +41,11 @@ H.~Katebi, K.~Sakallah, and I.~Markov.
 \newblock Symmetry and satisfiability: An update.
 \newblock {\em Theory and Applications of Satisfiability Testing--SAT 2010},
   pages 113--127, 2010.
+
+\bibitem{Luks2004}
+E.~M. Luks and A.~Roy.
+\newblock The complexity of symmetry-breaking formulas.
+\newblock {\em Ann. Math. Artif. Intell.}, 41(1):19--45, 2004.
 
 \bibitem{mckay2003nauty}
 B.~D. McKay.

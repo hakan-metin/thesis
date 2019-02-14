@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.9.2)  6 FEB 2019 15:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.9.2)  14 FEB 2019 17:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1411,6 +1411,10 @@ LaTeX Font Info:    Redeclaring math accent \mathring on input line 256.
 \feline@chapter=\box80
 )
 (./abbreviations.tex
+\c@definition=\count285
+\c@proposition=\count286
+\c@theorem=\count287
+
 (/usr/share/texlive/texmf-dist/tex/latex/hyphenat/hyphenat.sty
 Package: hyphenat 2009/09/02 v2.3c hyphenation utilities
 \langwohyphens=\language84
@@ -1418,52 +1422,52 @@ LaTeX Info: Redefining \_ on input line 43.
 )) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 65.
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 65.
-LaTeX Font Info:    Try loading font information for FML+futm on input line 65.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 64.
+LaTeX Font Info:    Try loading font information for FML+futm on input line 64.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmlfutm.fd
 File: fmlfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futm.
 )
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 65.
-LaTeX Font Info:    Try loading font information for FMS+futm on input line 65.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 64.
+LaTeX Font Info:    Try loading font information for FMS+futm on input line 64.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmsfutm.fd
 File: fmsfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FMS/futm.
 )
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 65.
-LaTeX Font Info:    Try loading font information for FMX+futm on input line 65.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 64.
+LaTeX Font Info:    Try loading font information for FMX+futm on input line 64.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmxfutm.fd
 File: fmxfutm.fd futm-extension
 )
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 65.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 65.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 64.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 64.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 65.
-LaTeX Font Info:    Try loading font information for T1+futs on input line 65.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Try loading font information for T1+futs on input line 64.
 
 (/usr/share/texlive/texmf-dist/tex/latex/fourier/t1futs.fd
 File: t1futs.fd 2004/03/02 Fontinst v1.926 font definitions for T1/futs.
@@ -1504,16 +1508,16 @@ File: t1futs.fd 2004/03/02 Fontinst v1.926 font definitions for T1/futs.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count285
+\scratchcounter=\count288
 \scratchdimen=\dimen311
 \scratchbox=\box81
-\nofMPsegments=\count286
-\nofMParguments=\count287
+\nofMPsegments=\count289
+\nofMParguments=\count290
 \everyMPshowfont=\toks60
-\MPscratchCnt=\count288
+\MPscratchCnt=\count291
 \MPscratchDim=\dimen312
-\MPnumerator=\count289
-\makeMPintoPDFobject=\count290
+\MPnumerator=\count292
+\makeMPintoPDFobject=\count293
 \everyMPtoPDFconversion=\toks61
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -1533,7 +1537,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box82
-Package hyperref Info: Link coloring OFF on input line 65.
+Package hyperref Info: Link coloring OFF on input line 64.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1541,19 +1545,19 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count291
+\c@section@level=\count294
 )
 Redoing nameref's sectioning
 Redoing nameref's label
-LaTeX Info: Redefining \nameref on input line 65.
-LaTeX Info: Redefining \ref on input line 65.
-LaTeX Info: Redefining \pageref on input line 65.
-LaTeX Info: Redefining \nameref on input line 65.
+LaTeX Info: Redefining \nameref on input line 64.
+LaTeX Info: Redefining \ref on input line 64.
+LaTeX Info: Redefining \pageref on input line 64.
+LaTeX Info: Redefining \nameref on input line 64.
 (./main.out) (./main.out)
 \@outlinefile=\write5
 \openout5 = `main.out'.
 
-\c@lstlisting=\count292
+\c@lstlisting=\count295
  ABD: EveryShipout initializing macros (./title.tex
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: pdftex
@@ -1587,12 +1591,12 @@ LaTeX Info: Redefining \nameref on input line 65.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<img/logo-sorbonne.pdf, id=75, 143.26022pt x 57.96657pt>
+<img/logo-sorbonne.pdf, id=67, 143.26022pt x 57.96657pt>
 File: img/logo-sorbonne.pdf Graphic file (type pdf)
 <use img/logo-sorbonne.pdf>
 Package pdftex.def Info: img/logo-sorbonne.pdf  used on input line 6.
 (pdftex.def)             Requested size: 173.71483pt x 70.2826pt.
-<img/logo-edite.pdf, id=76, 148.555pt x 97.36375pt>
+<img/logo-edite.pdf, id=68, 148.555pt x 97.36375pt>
 File: img/logo-edite.pdf Graphic file (type pdf)
 <use img/logo-edite.pdf>
 Package pdftex.def Info: img/logo-edite.pdf  used on input line 9.
@@ -1636,7 +1640,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 34--60
 
  []
 
-<img/logo-lip6.png, id=77, 271.0125pt x 254.9525pt>
+<img/logo-lip6.png, id=69, 271.0125pt x 254.9525pt>
 File: img/logo-lip6.png Graphic file (type png)
 <use img/logo-lip6.png>
 Package pdftex.def Info: img/logo-lip6.png  used on input line 63.
@@ -1659,9 +1663,9 @@ LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <10> not available
 
 ]
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 76.
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 75.
 LaTeX Font Info:    Font shape `T1/futs/bx/sc' in size <24.88> not available
-(Font)              Font shape `T1/futs/b/sc' tried instead on input line 76.
+(Font)              Font shape `T1/futs/b/sc' tried instead on input line 75.
 
 (./main.toc
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <12> not available
@@ -1686,17 +1690,23 @@ LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <14.4> not available
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [5]
+LaTeX Font Info:    Try loading font information for T1+cmss on input line 48.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmss.fd
+File: t1cmss.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <8> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 96.
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 96.
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 107.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 107.
+
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `T1/futs/bx/it' in size <12> not available
-(Font)              Font shape `T1/futs/b/it' tried instead on input line 96.
+(Font)              Font shape `T1/futs/b/it' tried instead on input line 107.
  [6]
-LaTeX Font Info:    Try loading font information for TS1+futs on input line 114
+LaTeX Font Info:    Try loading font information for TS1+futs on input line 125
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/fourier/ts1futs.fd
@@ -1707,7 +1717,7 @@ Underfull \vbox (badness 3919) has occurred while \output is active []
  [7
 
 ]
-LaTeX Font Info:    Try loading font information for U+euf on input line 172.
+LaTeX Font Info:    Try loading font information for U+euf on input line 183.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
@@ -1716,7 +1726,7 @@ File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 
 ]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 80.
+nput line 73.
  (./cnfs/battleship-3-4-unsat.cnf
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
 (Font)              scaled to size 9.19998pt on input line 2.
@@ -1731,58 +1741,63 @@ LaTeX Font Info:    Font shape `U/futm/m/n' will be
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
 (Font)              scaled to size 5.51999pt on input line 2.
 )
-<cnfs/graph_cnf_no_opt-crop.pdf, id=210, 681.54625pt x 654.445pt>
+<cnfs/graph_cnf_no_opt-crop.pdf, id=201, 681.54625pt x 654.445pt>
 File: cnfs/graph_cnf_no_opt-crop.pdf Graphic file (type pdf)
 <use cnfs/graph_cnf_no_opt-crop.pdf>
-Package pdftex.def Info: cnfs/graph_cnf_no_opt-crop.pdf  used on input line 83.
+Package pdftex.def Info: cnfs/graph_cnf_no_opt-crop.pdf  used on input line 76.
 
 (pdftex.def)             Requested size: 310.76122pt x 298.40205pt.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-LaTeX Font Info:    Try loading font information for T1+cmss on input line 89.
-(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmss.fd
-File: t1cmss.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-(./cnfs/battleship-3-4-unsat.cnf)
-<cnfs/graph_cnf_opt-crop.pdf, id=211, 635.37375pt x 557.08125pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 84--89
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
+
+ []
+
+[10] [11 <./cnfs/graph_cnf_no_opt-crop.pdf>] (./cnfs/battleship-3-4-unsat.cnf)
+<cnfs/graph_cnf_opt-crop.pdf, id=254, 635.37375pt x 557.08125pt>
 File: cnfs/graph_cnf_opt-crop.pdf Graphic file (type pdf)
 <use cnfs/graph_cnf_opt-crop.pdf>
-Package pdftex.def Info: cnfs/graph_cnf_opt-crop.pdf  used on input line 108.
+Package pdftex.def Info: cnfs/graph_cnf_opt-crop.pdf  used on input line 111.
 (pdftex.def)             Requested size: 310.76122pt x 272.47919pt.
 
+[12
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 114--117
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 118--125
-
- []
-
-[10]
-<cnfs/orbits.pdf, id=220, 1064.97874pt x 937.5025pt>
+ <./cnfs/graph_cnf_opt-crop.pdf>]
+<cnfs/orbits.pdf, id=302, 1064.97874pt x 937.5025pt>
 File: cnfs/orbits.pdf Graphic file (type pdf)
 <use cnfs/orbits.pdf>
-Package pdftex.def Info: cnfs/orbits.pdf  used on input line 130.
+Package pdftex.def Info: cnfs/orbits.pdf  used on input line 138.
 (pdftex.def)             Requested size: 448.13pt x 394.49223pt.
+ [13 <./cnfs/orbits.pdf>]) (./cosy.tex
+[14] [15
 
+] [16]
+Overfull \hbox (14.1542pt too wide) in paragraph at lines 120--126
+\FML/futmi/m/it/12 g[]:U \FMS/futm/m/n/12 Å f\FML/futmi/m/it/12 x[]; \FMS/futm/
+m/n/12 :\FML/futmi/m/it/12 x[]; x[]; \FMS/futm/m/n/12 :\FML/futmi/m/it/12 x[]\F
+MS/futm/m/n/12 g$ \T1/futs/m/n/12 and we can de-duce than $\FML/futmi/m/it/12 ^
+^Q\T1/futs/m/n/12 (\FML/futmi/m/it/12 ; g\T1/futs/m/n/12 ) \FMS/futm/m/n/12 Å 
+\T1/futs/m/n/12 (\FML/futmi/m/it/12 U \FMS/futm/m/n/12 [ \FML/futmi/m/it/12 g[]
+:U\T1/futs/m/n/12 ) \FMS/futm/m/n/12 n \FML/futmi/m/it/12  \FMS/futm/m/n/12 Å 
+f:\FML/futmi/m/it/12 x[]; \FMS/futm/m/n/12 :\FML/futmi/m/it/12 x[]; \FMS/futm/m
+/n/12 :\FML/futmi/m/it/12 x[]; x[]\FMS/futm/m/n/12 g$\T1/futs/m/n/12 . |
+ []
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+) (./conclusion.tex [17] [18
 
-[11 <./cnfs/graph_cnf_no_opt-crop.pdf>]) (./conclusion.tex [12 <./cnfs/graph_cn
-f_opt-crop.pdf>] [13 <./cnfs/orbits.pdf>] [14
-
-]) (./main.bbl [15] [16
+]) (./main.bbl [19] [20
 
 ]
 bibitemlist
-) [17]
+) [21]
 \tf@toc=\write6
 \openout6 = `main.toc'.
 
@@ -1792,15 +1807,15 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 95.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 95.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 95.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B784C4B94B12C0BE4D32F194E609C057;1010.
+(rerunfilecheck)             Checksum: 4707D65AF7178C2D106164F7522B2987;825.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 95.
  ) 
 Here is how much of TeX's memory you used:
- 27024 strings out of 492645
- 480790 string characters out of 6131957
- 598386 words of memory out of 5000000
- 30247 multiletter control sequences out of 15000+600000
- 166463 words of font info for 150 fonts, out of 8000000 for 9000
+ 27102 strings out of 492645
+ 481804 string characters out of 6131957
+ 586559 words of memory out of 5000000
+ 30293 multiletter control sequences out of 15000+600000
+ 169655 words of font info for 158 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,22n,69p,440b,1306s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texliv
@@ -1818,10 +1833,10 @@ ype1/adobe/utopia/putri8a.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfs
 s1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftc1200.pfb></usr/shar
 e/texmf/fonts/type1/public/cm-super/sftt1200.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/urw/times/utmr8a.pfb>
-Output written on main.pdf (21 pages, 299492 bytes).
+Output written on main.pdf (25 pages, 316273 bytes).
 PDF statistics:
- 417 PDF objects out of 1000 (max. 8388607)
- 356 compressed objects within 4 object streams
- 113 named destinations out of 1000 (max. 500000)
- 179 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 459 PDF objects out of 1000 (max. 8388607)
+ 394 compressed objects within 4 object streams
+ 134 named destinations out of 1000 (max. 500000)
+ 163 words of extra memory for PDF output out of 10000 (max. 10000000)
 
