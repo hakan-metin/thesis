@@ -195,19 +195,34 @@ The exploitation of symmetries statically is called \emph{static symmetry breaki
 It acts like a preprocessor which add \emph{symmetry breaking predicates} (SBP) at the 
 original formula and solve the augmented problem,
 
-
-\begin{proposition}[Satisfiability preservation]
-	\label{prop:equi_satisfiability}
-	 Let $\varphi$ a CNF problem and $\psi$ the computed symmetry breaking predicates.
-	 Solve $\varphi \cup \psi$ is equi-satisfiable to solve $\varphi$.
-\end{proposition}
+\begin{theorem}[Satisfiability preservation SBPs]
+	\label{theorem:satisfiability_preservation_SBPs}
+	Let $\varphi$ be a formula and $\psi$ the computed \textit{SBPs} for the set of
+	symmetries $S(\varphi)$
+	
+	$$\varphi~and ~\varphi \wedge \psi \text{ are equi-satisfiable}.$$
+\end{theorem}
 
 \begin{proof}
-	On the first case, if the initial formula $\varphi$ is \unsat,
-	then the augmented problem $\varphi \cup \psi$ is trivially \unsat.
-	On the second case, if $\varphi$ is \sat then $\varphi \cup \psi$ is also \sat because 
-	$\psi$ forbids only non lex-leader assignment so the formula still be \sat.
+	If $\varphi \wedge \psi$ is SAT then $\varphi$ is trivially SAT. If
+	$\varphi$ is SAT, then there is some assignment $\beta$ that satisfies $\varphi$.
+	Without loss of generality, $\beta$ can be chosen to be the lex-leader of its
+	orbit under $S(\varphi)$. Thus, $g$ does not contradict $\beta$, which implies that
+	$\beta \models \psi$.
 \end{proof}
+
+%\begin{proposition}[Satisfiability preservation]
+%	\label{prop:equi_satisfiability}
+%	 Let $\varphi$ a CNF problem and $\psi$ the computed symmetry breaking predicates.
+%	 Solve $\varphi \cup \psi$ is equi-satisfiable to solve $\varphi$.
+%\end{proposition}
+%
+%\begin{proof}
+%	On the first case, if the initial formula $\varphi$ is \unsat,
+%	then the augmented problem $\varphi \cup \psi$ is trivially \unsat.
+%	On the second case, if $\varphi$ is \sat then $\varphi \cup \psi$ is also \sat because 
+%	$\psi$ forbids only non lex-leader assignment so the formula still be \sat.
+%\end{proof}
 
 
 
