@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.9.2)  15 FEB 2019 16:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.9.2)  21 FEB 2019 17:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1594,12 +1594,12 @@ LaTeX Info: Redefining \nameref on input line 64.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<img/logo-sorbonne.pdf, id=71, 143.26022pt x 57.96657pt>
+<img/logo-sorbonne.pdf, id=75, 143.26022pt x 57.96657pt>
 File: img/logo-sorbonne.pdf Graphic file (type pdf)
 <use img/logo-sorbonne.pdf>
 Package pdftex.def Info: img/logo-sorbonne.pdf  used on input line 6.
 (pdftex.def)             Requested size: 173.71483pt x 70.2826pt.
-<img/logo-edite.pdf, id=72, 148.555pt x 97.36375pt>
+<img/logo-edite.pdf, id=76, 148.555pt x 97.36375pt>
 File: img/logo-edite.pdf Graphic file (type pdf)
 <use img/logo-edite.pdf>
 Package pdftex.def Info: img/logo-edite.pdf  used on input line 9.
@@ -1643,7 +1643,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 34--60
 
  []
 
-<img/logo-lip6.png, id=73, 271.0125pt x 254.9525pt>
+<img/logo-lip6.png, id=77, 271.0125pt x 254.9525pt>
 File: img/logo-lip6.png Graphic file (type png)
 <use img/logo-lip6.png>
 Package pdftex.def Info: img/logo-lip6.png  used on input line 63.
@@ -1693,33 +1693,33 @@ LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <14.4> not available
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [5]
-LaTeX Font Info:    Try loading font information for T1+phv on input line 48.
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
-File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
-)
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <8> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 107.
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 107.
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 130.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 130.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 LaTeX Font Info:    Font shape `T1/futs/bx/it' in size <12> not available
-(Font)              Font shape `T1/futs/b/it' tried instead on input line 107.
+(Font)              Font shape `T1/futs/b/it' tried instead on input line 130.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 135.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
+File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
+)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
  [6]
-LaTeX Font Info:    Try loading font information for TS1+futs on input line 125
+LaTeX Font Info:    Try loading font information for TS1+futs on input line 149
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/fourier/ts1futs.fd
 File: ts1futs.fd 2004/03/26 Fontinst v1.926 font definitions for TS1/futs.
 )
-Underfull \vbox (badness 3919) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [7
-
-]
-LaTeX Font Info:    Try loading font information for U+euf on input line 183.
+ [7]
+LaTeX Font Info:    Try loading font information for U+euf on input line 207.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
@@ -1743,7 +1743,7 @@ LaTeX Font Info:    Font shape `U/futm/m/n' will be
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
 (Font)              scaled to size 5.51999pt on input line 2.
 )
-<cnfs/graph_cnf_no_opt-crop.pdf, id=205, 681.54625pt x 654.445pt>
+<cnfs/graph_cnf_no_opt-crop.pdf, id=222, 681.54625pt x 654.445pt>
 File: cnfs/graph_cnf_no_opt-crop.pdf Graphic file (type pdf)
 <use cnfs/graph_cnf_no_opt-crop.pdf>
 Package pdftex.def Info: cnfs/graph_cnf_no_opt-crop.pdf  used on input line 76.
@@ -1764,7 +1764,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 90--91
  []
 
 [10] [11 <./cnfs/graph_cnf_no_opt-crop.pdf>] (./cnfs/battleship-3-4-unsat.cnf)
-<cnfs/graph_cnf_opt-crop.pdf, id=258, 635.37375pt x 557.08125pt>
+<cnfs/graph_cnf_opt-crop.pdf, id=275, 635.37375pt x 557.08125pt>
 File: cnfs/graph_cnf_opt-crop.pdf Graphic file (type pdf)
 <use cnfs/graph_cnf_opt-crop.pdf>
 Package pdftex.def Info: cnfs/graph_cnf_opt-crop.pdf  used on input line 111.
@@ -1773,15 +1773,26 @@ Package pdftex.def Info: cnfs/graph_cnf_opt-crop.pdf  used on input line 111.
 [12
 
  <./cnfs/graph_cnf_opt-crop.pdf>]
-<cnfs/orbits.pdf, id=306, 1064.97874pt x 937.5025pt>
+<cnfs/orbits.pdf, id=323, 1064.97874pt x 937.5025pt>
 File: cnfs/orbits.pdf Graphic file (type pdf)
 <use cnfs/orbits.pdf>
 Package pdftex.def Info: cnfs/orbits.pdf  used on input line 138.
 (pdftex.def)             Requested size: 448.13pt x 394.49223pt.
- [13 <./cnfs/orbits.pdf>]) (./cosy.tex
-[14] [15
+ [13 <./cnfs/orbits.pdf>]
+<example-image-a.pdf, id=341, 321.2pt x 240.9pt>
+File: example-image-a.pdf Graphic file (type pdf)
+<use example-image-a.pdf>
+Package pdftex.def Info: example-image-a.pdf  used on input line 229.
+(pdftex.def)             Requested size: 144.54pt x 108.40767pt.
 
-] [16]
+Underfull \hbox (badness 10000) in paragraph at lines 236--237
+
+ []
+
+[14]) (./cosy.tex [15 </usr/share/texlive/texmf-dist/tex/latex/mwe/example-imag
+e-a.pdf>] [16
+
+] [17] [18]
 Overfull \hbox (14.1542pt too wide) in paragraph at lines 120--126
 \FML/futmi/m/it/12 g[]:U \FMS/futm/m/n/12  f\FML/futmi/m/it/12 x[]; \FMS/futm/
 m/n/12 :\FML/futmi/m/it/12 x[]; x[]; \FMS/futm/m/n/12 :\FML/futmi/m/it/12 x[]\F
@@ -1793,13 +1804,13 @@ f:\FML/futmi/m/it/12 x[]; \FMS/futm/m/n/12 :\FML/futmi/m/it/12 x[]; \FMS/futm/m
 /n/12 :\FML/futmi/m/it/12 x[]; x[]\FMS/futm/m/n/12 g$\T1/futs/m/n/12 . |
  []
 
-) (./conclusion.tex [17] [18
+) (./conclusion.tex [19] [20
 
-]) (./main.bbl [19] [20
+]) (./main.bbl [21] [22
 
 ]
 bibitemlist
-) [21]
+[23]) [24]
 \tf@toc=\write6
 \openout6 = `main.toc'.
 
@@ -1809,14 +1820,14 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 95.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 95.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 95.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 4D16456884BC7D06AEAFA028F0D632A2;883.
+(rerunfilecheck)             Checksum: 519885E454F0A66A8036F50DA9F4E64A;954.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 95.
  ) 
 Here is how much of TeX's memory you used:
- 27151 strings out of 492645
- 481884 string characters out of 6131957
- 587602 words of memory out of 5000000
- 30339 multiletter control sequences out of 15000+600000
+ 27174 strings out of 492645
+ 482319 string characters out of 6131957
+ 586840 words of memory out of 5000000
+ 30350 multiletter control sequences out of 15000+600000
  172433 words of font info for 161 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,22n,69p,440b,1306s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1826,18 +1837,18 @@ ist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/fourier/fourier-mcl.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/fourier/fourier-mex.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/public/fourier/fourier-mlit.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/fourier/fourier-ms.pfb></usr/share/texlive/texmf-dist/fonts/type1/adobe/u
-topia/putb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/adobe/utopia/putbi8
-a.pfb></usr/share/texlive/texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/adobe/utopia/putri8a.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
-tmr8a.pfb>
-Output written on main.pdf (25 pages, 278807 bytes).
+ublic/fourier/fourier-ms.pfb></usr/share/texmf/fonts/type1/public/lm/lmss17.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/adobe/utopia/putb8a.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/adobe/utopia/putbi8a.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/adobe/utopia/putr8a.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/adobe/utopia/putr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ado
+be/utopia/putri8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/uc
+rr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+Output written on main.pdf (28 pages, 297023 bytes).
 PDF statistics:
- 459 PDF objects out of 1000 (max. 8388607)
- 395 compressed objects within 4 object streams
- 135 named destinations out of 1000 (max. 500000)
- 171 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 501 PDF objects out of 1000 (max. 8388607)
+ 431 compressed objects within 5 object streams
+ 146 named destinations out of 1000 (max. 500000)
+ 184 words of extra memory for PDF output out of 10000 (max. 10000000)
 

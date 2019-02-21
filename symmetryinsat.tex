@@ -81,7 +81,7 @@ $m$ clauses over $n$ variables, the graph is constructed as follows:
 \hakan{Explication du graph + informations num nodes num edges. Probleme reel battleship
 }
 
-The battleship problems place *** and two * in grid 3x4 \\
+The battleship problems place one  ship of size *** and two ships of size* in grid 3x4 \\
 1  2  3\\
 4  5  6\\
 7  8  9\\
@@ -152,10 +152,10 @@ assignments, or by altering the search space \emph{dynamically} to avoid symmetr
 In order to exploit the symmetry properties of a SAT problem, we need to
 introduce an ordering relation between the assignments.
 
-
 \begin{definition}[Assignments ordering]
 	\label{def:assignment_ordering}
-	We assume a total order, $\prec$, on $\Vars$.  Given two assignments $(\alpha,\beta) \in \Assignments(\Vars)^2 $, we say that $\alpha$ is strictly smaller than $\beta$, noted $\alpha < \beta$, if there exists a variable $v \in \Vars$
+	We assume a total order, $\prec$, on $\Vars$.  Given two assignments $(\alpha,\beta) \in \Assignments(\Vars)^2 $, 
+	we say that $\alpha$ is strictly smaller than $\beta$, noted $\alpha < \beta$, if there exists a variable $v \in \Vars$
 	such that:
 	\begin{itemize}
 		\item for all $v' \prec v$, either $v' \in \alpha \cap \beta$ or $\neg v' \in \alpha \cap
@@ -188,7 +188,19 @@ order is a total order.
 The optimal approach to solve a symmetric SAT problem would be to explore
 only one assignment per orbit (for instance each lex-leader). However, finding the
 lex-leader of an orbit is computationally hard~\cite{Luks2004}. 
-%However, some practical algorithms exists to solve this problem.
+
+
+Variable ordering may impact the number of generated constraint and so the performance of
+the underlying SAT solver. Different orders are studied in the literature. 
+One of the simplest order was the sorted variables according to their numbers.
+Some heuristics fo the orders exists, one of them is to exploit structural properties of the 
+problem. In particular, the orbits of the variables in different ways. For example with the occurrences of 
+each variables in the initial problem. This is equivalent to put largest orbits first because each variable 
+on the same orbit must have the same number of occurrences.
+
+
+
+
 
 
 The exploitation of symmetries statically is called \emph{static symmetry breaking}.
@@ -211,6 +223,26 @@ original formula and solve the augmented problem,
 	$\beta \models \psi$.
 \end{proof}
 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2in]{example-image-a}
+	\caption{One lex-leader per assignment}
+\end{figure}
+
+
+
+
+Example:\\
+
+Given the previous CNF formula, and the the increasing variables i.e $1 \leq 2 \leq ... \leq 12$, 
+the given automorphism computed for the formula. Generation of the SBPs for $g_1$
+
+
+
+
+
+
 %\begin{proposition}[Satisfiability preservation]
 %	\label{prop:equi_satisfiability}
 %	 Let $\varphi$ a CNF problem and $\psi$ the computed symmetry breaking predicates.
@@ -223,9 +255,6 @@ original formula and solve the augmented problem,
 %	On the second case, if $\varphi$ is \sat then $\varphi \cup \psi$ is also \sat because 
 %	$\psi$ forbids only non lex-leader assignment so the formula still be \sat.
 %\end{proof}
-
-
-
 
 
 

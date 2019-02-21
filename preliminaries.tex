@@ -34,18 +34,35 @@ formula may be satisfied by a partial assignment. A formula is said to be
 \emph{satisfiable} (\sat) if there is at least one assignment that satisfies it;
 otherwise the formula is \emph{unsatisfiable} (\unsat).
 
+\subsection{An NP-complete problem}
+
+
+The SAT problems is the first NP-complete algorithm as proven by Stephen Cook in 1971~\cite{cook1971complexity}.
+It is also proved by Leonid Levin in 1973~\cite{4640789}, for this purpose, it was known as Cook-Levin theorem.
+The proof of to show that can be found in \cite{sipser2006introduction}.
+Any NP problem can be reduced to a SAT problem in polynomial time and so open one of the most important 
+unsolved problem in theoretical computer science is the P versus NP problem.
+This question is one of the seven millennium prize problems.
+
+
+%It asks if every problems can be solved and verified in polynomial time.
+%Any NP problems can be reduced in polynomial time by a deterministic Turing machine to the SAT problems.
+%The states that the propositional satisfiability problem is NP-complete
+%SAT is NP because any assignment of Boolean values to Boolean variables that is claimed to 
+%satisfy the given expression can be verified in polynomial time by a deterministic Turing machine. 
+%
+%
+
 
 \subsection{Algorithm}
 
 A naive approach to solve a SAT problem is to try all possible assignments. In total,
 for a proposition formula with $n$ variables, it leads to $2^n$ assignments and is intractable
 even for a formula with few variables.
-One the first non memory intensive algorithm to solve the SAT problems is the Davis Putnam Logemann Loveland (DPLL) algorithm. This algorithm introduce the \emph{unit propagation}.
+One the first non memory intensive algorithm to solve the SAT problems is 
+the Davis Putnam Logemann Loveland (DPLL) algorithm. This algorithm introduce the \emph{unit propagation}.
 This principle force the value of a literal when a clause is \emph{assertive}, i.e. 
-has all literals to false and one unassigned.
-
-
-\hakan{Insert algorithm DPLL}
+has all literals to false but one unassigned.
 
 
 The state of the art sound and complete algorithm to resolve a SAT problem is 
@@ -59,13 +76,19 @@ A conflict at level $0$ indicates that the formula is not satisfiable, and the a
 reports it (lines~\ref{alg:cdcl:unsat_start}-\ref{alg:cdcl:unsat_end}).
 If a conflict is detected, it is analyzed, which provides a \emph{conflict clause} 
 explaining the reason for the conflict (line~\ref{alg:cdcl:analyze}).
+Different heuristics exists about the computation of conflict clause, on recent solvers
+the most used heuristic is the first Unique Implication Point (1 UIP) \cite{zhang2001efficient}.
 The analysis is completed by the computation of a
 backjump point to which the algorithm backtracks (line~\ref{alg:cdcl:backjump}).
   This clause is learnt (line~\ref{alg:cdcl:learn}), as it does not change the
 satisfiability of $\varphi$, and avoids encountering a conflict with the same
 causes in the future.
 Finally, if no conflict appears, the algorithm chooses a new decision literal 
-(line~\ref{alg:cdcl:pick_start}-\ref{alg:cdcl:pick_end}).
+(line~\ref{alg:cdcl:pick_start}-\ref{alg:cdcl:pick_end}). The choice of the decision literal
+affect the performance of solver. The first most used heuristic is Variable State Independent Decaying Sum (VSIDS)~\cite{moskewicz2001chaff}. The idea behind this heuristic is that the "hard" parts of the search space 
+will be treated first. To do that, each variable has an activity and wa increase if it participate to the resolution
+of the conflict.
+The second most used heuristics is Learning rate based branching (LRB~\cite{liang2016learning})
 The above steps are repeated until the satisfiability status of the formula is determined.
 
 
@@ -109,9 +132,10 @@ The above steps are repeated until the satisfiability status of the formula is d
 	
 \end{algorithm}
 
+\hakan{Peut être mettre les heuristiques dans des paragraphes}
 
+\hakan{Literal Block Distance LBD}
 
-\clearpage
 \section{Groups basics}
 
 Symmetries is related to a branch of mathematics called group theory. This section give us an overview of group
