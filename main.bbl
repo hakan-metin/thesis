@@ -21,6 +21,11 @@ S.~A. Cook.
 \newblock In {\em Proceedings of the third annual ACM symposium on Theory of
   computing}, pages 151--158. ACM, 1971.
 
+\bibitem{crawford1996symmetry}
+J.~Crawford and M.~Ginsberg.
+\newblock Symmetry-breaking predicates for search problems.
+\newblock 1996.
+
 \bibitem{dpll_62}
 M.~Davis, G.~Logemann, and D.~Loveland.
 \newblock A machine program for theorem-proving.

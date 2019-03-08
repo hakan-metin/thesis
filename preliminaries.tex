@@ -69,7 +69,6 @@ The state of the art sound and complete algorithm to resolve a SAT problem is
 Conflict-Driven Clause learning (CDCL) algorithm~\ref{algo:cdcl}.
 This algorithm is inspired by Davis Putnam Logemann Loveland (DPLL) algorithm \cite{dpll_62}.
 
-
 The CDCL algorithm walks a binary search tree.  It first applies unit propagation to
 the formula $\varphi$ for the current assignment $\alpha$ (line~\ref{alg:cdcl:unit}).
 A conflict at level $0$ indicates that the formula is not satisfiable, and the algorithm
@@ -77,9 +76,14 @@ reports it (lines~\ref{alg:cdcl:unsat_start}-\ref{alg:cdcl:unsat_end}).
 If a conflict is detected, it is analyzed, which provides a \emph{conflict clause} 
 explaining the reason for the conflict (line~\ref{alg:cdcl:analyze}).
 Different heuristics exists about the computation of conflict clause, on recent solvers
-the most used heuristic is the first Unique Implication Point (1 UIP) \cite{zhang2001efficient}.
+the most used heuristic is the first Unique Implication Point ($1^{th}$ UIP) \cite{zhang2001efficient}.
 The analysis is completed by the computation of a
 backjump point to which the algorithm backtracks (line~\ref{alg:cdcl:backjump}).
+Restart is an important things in SAT solver, it allows solver to explore a new search space
+with the learned clauses. It is also finely intertwined with the decision heuristics.
+If the solver is working on "hard" part of the problem it will reconsider the decision variables and
+solve this part part at first. But if we restart too often the solver doesn't have to discover new things.
+
   This clause is learnt (line~\ref{alg:cdcl:learn}), as it does not change the
 satisfiability of $\varphi$, and avoids encountering a conflict with the same
 causes in the future.
@@ -131,6 +135,7 @@ The above steps are repeated until the satisfiability status of the formula is d
 	\label{algo:cdcl}
 	
 \end{algorithm}
+
 
 \hakan{Peut être mettre les heuristiques dans des paragraphes}
 
@@ -199,7 +204,9 @@ $g$ is a permutation that maps $x_1$ to $x_2$, $x_2$ to $x_3$, $x_3$ to $x_1$, $
 Permutations are generally written in \emph{cycle notation} and the self mapped elements are omitted.
 So the permutation in cycle notation will be : $g$ = ($x_1$ $x_2$ $x_3$) ($x_5$ $x_6$).
 We say \emph{support} of the permutation $g$ noted $supp(g)$ the elements that not mapped to themselves,
-$supp(g) = \{ x \in X \mid g(x) \neq x\}$.
+$supp(g) = \{ x \in X \mid g.x \neq x\}$. A variable $x$ is \emph{stabilized} by a permutation $g$ 
+if $x \notin \support(g)$. A clause $\omega$ is \emph{stabilized} by a permutation $g$ if 
+$\omega \cap \support(g) = \emptyset$. \hakan{Maybe stabilisation as definition ?}
 
 
 The set of permutations of a given set $X$ form a group $G$,

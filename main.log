@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.9.2)  21 FEB 2019 17:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.9.2)  8 MAR 2019 17:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1093,13 +1093,98 @@ e.tex
 \tikz@lib@dec@box=\box79
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrary
-decorations.pathmorphing.code.tex)) (./style.tex
+decorations.pathmorphing.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryshapes.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshape
+s.geometric.code.tex
+File: pgflibraryshapes.geometric.code.tex 2008/06/26 v3.0.1a (rcs-revision 1.1)
+
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryarrows.code.tex
+File: tikzlibraryarrows.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.
+tex
+File: pgflibraryarrows.code.tex 2013/09/23 v3.0.1a (rcs-revision 1.16)
+\arrowsize=\dimen309
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryshapes.code.tex
+File: tikzlibraryshapes.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryshapes.misc.code.tex
+File: tikzlibraryshapes.misc.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshape
+s.misc.code.tex
+File: pgflibraryshapes.misc.code.tex 2013/07/18 v3.0.1a (rcs-revision 1.5)
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryshapes.symbols.code.tex
+File: tikzlibraryshapes.symbols.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshape
+s.symbols.code.tex
+File: pgflibraryshapes.symbols.code.tex 2013/09/11 v3.0.1a (rcs-revision 1.6)
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryshapes.arrows.code.tex
+File: tikzlibraryshapes.arrows.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshape
+s.arrows.code.tex
+File: pgflibraryshapes.arrows.code.tex 2008/06/26 v3.0.1a (rcs-revision 1.1)
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryshapes.callouts.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshape
+s.callouts.code.tex))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryshapes.multipart.code.tex
+File: tikzlibraryshapes.multipart.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshape
+s.multipart.code.tex
+File: pgflibraryshapes.multipart.code.tex 2010/01/07 v3.0.1a (rcs-revision 1.2)
+
+\pgfnodepartlowerbox=\box80
+\pgfnodeparttwobox=\box81
+\pgfnodepartthreebox=\box82
+\pgfnodepartfourbox=\box83
+\pgfnodeparttwentybox=\box84
+\pgfnodepartnineteenbox=\box85
+\pgfnodeparteighteenbox=\box86
+\pgfnodepartseventeenbox=\box87
+\pgfnodepartsixteenbox=\box88
+\pgfnodepartfifteenbox=\box89
+\pgfnodepartfourteenbox=\box90
+\pgfnodepartthirteenbox=\box91
+\pgfnodeparttwelvebox=\box92
+\pgfnodepartelevenbox=\box93
+\pgfnodeparttenbox=\box94
+\pgfnodepartninebox=\box95
+\pgfnodeparteightbox=\box96
+\pgfnodepartsevenbox=\box97
+\pgfnodepartsixbox=\box98
+\pgfnodepartfivebox=\box99
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarydecorations.markings.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrary
+decorations.markings.code.tex)) (./style.tex
 (/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count282
 \calc@Bcount=\count283
-\calc@Adimen=\dimen309
-\calc@Bdimen=\dimen310
+\calc@Adimen=\dimen310
+\calc@Bdimen=\dimen311
 \calc@Askip=\skip282
 \calc@Bskip=\skip283
 LaTeX Info: Redefining \setlength on input line 80.
@@ -1411,7 +1496,7 @@ LaTeX Font Info:    Redeclaring math accent \mathring on input line 256.
 \symUfutm=\mathgroup7
 )
 \dlf@normtxtw=\skip285
-\feline@chapter=\box80
+\feline@chapter=\box100
 )
 (./abbreviations.tex
 \c@definition=\count285
@@ -1425,52 +1510,52 @@ LaTeX Info: Redefining \_ on input line 43.
 )) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 64.
-LaTeX Font Info:    Try loading font information for FML+futm on input line 64.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 67.
+LaTeX Font Info:    Try loading font information for FML+futm on input line 67.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmlfutm.fd
 File: fmlfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futm.
 )
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 64.
-LaTeX Font Info:    Try loading font information for FMS+futm on input line 64.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 67.
+LaTeX Font Info:    Try loading font information for FMS+futm on input line 67.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmsfutm.fd
 File: fmsfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FMS/futm.
 )
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 64.
-LaTeX Font Info:    Try loading font information for FMX+futm on input line 64.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 67.
+LaTeX Font Info:    Try loading font information for FMX+futm on input line 67.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmxfutm.fd
 File: fmxfutm.fd futm-extension
 )
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 64.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 64.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 67.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 67.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Try loading font information for T1+futs on input line 64.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Try loading font information for T1+futs on input line 67.
 
 (/usr/share/texlive/texmf-dist/tex/latex/fourier/t1futs.fd
 File: t1futs.fd 2004/03/02 Fontinst v1.926 font definitions for T1/futs.
@@ -1512,13 +1597,13 @@ File: t1futs.fd 2004/03/02 Fontinst v1.926 font definitions for T1/futs.
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count288
-\scratchdimen=\dimen311
-\scratchbox=\box81
+\scratchdimen=\dimen312
+\scratchbox=\box101
 \nofMPsegments=\count289
 \nofMParguments=\count290
 \everyMPshowfont=\toks60
 \MPscratchCnt=\count291
-\MPscratchDim=\dimen312
+\MPscratchDim=\dimen313
 \MPnumerator=\count292
 \makeMPintoPDFobject=\count293
 \everyMPtoPDFconversion=\toks61
@@ -1539,8 +1624,8 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\AtBeginShipoutBox=\box82
-Package hyperref Info: Link coloring OFF on input line 64.
+\AtBeginShipoutBox=\box102
+Package hyperref Info: Link coloring OFF on input line 67.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1552,10 +1637,10 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 Redoing nameref's sectioning
 Redoing nameref's label
-LaTeX Info: Redefining \nameref on input line 64.
-LaTeX Info: Redefining \ref on input line 64.
-LaTeX Info: Redefining \pageref on input line 64.
-LaTeX Info: Redefining \nameref on input line 64.
+LaTeX Info: Redefining \nameref on input line 67.
+LaTeX Info: Redefining \ref on input line 67.
+LaTeX Info: Redefining \pageref on input line 67.
+LaTeX Info: Redefining \nameref on input line 67.
 (./main.out) (./main.out)
 \@outlinefile=\write5
 \openout5 = `main.out'.
@@ -1594,12 +1679,12 @@ LaTeX Info: Redefining \nameref on input line 64.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<img/logo-sorbonne.pdf, id=75, 143.26022pt x 57.96657pt>
+<img/logo-sorbonne.pdf, id=83, 143.26022pt x 57.96657pt>
 File: img/logo-sorbonne.pdf Graphic file (type pdf)
 <use img/logo-sorbonne.pdf>
 Package pdftex.def Info: img/logo-sorbonne.pdf  used on input line 6.
 (pdftex.def)             Requested size: 173.71483pt x 70.2826pt.
-<img/logo-edite.pdf, id=76, 148.555pt x 97.36375pt>
+<img/logo-edite.pdf, id=84, 148.555pt x 97.36375pt>
 File: img/logo-edite.pdf Graphic file (type pdf)
 <use img/logo-edite.pdf>
 Package pdftex.def Info: img/logo-edite.pdf  used on input line 9.
@@ -1643,7 +1728,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 34--60
 
  []
 
-<img/logo-lip6.png, id=77, 271.0125pt x 254.9525pt>
+<img/logo-lip6.png, id=85, 271.0125pt x 254.9525pt>
 File: img/logo-lip6.png Graphic file (type png)
 <use img/logo-lip6.png>
 Package pdftex.def Info: img/logo-lip6.png  used on input line 63.
@@ -1666,9 +1751,9 @@ LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <10> not available
 
 ]
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 75.
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 78.
 LaTeX Font Info:    Font shape `T1/futs/bx/sc' in size <24.88> not available
-(Font)              Font shape `T1/futs/b/sc' tried instead on input line 75.
+(Font)              Font shape `T1/futs/b/sc' tried instead on input line 78.
 
 (./main.toc
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <12> not available
@@ -1694,32 +1779,26 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [5]
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <8> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 130.
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 130.
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 134.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 134.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 LaTeX Font Info:    Font shape `T1/futs/bx/it' in size <12> not available
-(Font)              Font shape `T1/futs/b/it' tried instead on input line 130.
-LaTeX Font Info:    Try loading font information for T1+phv on input line 135.
+(Font)              Font shape `T1/futs/b/it' tried instead on input line 134.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 140.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
-)
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [6]
-LaTeX Font Info:    Try loading font information for TS1+futs on input line 149
+) [6]
+LaTeX Font Info:    Try loading font information for TS1+futs on input line 154
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/fourier/ts1futs.fd
 File: ts1futs.fd 2004/03/26 Fontinst v1.926 font definitions for TS1/futs.
-)
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [7]
-LaTeX Font Info:    Try loading font information for U+euf on input line 207.
+) [7]
+LaTeX Font Info:    Try loading font information for U+euf on input line 214.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
@@ -1728,7 +1807,7 @@ File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 
 ]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 73.
+nput line 74.
  (./cnfs/battleship-3-4-unsat.cnf
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
 (Font)              scaled to size 9.19998pt on input line 2.
@@ -1743,10 +1822,10 @@ LaTeX Font Info:    Font shape `U/futm/m/n' will be
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
 (Font)              scaled to size 5.51999pt on input line 2.
 )
-<cnfs/graph_cnf_no_opt-crop.pdf, id=222, 681.54625pt x 654.445pt>
+<cnfs/graph_cnf_no_opt-crop.pdf, id=232, 681.54625pt x 654.445pt>
 File: cnfs/graph_cnf_no_opt-crop.pdf Graphic file (type pdf)
 <use cnfs/graph_cnf_no_opt-crop.pdf>
-Package pdftex.def Info: cnfs/graph_cnf_no_opt-crop.pdf  used on input line 76.
+Package pdftex.def Info: cnfs/graph_cnf_no_opt-crop.pdf  used on input line 77.
 
 (pdftex.def)             Requested size: 310.76122pt x 298.40205pt.
 
@@ -1754,43 +1833,32 @@ Package pdftex.def Info: cnfs/graph_cnf_no_opt-crop.pdf  used on input line 76.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 84--89
+Underfull \hbox (badness 10000) in paragraph at lines 85--90
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 90--91
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
 
  []
 
 [10] [11 <./cnfs/graph_cnf_no_opt-crop.pdf>] (./cnfs/battleship-3-4-unsat.cnf)
-<cnfs/graph_cnf_opt-crop.pdf, id=275, 635.37375pt x 557.08125pt>
+<cnfs/graph_cnf_opt-crop.pdf, id=285, 635.37375pt x 557.08125pt>
 File: cnfs/graph_cnf_opt-crop.pdf Graphic file (type pdf)
 <use cnfs/graph_cnf_opt-crop.pdf>
-Package pdftex.def Info: cnfs/graph_cnf_opt-crop.pdf  used on input line 111.
+Package pdftex.def Info: cnfs/graph_cnf_opt-crop.pdf  used on input line 112.
 (pdftex.def)             Requested size: 310.76122pt x 272.47919pt.
 
 [12
 
  <./cnfs/graph_cnf_opt-crop.pdf>]
-<cnfs/orbits.pdf, id=323, 1064.97874pt x 937.5025pt>
+<cnfs/orbits.pdf, id=333, 1064.97874pt x 937.5025pt>
 File: cnfs/orbits.pdf Graphic file (type pdf)
 <use cnfs/orbits.pdf>
-Package pdftex.def Info: cnfs/orbits.pdf  used on input line 138.
+Package pdftex.def Info: cnfs/orbits.pdf  used on input line 139.
 (pdftex.def)             Requested size: 448.13pt x 394.49223pt.
  [13 <./cnfs/orbits.pdf>]
-<example-image-a.pdf, id=341, 321.2pt x 240.9pt>
-File: example-image-a.pdf Graphic file (type pdf)
-<use example-image-a.pdf>
-Package pdftex.def Info: example-image-a.pdf  used on input line 229.
-(pdftex.def)             Requested size: 144.54pt x 108.40767pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 236--237
-
- []
-
-[14]) (./cosy.tex [15 </usr/share/texlive/texmf-dist/tex/latex/mwe/example-imag
-e-a.pdf>] [16
+(./fig/assignment-lex-leader.tex) [14]) (./cosy.tex [15] [16
 
 ] [17] [18]
 Overfull \hbox (14.1542pt too wide) in paragraph at lines 120--126
@@ -1814,20 +1882,20 @@ bibitemlist
 \tf@toc=\write6
 \openout6 = `main.toc'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 95.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 95.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 98.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 98.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 95.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 95.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 98.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 98.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 519885E454F0A66A8036F50DA9F4E64A;954.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 95.
+(rerunfilecheck)             Checksum: 4ECE26805D5F219FFC85EB5D211DDE27;1099.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 98.
  ) 
 Here is how much of TeX's memory you used:
- 27174 strings out of 492645
- 482319 string characters out of 6131957
- 586840 words of memory out of 5000000
- 30350 multiletter control sequences out of 15000+600000
+ 29754 strings out of 492645
+ 555271 string characters out of 6131957
+ 680574 words of memory out of 5000000
+ 32872 multiletter control sequences out of 15000+600000
  172433 words of font info for 161 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,22n,69p,440b,1306s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1837,18 +1905,18 @@ ist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/fourier/fourier-mcl.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/fourier/fourier-mex.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/public/fourier/fourier-mlit.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/fourier/fourier-ms.pfb></usr/share/texmf/fonts/type1/public/lm/lmss17.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/adobe/utopia/putb8a.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/adobe/utopia/putbi8a.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/adobe/utopia/putr8a.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/adobe/utopia/putr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ado
-be/utopia/putri8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/uc
-rr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on main.pdf (28 pages, 297023 bytes).
+ublic/fourier/fourier-ms.pfb></usr/share/texlive/texmf-dist/fonts/type1/adobe/u
+topia/putb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/adobe/utopia/putbi8
+a.pfb></usr/share/texlive/texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/adobe/utopia/putri8a.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
+tmr8a.pfb>
+Output written on main.pdf (28 pages, 292165 bytes).
 PDF statistics:
- 501 PDF objects out of 1000 (max. 8388607)
- 431 compressed objects within 5 object streams
- 146 named destinations out of 1000 (max. 500000)
- 184 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 507 PDF objects out of 1000 (max. 8388607)
+ 439 compressed objects within 5 object streams
+ 149 named destinations out of 1000 (max. 500000)
+ 195 words of extra memory for PDF output out of 10000 (max. 10000000)
 
