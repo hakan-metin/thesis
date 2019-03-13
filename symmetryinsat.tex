@@ -244,11 +244,28 @@ and so on, because each variable on the same orbit must have the same number of 
 Another example of exploiting structural property of the orbit is the usage of \emph{stabilizer}.
 The order choose a variable which maximize the number of stabilized permutations, removes the not stabilized ones and loop over until the empty set. The remaining variables are added to the order to get a complete order.
 
+
+
+
 \subsection{Static symmetry breaking}
 The exploitation of symmetries statically is called \emph{static symmetry breaking}.
 It acts like a preprocessor which add \emph{symmetry breaking predicates} (SBPs) at the 
 original formula and solve the augmented problem. 
-This approach gives good performances in practice but have some drawbacks.
+This approach gives good performances in practice.
+
+\hakan{Generation des clauses de SBPs}\\
+\hakan{Parler des groupes speciaux  (totaux) }\\
+\hakan{Generation des clause binaires breakid lie aux orbits}\\
+\hakan{Parler de BreakID all in one tout au dessus}\\
+
+\hakan{Put a complete exemple}\\
+
+\hakan{Mettre des courbes}\\
+\hakan{Tableau sur le nombre de sbp genere}\\
+
+
+\hakan{Conclu static}
+
 In the general case,
 the size of the \textit{sbp} can be exponential in the number of variables of
 the problem so that they cannot be totally computed. The underlying SAT solver can 
@@ -259,10 +276,97 @@ only a subset of the symmetries is considered then the resulting search pruning
 will not be that interesting and its effectiveness depends heavily on the
 heuristically chosen symmetries \cite{biere2009handbook}.
 
-\hakan{Put a complete exemple}
 
+
+\hakan{Drawbacks de la methode pourquoi on fait du dynamique}
 
 \subsection{Dynamic symmetry breaking}
+
+
+Another disadvantage is that the solver is influenced by SBPs and explore the search space with a different 
+manner and can affect performance negatively \hakan{FIND A REF}
+
+A different approach can be used to reduce search space using symmetries is \emph{symmetry propagation}~\cite{Devriendt12}.
+The general idea of this approach is to propagate symmetrical literals of already propagated literals.
+In other words, it tries to accelerate the tree traversal by ``transforming some guessing to deductions''.
+Indeed, knowing that the processed problem presents symmetries makes it possible to deduce some values 
+for the variables that would be guessed if those symmetries were ignored.
+These deductions will reduce the overall tree traversal depth and hence eventually accelerate the solving process.
+
+
+\hakan{Mettre logical conqequence quand on explique CDCL + Expliquer CDCL plus en detail avec les learnt et les raisons}
+
+\begin{definition}[Logical consequence]
+	\label{def:logical_consequence}
+	A formula $\phi$ is a logical consequence of a formula $\varphi$ denoted by $\varphi \models \phi$ if for all assignment
+	$\alpha$ satisfying $\varphi$, it satisfies also $\phi$. Two formulas are \emph{logically equivalent} if each is a logical
+	consequence of the other.
+\end{definition}
+
+
+\begin{proposition}[Symmetry propagation]
+	\label{prop:symmetry_propagation}
+	Let $\varphi$ be a formula, $\alpha$ an assignment and $l$ a literal. 
+	If $g$ is a symmetry (permutation) of $\varphi \cup \alpha$ and
+	$\varphi  \cup \models \{l\}$, then $\varphi \cup \alpha \models g.\{l\}$ is also true.
+\end{proposition}
+
+In other words, if a literal $l$ was propagated by the solver and $g$ is a \emph{valid} symmetry for the
+sub problem $\varphi \cup \alpha$ (in which all satisfied clauses and literals are removed), so , the solver can
+also propagate the symmetrical of $l$. The problem here is to determinate which symmetries are valid for the formula
+$\varphi \cup \alpha$.
+
+\begin{definition}[Active symmetry]
+	A symmetry $g$ is called active under a partial assignment $\alpha$ $\text{if } g.\alpha = \alpha$
+\end{definition}
+
+Which leads to the following proposition
+
+\begin{proposition}
+	\label{prop:active_symmetry}
+	Let $\varphi$ a formula and $\alpha$ a partial assignment. Let $g$ a symmetry of $\varphi$,
+	if $g$ is active under the assignment $\alpha$, then $g$ is also a symmetry of $\varphi \cup \alpha$
+\end{proposition}
+
+The previous proposition states that an active symmetry $g$ for a partial assignment $\alpha$ still valid for
+the formula $\varphi \cup \alpha$. So when a literal $l$ is propagated, and a symmetry $g$ is active for a
+partial assignment $\alpha$, the solver can also propagate $g.l$. Moreover, with the group theory, permutations can be
+composed, the composition of two active symmetries is also an active symmetries and can propagate $g^2.l, g^3.l, ... $
+
+\hakan{Peut etre expliquer les sym conflicts}
+
+
+The authors of symmetry propagation improve the active symmetries, introducing \emph{weakly active} symmetries.
+
+\begin{definition}[Weakly active symmetry]
+	\label{def:weakly_active_symmetry}
+	Let $\varphi$ a formula and ($\delta, \alpha, \gamma$) a state of a CDCL solver in which $\delta$ is the set of decisions,
+	$\alpha$ is the current assignment and $\gamma$ the reasons of the learned clauses. Then a symmetry $g$ is weakly active 
+	if $g.\delta \subseteq \alpha$
+\end{definition}
+
+This definition leads to the following proposition:
+
+\begin{proposition}
+	Let $\varphi$ be a formula, $\alpha $ an assignment. If
+	there exists a subset $\delta \subseteq \alpha $ and a symmetry $g$ of $\varphi$ such that 
+	$g.\delta \subseteq \alpha $ and $\varphi \cup \delta \models \varphi \cup \alpha$, then $g$ 
+	is also a symmetry of $\varphi \cup \alpha $.
+\end{proposition}
+
+\hakan{Proof}
+
+
+
+\hakan{Detail SP}\\
+\hakan{Logical consequence of a formula }\\
+\hakan{Symmetry active}\\
+\hakan{Symmetry weakly active}\\
+\hakan{Courbe VS static an no sbp}\\
+\hakan{Conclu SP, depend on the solver choice }
+
+
+\hakan{Detail Symmetry Explanation Learning (SEL), apprendre les symmetriques des clauses}
 
 
 %\begin{proposition}[Satisfiability preservation]

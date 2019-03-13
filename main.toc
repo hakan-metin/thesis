@@ -13,10 +13,10 @@
 \contentsline {section}{\numberline {3.1}Symmetry detection in SAT}{9}{section.3.1}
 \contentsline {section}{\numberline {3.2}Usage of symmetries}{13}{section.3.2}
 \contentsline {subsection}{Static symmetry breaking}{15}{section*.8}
-\contentsline {subsection}{Dynamic symmetry breaking}{15}{section*.9}
-\contentsline {chapter}{\chapternumberline {4}SymmSAT}{17}{chapter.4}
-\contentsline {subsubsection}{Drawbacks of the static-based approaches.}{17}{section*.10}
-\contentsline {subsubsection}{Proposed solution. }{17}{section*.11}
-\contentsline {section}{\numberline {4.1}Experiments}{19}{section.4.1}
-\contentsline {chapter}{\chapternumberline {5}Conclusion}{21}{chapter.5}
-\contentsline {chapter}{Bibliography}{23}{chapter*.12}
+\contentsline {subsection}{Dynamic symmetry breaking}{16}{section*.9}
+\contentsline {chapter}{\chapternumberline {4}SymmSAT}{19}{chapter.4}
+\contentsline {subsubsection}{Drawbacks of the static-based approaches.}{19}{section*.10}
+\contentsline {subsubsection}{Proposed solution. }{19}{section*.11}
+\contentsline {section}{\numberline {4.1}Experiments}{21}{section.4.1}
+\contentsline {chapter}{\chapternumberline {5}Conclusion}{23}{chapter.5}
+\contentsline {chapter}{Bibliography}{25}{chapter*.12}
