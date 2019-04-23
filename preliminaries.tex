@@ -30,7 +30,9 @@ The assignment $\alpha$ \emph{satisfies} the clause $\omega$, denoted $\alpha
 \models \omega$, if $\alpha \cap \omega \neq \emptyset$. Similarly, the assignment
 $\alpha$ satisfies the propositional formula $\varphi$, denoted $\alpha \models
 \varphi$, if $\alpha$ satisfies all the clauses of $\varphi$. Note that a
-formula may be satisfied by a partial assignment. A formula is said to be
+formula may be satisfied by a partial assignment. In this case, unassigned variable are called
+\emph{dont care}.
+A formula is said to be
 \emph{satisfiable} (\sat) if there is at least one assignment that satisfies it;
 otherwise the formula is \emph{unsatisfiable} (\unsat).
 
@@ -54,20 +56,45 @@ This question is one of the seven millennium prize problems.
 %
 
 
-\subsection{Algorithm}
+\subsection{Solving a SAT problem}
 
 A naive approach to solve a SAT problem is to try all possible assignments. In total,
-for a proposition formula with $n$ variables, it leads to $2^n$ assignments and is intractable
-even for a formula with few variables.
-One the first non memory intensive algorithm to solve the SAT problems is 
-the Davis Putnam Logemann Loveland (DPLL) algorithm. This algorithm introduce the \emph{unit propagation}.
+for a propositional formula with $n$ variables, it leads to $2^n$ assignments.  
+Figure~\ref{fig:naive_algo} illustrate the search tree for a problem with six variables.
+This algorithm is obviously intractable on real problems even for a formula with few variables. 
+ 
+\begin{figure}[H]
+	\centering
+	\input{fig/naive_algorithm.tex}
+	\caption{All possible assignments for a problem with 6 variables}
+	\label{fig:naive_algo}
+\end{figure}
+
+%\hakan{Parler du DP}
+
+One of the first non memory intensive algorithm to solve the SAT problems is 
+the Davis Putnam Logemann Loveland (DPLL) algorithm~\cite{dpll_62}. 
+This algorithm introduces the \emph{unit propagation}.
 This principle force the value of a literal when a clause is \emph{assertive}, i.e. 
-has all literals to false but one unassigned.
+has all literals to false but one unassigned. It will force the value of the unassigned literal 
 
 
-The state of the art sound and complete algorithm to resolve a SAT problem is 
-Conflict-Driven Clause learning (CDCL) algorithm~\ref{algo:cdcl}.
-This algorithm is inspired by Davis Putnam Logemann Loveland (DPLL) algorithm \cite{dpll_62}.
+The iterated application of unit propagation until a fix point is called \emph{unit propagation} or \emph{boolean constraint propagation } (BCP).
+
+Another idea introduced by DPLL was \emph{elimination of pure literals},
+a literal is said pure if it only appear on one sign (positive or negative) in the problem.
+These literals are set to true in the assignment.
+On consequence, all clauses that own these literals are satisfied and so can be removed.
+
+A conflict 
+
+
+
+Another sound and complete algorithm to resolve a SAT problem is 
+Conflict-Driven Clause learning (CDCL) algorithm~\ref{algo:cdcl} and is inspired DPLL.
+This algorithm introduces two principles. The first one is \emph{no chronological backtracking}
+
+
 
 The CDCL algorithm walks a binary search tree.  It first applies unit propagation to
 the formula $\varphi$ for the current assignment $\alpha$ (line~\ref{alg:cdcl:unit}).

@@ -3,50 +3,46 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
 The style file: abbrv.bst
 Database file #1: main.bib
-Repeated entry---line 53 of file main.bib
- : @inproceedings{moskewicz2001chaff
- :                                  ,
-I'm skipping whatever remains of this entry
 Warning--empty journal in crawford1996symmetry
-You've used 17 entries,
+You've used 19 entries,
             2118 wiz_defined-function locations,
-            604 strings with 6730 characters,
-and the built_in function-call counts, 6601 in all, are:
-= -- 669
-> -- 286
-< -- 10
-+ -- 115
-- -- 94
-* -- 430
-:= -- 1038
-add.period$ -- 57
-call.type$ -- 17
-change.case$ -- 94
+            615 strings with 6997 characters,
+and the built_in function-call counts, 7494 in all, are:
+= -- 764
+> -- 311
+< -- 13
++ -- 125
+- -- 102
+* -- 482
+:= -- 1162
+add.period$ -- 64
+call.type$ -- 19
+change.case$ -- 104
 chr.to.int$ -- 0
-cite$ -- 18
-duplicate$ -- 278
-empty$ -- 522
-format.name$ -- 94
-if$ -- 1442
+cite$ -- 20
+duplicate$ -- 322
+empty$ -- 602
+format.name$ -- 102
+if$ -- 1651
 int.to.chr$ -- 0
-int.to.str$ -- 17
-missing$ -- 19
-newline$ -- 88
-num.names$ -- 36
-pop$ -- 119
+int.to.str$ -- 19
+missing$ -- 21
+newline$ -- 98
+num.names$ -- 40
+pop$ -- 134
 preamble$ -- 1
-purify$ -- 79
+purify$ -- 87
 quote$ -- 0
-skip$ -- 208
+skip$ -- 244
 stack$ -- 0
-substring$ -- 427
-swap$ -- 93
-text.length$ -- 10
+substring$ -- 496
+swap$ -- 114
+text.length$ -- 13
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 62
+type$ -- 70
 warning$ -- 1
-while$ -- 66
-width$ -- 19
-write$ -- 192
-(There was 1 error message)
+while$ -- 76
+width$ -- 21
+write$ -- 216
+(There was 1 warning)

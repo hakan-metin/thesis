@@ -31,6 +31,13 @@ M.~Davis, G.~Logemann, and D.~Loveland.
 \newblock A machine program for theorem-proving.
 \newblock {\em Commun. ACM}, 5(7):394--397, July 1962.
 
+\bibitem{devriendt2017symmetric}
+J.~Devriendt, B.~Bogaerts, and M.~Bruynooghe.
+\newblock Symmetric explanation learning: Effective dynamic symmetry handling
+  for sat.
+\newblock In {\em International Conference on Theory and Applications of
+  Satisfiability Testing}, pages 83--100. Springer, 2017.
+
 \bibitem{Devriendt12}
 J.~Devriendt, B.~Bogaerts, B.~de~Cat, M.~Denecker, and C.~Mears.
 \newblock Symmetry propagation: Improved dynamic symmetry breaking in {SAT}.
@@ -80,6 +87,11 @@ M.~W. Moskewicz, C.~F. Madigan, Y.~Zhao, L.~Zhang, and S.~Malik.
 F.~Rossi, P.~Van~Beek, and T.~Walsh.
 \newblock {\em Handbook of constraint programming}.
 \newblock Elsevier, 2006.
+
+\bibitem{sabharwal2005symchaff}
+A.~Sabharwal.
+\newblock Symchaff: A structure-aware satisfiability solver.
+\newblock In {\em AAAI}, volume~5, pages 467--474, 2005.
 
 \bibitem{sipser2006introduction}
 M.~Sipser.

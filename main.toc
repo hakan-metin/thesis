@@ -4,19 +4,20 @@
 \contentsline {section}{\numberline {2.1}SAT basics}{5}{section.2.1}
 \contentsline {subsection}{Satisfiability problem}{5}{section*.2}
 \contentsline {subsection}{An NP-complete problem}{6}{section*.3}
-\contentsline {subsection}{Algorithm}{6}{section*.4}
-\contentsline {section}{\numberline {2.2}Groups basics}{7}{section.2.2}
-\contentsline {subsection}{Groups}{7}{section*.5}
+\contentsline {subsection}{Solving a SAT problem}{6}{section*.4}
+\contentsline {section}{\numberline {2.2}Groups basics}{8}{section.2.2}
+\contentsline {subsection}{Groups}{8}{section*.5}
 \contentsline {subsubsection}{Generators of a group}{8}{section*.6}
-\contentsline {subsection}{Permutation groups}{8}{section*.7}
-\contentsline {chapter}{\chapternumberline {3}Symmetry and SAT}{9}{chapter.3}
-\contentsline {section}{\numberline {3.1}Symmetry detection in SAT}{9}{section.3.1}
-\contentsline {section}{\numberline {3.2}Usage of symmetries}{13}{section.3.2}
-\contentsline {subsection}{Static symmetry breaking}{15}{section*.8}
-\contentsline {subsection}{Dynamic symmetry breaking}{16}{section*.9}
-\contentsline {chapter}{\chapternumberline {4}SymmSAT}{19}{chapter.4}
-\contentsline {subsubsection}{Drawbacks of the static-based approaches.}{19}{section*.10}
-\contentsline {subsubsection}{Proposed solution. }{19}{section*.11}
-\contentsline {section}{\numberline {4.1}Experiments}{21}{section.4.1}
-\contentsline {chapter}{\chapternumberline {5}Conclusion}{23}{chapter.5}
-\contentsline {chapter}{Bibliography}{25}{chapter*.12}
+\contentsline {subsection}{Permutation groups}{9}{section*.7}
+\contentsline {chapter}{\chapternumberline {3}Symmetry and SAT}{11}{chapter.3}
+\contentsline {section}{\numberline {3.1}Symmetry detection in SAT}{11}{section.3.1}
+\contentsline {section}{\numberline {3.2}Usage of symmetries}{15}{section.3.2}
+\contentsline {subsection}{Static symmetry breaking}{17}{section*.8}
+\contentsline {subsection}{Dynamic symmetry breaking}{18}{section*.9}
+\contentsline {subsubsection}{SymChaff}{18}{section*.10}
+\contentsline {subsubsection}{Symmetry Propagation}{18}{section*.11}
+\contentsline {subsubsection}{Symmetry Explanation Learning}{20}{section*.12}
+\contentsline {chapter}{\chapternumberline {4}SymmSAT}{21}{chapter.4}
+\contentsline {subsection}{Algorithm}{23}{section*.13}
+\contentsline {subsection}{Experiments}{23}{section*.14}
+\contentsline {chapter}{Bibliography}{25}{chapter*.15}

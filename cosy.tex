@@ -1,7 +1,8 @@
 \chapter{SymmSAT}\label{chap:symmSAT}
 
 
-\subsubsection{Drawbacks of the static-based approaches.} In the general case,
+%\subsubsection{Drawbacks of the static-based approaches.} 
+In the general case,
 the size of the \textit{sbp} can be exponential in the number of variables of
 the problem so that they cannot be totally computed. Even in more favorable
 situations, the size of the generated \textit{sbp} is often too large to be
@@ -14,56 +15,19 @@ are preprocessors, so their combination with other techniques, such as
 their parameters during the solving turns out to be very difficult. For all
 these reasons, some classes of SAT problems cannot be solved yet despite
 exhibiting symmetries.
-
-
-
-%
-%\emph{static symmetry breaking} has some drawbacks which are
-%\begin{itemize}
-%	\item pre-generation of the constraints
-%	\item maybe unused (larges) clauses by the solver
-%	\item 
-%\end{itemize}
-
-
-\subsubsection{Proposed solution. } To handle these issues, we propose a new
+To handle these issues, we propose a new
 approach that reuses the principles of the static approaches, but operates
 dynamically: the symmetries are broken during the search process without any
-pre-generation of the \textit{sbp}. To do so, we elaborate the notions of
-\emph{symmetry status tracking} and \emph{effective symmetric breaking
-	predicates} (\emph{esbp}).
-
-The approach is implemented using a couple of components: (1) a
-\textit{Conflict Driven Clauses Learning (CDCL) search engine}; (2) \textit{a
-	symmetry controller}. Roughly speaking, the first component performs the
-classical search activity on the SAT problem, while the second observes the
-engine and maintains the status of the symmetries. When the controller detects
-a situation where the engine is starting to explore a redundant
-part\footnote{Isomorphic to a part that has been/will be explored.}, it orders
-the engine to operate a backjump. The detection is performed thanks to
-\emph{symmetry status tracking} and the backjump order is given by a simple
-injection of an \emph{esbp} computed on the fly.
-
-The main advantage of such an approach is to cope with the heavy (and
-potentially blocking) pre-generation phase of the static-based approaches, but
-also offers opportunities to combine with other dynamic-based approaches, like
-the \textit{symmetry propagation} technique~\cite{Devriendt12}. It also gives
-more flexibility for adjusting some parameters on the fly. Moreover, the
-overhead for non symmetric formulas is reduced to the computation time of the
-graph automorphism.
-
-The extensive evaluation of our approach on the symmetric formulas of the last
-six SAT contests shows that it outperforms the state-of-the-art techniques, in
-particular on unsatisfiable instances, which are the hardest class of the
-problem.
-
-
-
-What we propose here is a best effort approach that tries to eliminate,
+pre-generation of the \textit{sbp}. It is a best effort approach that tries to eliminate,
 \textit{dynamically}, the \textit{non lex-leading} assignments with a minimal
 computation effort. To do so, we first introduce the notions of
 \textit{reducer}, \textit{inactive} and \textit{active} permutation with
-respect to an assignment $\alpha$.
+respect to an assignment $\alpha$ and \emph{effective symmetric breaking predicates} (\emph{esbp}).
+
+
+
+
+
 
 \begin{definition}[Reducer, inactive and active permutation] A permutation $g$
 	is a \emph{reducer} of an assignment $\alpha$ if $g.\alpha < \alpha$ (hence $\alpha$ cannot be
@@ -158,4 +122,116 @@ satisfiability.
 \end{proof}
 
 
-\section{Experiments}
+
+
+\subsection{Algorithm}
+
+
+This section describes how to augment the state-of-the-art CDCL algorithm with
+the aforementioned concepts to develop an efficient symmetry-guided SAT
+solving algorithm. 
+The approach is implemented using a couple of components: (1) a
+\textit{Conflict Driven Clauses Learning (CDCL) search engine}; (2) \textit{a
+	symmetry controller}. Roughly speaking, the first component performs the
+classical search activity on the SAT problem, while the second observes the
+engine and maintains the status of the symmetries. When the controller detects
+a situation where the engine is starting to explore a redundant
+part\footnote{Isomorphic to a part that has been/will be explored.}, it orders
+the engine to operate a backjump. The detection is performed thanks to
+\emph{symmetry status tracking} and the backjump order is given by a simple
+injection of an \emph{esbp} computed on the fly.
+We first recall how the CDCL algorithm works. We then
+explain how to extend it with a \emph{symmetry controller} component which
+guides the behavior of CDCL algorithm depending on the status of symmetries.
+
+
+
+
+Conflict-Driven Clause Learning (CDCL) algorithm was already presented in Algorithm~\ref{algo:cdcl}
+
+
+epicted in
+Algorithm~\ref{algo:cdcl_cosy} (in black) is the same Algorithm . The parts in red (grey in B\&W printings) should be
+ignored for the moment.
+
+
+\hakan{Change Font !!}
+
+\begin{algorithm}
+	\SetKwProg{Fn}{function}{}{}
+	\SetKwData{C}{SymController}
+	\SetKwFunction{CDCL}{CDCLSym}
+	\SetKwFunction{unitPropagation}{unitPropagation}
+	\SetKwFunction{analyzeConflict}{analyzeConflict}
+	\SetKwFunction{addLearntClause}{addLearntClause}
+	\SetKwFunction{assignNewLiteral}{assignDecisionLiteral}
+	\SetKwFunction{backjumpPolicy}{backjumpAndRestartPolicies}
+	\SetKwFunction{isNotMinimal}{isNotLexLeader}
+	\SetKwFunction{SBP}{generateEsbp}
+	\SetKwFunction{notifyAssigned}{updateAssign}
+	\SetKwFunction{notifyCancelled}{updateCancel}
+	\SetKwFunction{symmetryController}{symmetryController}
+	\SetKwFunction{ca}{currentAssignment}
+	\DontPrintSemicolon
+	
+	\Fn{\CDCL{$\varphi$: CNF formula, {\color{red}\C: symmetry controller}}
+		\textbf{returns} $\true$ if $\varphi$ is \sat and $\false$ otherwise}
+	{
+		$dl \gets 0$ \tcp*{Current decision level}
+		\While {not all variables are assigned} {
+			$isConflict \gets$ \unitPropagation{}\;
+			{
+				\color{red} 
+				\C.\notifyAssigned{\ca{}}\;
+				$isReduced \gets$ \C.\isNotMinimal{\ca{}}\;
+			}
+			
+			\If{$isConflict \, {\color{red}||\, isReduced}$} {
+				\If{dl == 0}
+				{
+					\Return \false
+					\tcp*{$\varphi$ is $\unsat$}
+				}
+				\If{\color{red}$isConflict$}
+				{
+					$\omega \gets$ \analyzeConflict{}\;
+				}
+				\Else {
+					{
+						\color{red}$\omega \gets$ \C.\SBP{\ca{}}\;
+					}
+				}
+				\addLearntClause{$\omega$}\;
+				$dl \gets$ \backjumpPolicy{}\;
+				{\color{red}\C.\notifyCancelled{\ca{}}\;}
+			}
+			\Else{
+				\assignNewLiteral{}\;
+				$dl \gets dl+1$\;
+			}
+		}
+		\Return \true
+		\tcp*{$\varphi$ is $\sat$}
+		
+	}
+	\caption{the CDCLSym SAT Solving Algorithm.}
+	\label{algorithm:cdcl_cosy}
+\end{algorithm}
+
+
+
+The main advantage of such an approach is to cope with the heavy (and
+potentially blocking) pre-generation phase of the static-based approaches, but
+also offers opportunities to combine with other dynamic-based approaches, like
+the \textit{symmetry propagation} technique~\cite{Devriendt12}. It also gives
+more flexibility for adjusting some parameters on the fly. Moreover, the
+overhead for non symmetric formulas is reduced to the computation time of the
+graph automorphism.
+
+The extensive evaluation of our approach on the symmetric formulas of the last
+six SAT contests shows that it outperforms the state-of-the-art techniques, in
+particular on unsatisfiable instances, which are the hardest class of the
+problem.
+
+
+\subsection{Experiments}
