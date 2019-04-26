@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.9.2)  23 APR 2019 18:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.9.2)  26 APR 2019 17:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -706,22 +706,6 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 (/usr/share/texlive/texmf-dist/tex/latex/doublestroke/dsfont.sty
 Package: dsfont 1995/08/01 v0.1 Double stroke roman fonts
 )
-(/usr/share/texlive/texmf-dist/tex/latex/cleveref/cleveref.sty
-Package: cleveref 2018/03/27 v0.21.4 Intelligent cross-referencing
-LaTeX Info: Redefining \Cref on input line 925.
-Package cleveref Info: `hyperref' support loaded on input line 2370.
-LaTeX Info: Redefining \cref on input line 2370.
-LaTeX Info: Redefining \Cref on input line 2370.
-LaTeX Info: Redefining \crefrange on input line 2370.
-LaTeX Info: Redefining \Crefrange on input line 2370.
-LaTeX Info: Redefining \cpageref on input line 2370.
-LaTeX Info: Redefining \Cpageref on input line 2370.
-LaTeX Info: Redefining \cpagerefrange on input line 2370.
-LaTeX Info: Redefining \Cpagerefrange on input line 2370.
-LaTeX Info: Redefining \labelcref on input line 2370.
-LaTeX Info: Redefining \labelcpageref on input line 2370.
-Package cleveref Info: `amsthm' support loaded on input line 3026.
-)
 (/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \labelindent=\skip262
@@ -809,6 +793,24 @@ Package: relsize 2013/03/29 ver 4.1
 )
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty
 Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+(/usr/share/texlive/texmf-dist/tex/latex/cleveref/cleveref.sty
+Package: cleveref 2018/03/27 v0.21.4 Intelligent cross-referencing
+LaTeX Info: Redefining \Cref on input line 925.
+Package cleveref Info: `hyperref' support loaded on input line 2370.
+LaTeX Info: Redefining \cref on input line 2370.
+LaTeX Info: Redefining \Cref on input line 2370.
+LaTeX Info: Redefining \crefrange on input line 2370.
+LaTeX Info: Redefining \Crefrange on input line 2370.
+LaTeX Info: Redefining \cpageref on input line 2370.
+LaTeX Info: Redefining \Cpageref on input line 2370.
+LaTeX Info: Redefining \cpagerefrange on input line 2370.
+LaTeX Info: Redefining \Cpagerefrange on input line 2370.
+LaTeX Info: Redefining \labelcref on input line 2370.
+LaTeX Info: Redefining \labelcpageref on input line 2370.
+Package cleveref Info: `amsthm' support loaded on input line 3026.
+Package cleveref Info: `listings' support loaded on input line 3131.
+Package cleveref Info: `algorithm2e' support loaded on input line 3147.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
@@ -1687,12 +1689,12 @@ LaTeX Info: Redefining \nameref on input line 68.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<img/logo-sorbonne.pdf, id=83, 143.26022pt x 57.96657pt>
+<img/logo-sorbonne.pdf, id=87, 143.26022pt x 57.96657pt>
 File: img/logo-sorbonne.pdf Graphic file (type pdf)
 <use img/logo-sorbonne.pdf>
 Package pdftex.def Info: img/logo-sorbonne.pdf  used on input line 6.
 (pdftex.def)             Requested size: 173.71483pt x 70.2826pt.
-<img/logo-edite.pdf, id=84, 148.555pt x 97.36375pt>
+<img/logo-edite.pdf, id=88, 148.555pt x 97.36375pt>
 File: img/logo-edite.pdf Graphic file (type pdf)
 <use img/logo-edite.pdf>
 Package pdftex.def Info: img/logo-edite.pdf  used on input line 9.
@@ -1736,7 +1738,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 34--60
 
  []
 
-<img/logo-lip6.png, id=85, 271.0125pt x 254.9525pt>
+<img/logo-lip6.png, id=89, 271.0125pt x 254.9525pt>
 File: img/logo-lip6.png Graphic file (type png)
 <use img/logo-lip6.png>
 Package pdftex.def Info: img/logo-lip6.png  used on input line 63.
@@ -1786,66 +1788,96 @@ LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <14.4> not available
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [5]
-(./fig/naive_algorithm.tex) [6pdfTeX warning (ext4): destination with the same 
-identifier (name{figure.2.1}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.112 
-      ]
-LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <8> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 160.
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 160.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
-File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-)
-LaTeX Font Info:    Font shape `T1/futs/bx/it' in size <12> not available
-(Font)              Font shape `T1/futs/b/it' tried instead on input line 160.
-LaTeX Font Info:    Try loading font information for T1+phv on input line 166.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 72.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 69--73
+
+ []
+
+(./fig/naive_algorithm.tex
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 9.19998pt on input line 61.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 6.99199pt on input line 61.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 5.51999pt on input line 61.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 9.19998pt on input line 61.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 6.99199pt on input line 61.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 5.51999pt on input line 61.
+) [6pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
+1}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.97 
+     ] (./algo/dpll.tex
+LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <8> not available
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 34.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 34.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
+LaTeX Font Info:    Font shape `T1/futs/bx/it' in size <12> not available
+(Font)              Font shape `T1/futs/b/it' tried instead on input line 34.
+) (./algo/unitdpll.tex
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 10.07397pt on input line 18.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 7.63599pt on input line 18.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 10.07397pt on input line 18.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 7.63599pt on input line 18.
 ) [7pdfTeX warning (ext4): destination with the same identifier (name{algocf.1}
 ) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.175 \subsection
-                 {Groups}]
-LaTeX Font Info:    Try loading font information for TS1+futs on input line 180
+l.122 
+      pdfTeX warning (ext4): destination with the same identifier (name{algocf.
+2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.122 
+      ] (./algo/cdcl.tex)
+Underfull \vbox (badness 5726) has occurred while \output is active []
+
+ [8]
+LaTeX Font Info:    Try loading font information for TS1+futs on input line 185
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/fourier/ts1futs.fd
 File: ts1futs.fd 2004/03/26 Fontinst v1.926 font definitions for TS1/futs.
 )
-Underfull \vbox (badness 3919) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [8]
-LaTeX Font Info:    Try loading font information for U+euf on input line 240.
+ [9pdfTeX warning (ext4): destination with the same identifier (name{algocf.3})
+ has been already used, duplicate ignored
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/ueuf.fd
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.207 T
+       he structure $\langle G, * \rangle$ is denoted as G when clear from c...
+]
+LaTeX Font Info:    Try loading font information for U+euf on input line 245.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 ))
-(./symmetryinsat.tex [9] [10
+(./symmetryinsat.tex [10] [11
 
-] [11]
+]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
 nput line 74.
- (./cnfs/battleship-3-4-unsat.cnf
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 2.
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 2.
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 2.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 2.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 2.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 2.
-)
-<cnfs/graph_cnf_no_opt-crop.pdf, id=242, 681.54625pt x 654.445pt>
+ (./cnfs/battleship-3-4-unsat.cnf)
+<cnfs/graph_cnf_no_opt-crop.pdf, id=280, 681.54625pt x 654.445pt>
 File: cnfs/graph_cnf_no_opt-crop.pdf Graphic file (type pdf)
 <use cnfs/graph_cnf_no_opt-crop.pdf>
 Package pdftex.def Info: cnfs/graph_cnf_no_opt-crop.pdf  used on input line 77.
@@ -1873,7 +1905,7 @@ e.3.1}) has been already used, duplicate ignored
 l.95 \clearpage
                 <./cnfs/graph_cnf_no_opt-crop.pdf>]
 (./cnfs/battleship-3-4-unsat.cnf)
-<cnfs/graph_cnf_opt-crop.pdf, id=296, 635.37375pt x 557.08125pt>
+<cnfs/graph_cnf_opt-crop.pdf, id=334, 635.37375pt x 557.08125pt>
 File: cnfs/graph_cnf_opt-crop.pdf Graphic file (type pdf)
 <use cnfs/graph_cnf_opt-crop.pdf>
 Package pdftex.def Info: cnfs/graph_cnf_opt-crop.pdf  used on input line 112.
@@ -1887,7 +1919,7 @@ has been already used, duplicate ignored
                                                   \fi \fi 
 l.136 
        <./cnfs/graph_cnf_opt-crop.pdf>]
-<cnfs/orbits.pdf, id=343, 1064.97874pt x 937.5025pt>
+<cnfs/orbits.pdf, id=381, 1064.97874pt x 937.5025pt>
 File: cnfs/orbits.pdf Graphic file (type pdf)
 <use cnfs/orbits.pdf>
 Package pdftex.def Info: cnfs/orbits.pdf  used on input line 139.
@@ -1944,7 +1976,7 @@ LaTeX Warning: Reference `algo:cdcl_cosy' on page 23 undefined on input line 15
 4.
 
 ) (./main.bbl [23] [24pdfTeX warning (ext4): destination with the same identifi
-er (name{algocf.2}) has been already used, duplicate ignored
+er (name{algocf.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
@@ -1963,7 +1995,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 99.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 99.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 99.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 5F3DB0C665D5EC93CB4446C32677499B;1123.
+(rerunfilecheck)             Checksum: BF14A15DDE5104CF21294B86030BE96F;1184.
 
 
 LaTeX Warning: There were undefined references.
@@ -1971,13 +2003,13 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 99.
  ) 
 Here is how much of TeX's memory you used:
- 30034 strings out of 492645
- 559751 string characters out of 6131957
- 686627 words of memory out of 5000000
- 33113 multiletter control sequences out of 15000+600000
- 175323 words of font info for 163 fonts, out of 8000000 for 9000
+ 30129 strings out of 492645
+ 561096 string characters out of 6131957
+ 688536 words of memory out of 5000000
+ 33164 multiletter control sequences out of 15000+600000
+ 201695 words of font info for 188 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,22n,69p,440b,1594s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,22n,69p,440b,1657s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/ccicons/ccicons.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texlive/texmf-dist
@@ -1992,10 +2024,10 @@ e/texmf-dist/fonts/type1/adobe/utopia/putri8a.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
 tmr8a.pfb>
-Output written on main.pdf (30 pages, 312225 bytes).
+Output written on main.pdf (30 pages, 317311 bytes).
 PDF statistics:
- 560 PDF objects out of 1000 (max. 8388607)
- 490 compressed objects within 5 object streams
- 183 named destinations out of 1000 (max. 500000)
- 195 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 603 PDF objects out of 1000 (max. 8388607)
+ 532 compressed objects within 6 object streams
+ 210 named destinations out of 1000 (max. 500000)
+ 203 words of extra memory for PDF output out of 10000 (max. 10000000)
 

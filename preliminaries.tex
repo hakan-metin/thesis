@@ -4,8 +4,8 @@
 
 \subsection{Satisfiability problem}
 A \emph{Boolean variable}, or \emph{propositional variable}, is a variable that
-has two possible values : true or false (noted $\true$ or $\false$,
-respectively).  A \emph{literal} $l$ is a propositional variable or its
+has two possible values : true or false (noted respectively $\true$ or $\false$).
+A \emph{literal} $l$ is a propositional variable or its
 negation. For a given variable $x$, the positive literal is represented by $x$
 and the negative one by $\neg x$.
 A \emph{clause} $\omega$ is a finite disjunction of literals represented
@@ -38,7 +38,6 @@ otherwise the formula is \emph{unsatisfiable} (\unsat).
 
 \subsection{An NP-complete problem}
 
-
 The SAT problems is the first NP-complete algorithm as proven by Stephen Cook in 1971~\cite{cook1971complexity}.
 It is also proved by Leonid Levin in 1973~\cite{4640789}, for this purpose, it was known as Cook-Levin theorem.
 The proof of to show that can be found in \cite{sipser2006introduction}.
@@ -58,10 +57,21 @@ This question is one of the seven millennium prize problems.
 
 \subsection{Solving a SAT problem}
 
+Two kinds of algorithm exists to solve satisfiability problems.
+First, the \emph{incomplete} algorithm which does not provide any guarantee that will eventually report either any satisfiable assignment or declare that formula is unsatisfiable. This kind of algorithm is out of scope of this thesis. 
+Second, the \emph{complete} algorithm, which provides a guarantee that if an assignment exists
+it will be reached or it will declare that formula is unsatisfiable.
+This section describes different \emph{complete }algorithm to solve a propositional formula.
+
+
+
+\subsubsection{A naive algorithm}
 A naive approach to solve a SAT problem is to try all possible assignments. In total,
-for a propositional formula with $n$ variables, it leads to $2^n$ assignments.  
-Figure~\ref{fig:naive_algo} illustrate the search tree for a problem with six variables.
-This algorithm is obviously intractable on real problems even for a formula with few variables. 
+for a propositional formula with $n$ variables, it leads to $2^n$ assignments in the worth case.  
+\Cref{fig:naive_algo} illustrate the search tree for a problem with six variables.
+This algorithm is obviously intractable on real problems even for a formula with few variables. \hakan{alpha 11 is SAT}\\
+
+
  
 \begin{figure}[H]
 	\centering
@@ -72,14 +82,38 @@ This algorithm is obviously intractable on real problems even for a formula with
 
 %\hakan{Parler du DP}
 
-One of the first non memory intensive algorithm to solve the SAT problems is 
+\subsubsection{Davis Putnam Logemann Loveland (DPLL) algorithm}
+
+The first non memory intensive algorithm to solve the SAT problems is 
 the Davis Putnam Logemann Loveland (DPLL) algorithm~\cite{dpll_62}. 
-This algorithm introduces the \emph{unit propagation}.
+It explore a binary tree using depth first search as given in \Cref{algo:dpll}.
+The construction of the tree is related to
+
+Effectively a \emph{decision} literal is chose, and 
+When a leaf is reported as \unsat (\cref{algo:dpll:unsatbranch}), another branch is 
+explored with a new decision literal. If all leaves are reported as \unsat the formula
+$\varphi$ is \unsat. If any branch found a solution  i.e. the problem is empty,
+ formula is satisfiable corresponding assignment is returned (\cref{algo:dpll:sat1,algo:dpll:sat2})
+
+\input{algo/dpll}
+
+An important function in the DPLL algorithm is \texttt{unitPropagation} \cref{algo:dpll:unit} and
+it is detailed in \Cref{algo:unitdpll}.
+
+
+
+This algorithm introduces the \texttt{unitPropagation} (\Cref{algo:unitdpll})
 This principle force the value of a literal when a clause is \emph{assertive}, i.e. 
 has all literals to false but one unassigned. It will force the value of the unassigned literal 
+\input{algo/unitdpll}
 
 
-The iterated application of unit propagation until a fix point is called \emph{unit propagation} or \emph{boolean constraint propagation } (BCP).
+%\input{algo/puredpll}
+
+
+
+
+The iterated application of unit propagation until a fix point is called \texttt{unitPropagation} or \emph{boolean constraint propagation } (BCP).
 
 Another idea introduced by DPLL was \emph{elimination of pure literals},
 a literal is said pure if it only appear on one sign (positive or negative) in the problem.
@@ -91,31 +125,31 @@ A conflict
 
 
 Another sound and complete algorithm to resolve a SAT problem is 
-Conflict-Driven Clause learning (CDCL) algorithm~\ref{algo:cdcl} and is inspired DPLL.
+Conflict-Driven Clause learning (CDCL) \Cref{algo:cdcl} and is inspired DPLL.
 This algorithm introduces two principles. The first one is \emph{no chronological backtracking}
 
 
 
 The CDCL algorithm walks a binary search tree.  It first applies unit propagation to
-the formula $\varphi$ for the current assignment $\alpha$ (line~\ref{alg:cdcl:unit}).
+the formula $\varphi$ for the current assignment $\alpha$ (\cref{alg:cdcl:unit}).
 A conflict at level $0$ indicates that the formula is not satisfiable, and the algorithm
-reports it (lines~\ref{alg:cdcl:unsat_start}-\ref{alg:cdcl:unsat_end}).
+reports it (\cref{alg:cdcl:unsat_start,alg:cdcl:unsat_end}).
 If a conflict is detected, it is analyzed, which provides a \emph{conflict clause} 
-explaining the reason for the conflict (line~\ref{alg:cdcl:analyze}).
+explaining the reason for the conflict (\cref{alg:cdcl:analyze}).
 Different heuristics exists about the computation of conflict clause, on recent solvers
 the most used heuristic is the first Unique Implication Point ($1^{th}$ UIP) \cite{zhang2001efficient}.
 The analysis is completed by the computation of a
-backjump point to which the algorithm backtracks (line~\ref{alg:cdcl:backjump}).
+backjump point to which the algorithm backtracks (\cref{alg:cdcl:backjump}).
 Restart is an important things in SAT solver, it allows solver to explore a new search space
 with the learned clauses. It is also finely intertwined with the decision heuristics.
 If the solver is working on "hard" part of the problem it will reconsider the decision variables and
 solve this part part at first. But if we restart too often the solver doesn't have to discover new things.
 
-  This clause is learnt (line~\ref{alg:cdcl:learn}), as it does not change the
+  This clause is learnt (\cref{alg:cdcl:learn}), as it does not change the
 satisfiability of $\varphi$, and avoids encountering a conflict with the same
 causes in the future.
 Finally, if no conflict appears, the algorithm chooses a new decision literal 
-(line~\ref{alg:cdcl:pick_start}-\ref{alg:cdcl:pick_end}). The choice of the decision literal
+(\cref{alg:cdcl:pick_start,alg:cdcl:pick_end}). The choice of the decision literal
 affect the performance of solver. The first most used heuristic is Variable State Independent Decaying Sum (VSIDS)~\cite{moskewicz2001chaff}. The idea behind this heuristic is that the "hard" parts of the search space 
 will be treated first. To do that, each variable has an activity and wa increase if it participate to the resolution
 of the conflict.
@@ -123,45 +157,15 @@ The second most used heuristics is Learning rate based branching (LRB~\cite{lian
 The above steps are repeated until the satisfiability status of the formula is determined.
 
 
-\begin{algorithm}
-	\SetKwProg{Fn}{function}{}{}
-	\SetKwFunction{CDCL}{CDCL}
-	\SetKwFunction{unitPropagation}{unitPropagation}
-	\SetKwFunction{analyzeConflict}{analyzeConflict}
-	\SetKwFunction{addLearntClause}{addLearntClause}
-	\SetKwFunction{assignNewLiteral}{assignDecisionLiteral}
-	\SetKwFunction{backjumpPolicy}{backjumpAndRestartPolicies}
-	\SetKwFunction{ca}{currenttAssignment}
-	\Fn{
-		\CDCL{$\varphi$: CNF formula}\\
-		$\quad\quad$\textbf{returns} $\true$ if $\varphi$ is \sat and $\false$ otherwise
-	}
-	{
-		$dl \gets 0$ \tcp*{Current decision level}
-		\While{not all variables are assigned}{
-			$isConflict \gets$ \unitPropagation{}\;\label{alg:cdcl:unit}
-			\If{$isConflict$}{
-				\If{dl = 0}{\label{alg:cdcl:unsat_start} 
-					\Return \false \label{alg:cdcl:unsat_end} 
-					\tcp*{$\varphi$ is $\unsat$}
-				}
-				$\omega \gets$ \analyzeConflict{}\;\label{alg:cdcl:analyze} 
-				$dl \gets$ \backjumpPolicy{}\;\label{alg:cdcl:backjump} 
-				$\varphi \gets \varphi \cup \{\omega$\} \; \label{alg:cdcl:learn}
-				
-			}
-			\Else{
-				\assignNewLiteral{}\; \label{alg:cdcl:pick_start} 
-				$dl \gets dl+1$\;\label{alg:cdcl:pick_end} 
-			}
-		}
-		\Return \true
-		\tcp*{$\varphi$ is $\sat$}
-	}
-	\caption{The CDCL algorithm.}
-	\label{algo:cdcl}
-	
-\end{algorithm}
+\input{algo/cdcl}
+
+
+\subsection{Heuristics}
+
+\textbf{Decision heuristics}. Variable used to divide problems have a huge impact on the 
+overall solving time by the solver. Decision variable may impact the number of propagation and so the depth of the search tree  As propagated one can be seen as \emph{deduction} and the 
+
+
 
 
 \hakan{Peut être mettre les heuristiques dans des paragraphes}
