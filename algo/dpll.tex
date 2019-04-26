@@ -1,0 +1,37 @@
+\begin{algorithm}
+	\SetKwProg{Fn}{function}{}{}
+	\SetKwFunction{DPLL}{DPLL}	
+	\SetKwFunction{unitPropagation}{unitPropagation}
+	\SetKwFunction{purePropagation}{purePropagation}
+	\SetKwFunction{assignDecisionLiteral}{assignDecisionLiteral}
+
+	
+	\Fn{
+		\DPLL{$\varphi$: CNF formula, $\alpha$ assignment}\\
+		$\quad\quad$\textbf{returns} an assignment if $\varphi$ is \sat and $\unsat$ otherwise
+	}
+	{	
+		$\varphi, \alpha \gets$ \unitPropagation{$\varphi, \alpha$}\;
+	\label{algo:dpll:unit}
+		\If{$\{\} \in \varphi$}{\Return \unsat \tcp*{This branch is \unsat}}	 \label{algo:dpll:unsatbranch}
+		
+		\If{$\varphi = \{\}$}{\Return $\alpha$ \tcp*{$\varphi$ is $\sat$}}
+		
+		$x \gets$ \assignDecisionLiteral{}\;
+
+		\If{$\alpha \gets$ \DPLL{$\varphi \cup \{x\}, \alpha $}$\neq \unsat$ }
+		{
+			\Return $\alpha$ 		\label{algo:dpll:sat1}
+			
+		}\ElseIf{ $\alpha \gets$ \DPLL{$\varphi \cup \{\neg x\}, \alpha $}$\neq \unsat$}
+		{
+			\Return $\alpha$ 		\label{algo:dpll:sat2}
+		} \Else{
+			\Return \unsat \tcp*{$\varphi$ is $\unsat$}
+		}
+		\label{algo:dpll:unsat}
+	}
+	\caption{The DPLL algorithm.}
+	\label{algo:dpll}
+	
+\end{algorithm}

@@ -1,0 +1,21 @@
+\begin{algorithm}
+	\SetKwProg{Fn}{function}{}{}
+	\SetKwFunction{unitPropagation}{unitPropagation}
+	\Fn{
+		\unitPropagation{$\varphi$: CNF formula, $\alpha$ assignment}\\
+		$\quad\quad$\textbf{returns}  CNF formula and assignment $\alpha$ 
+	}
+	{	
+		\While{$\{l\} \in \varphi$ \textbf{and} $\{\} \notin \varphi$  }
+		{
+			\tcp{\small Remove all clauses containing $l$, all literals $\neg l$}
+			$\varphi \gets \varphi\mid_{\,l}$\\
+			$\alpha \gets \alpha \cup \{l\}$
+
+		}
+	\Return $\varphi, \alpha$
+	}
+	\caption{Unit propagation}
+	\label{algo:unitdpll}
+	
+\end{algorithm}

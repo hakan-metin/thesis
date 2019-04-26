@@ -1,0 +1,39 @@
+\begin{algorithm}
+	\SetKwProg{Fn}{function}{}{}
+	\SetKwFunction{CDCL}{CDCL}
+	\SetKwFunction{unitPropagation}{unitPropagation}
+	\SetKwFunction{analyzeConflict}{analyzeConflict}
+	\SetKwFunction{addLearntClause}{addLearntClause}
+	\SetKwFunction{assignNewLiteral}{assignDecisionLiteral}
+	\SetKwFunction{backjumpPolicy}{backjumpAndRestartPolicies}
+	\SetKwFunction{ca}{currenttAssignment}
+	\Fn{
+		\CDCL{$\varphi$: CNF formula}\\
+		$\quad\quad$\textbf{returns} $\true$ if $\varphi$ is \sat and $\false$ otherwise
+	}
+	{
+		$dl \gets 0$ \tcp*{Current decision level}
+		\While{not all variables are assigned}{
+			$isConflict \gets$ \unitPropagation{}\;\label{alg:cdcl:unit}
+			\If{$isConflict$}{
+				\If{dl = 0}{\label{alg:cdcl:unsat_start} 
+					\Return \false \label{alg:cdcl:unsat_end} 
+					\tcp*{$\varphi$ is $\unsat$}
+				}
+				$\omega \gets$ \analyzeConflict{}\;\label{alg:cdcl:analyze} 
+				$dl \gets$ \backjumpPolicy{}\;\label{alg:cdcl:backjump} 
+				$\varphi \gets \varphi \cup \{\omega$\} \; \label{alg:cdcl:learn}
+				
+			}
+			\Else{
+				\assignNewLiteral{}\; \label{alg:cdcl:pick_start} 
+				$dl \gets dl+1$\;\label{alg:cdcl:pick_end} 
+			}
+		}
+		\Return \true
+		\tcp*{$\varphi$ is $\sat$}
+	}
+	\caption{The CDCL algorithm.}
+	\label{algo:cdcl}
+	
+\end{algorithm}
