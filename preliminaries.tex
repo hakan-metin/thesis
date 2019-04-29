@@ -68,11 +68,11 @@ This section describes different \emph{complete }algorithm to solve a propositio
 \subsubsection{A naive algorithm}
 A naive approach to solve a SAT problem is to try all possible assignments. In total,
 for a propositional formula with $n$ variables, it leads to $2^n$ assignments in the worth case.  
-\Cref{fig:naive_algo} illustrate the search tree for a problem with six variables.
-This algorithm is obviously intractable on real problems even for a formula with few variables. \hakan{alpha 11 is SAT}\\
+\Cref{fig:naive_algo} illustrate the search tree for a given problem with six variables.
+In this case $\alpha_{11}$ ($\neg x_1, \neg x_2, x_3, \neg x_4, x_5, \neg x_6 $) is found as a solution of the problem. In the general case,
+this algorithm is obviously intractable on real problems even for a formula with few variables.
 
 
- 
 \begin{figure}[H]
 	\centering
 	\input{fig/naive_algorithm.tex}
@@ -84,46 +84,42 @@ This algorithm is obviously intractable on real problems even for a formula with
 
 \subsubsection{Davis Putnam Logemann Loveland (DPLL) algorithm}
 
-The first non memory intensive algorithm to solve the SAT problems is 
+One of the first non memory intensive algorithm to solve the SAT problems is 
 the Davis Putnam Logemann Loveland (DPLL) algorithm~\cite{dpll_62}. 
-It explore a binary tree using depth first search as given in \Cref{algo:dpll}.
-The construction of the tree is related to
-
-Effectively a \emph{decision} literal is chose, and 
-When a leaf is reported as \unsat (\cref{algo:dpll:unsatbranch}), another branch is 
-explored with a new decision literal. If all leaves are reported as \unsat the formula
-$\varphi$ is \unsat. If any branch found a solution  i.e. the problem is empty,
- formula is satisfiable corresponding assignment is returned (\cref{algo:dpll:sat1,algo:dpll:sat2})
+It explores a binary tree using depth first search as given in \Cref{algo:dpll}.
+The construction of the tree is related to a \emph{decision} literal (\cref{algo:dpll:decision}), then,
+recursive call with each value are checked.
+When a leaf report \unsat (\cref{algo:dpll:unsatbranch}), other branches are explored.
+By recursive construction of the algorithm, when positive and negative value of a literal reach \unsat,
+solver backtracks at most one level and is called \emph{chronological backtracking}.
+If all leaves report \unsat the formula $\varphi$ is unsatisfiable.
+And so  if any branch found a solution  i.e. the problem is empty,
+formula is satisfiable corresponding assignment is returned (\cref{algo:dpll:sat1,algo:dpll:sat2})
 
 \input{algo/dpll}
 
 An important function in the DPLL algorithm is \texttt{unitPropagation} \cref{algo:dpll:unit} and
-it is detailed in \Cref{algo:unitdpll}.
+it is detailed in \Cref{algo:unitdpll}. It searches all unit clauses to ensure satisfiability,
+negative literal is removed from the clause that belongs to him. Then, given formula is either simplified
+or leads to an inconsistency (empty clause). Literal is also added to the current assignment.
 
-
-
-This algorithm introduces the \texttt{unitPropagation} (\Cref{algo:unitdpll})
-This principle force the value of a literal when a clause is \emph{assertive}, i.e. 
-has all literals to false but one unassigned. It will force the value of the unassigned literal 
 \input{algo/unitdpll}
+
+When DPLL algorithm is executed on the formula in \Cref{fig:naive_algo}, unit propagation prevents to 
+explore assignments from $\alpha_1 $ to $\alpha_{8}$. Moreover, application to unit propagation until fix point
+leads directly to the solution.
+
 
 
 %\input{algo/puredpll}
+%Another idea introduced by DPLL was \emph{elimination of pure literals},
+%a literal is said pure if it only appear on one sign (positive or negative) in the problem.
+%These literals are set to true in the assignment.
+%On consequence, all clauses that own these literals are satisfied and so can be removed.
+%
 
 
-
-
-The iterated application of unit propagation until a fix point is called \texttt{unitPropagation} or \emph{boolean constraint propagation } (BCP).
-
-Another idea introduced by DPLL was \emph{elimination of pure literals},
-a literal is said pure if it only appear on one sign (positive or negative) in the problem.
-These literals are set to true in the assignment.
-On consequence, all clauses that own these literals are satisfied and so can be removed.
-
-A conflict 
-
-
-
+\subsubsection{Conflict Driven Clause Learning (CDCL) algorithm}
 Another sound and complete algorithm to resolve a SAT problem is 
 Conflict-Driven Clause learning (CDCL) \Cref{algo:cdcl} and is inspired DPLL.
 This algorithm introduces two principles. The first one is \emph{no chronological backtracking}

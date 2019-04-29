@@ -17,7 +17,7 @@
 		
 		\If{$\varphi = \{\}$}{\Return $\alpha$ \tcp*{$\varphi$ is $\sat$}}
 		
-		$x \gets$ \assignDecisionLiteral{}\;
+		$x \gets$ \assignDecisionLiteral{}\; \label{algo:dpll:decision}
 
 		\If{$\alpha \gets$ \DPLL{$\varphi \cup \{x\}, \alpha $}$\neq \unsat$ }
 		{

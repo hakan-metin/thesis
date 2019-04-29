@@ -1,0 +1,114 @@
+\begin{thebibliography}{10}
+
+\bibitem{aloul06}
+F.~Aloul, K.~Sakallah, and I.~Markov.
+\newblock Efficient symmetry breaking for boolean satisfiability.
+\newblock {\em {IEEE} Trans. Computers}, 55(5):549--558, 2006.
+
+\bibitem{barrett2018satisfiability}
+C.~Barrett and C.~Tinelli.
+\newblock Satisfiability modulo theories.
+\newblock In {\em Handbook of Model Checking}, pages 305--343. Springer, 2018.
+
+\bibitem{biere2009handbook}
+A.~Biere, M.~Heule, and H.~van Maaren.
+\newblock {\em Handbook of satisfiability}, volume 185.
+\newblock IOS press, 2009.
+
+\bibitem{cook1971complexity}
+S.~A. Cook.
+\newblock The complexity of theorem-proving procedures.
+\newblock In {\em Proceedings of the third annual ACM symposium on Theory of
+  computing}, pages 151--158. ACM, 1971.
+
+\bibitem{crawford1996symmetry}
+J.~Crawford and M.~Ginsberg.
+\newblock Symmetry-breaking predicates for search problems.
+\newblock 1996.
+
+\bibitem{dpll_62}
+M.~Davis, G.~Logemann, and D.~Loveland.
+\newblock A machine program for theorem-proving.
+\newblock {\em Commun. ACM}, 5(7):394--397, July 1962.
+
+\bibitem{devriendt2017symmetric}
+J.~Devriendt, B.~Bogaerts, and M.~Bruynooghe.
+\newblock Symmetric explanation learning: Effective dynamic symmetry handling
+  for sat.
+\newblock In {\em International Conference on Theory and Applications of
+  Satisfiability Testing}, pages 83--100. Springer, 2017.
+
+\bibitem{Devriendt12}
+J.~Devriendt, B.~Bogaerts, B.~de~Cat, M.~Denecker, and C.~Mears.
+\newblock Symmetry propagation: Improved dynamic symmetry breaking in {SAT}.
+\newblock In {\em {IEEE} 24th International Conference on Tools with Artificial
+  Intelligence, {ICTAI} 2012, Athens, Greece, November 7-9, 2012}, pages
+  49--56, 2012.
+
+\bibitem{JunttilaKaski:ALENEX2007}
+T.~Junttila and P.~Kaski.
+\newblock Engineering an efficient canonical labeling tool for large and sparse
+  graphs.
+\newblock In D.~Applegate, G.~S. Brodal, D.~Panario, and R.~Sedgewick, editors,
+  {\em Proceedings of the Ninth Workshop on Algorithm Engineering and
+  Experiments and the Fourth Workshop on Analytic Algorithms and
+  Combinatorics}, pages 135--149. SIAM, 2007.
+
+\bibitem{katebi2010symmetry}
+H.~Katebi, K.~Sakallah, and I.~Markov.
+\newblock Symmetry and satisfiability: An update.
+\newblock {\em Theory and Applications of Satisfiability Testing--SAT 2010},
+  pages 113--127, 2010.
+
+\bibitem{liang2016learning}
+J.~H. Liang, V.~Ganesh, P.~Poupart, and K.~Czarnecki.
+\newblock Learning rate based branching heuristic for sat solvers.
+\newblock In {\em International Conference on Theory and Applications of
+  Satisfiability Testing}, pages 123--140. Springer, 2016.
+
+\bibitem{Luks2004}
+E.~M. Luks and A.~Roy.
+\newblock The complexity of symmetry-breaking formulas.
+\newblock {\em Ann. Math. Artif. Intell.}, 41(1):19--45, 2004.
+
+\bibitem{mckay2003nauty}
+B.~D. McKay.
+\newblock nauty user’s guide (version 2.2).
+\newblock Technical report, Technical Report TR-CS-9002, Australian National
+  University, 2003.
+
+\bibitem{moskewicz2001chaff}
+M.~W. Moskewicz, C.~F. Madigan, Y.~Zhao, L.~Zhang, and S.~Malik.
+\newblock Chaff: Engineering an efficient sat solver.
+\newblock In {\em Proceedings of the 38th annual Design Automation Conference},
+  pages 530--535. ACM, 2001.
+
+\bibitem{rossi2006handbook}
+F.~Rossi, P.~Van~Beek, and T.~Walsh.
+\newblock {\em Handbook of constraint programming}.
+\newblock Elsevier, 2006.
+
+\bibitem{sabharwal2005symchaff}
+A.~Sabharwal.
+\newblock Symchaff: A structure-aware satisfiability solver.
+\newblock In {\em AAAI}, volume~5, pages 467--474, 2005.
+
+\bibitem{sipser2006introduction}
+M.~Sipser.
+\newblock {\em Introduction to the Theory of Computation}, volume~2.
+\newblock Thomson Course Technology Boston, 2006.
+
+\bibitem{4640789}
+B.~A. {Trakhtenbrot}.
+\newblock A survey of russian approaches to perebor (brute-force searches)
+  algorithms.
+\newblock {\em Annals of the History of Computing}, 6(4):384--400, Oct 1984.
+
+\bibitem{zhang2001efficient}
+L.~Zhang, C.~F. Madigan, M.~H. Moskewicz, and S.~Malik.
+\newblock Efficient conflict driven learning in a boolean satisfiability
+  solver.
+\newblock In {\em Proceedings of the 2001 IEEE/ACM international conference on
+  Computer-aided design}, pages 279--285. IEEE Press, 2001.
+
+\end{thebibliography}
