@@ -13,9 +13,11 @@
 	}
 	{
 		$dl \gets 0$ \tcp*{Current decision level}
+		$\alpha \gets \emptyset$\;
 		\While{not all variables are assigned}{
-			$isConflict \gets$ \unitPropagation{}\;\label{alg:cdcl:unit}
-			\If{$isConflict$}{
+			$\varphi, \alpha \gets$ \unitPropagation{$\varphi|_\alpha, \alpha$}\;\label{alg:cdcl:unit}
+			\If(\tcp*[f]{A conflict occurs}){ $\{\} \in \varphi$}
+			{ 
 				\If{dl = 0}{\label{alg:cdcl:unsat_start} 
 					\Return \false \label{alg:cdcl:unsat_end} 
 					\tcp*{$\varphi$ is $\unsat$}
@@ -26,7 +28,7 @@
 				
 			}
 			\Else{
-				\assignNewLiteral{}\; \label{alg:cdcl:pick_start} 
+				$\alpha \gets \alpha\, \cup $ \assignNewLiteral{}\; \label{alg:cdcl:pick_start} 
 				$dl \gets dl+1$\;\label{alg:cdcl:pick_end} 
 			}
 		}

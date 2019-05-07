@@ -87,11 +87,11 @@ this algorithm is obviously intractable on real problems even for a formula with
 One of the first non memory intensive algorithm to solve the SAT problems is 
 the Davis Putnam Logemann Loveland (DPLL) algorithm~\cite{dpll_62}. 
 It explores a binary tree using depth first search as given in \Cref{algo:dpll}.
-The construction of the tree is related to a \emph{decision} literal (\cref{algo:dpll:decision}), then,
+The construction of the tree is related to a \emph{decision} literal (\cref{algo:dpll:decision}) then,
 recursive call with each value are checked.
 When a leaf report \unsat (\cref{algo:dpll:unsatbranch}), other branches are explored.
 By recursive construction of the algorithm, when positive and negative value of a literal reach \unsat,
-solver backtracks at most one level and is called \emph{chronological backtracking}.
+solver backtracks at most one level, this fact is called \emph{chronological backtracking}.
 If all leaves report \unsat the formula $\varphi$ is unsatisfiable.
 And so  if any branch found a solution  i.e. the problem is empty,
 formula is satisfiable corresponding assignment is returned (\cref{algo:dpll:sat1,algo:dpll:sat2})
@@ -100,15 +100,19 @@ formula is satisfiable corresponding assignment is returned (\cref{algo:dpll:sat
 
 An important function in the DPLL algorithm is \texttt{unitPropagation} \cref{algo:dpll:unit} and
 it is detailed in \Cref{algo:unitdpll}. It searches all unit clauses to ensure satisfiability,
-negative literal is removed from the clause that belongs to him. Then, given formula is either simplified
-or leads to an inconsistency (empty clause). Literal is also added to the current assignment.
+negative literals are removed from the clause that belongs to him. Then, given formula is either simplified
+or leads to an inconsistency (empty clause). Unit literals are also added to the current assignment.
 
 \input{algo/unitdpll}
 
 When DPLL algorithm is executed on the formula in \Cref{fig:naive_algo}, unit propagation prevents to 
 explore assignments from $\alpha_1 $ to $\alpha_{8}$. Moreover, application to unit propagation until fix point
-leads directly to the solution.
-
+leads directly to the solution. 
+An important part of efficiency of DPLL is \texttt{assignDecisionLiteral} . The objective of this function 
+is to find a literal that will generate a maximum of unit propagation. Intuitively, decision literals 
+can be viewed as "guesses" and propagated literals can be viewed as "deductions". Finding a optimal variable
+is NP-Hard \cite{biere2009handbook}. Different heuristics exists, one of them will be presented in 
+\hakan{CITE SECTION DECISION HEURISTICS}.
 
 
 %\input{algo/puredpll}
@@ -117,43 +121,70 @@ leads directly to the solution.
 %These literals are set to true in the assignment.
 %On consequence, all clauses that own these literals are satisfied and so can be removed.
 %
-
-
 \subsubsection{Conflict Driven Clause Learning (CDCL) algorithm}
-Another sound and complete algorithm to resolve a SAT problem is 
-Conflict-Driven Clause learning (CDCL) \Cref{algo:cdcl} and is inspired DPLL.
-This algorithm introduces two principles. The first one is \emph{no chronological backtracking}
+
+The principal weakness of DPLL algorithm is to make same inconsistencies several times
+(principally due to chronological backtracking), incurring unnecessary CPU usage.\\
+Conflict Driven Clause Learning (CDCL) \cref{algo:cdcl} is another sound and complete algorithm
+to resolve a SAT problem and overcome its principal weakness.
 
 
-
-The CDCL algorithm walks a binary search tree.  It first applies unit propagation to
-the formula $\varphi$ for the current assignment $\alpha$ (\cref{alg:cdcl:unit}).
-A conflict at level $0$ indicates that the formula is not satisfiable, and the algorithm
-reports it (\cref{alg:cdcl:unsat_start,alg:cdcl:unsat_end}).
-If a conflict is detected, it is analyzed, which provides a \emph{conflict clause} 
-explaining the reason for the conflict (\cref{alg:cdcl:analyze}).
-Different heuristics exists about the computation of conflict clause, on recent solvers
-the most used heuristic is the first Unique Implication Point ($1^{th}$ UIP) \cite{zhang2001efficient}.
-The analysis is completed by the computation of a
-backjump point to which the algorithm backtracks (\cref{alg:cdcl:backjump}).
-Restart is an important things in SAT solver, it allows solver to explore a new search space
-with the learned clauses. It is also finely intertwined with the decision heuristics.
-If the solver is working on "hard" part of the problem it will reconsider the decision variables and
-solve this part part at first. But if we restart too often the solver doesn't have to discover new things.
-
-  This clause is learnt (\cref{alg:cdcl:learn}), as it does not change the
+\Cref{algo:cdcl} gives an overview of CDCL, Like DPLL,  it walks a binary search tree.
+It first applies unit propagation to the formula $\varphi$ for the current assignment $\alpha$ (\cref{alg:cdcl:unit}).
+Note that it is exactly the same procedure as the one used for DPLL.
+An inconsistency or a \emph{conflict} at level $0$ indicates that the formula is not satisfiable, and the algorithm
+reports it (\cref{alg:cdcl:unsat_start,alg:cdcl:unsat_end}). When the conflict is occurring at a higher level, it
+reason was analyzed and a clause called \emph{conflict clause} is deduced (\cref{alg:cdcl:analyze}).
+ This clause is \emph{learnt} (\cref{alg:cdcl:learn}), as it does not change the
 satisfiability of $\varphi$, and avoids encountering a conflict with the same
-causes in the future.
+causes in the future. This function will be presented thereafter
+The analysis is completed by the computation of a backjump point to which the algorithm backtracks (\cref{alg:cdcl:backjump}).
 Finally, if no conflict appears, the algorithm chooses a new decision literal 
-(\cref{alg:cdcl:pick_start,alg:cdcl:pick_end}). The choice of the decision literal
-affect the performance of solver. The first most used heuristic is Variable State Independent Decaying Sum (VSIDS)~\cite{moskewicz2001chaff}. The idea behind this heuristic is that the "hard" parts of the search space 
-will be treated first. To do that, each variable has an activity and wa increase if it participate to the resolution
-of the conflict.
-The second most used heuristics is Learning rate based branching (LRB~\cite{liang2016learning})
-The above steps are repeated until the satisfiability status of the formula is determined.
+(\cref{alg:cdcl:pick_start,alg:cdcl:pick_end}).
+The above steps are repeated until the satisfiability status of the
+formula is determined.
 
 
 \input{algo/cdcl}
+
+
+%If a conflict is detected in higher level, it is analyzed, which provides a
+%explaining the reason for the conflict.
+%Different heuristics exists about the computation of conflict clause, on recent solvers
+%the most used heuristic is the first Unique Implication Point ($1^{th}$ UIP) \cite{zhang2001efficient}.
+%Restart is an important things in SAT solver, it allows solver to explore a new search space
+%with the learned clauses. It is also finely intertwined with the decision heuristics.
+%If the solver is working on "hard" part of the problem it will reconsider the decision variables and
+%solve this part part at first. But if we restart too often the solver doesn't have to discover new things.
+%
+%
+%  This clause is learnt (\cref{alg:cdcl:learn}), as it does not change the
+%satisfiability of $\varphi$, and avoids encountering a conflict with the same
+%causes in the future.
+%
+%
+% The choice of the decision literal
+%affect the performance of solver. The first most used heuristic is Variable State Independent Decaying Sum (VSIDS)~\cite{moskewicz2001chaff}. The idea behind this heuristic is that the "hard" parts of the search space 
+%will be treated first. To do that, each variable has an activity and wa increase if it participate to the resolution
+%of the conflict.
+%The second most used heuristics is Learning rate based branching (LRB~\cite{liang2016learning})
+%The above steps are repeated until the satisfiability status of the formula is determined.
+
+
+\subsection{Conflict Analysis}
+A conflict is an inconsistency discovered by the solver, a situation that requires for a variable to be set 
+simultaneously to the \true and \false value. \Cref{fig:conflict} shows an assignments that leads to a conflict.
+The responsible variable is $x_3$. 
+ 
+\begin{figure}[H]
+	\input{fig/conflict}
+	\caption{Decisions/Propagations that leads to a  conflict}
+	\label{fig:conflict}
+\end{figure}
+
+This series of decisions would provoke same propagation and leads to the same conflict. 
+
+
 
 
 \subsection{Heuristics}
