@@ -174,18 +174,30 @@ formula is determined.
 \subsection{Conflict Analysis}
 A conflict is an inconsistency discovered by the solver, a situation that requires for a variable to be set 
 simultaneously to the \true and \false value. \Cref{fig:conflict} shows an assignments that leads to a conflict.
-The responsible variable is $x_3$. 
+First the solver chose $\neg x_1$ as decision then $\neg x_6$ and then $\neg x_5$. This last one propagates $x_4$
+which in turn propagates $x_2$ and $x_3$. On clause $\omega_1$, $x_3$ needs to be true and false in $\omega_5$ so
+a conflict appears.
  
 \begin{figure}[H]
-	\input{fig/conflict}
+	\centering
+		\input{fig/conflict}
 	\caption{Decisions/Propagations that leads to a  conflict}
 	\label{fig:conflict}
 \end{figure}
 
-This series of decisions would provoke same propagation and leads to the same conflict. 
+This series of decisions would provoke same propagation and leads to the same conflict. To avoid this
+situation, the solver needs to analyze the reason of the conflict with so called \emph{implication graph}.
+Implication graph represents the current state of the solver proof system.
+This graph is updated when a variable is assigned either on decision or propagation and when a variable
+is unassigned.
 
 
-
+\begin{figure}[H]
+	\centering
+	\input{fig/implication_graph}
+	\caption{Implication graph}
+	\label{fig:implication-graph}
+\end{figure}
 
 \subsection{Heuristics}
 

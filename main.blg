@@ -4,45 +4,45 @@ The top-level auxiliary file: main.aux
 The style file: abbrv.bst
 Database file #1: main.bib
 Warning--empty journal in crawford1996symmetry
-You've used 19 entries,
+You've used 16 entries,
             2118 wiz_defined-function locations,
-            615 strings with 6997 characters,
-and the built_in function-call counts, 7494 in all, are:
-= -- 764
-> -- 311
-< -- 13
-+ -- 125
-- -- 102
-* -- 482
-:= -- 1162
-add.period$ -- 64
-call.type$ -- 19
-change.case$ -- 104
+            598 strings with 6349 characters,
+and the built_in function-call counts, 5882 in all, are:
+= -- 594
+> -- 237
+< -- 10
++ -- 96
+- -- 76
+* -- 376
+:= -- 928
+add.period$ -- 52
+call.type$ -- 16
+change.case$ -- 82
 chr.to.int$ -- 0
-cite$ -- 20
-duplicate$ -- 322
-empty$ -- 602
-format.name$ -- 102
-if$ -- 1651
+cite$ -- 17
+duplicate$ -- 253
+empty$ -- 479
+format.name$ -- 76
+if$ -- 1283
 int.to.chr$ -- 0
-int.to.str$ -- 19
-missing$ -- 21
-newline$ -- 98
-num.names$ -- 40
-pop$ -- 134
+int.to.str$ -- 16
+missing$ -- 18
+newline$ -- 83
+num.names$ -- 34
+pop$ -- 103
 preamble$ -- 1
-purify$ -- 87
+purify$ -- 68
 quote$ -- 0
-skip$ -- 244
+skip$ -- 190
 stack$ -- 0
-substring$ -- 496
-swap$ -- 114
-text.length$ -- 13
+substring$ -- 385
+swap$ -- 81
+text.length$ -- 10
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 70
+type$ -- 58
 warning$ -- 1
-while$ -- 76
-width$ -- 21
-write$ -- 216
+while$ -- 61
+width$ -- 18
+write$ -- 180
 (There was 1 warning)

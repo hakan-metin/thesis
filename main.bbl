@@ -60,12 +60,6 @@ H.~Katebi, K.~Sakallah, and I.~Markov.
 \newblock {\em Theory and Applications of Satisfiability Testing--SAT 2010},
   pages 113--127, 2010.
 
-\bibitem{liang2016learning}
-J.~H. Liang, V.~Ganesh, P.~Poupart, and K.~Czarnecki.
-\newblock Learning rate based branching heuristic for sat solvers.
-\newblock In {\em International Conference on Theory and Applications of
-  Satisfiability Testing}, pages 123--140. Springer, 2016.
-
 \bibitem{Luks2004}
 E.~M. Luks and A.~Roy.
 \newblock The complexity of symmetry-breaking formulas.
@@ -76,12 +70,6 @@ B.~D. McKay.
 \newblock nauty user’s guide (version 2.2).
 \newblock Technical report, Technical Report TR-CS-9002, Australian National
   University, 2003.
-
-\bibitem{moskewicz2001chaff}
-M.~W. Moskewicz, C.~F. Madigan, Y.~Zhao, L.~Zhang, and S.~Malik.
-\newblock Chaff: Engineering an efficient sat solver.
-\newblock In {\em Proceedings of the 38th annual Design Automation Conference},
-  pages 530--535. ACM, 2001.
 
 \bibitem{rossi2006handbook}
 F.~Rossi, P.~Van~Beek, and T.~Walsh.
@@ -103,12 +91,5 @@ B.~A. {Trakhtenbrot}.
 \newblock A survey of russian approaches to perebor (brute-force searches)
   algorithms.
 \newblock {\em Annals of the History of Computing}, 6(4):384--400, Oct 1984.
-
-\bibitem{zhang2001efficient}
-L.~Zhang, C.~F. Madigan, M.~H. Moskewicz, and S.~Malik.
-\newblock Efficient conflict driven learning in a boolean satisfiability
-  solver.
-\newblock In {\em Proceedings of the 2001 IEEE/ACM international conference on
-  Computer-aided design}, pages 279--285. IEEE Press, 2001.
 
 \end{thebibliography}

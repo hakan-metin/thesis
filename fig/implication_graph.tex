@@ -1,0 +1,53 @@
+
+\begin{tikzpicture} % [level/.style={sibling distance=60mm/#1},every node/.style={scale=0.89}, scale=0.89]
+
+	\tikzstyle{decision}=[draw,double,circle,fill=red!25,minimum size=45pt,inner sep=0pt]
+	\tikzstyle{propagation}=[draw,circle,fill=white!25,minimum size=45pt,inner sep=0pt]
+	
+	\node[decision] (dx1) {$\neg x_1$@1};
+	\node[decision] (dx6) at ($(dx1) + (0, -2)$) {$\neg x_6$@2};
+	\node[decision, draw=orange] (dx5) at ($(dx6) + (0, -2)$) {$\neg x_5$@3};
+	
+	\node[propagation, draw=orange, line width=0.5mm] (px4) at ($(dx6) + (4, -1)$) {$x_4$@3};
+	\node[propagation] (px3) at ($(dx5) + (12, 0)$) {$\neg x_3$@3};
+	\node[propagation] (px2) at ($(dx6) + (8, 0)$) {$\neg x_2$@3};
+
+	\node[propagation] (px33) at ($(dx5) + (12, 4)$) {$x_3$@3};
+
+
+	\node[font=\bfseries] (reason) at (2,-6) {Reason Side};
+	\node[font=\bfseries] (reason) at (9,-6) {Conflict Side};
+
+	\path[->, draw, thick] (dx6) -- (px4) node [midway, fill=white] {$\omega_2$};
+	\path[->, draw, thick] (dx5) -- (px4) node [midway, fill=white] {$\omega_2$};
+	
+	\path[->, draw, thick] (px4) -- (px3) node [midway, fill=white] {$\omega_5$};
+	\path[->, draw, thick] (px4) -- (px2) node [midway, fill=white] {$\omega_4$};
+	
+	\path[->, draw, thick] (dx1) -- (px33) node [midway, fill=white] {$\omega_1$};
+	\path[->, draw, thick] (px2) -- (px33) node [midway, fill=white] {$\omega_1$};
+7	\path[<->, draw, line width=1mm, color=blue!60] (px3) -- (px33);
+	\path[line width=0.5mm, draw=orange] ($(px4.east) + (0.5, -3)$) -- ($(px4.east) + (0.5, 4)$);
+	
+	% Legend
+	
+	\path[draw] (-1, -6.5) -- (13, -6.5);
+	\node[decision, scale=0.3] (ld) at (0, -7) {};
+	\node[align=left, text width=2.2cm] at (1.5, -7) {Decision};
+	
+	\node[propagation, scale=0.3] (lp) at (0, -7.7) {};
+	\node[align=left, text width=2.2cm] at (1.5, -7.7) {Propagation};
+	
+	\node[scale=1.5] (lz) at (5, -7) {$\rightarrow$};
+	\node[align=left, text width=2.2cm] at (6.5, -7) {Implication};
+	
+	\node[scale=1.5] (ld) at (5, -7.7) {\textcolor{blue!60}{$\leftrightarrow$}};
+	\node[align=left, text width=2.2cm] at (6.5, -7.7) {Conflict};
+	
+	\node[propagation, draw=orange, line width=0.5mm, scale=0.3] (le) at (10, -7) {};
+	\node[align=left, text width=2.2cm] at (11.5, -7) {UIP};
+	
+	\node[scale=1.5] (ld) at (10, -7.7) {\textcolor{orange}{\textendash}};
+	\node[align=left, text width=2.2cm] at (11.5, -7.7) {Cut};
+	\path[draw] (-1, -8.2) -- (13, -8.2);
+\end{tikzpicture}
