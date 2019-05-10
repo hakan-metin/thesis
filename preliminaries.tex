@@ -177,7 +177,6 @@ simultaneously to the \true and \false value. \Cref{fig:conflict} shows an assig
 First the solver chose $\neg x_1$ as decision then $\neg x_6$ and then $\neg x_5$. This last one propagates $x_4$
 which in turn propagates $x_2$ and $x_3$. On clause $\omega_1$, $x_3$ needs to be true and false in $\omega_5$ so
 a conflict appears.
- 
 \begin{figure}[H]
 	\centering
 		\input{fig/conflict}
@@ -187,10 +186,15 @@ a conflict appears.
 
 This series of decisions would provoke same propagation and leads to the same conflict. To avoid this
 situation, the solver needs to analyze the reason of the conflict with so called \emph{implication graph}.
-Implication graph represents the current state of the solver proof system.
-This graph is updated when a variable is assigned either on decision or propagation and when a variable
-is unassigned.
-
+Implication graph represents the current state of the solver proof system. It records every dependencies
+among variables and so updated when a variable is assigned either on decision or propagation and when a variable
+is unassigned. The implication graph is a directed acyclic graph (DAG) in which a vertex represents an assigned variable labeled as $l@dl(l)$ where $l$ represents assigned literal and $dl(l)$ represents the decision level of the literal $l$.
+\hakan{Parler de decision level et de trail dans l'algo cdcl au dessus}
+Root vertexes , that have no incoming edges, are literals chosen by decision heuristics and others are 
+propagated literals.
+Incoming arcs labeled with a clause represents the \emph{reason} of this propagation.
+This clause must be assertive i.e. all of its literals are false except one that are not yet assigned.
+For example, \Cref{fig:implication-graph} shows implication graph of the previous example (\cref{fig:conflict}) until the conflict.
 
 \begin{figure}[H]
 	\centering
@@ -198,6 +202,34 @@ is unassigned.
 	\caption{Implication graph}
 	\label{fig:implication-graph}
 \end{figure}
+
+
+\texttt{analyzeConflict} procedure analyzed this graph to found the reason of the conflict. To do that, a search of
+\emph{unique implication point} (UIP) is performed. UIP of a decision level in the implication graph is a variables
+which lies on every path from the decision to the conflict. Note that, there are many UIP for a given decision level.
+In such case, UIPs are ordered according to the distance with the contradiction. The first UIP is the closest to
+the conflict. It is well known that the first UIP provides the smallest set of assignment that is responsible for the
+contradiction~\cite{zhang2001efficient}
+
+An UIP divides the implication in two sides with a \emph{cut}, the reason side contains decision variables 
+that is responsible for the contradiction and the conflict side contains the conflict. Note that, UIP is always is the 
+reason side. \Cref{fig:implication-graph} depicts two cuts in the implication graph.
+
+Once the reason side of a conflict is established, a conflict driven clause is produced called also 
+\emph{learnt clause}. It purposes to avoid same contradiction. To build this clause, it suffice to negate 
+literals that have an ongoing arc to the cut that contains first UIP. In \cref{fig:implication-graph}, produced
+clause will be $\omega_l = \{x_1, \neg x_4 \}$. Since the information of this clause is redundant with respect to 
+the original formula. It can be added without any satisfiability restrictions. 
+
+After producing the learnt clause, the solver compute \texttt{backjumpAndRestartPolicies}. It will unassigned all
+decision until the first one that is responsible for the conflict and so prune search space that contains no solution.
+This is the key point of the CDCL algorithm. The restart policy will be discussed in the next section.
+In our example, the target decision level is one. A first UIP variable  is said assertive, and will be propagated in the next loop of the solving algorithm.
+If a conflict implied only one level, the decision variable must 
+be assigned to the opposite value at level zero. Roughly speaking, to ensure satisfiability of the formula, this 
+literal must be true without any decision.
+
+ 
 
 \subsection{Heuristics}
 

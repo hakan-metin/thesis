@@ -92,4 +92,11 @@ B.~A. {Trakhtenbrot}.
   algorithms.
 \newblock {\em Annals of the History of Computing}, 6(4):384--400, Oct 1984.
 
+\bibitem{zhang2001efficient}
+L.~Zhang, C.~F. Madigan, M.~H. Moskewicz, and S.~Malik.
+\newblock Efficient conflict driven learning in a boolean satisfiability
+  solver.
+\newblock In {\em Proceedings of the 2001 IEEE/ACM international conference on
+  Computer-aided design}, pages 279--285. IEEE Press, 2001.
+
 \end{thebibliography}
