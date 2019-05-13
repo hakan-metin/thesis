@@ -5,6 +5,12 @@ F.~Aloul, K.~Sakallah, and I.~Markov.
 \newblock Efficient symmetry breaking for boolean satisfiability.
 \newblock {\em {IEEE} Trans. Computers}, 55(5):549--558, 2006.
 
+\bibitem{ansotegui2015using}
+C.~Ans{\'o}tegui, J.~Gir{\'a}ldez-Cru, J.~Levy, and L.~Simon.
+\newblock Using community structure to detect relevant learnt clauses.
+\newblock In {\em International Conference on Theory and Applications of
+  Satisfiability Testing}, pages 238--254. Springer, 2015.
+
 \bibitem{barrett2018satisfiability}
 C.~Barrett and C.~Tinelli.
 \newblock Satisfiability modulo theories.
@@ -45,6 +51,24 @@ J.~Devriendt, B.~Bogaerts, B.~de~Cat, M.~Denecker, and C.~Mears.
   Intelligence, {ICTAI} 2012, Athens, Greece, November 7-9, 2012}, pages
   49--56, 2012.
 
+\bibitem{een2005effective}
+N.~E{\'e}n and A.~Biere.
+\newblock Effective preprocessing in sat through variable and clause
+  elimination.
+\newblock In {\em International conference on theory and applications of
+  satisfiability testing}, pages 61--75. Springer, 2005.
+
+\bibitem{gomes1997heavy}
+C.~P. Gomes, B.~Selman, and N.~Crato.
+\newblock Heavy-tailed distributions in combinatorial search.
+\newblock In {\em International Conference on Principles and Practice of
+  Constraint Programming}, pages 121--135. Springer, 1997.
+
+\bibitem{huang2007effect}
+J.~Huang et~al.
+\newblock The effect of restarts on the efficiency of clause learning.
+\newblock In {\em IJCAI}, volume~7, pages 2318--2323, 2007.
+
 \bibitem{JunttilaKaski:ALENEX2007}
 T.~Junttila and P.~Kaski.
 \newblock Engineering an efficient canonical labeling tool for large and sparse
@@ -60,6 +84,25 @@ H.~Katebi, K.~Sakallah, and I.~Markov.
 \newblock {\em Theory and Applications of Satisfiability Testing--SAT 2010},
   pages 113--127, 2010.
 
+\bibitem{le2017painless}
+L.~Le~Frioux, S.~Baarir, J.~Sopena, and F.~Kordon.
+\newblock Painless: a framework for parallel sat solving.
+\newblock In {\em International Conference on Theory and Applications of
+  Satisfiability Testing}, pages 233--250. Springer, 2017.
+
+\bibitem{le2019modular}
+L.~Le~Frioux, S.~Baarir, J.~Sopena, and F.~Kordon.
+\newblock Modular and efficient divide-and-conquer sat solver on top of the
+  painless framework.
+\newblock In {\em International Conference on Tools and Algorithms for the
+  Construction and Analysis of Systems}, pages 135--151. Springer, 2019.
+
+\bibitem{liang2016learning}
+J.~H. Liang, V.~Ganesh, P.~Poupart, and K.~Czarnecki.
+\newblock Learning rate based branching heuristic for sat solvers.
+\newblock In {\em International Conference on Theory and Applications of
+  Satisfiability Testing}, pages 123--140. Springer, 2016.
+
 \bibitem{Luks2004}
 E.~M. Luks and A.~Roy.
 \newblock The complexity of symmetry-breaking formulas.
@@ -70,6 +113,12 @@ B.~D. McKay.
 \newblock nauty user’s guide (version 2.2).
 \newblock Technical report, Technical Report TR-CS-9002, Australian National
   University, 2003.
+
+\bibitem{moskewicz2001chaff}
+M.~W. Moskewicz, C.~F. Madigan, Y.~Zhao, L.~Zhang, and S.~Malik.
+\newblock Chaff: Engineering an efficient sat solver.
+\newblock In {\em Proceedings of the 38th annual Design Automation Conference},
+  pages 530--535. ACM, 2001.
 
 \bibitem{rossi2006handbook}
 F.~Rossi, P.~Van~Beek, and T.~Walsh.
@@ -85,6 +134,11 @@ A.~Sabharwal.
 M.~Sipser.
 \newblock {\em Introduction to the Theory of Computation}, volume~2.
 \newblock Thomson Course Technology Boston, 2006.
+
+\bibitem{soos2010enhanced}
+M.~Soos.
+\newblock Enhanced gaussian elimination in dpll-based sat solvers.
+\newblock In {\em POS@ SAT}, pages 2--14, 2010.
 
 \bibitem{4640789}
 B.~A. {Trakhtenbrot}.

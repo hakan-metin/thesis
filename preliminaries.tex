@@ -80,7 +80,6 @@ this algorithm is obviously intractable on real problems even for a formula with
 	\label{fig:naive_algo}
 \end{figure}
 
-%\hakan{Parler du DP}
 
 \subsubsection{Davis Putnam Logemann Loveland (DPLL) algorithm}
 
@@ -111,8 +110,7 @@ leads directly to the solution.
 An important part of efficiency of DPLL is \texttt{assignDecisionLiteral} . The objective of this function 
 is to find a literal that will generate a maximum of unit propagation. Intuitively, decision literals 
 can be viewed as "guesses" and propagated literals can be viewed as "deductions". Finding a optimal variable
-is NP-Hard \cite{biere2009handbook}. Different heuristics exists, one of them will be presented in 
-\hakan{CITE SECTION DECISION HEURISTICS}.
+is NP-Hard \cite{biere2009handbook}. Different heuristics exists, one of them will be presented in \ref{sec:heuristics}.
 
 
 %\input{algo/puredpll}
@@ -146,30 +144,6 @@ formula is determined.
 
 
 \input{algo/cdcl}
-
-
-%If a conflict is detected in higher level, it is analyzed, which provides a
-%explaining the reason for the conflict.
-%Different heuristics exists about the computation of conflict clause, on recent solvers
-%the most used heuristic is the first Unique Implication Point ($1^{th}$ UIP) \cite{zhang2001efficient}.
-%Restart is an important things in SAT solver, it allows solver to explore a new search space
-%with the learned clauses. It is also finely intertwined with the decision heuristics.
-%If the solver is working on "hard" part of the problem it will reconsider the decision variables and
-%solve this part part at first. But if we restart too often the solver doesn't have to discover new things.
-%
-%
-%  This clause is learnt (\cref{alg:cdcl:learn}), as it does not change the
-%satisfiability of $\varphi$, and avoids encountering a conflict with the same
-%causes in the future.
-%
-%
-% The choice of the decision literal
-%affect the performance of solver. The first most used heuristic is Variable State Independent Decaying Sum (VSIDS)~\cite{moskewicz2001chaff}. The idea behind this heuristic is that the "hard" parts of the search space 
-%will be treated first. To do that, each variable has an activity and wa increase if it participate to the resolution
-%of the conflict.
-%The second most used heuristics is Learning rate based branching (LRB~\cite{liang2016learning})
-%The above steps are repeated until the satisfiability status of the formula is determined.
-
 
 \subsection{Conflict Analysis}
 A conflict is an inconsistency discovered by the solver, a situation that requires for a variable to be set 
@@ -221,7 +195,7 @@ literals that have an ongoing arc to the cut that contains first UIP. In \cref{f
 clause will be $\omega_l = \{x_1, \neg x_4 \}$. Since the information of this clause is redundant with respect to 
 the original formula. It can be added without any satisfiability restrictions. 
 
-After producing the learnt clause, the solver compute \texttt{backjumpAndRestartPolicies}. It will unassigned all
+After producing the learn clause, the solver compute \texttt{backjumpAndRestartPolicies}. It will unassigned all
 decision until the first one that is responsible for the conflict and so prune search space that contains no solution.
 This is the key point of the CDCL algorithm. The restart policy will be discussed in the next section.
 In our example, the target decision level is one. A first UIP variable  is said assertive, and will be propagated in the next loop of the solving algorithm.
@@ -230,24 +204,79 @@ be assigned to the opposite value at level zero. Roughly speaking, to ensure sat
 literal must be true without any decision.
 
  
-
-\subsection{Heuristics}
+\subsection{Heuristics}\label{sec:heuristics}
 This sections gives an overview of different heuristics present in modern SAT solvers.
-In particular 
 
 \textbf{Decision heuristics}. Variable used to divide problems have a huge impact on the 
-overall solving time by the solver. Decision variable may impact the number of propagation and so the depth of the search tree  As propagated one can be seen as \emph{deduction} and the 
+overall solving time by the solver. Decision variable may impact the number of propagation and so 
+the depth of the search tree.
+
+Variable State Independent Decaying Sum (VSIDS)~\cite{moskewicz2001chaff} is one of the decision heuristic and used
+nowadays in almost all solvers. Each variable has an activity and was increased by a multiplicative factor 
+when it participate to the resolution of the conflict.
+A solver has thousands conflicts during the solving and so activity of variables are very volatile.
+Decision heuristics choose unassigned variable with the highest activity.
+The idea behind this heuristics is to solve "hard" part of problem at the top of the search tree.
+Hence, it is much more efficient when coupled with the restart heuristics. 
+
+Learning rate based branching (LRB~\cite{liang2016learning}) is a most recent decision heuristics. It is a
+generalization of VSIDS and its goal is to optimize the \emph{learning rate} (LR), defined as the ability to generate
+learnt clauses. The LRB of a variable is the weighted average (computed with \emph{exponential recency
+weighted average} (ERWA))  value taken by its LR over the time. Unassigned variable with a highest LRB are chose as decision. The idea behind this heuristics is to keep variables that used to generate learnt clause in the search tree.
 
 
-\textbf{Restart}
+\textbf{Restarts.}
+Another important heuristic is \emph{restart}. Basically the solver abandons it current assignment and so 
+start from the top of the tree, while maintaining other information notably learnt clauses but also scores of variables in the decision heuristic. It prevents the solver to get stuck in "hard" (heavy tailing~\cite{gomes1997heavy} part of the search space and can not escape due to backjump few levels after conflict resolution. Restart is best effort heuristics, hoping that,
+with more information, a better assignments was made. Hence, in practice, SAT solvers usually restarts after a
+certain number of conflict. Empirically a solver with restart has a better results~\cite{huang2007effect} and is today
+used in almost all state of the art solvers.
 
 
-\hakan{Peut être mettre les heuristiques dans des paragraphes}
+\subsection{Preprocessing / Inprocessing}
 
-\hakan{Literal Block Distance LBD}
+In order to optimize resolution time by the solver, some transformation to simplify the original formula can be applied. This is done by \emph{preprocessing} engine before the start of solving. When it is used at some point during the solving, usually after a restart, it is called \emph{inprocessing}.
+
+Simplification of the formula is made by removing clauses and/or variables.\\
+\textbf{Variable elimination} simplification is based on \emph{Resolution inference rule}.
+Suppose two clauses	$\omega_1 = \{x_1, x_i, ..., x_j \}$ and $\omega_2 = \{\neg x_1, y_i, ..., y_j\}$.
+The resolution inference rule allows to derive clause $\omega_3 = \{x_i, ..., x_j, y_i, ..., y_j\}$ which is called
+the \emph{resolvent} as it results from resolving two clauses on the literal $x_1$ and $\neg x_1$.
+Moreover, this rule is a complete algorithm to solve a SAT problem. Applying variable elimination until either an empty clause is derived (unsatisfiable formula) or no more application of the resolution are
+possible (satisfiable formula). Its major issue is to explicitly generate all resolvent can be exponential in CNF size. Hence, the memory of computer will be limiting factor.
+
+
+\emph{Subsumption} is a simple principle to remove clauses. Suppose two clauses $\omega_1$ and $\omega_2$ such that
+$\omega_1 \subset  \omega_2$, then $\omega_2$ can be safely removed from the original formula.
+\emph{Self Subsuming resolution} is a principle that use resolution rule and subsumption.
+Resolvent clause subsumes the original one. Example $\omega_1 = \{x_1, \neg x_2, x_3\}$ and $\omega_2 = \{x_1, \neg x_2, x_3, x_4\}$, then resolvent clause will be $\omega_3 = \{x_1, x_3\}$ which subsumes $\omega_2$. This principle
+is presents in \texttt{SatElite}~\cite{een2005effective} preprocessor engine and used in almost all modern SAT solvers.
+
+Other simplification techniques exists such that \emph{Gaussian elimination} which detect sub formula in a xor-SAT
+form and solve it in a polynomial complexity. Moreover, this technique can also be used as inprocessing~\cite{soos2010enhanced}. 
+
+Some techniques exploits the structure of the original formula and add relevant clauses to speed up the resolution
+time of the SAT solver. One of them use community structure of the formula to find good clauses to add into.
+A preprocessor engine doing that is  \texttt{modprep}~\cite{ansotegui2015using}.
+Usage of symmetries also add relevant clause in the formula and will be detailed in the next chapter.
+
+
+\subsection{Parallel SAT solving}
+With the emergence of multi core architectures and increasing power of computer, one way to optimize the solving
+of a SAT problem is the exploitation of these cores. Effectively, SAT problems are a good candidate for parallelism.
+\emph{Portfolio} is a technique that launches several SAT solver in parallel with different heuristics (decisions, restarts, ...) that communicates or not between us. When one of them found a solution or found that none exists, the overall computation is finished. Another technique to make parallel SAT solver exists and called \emph{divide and conquer} in which the search space was divided dynamically according to positive and negative value of the decision
+literal. Several solvers cooperate to found solution, each of them are assigned to sub formula induced by the division. Some specific techniques like load balancing and work stealing is applied to avoid a solver to be idle.
+A recent framework \emph{PaInleSS} (a Framework for Parallel SAT Solving) can be used to easily create a new parallel 
+SAT solver with different heuristics~\cite{le2017painless}~\cite{le2019modular}. Authors of this framework win the parallel tracks of SAT competition \footnote{\url{http://www.satcompetition.org/}} in 2018.
+
+
+
+
+
 
 \section{Groups basics}
 
+Some CNF instances presents symmetries and use of this property allow the solver to cut off search space.
 Symmetries is related to a branch of mathematics called group theory. This section give us an overview of group
 theory.
 
