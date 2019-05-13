@@ -39,12 +39,14 @@ otherwise the formula is \emph{unsatisfiable} (\unsat).
 \subsection{An NP-complete problem}
 
 The SAT problems is the first NP-complete algorithm as proven by Stephen Cook in 1971~\cite{cook1971complexity}.
-It is also proved by Leonid Levin in 1973~\cite{4640789}, for this purpose, it was known as Cook-Levin theorem.
-The proof of to show that can be found in \cite{sipser2006introduction}.
-Any NP problem can be reduced to a SAT problem in polynomial time and so open one of the most important 
-unsolved problem in theoretical computer science is the P versus NP problem.
+NP-completeness means that a SAT problem can be solved with a non deterministic machine in polynomial time (NP) and is also NP-hard. A problem is said NP-hard if everything in NP can be transformed into it in polynomial time. 
+One of the most important unsolved problem in theoretical computer science is the P versus NP problem.
 This question is one of the seven millennium prize problems.
 
+Some particular form of the SAT problems can be computed in linear time for 2-SAT~\cite{aspvall1979linear}
+where each clause is in binary form i.e. size  of two. %This kind of clauses can be written as implication 
+Others particular form  can be solved in  polynomial time like Horn SAT~\cite{aspvall1979linear} in which it suffice to  apply \emph{unit propagation} explained in \cref{sec:dpll} until fix point.
+Xor-SATisfiability where each clause contains exclusive or belong also to the polynomial class.
 
 %It asks if every problems can be solved and verified in polynomial time.
 %Any NP problems can be reduced in polynomial time by a deterministic Turing machine to the SAT problems.
@@ -73,7 +75,7 @@ In this case $\alpha_{11}$ ($\neg x_1, \neg x_2, x_3, \neg x_4, x_5, \neg x_6 $)
 this algorithm is obviously intractable on real problems even for a formula with few variables.
 
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
 	\centering
 	\input{fig/naive_algorithm.tex}
 	\caption{All possible assignments for a problem with 6 variables}
@@ -81,7 +83,7 @@ this algorithm is obviously intractable on real problems even for a formula with
 \end{figure}
 
 
-\subsubsection{Davis Putnam Logemann Loveland (DPLL) algorithm}
+\subsubsection{Davis Putnam Logemann Loveland (DPLL) algorithm}\label{sec:dpll}
 
 One of the first non memory intensive algorithm to solve the SAT problems is 
 the Davis Putnam Logemann Loveland (DPLL) algorithm~\cite{dpll_62}. 
@@ -128,12 +130,13 @@ to resolve a SAT problem and overcome its principal weakness.
 
 
 \Cref{algo:cdcl} gives an overview of CDCL, Like DPLL,  it walks a binary search tree.
-It first applies unit propagation to the formula $\varphi$ for the current assignment $\alpha$ (\cref{alg:cdcl:unit}).
+The current assignment is empty and decision level that indicated the depth of the search tree and noted as $dl$ is set to zero.
+Algorithm first applies unit propagation to the formula $\varphi$ for the current assignment $\alpha$ (\cref{alg:cdcl:unit}).
 Note that it is exactly the same procedure as the one used for DPLL.
-An inconsistency or a \emph{conflict} at level $0$ indicates that the formula is not satisfiable, and the algorithm
+An inconsistency or a \emph{conflict} at level zero indicates that the formula is unsatisfiable, and the algorithm
 reports it (\cref{alg:cdcl:unsat_start,alg:cdcl:unsat_end}). When the conflict is occurring at a higher level, it
 reason was analyzed and a clause called \emph{conflict clause} is deduced (\cref{alg:cdcl:analyze}).
- This clause is \emph{learnt} (\cref{alg:cdcl:learn}), as it does not change the
+This clause is \emph{learnt} (\cref{alg:cdcl:learn}), as it does not change the
 satisfiability of $\varphi$, and avoids encountering a conflict with the same
 causes in the future. This function will be presented thereafter
 The analysis is completed by the computation of a backjump point to which the algorithm backtracks (\cref{alg:cdcl:backjump}).
@@ -141,7 +144,6 @@ Finally, if no conflict appears, the algorithm chooses a new decision literal
 (\cref{alg:cdcl:pick_start,alg:cdcl:pick_end}).
 The above steps are repeated until the satisfiability status of the
 formula is determined.
-
 
 \input{algo/cdcl}
 
@@ -151,7 +153,8 @@ simultaneously to the \true and \false value. \Cref{fig:conflict} shows an assig
 First the solver chose $\neg x_1$ as decision then $\neg x_6$ and then $\neg x_5$. This last one propagates $x_4$
 which in turn propagates $x_2$ and $x_3$. On clause $\omega_1$, $x_3$ needs to be true and false in $\omega_5$ so
 a conflict appears.
-\begin{figure}[H]
+
+\begin{figure}[!htbp]
 	\centering
 		\input{fig/conflict}
 	\caption{Decisions/Propagations that leads to a  conflict}
@@ -163,14 +166,13 @@ situation, the solver needs to analyze the reason of the conflict with so called
 Implication graph represents the current state of the solver proof system. It records every dependencies
 among variables and so updated when a variable is assigned either on decision or propagation and when a variable
 is unassigned. The implication graph is a directed acyclic graph (DAG) in which a vertex represents an assigned variable labeled as $l@dl(l)$ where $l$ represents assigned literal and $dl(l)$ represents the decision level of the literal $l$.
-\hakan{Parler de decision level et de trail dans l'algo cdcl au dessus}
 Root vertexes , that have no incoming edges, are literals chosen by decision heuristics and others are 
 propagated literals.
 Incoming arcs labeled with a clause represents the \emph{reason} of this propagation.
 This clause must be assertive i.e. all of its literals are false except one that are not yet assigned.
 For example, \Cref{fig:implication-graph} shows implication graph of the previous example (\cref{fig:conflict}) until the conflict.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
 	\centering
 	\input{fig/implication_graph}
 	\caption{Implication graph}

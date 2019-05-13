@@ -11,6 +11,12 @@ C.~Ans{\'o}tegui, J.~Gir{\'a}ldez-Cru, J.~Levy, and L.~Simon.
 \newblock In {\em International Conference on Theory and Applications of
   Satisfiability Testing}, pages 238--254. Springer, 2015.
 
+\bibitem{aspvall1979linear}
+B.~Aspvall, M.~F. Plass, and R.~E. Tarjan.
+\newblock A linear-time algorithm for testing the truth of certain quantified
+  boolean formulas.
+\newblock {\em Information Processing Letters}, 8(3):121--123, 1979.
+
 \bibitem{barrett2018satisfiability}
 C.~Barrett and C.~Tinelli.
 \newblock Satisfiability modulo theories.
@@ -130,21 +136,10 @@ A.~Sabharwal.
 \newblock Symchaff: A structure-aware satisfiability solver.
 \newblock In {\em AAAI}, volume~5, pages 467--474, 2005.
 
-\bibitem{sipser2006introduction}
-M.~Sipser.
-\newblock {\em Introduction to the Theory of Computation}, volume~2.
-\newblock Thomson Course Technology Boston, 2006.
-
 \bibitem{soos2010enhanced}
 M.~Soos.
 \newblock Enhanced gaussian elimination in dpll-based sat solvers.
 \newblock In {\em POS@ SAT}, pages 2--14, 2010.
-
-\bibitem{4640789}
-B.~A. {Trakhtenbrot}.
-\newblock A survey of russian approaches to perebor (brute-force searches)
-  algorithms.
-\newblock {\em Annals of the History of Computing}, 6(4):384--400, Oct 1984.
 
 \bibitem{zhang2001efficient}
 L.~Zhang, C.~F. Madigan, M.~H. Moskewicz, and S.~Malik.
