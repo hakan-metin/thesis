@@ -92,27 +92,32 @@ The construction of the tree is related to a \emph{decision} literal (\cref{algo
 recursive call with each value are checked.
 When a leaf report \unsat (\cref{algo:dpll:unsatbranch}), other branches are explored.
 By recursive construction of the algorithm, when positive and negative value of a literal reach \unsat,
-solver backtracks at most one level, this fact is called \emph{chronological backtracking}.
-If all leaves report \unsat the formula $\varphi$ is unsatisfiable.
-And so  if any branch found a solution  i.e. the problem is empty,
+solver \emph{backtracks} at most one level, this fact is called \emph{chronological backtracking}.
+If all leaves report $\unsat$  the formula $\varphi$ is unsatisfiable \cref{algo:dpll:unsat}.
+Finally, if any branch found a solution  i.e. the problem is empty,
 formula is satisfiable corresponding assignment is returned (\cref{algo:dpll:sat1,algo:dpll:sat2})
 
 \input{algo/dpll}
 
 An important function in the DPLL algorithm is \texttt{unitPropagation} \cref{algo:dpll:unit} and
-it is detailed in \Cref{algo:unitdpll}. It searches all unit clauses to ensure satisfiability,
-negative literals are removed from the clause that belongs to him. Then, given formula is either simplified
-or leads to an inconsistency (empty clause). Unit literals are also added to the current assignment.
+it is detailed in \Cref{algo:unitdpll}. It searches all unit clauses, then, to ensure satisfiability these literals must be true
+and added to the current assignment. Formula is then simplified as follow, clauses that contains this literal are already satisfied
+and can be deleted; negative literals are removed from the clause that belongs to him.
+This procedure ends when either no unit clause remains or an inconsistency was found (empty clause).
+
 
 \input{algo/unitdpll}
 
-When DPLL algorithm is executed on the formula in \Cref{fig:naive_algo}, unit propagation prevents to 
-explore assignments from $\alpha_1 $ to $\alpha_{8}$. Moreover, application to unit propagation until fix point
-leads directly to the solution. 
-An important part of efficiency of DPLL is \texttt{assignDecisionLiteral} . The objective of this function 
+When DPLL algorithm is executed on the formula in \Cref{fig:naive_algo}, after the decision of literal
+$\neg x_1$ and $\neg x_2$ unit propagation detects that $x_3$ must be true. This propagation prevents to 
+explore assignments from $\alpha_1 $ to $\alpha_{8}$. Moreover, application to unit propagation provokes more unit clauses
+and leads directly to a solution. 
+An important part of efficiency of DPLL is due to choose the variable that divide the search tree made by
+the procedure \texttt{assignDecisionLiteral} . The objective of this function 
 is to find a literal that will generate a maximum of unit propagation. Intuitively, decision literals 
 can be viewed as "guesses" and propagated literals can be viewed as "deductions". Finding a optimal variable
-is NP-Hard \cite{biere2009handbook}. Different heuristics exists, one of them will be presented in \ref{sec:heuristics}.
+is NP-Hard. Different heuristics exists to choose the decision variable,
+some of them will be presented in section~\ref{sec:heuristics}.
 
 
 %\input{algo/puredpll}
@@ -126,20 +131,22 @@ is NP-Hard \cite{biere2009handbook}. Different heuristics exists, one of them wi
 The principal weakness of DPLL algorithm is to make same inconsistencies several times
 (principally due to chronological backtracking), incurring unnecessary CPU usage.\\
 Conflict Driven Clause Learning (CDCL) \cref{algo:cdcl} is another sound and complete algorithm
-to resolve a SAT problem and overcome its principal weakness.
+to resolve a SAT problem and overcome principal weakness of DPLL.
 
 
-\Cref{algo:cdcl} gives an overview of CDCL, Like DPLL,  it walks a binary search tree.
-The current assignment is empty and decision level that indicated the depth of the search tree and noted as $dl$ is set to zero.
+\Cref{algo:cdcl} gives an overview of CDCL, Like DPLL,  it walks on a binary search tree.
+Initially, the current assignment is empty and decision level that indicated the depth of the search tree noted as $dl$ is set to zero.
 Algorithm first applies unit propagation to the formula $\varphi$ for the current assignment $\alpha$ (\cref{alg:cdcl:unit}).
 Note that it is exactly the same procedure as the one used for DPLL.
 An inconsistency or a \emph{conflict} at level zero indicates that the formula is unsatisfiable, and the algorithm
 reports it (\cref{alg:cdcl:unsat_start,alg:cdcl:unsat_end}). When the conflict is occurring at a higher level, it
 reason was analyzed and a clause called \emph{conflict clause} is deduced (\cref{alg:cdcl:analyze}).
-This clause is \emph{learnt} (\cref{alg:cdcl:learn}), as it does not change the
-satisfiability of $\varphi$, and avoids encountering a conflict with the same
-causes in the future. This function will be presented thereafter
-The analysis is completed by the computation of a backjump point to which the algorithm backtracks (\cref{alg:cdcl:backjump}).
+This clause is \emph{learnt} (\cref{alg:cdcl:learn}) (added to the formula). This clause is redundant from the current
+formula and so as it does not change the satisfiability of $\varphi$. It also avoids encountering a conflict with the same
+causes in the future. Working of this function will be presented thereafter.
+The analysis is completed by the computation of a \emph{backjump}, solver unassign some literals and decrease
+the decision level (\cref{alg:cdcl:backjump}). As the level can be much lower than the current assignment this is called 
+\emph{non chronological backtracking}.
 Finally, if no conflict appears, the algorithm chooses a new decision literal 
 (\cref{alg:cdcl:pick_start,alg:cdcl:pick_end}).
 The above steps are repeated until the satisfiability status of the
@@ -151,7 +158,7 @@ formula is determined.
 A conflict is an inconsistency discovered by the solver, a situation that requires for a variable to be set 
 simultaneously to the \true and \false value. \Cref{fig:conflict} shows an assignments that leads to a conflict.
 First the solver chose $\neg x_1$ as decision then $\neg x_6$ and then $\neg x_5$. This last one propagates $x_4$
-which in turn propagates $x_2$ and $x_3$. On clause $\omega_1$, $x_3$ needs to be true and false in $\omega_5$ so
+which in turn propagates $x_2$ and $x_3$. On clause $\omega_1$, $x_3$ needs to be \true and \false in $\omega_5$ so
 a conflict appears.
 
 \begin{figure}[!htbp]
@@ -164,13 +171,13 @@ a conflict appears.
 This series of decisions would provoke same propagation and leads to the same conflict. To avoid this
 situation, the solver needs to analyze the reason of the conflict with so called \emph{implication graph}.
 Implication graph represents the current state of the solver proof system. It records every dependencies
-among variables and so updated when a variable is assigned either on decision or propagation and when a variable
+among variables and so it is updated either when a variable is assigned on decision/propagation or  when a variable
 is unassigned. The implication graph is a directed acyclic graph (DAG) in which a vertex represents an assigned variable labeled as $l@dl(l)$ where $l$ represents assigned literal and $dl(l)$ represents the decision level of the literal $l$.
 Root vertexes , that have no incoming edges, are literals chosen by decision heuristics and others are 
 propagated literals.
 Incoming arcs labeled with a clause represents the \emph{reason} of this propagation.
 This clause must be assertive i.e. all of its literals are false except one that are not yet assigned.
-For example, \Cref{fig:implication-graph} shows implication graph of the previous example (\cref{fig:conflict}) until the conflict.
+\Cref{fig:implication-graph} shows implication graph of the previous example (\cref{fig:conflict}) until the conflict.
 
 \begin{figure}[!htbp]
 	\centering
@@ -180,7 +187,7 @@ For example, \Cref{fig:implication-graph} shows implication graph of the previou
 \end{figure}
 
 
-\texttt{analyzeConflict} procedure analyzed this graph to found the reason of the conflict. To do that, a search of
+\texttt{analyzeConflict} procedure analyzes this graph to found the reason of the conflict. To do that, a search of
 \emph{unique implication point} (UIP) is performed. UIP of a decision level in the implication graph is a variables
 which lies on every path from the decision to the conflict. Note that, there are many UIP for a given decision level.
 In such case, UIPs are ordered according to the distance with the contradiction. The first UIP is the closest to
@@ -188,22 +195,24 @@ the conflict. It is well known that the first UIP provides the smallest set of a
 contradiction~\cite{zhang2001efficient}
 
 An UIP divides the implication in two sides with a \emph{cut}, the reason side contains decision variables 
-that is responsible for the contradiction and the conflict side contains the conflict. Note that, UIP is always is the 
+that is responsible for the contradiction and the conflict side that contains the conflict. Note that, UIP is always is the 
 reason side. \Cref{fig:implication-graph} depicts two cuts in the implication graph.
 
-Once the reason side of a conflict is established, a conflict driven clause is produced called also 
-\emph{learnt clause}. It purposes to avoid same contradiction. To build this clause, it suffice to negate 
-literals that have an ongoing arc to the cut that contains first UIP. In \cref{fig:implication-graph}, produced
+Once the reason side of a conflict is established, a conflict driven clause or conflict clause is produced.
+It purposes to avoid same contradiction. To build this clause, it suffices to negate 
+literals that have an ongoing arc to the first cut that contains first UIP. In \cref{fig:implication-graph}, produced
 clause will be $\omega_l = \{x_1, \neg x_4 \}$. Since the information of this clause is redundant with respect to 
-the original formula. It can be added without any satisfiability restrictions. 
+the original formula. It can be added without any satisfiability restrictions. The conflict clause can be simplified
+using the implication graph~\cite{sorensson2009minimizing}.
 
-After producing the learn clause, the solver compute \texttt{backjumpAndRestartPolicies}. It will unassigned all
-decision until the first one that is responsible for the conflict and so prune search space that contains no solution.
-This is the key point of the CDCL algorithm. The restart policy will be discussed in the next section.
-In our example, the target decision level is one. A first UIP variable  is said assertive, and will be propagated in the next loop of the solving algorithm.
-If a conflict implied only one level, the decision variable must 
-be assigned to the opposite value at level zero. Roughly speaking, to ensure satisfiability of the formula, this 
-literal must be true without any decision.
+\texttt{backjumpAndRestartPolicies} procedure is executed after producing the conflict clause.
+It will unassigned all
+decision until the first one that is responsible for the inconsistency. Add the conflict clause prune search space that 
+contains no solution. This is the key point of the CDCL algorithm. The restart policy will be discussed in the next section.
+In our example \Cref{fig:implication-graph}, the target decision level is one. The first UIP variable must be assertive,
+and will be propagated in the next loop of the solving algorithm.
+If a conflict implied only one level, the decision variable must be assigned to the opposite value at level zero.
+Roughly speaking, to ensure satisfiability of the formula, this literal must be true without any decision.
 
  
 \subsection{Heuristics}\label{sec:heuristics}
@@ -240,12 +249,13 @@ used in almost all state of the art solvers.
 In order to optimize resolution time by the solver, some transformation to simplify the original formula can be applied. This is done by \emph{preprocessing} engine before the start of solving. When it is used at some point during the solving, usually after a restart, it is called \emph{inprocessing}.
 
 Simplification of the formula is made by removing clauses and/or variables.\\
-\textbf{Variable elimination} simplification is based on \emph{Resolution inference rule}.
+\emph{Variable elimination} simplification is based on \emph{Resolution inference rule}.
 Suppose two clauses	$\omega_1 = \{x_1, x_i, ..., x_j \}$ and $\omega_2 = \{\neg x_1, y_i, ..., y_j\}$.
 The resolution inference rule allows to derive clause $\omega_3 = \{x_i, ..., x_j, y_i, ..., y_j\}$ which is called
 the \emph{resolvent} as it results from resolving two clauses on the literal $x_1$ and $\neg x_1$.
-Moreover, this rule is a complete algorithm to solve a SAT problem. Applying variable elimination until either an empty clause is derived (unsatisfiable formula) or no more application of the resolution are
-possible (satisfiable formula). Its major issue is to explicitly generate all resolvent can be exponential in CNF size. Hence, the memory of computer will be limiting factor.
+Moreover,  applying variable elimination until either an empty clause is derived (unsatisfiable formula) or no more application of the resolution are possible (satisfiable formula). This is a complete algorithm to solve a SAT problem.
+Its major issue is to explicitly generate all resolvent and can be exponential in CNF size.
+Hence, the memory of computer will be limiting factor.
 
 
 \emph{Subsumption} is a simple principle to remove clauses. Suppose two clauses $\omega_1$ and $\omega_2$ such that
@@ -272,93 +282,6 @@ A recent framework \emph{PaInleSS} (a Framework for Parallel SAT Solving) can be
 SAT solver with different heuristics~\cite{le2017painless}~\cite{le2019modular}. Authors of this framework win the parallel tracks of SAT competition \footnote{\url{http://www.satcompetition.org/}} in 2018.
 
 
-
-
-
-
-\section{Groups basics}
-
-Some CNF instances presents symmetries and use of this property allow the solver to cut off search space.
-Symmetries is related to a branch of mathematics called group theory. This section give us an overview of group
-theory.
-
-\subsection{Groups}
-
-A \emph{group} is a structure $\langle G, * \rangle$, where $G$ is a non empty set and $*$ a binary
-operation such the following axioms are satisfied:
-\begin{itemize}[noitemsep,nolistsep]
-	\item \emph{associativity}: $\forall a, b, c \in G, (a * b) * c = a * (b * c)$
-	\item \emph{closure}: $\forall a, b \in G, a * b \in G$.
-	\item \emph{identity}: $\forall a \in G, \exists e$ such that $ a * e = e * a = a$
-	\item \emph{inverse}:  $\forall a \in G, \exists b \in G$, commonly denoted $a^{-1}$ such that
-	 $a * a^{-1} = a^{-1} * a = e$
-\end{itemize}
-
-Note that \emph{commutativity} is not required i.e $\ a * b = b * a$, for $a, b \in G$.
-The group is \emph{abelian} if it satisfies the commutativity rule.
-Moreover, the last definition leads to important properties which are: i) uniqueness of the identity element. 
-To prove this property, assume $\langle G, * \rangle$ a group with two identity elements $e$ and $f$ 
-then $ e = e * f = f$.
-ii) uniqueness of the inverse element. To prove this property, suppose that an element $x_1$ has two inverses,
-denoted $b$ and $c$ in group $\langle G, * \rangle$, then\\
-	$\begin{array}{lcll}					
-			b & = & b * e & \\
-			  & = & b * (a * c) & c \text{ is an inverse of } a, \text{so } e = a * c\\
-			  & = & (b * a) * c &   \text{\emph{associativity} rule}\\
-			  & = & e * c       & b \text{ is an inverse of } a, \text{so } e = a * b\\
-			  & = & c           &   \text{\emph{identity} rule}
-	\end{array}$
-
-The structure $\langle G, * \rangle$ is denoted as G when clear from context that G is a group
-with a binary operation. In this thesis, we interested only with the \emph{finite} groups i.e
-with a finite number of elements.
-
-Given a group $G$, a \emph{subgroup} is a non empty subset of $G$ which is also a group with 
-the same binary operation. If $H$ is a subgroup of $G$, we denote as $H \leq G$.
-A group has at least two subgroups: i) the subgroup composed by identity element $\{e\}$, denoted \emph{trivial} subgroup. All other subgroups are \emph{nontrivial}; ii) the subgroup composed by itself, denoted \emph{improper} subgroup. All other subgroups are \emph{proper}.
-
-
-\subsubsection{Generators of a group}
-
-If every elements in a group G can be expressed as a linear combination
-of a set of group of elements S = $\{g_1, g_2, ..., g_n \}$ then we say G is 
-generated by the S. we denote this as G = $\langle S \rangle$ =
-$\langle \{g_1, g_2, ..., g_n \} \rangle$ 
-
-
-
-\subsection{Permutation groups}
- 
-A \emph{permutation} is a bijection from a set $X$ to itself.\\
- Example: given a set $X = \{x_1, x_2, x_3, x_4, x_5, x_6\}$,
-$g = ${\Bigg( \begin{tabular}{cccccc}
-		$x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$\\
-		$x_2$ & $x_3$ & $x_1$ & $x_4$ & $x_6$ & $x_5$
-	\end{tabular} \Bigg)}\\
-$g$ is a permutation that maps $x_1$ to $x_2$, $x_2$ to $x_3$, $x_3$ to $x_1$, $x_4$ to $x_4$, $x_5$ to $x_6$ and $x_6$ to $x_5$.
-
-Permutations are generally written in \emph{cycle notation} and the self mapped elements are omitted.
-So the permutation in cycle notation will be : $g$ = ($x_1$ $x_2$ $x_3$) ($x_5$ $x_6$).
-We say \emph{support} of the permutation $g$ noted $supp(g)$ the elements that not mapped to themselves,
-$supp(g) = \{ x \in X \mid g.x \neq x\}$. A variable $x$ is \emph{stabilized} by a permutation $g$ 
-if $x \notin \support(g)$. A clause $\omega$ is \emph{stabilized} by a permutation $g$ if 
-$\omega \cap \support(g) = \emptyset$. \hakan{Maybe stabilisation as definition ?}
-
-
-The set of permutations of a given set $X$ form a group $G$,
-with the composition operation ($\circ$) and called \emph{permutation group}.
-The \emph{symmetric group} id the set of all possible permutations of a set $X$ and noted \Group($X$).
-%The set of \textbf{all} permutations of a set $X$ is the \emph{symmetric group} of $X$ and noted \Group($X$).
-So, a \emph{permutation group} is a subgroup of \Group($X$). 
-%A set of permutations $P$ is a set of \emph{generators} of a group $G$ if each permutation of $G$
-%can be expressed as a composition of permutations in $P$. 
-
-
-A permutation group $G$ induces a \emph{equivalence relation} on the set of element $X$ being
-permuted. Two elements $x_1, x_2 \in X$ are equivalent if there exists a permutation $g \in G$ such that
-$g x_1 = x_2$. Then equivalence relation partitions $X$ into \emph{equivalence classes} referred to
-as the \emph{orbits} of $X$ under $G$. The orbit of an element $x$ under group $G$ (or simply orbit of $x$ when clear
-from the context) is the set $[x]_G = \{g.x \mid g \in G\}$
 
 
 
