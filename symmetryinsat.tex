@@ -4,7 +4,7 @@
 Despite SAT solving is an NP complete algorithm it works well on many real industrial problems. This is 
 principally due to capacity to cut off search space with learning clause. Another ways to cut off 
 search space is the exploitation of symmetry. Some instances exhibit symmetries and not taking them into account 
-forces solvers to needlessly explore isomorphic search space.  
+forces solvers to needlessly explore isomorphic search space.  \hakan{symmetrie leaves object invariant}
 
 
 
@@ -130,14 +130,10 @@ Symmetries of a formula $\varphi$ preserves the satisfaction, for every \emph{co
 \end{center}
 
 
-
-Example:
-\hakan{Peut etre mettre example de mefo avec l'arbre}
-
-$\omega_1 = \{x_1, x_2, x_3\}$ \\
-$\omega_2 = \{\neg x_1, \neg x_2 \}$\\
-$\omega_3 = \{\neg x_1, \neg x_3 \}$\\
-$\omega_4 = \{\neg x_2, \neg x_3 \}$\\
+\begin{figure}[!htbp]
+	\input{fig/symmetry_example}
+	\caption{Example of symmetries}
+\end{figure}
 
 
 
@@ -276,8 +272,8 @@ by \emph{statically} posting symmetry breaking constraints that invalidate symme
 assignments, or by altering the search space \emph{dynamically} to avoid symmetric search paths.
 
 
-One way to exploit symmetry properties is to forbid some equivalent assignment.
-Introduce an ordering relation between the assignments is required.
+One way to exploit symmetry properties is to forbid equivalent assignment.
+Let introduce an ordering relation between the assignments.
 
 \begin{definition}[Assignments ordering]
 	\label{def:assignment_ordering}
@@ -305,26 +301,41 @@ assignments. Furthermore, the $<$ relation is monotonic as expressed in the foll
 \end{proof}
 
 
-Let $\varphi$ a formula, and $G$ the group from the formula.
-The \emph{orbit of $\alpha$ under $G$} (or
+Given a formula $\varphi$ and its group of symmetry $G$,
+the \emph{orbit of $\alpha$ under $G$} (or
 simply the \emph{orbit of $\alpha$} when $G$ is clear from the context) is the set
-$ [\alpha]_G=\{ g.\alpha \mid g \in G \}$. The lexicographic leader
-(\textit{lex-leader} for short) of an orbit $[\alpha]_G$ is defined by
+$ [\alpha]_G=\{ g.\alpha \mid g \in G \}$. 
+The lexicographic leader (\textit{lex-leader} for short) of an orbit $[\alpha]_G$ is defined by
 $min_<([\alpha]_G)$. This \textit{lex-leader} is unique because the lexicographic
 order is a total order.
 The optimal approach to solve a symmetric SAT problem would be to explore
-only one assignment per orbit (for instance each lex-leader). However, finding the
-lex-leader of an orbit is computationally hard~\cite{Luks2004}. To avoid exploring 
-symmetry search space, \emph{symmetry breaking predicates} are added to the formula.
+only one assignment per orbit (for instance each lex-leader).To avoid exploring 
+symmetry search space, \emph{symmetry breaking predicates}(SBP) are added to the formula.
 These constraints are true only for the \emph{lex-leader} \cite{crawford1996symmetry}.
+\Cref{fig:lex-leader} show different orbits and the lex-leader one. It must exists a permutation in 
+the that map 
+
+\begin{figure}[!htbp]
+	\centering
+	%	\includegraphics[width=2in]{fig/assignment-lex-leader}
+	\input{fig/assignment-lex-leader}
+	\caption{Show lex-leader per orbit}
+	\label{fig:lex-leader}
+\end{figure}
 
 
 
 
-%\begin{definition}[Stabilizer of permutation]
-%	Let two permutation $g_1$ and $g_2$, we say that $g_1$  stabilize $g_2$
-%	$$\text{If}~ \support(g_1) \cap \support(g_2) = \emptyset$$
-%\end{definition}
+Generation of these lex-leaders constraints proposed by Crawford et al.~\cite{crawford1996symmetry}:
+
+$$\forall i : (\forall j < i : x_j \Leftrightarrow g.x_j) \Rightarrow \neg x_i \vee g.x_i$$
+
+Roughly speaking, assuming the ordering in \Cref{def:assignment_ordering}, these constraint express that 
+the value of the variable $x_i$ must be smaller or equal than the value of $g.x_i$ and all variables
+$x_j \prec x_i$, $x_j$ must have the same value of its symmetric. As such, these constraints encodes a valid lex leader.
+
+
+
 
 
 \begin{theorem}[Satisfiability preservation SBPs]
@@ -344,21 +355,17 @@ These constraints are true only for the \emph{lex-leader} \cite{crawford1996symm
 \end{proof}
 
  
-\hakan{Refaire la figure avec plus de point}
-\begin{figure}
-	\centering
-%	\includegraphics[width=2in]{fig/assignment-lex-leader}
-	\input{fig/assignment-lex-leader}
-	\caption{One lex-leader per assignment}
-\end{figure}
 
 
+However, finding the lex-leader of an orbit is computationally hard~\cite{Luks2004}.
 It exists two kind of symmetry breaking, the first one is \emph{full symmetry breaking} and it 
 aims to visit exactly one assignment per orbit (generally the lex-leader). This
 approach is in practice infeasible in the most case due to the exponential number of permutations in a group.
 The second one is \emph{partial symmetry breaking} and it aims to visit at least one assignment per orbit. This approach is easy to set up and bring us to considerable reduction of the search spaces. The used set
 of permutations is generally the set of generators of a formula given by the automorphism tool.
 
+
+\hakan{Faire une section pour ça}
 An extremely important point is the chosen lexicographic order.
 Variable ordering may impact the number of generated constraint and so the performance of
 the underlying SAT solver. Different orders are studied in the literature. 
@@ -369,8 +376,6 @@ with their number of occurrences in the initial problem. This order, is equivale
 and so on, because each variable on the same orbit must have the same number of occurrences.
 Another example of exploiting structural property of the orbit is the usage of \emph{stabilizer}.
 The order choose a variable which maximize the number of stabilized permutations, removes the not stabilized ones and loop over until the empty set. The remaining variables are added to the order to get a complete order.
-
-
 
 
 \subsection{Static symmetry breaking}

@@ -1,63 +1,47 @@
 \begin{tikzpicture}
-  \tikzstyle{point}=[circle,draw,thick,fill=black,scale=0.2]
-  \tikzstyle{point+}=[circle,draw=red,thick,fill=red,scale=0.3]
-  \tikzstyle{class2}=[ellipse, draw, minimum width=2cm, minimum height=1cm]
-  \tikzstyle{class1}=[ellipse, draw, minimum width=1cm, minimum height=1cm]
+    \tikzstyle{point}=[circle,draw,thick,fill=black,scale=0.2]
+	\tikzstyle{point+}=[circle,draw=red,thick,fill=red,scale=0.4]
 
-  \begin{scope}
-    \node[point] (p1) at (0, 0){};
-    \node[](a3) at (0, 0.25) {$\alpha_3$};
 
-    \node[point] (p2) at (1, 0){};
-    \node[](a5) at (1, 0.25) {$\alpha_5$};
+\begin{scope}
+\node[ellipse, draw, minimum width=4cm, minimum height=2cm] (c1) at (2.5,0){};
+	\clip (2.5,0) ellipse (2 and 1);
+	\node[point+] (p2) at (1, 0.3){};
+	\pgfmathsetseed{2945}
+	\foreach \p in {1,...,100}
+	{
+		\fill (4*rand,2*rand) circle (0.08);
+	}
+\end{scope}
 
-    \node[point] (p3) at (-2, -1){};
-    \node[](a6) at (-2, -0.75) {$\alpha_6$};
 
-    \node[point] (p4) at (-3, -1){};
-    \node[](a4) at (-3, -0.75) {$\alpha_4$};
+\begin{scope}
+\node[ellipse, draw, minimum width=4cm, minimum height=2cm] (c1) at (8.5,0){};
+\clip (8.5,0) ellipse (2 and 1);
+\node[point+] (p2) at (8.9, -0.7){};
+\pgfmathsetseed{466}
+\foreach \p in {1,...,40}
+{
+	\fill (4*rand+6,2*rand) circle (0.08);
+}
+\end{scope}
 
-    \node[point] (p5) at (-1.7, 0.5){};
-    \node[](a1) at (-1.7, 0.75) {$\alpha_1$};
+% Legend
 
-    \node[point] (p6) at (-2, 1.5){};
-    \node[](a2) at (-2, 1.75) {$\alpha_2$};
+\path[draw] (-1, -1.5) -- (13, -1.5);
+\node[draw,ellipse, draw, minimum width=4cm, minimum height=2cm, scale=0.1] (ld) at (0, -2) {};
+\node[align=left, text width=2.2cm] at (1.5, -2) {Orbit};
 
-    \node[point] (p7) at (0.5, -1.5){};
-    \node[](a7) at (0.5, -1.25) {$\alpha_7$};
 
-    \node[point] (p8) at (-1, 2){};
-    \node[](a8) at (-1, 2.25) {$\alpha_8$};
+\node[circle, fill=black, draw=black, line width=0.5mm, scale=0.3] (lz) at (3, -2) {};
+\node[align=left, text width=2.2cm] at (4.5, -2) {Assignment};
 
-  \end{scope}
-  \begin{scope}
 
-    \node[class2] (c1) at (0.5,0){};
-    \node[class2] (c2) at (-2.5, -1){};
+\node[circle, fill=red, draw=red, line width=0.5mm, scale=0.3] (le) at (7, -2) {};
+\node[align=left, text width=4.2cm] at (9.5, -2) {Lex-leader assignment};
 
-    \node[class1] (c3) at (-1.7, 0.5){};
-    \node[class1] (c4) at (-2, 1.5){};
-    \node[class1] (c5) at (0.5, -1.5){};
-    \node[class1] (c6) at (-1, 2){};
-  \end{scope}
-  \begin{scope}
-    \node[point+] (p1) at (0, 0){};
-    \node[point] (p2) at (1, 0){};
-    \node[point] (p3) at (-2, -1){};
-    \node[point+] (p4) at (-3, -1){};
+\path[draw] (-1, -2.7) -- (13, -2.7);
 
-    \node[point+] (p5) at (-1.7, 0.5){};
-    \node[point+] (p6) at (-2, 1.5){};
-    \node[point+] (p7) at (0.5, -1.5){};
-    \node[point+] (p8) at (-1, 2){};
 
-    \node[class2] (c1) at (0.5,0){};
-    \node[class2] (c2) at (-2.5, -1){};
-
-    \node[class1] (c3) at (-1.7, 0.5){};
-    \node[class1] (c4) at (-2, 1.5){};
-    \node[class1] (c5) at (0.5, -1.5){};
-    \node[class1] (c6) at (-1, 2){};
-  \end{scope}
 
 \end{tikzpicture}
