@@ -128,12 +128,34 @@ Symmetries of a formula $\varphi$ preserves the satisfaction, for every \emph{co
 \begin{center}
 	$\alpha \models \varphi\Leftrightarrow g.\alpha \models \varphi$
 \end{center}
+%$
+%\neg x_1 \neg x_2 \\
+%\neg x_1 \neg x_3 \\
+%\neg x_2 \neg x_3 \\
+%\neg x_4 \neg x_5 \\
+%\neg x_4 \neg x_6 \\
+%\neg x_5 \neg x_6 \\
+%\neg x_7 \neg x_8 \\
+%\neg x_7 \neg x_9 \\
+%\neg x_8 \neg x_9 \\
+%\neg x_{10} \neg x_{11} \\
+%\neg x_{10} \neg x_{12} \\
+%\neg x_{11} \neg x_{12} \\
+%x_1 x_4 x_7 x_{10} \\
+%x_2 x_5 x_8 x_{11} \\
+%x_3 x_6 x_9 x_{12} \\
+%x_1 x_6 x_8 x_{10} \\
+%x_2 x_4 x_9 x_{11} \\
+%x_3 x_5 x_7 x_{12} \\
+%x_1 x_5 x_9 x_{10} \\
+%x_2 x_6 x_7 x_{11} \\
+%x_3 x_4 x_8 x_{12} \\
+%$
 
-
-\begin{figure}[!htbp]
-	\input{fig/symmetry_example}
-	\caption{Example of symmetries}
-\end{figure}
+%\begin{figure}[!htbp]
+%	\input{fig/symmetry_example}
+%	\caption{Example of symmetries}
+%\end{figure}
 
 
 
@@ -198,23 +220,32 @@ $m$ clauses over $n$ variables, the graph is constructed as follows:
 	\begin{minipage}[l]{.75\textwidth}
 		\includegraphics[width=4.3in]{cnfs/graph_cnf_no_opt-crop}
 	\end{minipage}
-\caption{Example of constructed symmetry graph for a given CNF}
+ \caption{Example of constructed symmetry graph for a given CNF}
+ \label{fig:graph_no_opt}
 \end{figure}
 
-\hakan{Explication du graph + informations num nodes num edges. Probleme reel battleship
-}
 
-The battleship problems place one  ship of size *** and two ships of size* in grid 3x4 \\
-1  2  3\\
-4  5  6\\
-7  8  9\\
-10 11 12\\
+\Cref{fig:graph_no_opt} shows the graph representation of a CNF. This problem have 12 variables and 21
+clauses. So, the graph will have  24  + 21 = 45 vertexes where 24 represents literals vertexes (circle in the figure ) 
+and 21 represents number of clause vertexes (square in the figure). The graph will also have 24 edges for boolean 
+consistency (\hakan{XXX} color in the figure) and 36 edges that relies clauses vertexes to the literals.
 
-one ship per row.\\
 
-Produced graph contains 12 * 2 = 24  + 21 = 45 nodes and 24 + 36 = 60 edges 
+% and  24 + 36 = 60 
+%
+%\hakan{Explication du graph + informations num nodes num edges. Probleme reel battleship
+%}
+%
+%The battleship problems place one  ship of size *** and two ships of size* in grid 3x4 \\
+%1  2  3\\
+%4  5  6\\
+%7  8  9\\
+%10 11 12\\
+%
+%one ship per row.\\
+%
+%Produced graph contains and = 60 edges 
 
-\clearpage
 
 An optimization of this graph is possible with the usage of binary clauses i.e. a clause with only two literals.
 The clause node can be omitted and we connect the two literals. As we cannot distinguish between the optimized edge 
@@ -225,6 +256,7 @@ Roughly speaking, we check if the image of the negation of $x$ is equals to the 
 This optimization allows to compute symmetries of the problem more efficiently.
 In the previous example, the graph has deleted 12 nodes and 12 edges. More generally,
 the graph removes as many nodes and edges as binary clauses on the formula.
+\Cref{fig:graph_opt} represents the optimized version the graph.
 
 \begin{figure}[h]
 	\begin{minipage}[c]{.2\textwidth}
@@ -234,6 +266,7 @@ the graph removes as many nodes and edges as binary clauses on the formula.
 		\includegraphics[width=4.3in]{cnfs/graph_cnf_opt-crop}
 	\end{minipage}
 	\caption{Example of constructed symmetry graph for a given CNF}
+	 \label{fig:graph_opt}
 \end{figure}
 
 
@@ -241,27 +274,32 @@ the graph removes as many nodes and edges as binary clauses on the formula.
 %\hakan{creation d'un probleme fil conducteur and utilisation de celui dans chaque partie, du calcul des symétries
 %jusqu'au SBP}\\
 
-When these graph is given to an automorphism tool like \bliss, the following \emph{generators} are 
-obtained:
-\begin{itemize}[topsep=0em]
-\item $g_0$: (2 3)(5 6)(8 9)(11 12)(-2 -3)(-5 -6)(-8 -9)(-11 -12)
-\item $g_1$: (4 5 6)(7 9 8)(-4 -5 -6)(-7 -9 -8)
-\item $g_2$: (4 7)(5 8)(6 9)(-4 -7)(-5 -8)(-6 -9)
-\item $g_3$: (1 2)(5 6)(7 9)(10 11)(-1 -2)(-5 -6)(-7 -9)(-10 -11)
-\item $g_4$: (1 10)(2 11)(3 12)(-1 -10)(-2 -11)(-3 -12)
+After the construction of a such graph, a graph automorphism tools take it as input and gives the set of generators as output.
+With the previous graph, the following generators are obtained:
+
+\begin{figure}
+\begin{itemize}
+	\item $g_1$: (2 3)(5 6)(8 9)(11 12)(-2 -3)(-5 -6)(-8 -9)(-11 -12)
+	\item $g_2$: (4 5 6)(7 9 8)(-4 -5 -6)(-7 -9 -8)
+	\item $g_3$: (4 7)(5 8)(6 9)(-4 -7)(-5 -8)(-6 -9)
+	\item $g_4$: (1 2)(5 6)(7 9)(10 11)(-1 -2)(-5 -6)(-7 -9)(-10 -11)
+	\item $g_5$: (1 10)(2 11)(3 12)(-1 -10)(-2 -11)(-3 -12)
 \end{itemize}
+\end{figure}
 
 
-The visualization of the orbits of literals on the problem could be seen in figure~\ref{fig:orbits}, where each node represents a literal. Two literals are 
-linked with an arc if it exists a permutation that maps the literal to the second one.
-By definition of the orbits, each literal belongs to a strongly connected components (SCC).
 
- \begin{figure}[h]
- 	\centering
- 		\includegraphics[width=\textwidth]{cnfs/orbits}
- 	\caption{Orbits}
- 	\label{fig:orbits}
- \end{figure}
+
+%The visualization of the orbits of literals on the problem could be seen in figure~\ref{fig:orbits}, where each node represents a literal. Two literals are 
+%linked with an arc if it exists a permutation that maps the literal to the second one.
+%By definition of the orbits, each literal belongs to a strongly connected components (SCC).
+%
+% \begin{figure}[h]
+% 	\centering
+% 		\includegraphics[width=\textwidth]{cnfs/orbits}
+% 	\caption{Orbits}
+% 	\label{fig:orbits}
+% \end{figure}
 
 
 
@@ -271,6 +309,8 @@ By definition of the orbits, each literal belongs to a strongly connected compon
 by \emph{statically} posting symmetry breaking constraints that invalidate symmetric
 assignments, or by altering the search space \emph{dynamically} to avoid symmetric search paths.
 
+
+\subsection{Static symmetry breaking}
 
 One way to exploit symmetry properties is to forbid equivalent assignment.
 Let introduce an ordering relation between the assignments.
@@ -312,8 +352,7 @@ The optimal approach to solve a symmetric SAT problem would be to explore
 only one assignment per orbit (for instance each lex-leader).To avoid exploring 
 symmetry search space, \emph{symmetry breaking predicates}(SBP) are added to the formula.
 These constraints are true only for the \emph{lex-leader} \cite{crawford1996symmetry}.
-\Cref{fig:lex-leader} show different orbits and the lex-leader one. It must exists a permutation in 
-the that map 
+\Cref{fig:lex-leader} show different orbits and the lex-leader one.
 
 \begin{figure}[!htbp]
 	\centering
@@ -330,9 +369,18 @@ Generation of these lex-leaders constraints proposed by Crawford et al.~\cite{cr
 
 $$\forall i : (\forall j < i : x_j \Leftrightarrow g.x_j) \Rightarrow \neg x_i \vee g.x_i$$
 
-Roughly speaking, assuming the ordering in \Cref{def:assignment_ordering}, these constraint express that 
-the value of the variable $x_i$ must be smaller or equal than the value of $g.x_i$ and all variables
-$x_j \prec x_i$, $x_j$ must have the same value of its symmetric. As such, these constraints encodes a valid lex leader.
+Roughly speaking, assuming the ordering in \Cref{def:assignment_ordering}, for one permutation, these constraint express that 
+the value of the variable $x_i$ must be smaller or equal than the value of $g.x_i$ and all variables $x_j$ that respect the constraint
+$x_j \prec x_i$,  must have the same value of its symmetric. As such, these constraints encodes a valid lex leader with respect to 
+this permutation. 
+
+
+
+\begin{figure}
+\input{fig/example-sbp}
+\end{figure}
+
+
 
 
 
@@ -378,7 +426,7 @@ Another example of exploiting structural property of the orbit is the usage of \
 The order choose a variable which maximize the number of stabilized permutations, removes the not stabilized ones and loop over until the empty set. The remaining variables are added to the order to get a complete order.
 
 
-\subsection{Static symmetry breaking}
+
 The exploitation of symmetries statically is called \emph{static symmetry breaking}.
 It acts like a preprocessor which add \emph{symmetry breaking predicates} (SBPs) at the 
 original formula and solve the augmented problem. 
