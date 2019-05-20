@@ -1,7 +1,10 @@
 
-total order $ 1 \prec 2 \prec 3 \prec 4 \prec 5 \prec 6 \prec 7 \prec 8 \prec 9 \prec 10 \prec 11 \prec 12$\\
-permutation : $g_1$: (2 3)(5 6)(8 9)(11 12)(-2 -3)(-5 -6)(-8 -9)(-11 -12)  
+total order $ x_1 \prec x_2 \prec x_3 \prec x_4 \prec x_5 \prec x_6$\\
+permutation $g_1 = (x_2 \enskip x_3)(x_5 \enskip x_6)(\neg x_2 \enskip \neg x_3)(\neg x_5 \enskip \neg x_6)$\\
 
-2 <= 3 \\
-2 == 3 -> 3 <= 2
-2 == 3 \land 3 == 2 -> 5 <= 6
+
+$x_2 \preceq x_3$ \\
+$x_2 = x_3 \implies x_5 \preceq x_6$\\
+
+%2 == 3 -> 3 <= 2
+%2 == 3 \land 3 == 2 -> 5 <= 6

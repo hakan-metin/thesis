@@ -76,7 +76,7 @@ $g$ is a permutation that maps $x_1$ to $x_2$, $x_2$ to $x_3$, $x_3$ to $x_1$, $
 Permutations are generally written in \emph{cycle notation}, the self mapped elements are omitted.
 So the permutation in cycle notation will be : 
 \begin{center}
-	$g$ = ($x_1$ $x_2$ $x_3$) ($x_5$ $x_6$)
+	$g$ = ($x_1 \enskip x_2 \enskip x_3$) ($x_5 \enskip x_6$)
 \end{center}
 
 We say \emph{support} of the permutation $g$ noted $supp(g)$ the elements that not mapped to themselves:
@@ -215,7 +215,18 @@ $m$ clauses over $n$ variables, the graph is constructed as follows:
 
 \begin{figure}[h!]
 	\begin{minipage}[c]{.2\textwidth}
-		\lstinputlisting[numbers=none]{cnfs/battleship-3-4-unsat.cnf}
+		$\omega_{1} = \{ x_{1}, x_{2}, x_{3} \}$ \\
+		$\omega_{2} = \{ x_{4}, x_{5}, x_{6} \}$ \\
+		$\omega_{3} = \{ x_{1}, x_{4} \}$ \\
+		$\omega_{4} = \{ x_{2}, x_{5} \}$ \\
+		$\omega_{5} = \{ x_{3}, x_{6} \}$ \\
+		$\omega_{6} = \{ \neg x_{1}, \neg x_{2} \}$ \\
+		$\omega_{7} = \{ \neg x_{1}, \neg x_{3} \}$ \\
+		$\omega_{8} = \{ \neg x_{2}, \neg x_{3} \}$ \\
+		$\omega_{9} = \{ \neg x_{4}, \neg x_{5} \}$ \\
+		$\omega_{10} = \{ \neg x_{4}, \neg x_{6} \}$ \\
+		$\omega_{11} = \{ \neg x_{5}, \neg x_{6} \}$ \\
+		
 	\end{minipage}
 	\begin{minipage}[l]{.75\textwidth}
 		\includegraphics[width=4.3in]{cnfs/graph_cnf_no_opt-crop}
@@ -225,10 +236,9 @@ $m$ clauses over $n$ variables, the graph is constructed as follows:
 \end{figure}
 
 
-\Cref{fig:graph_no_opt} shows the graph representation of a CNF. This problem have 12 variables and 21
-clauses. So, the graph will have  24  + 21 = 45 vertexes where 24 represents literals vertexes (circle in the figure ) 
-and 21 represents number of clause vertexes (square in the figure). The graph will also have 24 edges for boolean 
-consistency (\hakan{XXX} color in the figure) and 36 edges that relies clauses vertexes to the literals.
+\Cref{fig:graph_no_opt} shows the graph representation of a CNF. This problem have 6 variables and 11
+clauses. So, the graph will have  12  + 11 = 33 vertexes where 12 represents literals vertexes (circle in the figure ) 
+and 11 represents number of clause vertexes (square in the figure). The graph will also have 6 + 24 = 30 edges, 6 for boolean consistency (\hakan{XXX} color in the figure) and 24 edges that relies clauses vertexes to the literals.
 
 
 % and  24 + 36 = 60 
@@ -260,7 +270,18 @@ the graph removes as many nodes and edges as binary clauses on the formula.
 
 \begin{figure}[h]
 	\begin{minipage}[c]{.2\textwidth}
-		\lstinputlisting[numbers=none]{cnfs/battleship-3-4-unsat.cnf}
+			$\omega_{1} = \{ x_{1}, x_{2}, x_{3} \}$ \\
+	$\omega_{2} = \{ x_{4}, x_{5}, x_{6} \}$ \\
+	$\omega_{3} = \{ x_{1}, x_{4} \}$ \\
+	$\omega_{4} = \{ x_{2}, x_{5} \}$ \\
+	$\omega_{5} = \{ x_{3}, x_{6} \}$ \\
+	$\omega_{6} = \{ \neg x_{1}, \neg x_{2} \}$ \\
+	$\omega_{7} = \{ \neg x_{1}, \neg x_{3} \}$ \\
+	$\omega_{8} = \{ \neg x_{2}, \neg x_{3} \}$ \\
+	$\omega_{9} = \{ \neg x_{4}, \neg x_{5} \}$ \\
+	$\omega_{10} = \{ \neg x_{4}, \neg x_{6} \}$ \\
+	$\omega_{11} = \{ \neg x_{5}, \neg x_{6} \}$ \\
+	
 	\end{minipage}
 	\begin{minipage}[l]{.75\textwidth}
 		\includegraphics[width=4.3in]{cnfs/graph_cnf_opt-crop}
@@ -277,15 +298,34 @@ the graph removes as many nodes and edges as binary clauses on the formula.
 After the construction of a such graph, a graph automorphism tools take it as input and gives the set of generators as output.
 With the previous graph, the following generators are obtained:
 
-\begin{figure}
-\begin{itemize}
-	\item $g_1$: (2 3)(5 6)(8 9)(11 12)(-2 -3)(-5 -6)(-8 -9)(-11 -12)
-	\item $g_2$: (4 5 6)(7 9 8)(-4 -5 -6)(-7 -9 -8)
-	\item $g_3$: (4 7)(5 8)(6 9)(-4 -7)(-5 -8)(-6 -9)
-	\item $g_4$: (1 2)(5 6)(7 9)(10 11)(-1 -2)(-5 -6)(-7 -9)(-10 -11)
-	\item $g_5$: (1 10)(2 11)(3 12)(-1 -10)(-2 -11)(-3 -12)
-\end{itemize}
-\end{figure}
+
+
+
+\begin{center}
+	\begin{minipage}[c]{.635\textwidth}
+		$g_1 = (x_2 \enskip x_3)(x_5 \enskip x_6)(\neg x_2 \enskip \neg x_3)(\neg x_5 \enskip \neg x_6)$\\
+		$g_2 = (x_1 \enskip x_2)(x_4 \enskip x_5)(\neg x_1 \enskip \neg x_2)(\neg x_4 \enskip \neg x_5)$\\
+		$g_3 = (x_1 \enskip x_4)(x_2 \enskip x_5)(x_3 \enskip x_6)(\neg x_1 \enskip \neg x_4)(\neg x_2 \enskip \neg x_5)(\neg x_3 \enskip \neg x_6)$
+	\end{minipage}
+\end{center}
+
+
+
+
+
+%$g_1 = (x_2 \enskip x_3)(x_5 \enskip x_6)(\neg x_2 \enskip \neg x_3)(\neg x_5 \enskip \neg x_6)$\\
+%$g_2 = (x_1 \enskip x_2)(x_4 \enskip x_5)(\neg x_1 \enskip \neg x_2)(\neg x_4 \enskip \neg x_5)$\\
+%$g_3 = (x_1 \enskip x_4)(x_2 \enskip x_5)(x_3 \enskip x_6)(\neg x_1 \enskip \neg x_4)(\neg x_2 \enskip \neg x_5)(\neg x_3 \enskip \neg x_6)$
+
+%\begin{figure}
+%\begin{itemize}
+%	\item $g_1$: (2 3)(5 6)(8 9)(11 12)(-2 -3)(-5 -6)(-8 -9)(-11 -12)
+%	\item $g_2$: (4 5 6)(7 9 8)(-4 -5 -6)(-7 -9 -8)
+%	\item $g_3$: (4 7)(5 8)(6 9)(-4 -7)(-5 -8)(-6 -9)
+%	\item $g_4$: (1 2)(5 6)(7 9)(10 11)(-1 -2)(-5 -6)(-7 -9)(-10 -11)
+%	\item $g_5$: (1 10)(2 11)(3 12)(-1 -10)(-2 -11)(-3 -12)
+%\end{itemize}
+%\end{figure}
 
 
 
