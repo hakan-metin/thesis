@@ -1,10 +1,62 @@
 
-total order $ x_1 \prec x_2 \prec x_3 \prec x_4 \prec x_5 \prec x_6$\\
-permutation $g_1 = (x_2 \enskip x_3)(x_5 \enskip x_6)(\neg x_2 \enskip \neg x_3)(\neg x_5 \enskip \neg x_6)$\\
+
+%\begin{center}
+%\begin{tabular}{lll}
+%	 Order &:& $ x_1 \prec x_2 \prec x_3 \prec x_4 \prec x_5 \prec x_6 \enskip \mid \enskip  (\false < \true)$ \\
+%	 Permutation &:& $g_1 = (x_2 \enskip x_3)(x_5 \enskip x_6)(\neg x_2 \enskip \neg x_3)(\neg x_5 \enskip \neg x_6)$\\
+%\end{tabular}
+%
+%\vspace*{2\baselineskip}
+%
+%\begin{tabular}{ll}
+%	Constraints & Generated SBP\\
+%	\midrule
+%	$x_2 \preceq x_3$ & $ \neg x_2 \lor x_3$ \\
+%	&\\
+%	$x_2 = x_3 \Rightarrow x_5 \preceq x_6$ & $ x_2 \lor x_3 \lor \neg x_5 \lor x_6$\\
+%	&$ \neg x_2 \lor \neg x_3 \lor \neg x_5 \lor x_6$\\
+%\end{tabular}
+%\end{center}
+%
 
 
-$x_2 \preceq x_3$ \\
-$x_2 = x_3 \implies x_5 \preceq x_6$\\
+\begin{center}
+	\begin{tabular}{lll}
+		Order &:& $ x_1 \prec x_2 \prec x_3 \prec x_4 \prec x_5 \prec x_6 \enskip \mid \enskip  (\false < \true)$ \\
+		Permutation &:& $g_3 = (x_1 \enskip x_4)(x_2 \enskip x_5)(x_3 \enskip x_6)(\neg x_1 \enskip \neg x_4)(\neg x_2 \enskip \neg x_5)(\neg x_3 \enskip \neg x_6)$
+	\end{tabular}
+	
+	\vspace*{2\baselineskip}
+	
+	\begin{tabular}{ll}
+		Constraints & Generated SBP\\
+		\midrule
+		$x_1 \preceq x_4$ & $ \neg x_1 \lor x_4$ \\
+		&\\
+		$x_1 = x_4 \Rightarrow x_2 \preceq x_5$ & $ x_1 \lor x_4 \lor \neg x_2 \lor x_5$\\
+		&$ \neg x_1 \lor \neg x_4 \lor \neg x_2 \lor x_5$\\
+		&\\
+		$x_1 = x_4 \land x_2 = x_5 \Rightarrow x_3 \preceq x_6$ &
+		  $ x_1 \lor x_4 \lor x_2 \lor x_5 \lor \neg x_3 \lor x_6$ \\
+		& $ \neg x_1 \lor \neg x_4 \lor x_2 \lor x_5 \lor \neg x_3 \lor x_6$ \\
+		& $ x_1 \lor x_4 \lor \neg x_2 \lor \neg x_5 \lor \neg x_3 \lor x_6$ \\
+		& $ \neg x_1 \lor \neg x_4 \lor \neg x_2 \lor \neg x_5 \lor \neg x_3 \lor x_6$ \\ 
 
-%2 == 3 -> 3 <= 2
-%2 == 3 \land 3 == 2 -> 5 <= 6
+	\end{tabular}
+\end{center}
+
+
+
+
+
+%\begin{center}
+%\begin{tabular}{l|l|l}
+%	Permutation & Constraints & Generated SBP\\
+%	\midrule
+%	& $x_2 \preceq x_3$ & $ \neg x_2 \lor x_3$ \\
+%	$g_1 = (x_2 \enskip x_3)(x_5 \enskip x_6)(\neg x_2 \enskip \neg x_3)(\neg x_5 \enskip \neg x_6)$ & & \\
+%	& $x_2 = x_3 \Rightarrow x_5 \preceq x_6$ & $ x_2 \lor x_3 \lor \neg x_5 \lor x_6$\\
+%	& &$ \neg x_2 \lor \neg x_3 \lor \neg x_5 \lor x_6$\\
+%\end{tabular}
+%\end{center}
+%

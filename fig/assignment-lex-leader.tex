@@ -1,16 +1,16 @@
 \begin{tikzpicture}
     \tikzstyle{point}=[circle,draw,thick,fill=black,scale=0.2]
-	\tikzstyle{point+}=[circle,draw=red,thick,fill=red,scale=0.4]
+	\tikzstyle{point+}=[circle,draw=red,thick,scale=0.4]
 
 
 \begin{scope}
 \node[ellipse, draw, minimum width=4cm, minimum height=2cm] (c1) at (2.5,0){};
-	\clip (2.5,0) ellipse (2 and 1);
+	\clip (2.5, 0) ellipse (2 and 1);
 	\node[point+] (p2) at (1, 0.3){};
-	\pgfmathsetseed{2945}
+	\pgfmathsetseed{281}
 	\foreach \p in {1,...,100}
 	{
-		\fill (4*rand,2*rand) circle (0.08);
+		\fill (4*rand,2*rand+0.25) circle (0.08);
 	}
 \end{scope}
 
@@ -18,8 +18,8 @@
 \begin{scope}
 \node[ellipse, draw, minimum width=4cm, minimum height=2cm] (c1) at (8.5,0){};
 \clip (8.5,0) ellipse (2 and 1);
-\node[point+] (p2) at (8.9, -0.7){};
-\pgfmathsetseed{466}
+\node[point+] (p2) at (8.6, -0.1){};
+\pgfmathsetseed{499478626}
 \foreach \p in {1,...,40}
 {
 	\fill (4*rand+6,2*rand) circle (0.08);
@@ -37,7 +37,7 @@
 \node[align=left, text width=2.2cm] at (4.5, -2) {Assignment};
 
 
-\node[circle, fill=red, draw=red, line width=0.5mm, scale=0.3] (le) at (7, -2) {};
+\node[point+] (le) at (7, -2) {};
 \node[align=left, text width=4.2cm] at (9.5, -2) {Lex-leader assignment};
 
 \path[draw] (-1, -2.7) -- (13, -2.7);

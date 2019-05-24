@@ -48,7 +48,9 @@ with a finite number of elements.
 
 Given a group $G$, a \emph{subgroup} is a non empty subset of $G$ which is also a group with 
 the same binary operation. If $H$ is a subgroup of $G$, we denote as $H \leq G$.
-A group has at least two subgroups: i) the subgroup composed by identity element $\{e\}$, denoted \emph{trivial} subgroup. All other subgroups are \emph{nontrivial}; ii) the subgroup composed by itself, denoted \emph{improper} subgroup. All other subgroups are \emph{proper}.
+A group has at least two subgroups: i) the subgroup composed by identity element $\{e\}$, denoted \emph{trivial} subgroup.
+All other subgroups are \emph{nontrivial}; ii) the subgroup composed by itself,
+denoted \emph{improper} subgroup. All other subgroups are \emph{proper}.
 
 
 \subsubsection{Generators of a group}
@@ -88,7 +90,7 @@ if $x \notin \support(g)$. A clause $\omega$ is \emph{stabilized} by a permutati
 $\omega \cap \support(g) = \emptyset$.
 
 
-The set of permutations of a given set $X$ form a group $G$,
+A set of permutations of a given set $X$ form a group $G$,
 with the composition operation ($\circ$) and is called \emph{permutation group}.
 The \emph{symmetric group} is the set of all possible permutations of a set $X$ and noted \Group($X$).
 %The set of \textbf{all} permutations of a set $X$ is the \emph{symmetric group} of $X$ and noted \Group($X$).
@@ -97,9 +99,9 @@ So, a \emph{permutation group} is a subgroup of \Group($X$).
 %can be expressed as a composition of permutations in $P$. 
 
 
-A permutation group $G$ induces a \emph{equivalence relation} on the set of element $X$ being
+A permutation group $G$ induces an \emph{equivalence relation} on the set of element $X$ being
 permuted. Two elements $x_1, x_2 \in X$ are equivalent if there exists a permutation $g \in G$ such that
-$g x_1 = x_2$. Then equivalence relation partitions $X$ into \emph{equivalence classes} referred to
+$g.x_1 = x_2$. Equivalence relations partition $X$ into \emph{equivalence classes} referred to
 as the \emph{orbits} of $X$ under $G$. The orbit of an element $x$ under group $G$ (or simply orbit of $x$ when clear
 from the context) is the set $[x]_G = \{g.x \mid g \in G\}$
 
@@ -122,7 +124,7 @@ The group $\Group(\Vars)$ also acts on  assignments possibly partial of $\Vars$ 
 	\item $g$  commutes with the negation: $g.\neg l  = \neg g.l$
 \end{itemize}
 
-The set of symmetries of $\varphi$ is noted $S(\varphi)$ and is a subgroup of $\Group(\Vars)$.
+The set of symmetries of $\varphi$ is noted $G_(\varphi)$ and is a subgroup of $\Group(\Vars)$.
 Symmetries of a formula $\varphi$ preserves the satisfaction, for every \emph{complete} assignment $\alpha$:
 
 \begin{center}
@@ -204,11 +206,11 @@ When a symmetry depends on the structure of the problem, we say \emph{syntactic}
 In contrast, symmetries were \emph{semantic}, when it is not inherent to the encoding.
 To find symmetries in SAT problem, the formula is transformed into colored graph
 and an automorphism tool is applied onto. Specifically, given a formula $\varphi$ with
-$m$ clauses over $n$ variables, the graph is constructed as follows:
+$m$ clauses over $n$ variables, the graph is constructed as follows~\cite{biere2009handbook}:
 \begin{itemize}
 	\item \emph{clause nodes}: represent each of the $m$ clauses by a node with color 0;
 	\item \emph{literals nodes}: represent each of the $l$ literals by a node with color 1;
-	\item \emph{clauses edges}: connect each clause node to the node of the literals that appear in clause;
+	\item \emph{clauses edges}: connect a clause to its literals by linking the corresponding  clause node and literal nodes;
 	\item \emph{boolean consistency edges}: connect each pair of literals that correspond to the same variables.
 \end{itemize}
 
@@ -238,7 +240,8 @@ $m$ clauses over $n$ variables, the graph is constructed as follows:
 
 \Cref{fig:graph_no_opt} shows the graph representation of a CNF. This problem have 6 variables and 11
 clauses. So, the graph will have  12  + 11 = 33 vertexes where 12 represents literals vertexes (circle in the figure ) 
-and 11 represents number of clause vertexes (square in the figure). The graph will also have 6 + 24 = 30 edges, 6 for boolean consistency (\hakan{XXX} color in the figure) and 24 edges that relies clauses vertexes to the literals.
+and 11 represents number of clause vertexes (square in the figure). The graph will also have 6 + 24 = 30 edges, 6 for boolean consistency 
+(\hakan{XXX} color in the figure) and 24 edges that relies clauses vertexes to the literals.
 
 
 % and  24 + 36 = 60 
@@ -262,14 +265,15 @@ The clause node can be omitted and we connect the two literals. As we cannot dis
 and boolean consistency edges, we must check if the produced permutations are spurious. 
 To do so, as we ensure the permutation commutes with the negation it suffice to check:
 $\forall x \in \support(g), g.\neg x = \neg g.x$.
-Roughly speaking, we check if the image of the negation of $x$ is equals to the negation of the image of $x$, for each element $x$ in the support of the permutation.
+Roughly speaking, we check if the image of the negation of $x$ is equals to the negation of the image of $x$,
+for each element $x$ in the support of the permutation.
 This optimization allows to compute symmetries of the problem more efficiently.
 In the previous example, the graph has deleted 12 nodes and 12 edges. More generally,
 the graph removes as many nodes and edges as binary clauses on the formula.
 \Cref{fig:graph_opt} represents the optimized version the graph.
 
-\begin{figure}[h]
-	\begin{minipage}[c]{.2\textwidth}
+\begin{figure}[!htbp]
+	\begin{minipage}[r]{.2\textwidth}
 			$\omega_{1} = \{ x_{1}, x_{2}, x_{3} \}$ \\
 	$\omega_{2} = \{ x_{4}, x_{5}, x_{6} \}$ \\
 	$\omega_{3} = \{ x_{1}, x_{4} \}$ \\
@@ -281,9 +285,8 @@ the graph removes as many nodes and edges as binary clauses on the formula.
 	$\omega_{9} = \{ \neg x_{4}, \neg x_{5} \}$ \\
 	$\omega_{10} = \{ \neg x_{4}, \neg x_{6} \}$ \\
 	$\omega_{11} = \{ \neg x_{5}, \neg x_{6} \}$ \\
-	
 	\end{minipage}
-	\begin{minipage}[l]{.75\textwidth}
+	\begin{minipage}[r]{.75\textwidth}
 		\includegraphics[width=4.3in]{cnfs/graph_cnf_opt-crop}
 	\end{minipage}
 	\caption{Example of constructed symmetry graph for a given CNF}
@@ -291,12 +294,10 @@ the graph removes as many nodes and edges as binary clauses on the formula.
 \end{figure}
 
 
-%\hakan{optimisation du graph}\\
-%\hakan{creation d'un probleme fil conducteur and utilisation de celui dans chaque partie, du calcul des symétries
-%jusqu'au SBP}\\
 
-After the construction of a such graph, a graph automorphism tools take it as input and gives the set of generators as output.
-With the previous graph, the following generators are obtained:
+
+After the construction of a such graph, a graph automorphism tools take it as input and gives
+the set of generators as output.With the previous graph, the following generators are obtained:
 
 
 
@@ -311,35 +312,18 @@ With the previous graph, the following generators are obtained:
 
 
 
+These permutations form a permutation group and so induce an equivalence relation.
+\Cref{fig:orbit} shows graphical representation of an orbit, where each node represents a literal. Two literals are linked with an arc if it exists a permutation that maps one to the other. 
+An orbit must be a \emph{strongly connected component} (SCC).  
+Some permutations have a special form like two dimensional
+array as in this example.
+ A further section (\ref{sec:matrix-sbp}) shows how to exploit this special form.
 
-
-%$g_1 = (x_2 \enskip x_3)(x_5 \enskip x_6)(\neg x_2 \enskip \neg x_3)(\neg x_5 \enskip \neg x_6)$\\
-%$g_2 = (x_1 \enskip x_2)(x_4 \enskip x_5)(\neg x_1 \enskip \neg x_2)(\neg x_4 \enskip \neg x_5)$\\
-%$g_3 = (x_1 \enskip x_4)(x_2 \enskip x_5)(x_3 \enskip x_6)(\neg x_1 \enskip \neg x_4)(\neg x_2 \enskip \neg x_5)(\neg x_3 \enskip \neg x_6)$
-
-%\begin{figure}
-%\begin{itemize}
-%	\item $g_1$: (2 3)(5 6)(8 9)(11 12)(-2 -3)(-5 -6)(-8 -9)(-11 -12)
-%	\item $g_2$: (4 5 6)(7 9 8)(-4 -5 -6)(-7 -9 -8)
-%	\item $g_3$: (4 7)(5 8)(6 9)(-4 -7)(-5 -8)(-6 -9)
-%	\item $g_4$: (1 2)(5 6)(7 9)(10 11)(-1 -2)(-5 -6)(-7 -9)(-10 -11)
-%	\item $g_5$: (1 10)(2 11)(3 12)(-1 -10)(-2 -11)(-3 -12)
-%\end{itemize}
-%\end{figure}
-
-
-
-
-%The visualization of the orbits of literals on the problem could be seen in figure~\ref{fig:orbits}, where each node represents a literal. Two literals are 
-%linked with an arc if it exists a permutation that maps the literal to the second one.
-%By definition of the orbits, each literal belongs to a strongly connected components (SCC).
-%
-% \begin{figure}[h]
-% 	\centering
-% 		\includegraphics[width=\textwidth]{cnfs/orbits}
-% 	\caption{Orbits}
-% 	\label{fig:orbits}
-% \end{figure}
+\begin{figure}[!htbp]
+	\input{fig/exemple-orbits}
+	\caption{Graphical representation of an orbit}
+	\label{fig:orbit}
+\end{figure}
 
 
 
@@ -352,7 +336,7 @@ assignments, or by altering the search space \emph{dynamically} to avoid symmetr
 
 \subsection{Static symmetry breaking}
 
-One way to exploit symmetry properties is to forbid equivalent assignment.
+One way to exploit symmetry properties is to forbid equivalent assignments except one.
 Let introduce an ordering relation between the assignments.
 
 \begin{definition}[Assignments ordering]
@@ -363,12 +347,18 @@ Let introduce an ordering relation between the assignments.
 	\begin{itemize}
 		\item for all $v' \prec v$, either $v' \in \alpha \cap \beta$ or $\neg v' \in \alpha \cap
 		\beta$.
-		\item $\neg v \in \alpha$ and $v \in \beta$.\footnote{We could have chosen as well $v \in \alpha$ and $\neg v \in \beta$ without loss of generality.}
+		\item $\neg v \in \alpha$ and $v \in \beta$ \footnote{We could have chosen as well 
+			$v \in \alpha$ and $\neg v \in \beta$ without loss of generality.}.
 	\end{itemize}
 \end{definition}
 
+
+In other word, the prefix of both assignment are equals according to the ordering relation~$\prec$
+and the next variable $v$ has a different value, $\alpha(v) = \false, \beta(v) = \true$, then $\alpha < \beta$.
 Note that $<$ coincides with the lexicographical order on \emph{complete}
-assignments. Furthermore, the $<$ relation is monotonic as expressed in the following proposition:
+assignments. 
+
+Furthermore, the $<$ relation is monotonic as expressed in the following proposition:
 
 \begin{proposition}[Monotonicity of assignments ordering]
 	\label{prop:monocity_assignments_ordering}
@@ -389,10 +379,11 @@ The lexicographic leader (\textit{lex-leader} for short) of an orbit $[\alpha]_G
 $min_<([\alpha]_G)$. This \textit{lex-leader} is unique because the lexicographic
 order is a total order.
 The optimal approach to solve a symmetric SAT problem would be to explore
-only one assignment per orbit (for instance each lex-leader).To avoid exploring 
-symmetry search space, \emph{symmetry breaking predicates}(SBP) are added to the formula.
-These constraints are true only for the \emph{lex-leader} \cite{crawford1996symmetry}.
-\Cref{fig:lex-leader} show different orbits and the lex-leader one.
+only one assignment per orbit (for instance each lex-leader). \Cref{fig:lex-leader} shows different orbits, each dot in an orbit (ellipse in the figure) is an assignment, and the lex-leader is the empty red one.
+To avoid exploring 
+symmetry search space, \emph{symmetry breaking predicates} (SBP) also called \emph{lex-leader constraints} 
+are added to the formula.
+These constraints are only true for the \emph{lex-leader} \cite{crawford1996symmetry} and prevents other assignments from being explored. 
 
 \begin{figure}[!htbp]
 	\centering
@@ -403,33 +394,19 @@ These constraints are true only for the \emph{lex-leader} \cite{crawford1996symm
 \end{figure}
 
 
+Let $LL_g$ denote the lex-leader predicates for a permutation $g \in G_\varphi$ defined as :
+$$LL_g = \forall i : (\forall j < i : x_j = g.x_j) \Rightarrow  x_i \preceq g.x_i$$
 
-
-Generation of these lex-leaders constraints proposed by Crawford et al.~\cite{crawford1996symmetry}:
-
-$$\forall i : (\forall j < i : x_j \Leftrightarrow g.x_j) \Rightarrow \neg x_i \vee g.x_i$$
-
-Roughly speaking, assuming the ordering in \Cref{def:assignment_ordering}, for one permutation, these constraint express that 
-the value of the variable $x_i$ must be smaller or equal than the value of $g.x_i$ and all variables $x_j$ that respect the constraint
-$x_j \prec x_i$,  must have the same value of its symmetric. As such, these constraints encodes a valid lex leader with respect to 
-this permutation. 
-
-
-
-\begin{figure}
-\input{fig/example-sbp}
-\end{figure}
-
-
-
+In other words, each assignment whose have a variable such that its image under $g$ is smaller according to the ordering relation (depicted in \Cref{def:assignment_ordering}), is pruned by $LL_g$.
+Conjunction of $LL_g$, for all permutation in some $G \subseteq G_{\varphi} $ results a sound 
+but not necessarily \emph{complete} symmetry breaking predicates for $G_{\varphi}$ noted $\psi$.
 
 
 
 
 \begin{theorem}[Satisfiability preservation SBPs]
 	\label{theorem:satisfiability_preservation_SBPs}
-	Let $\varphi$ be a formula and $\psi$ the computed \textit{SBPs} for the set of
-	symmetries $S(\varphi)$
+	Let $\varphi$ be a formula and $\psi$ the computed \textit{SBPs} for the set of	symmetries in $G_{\varphi}$:
 	
 	$$\varphi~and ~\varphi \wedge \psi \text{ are equi-satisfiable}.$$
 \end{theorem}
@@ -438,19 +415,99 @@ this permutation.
 	If $\varphi \wedge \psi$ is SAT then $\varphi$ is trivially SAT. If
 	$\varphi$ is SAT, then there is some assignment $\beta$ that satisfies $\varphi$.
 	Without loss of generality, $\beta$ can be chosen to be the lex-leader of its
-	orbit under $S(\varphi)$. Thus, $g$ does not contradict $\beta$, which implies that
+	orbit under $G_{\varphi}$. Thus, $g$ does not contradict $\beta$, which implies that
 	$\beta \models \psi$.
 \end{proof}
 
+
+
+
+% By definition of an orbit, it exists a permutation that map each assignment to another in the same orbit. 
+
+
+%
+%Lex-leader constraints are build for each permutation in the group.
+%Given a permutation 
+%Generation of these lex-leaders constraints proposed by Crawford et al.~\cite{crawford1996symmetry}:
+%
+%$$\forall i : (\forall j < i : x_j = g.x_j) \Rightarrow  x_i \preceq g.x_i$$
+%
+%In other words, assuming the ordering relation depicted in \Cref{def:assignment_ordering}, for one permutation,
+%these constraint express that the value of the variable $x_i$ must be smaller or equal than the
+%value of $g.x_i$ and all variables $x_j$ that respect the constraint $x_j \prec x_i$,  
+%must have the same value of its symmetric. As such, these constraints encodes a valid 
+%lex leader with respect to this permutation.
+
+Encoding of the constraints
  
+ 
+ \Cref{fig:esbp_gen} shows an example of generated constraints for the first permutation of the previous 
+ example and an lexicographic order.
+ Constraints like ($x_2 = x_3 \Rightarrow x_3 \preceq x_2$), that generates \emph{tautology} clause 
+ (i.e have positive and negative value of a literal in the same clause) are always true, and so
+ not presents on the figure. Moreover, it will exists another encoding of constraints to the SBPs that
+ creates a new variables to encode equality of literals and get a more compact lex-leader encoding.
+ \hakan{REF shatter + example compact encoding }
+ 
+ \begin{figure}[!htbp]
+ 	\input{fig/example-sbp}
+ 	\caption{Example of generated SBPs for one permutation}
+ 	\label{fig:esbp_gen}
+ \end{figure}
+ 
+ 
+ 
+To ensure the visiting only the lex leader, all SBPs of all permutations 
+belongs to the group must be generated.
+ Adding too many SBPs clauses will overload the solver and slow down the unit propagation.
+Hence, finding the lex-leader of an orbit is computationally hard~\cite{Luks2004}. 
+When only one assignment per orbit (generally the lex-leader) is visited, this is called  \emph{full symmetry breaking}.
+Conversely, \emph{partial symmetry breaking} aims to visit at least one assignment per orbit.
+Only some of the permutations are used to generate SBPS, that are generally  the set of generators 
+given by the automorphism tool.
+This approach is more easy to set up and bring considerable reduction of the search spaces.
 
 
-However, finding the lex-leader of an orbit is computationally hard~\cite{Luks2004}.
-It exists two kind of symmetry breaking, the first one is \emph{full symmetry breaking} and it 
-aims to visit exactly one assignment per orbit (generally the lex-leader). This
-approach is in practice infeasible in the most case due to the exponential number of permutations in a group.
-The second one is \emph{partial symmetry breaking} and it aims to visit at least one assignment per orbit. This approach is easy to set up and bring us to considerable reduction of the search spaces. The used set
-of permutations is generally the set of generators of a formula given by the automorphism tool.
+
+\subsubsection{Special form of the group} \label{sec:matrix-sbp}
+Some formula presents specific type of symmetry called \emph{row (column) interchangeability}, when a
+subset of variables are structured as a two dimensional matrix. Each row (column) are interchangeable
+with the symmetries.
+This form of symmetry is common in different kind of problem like pigeon hole problem in which
+pigeons and holes are interchangeable or in delivery system in which trucks of a fleet are interchangeable.
+Usage of row (column) interchangeability can significantly improved SAT performance. 
+Effectively symmetries can be eliminated by the addition 
+of only a linear number of symmetry-breaking constraints~\cite{flener2002breaking}. 
+One condition must be satisfied to ensure this linear number of constraints:
+lexicographic order needs to respect the structure of the matrix.
+In practice, automorphism tools gives only the set generators which contains no information on the structure of the group. 
+Authors of $\breakid$~\cite{devriendt2016improved}, a static partial symmetry breaking tool,
+ publish an algorithm to discover this structure and exploit it.
+
+Moreover, \breakid have another optimization that aims to post many binary symmetry breaking constraints.
+By definition, the first constraint of a permutation must be a binary clauses.
+Moreover, the smallest variable according to the $\prec$ belongs to an orbit.
+As its an SCC it must exists a permutation that
+swap the smallest variable with all other in the same orbit. This will generate as many binary clauses as
+variables in the orbit. Then, all permutations that have the smallest variable are discarded and the algorithm
+reiterate the process until the empty set.
+
+
+
+
+An existing tool for partial static symmetry breaking is \shatter~\cite{aloul06}. This is a complete tool
+that use $\saucy$ to detect the symmetries in the formula and use compact lex leader encoding.
+
+\hakan{mettre tableauw nombre de SBP generé}
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[height=5cm]{example-image-a}
+	\label{}
+\end{figure}
+
+
+
+
 
 
 \hakan{Faire une section pour ça}
@@ -487,7 +544,8 @@ This approach gives good performances in practice.
 \hakan{Conclu static}
 
 In the general case,
-the size of the \textit{sbp} can be exponential in the number of variables of
+the size of the \textit{sbp} can be 
+exponential in the number of variables of
 the problem so that they cannot be totally computed. The underlying SAT solver can 
  Even in more favorable
 situations, the size of the generated \textit{sbp} is often too large to be

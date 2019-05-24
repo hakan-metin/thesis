@@ -1,0 +1,67 @@
+
+\begin{minipage}[c]{0.6\linewidth}
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1},every node/.style={scale=0.6}, scale=0.6]
+  \tikzstyle{trans}=[thick, ->, sloped]
+  \tikzstyle{unsat}=[thick,fill=purple,scale=1.5]
+  \tikzstyle{sat}=[thick,fill=hgreen,scale=1.5]
+  \tikzstyle{alpha}=[sibling distance=0pt,level distance=20pt]
+  
+\node [circle,draw] (x1) {$x_1$}
+  child {node [circle,draw] (x2_1) {$x_2$}
+    child {node [circle,draw] (x3_1) {$x_3$}
+      child {node[unsat]  (xn_1) {}
+   	     child[alpha] { node (a1) {$\alpha_1$} edge from parent[draw=none]}}
+      child {node[sat] (xn_2) {}
+   	     child[alpha] { node (a1) {$\alpha_2$} edge from parent[draw=none]}}
+    }
+    child {node [circle,draw] (x3_2) {$x_3$}
+      child {node[sat] (xn_3) {}
+  	     child[alpha] { node (a1) {$\alpha_3$} edge from parent[draw=none]}}
+      child {node[unsat] (xn_4) {}
+   	     child[alpha] { node (a1) {$\alpha_4$} edge from parent[draw=none]}}
+    }
+  }
+  child {node [circle,draw] (x2_2) {$x_2$}
+    child {node [circle,draw] (x3_3) {$x_3$}
+      child {node[sat] (xn_5) {}
+   	     child[alpha] { node (a1) {$\alpha_5$} edge from parent[draw=none]}}
+      child {node[unsat] (xn_6) {}
+   	     child[alpha] { node (a1) {$\alpha_6$} edge from parent[draw=none]}}
+    }
+  child {node [circle,draw] (x3_4) {$x_3$}
+    child {node[unsat] (xn_7) {}
+   		child[alpha] { node (a1) {$\alpha_7$} edge from parent[draw=none]}}
+    child {node[unsat] (xn_8) {}
+    	child[alpha] { node (a1) {$\alpha_8$} edge from parent[draw=none]}}
+  }};
+
+
+\path (x1)   -- (x2_1) node [midway, fill=white] {$0$};
+\path (x2_1) -- (x3_1) node [midway, fill=white] {$0$};
+\path (x3_1) -- (xn_1) node [midway, fill=white] {$0$};
+\path (x3_2) -- (xn_3) node [midway, fill=white] {$0$};
+\path (x2_2) -- (x3_3) node [midway, fill=white] {$0$};
+\path (x2_2) -- (x3_4) node [midway, fill=white] {$1$};
+\path (x1)   -- (x2_2) node [midway, fill=white] {$1$};
+\path (x3_1) -- (xn_2) node [midway, fill=white] {$1$};
+\path (x2_1) -- (x3_2) node [midway, fill=white] {$1$};
+\path (x3_2) -- (xn_4) node [midway, fill=white] {$1$};
+\path (x3_3) -- (xn_5) node [midway, fill=white] {$0$};
+\path (x3_3) -- (xn_6) node [midway, fill=white] {$1$};
+\path (x3_4) -- (xn_7) node [midway, fill=white] {$0$};
+\path (x3_4) -- (xn_8) node [midway, fill=white] {$1$};
+
+%\path (xn_8) -- (x6_3) node [midway, fill=white] {$0$};
+%\path (xn_8) -- (x6_4) node [midway, fill=white] {$1$};
+
+\end{tikzpicture}
+\end{minipage}
+\begin{minipage}[c]{0.23\linewidth}
+           \footnotesize
+		\begin{itemize}
+			\item[] $\omega_1 = \{x_1, x_2, x_3\}$ \\
+			\item[] $\omega_2 = \{\neg x_1, \neg x_2 \}$\\
+			\item[] $\omega_3 = \{\neg x_1, \neg x_3 \}$\\
+			\item[] $\omega_4 = \{\neg x_2, \neg x_3 \}$\\
+		\end{itemize}
+\end{minipage}

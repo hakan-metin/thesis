@@ -1,0 +1,47 @@
+
+
+\begin{center}
+	
+
+\begin{tikzpicture}
+	\tikzstyle{orbit-node}=[draw,circle,minimum size=35pt,inner sep=0pt]
+	\tikzstyle{g1}=[->, draw, color=blue_1, line width=1pt]
+	\tikzstyle{g2}=[->, draw, color=green_1, line width=1pt]
+	\tikzstyle{g3}=[->, draw, color=red_1, line width=1pt]
+	
+	\node[orbit-node] (1) {$x_1$};
+	\node[orbit-node] (2) at ($(1) + (5, 0)$) {$x_2$};
+	\node[orbit-node] (3) at ($(2) + (5, 0)$) {$x_3$};
+	\node[orbit-node] (4) at ($(1) + (0, -4)$) {$x_4$};
+	\node[orbit-node] (5) at ($(1) + (5, -4)$) {$x_5$};
+	\node[orbit-node] (6) at ($(2) + (5, -4)$) {$x_6$};
+	
+	% g1
+	\draw[g1] (1) to [bend right=10] (2);
+	\draw[g1] (2) to [bend right=10] (1);
+	
+	\draw[g1] (4) to [bend right=10] (5);
+	\draw[g1] (5) to [bend right=10] (4);
+	
+	
+	%g2
+	
+	\draw[g2] (2) to [bend right=10] (3);
+	\draw[g2] (3) to [bend right=10] (2);
+	
+	\draw[g2] (5) to [bend right=10] (6);
+	\draw[g2] (6) to [bend right=10] (5);
+	
+	% g3
+	\draw[g3] (1) to [bend right=10] (4);
+	\draw[g3] (4) to [bend right=10] (1);
+	
+	\draw[g3] (2) to [bend right=10] (5);
+	\draw[g3] (5) to [bend right=10] (2);
+	
+	\draw[g3] (3) to [bend right=10] (6);
+	\draw[g3] (6) to [bend right=10] (3);
+	
+\end{tikzpicture}
+
+\end{center}
