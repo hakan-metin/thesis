@@ -511,7 +511,7 @@ in this example $x_7, x_8, x_9$ such that $x_7$ encode the equality of $x_1$ and
 \end{figure}
 
 
-\shatter~\cite{aloul06} is a tool that computes symmetry wit $\saucy$ automorphism tool and generate a new formula with compact lex-leader encoding. Following table shows the number of symmetry breaking predicates clauses and the
+\shatter~\cite{aloul06} is a tool fot partial symmetry breaking that computes symmetry with $\saucy$ automorphism tool and generate a new formula with compact lex-leader encoding. It uses only generators given by the automorphism tool. Following table shows the number of symmetry breaking predicates clauses and the
 number of auxiliary variables added to the original formula.
 
 
@@ -524,10 +524,16 @@ number of auxiliary variables added to the original formula.
 
 
 
+An improvement of static symmetry breaking was made by Devriendt et al~\cite{devriendt2016improved} with a tool 
+called $\breakid$. It exploits some properties from the structure of generators. On some circumstance 
+a linear number of constraints can break all group. The other tries to add a maximum of binary clauses that 
+is useful because it can participate often to unit propagation and so to the conflict analysis.
+
+
 \subsubsection{Special form of the group} \label{sec:matrix-sbp}
 Some formula presents specific type of symmetry called \emph{row (column) interchangeability}, when a
 subset of variables are structured as a two dimensional matrix. Each row (column) are interchangeable
-with the symmetries.
+with the symmetries. 
 This form of symmetry is common in different kind of problem like pigeon hole problem in which
 pigeons and holes are interchangeable or in delivery system in which trucks of a fleet are interchangeable.
 Usage of row (column) interchangeability can significantly improved SAT performance. 
@@ -537,8 +543,23 @@ One condition must be satisfied to ensure this linear number of constraints:
 lexicographic order needs to respect the structure of the matrix.
 In practice, automorphism tools gives only the set generators which contains no information on
 the structure of the group. 
-Authors of $\breakid$~\cite{devriendt2016improved}, a static partial symmetry breaking tool,
- publish an algorithm to discover this structure and exploit it.
+Authors of $\breakid$ develop an algorithm to detect this specific structure and exploit it.
+
+
+Graphical representation of previous example has this specificity~\ref{fig:orbit}. Two rows and three columns
+are presents. Given the lexicographic order $\{x_1, x_2, x_3, x_4, x_5, x_6\} \mid \false < \true$,
+
+$\{\neg x_1, x_2\}$\\
+$\{\neg x_1, x_4\}$\\
+$\{\neg x_2, x_3\}$\\
+
+
+The previous presented example has this specificity.
+
+
+
+
+
 
 Moreover, \breakid have another optimization that aims to post many binary symmetry breaking constraints.
 By definition, the first constraint of a permutation must be a binary clauses.
@@ -547,7 +568,6 @@ As its an SCC it must exists a permutation that
 swap the smallest variable with all other in the same orbit. This will generate as many binary clauses as
 variables in the orbit. Then, all permutations that have the smallest variable are discarded and the algorithm
 reiterate the process until the empty set.
-
 
 
 
