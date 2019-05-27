@@ -81,13 +81,13 @@ So the permutation in cycle notation will be :
 	$g$ = ($x_1 \enskip x_2 \enskip x_3$) ($x_5 \enskip x_6$)
 \end{center}
 
-We say \emph{support} of the permutation $g$ noted $supp(g)$ the elements that not mapped to themselves:
+We say \emph{support} of the permutation $g$ noted $\support_{g}$ the elements that not mapped to themselves:
 \begin{center}
-	$supp(g) = \{ x \in X \mid g.x \neq x\}$
+	$\support_{g} = \{ x \in X \mid g.x \neq x\}$
 \end{center}
 A variable $x$ is \emph{stable} by a permutation $g$ 
-if $x \notin \support(g)$. A clause $\omega$ is \emph{stabilized} by a permutation $g$ if 
-$\omega \cap \support(g) = \emptyset$.
+if $x \notin \support_g$. A clause $\omega$ is \emph{stabilized} by a permutation $g$ if 
+$\omega \cap \support_g = \emptyset$.
 
 
 A set of permutations of a given set $X$ form a group $G$,
@@ -394,13 +394,37 @@ These constraints are only true for the \emph{lex-leader} \cite{crawford1996symm
 \end{figure}
 
 
-Let $LL_g$ denote the lex-leader predicates for a permutation $g \in G_\varphi$ defined as :
+Lex-leader predicates for a permutation $g \in G_\varphi$ is defined as :
 $$LL_g = \forall i : (\forall j < i : x_j = g.x_j) \Rightarrow  x_i \preceq g.x_i$$
 
-In other words, each assignment whose have a variable such that its image under $g$ is smaller according to the ordering relation (depicted in \Cref{def:assignment_ordering}), is pruned by $LL_g$.
-Conjunction of $LL_g$, for all permutation in some $G \subseteq G_{\varphi} $ results a sound 
-but not necessarily \emph{complete} symmetry breaking predicates for $G_{\varphi}$ noted $\psi$.
+In other words, each assignment whose have a variable such that its image under $g$ is smaller according to the ordering relation $\prec$, is pruned by $LL_g$.
+Conjunction of $LL_g$, for all permutation  $g \in G_{\varphi} $ results a sound and complete symmetry breaking predicates also called \emph{full symmetry breaking}. Only lex-leader assignment will be visited 
+per orbit. Hence, finding the lex-leader of an orbit is computationally hard~\cite{Luks2004}. 
+Conjunction of $LL_g$ for some $G \subset G_{\varphi}$ results a symmetry breaking predicates that aims to
+visit at least one assignment per orbit and called is \emph{partial symmetry breaking}.
+In both case, the set of symmetry breaking predicates generated is denoted as $\psi$.
 
+Since  a group may have a exponential number of permutations, all symmetry breaking predicates belongs
+to the group must be generated to ensure full symmetry breaking. These constraints will overload the 
+solver and slow down its core (unit propagation). Hence, slow down overall time computation.
+Conversely, partial symmetry breaking add few constraints and bring often considerable reduction of the
+search space. Generally, the set of generators produced by automorphism tool is chose as subgroup.
+Partial symmetry breaking gives a good trade off between number of generated constraints and reduction of the search space.
+
+
+%
+%To ensure the visiting only the lex leader, all SBPs of all permutations 
+%belongs to the group must be generated.
+%Adding too many SBPs clauses will overload the solver and slow down the unit propagation.
+%
+%When only one assignment per orbit (generally the lex-leader) is visited, this is called  \emph{full symmetry breaking}.
+%Conversely, \emph{partial symmetry breaking} aims to visit at least one assignment per orbit.
+%Only some of the permutations are used to generate SBPS, that are generally  the set of generators 
+%given by the automorphism tool.
+%This approach is more easy to set up and bring considerable reduction of the search spaces.
+
+%in some $G \subseteq G_{\varphi} $ results a sound and complete symmetry breaking predicates
+%but not necessarily \emph{complete} symmetry breaking predicates for $G_{\varphi}$ noted $\psi$.
 
 
 
@@ -438,16 +462,16 @@ but not necessarily \emph{complete} symmetry breaking predicates for $G_{\varphi
 %must have the same value of its symmetric. As such, these constraints encodes a valid 
 %lex leader with respect to this permutation.
 
-Encoding of the constraints
+
+Generation of lex-leader constraints proposed by Crawford et al.~\cite{crawford1996symmetry} is defined as follow:
+$$ LL_g = \forall i : (\forall j < i : x_j = g.x_j) \Rightarrow  \neg x_i \lor g.x_i$$
+
  
+ \Cref{fig:esbp_gen} shows an example of generated clauses for the  permutation $g_3$ of the previous 
+ example and an lexicographic order. Last constraint present in the figure produce tautological clause,
+ effectively variable $x_1$ or $x_4$ are present in both polarity. The constraints of other variables produce 
+ also tautological clauses. 
  
- \Cref{fig:esbp_gen} shows an example of generated constraints for the first permutation of the previous 
- example and an lexicographic order.
- Constraints like ($x_2 = x_3 \Rightarrow x_3 \preceq x_2$), that generates \emph{tautology} clause 
- (i.e have positive and negative value of a literal in the same clause) are always true, and so
- not presents on the figure. Moreover, it will exists another encoding of constraints to the SBPs that
- creates a new variables to encode equality of literals and get a more compact lex-leader encoding.
- \hakan{REF shatter + example compact encoding }
  
  \begin{figure}[!htbp]
  	\input{fig/example-sbp}
@@ -456,16 +480,47 @@ Encoding of the constraints
  \end{figure}
  
  
+ Moreover, the number of clauses generated per constraint increase exponentially with the number of variable present in the permutation.
+  Hence, Aloul et al~\cite{aloul06} propose a more compact representation of  symmetry breaking predicates.
  
-To ensure the visiting only the lex leader, all SBPs of all permutations 
-belongs to the group must be generated.
- Adding too many SBPs clauses will overload the solver and slow down the unit propagation.
-Hence, finding the lex-leader of an orbit is computationally hard~\cite{Luks2004}. 
-When only one assignment per orbit (generally the lex-leader) is visited, this is called  \emph{full symmetry breaking}.
-Conversely, \emph{partial symmetry breaking} aims to visit at least one assignment per orbit.
-Only some of the permutations are used to generate SBPS, that are generally  the set of generators 
-given by the automorphism tool.
-This approach is more easy to set up and bring considerable reduction of the search spaces.
+ Let $g$ a permutation, let $\support_g$ = $\{x_1, \cdots, x_n\}$ the support of the permutation $g$ be ordered 
+ such that $x_i \preceq x_j$ iff $i \leq j$  and let $\{y_0,\cdots, y_{n} \}$ be a set of auxiliary variables
+ disjoint from $\support_g$. These auxiliary variables encode equality of literals in such $y_0$ is set as an unit clause
+ and encode the first equality.
+ Following clauses encode a compact lex-leader for a permutation:
+ 
+
+\begin{center}
+\begin{tabular}{cc|cc}
+	$\neg y_i \lor \neg x_{i-1} \lor \neg x_i \lor g.x_i$ & $1 \leq i \leq n$ & $ \neg y_i \lor \neg x_{i-1} \lor \neg y_{i+1}$ & $1 \leq i \leq n$ \\
+	$\neg y_i \lor  g.x_{i-1} \lor \neg x_i \lor g.x_i$ & $1 \leq i \leq n$ & $ \neg y_i \lor g.x_{i-1} \lor \neg y_{i+1}$ & $1 \leq i \leq n$ \\
+	
+\end{tabular}
+\end{center}
+
+
+
+\Cref{fig:esbp_compact_gen} shows the compact encoding of generated clauses. This form grow linearly with the number of variables.
+Auxiliary variable encodes the equality of two literals allows to achieve this reduction. Three auxiliary variables are introduced
+in this example $x_7, x_8, x_9$ such that $x_7$ encode the equality of $x_1$ and $x_4$, $x_8$ equality of $x_2$ and $x_5$, and $x_9$ equality of $x_3$ and $x_6$.
+
+ \begin{figure}[!htbp]
+	\input{fig/example-compact-sbp}
+	\caption{Example of compact generated SBPs for one permutation}
+	\label{fig:esbp_compact_gen}
+\end{figure}
+
+
+\shatter~\cite{aloul06} is a tool that computes symmetry wit $\saucy$ automorphism tool and generate a new formula with compact lex-leader encoding. Following table shows the number of symmetry breaking predicates clauses and the
+number of auxiliary variables added to the original formula.
+
+
+\hakan{mettre tableauw nombre de SBP generé}
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[height=5cm]{example-image-a}
+	\label{}
+\end{figure}
 
 
 
@@ -480,7 +535,8 @@ Effectively symmetries can be eliminated by the addition
 of only a linear number of symmetry-breaking constraints~\cite{flener2002breaking}. 
 One condition must be satisfied to ensure this linear number of constraints:
 lexicographic order needs to respect the structure of the matrix.
-In practice, automorphism tools gives only the set generators which contains no information on the structure of the group. 
+In practice, automorphism tools gives only the set generators which contains no information on
+the structure of the group. 
 Authors of $\breakid$~\cite{devriendt2016improved}, a static partial symmetry breaking tool,
  publish an algorithm to discover this structure and exploit it.
 
@@ -497,13 +553,6 @@ reiterate the process until the empty set.
 
 An existing tool for partial static symmetry breaking is \shatter~\cite{aloul06}. This is a complete tool
 that use $\saucy$ to detect the symmetries in the formula and use compact lex leader encoding.
-
-\hakan{mettre tableauw nombre de SBP generé}
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[height=5cm]{example-image-a}
-	\label{}
-\end{figure}
 
 
 

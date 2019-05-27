@@ -41,7 +41,12 @@
 		& $ \neg x_1 \lor \neg x_4 \lor x_2 \lor x_5 \lor \neg x_3 \lor x_6$ \\
 		& $ x_1 \lor x_4 \lor \neg x_2 \lor \neg x_5 \lor \neg x_3 \lor x_6$ \\
 		& $ \neg x_1 \lor \neg x_4 \lor \neg x_2 \lor \neg x_5 \lor \neg x_3 \lor x_6$ \\ 
-
+		&\\
+		  $x_1 = x_4 \land x_2 = x_5 \land x_3 = x_6 \Rightarrow x_4 \preceq x_1$ &
+		  $ x_1 \lor \textcolor{blue_1}{x_4} \lor x_2 \lor x_5 \lor  x_3 \lor x_6 \lor \textcolor{blue_1}{\neg x_4} \lor x_1$\\
+		& $\cdots$ \\
+		& $ \textcolor{blue_1}{\neg x_1} \lor \neg x_4 \lor  x_2 \lor x_5 \lor x_3 \lor x_6 \neg x_4 \lor \textcolor{blue_1}{x_1}$ \\ 
+     	& $\cdots$ \\
 	\end{tabular}
 \end{center}
 
