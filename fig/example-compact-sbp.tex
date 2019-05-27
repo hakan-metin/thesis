@@ -1,0 +1,31 @@
+
+
+
+\begin{center}
+	\begin{tabular}{lll}
+		Order &:& $ x_1 \prec x_2 \prec x_3 \prec x_4 \prec x_5 \prec x_6 \enskip \mid \enskip  (\false < \true)$ \\
+		Permutation &:& $g_3 = (x_1 \enskip x_4)(x_2 \enskip x_5)(x_3 \enskip x_6)(\neg x_1 \enskip \neg x_4)(\neg x_2 \enskip \neg x_5)(\neg x_3 \enskip \neg x_6)$
+	\end{tabular}
+	
+	\vspace*{2\baselineskip}
+	
+	\begin{tabular}{ll}
+		Constraints & Generated SBP\\
+		\midrule
+		$x_1 \preceq x_4$ & $ \neg x_1 \lor x_4$ \\
+		& $x_7$ \\
+		&\\
+		$x_1 = x_4 \Rightarrow x_2 \preceq x_5$ &  $ \neg x_7 \lor \neg x_1 \lor \neg x_2 \lor x_5$\\
+		& $ \neg x_7 \lor \neg x_1 \lor x_8$\\
+		& $ \neg x_7 \lor  x_4 \lor \neg x_2 \lor x_5$ \\
+		& $ \neg x_7 \lor x_4 \lor x_8$\\
+		
+		&\\
+		$x_1 = x_4 \land x_2 = x_5 \Rightarrow x_3 \preceq x_6$ 
+		& $\neg x_8 \lor \neg x_2 \lor \neg x_3 \lor x_6$\\
+		& $\neg x_8 \lor \neg x_2 \lor x_9$\\
+		& $\neg x_8 \lor x_5 \lor \neg x_3 \lor x_6$\\
+		& $\neg x_8 \lor x_5 \lor \neg x_9$\\
+
+	\end{tabular}
+\end{center}
