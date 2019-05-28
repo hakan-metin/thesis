@@ -543,36 +543,48 @@ One condition must be satisfied to ensure this linear number of constraints:
 lexicographic order needs to respect the structure of the matrix.
 In practice, automorphism tools gives only the set generators which contains no information on
 the structure of the group. 
-Authors of $\breakid$ develop an algorithm to detect this specific structure and exploit it.
-
-
-Graphical representation of previous example has this specificity~\ref{fig:orbit}. Two rows and three columns
-are presents. Given the lexicographic order $\{x_1, x_2, x_3, x_4, x_5, x_6\} \mid \false < \true$,
-
-$\{\neg x_1, x_2\}$\\
-$\{\neg x_1, x_4\}$\\
-$\{\neg x_2, x_3\}$\\
-
-
-The previous presented example has this specificity.
+Authors of $\breakid$~\cite{devriendt2016improved} develop an algorithm to detect this specific 
+structure and exploit it.
 
 
 
+\subsubsection{Binary leax-leader constraints}
+
+$\breakid$ has another approach that aims to post many lex-leader constraints.
+The first constraint of symmetry breaking predicates must produce a binary clause.
+Building many binary clauses is possible without enumerating the whole symmetry group. 
+It suffices to compute the orbit of the smallest variable according to the ordering relation. As the orbit can be seen as a strong connected component, it must exist a permutation that permutes the smallest variable with all other variables in the same orbit.
+Then, as many binary clauses as variables (without the smallest variable) in the orbit can be added to the formula.
 
 
 
-Moreover, \breakid have another optimization that aims to post many binary symmetry breaking constraints.
-By definition, the first constraint of a permutation must be a binary clauses.
-Moreover, the smallest variable according to the $\prec$ belongs to an orbit.
-As its an SCC it must exists a permutation that
-swap the smallest variable with all other in the same orbit. This will generate as many binary clauses as
-variables in the orbit. Then, all permutations that have the smallest variable are discarded and the algorithm
-reiterate the process until the empty set.
+ This will generate as many binary clauses as variables in the orbit.
 
 
+Properties of
 
-An existing tool for partial static symmetry breaking is \shatter~\cite{aloul06}. This is a complete tool
-that use $\saucy$ to detect the symmetries in the formula and use compact lex leader encoding.
+The first constraint of each permutation must be a binary clause.
+Moreover, the smallest variable according to the ordering relation $\prec$ belongs to an orbit.
+As its an strong connected component it must exists a permutation that
+permutes the smallest variable with all other in the same orbit. This will generate as many binary clauses as variables in the orbit.
+Then, we compute a subgroup such that any permutations that do not stabilize smallest variable in the permutation (i.e. have the smallest variable in its support) are discarded.
+The same algorithm is iterated with the computed subgroup. The procedure ends when 
+trivial group is reached.\hakan{stabilizer chain}
+
+
+\Cref{fig:binary_sbp} shows application of this approach. First all permutations are considered. The smallest variable in the orbit is $x_1$ and all variables are in the
+orbit. According to the ordering relation, five lex-leader constraints are generated.
+Note that, when the smallest variable have the greatest value (\true in this case),
+ all variables in the orbits must have the same value.
+At the second step, $g_2$ and $g_3$ are permutations that not stabilize $x_1$ and so are discarded. It remains only one permutation $g_1$. As $x_2$ is the smallest variable 
+the constraint $\neg x_2 \lor x_3$ is the only symmetry breaking predicates that is generated.
+
+ \begin{figure}[!htbp]
+	\input{fig/binary-sbp}
+	\caption{Caption}
+	\label{fig:binary_sbp}
+\end{figure}
+
 
 
 
