@@ -34,7 +34,7 @@ To prove this property, assume $\langle G, * \rangle$ a group with two identity 
 then $ e = e * f = f$.
 ii) uniqueness of the inverse element. To prove this property, suppose that an element $x_1$ has two inverses,
 denoted $b$ and $c$ in group $\langle G, * \rangle$, then\\
-$\begin{array}{lcll}					
+ $\begin{array}{lcll}					
 b & = & b * e & \\
 & = & b * (a * c) & c \text{ is an inverse of } a, \text{so } e = a * c\\
 & = & (b * a) * c &   \text{\emph{associativity} rule}\\
@@ -554,30 +554,22 @@ $\breakid$ has another approach that aims to post many lex-leader constraints.
 The first constraint of symmetry breaking predicates must produce a binary clause.
 Building many binary clauses is possible without enumerating the whole symmetry group. 
 It suffices to compute the orbit of the smallest variable according to the ordering relation. As the orbit can be seen as a strong connected component, it must exist a permutation that permutes the smallest variable with all other variables in the same orbit.
-Then, as many binary clauses as variables (without the smallest variable) in the orbit can be added to the formula.
+Then, as many binary clauses as variables (without the smallest variable) in the orbit can be added to the formula. Constructing a sequence of subgroups that stabilize the smallest variable (i.e. not have the smallest variable in its support) results to new binary clauses.
+This sequence ends when trivial subgroup is reached and is called a  \emph{stabilizer chain}.
 
 
+\Cref{fig:binary_sbp} shows application of the generation of binary clauses.
+In the example, considered group has three permutations and its graphical representation
+is show. Given the lexicographic order, the smallest variable is $x_1$ and 
+all other variables are in its orbits. According to the ordering relation, five 
+symmetry breaking predicates are generated with the formula $\neg x_1 \lor g.x_1$.
+Then, subgroup that stabilize $x_1$ is computed and it remains only one permutation $g_2$.
+As it smallest variable is $x_2$, the constraint $\neg x_2 \lor x_3$ is generated.
+Stabilizer chain leads to trivial group and no more binary clauses are generated.
 
- This will generate as many binary clauses as variables in the orbit.
-
-
-Properties of
-
-The first constraint of each permutation must be a binary clause.
-Moreover, the smallest variable according to the ordering relation $\prec$ belongs to an orbit.
-As its an strong connected component it must exists a permutation that
-permutes the smallest variable with all other in the same orbit. This will generate as many binary clauses as variables in the orbit.
-Then, we compute a subgroup such that any permutations that do not stabilize smallest variable in the permutation (i.e. have the smallest variable in its support) are discarded.
-The same algorithm is iterated with the computed subgroup. The procedure ends when 
-trivial group is reached.\hakan{stabilizer chain}
-
-
-\Cref{fig:binary_sbp} shows application of this approach. First all permutations are considered. The smallest variable in the orbit is $x_1$ and all variables are in the
-orbit. According to the ordering relation, five lex-leader constraints are generated.
-Note that, when the smallest variable have the greatest value (\true in this case),
- all variables in the orbits must have the same value.
-At the second step, $g_2$ and $g_3$ are permutations that not stabilize $x_1$ and so are discarded. It remains only one permutation $g_1$. As $x_2$ is the smallest variable 
-the constraint $\neg x_2 \lor x_3$ is the only symmetry breaking predicates that is generated.
+In total, six binary clauses is generated without adding any auxiliary variables.
+Moreover, a property can be observed, when the smallest variable have the greatest value 
+(\true in this case), all variables in the orbits must have the same value.
 
  \begin{figure}[!htbp]
 	\input{fig/binary-sbp}
@@ -586,8 +578,14 @@ the constraint $\neg x_2 \lor x_3$ is the only symmetry breaking predicates that
 \end{figure}
 
 
+The size of the stabilizer chain is heavily dependent of the chose lexicographic order.
+More stabilizer discard permutations and more trivial subgroup is reached quickly and less 
+binary clauses are generated. An incremental order is proposed to optimize number of generates binary clauses. First, orbit of all variables is computed and the variable with fewest number of occurrence is chose among the biggest orbit. The idea is that biggest orbit produce more
+clauses and the variable appearing in few permutations reduce the number of stabilized permutation. This procedure is applied until trivial group is reached. At the end, remaining variables are added to the order.
 
 
+
+\subsection{Evaluation of performance}
 
 
 
@@ -605,39 +603,50 @@ The order choose a variable which maximize the number of stabilized permutations
 
 
 
-The exploitation of symmetries statically is called \emph{static symmetry breaking}.
-It acts like a preprocessor which add \emph{symmetry breaking predicates} (SBPs) at the 
-original formula and solve the augmented problem. 
-This approach gives good performances in practice.
+%The exploitation of symmetries statically is called \emph{static symmetry breaking}.
+%It acts like a preprocessor which add \emph{symmetry breaking predicates} (SBPs) at the 
+%original formula and solve the augmented problem. 
+%This approach gives good performances in practice.
+%
+%\hakan{Generation des clauses de SBPs}\\
+%\hakan{Parler des groupes speciaux  (totaux) }\\
+%\hakan{Generation des clause binaires breakid lie aux orbits}\\
+%\hakan{Parler de BreakID all in one tout au dessus}\\
+%
+%\hakan{Put a complete exemple}\\
+%
+%\hakan{Mettre des courbes}\\
+%\hakan{Tableau sur le nombre de sbp genere}\\
+%
+%\hakan{ Shatter, BreakID}
+%
+%\hakan{Conclu static}
 
-\hakan{Generation des clauses de SBPs}\\
-\hakan{Parler des groupes speciaux  (totaux) }\\
-\hakan{Generation des clause binaires breakid lie aux orbits}\\
-\hakan{Parler de BreakID all in one tout au dessus}\\
 
-\hakan{Put a complete exemple}\\
 
-\hakan{Mettre des courbes}\\
-\hakan{Tableau sur le nombre de sbp genere}\\
 
-\hakan{ Shatter, BreakID}
+\subsubsection{Conclusion}
 
-\hakan{Conclu static}
-
-In the general case,
-the size of the \textit{sbp} can be 
-exponential in the number of variables of
-the problem so that they cannot be totally computed. The underlying SAT solver can 
- Even in more favorable
-situations, the size of the generated \textit{sbp} is often too large to be
-effectively handled by a SAT solver~\cite{Luks2004}. On the other hand, if
-only a subset of the symmetries is considered then the resulting search pruning
-will not be that interesting and its effectiveness depends heavily on the
+Static symmetry breaking acts as a preprocessor that augment the initial formula with
+symmetry breaking predicates. These constraints avoid exploration of symmetric search space.
+In the general case, the number of these clauses are often too large to be
+effectively handled by a SAT solver~\cite{Luks2004}. 
+On the other hand, if only a subset of the symmetries is considered then the resulting search pruning
+will not be perfect and its effectiveness depends heavily on the
 heuristically chosen symmetries \cite{biere2009handbook}.
+\hakan{Parler des optim de BReakID}
+Despite the good reduction of the search space, some formula still intractable for a 
+state of the art SAT solver.
+
+
+%\begin{figure}[!htbp]
+%	\input{fig/big-picture-static}
+%	\caption{Caption}
+%	\label{fig:big_picture_static}
+%\end{figure}
 
 
 
-\hakan{Drawbacks de la methode pourquoi on fait du dynamique}
 
 \subsection{Dynamic symmetry breaking}
 
