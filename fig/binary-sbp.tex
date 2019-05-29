@@ -1,0 +1,105 @@
+
+\begin{center}
+\begin{tabular}{lll}
+	Order &:& $ x_1 \prec x_2 \prec x_3 \prec x_4 \prec x_5 \prec x_6 \enskip \mid \enskip  (\false < \true)$ \\
+\end{tabular}
+\end{center}
+\vspace*{1\baselineskip}
+	
+\begin{minipage}[c]{.635\textwidth}
+	\footnotesize
+	$\textcolor{green_1}{g_1 = (x_2 \enskip x_3)(x_5 \enskip x_6)(\neg x_2 \enskip \neg x_3)(\neg x_5 \enskip \neg x_6)}$\\
+	$\textcolor{blue_1}{g_2 = (x_1 \enskip x_2)(x_4 \enskip x_5)(\neg x_1 \enskip \neg x_2)(\neg x_4 \enskip \neg x_5)}$\\
+	$\textcolor{red_1}{g_3 = (x_1 \enskip x_4)(x_2 \enskip x_5)(x_3 \enskip x_6)(\neg x_1 \enskip \neg x_4)(\neg x_2 \enskip \neg x_5)(\neg x_3 \enskip \neg x_6)}$
+
+	\vspace*{2\baselineskip}
+	
+\begin{tikzpicture}[level/.style={sibling distance=60mm/#1},every node/.style={scale=0.6}, scale=0.6]
+	\tikzstyle{orbit-node}=[draw,circle,minimum size=35pt,inner sep=0pt]
+	\tikzstyle{g1}=[->, draw, color=blue_1, line width=1pt]
+	\tikzstyle{g2}=[->, draw, color=green_1, line width=1pt]
+	\tikzstyle{g3}=[->, draw, color=red_1, line width=1pt]
+	
+	\tikzstyle{g}=[->, draw, color=black, line width=1pt]
+		
+	\node[orbit-node, fill=orange!30] (1) {$x_1$};
+	\node[orbit-node] (2) at ($(1) + (5, 0)$) {$x_2$};
+	\node[orbit-node] (3) at ($(2) + (5, 0)$) {$x_3$};
+	\node[orbit-node] (4) at ($(1) + (0, -4)$) {$x_4$};
+	\node[orbit-node] (5) at ($(1) + (5, -4)$) {$x_5$};
+	\node[orbit-node] (6) at ($(2) + (5, -4)$) {$x_6$};
+	
+	% g1
+	\draw[g1] (1) to [bend right=10] (2);
+	\draw[g1] (2) to [bend right=10] (1);
+	
+	\draw[g1] (4) to [bend right=10] (5);
+	\draw[g1] (5) to [bend right=10] (4);
+	
+	
+	%g2
+	
+	\draw[g2] (2) to [bend right=10] (3);
+	\draw[g2] (3) to [bend right=10] (2);
+	
+	\draw[g2] (5) to [bend right=10] (6);
+	\draw[g2] (6) to [bend right=10] (5);
+	
+	% g3
+	\draw[g3] (1) to [bend right=10] (4);
+	\draw[g3] (4) to [bend right=10] (1);
+	
+	\draw[g3] (2) to [bend right=10] (5);
+	\draw[g3] (5) to [bend right=10] (2);
+	
+	\draw[g3] (3) to [bend right=10] (6);
+	\draw[g3] (6) to [bend right=10] (3);
+	
+	\draw[g] (1) to [bend left=25] (3);
+	\draw[g] (1) to [] (5);
+	\draw[g] (1) to [bend left=0] (6);
+\end{tikzpicture}
+\end{minipage}
+\begin{minipage}[c]{.635\textwidth}
+	\footnotesize
+	$\textcolor{green_1}{g_1 = (x_2 \enskip x_3)(x_5 \enskip x_6)(\neg x_2 \enskip \neg x_3)(\neg x_5 \enskip \neg x_6)}$\\
+	
+	\vspace*{4.5\baselineskip}
+	
+	\begin{tikzpicture}[level/.style={sibling distance=60mm/#1},every node/.style={scale=0.6}, scale=0.6]
+	\tikzstyle{orbit-node}=[draw,circle,minimum size=35pt,inner sep=0pt]
+	\tikzstyle{g1}=[->, draw, color=blue_1, line width=1pt]
+	\tikzstyle{g2}=[->, draw, color=green_1, line width=1pt]
+	\tikzstyle{g3}=[->, draw, color=red_1, line width=1pt]
+	
+	\tikzstyle{g}=[->, draw, color=black, line width=1pt]
+	
+	\node[orbit-node,fill=orange!30] (2) {$x_2$};
+	\node[orbit-node] (3) at ($(1) + (5, 0)$) {$x_3$};
+
+	\node[orbit-node] (5) at ($(1) + (0, -4)$) {$x_5$};
+	\node[orbit-node] (6) at ($(1) + (5, -4)$) {$x_6$};
+
+	\draw[g2] (2) to [bend right=10] (3);
+	\draw[g2] (3) to [bend right=10] (2);
+	
+	\draw[g2] (5) to [bend right=10] (6);
+	\draw[g2] (6) to [bend right=10] (5);
+	
+	\end{tikzpicture}
+\end{minipage}
+
+\vspace*{1\baselineskip}
+
+\begin{minipage}[l]{.58\textwidth}
+	\begin{itemize}
+		\item[] $\omega_{1} = \{\neg x_1, x_2\}$\hspace*{2em} $\omega_{4} = \{\neg x_1, x_5\}$
+		\item[] $\omega_{2} = \{\neg x_1, x_3\}$\hspace*{2em} $\omega_{5} = \{\neg x_1, x_6\}$
+		\item[] $\omega_{3} = \{\neg x_1, x_4\}$
+	\end{itemize}
+\end{minipage}
+\begin{minipage}[l]{.635\textwidth}
+	\begin{itemize}
+		\item[] $\omega_{6} = \{\neg x_2, x_3\}$
+	\end{itemize}
+\end{minipage}
