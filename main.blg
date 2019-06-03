@@ -1,3 +1,48 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: main.aux
+This is BibTeX, Version 0.99d (TeX Live 2019/dev/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: main.aux
 The style file: abbrv.bst
 Database file #1: main.bib
+Warning--I didn't find a database entry for "handbook_09"
+You've used 30 entries,
+            2118 wiz_defined-function locations,
+            670 strings with 8806 characters,
+and the built_in function-call counts, 13241 in all, are:
+= -- 1381
+> -- 545
+< -- 24
++ -- 219
+- -- 182
+* -- 853
+:= -- 1984
+add.period$ -- 106
+call.type$ -- 30
+change.case$ -- 177
+chr.to.int$ -- 0
+cite$ -- 30
+duplicate$ -- 571
+empty$ -- 1060
+format.name$ -- 182
+if$ -- 2967
+int.to.chr$ -- 0
+int.to.str$ -- 30
+missing$ -- 31
+newline$ -- 153
+num.names$ -- 62
+pop$ -- 229
+preamble$ -- 1
+purify$ -- 148
+quote$ -- 0
+skip$ -- 446
+stack$ -- 0
+substring$ -- 941
+swap$ -- 232
+text.length$ -- 24
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 116
+warning$ -- 0
+while$ -- 136
+width$ -- 32
+write$ -- 349
+(There was 1 warning)

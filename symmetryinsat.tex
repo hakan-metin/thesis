@@ -1,4 +1,4 @@
-﻿\chapter{Symmetry and SAT}\label{chap:symmetryinsat}
+\chapter{Symmetry and SAT}\label{chap:symmetryinsat}
 
 Despite SAT solving is an NP-complete algorithm, it works well on many real industrial problems. This is 
 principally due to capacity to cut off search space with learning clause. Another way to cut off 
@@ -502,7 +502,7 @@ clauses and the variable appearing in few permutations reduce the number of stab
 
 \subsection{Evaluation of performance}
 
-\hakan{Faire une section pour Ã§a}
+\hakan{Faire une section pour}
 An extremely important point is the chosen lexicographic order.
 Variable ordering may impact the number of generated constraints and so the performance of
 the underlying SAT solver. Different orders are studied in the literature. 
@@ -542,9 +542,14 @@ effectively handled by a SAT solver~\cite{Luks2004}.
 On the other hand, if only a subset of the symmetries is considered then the resulting search pruning
 will not be perfect and its effectiveness depends heavily on the
 heuristically chosen symmetries \cite{biere2009handbook}.
-\hakan{Parler des optim de BReakID}
-Despite the good reduction of the search space, some formula still intractable for a 
-state-of-the-art SAT solver.
+Some recent works brings some optimizations and solves more instances.
+Despite these optimizations and the good reduction of the search space with symmetries,
+ some formula still intractable for a state-of-the-art SAT solver.
+ 
+Static symmetry breaking acts as a preprocessor, a new formula is produced and solver takes it as input.
+No modification of the existing solver is required.
+Another disadvantage is that the solver is influenced by SBPs and explore the search space with a different 
+manner and can affect performance negatively.
 
 %\begin{figure}[!htbp]
 % \input{fig/big-picture-static}
@@ -555,17 +560,22 @@ state-of-the-art SAT solver.
 
 \subsection{Dynamic symmetry breaking}
 
-Another disadvantage is that the solver is influenced by SBPs and explore the search space with a different 
-manner and can affect performance negatively \hakan{FIND A REF}
-In the literature, different approaches of dynamic symmetry breaking is used to reduce the search space
-of the sat solver in different ways. Some of them \textit{inject} constraints to allow only one representative assignment of each orbit like the static approach and others accelerate the propagation of variable using symmetrical properties. In this section, we present different approach to use symmetrical properties of a problem 
-dynamically.
+
+Dynamic symmetry breaking approaches aims to exploits symmetries during the solving by altering search space dynamically.
+In the literature, different approaches of dynamic symmetry breaking are used to reduce the search space.
+This section presents some of them.
+
+%
+%of the sat solver in different ways.  In this section, we present different approach to use symmetrical properties of a problem dynamically.
+%
+
 
 \subsubsection{SymChaff}
-One of the first dynamic symmetry breaking approaches is \emph{SymChaff}~\cite{sabharwal2005symchaff}
-and is applicable only on special groups where all couple of variables are symmetric.
+One of the first dy namic symmetry breaking approaches is \emph{SymChaff}~\cite{sabharwal2005symchaff}
+and is applicable only on special groups where all couple of variables are symmetric \cref{sec:matrix-sbp}.
 The idea of this approach is to treat each orbit like a \emph{symbolic variable}, i.e. instead of considering a single
-variable, all symmetric variables are considered at the same time and so backtracked at the same time.
+variable (branching), all symmetric variables are considered at the same time and so backtracked at the same time 
+(k-branching).
 In this special case of groups, the number of orbits is easy to compute but the order in which they would be
 applied has a tremendous impact of the solver performance.
 In the general case, when we take any groups computing the number of orbits will be very difficult and this approach
@@ -579,7 +589,7 @@ Indeed, problem that presents symmetries makes possible to deduce some value
 for the variables that would be guessed if symmetry properties were ignored.
 These deductions will reduce the overall tree traversal depth and hence eventually accelerate the solving process.
 To explain this approach, some definitions are required.
-\hakan{Mettre logical consequence quand on explique CDCL + Expliquer CDCL plus en detail avec les learnt et les raisons}
+
 \begin{definition}[Logical consequence]
  \label{def:logical_consequence}
  A formula $\phi$ is a logical consequence of a formula $\varphi$ denoted by $\varphi \models \phi$ if for all assignment
@@ -610,8 +620,8 @@ The previous proposition states that an active symmetry $g$ for a partial assign
 the formula $\varphi \cup \alpha$. So when a literal $l$ is propagated, and a symmetry $g$ is active for a
 partial assignment $\alpha$, the solver can also propagate $g.l$. 
 Moreover, the group theory allows to compose permutations with the composition operator~$\circ$ and the composition of two active symmetries is also an active symmetry so the solver can also propagate. $g^2.l, g^3.l, ... $
-\hakan{Peut etre expliquer les sym conflicts}
-The authors of symmetry propagation improve the active symmetries, introducing \emph{weakly active} symmetries.
+
+Devriendt et al improves the active symmetries in the SAT context, introducing \emph{weakly active} symmetries.
 \begin{definition}[Weakly active symmetry]
  \label{def:weakly_active_symmetry}
  Let $\varphi$ a formula and ($\delta, \alpha, \gamma$) a state of a CDCL solver in which $\delta$ is the set of decisions
@@ -625,7 +635,8 @@ This definition leads to the following proposition:
  $g.\delta \subseteq \alpha $ and $\varphi \cup \delta \models \varphi \cup \alpha$, then $g$ 
  also is a symmetry of $\varphi \cup \alpha $.
 \end{proposition}
-\hakan{Proof}
+
+
 In other words, we can detect with a minimal effort, the symmetries of $\varphi
 \cup \alpha$ by keeping track of the set of variables $\delta$, which are 
 in a state-of-the-art complete SAT solving algorithms, the set of decision variables.
@@ -633,51 +644,55 @@ Obviously, a weakly active symmetry can also propagate the symmetrical literals 
 Moreover, weakly active symmetries allow more propagation and so is more efficient.
 Note that if a weakly active symmetry wants to propagate a symmetrical literal which are already affected to the 
 opposite value, this leads to a symmetry conflict and the solver backtrack to propagate the symmetrical value correctly.
-\hakan{Mettre des tableaux, courbes etc ...}
+
+\hakan{Mettre des tableaux, courbes etc ...}\\
 \hakan{Courbe VS static an no sbp}\\
-\hakan{Conclu SP, depend on the solver choice}
+\hakan{Conclu SP, depend on the solver choice}\\
+
 Symmetry propagation gives good performances on many symmetric instances.
-The overall performance of the symmetry propagation is intrinsically related to the decision heuristics of
-the underlying SAT solv1er.
-One optimization of symmetry propagation is the following proposition, as seen in Section
-\hakan{DETERMINE SECTION SAT LEARNING} each propagated clause has a reason which is an assertive clause.
-If the symmetrical clause is also an assertive one, this clause can be added in the formula without any requirements
-(even if the permutation is not weakly active). The added symmetrical clause will also participate to unit propagation and propagate the symmetrical literal.
+The overall performance of the symmetry propagation is intrinsically related to the decision heuristics of the underlying SAT solver.
+
+Note that, this approach don't discard any assignments like in the static approach where 
+not lex-leader assignment were eliminated by symmetry breaking predicates.
+
+%One optimization of symmetry propagation is the following proposition, as seen in 
+% each propagated clause has a reason which is an assertive clause.
+%If the symmetrical clause is also an assertive one, this clause can be added in the formula without any requirements
+%(even if the permutation is not weakly active). The added symmetrical clause will also participate to unit propagation and propagate the symmetrical literal.
 
 \subsubsection{Symmetry Explanation Learning}
 
 Another approach to exploit symmetry without removing any satisfiable assignment of the problem
-is \emph{Symmetry Explanation Learning}~\cite{devriendt2017symmetric}. This approach aim to learn useful 
-symmetrical variant of clauses only where they are used by the solver. A useful clause is a clause that participates
-to the unit propagation or conflict. 
-A naive approach to ensure that is to compute the symmetrical clause of 
-each learned clause and check if it is useful. In addition, due to size of a group a clause can have many 
-symmetrical ones. The naive approach will have an important overhead and will be intractable on reel problems.
-SEL have different optimization based on the following facts. First,
-On the unit propagation, propagated literals has a reason clause which is assertive, and in the general case,
- symmetries permute only few literals of the clause so symmetrical clauses can also be assertive and so useful.
-Secondly, avoiding to add identical clauses to the problem, symmetrical clause ares stored in different learning scheme and used when classical unit propagation is finished. This ensures that no duplicate clause is added in the problem.
-  
- 
+is \emph{Symmetry Explanation Learning}~\cite{devriendt2017symmetric} (SEL). 
+Symmetries of a formula leaves this one invariant. Moreover all learned clauses are logical consequence of the problem, symmetric of these clauses are also valid.
+The idea of this approach is to learn useful symmetrical variant of learned clauses.
+ A clause is said useful if it participates to the unit propagation or conflict analysis.
+Computing all symmetrical learn clauses will create a huge overhead and will be intractable 
+on real problems.
+% As symmetries leave the formula, the symmetrical clauses can be already
+%in managed clause by the solver and make unit propagation heavier.
+
+Symmetry Explanation Learning uses the following fact:
+on the unit propagation, propagated literals has a reason clause which is assertive.
+Generally , symmetries permute only few literals in a clause and so symmetrical clauses may
+also be assertive and participate to unit propagation.
+ These clauses are stored in different learning scheme and 
+treated separately. Solver promotes these clause  uniquely where they are effectively useful
+at the end of unit propagation. As unit propagation is done until fix point, it
+ensures that no duplicate clause is added in the problem.
+To limit memory impact, symmetrical clauses are removed when the propagated literal 
+responsible of the computation is unaffected.
+
+SEL provides some interesting properties. First, the authors proves that its propagation are a superset of the one provided by symmetry propagation. It also no need to track any status of 
+symmetries as opposed to symmetry propagation. Like symmetry propagation no satisfying assignment are discarded.
+As disadvantage, SEL may flood the solver if the used set of symmetries is big and take time 
+to compute symmetrical clauses. 
 
 
-%\begin{proposition}[Satisfiability preservation]
-% \label{prop:equi_satisfiability}
-%  Let $\varphi$ a CNF problem and $\psi$ the computed symmetry breaking predicates.
-%  Solve $\varphi \cup \psi$ is equi-satisfiable to solve $\varphi$.
-%\end{proposition}
-%
-%\begin{proof}
-% On the first case, if the initial formula $\varphi$ is \unsat,
-% then the augmented problem $\varphi \cup \psi$ is trivially \unsat.
-% On the second case, if $\varphi$ is \sat then $\varphi \cup \psi$ is also \sat because 
-% $\psi$ forbids only non lex-leader assignment so the formula still be \sat.
-%\end{proof}
 
-%% Local Variables:
-%% TeX-master: "main.tex"
-%% ispell-dictionary: "en_US"
-%% mode: latex
+\hakan{Perf of differents approaches}
+
+%\begin{proposition}[Satisfiability preservation] 
 %% mode: flyspell
 %% coding: utf-8
 %% End:

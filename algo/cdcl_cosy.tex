@@ -1,0 +1,62 @@
+\begin{algorithm}[!htbp]
+	\SetKwProg{Fn}{function}{}{}
+	\SetKwData{C}{SymController}
+	\SetKwFunction{CDCL}{CDCLSym}
+	\SetKwFunction{unitPropagation}{unitPropagation}
+	\SetKwFunction{analyzeConflict}{analyzeConflict}
+	\SetKwFunction{addLearntClause}{addLearntClause}
+	\SetKwFunction{assignNewLiteral}{assignDecisionLiteral}
+	\SetKwFunction{backjumpPolicy}{backjumpAndRestartPolicies}
+	\SetKwFunction{isNotMinimal}{isNotLexLeader}
+	\SetKwFunction{SBP}{generateEsbp}
+	\SetKwFunction{notifyAssigned}{updateAssign}
+	\SetKwFunction{notifyCancelled}{updateCancel}
+	\SetKwFunction{symmetryController}{symmetryController}
+
+	\DontPrintSemicolon
+	
+	\Fn{\CDCL{$\varphi$: CNF formula, {\color{red}\C: symmetry controller}}
+		\textbf{returns} $\true$ if $\varphi$ is \sat and $\false$ otherwise}
+	{
+		$dl \gets 0$ \tcp*{Current decision level}
+		$\alpha \gets \emptyset$\;
+		\While {not all variables are assigned} {
+			$isConflict \gets$ \unitPropagation{}\;
+			{
+				\color{red} 
+				\C.\notifyAssigned{$\alpha$}\;\label{algo:cdcl_sym:notify}
+				$isReduced \gets$ \C.\isNotMinimal{$\alpha$}\;\label{algo:cdcl_sym:not_minimal}
+			}
+			
+			\If{$isConflict \, {\color{red}||\, isReduced}$} {
+				\If{dl == 0}
+				{
+					\Return \false
+					\tcp*{$\varphi$ is $\unsat$}
+				}
+				\If{\color{red}$isConflict$}
+				{
+					$\omega \gets$ \analyzeConflict{}\;
+				}
+				\Else {
+					{
+						\color{red}$\omega \gets$ \C.\SBP{$\alpha$}\;\label{algo:cdcl_sym:gen_esbp}
+					}
+				}
+			$\varphi \gets \varphi \cup \{\omega$\} \;
+				$dl \gets$ \backjumpPolicy{}\;
+				{\color{red}\C.\notifyCancelled{$\alpha$}\;} \label{algo:cdcl_sym:cancel}
+			}
+			\Else{
+				$\alpha \gets \alpha\, \cup $ \assignNewLiteral{}\; 
+			$dl \gets dl+1$\;
+			}
+		}
+		\Return \true
+		\tcp*{$\varphi$ is $\sat$}
+		
+	}
+	\caption{the CDCLSym SAT Solving Algorithm.}
+	\label{algorithm:cdcl_cosy}
+\end{algorithm}
+

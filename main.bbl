@@ -70,6 +70,12 @@ N.~E{\'e}n and A.~Biere.
 \newblock In {\em International conference on theory and applications of
   satisfiability testing}, pages 61--75. Springer, 2005.
 
+\bibitem{een2003extensible}
+N.~E{\'e}n and N.~S{\"o}rensson.
+\newblock An extensible sat-solver.
+\newblock In {\em International conference on theory and applications of
+  satisfiability testing}, pages 502--518. Springer, 2003.
+
 \bibitem{flener2002breaking}
 P.~Flener, A.~M. Frisch, B.~Hnich, Z.~Kiziltan, I.~Miguel, J.~Pearson, and
   T.~Walsh.
@@ -121,6 +127,12 @@ J.~H. Liang, V.~Ganesh, P.~Poupart, and K.~Czarnecki.
 \newblock Learning rate based branching heuristic for sat solvers.
 \newblock In {\em International Conference on Theory and Applications of
   Satisfiability Testing}, pages 123--140. Springer, 2016.
+
+\bibitem{luks.04.amai}
+E.~Luks and A.~Roy.
+\newblock The complexity of symmetry-breaking formulas.
+\newblock {\em Annals of Mathematics and Artificial Intelligence},
+  41(1):19--45, 2004.
 
 \bibitem{Luks2004}
 E.~M. Luks and A.~Roy.
