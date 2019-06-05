@@ -1,9 +1,12 @@
 \chapter{Symmetry and SAT}\label{chap:symmetryinsat}
 
 Despite SAT solving is an NP-complete algorithm, it works well on many real industrial problems. This is 
-principally due to capacity to cut off search space with learning clause. Another way to cut off 
-search space is the exploitation of symmetry. Some instances exhibit symmetries and not taking them into account 
-forces solvers to needlessly explore isomorphic search space.  \hakan{symmetry leaves objects invariant}
+principally due to capacity to cut off search space with learning clause. Another way to cut off search space is the exploitation of symmetry.
+At its most basics, symmetry is a transformation of an object that leaves it unchanged. Some instances exhibit symmetries and not taking them into account 
+forces solvers to needlessly explore isomorphic search space.  
+
+
+In this chapter, we 
 
 
 \section{Group basics}
@@ -21,12 +24,13 @@ operation such as the following axioms are satisfied:
  $a * a^{-1} = a^{-1} * a = e$
 \end{itemize}
 Note that \emph{commutativity} is not required i.e $\ a * b = b * a$, for $a, b \in G$.
-The group is \emph{abelian} if it satisfies the commutativity rule.
+A group is \emph{abelian} if it satisfies the commutativity rule.
 Moreover, the last definition leads to important properties which are: i) uniqueness of the identity element. 
 To prove this property, assume $\langle G, * \rangle$ a group with two identity elements $e$ and $f$ 
 then $ e = e * f = f$.
 ii) uniqueness of the inverse element. To prove this property, suppose that an element $x_1$ has two inverses,
 denoted $b$ and $c$ in groups $\langle G, * \rangle$, then\\
+
  $\begin{array}{lcll}     
 b & = & b * e & \\
 & = & b * (a * c) & c \text{ is an inverse of } a, \text{so } e = a * c\\
@@ -34,6 +38,7 @@ b & = & b * e & \\
 & = & e * c       & b \text{ is an inverse of } a, \text{so } e = a * b\\
 & = & c           &   \text{\emph{identity} rule}
 \end{array}$
+
 The structure $\langle G, * \rangle$ is denoted as G when clear from context that G is a group
 with a binary operation. In this thesis, we are interested only with the \emph{finite} groups i.e
 with a finite number of elements.
@@ -205,8 +210,8 @@ $m$ clauses over $n$ variables, the graph is constructed as follows~\cite{biere2
 
 \Cref{fig:graph_no_opt} shows the graph representation of a CNF. This problem has 6 variables and 11
 clauses. So, the graph will have  12  + 11 = 33 vertexes where 12 represents literal vertexes (circle in the figure ) 
-and 11 represents the number of clause vertexes (square in the figure). The graph will also have 6 + 24 = 30 edges, 6 for boolean consistency 
-(\hakan{XXX} color in the figure) and 24 edges that rely clause vertexes to the literals.
+and 11 represents the number of clause vertexes (square in the figure). The graph will also have 6 + 24 = 30 edges, 6 for Boolean consistency 
+(red color in the figure) and 24 edges that rely clause vertexes to the literals.
 
 % and  24 + 36 = 60 
 %
@@ -225,9 +230,10 @@ and 11 represents the number of clause vertexes (square in the figure). The grap
 
 An optimization of this graph is possible with the usage of binary clauses i.e. a clause with only two literals.
 The clause node can be omitted and we connect the two literals. As we cannot distinguish between the optimized edge 
-and boolean consistency edges, we must check if the produced permutations are spurious. 
+and Boolean consistency edges, we must check if the produced permutations are spurious. 
 To do so, as we ensure the permutation commutes with the negation it suffices to check:
-$\forall x \in \support(g), g.\neg x = \neg g.x$.
+$$\forall x \in \support(g), g.\neg x = \neg g.x$$
+
 Roughly speaking, we check if the image of the negation of $x$ is equals to the negation of the image of $x$,
 for each element $x$ in the support of the permutation.
 This optimization allows to compute symmetries of the problem more efficiently.
@@ -430,6 +436,7 @@ $$ LL_g = \forall i : (\forall j < i : x_j = g.x_j) \Rightarrow  \neg x_i \lor g
 \Cref{fig:esbp_compact_gen} shows the compact encoding of generated clauses. This form grows linearly with the number of variables.
 Auxiliary variable encodes the equality of two literals allows to achieve this reduction. Three auxiliary variables are introduced
 in this example $x_7, x_8, x_9$ such that $x_7$ encode the equality of $x_1$ and $x_4$, $x_8$ equality of $x_2$ and $x_5$, and $x_9$ equality of $x_3$ and $x_6$.
+
  \begin{figure}[!htbp]
  \input{fig/example-compact-sbp}
  \caption{Example of compact generated SBPs for one permutation}
@@ -491,7 +498,7 @@ Moreover, a property can be observed, when the smallest variable have the greate
 (\true in this case), all variables in the orbits must have the same value.
  \begin{figure}[!htbp]
  \input{fig/binary-sbp}
- \caption{Caption}
+ \caption{Generation of binary symmetry breaking predicates}
  \label{fig:binary_sbp}
 \end{figure}
 
@@ -502,7 +509,11 @@ clauses and the variable appearing in few permutations reduce the number of stab
 
 \subsection{Evaluation of performance}
 
-\hakan{Faire une section pour}
+\hakan{Compare BreakID et shatter perfs on instances}
+
+
+
+\hakan{Faire une section pour les ordres heuristics}\\
 An extremely important point is the chosen lexicographic order.
 Variable ordering may impact the number of generated constraints and so the performance of
 the underlying SAT solver. Different orders are studied in the literature. 
@@ -544,10 +555,9 @@ will not be perfect and its effectiveness depends heavily on the
 heuristically chosen symmetries \cite{biere2009handbook}.
 Some recent works brings some optimizations and solves more instances.
 Despite these optimizations and the good reduction of the search space with symmetries,
- some formula still intractable for a state-of-the-art SAT solver.
+ some formula that exhibit symmetries still intractable for a state-of-the-art SAT solver.
  
-Static symmetry breaking acts as a preprocessor, a new formula is produced and solver takes it as input.
-No modification of the existing solver is required.
+
 Another disadvantage is that the solver is influenced by SBPs and explore the search space with a different 
 manner and can affect performance negatively.
 

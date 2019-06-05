@@ -1,0 +1,127 @@
+\chapter{Compose dynamic symmetry handling}
+
+
+\section{Composition of SP and SymmSAT}
+
+Recently, we developed an approach that reuses the
+principles of the static approaches, but operates dynamically (namely, the effective symmetry breaking approach~\cite{metin2018cdclsym}):
+ the symmetries are broken during the search process without any pre-generation of the \textit{sbp}. The main
+advantage of this technique is to cope with the heavy (and potentially
+blocking) pre-generation phase of the static-based approaches. It also gives
+more flexibility for adjusting some parameters on the fly. 
+Nevertheless, we also observed that many formulas easily solved by the pure
+dynamic approaches remained unsolvable by our approach and vice-versa. This is
+particularly true with the \textit{symmetry propagation} technique developed by
+Devriendt et al.~\cite{Devriendt12}.
+Hence, our goal is to explore the composition of our algorithm with the  \textit{symmetry propagation} technique in
+a new approach that would mix the advantages of the two classes of techniques while alleviating their drawbacks. At first sight,
+the two approaches appear to be orthogonal, and hence could be mixed easily. However, as we show in the rest of this section,
+this is not completely true: both theoretical and practical issues have to be analysed and solved to get a
+running complementary. 
+
+
+Since the approach based on symmetry propagation focuses on
+accelerating the tree traversal and the approach based on effective symmetry
+breaking targets to prune the tree traversal, the question of combining these approaches, to solve a formula $\varphi$, can
+be reformulated as: 
+
+\begin{center}
+	\textit{is it possible to accelerate the traversal while pruning the tree?}
+\end{center}
+
+
+\subsection{Theoretical foundations}
+\label{sec:tf}
+
+To answer the previous questions, we analyse the evolution of $\varphi$ during
+its solving. In ESBA, $\varphi$ evolves, incrementally, to an
+equi-satisfiable formula of the form $\varphi \equiv \varphi \cup \varphi_e
+\cup \varphi_d$, where $\varphi_e$ is a set of injected esbps and $\varphi_d$
+is a set of deduced clauses (logical consequences). Both sets are modified continuously during the solving. Hence, to be able to compose ESBA with SPA, we have to consider the symmetries of $\varphi^\prime=\varphi \cup \varphi_e \cup \varphi_d$ as
+allowed permutations in place of those of $\varphi$.
+
+
+A first naive solution could be to recompute, dynamically, the set of symmetries of $\varphi
+\cup \varphi_e \cup \varphi_d$ for each new $\varphi_e \cup \varphi_d$, but
+this would be an intractable solution generating a huge complexity. 
+
+A  computationally less expensive solution would be to keep track of all globally unbroken symmetries as the clauses of $\varphi_e$ are injected during the solving process: considering formula $\varphi$ and 
+a set of esbps $\varphi_e$ then the set of global unbroken symmetries is:
+
+$$GUS = \underset{\omega_e \in \varphi_e}{\bigcap}Stab(\omega_e) \cap S(\varphi)$$
+
+ where  $Stab(\omega_e)=\{g \in \Group{\Vars}\mid
+\omega_e=g.\omega_e\}$ is the stabilizer set of $\omega_e$ and $S(\varphi)$ is the set of symmetries of $\varphi$. Since $\varphi \cup \varphi_e  \models \varphi_d$, then $GUS$ is a valid set of symmetries for $\varphi \cup \varphi_e \cup \varphi_d$. Then, (1) each time a new set of esbp clauses is added, its stabilizer will be used to reduce $GUS$; (2) conversely, when a set of esbp clauses is reduced\footnote{In classical CDCL algorithm, this can be due to a back-jump or a restart.}, $GUS$ cannot be enlarged by the recovered broken symmetries because of the retrieved set: \textit{at that point, we do not know which symmetries become valid}! 
+
+As a consequence, the set of globally unbroken symmetries will converge very quickly to the empty set. At this point, SPA will be blocked for the rest of the solving process without any chance to recover. Therefore, this solution is of limited interest in practice.
+
+We propose here to improve aforementioned solution by alleviating the issue cited in point (2). We first present the intuition, then we will detail and formalize it. 
+
+%The idea here is to keep track of particular symmetries for each clause. For a deduced clause, this set of symmetries captures which esbp's were involved in a deduced clause's derivation. The intersection of these sets is a superset of the globally unbroken symmetries, and a strict superset after clause deletion.
+
+Consider formula $\varphi^\prime$ as before. It can be rewritten as:
+
+$$\varphi^\prime=\varphi \, \underset{i}{\bigcup}(\varphi_e^i \cup \varphi_d^i) \text{ , such that } \varphi_e \cup \varphi_d = \underset{i}{\bigcup}(\varphi_e^i \cup \varphi_d^i) \text{ and } \varphi \cup \varphi_e^i \models \varphi_d^i  \text{ for all } i$$
+
+
+  So, $GUS_i = \underset{\omega_e \in \varphi_e^i}{\bigcap}Stab(\omega_e) \cap S(\varphi)$ is a valid set of symmetries for the sub-formula $\varphi \cup \varphi_e^i \cup \varphi_d^i$, and $GUS$ can be obtained by $GUS = \underset{i}{\bigcap} GUS_i$. If some esbp clauses are added to $\varphi^\prime$, then the new $GUS$ is computed as described in (1). The novelty here comes with the retrieval of some set of clauses: by keeping track of the symmetries associated to each sub-formula ($GUS_i$), it is now easy to recompute a valid set of symmetries for $\varphi^\prime$ when some set
+$\varphi_e^k \cup \varphi_d^k$ is retrieved. It suffices to operate the intersection on the valid symmetries of the rest of the sub-formulas: $GUS = \underset{i \neq k}{\bigcap} GUS_i$.
+
+Just say your approach keeps track of a set of particular symmetries for each clause. For a deduced clause, this set of symmetries captures which esbp's were involved in a deduced clause's derivation. The intersection of these sets is a superset of the globally unbroken symmetries, and a strict superset after clause deletion.
+
+
+\subsection{Local symmetries}
+
+The general and formal framework that embodies the above idea is given by the following. It first relies on the notion of \textit{local symmetries} that we introduce in \cref{def:ls}.
+
+\begin{definition}
+	\label{def:ls}
+	Let $\varphi$ be a formula. We define $L_{\omega,\varphi}$, 
+	the set of \textit{local symmetries} for a clause $\omega$, and with respect to 
+	a formula $\varphi$, as follows:
+	
+	$$L_{\omega,\varphi}=\{g \in \Group{\Vars}\mid \varphi \models g.\omega\}$$
+\end{definition}
+
+$L_{\omega,\varphi}$ is local since the set of permutations applies locally to
+$\omega$. It is then straightforward to deduce the next proposition that gives us a
+practical framework to compute, incrementally, a set of symmetries for a
+formula (by using the intersection of all local symmetries).
+
+\begin{proposition}
+	\label{prop:gls-prop}
+	Let $\varphi$ be a formula. Then,  $\underset{\omega \in \varphi}{\bigcap}L_{\omega,\varphi} 
+	\subseteq S(\varphi)$.
+\end{proposition}
+
+\begin{proof}
+	Let $\varphi$ be a formula. Then, $\forall \omega \in \varphi, \forall g \in L_{\omega,\varphi}, \varphi \models g.\varphi $. So, $\forall g \in \underset{\omega \in \varphi}{\bigcap}L_{\omega,\varphi}, \varphi \models g.\varphi$. This is combined with the fact that the number of satisfying assignments for a formula is not changed by permuting the variables of the formula, we have $g.\varphi \models \varphi$. Hence $\varphi \equiv g.\varphi$, and $g \in S(\varphi)$ (by definition). 
+\end{proof}
+
+Using this proposition, it becomes easy to reconsider the symmetries
+on-the-fly: each time a new clause $\omega$ is added to the formula $\varphi$,
+we can just operate an intersection between $L_{\omega,\varphi}$ and
+$\underset{\omega^\prime \in \varphi}{\bigcap}L_{\omega^\prime,\varphi}$ to get
+a new set of valid symmetries for $\varphi \cup \{\omega\}$.
+
+\medskip
+Proposition \ref{prop:lsc-prop} establishes the relationship between the local symmetries of a deduced clause and those of the set of clauses that allow its derivation. 
+
+\begin{proposition}
+	\label{prop:lsc-prop}
+	Let $\varphi_1$ and $\varphi_2$ be two formulas, with $\varphi_2 \subseteq \varphi_1$. 
+	Let $\omega$ be a clause such that $\varphi_2 \models \omega$. Then, 
+	$(\underset{\omega^\prime \in \varphi_2}{\bigcap}L_{\omega^\prime,\varphi_1})
+	\cup Stab(\omega) \subseteq L_{\omega,\varphi_1}$;
+\end{proposition} 
+
+
+\begin{proof}
+	Let us consider a clause $\omega$ and a permutation $g \in 
+	(\underset{\omega^\prime \in \varphi_2}{\bigcap}L_{\omega^\prime,\varphi_1})
+	\cup Stab(\omega)$.
+	Since, $\varphi_2 \models \omega$, then  $g.\varphi_2 \models g.\omega$. Since $\varphi_1 \models \varphi_2 (\varphi_2 \subseteq \varphi_1)$, and 
+	$g \in 
+	(\underset{\omega^\prime \in \varphi_2}{\bigcap}L_{\omega^\prime,\varphi_1})
+	\cup Stab(\omega)$, then we have $\varphi_1 \models g.\varphi_2$ (from Def.~\ref{def:ls}). Hence, $\varphi_1 \models g.\varphi_2 \models g.\omega$, and then, $g \in L_{\omega,\varphi_1}$ (by definition). 
+\end{proof}

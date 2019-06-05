@@ -145,6 +145,12 @@ B.~D. McKay.
 \newblock Technical report, Technical Report TR-CS-9002, Australian National
   University, 2003.
 
+\bibitem{metin2018cdclsym}
+H.~Metin, S.~Baarir, M.~Colange, and F.~Kordon.
+\newblock Cdclsym: Introducing effective symmetry breaking in sat solving.
+\newblock In {\em International Conference on Tools and Algorithms for the
+  Construction and Analysis of Systems}, pages 99--114. Springer, 2018.
+
 \bibitem{moskewicz2001chaff}
 M.~W. Moskewicz, C.~F. Madigan, Y.~Zhao, L.~Zhang, and S.~Malik.
 \newblock Chaff: Engineering an efficient sat solver.

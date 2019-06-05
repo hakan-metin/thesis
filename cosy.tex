@@ -1,8 +1,9 @@
 \chapter{SymmSAT}\label{chap:symmSAT}
 
 
-This section presents our first contribution published in TACAS 2018 conference~\ref{algorithm:cdcl_cosy}. 
+This chapter presents our first contribution published in TACAS 2018 conference~\ref{algorithm:cdcl_cosy}. 
 
+\section{General idea}
 %\subsubsection{Drawbacks of the static-based approaches.} 
 In the general case,
 the size of the \textit{sbp} can be exponential in the number of variables of
@@ -246,7 +247,7 @@ Principle of CDCL is described in section \ref{sec:cdcl}, \cref{algorithm:cdcl_c
  
  \subsection{Illustrative example}
   Let us illustrate the previous concepts and algorithms on a simple example. Let the ordering relation $x_1 \prec x_2 \prec x_3 \prec x_4
- \prec x_5 \prec x_6\ \mid \false < \true$, and a set of symmetries 
+ \prec x_5 \prec x_6\ \mid \false < \true$, and the two last previous generators
  $G = \{
  	g_2 = (x_1 \enskip x_2)(x_4 \enskip x_5),g_3 = (x_1 \enskip x_4)(x_2 \enskip x_5)(x_3 \enskip x_6)\}$
  (written in cycle notation with opposite cycles omitted). Their
@@ -548,7 +549,7 @@ in the case of satisfiable instances only offers a marginal improvement.
 
 \begin{figure}[!htbp]
 	\centering
-	\subfloat[with\saucy]{{\includegraphics[scale=0.36]{img/saucy-result}}}%
+	\subfloat[with \saucy]{{\includegraphics[scale=0.36]{img/saucy-result}}}%
 	\qquad
 	\subfloat[with \bliss]{{\includegraphics[scale=0.36]{img/bliss-result}}}%
 	\caption{cactus plot  total number of instances}%
@@ -639,24 +640,32 @@ benchmark.
 		}
 	}
 	\vspace*{0.1cm}
-	\caption{comparison of the tools on 99 highly symmetric $\unsat$problems.}
+	\caption{comparison of the tools on 76 highly symmetric $\unsat$ problems.}
 	\label{table:bench2}
 \end{table}
 
 
+\section{Conclusion}
 
-%The main advantage of such an approach is to cope with the heavy (and
-%potentially blocking) pre-generation phase of the static-based approaches, but
-%also offers opportunities to combine with other dynamic-based approaches, like
-%the \textit{symmetry propagation} technique~\cite{Devriendt12}. It also gives
-%more flexibility for adjusting some parameters on the fly. Moreover, the
-%overhead for non symmetric formulas is reduced to the computation time of the
-%graph automorphism.
-%
-%The extensive evaluation of our approach on the symmetric formulas of the last
-%six SAT contests shows that it outperforms the state-of-the-art techniques, in
-%particular on unsatisfiable instances, which are the hardest class of the
-%problem.
+SymmSAT uses same principles as static symmetry breaking but operates dynamically by 
+injecting effective symmetry breaking during the search.
+This overcomes, the main problem of the static approaches , that they
+generate many \textit{sbp} that are not effective in the solving (size of the
+generated formulas, overburden of the unit propagation procedure, etc.).
+The idea we bring is to break symmetries \emph{on the fly}: when the current
+partial assignment can not be a prefix of a \textit{lex-leader} (of an orbit),
+an \textit{esbp} that prunes this forbidden assignment and all its extensions is generated. 
+
+This approach is implemented in the C++ library called \libdsb{}. It is an
+off-the-shelf component that can be interfaced with virtually any CDCL SAT
+solver. \libdsb{} is released under GPL licence and is available at
+\url{https://github.com/lip6/cosy}.
+ 
+The extensive evaluation of our approach on the symmetric formulas of the last
+six SAT contests shows that it outperforms the state-of-the-art techniques, in
+particular on unsatisfiable instances, which are the hardest class of the
+problem.
+
 
 
 
