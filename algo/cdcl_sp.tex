@@ -1,0 +1,50 @@
+	\begin{algorithm}[!htbp]
+		
+			\small	
+		\SetKwProg{Fn}{function}{}{}
+		\SetKwData{C}{symController}
+		\SetKwData{CSP}{spController}
+		\SetKwFunction{CDCL}{CDCLSymSp}
+		\SetKwFunction{unitPropagation}{unitPropagation}
+		\SetKwFunction{symPropagation}{symPropagation}
+		\SetKwFunction{updateSymmetries}{updateActiveSymmetries}
+		\SetKwFunction{cancelSymmetries}{cancelActiveSymmetries}
+		\SetKwFunction{analyzeConflict}{analyzeConflict}
+		\SetKwFunction{isSymmetryConflict}{isSymmetryConflict}
+		\SetKwFunction{assignNewLiteral}{assignDecisionLiteral}
+		\SetKwFunction{backjumpPolicy}{backjumpAndRestartPolicies}
+		
+	
+	\Fn{
+		\CDCL{$\varphi$: CNF formula, \colorsp{\CSP : symmetry propagation controller}}\\
+		$\quad\quad$\textbf{returns} $\true$ if $\varphi$ is \sat and $\false$ otherwise
+	}
+	{
+		$dl \gets 0$ \tcp*{Current decision level}
+		$\alpha \gets \emptyset$\;
+		\While{not all variables are assigned}{
+			$isConflict \gets$ \unitPropagation{}  \
+			\colorsp{$\wedge$ \CSP.\symPropagation{}}\;	\label{algo:cdclsp:symprop}
+			\If{$isConflict$}{
+				\If{dl = 0}{
+					\Return \false
+					\tcp*{$\varphi$ is $\unsat$}
+				}
+				$\omega \gets$ \analyzeConflict{}\;
+				$dl \gets$ \backjumpPolicy{}\;
+				$\varphi \gets \varphi \cup \{\omega$\} \;
+				\colorsp{\CSP.\cancelSymmetries{}}\; \label{algo:cdclsp:cancel}	
+			}
+			\Else{
+				$\alpha \gets \alpha\, \cup $ \assignNewLiteral{}\; 
+				$dl \gets dl+1$\;
+				\colorsp{\CSP.\updateSymmetries{}}\; \label{algo:cdclsp:update}
+			}
+		}
+		\Return \true
+		\tcp*{$\varphi$ is $\sat$}
+	}
+	\caption{The {\cdclsp} algorithm. Blue (or grey) parts denote additions to {\cdcl}.}
+	\label{algo:cdclsp}
+	
+\end{algorithm}

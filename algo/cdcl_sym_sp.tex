@@ -1,0 +1,85 @@
+
+\begin{algorithm}[!htbp]	
+	\small	
+	\SetKwProg{Fn}{function}{}{}
+	\SetKwData{C}{symController}
+	\SetKwData{CSP}{spController}
+	\SetKwFunction{CDCL}{CDCLSymSp}
+	\SetKwFunction{unitPropagation}{unitPropagation}
+
+	\SetKwFunction{symPropagation}{symPropagation}
+	
+	\SetKwFunction{updateSymmetries}{updateActiveSymmetriesSym}
+	
+	\SetKwFunction{cancelSymmetriesSym}{cancelActiveSymmetriesSym}
+	
+	\SetKwFunction{updateLocSymmetries}{updateLocalSymmetries}
+	
+	\SetKwFunction{analyzeConflict}{analyzeConflictSymSp}
+
+	
+	\SetKwFunction{isSymmetryConflict}{isSymmetryConflict}
+	\SetKwFunction{assignNewLiteral}{assignDecisionLiteral}
+
+	\SetKwFunction{backjumpPolicy}{backjumpAndRestartPolicies}
+
+	\SetKwFunction{isNotMinimal}{isNotLexLeader}
+	\SetKwFunction{SBP}{generateEsbpSp}
+	\SetKwFunction{notifyAssigned}{updateAssign}
+	\SetKwFunction{notifyCancelled}{updateCancel}
+
+
+	
+	\Fn{
+		\CDCL{$\varphi$: CNF formula, \colorsym{\C: symmetry controller},\\
+			 \hspace{11em} \colorsp{\CSP : symmetry propagation controller}}\\
+		$\quad\quad$\textbf{returns} $\true$ if $\varphi$ is $\sat$ and $\false$ otherwise
+	}
+	{
+
+		$dl \gets 0$ \tcp*{Current decision level}
+		$\alpha \gets \emptyset$\;
+		\While{not all variables are assigned}{
+			
+			$isConflict \gets$ \unitPropagation{}  \colorsp{$\land$ \CSP.\symPropagation{}}\;\label{algo:sym_prop}
+			\colorsym{\C.\notifyAssigned{$\alpha$}\;}
+			\colorsym{$isReduced \gets$ \C.\isNotMinimal{$\alpha$}\;}
+			
+			\If{$isConflict$ \colorsym{$\vee\, isReduced$}}{
+				\If{dl = 0}{
+					\Return \false
+					\tcp*{$\varphi$ is $\unsat$}
+				}
+				
+				\If{$isConflict$}{\label{algo:start_stab}
+					
+					\colorbox{gray!30}{$\langle\omega, L = \underset{\omega' \in \varphi_1}{\bigcap}L_{\omega',\varphi_1} \cup Stab(\omega)\rangle \gets$ \analyzeConflict{}\;}
+				}
+				\Else {
+					\colorbox{gray!30}{$\langle\omega, L = Stab(\omega)\rangle \gets$ \C.\SBP{$\alpha$}\;}
+				}\label{algo:end_stab}		
+				
+				
+				$dl \gets$ \backjumpPolicy{}\;
+				$\varphi \gets \varphi \cup \{\omega$\} \;
+				
+				\colorsym{\C.\notifyCancelled{$\alpha$}}\;
+				\colorbox{gray!30}{\CSP.\cancelSymmetriesSym{}}\;\label{algo:symsp:cancel}
+				\colorbox{gray!30}{\CSP.\updateLocSymmetries{L}\;}\label{algo:symsp:updateloc}
+				
+			}
+			\Else{
+				$\alpha \gets \alpha\, \cup $ \assignNewLiteral{}\; 
+				$dl \gets dl+1$\;
+				\colorbox{gray!30}{\CSP.\updateSymmetries{}}\;\label{algo:symsp:updateact}
+			}
+		}
+		\Return \true
+		\tcp*{$\varphi$ is $\sat$}
+	}
+	\caption{The {\cdclsymsp} algorithm. Additions derived
+		from {\cdclsym} and {\cdclsp} are reported in red and blue (or grey). Additions
+		due to the composition of the two algorithms are reported with a gray
+		background.}
+	\label{algo:cdclSYMSP}
+\end{algorithm}

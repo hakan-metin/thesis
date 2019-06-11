@@ -3,47 +3,46 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
 The style file: abbrv.bst
 Database file #1: main.bib
-Warning--I didn't find a database entry for "jarvisalo2012international"
 Warning--I didn't find a database entry for "Devriendt16"
-You've used 31 entries,
+You've used 33 entries,
             2118 wiz_defined-function locations,
-            676 strings with 9005 characters,
-and the built_in function-call counts, 13739 in all, are:
-= -- 1433
-> -- 568
-< -- 25
-+ -- 228
-- -- 190
-* -- 886
-:= -- 2058
-add.period$ -- 110
-call.type$ -- 31
-change.case$ -- 184
+            687 strings with 9390 characters,
+and the built_in function-call counts, 14656 in all, are:
+= -- 1527
+> -- 614
+< -- 27
++ -- 247
+- -- 206
+* -- 956
+:= -- 2200
+add.period$ -- 117
+call.type$ -- 33
+change.case$ -- 198
 chr.to.int$ -- 0
-cite$ -- 31
-duplicate$ -- 592
-empty$ -- 1099
-format.name$ -- 190
-if$ -- 3080
+cite$ -- 33
+duplicate$ -- 626
+empty$ -- 1165
+format.name$ -- 206
+if$ -- 3277
 int.to.chr$ -- 0
-int.to.str$ -- 31
-missing$ -- 32
-newline$ -- 158
-num.names$ -- 64
-pop$ -- 239
+int.to.str$ -- 33
+missing$ -- 34
+newline$ -- 168
+num.names$ -- 68
+pop$ -- 253
 preamble$ -- 1
-purify$ -- 154
+purify$ -- 166
 quote$ -- 0
-skip$ -- 461
+skip$ -- 487
 stack$ -- 0
-substring$ -- 973
-swap$ -- 241
-text.length$ -- 25
+substring$ -- 1035
+swap$ -- 254
+text.length$ -- 27
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 120
+type$ -- 128
 warning$ -- 0
-while$ -- 141
-width$ -- 33
-write$ -- 361
-(There were 2 warnings)
+while$ -- 150
+width$ -- 35
+write$ -- 385
+(There was 1 warning)

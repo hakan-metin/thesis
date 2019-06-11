@@ -22,6 +22,12 @@ C.~Barrett and C.~Tinelli.
 \newblock Satisfiability modulo theories.
 \newblock In {\em Handbook of Model Checking}, pages 305--343. Springer, 2018.
 
+\bibitem{benhamou2010enhancing}
+B.~Benhamou, T.~Nabhani, R.~Ostrowski, and M.~R. Saidi.
+\newblock Enhancing clause learning by symmetry in sat solvers.
+\newblock In {\em 2010 22nd IEEE International Conference on Tools with
+  Artificial Intelligence}, volume~1, pages 329--335. IEEE, 2010.
+
 \bibitem{biere2009handbook}
 A.~Biere, M.~Heule, and H.~van Maaren.
 \newblock {\em Handbook of satisfiability}, volume 185.
@@ -93,6 +99,11 @@ C.~P. Gomes, B.~Selman, and N.~Crato.
 J.~Huang et~al.
 \newblock The effect of restarts on the efficiency of clause learning.
 \newblock In {\em IJCAI}, volume~7, pages 2318--2323, 2007.
+
+\bibitem{jarvisalo2012international}
+M.~J{\"a}rvisalo, D.~Le~Berre, O.~Roussel, and L.~Simon.
+\newblock The international sat solver competitions.
+\newblock {\em AI Magazine}, 33(1):89--92, 2012.
 
 \bibitem{JunttilaKaski:ALENEX2007}
 T.~Junttila and P.~Kaski.
