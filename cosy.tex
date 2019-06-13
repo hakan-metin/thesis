@@ -305,6 +305,8 @@ All the symmetries we used for the presentation of our approach are
 permutations of variables. Our method straightforwardly extends to permutations of literals, also known as \emph{value permutations} \cite{biere2009handbook}.
 
 
+
+
 \subsubsection{Integration in \minisat{}.} We show how to integrate \libdsb{}
 to an existing solver, through example of \minisat{}~\cite{een2003extensible}.
 
@@ -367,7 +369,7 @@ We compare \cdclsym{} using the occurrence order, value symmetries, and without
 	coupled with the \minisat{} SAT engine;
 	
 	\item \breakid{}, another symmetry breaking preprocessor, described in
-	\cite{Devriendt16}, also coupled with the \minisat{} SAT engine.
+	\cite{devriendt2016improved}, also coupled with the \minisat{} SAT engine.
 	
 \end{itemize}
 
@@ -393,7 +395,7 @@ $\langle x \rangle$ indicates the year) from hard combinatorial ones
 2015 and 2017 (all2015 and all2017). The total number of instances for each
 bench is indicated between parentheses. For each row, the cells corresponding
 to the tools solving the most instances (within time and memory limits) are
-typeset in bold and greyed out. Table~\ref{tab:par2} shows the cumulative and
+typeset in bold and grayed out. Table~\ref{tab:par2} shows the cumulative and
 average PAR-2 times of the evaluated tools.
 
 \begin{table}[t]
@@ -643,6 +645,39 @@ benchmark.
 	\caption{comparison of the tools on 76 highly symmetric $\unsat$ problems.}
 	\label{table:bench2}
 \end{table}
+
+
+
+\section{Related Works}
+
+Usage of symmetry property dynamically allows the solver to adapt classical heuristics and symmetry based one on the fly.
+For example, some restart heuristics are based on the number of conflict, taking into account injection of ESBP may impact
+the performance of the overall SAT solver. 
+
+\subsection{Adapt heuristics dynamically}
+
+Other heuristics on the symmetry handling may increase the performance. We present here some of them.
+In some cases multiple permutations are reducer at the same time, and each one generate different symmetry breaking constraint.
+The backtrack level of the solver and the pruning capacity depends heavily on the chosen one. In the provided library, first reducer permutation generates the constraints. Inject symmetry breaking predicates when it was detected at the beginning of the 
+unit propagation or at the end will change the solver behavior. In the first case, ESBP is more important of a classical conflict
+if bot occurs and the inverse on the second case. We can even ignore the conflict and just add the constraints to clause database.
+This prevents the solver to get multiple time on non minimal part of search. We can allow to go one time for satisfiable instances 
+for example. Effectively, if the solution is easy to found in this symmetrical branch and much more harder on the lex leader, it may
+have a positive impact.
+
+\subsection{Change the order dynamically}
+
+As seen before, ordering relation between variable influence lex-leader and the generated constraints. This order is chosen 
+heuristically, changing this order dynamically is possible but with some requirement. All generated constraints and all deduced 
+clause from a symmetry breaking predicates needs to be completely removed. If these constraints are not removed, inconsistencies 
+may appear and a satisfiable problem become unsatisfiable.
+
+
+
+
+
+
+
 
 
 \section{Conclusion}
