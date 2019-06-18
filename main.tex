@@ -1,10 +1,13 @@
 \documentclass[12pt,a4paper]{memoir}
 
 
-%\usepackage[T1]{fontenc}
-%\usepackage{dejavu}
+%\usepackage{DejaVuSans}
 
-\usepackage[a4paper, margin=3cm]{geometry}
+\usepackage[a4paper,     inner=3cm, % Inner margin
+outer=3.8cm, % Outer margin
+]{geometry}
+
+\usepackage{minitoc} 
 \usepackage[utf8]{inputenc}
 \usepackage{tabularx}
 \usepackage{array}
@@ -12,14 +15,14 @@
 \usepackage{multirow}
 \usepackage[dvipsnames,table]{xcolor}
 \usepackage{graphicx}
-%\usepackage{amssymb}
+\usepackage{amssymb}
 \usepackage{ifthen}
 \usepackage{nicefrac}
 \PassOptionsToPackage{hyphens}{url}
 %\usepackage[a-1b]{pdfx}
 \usepackage{hyperref}
 \usepackage{balance}
-%\usepackage{cite}
+\usepackage{cite}
 \usepackage{ccicons}
 \usepackage{soul}
 \usepackage{amsfonts}
@@ -37,6 +40,15 @@
 \usepackage{bm}
 \usepackage{pgfplots}
 \usepackage{subfig}
+\usepackage{calc,soul,fourier}
+\usepackage{phaistos} % animal symbols
+
+
+%\usepackage{DejaVuSans}
+%\usepackage[T1]{fontenc}
+%
+
+
 
 %%% Colors ====================================================================
 \definecolor{phdcol0}{RGB}{0,47,107}
@@ -97,6 +109,8 @@
 
 \begin{document}
 	
+	
+\dominitoc 
 \frontmatter
 
 
@@ -115,11 +129,20 @@
 \mainmatter
 
 \input{TODO}
+
+\part{State-of-the-art}
 % Chapters
 \input{introduction}
+
+\setcounter{mtc}{2} 
 \input{preliminaries}
+\setcounter{mtc}{3} 
 \input{symmetryinsat}
+
+\part{Contributions}
+\setcounter{mtc}{4} 
 \input{cosy}
+\setcounter{mtc}{5} 
 \input{hybrid_cosy_spfs}
 
 \input{conclusion}

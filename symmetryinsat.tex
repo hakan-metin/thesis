@@ -1,12 +1,41 @@
 \chapter{Symmetry and SAT}\label{chap:symmetryinsat}
+\minitoc
 
 Despite SAT solving is an NP-complete algorithm, it works well on many real industrial problems. This is 
 principally due to capacity to cut off search space with learning clause. Another way to cut off search space is the exploitation of symmetry.
-At its most basics, symmetry is a transformation of an object that leaves it unchanged. Some instances exhibit symmetries and not taking them into account 
-forces solvers to needlessly explore isomorphic search space.  
+At its most basics, symmetry is a transformation of an object that leaves it unchanged. 
+Symmetries is common in real life, if we take some butterfly, it has exactly the same halves.
+If we search a pattern on one halve and not found it, searching the same pattern in the other halve is 
+completely absurd. But some butterfly  are not symmetric.
 
 
-In this chapter, we 
+
+Some instances exhibit symmetries and not taking them into account forces solvers to needlessly explore isomorphic search space.  
+
+
+
+In this chapter, we show how to detect if a given formula present symmetries and if it is the case, how to
+exploit them for accelerating solving time.
+
+
+\hakan{mettre cette figure pour les pigeonhole problem}
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[
+	start chain = going right,
+	node distance = 0pt,
+	AStyle/.style={draw, minimum width=2em, minimum height=2em, 
+		outer sep=0pt, on chain, fill=yellow!0!white}]
+	\node [AStyle] (1) {\huge\textcolor{gray}{\PHdove}};
+	\node [AStyle] (4) {\huge\textcolor{gray}{\PHdove}};
+	\node [AStyle] (5) {\huge\textcolor{gray}{\PHdove}};
+	\node [AStyle, draw] (6) {\huge\textcolor{gray}{\PHdove}};
+	\node [ minimum width=2em, minimum height=2em, 
+	outer sep=1pt, on chain] (7) {\huge\textcolor{gray}{\PHdove}};
+	\end{tikzpicture}
+\end{figure}
+
+
 
 
 \section{Group basics}
