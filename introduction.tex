@@ -1,55 +1,64 @@
 \chapter{Introduction}\label{chap:intro}
 
-
 Nowadays, computers are powerful and used in many applications in different domains.
-On of this domain is critical application, these applications are running in planes, cars
-and some software must be secure. Proving the correctness of these software leads
+One of these domains is critical application, these applications are running in planes, cars
+and some software must be secure. Proving the correctness of this software leads
 to combinatorial explosion.
-Over the years, computers scientist have developed many techniques to solve 
-this kind of problems like \emph{constraint programming} (CP) \cite{rossi2006handbook},
+Over the years, computer scientist has developed many techniques to solve 
+these kinds of problems like \emph{constraint programming} (CP) \cite{rossi2006handbook},
 \emph{Propositional Satisfiability} (SAT) \cite{biere2009handbook},
 \emph{Satisfiability Modulo Theory} (SMT) \cite{barrett2018satisfiability}.
-
 In this thesis, we focus on solving propositional or Boolean formula, it is simply deciding whether 
-all constraints of a formula can be satisfiable and answer SAT, or it is not possible to satisfy all
-constraints and answer UNSAT.This problem may appear to be simple bu cannot be handled efficiently.
-This problem is the first one proved NP-complete and so means that every NP problem can be 
-expressed as a propositional formula. Hence, it is an important challenge to optimize solving time.
-Moreover, SAT is used as a basic component of more complex tools such SMT solvers.
+all constraints of a formula can be satisfiable and answer \sat, or it is not possible to satisfy all
+constraints and answer \unsat.This problem may appear to be simple bu cannot be handled efficiently.
+This is due to the complexity of the problem which is proved NP-complete in 1971. Many problems can
+be transformed into a SAT problem, it is an important challenge to optimize it.
 
 Over the last decades, SAT solver can handle more and more complicated problems in different domains:
 like \emph{formal methods}: hardware model checking,
-software model checking, etc; \emph{artificial intelligence}: planning; \emph{games resolution}:
-sudoku, n-queens, \emph{Bio informatics} : Haplotype inference,
+software model checking, etc.; \emph{artificial intelligence}: planning; \emph{game resolution}:
+sudoku, n-queens, \emph{Bioinformatics} : Haplotype inference,
 \emph{design automation} : equivalence checking.
-A recent works solves the Pythagorean triple, an old mathematical problems that be solved with a
-huge proof of 200TB.
+A recent work solve the Pythagorean triple, an old mathematical problem which has been resolved with 
+a SAT solver and produce a huge proof of 200 TB.
  
 This success comes from the introduction of sophisticated heuristics and optimization of the solving 
 algorithm called Conflict Driven Clause Learning (CDCL) algorithm. It is based on the first non memory
 intensive algorithm named by its authors Davis, Putnam, Logemann, and Loveland (DPLL).
-
-Unfortunately, some problems still intractable for state of the art SAT solver. But, some 
+Unfortunately, some problems still intractable for state-of-the-art SAT solvers. But some 
 of them exhibits symmetries that can be exploited by the solver to accelerate the overall solving time.
-At its most basic, symmetry is some transformations of an object that leaves it  unchanged.
-In the case of satisfiability problems it maps a solution of a problem to another.
+At its most basic, symmetry is some transformations of an object that leaves it unchanged.
+Symmetries is common in real life, if we take some butterfly, it has exactly the same halves.
+In the case of satisfiability problems, it maps a solution of a problem to another.
 Ignoring these properties forces the solver to explore equivalent search space and it is a loss of
-time and energy (let's save the world). 
+time and energy. Considering the butterfly example if we search a pattern and it is not present, it is
+completely absurd to verify the other side. 
 
-Effectively it leads to a combinatorial explosion
+In the literature, some works exist and tackle the symmetry problems.
+But, the first step to exploit symmetries is to find them. For this purpose, it exists technique 
+that use graph isomorphism.
+When symmetries are found, the most common approach to exploit it is \emph{static symmetry breaking}.
+It takes the symmetric problem as input and produces a satisfiability equivalent formula without symmetries. This transformation is made without any change of existing solvers. This approach works 
+well on many applications but stuck on some highly symmetrical ones.
 
+Another approach to handle symmetry is \emph{dynamic symmetry breaking}, it is included in the solver. It observes his behavior and use symmetry properties to avoid visiting symmetric search space.
+These approaches will be clearly explained all along this thesis.
 
-
-
-In the literature, some works exists and tackle the symmetry problems in two different ways.
-The first one is made without any change of existing solvers. It takes the symmetric problem as input
-and produce an satisfiability equivalent formula without symmetries.
-
-The seconds one integrate a component to existing solver to handle symmetries and avoid it to manage
 
 \section{Contributions}
 
+Understanding state of the art techniques in symmetry breaking allow us to improve it.
+2 majors contributions are detailed in this thesis. The first one use the force of static symmetry 
+breaking and apply it dynamically to avoid its drawback. It add an opportunistic symmetry controller 
+that avoid visiting symmetric search space. This idea allow us to solve very hard symmetric problems.
+ The second contribution use the previous one and combines it with state of the art dynamic 
+ symmetry breaking approach and take the best of 2 worlds. This combination leads to 
+ important theoretical step for the usage of \emph{partial symmetry breaking} with the usage of 
+ \emph{local symmetries}. 
+ 
+
 \section{Structure of the manuscript}
+
 
 
 %% Local Variables:

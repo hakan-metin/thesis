@@ -1,81 +1,71 @@
 \chapter{The Boolean Satisfiability Problem}\label{chap:preliminaries}
 \minitoc
-
 In this thesis, our goal is to exploit symmetrical properties of a SAT problems.
 Before, get to the heart of the matter, we first introduce the Boolean satisfiability (SAT)  problems.
 These problems are propositional formula  representing constraints of a system.
 A SAT solver aims to satisfy all constraints present in the formula.
 It is a decision problem that answer $\sat$ if it is possible and $\unsat$ otherwise.
-
 \section{SAT basics}
-
 A most basic block of satisfiability problem is\emph{Boolean variable}, or \emph{propositional variable}.
 It has two possible values : true or false (noted respectively $\true$ or $\false$) that are \emph{constants}.
 We denote \emph{literal} $l$, a propositional variable or its negation.
 For a given variable $x$, the positive literal is represented by $x$ and the negative one by $\neg x$.
+Given a formula $\varphi$, we denote $\Vars_\varphi$ ($\Lits_\varphi$) the set of variables (literals) used in the formula (the index in $\Vars_\varphi$ and $\Lits_\varphi$ is usually omitted when
+clear from context).
 To build more complex formula, it exists different operators, $\neg, \lor$ and $\land$ that are respectively negation, disjunction and conjunction. Others operators like $\Rightarrow, \Leftrightarrow$ and
-$\oplus,$ respectively called implication, equivalence and exclusive disjunction (xor) can be written with the basic one.
-For example $a \Rightarrow b$ can be expressed as $ \neg a \lor b$, where $a$ and $b$ are propositional variables.
+$\oplus, \cdots$ respectively called implication, equivalence and exclusive disjunction (xor), $\cdots$ can be written with the basic one.
+For example $a \Rightarrow b$ can be expressed as $ \neg a \lor b$.
 These operators have a different priority and given in decreasing order:
 negation ($\neg$), conjunction ($\land$), disjunction ($\lor$). To ensure
-the priority, constraints are between parenthesis.
+the priority, constraints can be set between parenthesis.
 
 %The meaning of basic operators are given in the following truth table~\ref{tab:truthtable}:
-
 \begin{table}[!htbp]
-	\centering
-	\begin{tabular}{cc|ccc}
-		$x$ & $y$ & $\neg x$ & $x \lor y$ & $x \land y$ \\
-		\toprule
-		0 & 0 & 1 & 0 & 0 \\
-		\midrule
-		0 & 1 & 1 & 1 & 0 \\
-		\midrule
-		1 & 0 & 0 & 1 & 0 \\
-		\midrule
-		1 & 1 & 0 & 1 & 1 \\
-		\bottomrule
-	\end{tabular}
-	\caption{Truth table of basic operators}
-	\label{tab:truthtable}
+ \centering
+ \begin{tabular}{cc|ccc}
+  $x$ & $y$ & $\neg x$ & $x \lor y$ & $x \land y$ \\
+  \toprule
+  0 & 0 & 1 & 0 & 0 \\
+  \midrule
+  0 & 1 & 1 & 1 & 0 \\
+  \midrule
+  1 & 0 & 0 & 1 & 0 \\
+  \midrule
+  1 & 1 & 0 & 1 & 1 \\
+  \bottomrule
+ \end{tabular}
+ \caption{Truth table of basic operators}
+ \label{tab:truthtable}
 \end{table}
-
-The value given to each variable of a formula is called an \emph{assignment} noted $\alpha$ and defined as follow:
-	$$\alpha: \Vars \mapsto \{ \true, \false \}$$
-
- As usual, $\alpha$ is said \emph{total}, or \emph{complete}, when all elements of $\Vars$ have an image by
+The value given to each variable of a formula is called an \emph{assignment} noted $\alpha$ and defined as follows:
+ $$\alpha: \Vars \mapsto \{ \true, \false \}$$
+ As usual $\alpha$ is said \emph{total}, or \emph{complete}, when all elements of $\Vars$ have an image by
 $\alpha$, otherwise it is \emph{partial}. By abuse of notation, an assignment is
 often represented by the set of its true literals.  The set of all (possibly
 partial) assignments of $\Vars$ is noted $\Assignments(\Vars)$.
 A \emph{truth table} gives an evaluation of all possible assignment for a given formula.
 \Cref{tab:truthtable} shows the evaluation of negation, conjunction and disjunction operators.
-For convenience, true value (\true) is also represented as $1$ and false value (\false) is represented as $0$.
-
-When a formula is always true independently from the assignment it is called a \emph{tautology}, $x \lor \neg x$ is 
+For convenience, true value (\true) is also represented as $1$ a false value (\false) is represented as $0$.
+When a formula is always true independently from the assignment, it is called a \emph{tautology} $x \lor \neg x$ is 
 an example of tautologous formula.
 
-
-
 \subsection{Normal forms}
-
 In Boolean logic, it exists some structural properties, called \emph{normal form}.
 To present them, we first need to introduce \emph{clause} and \emph{cube} concepts.
-
 A \emph{clause} $\omega$ is a finite disjunction of literals represented by:
  $$\omega = \bigvee_{i=1}^k l_i$$
  
  
-A \emph{cube} $\gamma$ is a finite conjunction of literals represented by:
+And a \emph{cube} $\gamma$ is a finite conjunction of literals represented by:
 $$\gamma = \bigwedge_{i=1}^k l_i$$
 
 % Or equivalently by the set of its literals:
 %$$\omega = \{l_i\}_{i \in \llbracket 1,k \rrbracket}$$
+On respect to its size, a clause is said \emph{unary, binary, ternary, $n$-ary} if it contains respectively one, two, three, or $n$ literals.
 
-On respect to its size, a clause is said \emph{unary, binary or ternary} if it contains respectively one, two, three literals.
-The clause form have a property called \emph{subsumption}. 
-When a clause $\omega_1$ is subset of an other clause $\omega_2$ noted $\omega_1 \subset \omega_2$. And any 
-assignment that satisfies $\omega_1$ also satisfies $\omega_2$, so $omega_2$ is \emph{redundant} towards $\omega_1$ and so 
-can be removed of the formula.
+The clause form has a property called \emph{subsumption}. 
+When a clause $\omega_1$ is a subset of another clause $\omega_2$ noted $\omega_1 \subset \omega_2$. And any 
+assignment that satisfies $\omega_1$ also satisfies $\omega_2$, so $\omega_2$ is \emph{redundant} towards $\omega_1$ and so can be removed of the formula.
 
 \emph{Conjunctive Normal Form} (CNF) of a formula is a finite conjunction of clauses
  A CNF can be either noted:
@@ -83,44 +73,38 @@ can be removed of the formula.
   
 \emph{Disjunctive normal form} (DNF) of a formula is finite disjunction of cubes and noted:
   $$\varphi = \bigvee_{i=1}^k \gamma_i$$
-
-The following table is a summary of existing laws about Boolean formulas that allow to transform any formula to
+The following table is a summary of laws about Boolean formulas that allow to transform any formula to
 a normal form.
-
 \begin{table}[!htbp]
-	\centering
-	\begin{tabular}{lllc}
-		
-		associativity & 
-		
-		
-		\emph{associativity of $\lor$} & $(x \lor y) \lor z \equiv x \lor (y \lor z)$\\
-		\emph{commutativity of $\lor$} & $x \lor y \equiv y \lor x$\\
-		\emph{identity} & $x \lor \false \equiv x$\\
-		\emph{domination} & $x \lor \true \equiv \true$\\
-		\emph{idempotent} & $x \lor x \equiv x$\\
-		\emph{distribution over $land$} & $x \lor (y \land z) \equiv (x \lor y) \land (x \lor z)$\\
-		
-		\\
-		\emph{associativity of $\land$} & $(x \land y) \land z \equiv x \land (y \land z)$\\
-		\emph{commutativity of $\land$} & $x \land y \equiv y \land x$\\
-		\emph{identity} & $x \land \true \equiv x$\\
-		\emph{domination} & $x \land \false \equiv \false$\\
-		\emph{idempotent} & $x \land x \equiv x$\\
-		\emph{distribution over $\lor$} & $x \land (y \lor z) \equiv (x \land y) \lor (x \land z)$\\
- 		\\
- 		\emph{negation 1} & $x \lor \neg x \equiv \false$\\
-  		\emph{negation 2} & $x \land \neg x \equiv \true$\\
-  		
-  		\emph{double negation} & $\neg (\neg x) \equiv x$ \\
-  		\emph{De Morgan 1} & $\neg x \lor \neg y \equiv \neg (x \land y)$\\
-  		\emph{De Morgan 2} & $\neg x \land \neg y \equiv \neg (x \lor y)$\\
-  		
-	\end{tabular}
-	\caption{Set of laws of operators}
-	\label{tab:laws}
+ \centering
+ \begin{tabular}{lllc}
+  
+  \emph{associativity of $\lor$} & $(x \lor y) \lor z \equiv x \lor (y \lor z)$\\
+  \emph{commutativity of $\lor$} & $x \lor y \equiv y \lor x$\\
+  \emph{identity} & $x \lor \false \equiv x$\\
+  \emph{domination} & $x \lor \true \equiv \true$\\
+  \emph{idempotent} & $x \lor x \equiv x$\\
+  \emph{distribution over $\land$} & $x \lor (y \land z) \equiv (x \lor y) \land (x \lor z)$\\
+  
+  \\
+  \emph{associativity of $\land$} & $(x \land y) \land z \equiv x \land (y \land z)$\\
+  \emph{commutativity of $\land$} & $x \land y \equiv y \land x$\\
+  \emph{identity} & $x \land \true \equiv x$\\
+  \emph{domination} & $x \land \false \equiv \false$\\
+  \emph{idempotent} & $x \land x \equiv x$\\
+  \emph{distribution over $\lor$} & $x \land (y \lor z) \equiv (x \land y) \lor (x \land z)$\\
+   \\
+   \emph{negation 1} & $x \lor \neg x \equiv \false$\\
+    \emph{negation 2} & $x \land \neg x \equiv \true$\\
+    
+    \emph{double negation} & $\neg (\neg x) \equiv x$ \\
+    \emph{De Morgan 1} & $\neg x \lor \neg y \equiv \neg (x \land y)$\\
+    \emph{De Morgan 2} & $\neg x \land \neg y \equiv \neg (x \lor y)$\\
+    
+ \end{tabular}
+ \caption{Set of laws of operators}
+ \label{tab:laws}
 \end{table}
-
 
 Every formula can be transformed into a normal form with different complexity and the resulting formula is 
 \emph{equivalent}.  
@@ -129,63 +113,56 @@ and vice-versa, denoted as $\varphi \equiv \psi$.
  Also, we say a formula $\psi$ is \emph{logical consequence} of a formula $\varphi$ is every model of $\varphi$
  is also a model of $\psi$ and is denoted as $\varphi \models \psi$.
 
-
 Conjunctive normal form is the input form of state-of-the-art solvers.
  
-Note that each cube in DNF is a solution to whole formula in CNF form.
-
-
-
-\subsection{Satisfiability problem}
-A \emph{Boolean variable}, or \emph{propositional variable}, is a variable that
-has two possible values : true or false (noted respectively $\true$ or $\false$).
-A \emph{literal} $l$ is a propositional variable or its
-negation. For a given variable $x$, the positive literal is represented by $x$
-and the negative one by $\neg x$.
-
-
-A \emph{clause} $\omega$ is a finite disjunction of literals represented
-equivalently by $\omega = \bigvee_{i=1}^k l_i$ or the set of its literals
-$\omega = \{l_i\}_{i \in \llbracket 1,k \rrbracket}$. A clause with a single
-literal is called \emph{unit clause}.
-A clause is a \emph{tautology} if it is always true, a clause that contains a positive 
-and negative value of a clause for example.
-A \emph{conjunctive normal form (CNF) formula} $\varphi$ is a finite
-conjunction of clauses.  A CNF can be either noted $\varphi = \bigwedge_{i=1}^k
-\omega_i$ or $\varphi = \{\omega_i\}_{i \in \llbracket 1,k \rrbracket}$. We
-denote $\Vars_\varphi$ ($\Lits_\varphi$) the set of variables (literals) used in
-$\varphi$ (the index in $\Vars_\varphi$ and $\Lits_\varphi$ is usually omitted when
-clear from context).
-
-For a given formula $\varphi$, an \emph{assignment} of the variables of
-$\varphi$ is a function $\alpha: \Vars \mapsto \{ \true, \false \}$.  As usual, $\alpha$ is
-\emph{total}, or \emph{complete}, when all elements of $\Vars$ have an image by
-$\alpha$, otherwise it is \emph{partial}. By abuse of notation, an assignment is
-often represented by the set of its true literals.  The set of all (possibly
-partial) assignments of $\Vars$ is noted $\Assignments(\Vars)$.
-
-The assignment $\alpha$ \emph{satisfies} the clause $\omega$, denoted $\alpha
-\models \omega$, if $\alpha \cap \omega \neq \emptyset$. Similarly, the assignment
-$\alpha$ satisfies the propositional formula $\varphi$, denoted $\alpha \models
-\varphi$, if $\alpha$ satisfies all the clauses of $\varphi$. Note that a
-formula may be satisfied by a partial assignment. In this case, unassigned variable are called
-\emph{dont care}.
-A formula is said to be
-\emph{satisfiable} (\sat) if there is at least one assignment that satisfies it;
+Note that each cube in DNF is a solution to the whole formula in CNF form.
+A formula is said to be \emph{satisfiable} (\sat) if there is at least one assignment that satisfies it;
 otherwise the formula is \emph{unsatisfiable} (\unsat).
 
+%\subsection{Satisfiability problem}
+%A \emph{Boolean variable}, or \emph{propositional variable}, is a variable that
+%has two possible values : true or false (noted respectively $\true$ or $\false$).
+%A \emph{literal} $l$ is a propositional variable or its
+%negation. For a given variable $x$, the positive literal is represented by $x$
+%and the negative one by $\neg x$.
+%
+%A \emph{clause} $\omega$ is a finite disjunction of literals represented
+%equivalently by $\omega = \bigvee_{i=1}^k l_i$ or the set of its literals
+%$\omega = \{l_i\}_{i \in \llbracket 1,k \rrbracket}$. A clause with a single
+%literal is called \emph{unit clause}.
+%A clause is a \emph{tautology} if it is always true, a clause that contains a positive 
+%and negative value of a clause for example.
+%A \emph{conjunctive normal form (CNF) formula} $\varphi$ is a finite
+%conjunction of clauses.  A CNF can be either noted $\varphi = \bigwedge_{i=1}^k
+%\omega_i$ or $\varphi = \{\omega_i\}_{i \in \llbracket 1,k \rrbracket}$. We
+%denote $\Vars_\varphi$ ($\Lits_\varphi$) the set of variables (literals) used in
+%$\varphi$ (the index in $\Vars_\varphi$ and $\Lits_\varphi$ is usually omitted when
+%clear from context).
+%For a given formula $\varphi$, an \emph{assignment} of the variables of
+%$\varphi$ is a function $\alpha: \Vars \mapsto \{ \true, \false \}$.  As usual, $\alpha$ is
+%\emph{total}, or \emph{complete}, when all elements of $\Vars$ have an image by
+%$\alpha$, otherwise it is \emph{partial}. By abuse of notation, an assignment is
+%often represented by the set of its true literals.  The set of all (possibly
+%partial) assignments of $\Vars$ is noted $\Assignments(\Vars)$.
+%The assignment $\alpha$ \emph{satisfies} the clause $\omega$, denoted $\alpha
+%\models \omega$, if $\alpha \cap \omega \neq \emptyset$. Similarly, the assignment
+%$\alpha$ satisfies the propositional formula $\varphi$, denoted $\alpha \models
+%\varphi$, if $\alpha$ satisfies all the clauses of $\varphi$. Note that a
+%formula may be satisfied by a partial assignment. In this case, unassigned variable is called
+%\emph{don’t care}.
+%A formula is said to be
+%\emph{satisfiable} (\sat) if there is at least one assignment that satisfies it;
+%otherwise the formula is \emph{unsatisfiable} (\unsat).
+
 \subsection{An NP-complete problem}
-
-The SAT problems is the first NP-complete algorithm as proven by Stephen Cook in 1971~\cite{cook1971complexity}.
-NP-completeness means that a SAT problem can be solved with a non deterministic machine in polynomial time (NP) and is also NP-hard. A problem is said NP-hard if everything in NP can be transformed into it in polynomial time. 
-One of the most important unsolved problem in theoretical computer science is the P versus NP problem.
+The SAT problem is the first NP-complete algorithm as proven by Stephen Cook in 1971~\cite{cook1971complexity}.
+NP-completeness means that a SAT problem can be solved with a non-deterministic machine in polynomial time (NP) and is also NP-hard. A problem is said NP-hard if everything in NP can be transformed into it in polynomial time. 
+One of the most important unsolved problems in theoretical computer science is the P versus NP problem.
 This question is one of the seven millennium prize problems.
-
 Some particular form of the SAT problems can be computed in linear time for 2-SAT~\cite{aspvall1979linear}
 where each clause is in binary form i.e. size  of two. %This kind of clauses can be written as implication 
-Others particular form  can be solved in  polynomial time like Horn SAT~\cite{aspvall1979linear} in which it suffice to  apply \emph{unit propagation} explained in \cref{sec:dpll} until fix point.
+Other particular form  can be solved in  polynomial time like Horn SAT~\cite{aspvall1979linear} in which it suffice to  apply \emph{unit propagation} explained in \cref{sec:dpll} until fix point.
 Xor-SATisfiability where each clause contains exclusive or belong also to the polynomial class.
-
 %It asks if every problems can be solved and verified in polynomial time.
 %Any NP problems can be reduced in polynomial time by a deterministic Turing machine to the SAT problems.
 %The states that the propositional satisfiability problem is NP-complete
@@ -194,36 +171,29 @@ Xor-SATisfiability where each clause contains exclusive or belong also to the po
 %
 %
 
-
 \subsection{Solving a SAT problem}
-
-Two kinds of algorithm exists to solve satisfiability problems.
+Two kinds of algorithms exist to solve satisfiability problems.
 First, the \emph{incomplete} algorithm which does not provide any guarantee that will eventually report either any satisfiable assignment or declare that formula is unsatisfiable. This kind of algorithm is out of scope of this thesis. 
 Second, the \emph{complete} algorithm, which provides a guarantee that if an assignment exists
 it will be reached or it will declare that formula is unsatisfiable.
 This section describes different \emph{complete }algorithm to solve a propositional formula.
 
-
-
 \subsubsection{A naive algorithm}
-A naive approach to solve a SAT problem is to try all possible assignments. In total,
-for a propositional formula with $n$ variables, it leads to $2^n$ assignments in the worth case.  
+A naive approach to solve a SAT problem is to try all possible assignments.
+For a propositional formula with $n$ variables, it leads to $2^n$ assignments in the worse case.  
 \Cref{fig:naive_algo} illustrate the search tree for a given problem with six variables.
 In this case $\alpha_{11}$ ($\neg x_1, \neg x_2, x_3, \neg x_4, x_5, \neg x_6 $) is found as a solution of the problem. In the general case,
-this algorithm is obviously intractable on real problems even for a formula with few variables.
-
+this algorithm is  intractable on real problems even for a formula with few variables.
 
 \begin{figure}[!htbp]
-	\centering
-	\input{fig/naive_algorithm.tex}
-	\caption{All possible assignments for a problem with 6 variables}
-	\label{fig:naive_algo}
+ \centering
+ \input{fig/naive_algorithm.tex}
+ \caption{All possible assignments for a problem with 6 variables}
+ \label{fig:naive_algo}
 \end{figure}
 
-
 \subsubsection{Davis Putnam Logemann Loveland (DPLL) algorithm}\label{sec:dpll}
-
-One of the first non memory intensive algorithm to solve the SAT problems is 
+One of the first non-memory-intensive algorithm to solve the SAT problems is 
 the Davis Putnam Logemann Loveland (DPLL) algorithm~\cite{dpll_62}. 
 It explores a binary tree using depth first search as given in \Cref{algo:dpll}.
 The construction of the tree is related to a \emph{decision} literal (\cref{algo:dpll:decision}) then,
@@ -234,29 +204,24 @@ solver \emph{backtracks} at most one level, this fact is called \emph{chronologi
 If all leaves report $\unsat$  the formula $\varphi$ is unsatisfiable \cref{algo:dpll:unsat}.
 Finally, if any branch found a solution  i.e. the problem is empty,
 formula is satisfiable corresponding assignment is returned (\cref{algo:dpll:sat1,algo:dpll:sat2})
-
 \input{algo/dpll}
-
 An important function in the DPLL algorithm is \texttt{unitPropagation} \cref{algo:dpll:unit} and
 it is detailed in \Cref{algo:unitdpll}. It searches all unit clauses, then, to ensure satisfiability these literals must be true
-and added to the current assignment. Formula is then simplified as follow, clauses that contains this literal are already satisfied
-and can be deleted; negative literals are removed from the clause that belongs to him.
+and added to the current assignment. Formula is then simplified as follows, clauses that contains this literal are already satisfied
+and can be deleted; negative literals are removed from the clause that belongs to them.
 This procedure ends when either no unit clause remains or an inconsistency was found (empty clause).
 
-
 \input{algo/unitdpll}
-
 When DPLL algorithm is executed on the formula in \Cref{fig:naive_algo}, after the decision of literal
 $\neg x_1$ and $\neg x_2$ unit propagation detects that $x_3$ must be true. This propagation prevents to 
 explore assignments from $\alpha_1 $ to $\alpha_{8}$. Moreover, application to unit propagation provokes more unit clauses
 and leads directly to a solution. 
-An important part of efficiency of DPLL is due to choose the variable that divide the search tree made by
+An important part of efficiency of DPLL is due to choose the variable that divides the search tree made by
 the procedure \texttt{assignDecisionLiteral} . The objective of this function 
 is to find a literal that will generate a maximum of unit propagation. Intuitively, decision literals 
-can be viewed as "guesses" and propagated literals can be viewed as "deductions". Finding a optimal variable
+can be viewed as ‘guesses’ and propagated literals can be viewed as ‘deductions’. Finding a optimal variable
 is NP-Hard. Different heuristics exists to choose the decision variable,
-some of them will be presented in section~\ref{sec:heuristics}.
-
+some of them will be presented in the section~\ref{sec:heuristics}.
 
 %\input{algo/puredpll}
 %Another idea introduced by DPLL was \emph{elimination of pure literals},
@@ -265,17 +230,15 @@ some of them will be presented in section~\ref{sec:heuristics}.
 %On consequence, all clauses that own these literals are satisfied and so can be removed.
 %
 \subsubsection{Conflict Driven Clause Learning (CDCL) algorithm}\label{sec:cdcl}
-
 The principal weakness of DPLL algorithm is to make same inconsistencies several times
 (principally due to chronological backtracking), incurring unnecessary CPU usage.\\
 Conflict Driven Clause Learning (CDCL) \cref{algo:cdcl} is another sound and complete algorithm
 to resolve a SAT problem and overcome principal weakness of DPLL.
 
-
 \Cref{algo:cdcl} gives an overview of CDCL, Like DPLL,  it walks on a binary search tree.
 Initially, the current assignment is empty and decision level that indicated the depth of the search tree noted as $dl$ is set to zero.
 Algorithm first applies unit propagation to the formula $\varphi$ for the current assignment $\alpha$ (\cref{alg:cdcl:unit}).
-Note that it is exactly the same procedure as the one used for DPLL.
+Note that it is  the same procedure as the one used for DPLL.
 An inconsistency or a \emph{conflict} at level zero indicates that the formula is unsatisfiable, and the algorithm
 reports it (\cref{alg:cdcl:unsat_start,alg:cdcl:unsat_end}). When the conflict is occurring at a higher level, it
 reason was analyzed and a clause called \emph{conflict clause} is deduced (\cref{alg:cdcl:analyze}).
@@ -289,143 +252,119 @@ Finally, if no conflict appears, the algorithm chooses a new decision literal
 (\cref{alg:cdcl:pick_start,alg:cdcl:pick_end}).
 The above steps are repeated until the satisfiability status of the
 formula is determined.
-
 \input{algo/cdcl}
-
 \subsection{Conflict Analysis}
 A conflict is an inconsistency discovered by the solver, a situation that requires for a variable to be set 
 simultaneously to the \true and \false value. \Cref{fig:conflict} shows an assignments that leads to a conflict.
 First the solver chose $\neg x_1$ as decision then $\neg x_6$ and then $\neg x_5$. This last one propagates $x_4$
 which in turn propagates $x_2$ and $x_3$. On clause $\omega_1$, $x_3$ needs to be \true and \false in $\omega_5$ so
 a conflict appears.
-
 \begin{figure}[!htbp]
-	\centering
-		\input{fig/conflict}
-	\caption{Decisions/Propagations that leads to a  conflict}
-	\label{fig:conflict}
+ \centering
+  \input{fig/conflict}
+ \caption{Decisions/Propagations that leads to a  conflict}
+ \label{fig:conflict}
 \end{figure}
-
 This series of decisions would provoke same propagation and leads to the same conflict. To avoid this
-situation, the solver needs to analyze the reason of the conflict with so called \emph{implication graph}.
-Implication graph represents the current state of the solver proof system. It records every dependencies
+situation, the solver needs to analyze the reason of the conflict with so-called \emph{implication graph}.
+Implication graph represents the current state of the solver proof system. It records every dependency
 among variables and so it is updated either when a variable is assigned on decision/propagation or  when a variable
 is unassigned. The implication graph is a directed acyclic graph (DAG) in which a vertex represents an assigned variable labeled as $l@dl(l)$ where $l$ represents assigned literal and $dl(l)$ represents the decision level of the literal $l$.
 Root vertexes , that have no incoming edges, are literals chosen by decision heuristics and others are 
 propagated literals.
-Incoming arcs labeled with a clause represents the \emph{reason} of this propagation.
-This clause must be assertive i.e. all of its literals are false except one that are not yet assigned.
+Incoming arcs labeled with a clause represent the \emph{reason} of this propagation.
+This clause must be assertive i.e. all  literals are false except one that is not yet assigned.
 \Cref{fig:implication-graph} shows implication graph of the previous example (\cref{fig:conflict}) until the conflict.
-
 \begin{figure}[!htbp]
-	\centering
-	\input{fig/implication_graph}
-	\caption{Implication graph}
-	\label{fig:implication-graph}
+ \centering
+ \input{fig/implication_graph}
+ \caption{Implication graph}
+ \label{fig:implication-graph}
 \end{figure}
 
-
-\texttt{analyzeConflict} procedure analyzes this graph to found the reason of the conflict. To do that, a search of
-\emph{unique implication point} (UIP) is performed. UIP of a decision level in the implication graph is a variables
+\texttt{analyzeConflict} procedure analyzes this graph to find the reason of the conflict. To do that, a search of
+\emph{unique implication point} (UIP) is performed. UIP of a decision level in the implication graph is a variable
 which lies on every path from the decision to the conflict. Note that, there are many UIP for a given decision level.
 In such case, UIPs are ordered according to the distance with the contradiction. The first UIP is the closest to
 the conflict. It is well known that the first UIP provides the smallest set of assignment that is responsible for the
-contradiction~\cite{zhang2001efficient}
-
+contradiction.~\cite{zhang2001efficient}
 An UIP divides the implication in two sides with a \emph{cut}, the reason side contains decision variables 
 that is responsible for the contradiction and the conflict side that contains the conflict. Note that, UIP is always is the 
 reason side. \Cref{fig:implication-graph} depicts two cuts in the implication graph.
-
-Once the reason side of a conflict is established, a conflict driven clause or conflict clause is produced.
+Once the reason side of a conflict is established, a conflict-driven clause or conflict clause is produced.
 It purposes to avoid same contradiction. To build this clause, it suffices to negate 
 literals that have an ongoing arc to the first cut that contains first UIP. In \cref{fig:implication-graph}, produced
-clause will be $\omega_l = \{x_1, \neg x_4 \}$. Since the information of this clause is redundant with respect to 
+clause will be $\omega_l = \{x_1, \neg x_4 \}$. Since the information of this clause is redundant regarding 
 the original formula. It can be added without any satisfiability restrictions. The conflict clause can be simplified
 using the implication graph~\cite{sorensson2009minimizing}.
-
 \texttt{backjumpAndRestartPolicies} procedure is executed after producing the conflict clause.
 It will unassigned all
 decision until the first one that is responsible for the inconsistency. Add the conflict clause prune search space that 
 contains no solution. This is the key point of the CDCL algorithm. The restart policy will be discussed in the next section.
 In our example \Cref{fig:implication-graph}, the target decision level is one. The first UIP variable must be assertive,
 and will be propagated in the next loop of the solving algorithm.
-If a conflict implied only one level, the decision variable must be assigned to the opposite value at level zero.
+If a conflict implied only one level, the decision variable must be assigned to the opposite value at level 0.
 Roughly speaking, to ensure satisfiability of the formula, this literal must be true without any decision.
-
  
 \subsection{Heuristics}\label{sec:heuristics}
-This sections gives an overview of different heuristics present in modern SAT solvers.
-
+This section gives an overview of different heuristics present in modern SAT solvers.
 \textbf{Decision heuristics}. Variable used to divide problems have a huge impact on the 
 overall solving time by the solver. Decision variable may impact the number of propagation and so 
 the depth of the search tree.
-
-Variable State Independent Decaying Sum (VSIDS)~\cite{moskewicz2001chaff} is one of the decision heuristic and used
+Variable State Independent Decaying Sum (VSIDS)~\cite{moskewicz2001chaff} is one of the decisions heuristic and used
 nowadays in almost all solvers. Each variable has an activity and was increased by a multiplicative factor 
-when it participate to the resolution of the conflict.
+when it participates to the resolution of the conflict.
 A solver has thousands conflicts during the solving and so activity of variables are very volatile.
 Decision heuristics choose unassigned variable with the highest activity.
-The idea behind this heuristics is to solve "hard" part of problem at the top of the search tree.
+The idea behind this heuristic is to solve ‘hard’ part of problem at the top of the search tree.
 Hence, it is much more efficient when coupled with the restart heuristics. 
-
-Learning rate based branching (LRB~\cite{liang2016learning}) is a most recent decision heuristics. It is a
+Learning rate based branching (LRB~\cite{liang2016learning}) is a latest decision heuristic. It is a
 generalization of VSIDS and its goal is to optimize the \emph{learning rate} (LR), defined as the ability to generate
-learnt clauses. The LRB of a variable is the weighted average (computed with \emph{exponential recency
+learned clauses. The LRB of a variable is the weighted average (computed with \emph{exponential recency
 weighted average} (ERWA))  value taken by its LR over the time. Unassigned variable with a highest LRB are chose as decision. 
-The idea behind this heuristics is to keep variables that used to generate learnt clause in the search tree.
-
+The idea behind this heuristics is to keep variables that used to generate learned clause in the search tree.
 
 \textbf{Restarts.}
-Another important heuristic is \emph{restart}. Basically the solver abandons it current assignment and so 
-start from the top of the tree, while maintaining other information notably learnt clauses but also scores of variables in the decision heuristic. 
-It prevents the solver to get stuck in "hard" (heavy tailing~\cite{gomes1997heavy} part of the search space and can not escape due 
+Another important heuristic is \emph{restart}. Basically, the solver abandons it current assignment and so 
+start from the top of the tree, while maintaining other information notably learned clauses but also scores of variables in the decision heuristic. 
+It prevents the solver to get stuck in ‘hard’ (heavy tailing~\cite{gomes1997heavy} part of the search space and cannot escape due 
 to backjump few levels after conflict resolution. Restart is best effort heuristics, hoping that,
-with more information, a better assignments was made. Hence, in practice, SAT solvers usually restarts after a
-certain number of conflict. Empirically a solver with restart has a better results~\cite{huang2007effect} and is today
-used in almost all state of the art solvers.
-
+with more information, a better assignment was made. Hence, in practice, SAT solvers usually restart after a
+certain number of conflict. Empirically a solver with restart has a better result~\cite{huang2007effect} and is today
+used in almost all state-of-the-art solvers.
 
 \subsection{Preprocessing / Inprocessing}
-
 In order to optimize resolution time by the solver, some transformation to simplify the original formula can be applied.
 This is done by \emph{preprocessing} engine before the start of solving.
 When it is used at some point during the solving, usually after a restart, it is called \emph{inprocessing}.
-
 Simplification of the formula is made by removing clauses and/or variables.\\
 \emph{Variable elimination} simplification is based on \emph{Resolution inference rule}.
-Suppose two clauses	$\omega_1 = \{x_1, x_i, ..., x_j \}$ and $\omega_2 = \{\neg x_1, y_i, ..., y_j\}$.
-The resolution inference rule allows to derive clause $\omega_3 = \{x_i, ..., x_j, y_i, ..., y_j\}$ which is called
+Suppose two clauses $\omega_1 = \{x_1, x_i, ..., x_j \}$ and $\omega_2 = \{\neg x_1, y_i, ..., y_j\}$.
+The resolution inference rule allows to derive a clause $\omega_3 = \{x_i, ..., x_j, y_i, ..., y_j\}$ which is called
 the \emph{resolvent} as it results from resolving two clauses on the literal $x_1$ and $\neg x_1$.
 Moreover,  applying variable elimination until either an empty clause is derived (unsatisfiable formula) or no more application of the resolution are possible (satisfiable formula). This is a complete algorithm to solve a SAT problem.
 Its major issue is to explicitly generate all resolvent and can be exponential in CNF size.
-Hence, the memory of computer will be limiting factor.
+Hence, the memory of the computer will be limiting factor.
 
-
-\emph{Subsumption} is a simple principle to remove clauses. Suppose two clauses $\omega_1$ and $\omega_2$ such that
+\emph{The subsumption} is a simple principle to remove clauses. Suppose two clauses $\omega_1$ and $\omega_2$ such that
 $\omega_1 \subset  \omega_2$, then $\omega_2$ can be safely removed from the original formula.
-\emph{Self Subsuming resolution} is a principle that use resolution rule and subsumption.
-Resolvent clause subsumes the original one. Example $\omega_1 = \{x_1, \neg x_2, x_3\}$ and $\omega_2 = \{x_1, \neg x_2, x_3, x_4\}$, then resolvent clause will be $\omega_3 = \{x_1, x_3\}$ which subsumes $\omega_2$. This principle
-is presents in \texttt{SatElite}~\cite{een2005effective} preprocessor engine and used in almost all modern SAT solvers.
-
-Other simplification techniques exists such that \emph{Gaussian elimination} which detect sub formula in a xor-SAT
+\emph{Self subsuming resolution} is a principle that uses resolution rules and subsumption.
+The resolvent clause subsumes the original one. Examples $\omega_1 = \{x_1, \neg x_2, x_3\}$ and $\omega_2 = \{x_1, \neg x_2, x_3, x_4\}$, then resolvent clause will be $\omega_3 = \{x_1, x_3\}$ which subsumes $\omega_2$. This principle
+is present in \texttt{SatElite}~\cite{een2005effective} preprocessor engine and used in almost all modern SAT solvers.
+Other simplification techniques exist such that \emph{Gaussian elimination} which detects sub formula in a XOR-SAT
 form and solve it in a polynomial complexity. Moreover, this technique can also be used as inprocessing~\cite{soos2010enhanced}. 
-
-Some techniques exploits the structure of the original formula and add relevant clauses to speed up the resolution
+Some techniques exploit the structure of the original formula and add relevant clauses to speed up the resolution
 time of the SAT solver. One of them use community structure of the formula to find good clauses to add into.
 A preprocessor engine doing that is  \texttt{modprep}~\cite{ansotegui2015using}.
-Usage of symmetries also add relevant clause in the formula and will be detailed in the next chapter.
-
+Usage of symmetries also adds relevant clauses in the formula and will be detailed in the next chapter.
 
 \subsection{Parallel SAT solving}
-With the emergence of multi core architectures and increasing power of computer, one way to optimize the solving
+With the emergence of multi-core architectures and increasing power of computers, one way to optimize the solving
 of a SAT problem is the exploitation of these cores. Effectively, SAT problems are a good candidate for parallelism.
-\emph{Portfolio} is a technique that launches several SAT solver in parallel with different heuristics (decisions, restarts, ...) that communicates or not between us. When one of them found a solution or found that none exists, the overall computation is finished. Another technique to make parallel SAT solver exists and called \emph{divide and conquer} in which the search space was divided dynamically according to positive and negative value of the decision
-literal. Several solvers cooperate to found solution, each of them are assigned to sub formula induced by the division. Some specific techniques like load balancing and work stealing is applied to avoid a solver to be idle.
+\emph{Portfolio} is a technique that launches several SAT solvers in parallel with different heuristics (decisions, restarts, ...) that communicates or not between us. When one of them found a solution or found that none exists, the overall computation is finished. Another technique to make parallel SAT solver exists and called \emph{divide and conquer} in which the search space was divided dynamically according to positive and negative value of the decision
+literal. Several solvers cooperate to find a solution, each of them is assigned to sub formula induced by the division. Some specific techniques like load balancing and work stealing is applied to avoid a solver to be idle.
 A recent framework \emph{PaInleSS} (a Framework for Parallel SAT Solving) can be used to easily create a new parallel 
 SAT solver with different heuristics~\cite{le2017painless}~\cite{le2019modular}. Authors of this framework win the parallel tracks of SAT competition \footnote{\url{http://www.satcompetition.org/}} in 2018.
-
-
-
 
 
 
@@ -446,4 +385,3 @@ SAT solver with different heuristics~\cite{le2017painless}~\cite{le2019modular}.
 %\node at ($ (c) + (0, -1.3)$)   {$y \land z$};
 %\end{tikzpicture}
 %\end{center}
-
