@@ -940,10 +940,6 @@ INPUT main.mtc
 OUTPUT main.mtc
 INPUT main.mtc4
 INPUT main.mtc4
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/helvetic/phvr8t.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/phaistos/phaistos.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/helvetic/phvr8t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/helvetic/phvr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/tex/latex/fourier/ts1futs.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/fourier/ts1futs.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/fourier/futr8c.tfm
@@ -962,6 +958,7 @@ INPUT ./cnfs/graph_cnf_opt-crop.pdf
 INPUT ./cnfs/graph_cnf_opt-crop.pdf
 INPUT fig/exemple-orbits.tex
 INPUT fig/exemple-orbits.tex
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/phaistos/phaistos.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/fourier/futri8c.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm7.tfm
@@ -975,6 +972,9 @@ INPUT fig/example-compact-sbp.tex
 INPUT fig/example-compact-sbp.tex
 INPUT sbp-table.tex
 INPUT sbp-table.tex
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/helvetic/phvr8t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/helvetic/phvr8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/helvetic/phvr8r.tfm
 INPUT fig/binary-sbp.tex
 INPUT fig/binary-sbp.tex
 INPUT cosy.tex

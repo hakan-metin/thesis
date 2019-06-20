@@ -6,34 +6,19 @@ principally due to capacity to cut off search space with learning clause. Anothe
 At its most basics, symmetry is a transformation of an object that leaves it unchanged. 
 Symmetries is common in real life, if we take some butterfly, it has exactly the same halves.
 If we search a pattern on one halve and not found it, searching the same pattern in the other halve is 
-completely absurd. But some butterfly  are not symmetric.
+completely absurd. But some of them are not symmetric and we must check pattern in every halves.
+
+In this chapter, we show how to detect if the given formula presents symmetries and if it is the case, how to
+exploit them and so accelerate the solving time.
+
+
+%Some instances exhibit symmetries and not taking them into account forces solvers to needlessly explore isomorphic search space.  
 
 
 
-Some instances exhibit symmetries and not taking them into account forces solvers to needlessly explore isomorphic search space.  
 
 
 
-In this chapter, we show how to detect if a given formula present symmetries and if it is the case, how to
-exploit them for accelerating solving time.
-
-
-\hakan{mettre cette figure pour les pigeonhole problem}
-\begin{figure}
-	\centering
-	\begin{tikzpicture}[
-	start chain = going right,
-	node distance = 0pt,
-	AStyle/.style={draw, minimum width=2em, minimum height=2em, 
-		outer sep=0pt, on chain, fill=yellow!0!white}]
-	\node [AStyle] (1) {\huge\textcolor{gray}{\PHdove}};
-	\node [AStyle] (4) {\huge\textcolor{gray}{\PHdove}};
-	\node [AStyle] (5) {\huge\textcolor{gray}{\PHdove}};
-	\node [AStyle, draw] (6) {\huge\textcolor{gray}{\PHdove}};
-	\node [ minimum width=2em, minimum height=2em, 
-	outer sep=1pt, on chain] (7) {\huge\textcolor{gray}{\PHdove}};
-	\end{tikzpicture}
-\end{figure}
 
 
 
@@ -328,9 +313,9 @@ Visiting one branch is equivalent to visit each symmetric branch and so visiting
 determine satisfiability of the whole formula. Symmetrical branch are discarded by the solver with the addition of 
 constraints. These constraint are not satisfied if the solver visit equivalent assignment.
 In other words, when symmetries of a problems are ignored, solver visit a branch multiple times.
-Suppose the \textit{pigeonhole problems}, where $n$ pigeons are put into $n-1$
+Suppose the \textit{pigeonhole problems} (See \cref{fig:hole}), where $n$ pigeons are put into $n-1$
 holes, with the constraint that each pigeon must be in a different hole is a
-highly symmetric problem. Indeed, all the pigeons (resp. holes) are swappable
+highly symmetric problem. Indeed, all the pigeons (resp. holes) are exchangeable
 without changing the initial problem. Trying to solve it with a standard SAT
 solver, like MiniSAT~\cite{een2003extensible}, turns out to be very time
 consuming (and even impossible, in reasonable time, for high values of $n$).
@@ -339,9 +324,28 @@ then potentially tries all variables combinations ; this eventually leads to
 a combinatorial explosion.
 
 
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[
+	start chain = going right,
+	node distance = 0pt,
+	AStyle/.style={draw, minimum width=2em, minimum height=2em, 
+		outer sep=0pt, on chain, fill=yellow!0!white}]
+	\node [AStyle] (1) {\huge\textcolor{gray}{\PHdove}};
+	\node [AStyle] (4) {\huge\textcolor{gray}{\PHdove}};
+	\node [AStyle] (5) {\huge\textcolor{gray}{\PHdove}};
+	\node [AStyle, draw] (6) {\huge\textcolor{gray}{\PHdove}};
+	\node [ minimum width=2em, minimum height=2em, 
+	outer sep=1pt, on chain] (7) {\huge\textcolor{gray}{\PHdove}};
+	\end{tikzpicture}
+	\caption{Graphical representation of pigeonhole problem}
+	\label{fig:hole}
+\end{figure}
+
+
 This section explains how to exploit statically symmetrical properties of a SAT problem. This can be summarize with the following two 
-questions: 1) How  to choose branch that are equivalent to all symmetric ones? 2)
-how to generate constraints that forbid symmetrical assignments.
+questions: 1) How  to choose branch that are equivalent to all symmetric ones?
+ 2) How to generate constraints that forbid symmetrical assignments?
 
 
 

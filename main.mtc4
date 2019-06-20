@@ -1,11 +1,11 @@
 {\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {3.1}Group basics}{\reset@font\mtcSfont 20}{section.3.1}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Groups}{\reset@font\mtcSSfont 20}{section*.23}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Generators of a group}{\reset@font\mtcSSSfont 20}{section*.24}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Permutation groups}{\reset@font\mtcSSfont 21}{section*.25}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Groups}{\reset@font\mtcSSfont 20}{section*.22}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Generators of a group}{\reset@font\mtcSSSfont 20}{section*.23}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Permutation groups}{\reset@font\mtcSSfont 20}{section*.24}}
 {\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {3.2}Symmetries in SAT}{\reset@font\mtcSfont 21}{section.3.2}}
 {\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {3.3}Symmetry detection in SAT}{\reset@font\mtcSfont 22}{section.3.3}}
 {\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {3.4}Usage of symmetries}{\reset@font\mtcSfont 24}{section.3.4}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Static symmetry breaking}{\reset@font\mtcSSfont 25}{section*.29}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Static symmetry breaking}{\reset@font\mtcSSfont 24}{section*.28}}
 {\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Special form of the group}{\reset@font\mtcSSSfont 30}{section*.33}}
 {\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Binary lex-leader constraints}{\reset@font\mtcSSSfont 30}{section*.34}}
 {\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode BreakID}{\reset@font\mtcSSSfont 31}{section*.36}}
