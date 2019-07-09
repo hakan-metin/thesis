@@ -1,4 +1,4 @@
-﻿\chapter{Between Static and Dynamic\\ Symmetry Breaking}\label{chap:symmSAT}
+\chapter{Between Static and Dynamic\\ Symmetry Breaking}\label{chap:symmSAT}
 \minitoc
 This chapter presents our first contribution published in TACAS 2018 conference~\ref{algorithm:cdcl_cosy}. 
 \section{General idea}
@@ -277,6 +277,7 @@ performance of the solver on some instances, so that it is an option of the
 library.
 All the symmetries we used for the presentation of our approach are
 permutations of variables. Our method straightforwardly extends to permutations of literals, also known as \emph{value permutations} \cite{biere2009handbook}.
+
 
 
 \subsubsection{Integration in \minisat{}.} We show how to integrate \libdsb{}
@@ -616,6 +617,42 @@ heuristically, changing this order dynamically is possible but with some require
 clause from a symmetry breaking predicates needs to be completely removed. If these constraints are not removed, inconsistencies 
 may appear and a satisfiable problem become unsatisfiable.
 
+
+\subsection{Impact of the sign in variable ordering}
+With the same variable ordering, swapping the value thus, $\true < \false$ or $\false < \true$
+may impact drastically the performance of the solver.
+
+To illustrate it, we execute \texit{hole100}, the pigeonhole problem with 100 holes and 101 pigeons with 
+the increase order and change only the sign.
+With  $\false < \true$, the solver generates 20\,619 ESBP and takes 13.8 seconds to solve it.
+With the inverse order, $\true < \false$, it generates 33\,263 ESBP ans solve it in 93.4 seconds.
+
+Following figures~\ref{table:compare_sign_order} show this difference on 500 symmetric instances with
+a scatter plot that compare orders, \texttt{MiniSymFT} is $\true < \false$ and  \texttt{MiniSymTF} is $\false < \true$.
+On the left, we compare the duration of the solver, \texttt{MiniSymTF} is more efficient on some \unsat instances.
+The right figure shows the number of generated ESBP by solvers in log scale. On some instance, it will generate 
+approximately the same number of ESBP. But the difference can an order of magnitude higher. A high number of ESBP is not necessarily
+better. If few number of ESBP cut-off a huge search space it can be sufficient for the solver to prove the existence or not 
+of a solution, variable ordering impact also.
+
+
+\begin{table}[!htbp]
+	\subfloat[Time]{%
+		\includegraphics[width=.3\textheight]{img/scatter_compare}%
+	}
+	\hspace{1em}
+	\subfloat[Number of ESBP]{%
+		\includegraphics[width=.375\textheight]{img/scatter_esbp_compare}%
+	}
+	\vspace*{0.1cm}
+	\caption{Comparison of the order with different sign on 500 symmetric instances.}
+	\label{table:compare_sign_order}
+\end{table}
+
+
+\texttt{MiniSymTF} is generally better and is the default choice of the library.
+But on some cases, it can be worth than the opposite order like in the hole problem.
+With a specific application, both sign orders can be applied to evaluate which one is better.
 
 
 

@@ -120,6 +120,11 @@ H.~Katebi, K.~Sakallah, and I.~Markov.
 \newblock {\em Theory and Applications of Satisfiability Testing--SAT 2010},
   pages 113--127, 2010.
 
+\bibitem{planning_92}
+H.~A. Kautz, B.~Selman, et~al.
+\newblock Planning as satisfiability.
+\newblock In {\em ECAI}, volume~92, pages 359--363, 1992.
+
 \bibitem{le2017painless}
 L.~Le~Frioux, S.~Baarir, J.~Sopena, and F.~Kordon.
 \newblock Painless: a framework for parallel sat solving.

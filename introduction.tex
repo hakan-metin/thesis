@@ -1,22 +1,27 @@
 \chapter{Introduction}\label{chap:intro}
 
 Nowadays, computers are powerful and used in many applications in different domains.
-One of these domains is critical application, these applications are running in planes, cars
-and some software must be secure. Proving the correctness of this software leads
-to combinatorial explosion.
-Over the years, computer scientist has developed many techniques to solve 
+One of these domains is critical application that run in planes, cars, trains, etc.
+Software present in these machines must be correct and exempt of bugs.
+Proving the correctness of these software is a difficult problem. 
+
+
+
+ can leads to combinatorial explosion.
+Over the years, computer scientists have developed many techniques to solve 
 these kinds of problems like \emph{constraint programming} (CP) \cite{rossi2006handbook},
 \emph{Propositional Satisfiability} (SAT) \cite{biere2009handbook},
 \emph{Satisfiability Modulo Theory} (SMT) \cite{barrett2018satisfiability}.
-In this thesis, we focus on solving propositional or Boolean formula, it is simply deciding whether 
+In this thesis, we focus on solving propositional or Boolean formula, it consists of deciding whether 
 all constraints of a formula can be satisfiable and answer \sat, or it is not possible to satisfy all
-constraints and answer \unsat.This problem may appear to be simple bu cannot be handled efficiently.
-This is due to the complexity of the problem which is proved NP-complete in 1971. Many problems can
-be transformed into a SAT problem, it is an important challenge to optimize it.
+constraints and answer \unsat.This problem may appear to be simple but cannot be handled efficiently
+at the moment. This is due to the complexity of the problem which is proved NP-complete in 1971. 
+Many industrial applications problems can be transformed into a SAT problem.
+Improving the performance of tools that resolve this problem is an important challenge. 
 
 Over the last decades, SAT solver can handle more and more complicated problems in different domains:
 like \emph{formal methods}: hardware model checking,
-software model checking, etc.; \emph{artificial intelligence}: planning; \emph{game resolution}:
+software model checking, etc.; \emph{artificial intelligence}: planning~\cite{planning_92}; \emph{game resolution}:
 sudoku, n-queens, \emph{Bioinformatics} : Haplotype inference,
 \emph{design automation} : equivalence checking.
 A recent work solve the Pythagorean triple, an old mathematical problem which has been resolved with 

@@ -1,13 +1,15 @@
 \chapter{The Boolean Satisfiability Problem}\label{chap:preliminaries}
 \minitoc
-In this thesis, our goal is to exploit symmetrical properties of a SAT problems.
-Before, get to the heart of the matter, we first introduce the Boolean satisfiability (SAT)  problems.
-These problems are propositional formula  representing constraints of a system.
-A SAT solver aims to satisfy all constraints present in the formula.
-It is a decision problem that answer $\sat$ if it is possible and $\unsat$ otherwise.
+In this thesis, our goal is to exploit the symmetrical properties of SAT problems.
+Before, we get to the heart of the matter, we first introduce the Boolean satisfiability (SAT)  problem.
+This problem is a propositional formula representing the constraints of a system.
+A tool that aims to satisfy such formulas is called a SAT solver. It answers $\sat$ when all constraints
+present in the formula can be satisfied and $\unsat$ otherwise.
+
+
 \section{SAT basics}
-A most basic block of satisfiability problem is\emph{Boolean variable}, or \emph{propositional variable}.
-It has two possible values : true or false (noted respectively $\true$ or $\false$) that are \emph{constants}.
+The most basic block of satisfiability problem is the \emph{Boolean} or \emph{propositional variable}.
+It has two possible values : true or false (noted respectively $\true$ or $\false$).
 We denote \emph{literal} $l$, a propositional variable or its negation.
 For a given variable $x$, the positive literal is represented by $x$ and the negative one by $\neg x$.
 Given a formula $\varphi$, we denote $\Vars_\varphi$ ($\Lits_\varphi$) the set of variables (literals) used in the formula (the index in $\Vars_\varphi$ and $\Lits_\varphi$ is usually omitted when
@@ -45,7 +47,7 @@ often represented by the set of its true literals.  The set of all (possibly
 partial) assignments of $\Vars$ is noted $\Assignments(\Vars)$.
 A \emph{truth table} gives an evaluation of all possible assignment for a given formula.
 \Cref{tab:truthtable} shows the evaluation of negation, conjunction and disjunction operators.
-For convenience, true value (\true) is also represented as $1$ a false value (\false) is represented as $0$.
+For convenience, true value (\true) is also represented as $1$, a false value (\false) is represented as $0$.
 When a formula is always true independently from the assignment, it is called a \emph{tautology} $x \lor \neg x$ is 
 an example of tautologous formula.
 
@@ -113,11 +115,14 @@ and vice-versa, denoted as $\varphi \equiv \psi$.
  Also, we say a formula $\psi$ is \emph{logical consequence} of a formula $\varphi$ is every model of $\varphi$
  is also a model of $\psi$ and is denoted as $\varphi \models \psi$.
 
-Conjunctive normal form is the input form of state-of-the-art solvers.
- 
-Note that each cube in DNF is a solution to the whole formula in CNF form.
-A formula is said to be \emph{satisfiable} (\sat) if there is at least one assignment that satisfies it;
-otherwise the formula is \emph{unsatisfiable} (\unsat).
+Conjunctive normal form is the input form of state-of-the-art solvers. Any propositional
+formula can be transformed in CNF form with a polynomial complexity. Conversely, DNF form have
+an exponential memory complexity during the transformation.
+Note that each cube in the problem in DNF form is a solution in the equivalent CNF formulas.
+\hakan{Sharp SAT = transform CNF to DNF}
+
+%A formula is said to be \emph{satisfiable} (\sat) if there is at least one assignment that satisfies it;
+%otherwise the formula is \emph{unsatisfiable} (\unsat).
 
 %\subsection{Satisfiability problem}
 %A \emph{Boolean variable}, or \emph{propositional variable}, is a variable that
@@ -155,21 +160,42 @@ otherwise the formula is \emph{unsatisfiable} (\unsat).
 %otherwise the formula is \emph{unsatisfiable} (\unsat).
 
 \subsection{An NP-complete problem}
-The SAT problem is the first NP-complete algorithm as proven by Stephen Cook in 1971~\cite{cook1971complexity}.
+The SAT problem is the first NP-complete algorithm proven by Stephen Cook in 1971~\cite{cook1971complexity}.
 NP-completeness means that a SAT problem can be solved with a non-deterministic machine in polynomial time (NP) and is also NP-hard. A problem is said NP-hard if everything in NP can be transformed into it in polynomial time. 
 One of the most important unsolved problems in theoretical computer science is the P versus NP problem.
 This question is one of the seven millennium prize problems.
+
+
+\subsection{Easy to solve particular forms}
 Some particular form of the SAT problems can be computed in linear time for 2-SAT~\cite{aspvall1979linear}
-where each clause is in binary form i.e. size  of two. %This kind of clauses can be written as implication 
-Other particular form  can be solved in  polynomial time like Horn SAT~\cite{aspvall1979linear} in which it suffice to  apply \emph{unit propagation} explained in \cref{sec:dpll} until fix point.
-Xor-SATisfiability where each clause contains exclusive or belong also to the polynomial class.
-%It asks if every problems can be solved and verified in polynomial time.
-%Any NP problems can be reduced in polynomial time by a deterministic Turing machine to the SAT problems.
-%The states that the propositional satisfiability problem is NP-complete
-%SAT is NP because any assignment of Boolean values to Boolean variables that is claimed to 
-%satisfy the given expression can be verified in polynomial time by a deterministic Turing machine. 
-%
-%
+where each clause is in binary form. In this case, it suffices to create a graph in which each clause is transformed into implication. For example, the clause $x \lor y$ will be transformed into $ \neg x \Rightarrow y,
+\neg y \Rightarrow x$. After computing strong connected component on this graph, a 
+search of the positive and negative literal in the same  strong connected component suffices 
+to determine the satisfiability of the formula. If it is the case, the formula is \unsat. Otherwise 
+a solution can be deduce and the problem is \sat.
+
+Other particular form  can be solved in  polynomial time like Horn SAT~\cite{aspvall1979linear} in which it suffices to  apply \emph{unit propagation} explained thereafter in \cref{sec:dpll} until fix point. Simply it satisfies unit clause to satisfy them. To finish decision procedure, the formula must contains only Horn clauses. If the empty clause is reached, then the problem is
+$\unsat$ and $\sat$ otherwise.
+
+Xor-Satisfiability  is also a particular form where each clause encodes exclusive or (xor).
+This problem can be seen as linear equations. Gaussian elimination allows to solve this kind of
+problem is polynomial time.
+
+
+\subsection{Related problems}
+
+Different kind of problems related to SAT is presented is this section.
+One of them is sharp-SAT (\#SAT), it purpose is to count the umber of solution in CNF.
+Note that, in DNF form it is trivial, it is just the number of cube present in the formula.
+
+Another related problem is maximum satisfiability problem (MAX-SAT). In this case the problem
+is to find the maximum subset of clauses that can be satisfied for a formula. Different variant
+of this problem exists. For example, some constraints must be satisfied (hard clauses) and MAX-SAT
+is applied on remaining \emph{soft} clauses.
+
+The last related problem is quantified Boolean formula (QBF) where the quantifiers $\exists$ and
+$\forall$ are present in the formula.
+
 
 \subsection{Solving a SAT problem}
 Two kinds of algorithms exist to solve satisfiability problems.
@@ -214,8 +240,8 @@ This procedure ends when either no unit clause remains or an inconsistency was f
 \input{algo/unitdpll}
 When DPLL algorithm is executed on the formula in \Cref{fig:naive_algo}, after the decision of literal
 $\neg x_1$ and $\neg x_2$ unit propagation detects that $x_3$ must be true. This propagation prevents to 
-explore assignments from $\alpha_1 $ to $\alpha_{8}$. Moreover, application to unit propagation provokes more unit clauses
-and leads directly to a solution. 
+explore assignments from $\alpha_1 $ to $\alpha_{8}$. Moreover, application to unit propagation 
+provokes more unit clauses and leads directly to a solution. 
 An important part of efficiency of DPLL is due to choose the variable that divides the search tree made by
 the procedure \texttt{assignDecisionLiteral} . The objective of this function 
 is to find a literal that will generate a maximum of unit propagation. Intuitively, decision literals 
@@ -236,28 +262,30 @@ Conflict Driven Clause Learning (CDCL) \cref{algo:cdcl} is another sound and com
 to resolve a SAT problem and overcome principal weakness of DPLL.
 
 \Cref{algo:cdcl} gives an overview of CDCL, Like DPLL,  it walks on a binary search tree.
-Initially, the current assignment is empty and decision level that indicated the depth of the search tree noted as $dl$ is set to zero.
+Initially, the current assignment is empty and decision level that 
+indicated the depth of the search tree noted as $dl$ is set to zero.
 Algorithm first applies unit propagation to the formula $\varphi$ for the current assignment $\alpha$ (\cref{alg:cdcl:unit}).
 Note that it is  the same procedure as the one used for DPLL.
 An inconsistency or a \emph{conflict} at level zero indicates that the formula is unsatisfiable, and the algorithm
 reports it (\cref{alg:cdcl:unsat_start,alg:cdcl:unsat_end}). When the conflict is occurring at a higher level, it
 reason was analyzed and a clause called \emph{conflict clause} is deduced (\cref{alg:cdcl:analyze}).
+Working of this procedure will be clearly explained thereafter.
 This clause is \emph{learnt} (\cref{alg:cdcl:learn}) (added to the formula). This clause is redundant from the current
 formula and so as it does not change the satisfiability of $\varphi$. It also avoids encountering a conflict with the same
-causes in the future. Working of this function will be presented thereafter.
-The analysis is completed by the computation of a \emph{backjump}, solver unassign some literals and decrease
-the decision level (\cref{alg:cdcl:backjump}). As the level can be much lower than the current assignment this is called 
-\emph{non chronological backtracking}.
+causes in the future.
+The analysis is completed by the computation of a \emph{backjump}, solver unassign responsible literals and decrease the decision level (\cref{alg:cdcl:backjump}). As the level can be much lower than the current assignment this is called \emph{non chronological backtracking}.
 Finally, if no conflict appears, the algorithm chooses a new decision literal 
 (\cref{alg:cdcl:pick_start,alg:cdcl:pick_end}).
 The above steps are repeated until the satisfiability status of the
 formula is determined.
+
 \input{algo/cdcl}
+
 \subsection{Conflict Analysis}
 A conflict is an inconsistency discovered by the solver, a situation that requires for a variable to be set 
 simultaneously to the \true and \false value. \Cref{fig:conflict} shows an assignments that leads to a conflict.
 First the solver chose $\neg x_1$ as decision then $\neg x_6$ and then $\neg x_5$. This last one propagates $x_4$
-which in turn propagates $x_2$ and $x_3$. On clause $\omega_1$, $x_3$ needs to be \true and \false in $\omega_5$ so
+which in turn propagates $x_2$ and $x_3$. On clause $\omega_1$, $x_3$ needs to be $\true$ and $\false$ in $\omega_5$ so
 a conflict appears.
 \begin{figure}[!htbp]
  \centering
@@ -287,27 +315,29 @@ This clause must be assertive i.e. all  literals are false except one that is no
 which lies on every path from the decision to the conflict. Note that, there are many UIP for a given decision level.
 In such case, UIPs are ordered according to the distance with the contradiction. The first UIP is the closest to
 the conflict. It is well known that the first UIP provides the smallest set of assignment that is responsible for the
-contradiction.~\cite{zhang2001efficient}
-An UIP divides the implication in two sides with a \emph{cut}, the reason side contains decision variables 
-that is responsible for the contradiction and the conflict side that contains the conflict. Note that, UIP is always is the 
+contradiction~\cite{zhang2001efficient}.
+An UIP divides the implication in two sides with a \emph{cut}, the \emph{reason side} contains decision variables 
+that is responsible for the contradiction and the \emph{conflict side} that contains the conflict. Note that, UIP is always is the 
 reason side. \Cref{fig:implication-graph} depicts two cuts in the implication graph.
 Once the reason side of a conflict is established, a conflict-driven clause or conflict clause is produced.
 It purposes to avoid same contradiction. To build this clause, it suffices to negate 
-literals that have an ongoing arc to the first cut that contains first UIP. In \cref{fig:implication-graph}, produced
+literals that have an ongoing arc to the  cut that contains first UIP. In \cref{fig:implication-graph}, produced
 clause will be $\omega_l = \{x_1, \neg x_4 \}$. Since the information of this clause is redundant regarding 
 the original formula. It can be added without any satisfiability restrictions. The conflict clause can be simplified
-using the implication graph~\cite{sorensson2009minimizing}.
+using the implication graph~\cite{sorensson2009minimizing} to reduce its size by detecting
+redundancy. All leaned clause are store in clause database that is simply a vector of clauses.
 \texttt{backjumpAndRestartPolicies} procedure is executed after producing the conflict clause.
-It will unassigned all
-decision until the first one that is responsible for the inconsistency. Add the conflict clause prune search space that 
-contains no solution. This is the key point of the CDCL algorithm. The restart policy will be discussed in the next section.
-In our example \Cref{fig:implication-graph}, the target decision level is one. The first UIP variable must be assertive,
-and will be propagated in the next loop of the solving algorithm.
-If a conflict implied only one level, the decision variable must be assigned to the opposite value at level 0.
-Roughly speaking, to ensure satisfiability of the formula, this literal must be true without any decision.
+It will unassigned all decision until the first one that is responsible for the inconsistency. Adding the conflict clause prunes search space that contains no solution. This is the key point of the CDCL algorithm. In our example \Cref{fig:implication-graph}, the target decision level is 1.
+After backtrack, the conflict clause is assertive, the first UIP is the only variable that 
+have not a value and will be propagated in the next loop of the solving algorithm.
+If a conflict implied only one level, the decision variable must be assigned 
+to the opposite value at level 0. This means that to ensure satisfiability of the formula,
+this literal must be true without any decision.
+ 
  
 \subsection{Heuristics}\label{sec:heuristics}
 This section gives an overview of different heuristics present in modern SAT solvers.
+
 \textbf{Decision heuristics}. Variable used to divide problems have a huge impact on the 
 overall solving time by the solver. Decision variable may impact the number of propagation and so 
 the depth of the search tree.
@@ -333,23 +363,40 @@ with more information, a better assignment was made. Hence, in practice, SAT sol
 certain number of conflict. Empirically a solver with restart has a better result~\cite{huang2007effect} and is today
 used in almost all state-of-the-art solvers.
 
+
+\textbf{Cleaning clause database.}
+Adding constantly all learned clauses will saturate presents memory in the machine and the 
+problem cannot be solved. When some conditions are satisfied, some learned clauses are
+deleted from the clause chosen with different heuristic criteria. The size of the clause
+is one of them and is very often used by solvers. Effectively a clause is really useful when 
+it participates to unit propagation. The smaller the clause, the greater its chance.
+\emph{clause activity} is another heuristic, when a clause participate to conflict analysis 
+its score is increment and lower activity will be removed. The last often used criteria 
+is base on Literal Block Distance (LBD). It is a measure that compute the \emph{quality} of a clause
+it is based on the number decision level presents in the clause. Clauses with high value of LBD will 
+deleted from the clause database.
+
+
 \subsection{Preprocessing / Inprocessing}
 In order to optimize resolution time by the solver, some transformation to simplify the original formula can be applied.
 This is done by \emph{preprocessing} engine before the start of solving.
 When it is used at some point during the solving, usually after a restart, it is called \emph{inprocessing}.
 Simplification of the formula is made by removing clauses and/or variables.\\
-\emph{Variable elimination} simplification is based on \emph{Resolution inference rule}.
+
+\emph{Variable elimination} simplification is based on \emph{resolution inference rule}.
 Suppose two clauses $\omega_1 = \{x_1, x_i, ..., x_j \}$ and $\omega_2 = \{\neg x_1, y_i, ..., y_j\}$.
 The resolution inference rule allows to derive a clause $\omega_3 = \{x_i, ..., x_j, y_i, ..., y_j\}$ which is called
 the \emph{resolvent} as it results from resolving two clauses on the literal $x_1$ and $\neg x_1$.
-Moreover,  applying variable elimination until either an empty clause is derived (unsatisfiable formula) or no more application of the resolution are possible (satisfiable formula). This is a complete algorithm to solve a SAT problem.
+Moreover,  applying variable elimination until either an empty clause is derived (unsatisfiable formula) or 
+no more application of the resolution are possible (satisfiable formula). This is a complete algorithm to solve a SAT problem.
 Its major issue is to explicitly generate all resolvent and can be exponential in CNF size.
 Hence, the memory of the computer will be limiting factor.
 
 \emph{The subsumption} is a simple principle to remove clauses. Suppose two clauses $\omega_1$ and $\omega_2$ such that
 $\omega_1 \subset  \omega_2$, then $\omega_2$ can be safely removed from the original formula.
 \emph{Self subsuming resolution} is a principle that uses resolution rules and subsumption.
-The resolvent clause subsumes the original one. Examples $\omega_1 = \{x_1, \neg x_2, x_3\}$ and $\omega_2 = \{x_1, \neg x_2, x_3, x_4\}$, then resolvent clause will be $\omega_3 = \{x_1, x_3\}$ which subsumes $\omega_2$. This principle
+The resolvent clause subsumes the original one. Examples $\omega_1 = \{x_1, \neg x_2, x_3\}$ and $\omega_2 = \{x_1, \neg x_2, x_3, x_4\}$,
+ then resolvent clause will be $\omega_3 = \{x_1, x_3\}$ which subsumes $\omega_2$. This principle
 is present in \texttt{SatElite}~\cite{een2005effective} preprocessor engine and used in almost all modern SAT solvers.
 Other simplification techniques exist such that \emph{Gaussian elimination} which detects sub formula in a XOR-SAT
 form and solve it in a polynomial complexity. Moreover, this technique can also be used as inprocessing~\cite{soos2010enhanced}. 
@@ -361,10 +408,15 @@ Usage of symmetries also adds relevant clauses in the formula and will be detail
 \subsection{Parallel SAT solving}
 With the emergence of multi-core architectures and increasing power of computers, one way to optimize the solving
 of a SAT problem is the exploitation of these cores. Effectively, SAT problems are a good candidate for parallelism.
-\emph{Portfolio} is a technique that launches several SAT solvers in parallel with different heuristics (decisions, restarts, ...) that communicates or not between us. When one of them found a solution or found that none exists, the overall computation is finished. Another technique to make parallel SAT solver exists and called \emph{divide and conquer} in which the search space was divided dynamically according to positive and negative value of the decision
-literal. Several solvers cooperate to find a solution, each of them is assigned to sub formula induced by the division. Some specific techniques like load balancing and work stealing is applied to avoid a solver to be idle.
+\emph{Portfolio} is a technique that launches several SAT solvers in parallel with different heuristics (decisions, restarts, ...) that 
+communicates or not between us. When one of them found a solution or found that none exists, the overall computation is finished.
+Another technique to make parallel SAT solver exists and called \emph{divide and conquer} in which the search space was divided 
+dynamically according to positive and negative value of the decision literal. Several solvers cooperate to find a solution, 
+each of them is assigned to sub formula induced by the division. Some specific techniques like load balancing and work stealing 
+is applied to avoid a solver to be idle.
 A recent framework \emph{PaInleSS} (a Framework for Parallel SAT Solving) can be used to easily create a new parallel 
-SAT solver with different heuristics~\cite{le2017painless}~\cite{le2019modular}. Authors of this framework win the parallel tracks of SAT competition \footnote{\url{http://www.satcompetition.org/}} in 2018.
+SAT solver with different heuristics~\cite{le2017painless}~\cite{le2019modular}. Authors of this framework win the parallel 
+tracks of SAT competition \footnote{\url{http://www.satcompetition.org/}} in 2018.
 
 
 

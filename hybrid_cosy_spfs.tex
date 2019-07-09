@@ -1,4 +1,4 @@
-﻿\chapter{Compose dynamic symmetry handling}
+\chapter{Compose dynamic symmetry handling}
 \minitoc
 \section{Composition of SP and SymmSAT}
 Recently, we developed an approach that reuses the
@@ -276,6 +276,7 @@ symmetries tracking would probably reduce this cost.
  \label{fig:ratio}
 \end{figure}
 \end{center}
+
 To go further in our analyze, we also compare the ratio between the number of
 decisions and the number of propagation. This is a fair measure to assess the
 quality of a SAT solving approach: if the ratio is small, then this means that
@@ -291,6 +292,7 @@ What is important to underline here is highlighted on the left hand side
 scatter plot: on a large majority of UNSAT problems, the ratio goes in favor
 of \texttt{minisat-SymSp} w.r.t. \texttt{minisat-Sym}. This confirms the
 positive impact of SPA when applied in conjunction with ESBA.
+
 \section{Another combo approach}
 Introducing local symmetries allow us to use it with another dynamic approach : 
 \textit{Symmetry Explanation Learning} (SEL). It computes the symmetrical learning clause and
