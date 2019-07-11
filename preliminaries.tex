@@ -224,8 +224,11 @@ This section describes different \emph{complete }algorithm to solve a propositio
 A naive approach to solve a SAT problem is to try all possible assignments.
 For a propositional formula with $n$ variables, it leads to $2^n$ assignments in the worse case.  
 \Cref{fig:naive_algo} illustrates the search tree for a given problem with six variables.
-In this case $\alpha_{11}$ ($\neg x_1, \neg x_2, x_3, \neg x_4, x_5, \neg x_6 $) is found as a solution of the problem. In the general case,
-this algorithm is  intractable on real problems even for a formula with few variables.
+The presented formula in the figure have 6 clauses, with 2 ternary clauses and 4 binary clauses.
+It will be used as example in different algorithm presented below. This formula is $\sat$,
+$\alpha_{11} = \{\neg x_1, \neg x_2, x_3, \neg x_4, x_5, \neg x_6 \}$ is a solution of the problem.
+This naive algorithm will check 10 assignments before finding the solution. 
+In the general case, due to the number of variable in problems, this algorithm is intractable.
 
 \begin{figure}[!htbp]
  \centering
@@ -236,32 +239,36 @@ this algorithm is  intractable on real problems even for a formula with few vari
 
 \subsubsection{Davis Putnam Logemann Loveland algorithm (DPLL)}\label{sec:dpll}
 One of the first non-memory-intensive algorithm developed to solve SAT problems is 
-the Davis Putnam Logemann Loveland algorithm~\cite{dpll_62} (DPLL). 
+the Davis Putnam Logemann Loveland algorithm (DPLL)~\cite{dpll_62}. 
 It explores a binary tree using depth first search as shown in \Cref{algo:dpll}.
 The construction of the tree  relies on the \emph{decision} made (on \cref{algo:dpll:decision}) then,
-
-
-recursive call with each value are checked.
-
-
-When a leaf report \unsat (\cref{algo:dpll:unsatbranch}), other branches are explored.
-By recursive construction of the algorithm, when positive and negative value of a literal reach \unsat,
+each possible value are checked in recursive call, true value on \cref{algo:dpll:pos} and false value 
+on \cref{algo:dpll:neg}.
+When a leaf find a conflict (\cref{algo:dpll:unsatbranch}) which means that the formula cannot be satisfied with
+the current assignment, other branches are explored.
+By recursive construction of the algorithm, when each value of a literal reach to a conflict,
 solver \emph{backtracks} at most one level, this fact is called \emph{chronological backtracking}.
-If all leaves report $\unsat$  the formula $\varphi$ is unsatisfiable \cref{algo:dpll:unsat}.
-Finally, if any branch found a solution  i.e. the problem is empty,
-formula is satisfiable corresponding assignment is returned (\cref{algo:dpll:sat1,algo:dpll:sat2})
+When the conflict occurs at the top of the tree, it means that the formula cannot be satisfied and the 
+solver reports $\unsat$ (\cref{algo:dpll:unsat}). However, if the formula is empty in any branch, 
+it means that current assignment satisfy the whole formula and the solver reports it on \cref{algo:dpll:sat1}
+or \ref{algo:dpll:sat2}.
+
 \input{algo/dpll}
-An important function in the DPLL algorithm is \texttt{unitPropagation} \cref{algo:dpll:unit} and
-it is detailed in \Cref{algo:unitdpll}. It searches all unit clauses, then, to ensure satisfiability these literals must be true
-and added to the current assignment. Formula is then simplified as follows, clauses that contains this literal are already satisfied
-and can be deleted; negative literals are removed from the clause that belongs to them.
-This procedure ends when either no unit clause remains or an inconsistency was found (empty clause).
+
+An important function in the DPLL algorithm is \texttt{unitPropagation} (\cref{algo:dpll:unit}).
+It is presented in \Cref{algo:unitdpll}. This function set value to unit clause in order to satisfy them
+until fix point is reached. Either, they are no more unit clause in the formula or an inconsistency 
+is found which means that current assignment cannot satisfy the formula. In the later case, the solver will
+backtrack and another branch will be explored.
 
 \input{algo/unitdpll}
-When DPLL algorithm is executed on the formula in \Cref{fig:naive_algo}, after the decision of literal
-$\neg x_1$ and $\neg x_2$ unit propagation detects that $x_3$ must be true. This propagation prevents to 
-explore assignments from $\alpha_1 $ to $\alpha_{8}$. Moreover, application to unit propagation 
-provokes more unit clauses and leads directly to a solution. 
+
+When DPLL algorithm is executed on the formula in \Cref{fig:naive_algo}, after making the decisions on literals
+$\neg x_1$ and $\neg x_2$, unit propagation detects that $x_3$ must be true. 
+This propagation prevents to explore  assignments from $\alpha_1 $ to $\alpha_{8}$. Effectively, when 
+$x_3$ is set to false value, the clause $\omega_1$ is not satisfied and it remains 3 variables and so 
+$2^3$ possible assignments.
+Moreover, in the DPLL algorithm, application of unit propagation until the fix point is reached leads  to a solution. 
 An important part of efficiency of DPLL is due to choose the variable that divides the search tree made by
 the procedure \texttt{assignDecisionLiteral} . The objective of this function 
 is to find a literal that will generate a maximum of unit propagation. Intuitively, decision literals 

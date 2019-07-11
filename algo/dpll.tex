@@ -13,23 +13,22 @@
 	{	
 		$\varphi, \alpha \gets$ \unitPropagation{$\varphi, \alpha$}\;
 	\label{algo:dpll:unit}
-		\If{$\{\} \in \varphi$}{\Return \unsat \tcp*{This branch is \unsat}}	 \label{algo:dpll:unsatbranch}
+		\If{$\{\} \in \varphi$}{\Return \false \tcp*{Conflict}}	 \label{algo:dpll:unsatbranch}
 		
 		\If{$\varphi = \{\}$}{\Return $\alpha$ \tcp*{$\varphi$ is $\sat$}}
 		
 		$x \gets$ \assignDecisionLiteral{}\; \label{algo:dpll:decision}
 
-		\If{$\alpha \gets$ \DPLL{$\varphi \cup \{x\}, \alpha $}$\neq \unsat$ }
+		\If{$\alpha \gets$ \DPLL{$\varphi \cup \{x\}, \alpha $} \label{algo:dpll:pos}} 
 		{
 			\Return $\alpha$ 		\label{algo:dpll:sat1}
-			
-		}\ElseIf{ $\alpha \gets$ \DPLL{$\varphi \cup \{\neg x\}, \alpha $}$\neq \unsat$}
+		}
+		\If{ $\alpha \gets$ \DPLL{$\varphi \cup \{\neg x\}, \alpha $} \label{algo:dpll:neg}}
 		{
 			\Return $\alpha$ 		\label{algo:dpll:sat2}
-		} \Else{
-			\Return \unsat \tcp*{$\varphi$ is $\unsat$}
-		}
-		\label{algo:dpll:unsat}
+		} 
+	
+		\Return \unsat \tcp*{$\varphi$ is $\unsat$}\label{algo:dpll:unsat}
 	}
 	\caption{The DPLL algorithm.}
 	\label{algo:dpll}

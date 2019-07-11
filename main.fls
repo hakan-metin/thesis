@@ -876,6 +876,8 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/fourier/fourier-mcl.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/helvetic/phvr8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/helvetic/phvr8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/helvetic/phvr8r.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/fourier/futrc8t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/fourier/futrc8t.tfm
 INPUT fig/naive_algorithm.tex
 INPUT fig/naive_algorithm.tex
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/fourier/futr8t.tfm
@@ -896,8 +898,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/fourier/fourier-alt.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/fourier/futsy.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/fourier/fourier-ms.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/fourier/fourier-mcl.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/fourier/futrc8t.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/fourier/futrc8t.tfm
 INPUT algo/dpll.tex
 INPUT algo/dpll.tex
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/fourier/futb8t.tfm
@@ -915,11 +915,11 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrrc8t.tfm
 INPUT algo/unitdpll.tex
 INPUT algo/unitdpll.tex
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr8t.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/courier/pcrr8t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/fourier/futb8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/fourier/futb8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/fourier/fourier-alt-bold.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/courier/pcrr8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/fourier/futbi8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/fourier/futbi8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/fourier/fourier-alt-boldita.tfm
