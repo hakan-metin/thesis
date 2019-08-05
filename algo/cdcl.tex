@@ -15,15 +15,15 @@
 		$dl \gets 0$ \tcp*{Current decision level}
 		$\alpha \gets \emptyset$\;
 		\While{not all variables are assigned}{
-			$\varphi, \alpha \gets$ \unitPropagation{$\varphi|_\alpha, \alpha$}\;\label{alg:cdcl:unit}
-			\If(\tcp*[f]{A conflict occurs}){ $\{\} \in \varphi$}
+			($\varphi, \alpha) \gets$ \unitPropagation{$\varphi|_\alpha, \alpha$}\;\label{alg:cdcl:unit}
+			\If(\label{alg:cdcl:unsat_start} \tcp*[f]{A conflict occurs}){ $\{\} \in \varphi$}
 			{ 
-				\If{dl = 0}{\label{alg:cdcl:unsat_start} 
+				\If{dl = 0}{
 					\Return \false \label{alg:cdcl:unsat_end} 
 					\tcp*{$\varphi$ is $\unsat$}
 				}
 				$\omega \gets$ \analyzeConflict{}\;\label{alg:cdcl:analyze} 
-				$dl \gets$ \backjumpPolicy{}\;\label{alg:cdcl:backjump} 
+				$(dl, \alpha) \gets$ \backjumpPolicy{}\;\label{alg:cdcl:backjump} 
 				$\varphi \gets \varphi \cup \{\omega$\} \; \label{alg:cdcl:learn}
 				
 			}

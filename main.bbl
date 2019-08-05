@@ -17,6 +17,12 @@ B.~Aspvall, M.~F. Plass, and R.~E. Tarjan.
   boolean formulas.
 \newblock {\em Information Processing Letters}, 8(3):121--123, 1979.
 
+\bibitem{audemard2012refining}
+G.~Audemard and L.~Simon.
+\newblock Refining restarts strategies for sat and unsat.
+\newblock In {\em International Conference on Principles and Practice of
+  Constraint Programming}, pages 118--126. Springer, 2012.
+
 \bibitem{barrett2018satisfiability}
 C.~Barrett and C.~Tinelli.
 \newblock Satisfiability modulo theories.
@@ -27,6 +33,12 @@ B.~Benhamou, T.~Nabhani, R.~Ostrowski, and M.~R. Saidi.
 \newblock Enhancing clause learning by symmetry in sat solvers.
 \newblock In {\em 2010 22nd IEEE International Conference on Tools with
   Artificial Intelligence}, volume~1, pages 329--335. IEEE, 2010.
+
+\bibitem{biere2008adaptive}
+A.~Biere.
+\newblock Adaptive restart strategies for conflict driven sat solvers.
+\newblock In {\em International Conference on Theory and Applications of
+  Satisfiability Testing}, pages 28--33. Springer, 2008.
 
 \bibitem{biere2009handbook}
 A.~Biere, M.~Heule, and H.~van Maaren.
@@ -120,6 +132,11 @@ H.~Katebi, K.~Sakallah, and I.~Markov.
 \newblock {\em Theory and Applications of Satisfiability Testing--SAT 2010},
   pages 113--127, 2010.
 
+\bibitem{kautz2009incomplete}
+H.~A. Kautz, A.~Sabharwal, and B.~Selman.
+\newblock Incomplete algorithms.
+\newblock {\em Handbook of satisfiability}, 185:185--203, 2009.
+
 \bibitem{planning_92}
 H.~A. Kautz, B.~Selman, et~al.
 \newblock Planning as satisfiability.
@@ -172,6 +189,11 @@ M.~W. Moskewicz, C.~F. Madigan, Y.~Zhao, L.~Zhang, and S.~Malik.
 \newblock Chaff: Engineering an efficient sat solver.
 \newblock In {\em Proceedings of the 38th annual Design Automation Conference},
   pages 530--535. ACM, 2001.
+
+\bibitem{robinson1965machine}
+J.~A. Robinson et~al.
+\newblock A machine-oriented logic based on the resolution principle.
+\newblock {\em Journal of the ACM}, 12(1):23--41, 1965.
 
 \bibitem{rossi2006handbook}
 F.~Rossi, P.~Van~Beek, and T.~Walsh.
