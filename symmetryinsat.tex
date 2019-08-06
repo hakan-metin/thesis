@@ -163,31 +163,32 @@ Symmetry of a formula $\varphi$ preserves the satisfaction, for every \emph{comp
 %The next section presents how to compute the set of \emph{generators} of a given formula.
 \section{Symmetry detection in SAT}
 For the detection of symmetries in SAT, we fist introduce the graph automorphism notion.
-Given a colored graph $G = (V, E, \gamma)$, with vertex set $V \in  [1, n] $, edge set E and
-$\gamma$ a function that apply a mapping : $V \rightarrow C$ where C is a set of \emph{colors}.
-An automorphism of G is a permutation from its vertices $g :V \rightarrow V$ 
+Given a colored graph $Gr = (V, E, \gamma)$, with a set of vertices set $V \in  [1, n] $, a set of edges $E$ and
+$\gamma$ a mapping : $V \rightarrow C$, where C is a set of \emph{colors}.
+An automorphism of $Gr$ is a permutation on its vertices, $g :V \rightarrow V$,
 such that:
 \begin{itemize}
  \item $\forall (u, v) \in E \implies (g.u, g.v) \in E$
  \item $\forall v \in V, \gamma(v) = \gamma(g.v)$
 \end{itemize}
 The graph automorphism problem is to find if a given graph has a non-trivial permutation group. 
-The computational complexity of this algorithm is conjectured to be strictly between P and NP.
+The computational complexity of this algorithm is conjectured to be strictly between P and NP~\cite{kobler2012graph,toran2004hardness}.
 Several tools exist to tackle this problem like \saucy~\cite{katebi2010symmetry},
 \bliss~\cite{JunttilaKaski:ALENEX2007}, \nauty~\cite{mckay2003nauty}, etc.
 
-There exists different ways to encode a SAT problem,
-which leads to different symmetries in these problems.
+There exists different ways to encode a SAT problem, which lead to different symmetries of this problem.
+
 When a symmetry depends on the structure of the problem, we say \emph{syntactic} symmetries. 
 In contrast, symmetries were \emph{semantic}, when it is not inherent to the encoding.
-To find symmetries in SAT problem, the formula is transformed into colored graphs
-and an automorphism tool is applied onto. Specifically, given a formula $\varphi$ with
-$m$ clauses over $n$ variables, the graph is constructed as follows~\cite{biere2009handbook}:
+
+To find symmetries in a SAT problem, the formula is encoded in colored graph
+and an automorphism tool is applied onto. In particular, given a formula $\varphi$ with
+$m$ clauses and $n$ variables, the graph is constructed as follows~\cite{biere2009handbook}:
 \begin{itemize}
  \item \emph{clause nodes}: represent each of the $m$ clauses by a node with color 0;
  \item \emph{literal nodes}: represent each of the $l$ literals by a node with color 1;
- \item \emph{clauses edges}: connect a clause to its literal by linking the corresponding  clause node and literal nodes;
- \item \emph{boolean consistency edges}: connect each pair of literals that correspond to the same variables.
+ \item \emph{clause edges}: connect a clause to its literals by linking the corresponding  clause node and literal nodes;
+ \item \emph{boolean consistency edges}: connect each pair of literals that correspond to the same variable.
 \end{itemize}
 
 \begin{figure}[h!]
@@ -213,9 +214,9 @@ $m$ clauses over $n$ variables, the graph is constructed as follows~\cite{biere2
 \end{figure}
 
 \Cref{fig:graph_no_opt} shows the graph representation of a CNF. This problem has 6 variables and 11
-clauses. So, the graph will have  12  + 11 = 33 vertexes where 12 represents literal vertexes (circle in the figure ) 
-and 11 represents the number of clause vertexes (square in the figure). The graph will also have 6 + 24 = 30 edges, 6 for Boolean consistency 
-(red color in the figure) and 24 edges that rely clause vertexes to the literals.
+clauses. So, the graph will have  12  + 11 = 33 vertices where 12 represent literal vertices (circles in the figure ) 
+and 11 represents the number of clause vertices (squares in the figure). The graph will also have 6 + 24 = 30 edges, 6 for Boolean consistency 
+(red edges in the figure) and 24 edges that rely clause vertices to the literals.
 
 % and  24 + 36 = 60 
 %
@@ -232,17 +233,17 @@ and 11 represents the number of clause vertexes (square in the figure). The grap
 %
 %Produced graph contains and = 60 edges 
 
-An optimization of this graph is possible with the usage of binary clauses i.e. a clause with only two literals.
-The clause node can be omitted and we connect the two literals. As we cannot distinguish between the optimized edge 
-and Boolean consistency edges, we must check if the produced permutations are spurious. 
-To do so, as we ensure the permutation commutes with the negation it suffices to check:
-$$\forall x \in \support(g), g.\neg x = \neg g.x$$
+An optimization to reduce the size of the graph is possible. Binary clause nodes can be omitted and literals 
+are connected with an edge. In this situation, these edges can be confused with Boolean consistency edges and 
+graph automorphism tool can produce spurious permutations. To ensure that the permutation is valid, 
+it must commutes with the negation:
+$$\forall x \in \support_g, g.\neg x == \neg g.x$$
 
 Roughly speaking, we check if the image of the negation of $x$ is equals to the negation of the image of $x$,
 for each element $x$ in the support of the permutation.
 This optimization allows to compute symmetries of the problem more efficiently.
-In the previous example, the graph has deleted 12 nodes and 12 edges. More generally,
-the graph removes as many nodes and edges as binary clauses on the formula.
+In the previous example, we can remove 12 nodes and 12 edges. More generally,
+we can remove from the graph as many nodes and edges as binary clauses on the formula.
 \Cref{fig:graph_opt} represents the optimized version the graph.
 \begin{figure}[!htbp]
  \begin{minipage}[r]{.2\textwidth}
@@ -266,8 +267,9 @@ the graph removes as many nodes and edges as binary clauses on the formula.
 \end{figure}
 
 
-After the construction of a such graph, a graph automorphism tools take it as input and give
-the set of generators as output.With the previous graph, the following generators are obtained:
+After the construction of such a graph, it is given to an automorphism tool.
+This last will produce its set of generators.
+With the previous graph, the following generators are obtained with \bliss:
 
 
 \begin{center}
@@ -278,13 +280,12 @@ the set of generators as output.With the previous graph, the following generator
  \end{minipage}
 \end{center}
 
-These permutations form a permutation group and so induce an equivalence relation.
-\Cref{fig:orbit} shows graphical representation of an orbit, where each node represents a literal.
+These permutations generate the group of symmetries of the formula,
+and so induce an equivalence relation.
+\Cref{fig:orbit} shows a graphical representation of an orbit, where each node represents a literal.
 Two literals are linked with an arc if it exists a permutation that maps one to the other. 
-An orbit must be a \emph{strongly connected component} (SCC).  
-Some permutations have a special form like two-dimensional
-array as in this example.
- A further section (\ref{sec:matrix-sbp}) shows how to exploit this special form.
+An orbit must be a \emph{strongly connected component} (SCC) and have a particular form as in this example (matrix).
+ \Cref{sec:matrix-sbp} shows how to exploit this form.
 \begin{figure}[!htbp]
  \input{fig/exemple-orbits}
  \caption{Graphical representation of an orbit}
@@ -293,8 +294,11 @@ array as in this example.
 
 \section{Usage of symmetries}
 \emph{Symmetry breaking} aims at eliminating symmetry, either
-by \emph{statically} posting symmetry breaking constraints that invalidate symmetric
-assignments, or by altering the search space \emph{dynamically} to avoid symmetric search paths.
+by \emph{statically} adding symmetry breaking constraints that invalidate symmetric
+assignments, or by altering the search space \emph{dynamically} to avoid the exploration of symmetric search paths.
+
+
+
 
 \subsection{Static symmetry breaking}
 
@@ -303,7 +307,7 @@ Visiting one branch is equivalent to visit each symmetric branch and so visiting
 determine satisfiability of the whole formula. Symmetrical branch are discarded by the solver with the addition of 
 constraints. These constraint are not satisfied if the solver visit equivalent assignment.
 In other words, when symmetries of a problems are ignored, solver visit a branch multiple times.
-Suppose the \textit{pigeonhole problems} (See \cref{fig:hole}), where $n$ pigeons are put into $n-1$
+Consider the \textit{pigeonhole problems} (See \cref{fig:hole}), where $n$ pigeons are put into $n-1$
 holes, with the constraint that each pigeon must be in a different hole is a
 highly symmetric problem. Indeed, all the pigeons (resp. holes) are exchangeable
 without changing the initial problem. Trying to solve it with a standard SAT

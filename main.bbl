@@ -142,6 +142,11 @@ H.~A. Kautz, B.~Selman, et~al.
 \newblock Planning as satisfiability.
 \newblock In {\em ECAI}, volume~92, pages 359--363, 1992.
 
+\bibitem{kobler2012graph}
+J.~Kobler, U.~Sch{\"o}ning, and J.~Tor{\'a}n.
+\newblock {\em The graph isomorphism problem: its structural complexity}.
+\newblock Springer Science \& Business Media, 2012.
+
 \bibitem{le2017painless}
 L.~Le~Frioux, S.~Baarir, J.~Sopena, and F.~Kordon.
 \newblock Painless: a framework for parallel sat solving.
@@ -221,6 +226,11 @@ N.~S{\"o}rensson and A.~Biere.
 \newblock Minimizing learned clauses.
 \newblock In {\em International Conference on Theory and Applications of
   Satisfiability Testing}, pages 237--243. Springer, 2009.
+
+\bibitem{toran2004hardness}
+J.~Tor{\'a}n.
+\newblock On the hardness of graph isomorphism.
+\newblock {\em SIAM Journal on Computing}, 33(5):1093--1108, 2004.
 
 \bibitem{zhang2001efficient}
 L.~Zhang, C.~F. Madigan, M.~H. Moskewicz, and S.~Malik.
