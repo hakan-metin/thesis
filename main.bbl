@@ -5,6 +5,13 @@ F.~Aloul, K.~Sakallah, and I.~Markov.
 \newblock Efficient symmetry breaking for boolean satisfiability.
 \newblock {\em {IEEE} Trans. Computers}, 55(5):549--558, 2006.
 
+\bibitem{aloul2003solving}
+F.~A. Aloul, A.~Ramani, I.~L. Markov, and K.~A. Sakallah.
+\newblock Solving difficult instances of boolean satisfiability in the presence
+  of symmetry.
+\newblock {\em IEEE Transactions on Computer-Aided Design of Integrated
+  Circuits and Systems}, 22(9):1117--1137, 2003.
+
 \bibitem{ansotegui2015using}
 C.~Ans{\'o}tegui, J.~Gir{\'a}ldez-Cru, J.~Levy, and L.~Simon.
 \newblock Using community structure to detect relevant learnt clauses.
