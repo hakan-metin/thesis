@@ -239,6 +239,11 @@ J.~Tor{\'a}n.
 \newblock On the hardness of graph isomorphism.
 \newblock {\em SIAM Journal on Computing}, 33(5):1093--1108, 2004.
 
+\bibitem{toth2002vehicle}
+P.~Toth and D.~Vigo.
+\newblock {\em The vehicle routing problem}.
+\newblock SIAM, 2002.
+
 \bibitem{zhang2001efficient}
 L.~Zhang, C.~F. Madigan, M.~H. Moskewicz, and S.~Malik.
 \newblock Efficient conflict driven learning in a boolean satisfiability

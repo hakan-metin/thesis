@@ -488,14 +488,12 @@ $$ LL_g = \forall i : (\forall j < i : x_j = g.x_j) \Rightarrow  \neg x_i \lor g
  Actually variables $x_1$, $x_4$ are present with both polarities. The constraints of other variables produce 
  also tautological clauses. 
  
- 
  \begin{figure}[!htbp]
   \input{fig/example-sbp}
   \caption{Example of generated SBPs for one permutation}
   \label{fig:esbp_gen}
  \end{figure}
- 
- 
+
 Here, the number of clauses generated per constraint increase exponentially by the 
 cardinality of the support  of the permutation. Hence, Aloul et al~\cite{aloul06} proposed a more compact representation of sbps based on the creation of auxiliary variables.  
 These variables encodes equality of literals and are disjoint from the support of the permutation.
@@ -514,12 +512,12 @@ Following clauses encode a compact lex-leader for a permutation:
  
 \end{tabular}
 \end{center}
-where $\{y_0,\cdots, y_{n} \}$ be the set of auxiliary variables, $y_0$ is a unit clause that encodes the first equality.
+where $\{y_0,\cdots, y_{n} \}$ be the set of auxiliary variables, $y_0$ is a unit clause that encodes the first equality and $\{x_1,...,x_n\}$ be the set of variables sorted with the lexicographic order.
 
 
 \Cref{fig:esbp_compact_gen} shows the compact encoding of generated clauses. This form grows linearly with the number of variables.
-Auxiliary variable encodes the equality of two literals allows to achieve this reduction. Three auxiliary variables are introduced
-in this example $x_7,\ x_8,\ x_9$ such that $x_7$ encodes the equality of $x_1$ and $x_4$, $x_8$ encodes the equality of $x_2$ and $x_5$, and $x_9$ encodes the equality of $x_3$ and $x_6$.
+The auxiliary variables that encode the equality of two literals provide this reduction. 
+Three auxiliary variables are introduced in this example $x_7,\ x_8,\ x_9$ such that $x_7$ encodes the equality of $x_1$ and $x_4$, $x_8$ encodes the equality of $x_2$ and $x_5$, and $x_9$ encodes the equality of $x_3$ and $x_6$.
 
  \begin{figure}[!htbp]
  \input{fig/example-compact-sbp}
@@ -527,10 +525,21 @@ in this example $x_7,\ x_8,\ x_9$ such that $x_7$ encodes the equality of $x_1$ 
  \label{fig:esbp_compact_gen}
 \end{figure}
 
-\shatter is a tool ~\cite{aloul06} for partial symmetry breaking that computes symmetry with $\saucy$~\cite{katebi2010symmetry} automorphism tool and generates the formula augmented with compact lex-leader encoding sbps. The following table shows the number of symmetry breaking predicates and the
+$\shatter$ is a tool ~\cite{aloul06} for partial symmetry breaking.
+It computes a compact lex-leader sbps with the symmetries produced by $\saucy$~\cite{katebi2010symmetry}.
+The following table shows the number of symmetry breaking predicates and the
 number of auxiliary variables added to the original formula.
 
 \input{sbp-table}
+
+
+\Cref{tab:numsbp} presents the number of variables and clauses present in the formula and also the  
+number of sbps generated and the number of auxiliary variables added on different problem categories that are:
+battleship (the battleship puzzle), chnl (channel routing instances), fpga (routing of global wires in integrated circuits)
+ hole (the pigeonhole problem), urq (randomized instance based on expander graphs), xor (exlusive or chain)
+We can observe that the number of produced sbps or added auxiliary variables can be much larger than
+respectively the number of initial clauses, variables.
+
 
 %\hakan{mettre tableauw nombre de SBP generÃ©}
 %
@@ -671,16 +680,15 @@ In the literature, different approaches of dynamic symmetry breaking exists, thi
 \subsubsection{SymChaff}
 One of the first tool for dynamic symmetry breaking is \emph{SymChaff}~\cite{sabharwal2005symchaff}
 and is applicable only on particular groups, where all couple of variables are symmetric (\cref{sec:matrix-sbp}).
+To take part of this property, Instead of using the classical decision heuristic that choose exactly one
+variable, all symmetric variable are considered at the same time (k-branching). Roughly speaking,
+all variable in the same orbit are affected/unaffected in the same time. So, all possible valuation 
+of the orbit must be checked. Computing the number of possible valuation is trivial in this particular 
+form of group. The order in which the valuations are checked has a tremendous impact on solver performance. 
+This approach has good results when the group of symmetry presents particular form.
+In the general case, when we consider any group, computing the number of possible valuation will be very difficult and this approach is not applicable.
 
-\hakan{A REFAIRE}
 
-The idea of this approach is to treat each orbit like a \emph{symbolic variable}, i.e., instead of considering a single
-variable (branching), all symmetric variables are considered at the same time and so backtracked at the same time 
-(k-branching).
-In this special case of groups, the number of orbits is easy to compute but the order in which they would be
-applied has a tremendous impact of the solver performance.
-In the general case, when we take any groups computing the number of orbits will be very difficult and this approach
-will be intractable.
 
 \subsubsection{Symmetry Propagation}
 A different approach can be used to reduce the search space using symmetries is \emph{symmetry propagation}(SP)~\cite{Devriendt12}.
@@ -798,9 +806,20 @@ As disadvantage, SEL may flood the solver if the used set of symmetries is big a
 to compute symmetrical clauses. 
 
 
-\subsection{Conclusion}
+\subsection{Conclusion} 
 
-Dynamic symmetry handling 
+Dynamic symmetry breaking exploits the symmetry property of the formula during the solving.
+Different approaches exist, as in the static approach, some tools forbid non lex-leader assignment
+and so prune the search space. Others use symmetry to propagate a symmetrical fact.
+Essentially it transforms decisions (guesses) to propagations (deductions). 
+Moreover, as it is integrated directly to the search engine, solvers can adapt their heuristics dynamically.
+This approach prevents the creation, as in static symmetry breaking, of potentially useless clause that
+increase the size of the original formula.
+Moreover, the computation of \textit{local symmetries} becomes possible. Effectively, some symmetry can 
+appear during the solving algorithm, exploiting these symmetries is not possible on the static approach. 
+However, the integration of dynamic approach must be done carefully, CDCL algorithm is highly optimized and 
+fine tuned search engines. Integration of symmetry breaking can slow down its core engine
+
 
 %SAT solvers are fine tuned algorithm to solve propositional formula, adding additional component that modify 
 %fundamentally the behavior of a SAT solver may impact negatively this performance.

@@ -1,21 +1,117 @@
 \chapter{Introduction}\label{chap:intro}
 
+
+
+Propositional logic deals with propositions which can be true or false.
+The logical connection allows the proposals to be connected to each other.
+In this thesis, we focus on solving the problem of Boolean satisfiability (SAT).
+
+Given a propositional formula that are generally the constraints of an encoded problem,
+SAT solving consists in deciding whether the formula is satisfiable (i.e, all constraints can be
+satisfiable) or unsatisfiable (i.e, there is no way to satisfy all constraints).
+This computation is made by a SAT solver that answer $\sat$ when the formula is satisfiable
+and $\unsat$ otherwise.
+
+This problem may appear to be simple but cannot be handled efficiently
+at the moment. This is due to the complexity of the problem which is prove to be NP-complete in 1971~\cite{cook1971complexity}. Many industrial applications problems can be transformed into a SAT problem.
+Improving the performance of SAT solver is an important challenge.
+
+
+An example of problem can be the vehicle routing problem (VRP).
+It concerns the service of delivery company and deals with the following question:
+How to deliver things from depots to a set of customers with a fleet of vehicle that can move on road network.
+The goal is to find a set of routes that minimize the delivery cost (monetary, distance, ...).
+This problem quickly becomes unachievable for a human being. Moreover, 
+finding the optimal solution for VRP problem is NP-Hard~\cite{toth2002vehicle}.
+
+
+This problem leads to combinatorial explosion of the search space.
+It greatly hinders the performance of SAT solvers.
+Different approach have been proposed to to deal with this combinatorial explosion.
+Here, we focus on the exploitation of \textit{symmetries}. 
+
+
+\section{Symmetry}
+
+In general, a symmetry is a transformation that leave an object (or some aspect of the object) unchanged.
+Many problem exhibits symmetry, for example in our previous example renaming a set of identical vehicle,
+rotating a chess board, 
+The presence of symmetry force search algorithm to fruitlessly explore symmetric search space.
+
+
+Symmetries are typically defined as a \textit{syntactical} property of a problem. 
+Its presence is inherent to the encoding of the problem.
+A permutation of variable preserve the original specification. 
+Conversely, a \textit{semantic} symmetries are independent of any 
+particular representation of the problem.
+
+
+To exploit the symmetry of a problem, the first step is to find them.
+In context of SAT, the detection of symmetry is done by a transforming the specification
+in a colored graph and then apply a graph automorphism tool.
+
+
+
+When symmetries are found, the most common approach to exploit it is \emph{static symmetry breaking}.
+It takes the symmetric problem as input and produces a satisfiability equivalent formula without symmetries.
+It is done by augmenting the problem with constraints that force solver to not explore the symmetric search 
+space. It is a easy way to integrate symmetry breaking in an existing SAT solver, no modification 
+of existing solver is necessary. In addition, this approach works well on many symmetry applications.
+However, the number and the size of added constraints increase the solving time and the solver stuck
+on some highly symmetrical problems.
+
+
+Another approach to handle symmetry is \emph{dynamic symmetry breaking}. In this one, the management of
+symmetries is included in the search algorithm. It observes the behavior of the solver and help it to
+not visit symmetric search space.
+
+
+The challenge of this thesis is to understand the state of  the art approach in symmetry breaking and
+improve them.
+
+%all constraints of a formula can be satisfiable and answer ,
+% or it is not possible to satisfy all constraints and answer \unsat.
+%
+%The problem of Boolean satisfiability (SAT) is nowadays an unavoidable problem. 
+%
+%
+%
+%SAT solving consists in deciding whether 
+%all constraints of a formula can be satisfiable and answer \sat, or it is not possible to satisfy all
+%constraints and answer \unsat.
+%
+%
+%It consists of deciding whether 
+%all constraints of a formula can be satisfiable and answer \sat, or it is not possible to satisfy all
+%constraints and answer \unsat.
+
+
+
+
+
+
+
+
 Nowadays, computers are powerful and used in many applications in different domains.
 One of these domains is critical application that run in planes, cars, trains, etc.
 Software present in these machines must be correct and exempt of bugs.
 Proving the correctness of these software is a difficult problem. 
 
-
-
  can leads to combinatorial explosion.
+ 
+ 
 Over the years, computer scientists have developed many techniques to solve 
 these kinds of problems like \emph{constraint programming} (CP) \cite{rossi2006handbook},
 \emph{Propositional Satisfiability} (SAT) \cite{biere2009handbook},
 \emph{Satisfiability Modulo Theory} (SMT) \cite{barrett2018satisfiability}.
+
+
+
 In this thesis, we focus on solving propositional or Boolean formula, it consists of deciding whether 
 all constraints of a formula can be satisfiable and answer \sat, or it is not possible to satisfy all
-constraints and answer \unsat.This problem may appear to be simple but cannot be handled efficiently
-at the moment. This is due to the complexity of the problem which is proved NP-complete in 1971. 
+constraints and answer \unsat.
+This problem may appear to be simple but cannot be handled efficiently
+at the moment. This is due to the complexity of the problem which is prove to be NP-complete in 1971. 
 Many industrial applications problems can be transformed into a SAT problem.
 Improving the performance of tools that resolve this problem is an important challenge. 
 
