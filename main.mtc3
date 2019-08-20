@@ -2,12 +2,12 @@
 {\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Normal forms}{\reset@font\mtcSSfont 8}{section*.4}}
 {\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode An NP-complete problem}{\reset@font\mtcSSfont 10}{section*.6}}
 {\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Particular forms easy to solve}{\reset@font\mtcSSfont 10}{section*.7}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Some related problems}{\reset@font\mtcSSfont 11}{section*.8}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Some related problems}{\reset@font\mtcSSfont 10}{section*.8}}
 {\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Solving a SAT problem}{\reset@font\mtcSSfont 11}{section*.9}}
 {\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode A naive algorithm}{\reset@font\mtcSSSfont 11}{section*.10}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Davis Putnam Logemann Loveland algorithm (DPLL)}{\reset@font\mtcSSSfont 12}{section*.12}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Davis Putnam Logemann Loveland algorithm (DPLL)}{\reset@font\mtcSSSfont 11}{section*.12}}
 {\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Conflict Driven Clause Learning (CDCL) algorithm}{\reset@font\mtcSSSfont 13}{section*.15}}
 {\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Conflict Analysis}{\reset@font\mtcSSfont 13}{section*.17}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Heuristics}{\reset@font\mtcSSfont 16}{section*.20}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Preprocessing / Inprocessing}{\reset@font\mtcSSfont 17}{section*.21}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Heuristics}{\reset@font\mtcSSfont 15}{section*.20}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Preprocessing / Inprocessing}{\reset@font\mtcSSfont 16}{section*.21}}
 {\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Parallel SAT solving}{\reset@font\mtcSSfont 17}{section*.22}}

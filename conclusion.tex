@@ -2,8 +2,23 @@
 
 
 
-In this thesis, we have presented a way to increase performance of solving Boolean satisfiability problem (SAT)
-on presence of symmetries. 
+
+
+
+In this thesis, we have presented approaches to increase the performance of solving 
+Boolean satisfiability problem (SAT) in presence of symmetries. 
+The presence of symmetry in a problem hinders the performance of the solver.
+Some trivial question for an human, like Can 100 pigeons fit in 99 holes?,
+becomes almost impossible for a solver. The solver will explore each pair of pigeon, hole and 
+will face to a combinatorial explosion.To deal with symmetries, we study the symmetry detection 
+and the symmetry exploitation.
+
+In \Cref{chap:symmSAT}, we develop $\libdsb$ a library that perform dynamic symmetry breaking.
+
+It can be integrated easily to any CDCL solvers. It uses the strength of static symmetry breaking 
+
+Experimental results show that our work challenge current state of the art symmetry breaking techniques
+
 
 Nowadays, SAT solvers can handled huge problems with thousands of variables and clauses. 
 It is primary due to efficiently cut off search space.

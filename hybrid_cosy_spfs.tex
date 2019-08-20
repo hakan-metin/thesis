@@ -132,9 +132,8 @@ Let us detail the critical points.
  , then the esbp generation function, \texttt{generateEsbp}, is
  called. In the new algorithm this function is replaced by a new one called
  \texttt{generateEsbpSp}. In addition to compute the esbp clause $\omega$, it
- produces the stabilizer set of $\omega$\footnote{The only allowed
-  local symmetries in case of an esbp, according to point~2 of
-  section~\ref{sec:pc}.}.
+ produces the stabilizer set of $\omega$\footnote{The only allowed  local symmetries in case of an esbp.}.
+% , according to point~2 of  section~\ref{sec:pc}.}.
  
  \item \Cref{algo:symsp:cancel}: \texttt{cancelActiveSymmetriesSym} extends function \texttt{cancelActiveSymmetries} of Algorithm~\ref{algo:cdclsp} with the additional reactivation of the symmetries that have been broken (deactivated) by ESBPA. Technically speaking, each time a deduced literal is unassigned, all symmetries that became inactive because of its assignment (see \texttt{updateLocalSymmetries} and \texttt{updateActiveSymmetriesSym} functions below) are \textit{reactivated}.
  

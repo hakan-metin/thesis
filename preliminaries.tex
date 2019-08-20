@@ -1,6 +1,6 @@
-﻿\chapter{The Boolean Satisfiability Problem}\label{chap:preliminaries}
+\chapter{The Boolean Satisfiability Problem}\label{chap:preliminaries}
 \minitoc
-In this thesis, our goal is to exploit the symmetrical properties of SAT problems.
+In this thesis, our goal is to exploit the symmetry properties of SAT problems.
 Before, we get to the heart of the matter, we first introduce the Boolean satisfiability (SAT)  problem.
 %This is a propositional formula representing constraints.
 %A tool that aims to satisfy such formulas is called a SAT solver. 
@@ -8,17 +8,16 @@ Before, we get to the heart of the matter, we first introduce the Boolean satisf
 %present in the formula can be satisfied and $\unsat$ otherwise.
 
 \section{SAT basics}
-The satisfiability problem is constituted of \emph{Boolean} or \emph{propositional variable}.
-It has two possible values: true or false (noted respectively $\true$ or $\false$).
+A satisfiability problem is constituted of \emph{Boolean} or \emph{propositional variables},
+i.e. each variable has two possible values: true or false (noted respectively $\true$ or $\false$).
 We call \emph{literal}, a propositional variable or its negation.
 For a given variable $x$, the positive literal is represented by $x$ and the negative one by $\neg x$.
 Given a formula $\varphi$, we denote $\Vars_\varphi$ ($\Lits_\varphi$) the set of variables (literals) used in the formula (the index in $\Vars_\varphi$ and $\Lits_\varphi$ is usually omitted when
 clear from context).
-To build more complex formula, it exists different operators, $\neg, \lor$ and $\land$ that are respectively negation, disjunction and conjunction. Others operators like $\Rightarrow, \Leftrightarrow$ and
-$\oplus, \cdots$ respectively called implication, equivalence and exclusive disjunction (xor), $\cdots$ can be 
-expressed with the basic ones.
-For example, $a \Rightarrow b$ can be expressed as $ \neg a \lor b$.
-To ensure the priority of these operators, constraints are expressed between parenthesis.
+To build complex formulas, different operators are used, $\neg, \lor$ and $\land$, $\cdots$ can be 
+expressed by use of the basic ones.
+For example, $a \Rightarrow b$, can be expressed by $ \neg a \lor b$.
+%To ensure the priority of these operators, constraints are expressed between parenthesis.
 In the absence of its, the following priority order applies (from the highest to the lowest priority):
 negation ($\neg$), conjunction ($\land$), disjunction ($\lor$).
 
