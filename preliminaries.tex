@@ -103,12 +103,12 @@ a normal form.
  \label{tab:laws}
 \end{table}
 Every formula can be transformed into a normal form with different complexity and the resulting formula is 
-\emph{equivalent}.  
+\emph{equivalent} to the original one.  
 In other words, every assignment $\alpha$ that satisfies formula $\varphi$  also models the resulting formula $\psi$
 and vice-versa, denoted by $\varphi \equiv \psi$.
- Also, we say a formula $\psi$ is a \emph{logical consequence} of a formula $\varphi$ is every model of $\varphi$
+ Also, we say that a formula $\psi$ is a \emph{logical consequence} of a formula $\varphi$ if every model of $\varphi$
  is also a model of $\psi$ and is denoted by $\varphi \models \psi$.
-Conjunctive normal form is the input form of state-of-the-art solvers. Any propositional
+Conjunctive normal form is the input form of state-of-the-art SAT solvers. Any propositional
 formula can be transformed in CNF form with polynomial time. Conversely, DNF form have
 an exponential memory complexity during the transformation.
 Note that each cube in the problem in DNF form is a solution in the equivalent CNF formulas.
@@ -151,38 +151,42 @@ Note that each cube in the problem in DNF form is a solution in the equivalent C
 %otherwise the formula is \emph{unsatisfiable} (\unsat).
 \subsection{An NP-complete problem}
 The SAT problem is the first NP-complete problem proven by Stephen Cook in 1971~\cite{cook1971complexity}.
-NP-completeness means that a SAT problem can be solved with a non-deterministic Turing machine in polynomial time (NP) and is also NP-hard. A problem is said NP-hard if everything in NP can be transformed into it in polynomial time. 
+NP-completeness means that a SAT problem can be solved with a non-deterministic Turing machine in polynomial time (NP) and is also NP-hard. A problem is said to be NP-hard if everything in NP can be transformed into it in polynomial time. 
 One of the most important unsolved problems in theoretical computer science is the P versus NP problem.
 This question is one of the seven millennium prize problems.
 
-\subsection{Particular forms easy to solve}
-In some particular forms, SAT problems can be computed with polynomial algorithm.
+\subsection{Some easy to solve forms}
+
+Some particular instances of the SAT problem can be computed in polynomial time.
 
 \textbf{2-SAT~\cite{aspvall1979linear}.}
 In this particular form, the given CNF formula contains only binary clauses.
-In this case, it suffices to create a graph in which each clause is transformed into implication. For example, the clause $x \lor y$ will be transformed into $ \neg x \Rightarrow y,
-\neg y \Rightarrow x$. After computing \emph{strong connected component} on this graph, to be looking for
- the positive and negative forms of the same variable, in the same  strong connected component suffices 
-to determine the satisfiability of the formula. If it is the case, the formula is \unsat. Otherwise 
+In this case, it suffices to create a graph in which each clause is transformed into implication. For example, the clause $x \lor y$ will be transformed into $ \neg x \Rightarrow y$ and $\neg y \Rightarrow x$.
+\hakan{REDO}
+ After computing \emph{strong connected component} on this graph, to be looking for the positive and negative forms of the same variable, in the same  strong connected component suffices 
+to determine the satisfiability of the formula.
+ If it is the case, the formula is \unsat. Otherwise 
 a solution can be deduce and the problem is \sat. This algorithm can be computed in linear time complexity.
+
 \textbf{Horn SAT.} In this particular form, the given CNF formula contains only Horn clauses. It exists three form
-of Horn clause: \emph{strict Horn clause} that contains only one positive literal and at least one negative literal,
-\emph{positive Horn clause} that contains only one positive literal and no negative literals
+of Horn clause: \emph{strict Horn clause} that contains only one positive literal and at least one negative literal;
+\emph{positive Horn clause} that contains only one positive literal and no negative literals;
 \emph{negative Horn clause} that contains only negative literals.
-To solve this particular form of formula, it suffices to  apply \emph{Boolean constraint propagation} (BCP) or \emph{unit propagation} explained thereafter in \cref{sec:dpll} until fix point.
-Roughly speaking, it satisfies all unit clauses in cascades. Either an empty clause was deduced and the problem
-is \unsat or the fix point is reached and the formula is \sat. Like 2-SAT, this algorithm can also be computed
+To solve this particular form of formula, it suffices to  apply \emph{Boolean constraint propagation} (BCP) (or \emph{unit propagation}) explained, in \cref{sec:dpll} until fix point.
+Roughly speaking, it satisfies all unit clauses in cascades. Either an empty clause is deduced and the problem
+is $\unsat$ or the fix point is reached and the formula is \sat. Like 2-SAT, this algorithm can also be computed
 in linear time complexity.
 
 \textbf{XOR SAT.} In this particular form, each clause contains xor ($\oplus$) operator rather than or ($\lor$).
-This problem can be seen as a system of linear equations. Gaussian elimination allows to solve this kind of
+This problem can be seen as a system linear equations. Gaussian elimination allows to solve this kind of
 problem is polynomial time.
-The membership of polynomial class (P) of the particular form of satisfiability problems describes above is a special case of Schaefer's dichotomy theorem~\cite{schaefer1978complexity}.
+%The membership of polynomial class (P) of the particular form of satisfiability problems describes above is a special case of Schaefer's dichotomy theorem~\cite{schaefer1978complexity}.
 \subsection{Some related problems}
-Different kind of problems related to SAT is presented is this section.
+\hakan{todo}
+A different kind of problems related to SAT is presented in this section.
 One of them is sharp-SAT (\#SAT), its purpose is to count the number of solutions in a CNF.
 
-Another related problem is maximum satisfiability problem (MAX-SAT). In this case, the problem
+Another related problem is \textit{maximum satisfiability problem} (MAX-SAT). In this case, the problem
 is to find the maximum subset of clauses that can be satisfied for a formula. Different variants
 of this problem exist. For example, some constraints must be satisfied (hard clauses) and MAX-SAT
 is applied on the remaining clauses called \emph{soft} clauses.
@@ -191,19 +195,21 @@ $\forall$ are present in the formula. For example, $\forall x\, \exists y\, \exi
 This particular form is a generalization of the SAT problem with PSPACE complexity.
 \subsection{Solving a SAT problem}
 Two kinds of algorithms exist to solve satisfiability problems.
-First, the \emph{incomplete} algorithm~\cite{kautz2009incomplete} which does not provide any guarantee that will eventually report either any satisfiable assignment or declare the formula unsatisfiable. This kind of algorithm is out of scope of this thesis. 
-Second, the \emph{complete} algorithm, which provides a guarantee that if an assignment exists
-it will be reached or it will declare that formula is unsatisfiable.
+First, the \emph{incomplete} algorithms~\cite{kautz2009incomplete} which do not provide any guarantee that they will eventually report ,either a satisfiable assignment or declare the formula unsatisfiable. This kind of algorithm is out of scope of this thesis. 
+Second, the \emph{complete} algorithms, which provide a guarantee that if an assignment exists,
+it will be found or declare that formula unsatisfiable.
 This section describes different \emph{complete }algorithm to solve a propositional formula.
+
 \subsubsection{A naive algorithm}
 A naive approach to solve a SAT problem is to try all possible assignments.
-For a propositional formula with $n$ variables, it leads to $2^n$ assignments in the worse case.  
+For a propositional formula with $n$ variables, we have $2^n$ assignments (in the worse case).  
 \Cref{fig:naive_algo} illustrates the search tree for a given problem with six variables.
-The presented formula in the figure has 6 clauses, with 2 ternary clauses and 4 binary clauses.
-It will be used as an example in different algorithm presented below. This formula is $\sat$,
+The  formula presented in the figure has 6 clauses, with 2 ternary clauses and 4 binary clauses.
+%It will be used as an example in different algorithm presented below. 
+This formula is $\sat$, the assignment
 $\alpha_{11} = \{\neg x_1, \neg x_2, x_3, \neg x_4, x_5, \neg x_6 \}$ is a solution of the problem.
-This naive algorithm will check 10 assignments before finding the solution. 
-In the general case, due to the number of variables in problems, this algorithm is intractable.
+A naive algorithm will check 10 assignments before finding the solution. 
+In the general case, due to the number of variables in problems, this algorithm will be intractable.
 \begin{figure}[!htbp]
  \centering
  \input{fig/naive_algorithm.tex}
@@ -211,37 +217,39 @@ In the general case, due to the number of variables in problems, this algorithm 
  \label{fig:naive_algo}
 \end{figure}
 \subsubsection{Davis Putnam Logemann Loveland algorithm (DPLL)}\label{sec:dpll}
-One of the first non-memory-intensive algorithm developed to solve SAT problems is 
+One of the first, non-memory-intensive, algorithm developed to solve SAT problems is 
 the Davis Putnam Logemann Loveland algorithm (DPLL)~\cite{dpll_62}. 
-It explores a binary tree using depth first search as shown in \Cref{algo:dpll}.
-The construction of the tree  relies on the \emph{decision} made (on \cref{algo:dpll:decision}). Both values
-are checked, true value on \cref{algo:dpll:pos} and false value on \cref{algo:dpll:neg}.
-When a leaf find a conflict (\cref{algo:dpll:unsatbranch}) which means that the formula cannot be satisfied with
+It explores a binary tree using depth first search, as shown in \Cref{algo:dpll}.
+The construction of the tree  relies on a \emph{decision} that is made on \cref{algo:dpll:decision}.
+This gives a variable for which both values are checked, the true value on \cref{algo:dpll:pos} and the false value on \cref{algo:dpll:neg}.
+When a leaf find an inconsistency, called a conflict (\cref{algo:dpll:unsatbranch}) which means that the formula cannot be satisfied with
 the current assignment, other branches are explored.
-By recursive construction of the algorithm, when each value of a literal reach to a conflict,
-solver \emph{backtracks} at most one level, this fact is called \emph{chronological backtracking}.
+Recursively, when each value of a literal reaches a conflict,
+\emph{backtracks} one level, (\emph{chronological backtracking}).
 When the conflict occurs at the top of the tree, it means that the formula cannot be satisfied and the 
-solver reports $\unsat$ (\cref{algo:dpll:unsat}). However, if the formula is empty in any branch, 
-it means that current assignment satisfy the whole formula and the solver reports it on \cref{algo:dpll:sat1}
+solver reports $\unsat$ (\cref{algo:dpll:unsat}). However, if the formula is empty in a branch, 
+this means that the current assignment satisfies the whole formula and the algorithm reports it on \cref{algo:dpll:sat1}
 or \ref{algo:dpll:sat2}.
+
 \input{algo/dpll}
+
 An important function in the DPLL algorithm is \texttt{unitPropagation} (\cref{algo:dpll:unit}).
-It is presented in \Cref{algo:unitdpll}. This function set value to unit clause in order to satisfy them
-until fix point is reached. Either, there
- are no more unit clause in the formula or an inconsistency 
-is found which means that current assignment cannot satisfy the formula. In the later case, the solver will
+It is presented in \Cref{algo:unitdpll}. This function forces the values of unit clauses in order to satisfy them
+until a fix point is reached. Either, there
+ are no more unit clauses in the formula or an inconsistency 
+is found this means that the current assignment cannot satisfy the formula. In the later case, the solver will
 backtrack and another branch will be explored.
 \input{algo/unitdpll}
-When DPLL algorithm is executed on the formula of \Cref{fig:naive_algo}, after making decisions on literals
+When DPLL  is executed on the formula of \Cref{fig:naive_algo}, after making decisions on literals
 $\neg x_1$ and $\neg x_2$, unit propagation detects that $x_3$ must be assigned to true.
-This propagation prevents to explore  multiple assignments. Effectively, when $x_3$ is set to false value,
+This propagation prevents to explore non-interesting assignments. Actually, when $x_3$ is set to false,
 the clause $\omega_1$ is not satisfied and it remains 3 variables and so $2^3$ possible assignments
 (from $\alpha_1$ to $\alpha_8$) are discarded.
-Moreover, in the DPLL algorithm, application of unit propagation until the fix point is reached leads  to a solution.
+%Moreover, in the DPLL algorithm, application of unit propagation until the fix point is reached leads  to a solution.
 \texttt{assignDecisionLiteral} is an important procedure that responsible of choosing the variable that
-divides the search space. Its objective is to find a literal that will generate a maximum of unit propagations. Intuitively, decision literals can be viewed as â€˜guessesâ€™ and propagated literals can be viewed as â€˜deductionsâ€™. 
-Finding a optimal variable is NP-Hard. Different heuristics exists to choose the decision variable,
-some of them will be presented in the section~\ref{sec:heuristics}.
+divides the search space. Its objective is to find a literal that will generate a maximum of unit propagations. Intuitively, decision literals can be viewed as "guesses" and propagated literals can be viewed as "deductions". 
+Finding the optimal variable is NP-Hard. Different heuristics exists to choose the decision variable,
+some of them are presented in~\Cref{sec:heuristics}.
 %\input{algo/puredpll}
 %Another idea introduced by DPLL was \emph{elimination of pure literals},
 %a literal is said pure if it only appear on one sign (positive or negative) in the problem.
