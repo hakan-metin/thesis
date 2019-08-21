@@ -14,24 +14,23 @@ We call \emph{literal}, a propositional variable or its negation.
 For a given variable $x$, the positive literal is represented by $x$ and the negative one by $\neg x$.
 Given a formula $\varphi$, we denote $\Vars_\varphi$ ($\Lits_\varphi$) the set of variables (literals) used in the formula (the index in $\Vars_\varphi$ and $\Lits_\varphi$ is usually omitted when
 clear from context).
-To build complex formulas, different operators are used, $\neg, \lor$ and $\land$, $\cdots$ can be 
-expressed by use of the basic ones.
+To build complex formulas, different operators are used, $\neg, \lor$ and $\land$ that are respectively negation, disjunction and conjunction. the remaining operators like, $\Rightarrow, \Leftrightarrow$ and
+$\oplus, \cdots$ can be expressed by the use of the basic ones.
 For example, $a \Rightarrow b$, can be expressed by $ \neg a \lor b$.
-%To ensure the priority of these operators, constraints are expressed between parenthesis.
-In the absence of its, the following priority order applies (from the highest to the lowest priority):
+In the absence of parenthesis, the following priority order applies (from the highest to the lowest priority):
 negation ($\neg$), conjunction ($\land$), disjunction ($\lor$).
 
-The value given to each variable of a formula is called an \emph{assignment} noted $\alpha$ and defined as follows:
+An \emph{assignment}, noted $\alpha$, is defined as the function that assings a value to each variable of $\varphi$.
  $$\alpha: \Vars \mapsto \{ \true, \false \}$$
- As usual $\alpha$ is said \emph{total}, or \emph{complete}, when all elements of $\Vars$ have an image by
+ As usual, $\alpha$ is said \emph{total}, or \emph{complete}, when all elements of $\Vars$ have an image by
 $\alpha$, otherwise it is \emph{partial}. By abuse of notation, an assignment is
 often represented by the set of its true literals. For example, $\alpha = \{\neg x_1, x_3 \}$ means that $x_1$
-have the false value and $x_3$ have the true value.
+is set to false value and $x_3$ is set to true.
   The set of all (possibly partial) assignments of $\Vars$ is noted $\Assignments(\Vars)$.
 A \emph{truth table} gives an evaluation of all possible assignments for a given formula.
-\Cref{tab:truthtable} shows the evaluation of negation ($\neg$), conjunction ($\land$), disjunction ($\lor$) operators.
+\Cref{tab:truthtable} shows the evaluation of the negation ($\neg$), the conjunction ($\land$), and the disjunction ($\lor$) operators.
 For convenience, true value (\true) is also represented by $1$, and false value (\false) is represented by $0$.
-When a formula is always true independently from the assignment, it is called a \emph{tautology}: $x \lor \neg x$ is 
+When a formula is always true, independently from the assignment, it is called a \emph{tautology}: $x \lor \neg x$ is 
 an example of tautologous formula.
 
 \begin{table}[!htbp]
@@ -55,20 +54,21 @@ an example of tautologous formula.
 In Boolean logic, it exists some structural properties, called \emph{normal form}.
 To introduce them, we first need to present the concepts of \emph{cube} and \emph{clause}.
 A \emph{cube} $\gamma$ is a finite conjunction of literals represented equivalently by:
-$$\gamma = \bigwedge_{i=1}^k l_i \text{, or by the set of its literals } \gamma = \{l_i\}_{i \in \llbracket 1,k \rrbracket}$$
+$$\gamma = \bigwedge_{i=1}^k l_i $$
 A \emph{clause} $\omega$ is a finite disjunction of literals represented equivalently by:
 $$\omega = \bigvee_{i=1}^k l_i \text{, or by the set of its literals } \omega = \{l_i\}_{i \in \llbracket 1,k \rrbracket}$$
  
 With respect to its size, a clause is said to be \emph{unary, binary, ternary, $n$-ary} if it contains respectively one, two, three, or $n$ literals.
-The clause form has a property called \emph{subsumption}. 
-When a clause $\omega_1$ is a subset of another clause $\omega_2$ noted $\omega_1 \subset \omega_2$. And any 
-assignment that satisfies $\omega_1$ also satisfies $\omega_2$, so $\omega_2$ is \emph{redundant} towards $\omega_1$ and so can be removed of the formula.
-\emph{Conjunctive Normal Form} (CNF) of a formula is a finite conjunction of clauses represented equivalently by:
-  $$\varphi = \bigwedge_{i=1}^k \omega_i \text{ or by the set of its clauses } \omega = \{\omega_i\}_{i \in \llbracket 1,k \rrbracket}$$
+%The clause form has a property called \emph{subsumption}. 
+When a clause $\omega_1$ is a subset of another clause $\omega_2$, noted $\omega_1 \subset \omega_2$,
+we say thath $\omega_{1}$ subsumes $\omega_{2}$.
+ And any assignment that satisfies $\omega_1$ will also satisfy $\omega_2$. So, $\omega_2$ is \emph{redundant} w.r.t. $\omega_1$ and can be removed from the formula.
+\emph{Conjunctive Normal Form} (CNF) of a formula is a finite conjunction of clauses represented by
+  $$\varphi = \bigwedge_{i=1}^k \omega_i \text{ (or by the set of its clauses } \varphi = \{\omega_i\}_{i \in \llbracket 1,k \rrbracket}\text{)}$$
   
-\emph{Disjunctive normal form} (DNF) of a formula is finite disjunction of cubes represented equivalently by:
-  $$\varphi = \bigvee_{i=1}^k \gamma_i \text{ or by the set of its cubes } \omega = \{\gamma_i\}_{i \in \llbracket 1,k \rrbracket}$$
-The following table is a summary of laws about Boolean formulas that allow to transform any formula to
+\emph{Disjunctive normal form} (DNF) of a formula is finite disjunction of cubes represented by:
+  $$\varphi = \bigvee_{i=1}^k \gamma_i \text{ (or by the set of its cubes } \varphi = \{\gamma_i\}_{i \in \llbracket 1,k \rrbracket}\text{)}$$
+The following table is a summary of the laws that allow to transform any formula to
 a normal form.
 \begin{table}[!htbp]
  \centering
