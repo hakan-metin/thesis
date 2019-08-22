@@ -281,24 +281,27 @@ formula is determined.
 \subsection{Conflict Analysis}
 A conflict is an inconsistency discovered by the solver, a situation that requires for a variable to be set 
 simultaneously to the \true and \false values. \Cref{fig:conflict} shows an assignments that leads to a conflict.
-First the solver chooses $\neg x_1$ as a decision (marked with a D in the figure) then, $\neg x_6$ and, then $\neg x_5$. This last one propagates $x_4$ (marked with aa P in the figure),
+First, the solver chooses $\neg x_1$ as a decision (noted D ($\neg x_1$) in the figure) then, $\neg x_6$ and, then $\neg x_5$. This last one propagates $x_4$ (marked with P ($x_4$) in the figure),
 which in turn propagates $x_2$ and $x_3$.
-To satisfy $\omega_1$, $x_3$ needs to be set to $\true$ and  to satisfy $\omega_5$, 
-needs to be $\false$. As a variable cannot have both values, a conflict appears (marked as a C in the figure).
+To satisfy $\omega_1$, $x_3$ needs to be set to $\true$, and  to satisfy $\omega_5$, 
+it needs to be set to $\false$. As a variable cannot have both values, a conflict appears (noted C in the figure).
 \begin{figure}[!htbp]
  \centering
   \input{fig/conflict}
  \caption{Decisions/Propagations that leads to a  conflict}
  \label{fig:conflict}
 \end{figure}
-This series of decisions would provoke same propagation and leads to the same conflict. To escape this
-situation, the solver needs to analyze the reason of the conflict with so-called \emph{implication graph}.
-It represents the current state of the solver and so records all dependencies between  variables. It is updated either when a variable is assigned on decision/propagation, or  when a variable
-is unassigned (on backjump's operation). The implication graph is a directed acyclic graph (DAG) in which a vertex represents an assigned variable labeled by $l@dl(l)$ where $l$ represents assigned literal and $dl(l)$ represents the decision level of the literal $l$.
-Root vertices , that have no incoming edges, represent decision literal. The remaining vertices represent
+
+Applied another time, this serie of decisions would provoke the same propagation and leads to the same conflict. 
+To escape this situation, one needs to analyze the situation and feed the algorithm with the information that prevent it to do the 
+same mistake again. This is done by use of the so-called \emph{implication graph}.
+%the solver needs to analyze the reason of the conflict with 
+It represents the current state of the solver and records all dependencies between  variables. It is updated when a variable is assigned 
+(on decision/propagation), or unassigned (on backjumping operation). The implication graph is a directed acyclic graph (DAG) in which a vertex represents an assigned variable labeled by $l@dl(l)$ where $l$ represents assigned literal and $dl(l)$ represents the decision level of the literal $l$.
+Root vertice , that have no incoming edges, represent decision literal. The remaining vertices represent
 propagations.
-Each incoming arc, labeled with a clause represents the \emph{reason} of this propagation.
-This clause must be assertive (i.e. all  literals are false except one that is not yet assigned).
+Each incoming arc, labeled by a clause, represents the \emph{reason} of this propagation.
+This clause must be \textit{assertive} (i.e., all  literals are false except one that is not yet assigned).
 \Cref{fig:implication-graph} shows the implication graph of the previous example (\Cref{fig:conflict}).
 \begin{figure}[!htbp]
  \centering
@@ -306,13 +309,13 @@ This clause must be assertive (i.e. all  literals are false except one that is n
  \caption{Implication graph}
  \label{fig:implication-graph}
 \end{figure}
-\texttt{analyzeConflict} procedure analyzes this graph to find the reason of the conflict. To do that, a search of
-\emph{unique implication point} (UIP) is performed. UIP of the last decision level of the implication graph is a variable
+\texttt{analyzeConflict} procedure analyzes this graph to find the reason of the conflict. To do that, a search of a
+\emph{unique implication point (UIP)} is performed. UIP of the last decision level of the implication graph is a variable
 which lies on every path from the decision to the conflict. Note that, there are many UIP for a given decision level.
 In such case, UIPs are ordered according to the distance with the contradiction. The First UIP (FUIP) is the closest to
 the conflict. It is well known that the first UIP provides the smallest set of assignment that is responsible for the
 contradiction~\cite{zhang2001efficient}.
-A UIP divides the implication graph in two sides with a \emph{cut}, the \emph{reason side} contains decision variables 
+A UIP divides the implication graph in two sides with a \emph{cut}; the \emph{reason side} contains decision variables 
 that is responsible of the contradiction and the \emph{conflict side} that contains the conflict. 
  UIP is always is the 
 reason side. \Cref{fig:implication-graph} depicts two cuts in the implication graph.
@@ -321,10 +324,9 @@ To build this clause, it suffices to negate the
 literals that have an ongoing arc to the  cut that contains the UIP. In \Cref{fig:implication-graph}, the produced
 clause will be $\omega_l = \{x_1, \neg x_4 \}$. Since the information of this clause is redundant regarding 
 the original formula. It can be added without any  restriction. The conflict clause can be simplified
-using the implication graph to reduce its size, by detecting
-redundancies~\cite{sorensson2009minimizing}. All leaned clause is stored in a clause database.
-\texttt{backjumpAndRestartPolicies} procedure is executed after producing the conflict clause.
-All responsible variables of the inconsistency are removed from the current assignment.
+using the implication graph to reduce its size (by detecting redundancies~\cite{sorensson2009minimizing}).
+ All learned clauses are stored in a clauses database. \texttt{backjumpAndRestartPolicies} procedure is executed after producing the conflict clause.
+All  variables responsible of the inconsistency are removed from the current assignment.
 Adding the conflict clause prunes search space that contains no solution. This is the key point of the CDCL algorithm. In our example \Cref{fig:implication-graph}, the target decision level is 1.
 After backtrack, the conflict clause will be assertive.The first UIP is the only variable that 
 has not a value and will be propagated in the next step of the  algorithm.
@@ -333,11 +335,14 @@ to the opposite value at level 0. This means that this literal must be true with
  
  
 \subsection{Heuristics}\label{sec:heuristics}
-This section gives an overview of different heuristics present in modern SAT solvers.
-\textbf{Decision heuristics}. Decision variable has a huge impact on the 
-overall solving time. It impacts the number of propagations and so 
+This section gives an overview of different heuristics implemented in modern SAT solvers.
+
+\textbf{Decision heuristics}.
+
+ Decision variable has a huge impact on the 
+overall solving time. It influences the number of propagations and so 
 the depth of the search tree.
-The Variable State Independent Decaying Sum (VSIDS)~\cite{moskewicz2001chaff} measure is one of the most famous decision heuristics and is used
+ Variable State Independent Decaying Sum (VSIDS)~\cite{moskewicz2001chaff} measure is one of the most famous decision heuristics and is used
 nowadays in almost all solvers; each variable has an activity and  is increased by a multiplicative factor 
 when it participates to the resolution of a conflict.
 %A solver has thousands conflicts during the solving and so activity of variables are very volatile.
@@ -346,34 +351,38 @@ Decision heuristics choose unassigned variable with the highest activity.
 %The idea behind this heuristic is to solve â€˜hardâ€™ part of problem at the top of the search tree.
 %Hence, it is much more efficient when coupled with the restart heuristics}
 %. 
-Learning rate based branching (LRB~\cite{liang2016learning}) is a latest decision heuristic. It is a
+Learning rate based branching (LRB~\cite{liang2016learning}) is the latest decision heuristic. It is a
 generalization of VSIDS and its goal is to optimize the \emph{learning rate} (LR), defined as the ability to generate
 learned clauses. The LRB of a variable is the weighted average (computed with \emph{exponential recency
 weighted average} (ERWA))  value taken by its LR over the time. Unassigned variable with the highest LRB is chosen as a decision. 
 %\hakan{A VOIR The idea behind this heuristics is to keep variables that used to generate learned clause in the search tree.}
+
 \textbf{Restarts.}
-Another important mechanism is \emph{restart}. Basically, the solver abandons it current assignment and 
-start from the top of the tree, while maintaining some information, like learned clauses, scores of variables, etc The restart prevents the solver to get stuck in the same part of the search space (heavy tailing~\cite{gomes1997heavy}).
+
+Another important mechanism is \emph{restart}. Basically, the solver abandons its current assignment and 
+restart from the top of the tree, while maintaining some information, like learned clauses, scores of variables, etc The restart prevents the solver to get stuck in the same part of the search space (phenomenon known as heavy tailing~\cite{gomes1997heavy}).
 Detecting this phenomenon has been widely treated in the literature~\cite{audemard2012refining,biere2008adaptive}.
 These strategies are based on counting the number of conflict or on the monitoring the current search's depth.
-Empirically a solver with restart has a better result~\cite{huang2007effect} and is today
+Theoretically a solver with restart has a better result~\cite{huang2007effect} and is today
 used in almost all state-of-the-art solvers.
 
-\textbf{Cleaning clause database.}
-Storing  all learned clauses will end up by a memory issue. So, we need to develop a policy to eliminate
+\textbf{Cleaning clauses database.}
+
+Storing  all learned clauses will end up by a memory issue\hakan{AND BLA BLA}. So, we need to develop a policy to eliminate
 some of them. In the literature, different criteria exist,
  the size of the clause is one of them and is very often used by solvers. 
- A small clause have better chance to participate to the unit propagation and so be useful in the solving.
+ A small clause have better chance to participate to the unit propagation and so be useful for the solving.
  As a consequence, large clauses are removed.
-\emph{Clause activity} is another criteria, when a clause augment its activity when it participates to conflict analysis. Lower activity clauses are less used and so removed.
- The last often used criteria is based on Literal Block Distance (LBD). It is a measure that computes the \emph{quality} of a clause it is based on the number of decision levels present in the clause. Clauses with high value of LBD will be deleted from the clause database.
+\emph{Clause activity} is another criterion, a clause augments its activity when it participates to conflict analysis. 
+Clauses with lower activity removed.
+ The last, often, used criterion is based on the Literal Block Distance (LBD) measure. It is a measure that computes the \emph{quality} of a clause it is based on the number of decision levels present in the clause. Clauses with high value of LBD will be deleted from the clause database.
 In current state-of-the-art solvers, multiple criteria are used and half of the learned clauses are removed during the clause database cleaning process.
 \subsection{Preprocessing / Inprocessing}
 In order to optimize solving time, some transformation can be applied to simplify the original formula.
-This is done by a \emph{preprocessing} engine before the start of solving.
+This is done by \emph{preprocessing} the formula before the start of the solving.
 When it is used during the solving, (usually after a restart), it is called \emph{inprocessing}.
 Simplification of the formula is made by removing clauses and/or variables.\\
-\emph{Variable elimination} simplification is based on \emph{resolution inference rule}~\cite{robinson1965machine}.
+\emph{Variable elimination} simplification is based on the \emph{resolution inference rule}~\cite{robinson1965machine}.
 Consider two clauses $\omega_1 = \{x_1, x_i, ..., x_j \}$ and $\omega_2 = \{\neg x_1, y_i, ..., y_j\}$.
 The resolution inference rule allows to derive a clause $\omega_3 = \{x_i, ..., x_j, y_i, ..., y_j\}$ which is called
 the \emph{resolvent} as it results from solving two clauses on the literal $x_1$ and $\neg x_1$.
@@ -383,27 +392,27 @@ the \emph{resolvent} as it results from solving two clauses on the literal $x_1$
 %Hence, the memory of the computer will be limiting factor.
 \emph{The subsumption} aims at removing  clauses. Consider two clauses $\omega_1$ and $\omega_2$, such that
 $\omega_1 \subset  \omega_2$, then $\omega_2$ can be safely removed from the original formula.
-\emph{Self subsuming resolution} is a principle that uses resolution rules and subsumption.
-The resolvent clause subsumes the original one. For example, $\omega_1 = \{x_1, \neg x_2, x_3\}$ and $\omega_2 = \{x_1, \neg x_2, x_3, x_4\}$,
+\emph{Self subsuming resolution} uses resolution rules and subsumption. at the same time,
+the resolvent clause subsumes the original one. For example, $\omega_1 = \{x_1, \neg x_2, x_3\}$ and $\omega_2 = \{x_1, \neg x_2, x_3, x_4\}$,
  then the resolvent clause will be $\omega_3 = \{x_1, x_3\}$ which subsumes $\omega_2$. This principle
 is implemented in \texttt{SatElite}~\cite{een2005effective} preprocessor engine and is used in almost all modern SAT solvers.
 Other simplification techniques exist such that \emph{Gaussian elimination} which detects sub formula in a XOR-SAT
-form and solve it in a polynomial time. Moreover, this technique can also be used as inprocessing~\cite{soos2010enhanced}. 
+form and solve it in a polynomial time\hakan{REF }. This technique can also be used in inprocessing~\cite{soos2010enhanced}. 
 Some techniques exploit the structure of the original formula and add relevant clauses to speed up the resolution
-time of the SAT solver. One of them use \textit{community structure} of the formula to find good clauses to add into.
+time of the SAT solver. One of them uses \textit{community structure} of the formula to find good clauses to add into.
 A preprocessor engine doing that is  \texttt{modprep}~\cite{ansotegui2015using}.
 The usage of symmetries also adds relevant clauses in the formula and will be detailed in the next chapter.
 \subsection{Parallel SAT solving}
-With the emergence of multi-core architectures and increasing power of computers, one way to optimize the solving
-of a SAT problem is the exploitation of these cores. Actually, SAT problems are a good candidate for parallelism.
+With the emergence of multi-core architectures and the increasing power of computers, one way to optimize the solving
+of a SAT problem is the exploitation of these cores. %Actually, SAT problems are a good candidate for parallelism.
 \emph{Portfolio} is a technique that launches several SAT solvers in parallel with different heuristics (decisions, restarts, ...) that 
-communicates or not between them. When one of them finds a solution or finds that none exists, the overall computation is finished.
+communicates or not between them. When one of them finds a solution or finds that none exists, the overall computation is finished.\hakan{REF}
 Another technique to develop a parallel SAT solver is called \emph{divide and conquer}. In this technique,
-the search space is divided  dynamically and submitted to different solvers that cooperate to find a solution.
+the search space is divided  dynamically and submitted to different solvers that cooperate to find a solution.\hakan{REF}
  Some specific techniques like load balancing and work stealing is applied to avoid a solver to be idle.
 A recent framework \emph{PaInleSS} (a Framework for Parallel SAT Solving) can be used to easily create a new parallel 
-SAT solver with different heuristics~\cite{le2017painless}~\cite{le2019modular}. Authors of this framework win the parallel 
-tracks of SAT competition \footnote{\url{http://www.satcompetition.org/}} in 2018.
+SAT solver with different heuristics~\cite{le2017painless}~\cite{le2019modular}. 
+%Authors of this framework win the parallel tracks of SAT competition \footnote{\url{http://www.satcompetition.org/}} in 2018.
 
 %\begin{center}
 %\begin{tikzpicture}

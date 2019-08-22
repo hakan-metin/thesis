@@ -226,12 +226,6 @@ A.~Sabharwal.
 \newblock Symchaff: A structure-aware satisfiability solver.
 \newblock In {\em AAAI}, volume~5, pages 467--474, 2005.
 
-\bibitem{schaefer1978complexity}
-T.~J. Schaefer.
-\newblock The complexity of satisfiability problems.
-\newblock In {\em Proceedings of the tenth annual ACM symposium on Theory of
-  computing}, pages 216--226. ACM, 1978.
-
 \bibitem{soos2010enhanced}
 M.~Soos.
 \newblock Enhanced gaussian elimination in dpll-based sat solvers.
