@@ -53,6 +53,11 @@ A.~Biere, M.~Heule, and H.~van Maaren.
 \newblock {\em Handbook of satisfiability}, volume 185.
 \newblock IOS press, 2009.
 
+\bibitem{chu2008pminisat}
+G.~Chu, P.~J. Stuckey, and A.~Harwood.
+\newblock Pminisat: a parallelization of minisat 2.0.
+\newblock {\em SAT race}, 2008.
+
 \bibitem{cook1971complexity}
 S.~A. Cook.
 \newblock The complexity of theorem-proving procedures.
@@ -120,11 +125,22 @@ P.~Flener, A.~M. Frisch, B.~Hnich, Z.~Kiziltan, I.~Miguel, J.~Pearson, and
 \newblock In {\em International Conference on Principles and Practice of
   Constraint Programming}, pages 462--477. Springer, 2002.
 
+\bibitem{garey2002computers}
+M.~R. Garey and D.~S. Johnson.
+\newblock {\em Computers and intractability}, volume~29.
+\newblock wh freeman New York, 2002.
+
 \bibitem{gomes1997heavy}
 C.~P. Gomes, B.~Selman, and N.~Crato.
 \newblock Heavy-tailed distributions in combinatorial search.
 \newblock In {\em International Conference on Principles and Practice of
   Constraint Programming}, pages 121--135. Springer, 1997.
+
+\bibitem{hamadi2008manysat}
+Y.~Hamadi, S.~Jabbour, and L.~Sais.
+\newblock Manysat: a parallel sat solver.
+\newblock {\em Journal on Satisfiability, Boolean Modeling and Computation},
+  6:245--262, 2008.
 
 \bibitem{heule2016solving}
 M.~J. Heule, O.~Kullmann, and V.~W. Marek.
@@ -185,6 +201,12 @@ L.~Le~Frioux, S.~Baarir, J.~Sopena, and F.~Kordon.
   painless framework.
 \newblock In {\em International Conference on Tools and Algorithms for the
   Construction and Analysis of Systems}, pages 135--151. Springer, 2019.
+
+\bibitem{lewis2007multithreaded}
+M.~Lewis, T.~Schubert, and B.~Becker.
+\newblock Multithreaded sat solving.
+\newblock In {\em Proceedings of the 2007 Asia and South Pacific Design
+  Automation Conference}, pages 926--931. IEEE Computer Society, 2007.
 
 \bibitem{liang2016learning}
 J.~H. Liang, V.~Ganesh, P.~Poupart, and K.~Czarnecki.

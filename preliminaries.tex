@@ -191,20 +191,20 @@ problem is polynomial time.
 \subsection{Some related problems}
 
 A different kind of problems are related to SAT is.% presented in this section.
-One of them is sharp-SAT (\#SAT)\cite{valiant1979complexity}, its purpose is to count the number of solutions in a CNF.
+One of them is sharp-SAT (\#SAT)~\cite{valiant1979complexity}, its purpose is to count the number of solutions in a CNF.
 
-Another related problem is \textit{maximum satisfiability problem} (MAX-SAT)\cite{biere2009handbook}. In this case, the problem
+Another related problem is \textit{maximum satisfiability problem} (MAX-SAT)~\cite{biere2009handbook}. In this case, the problem
 is to find the maximum subset of clauses that can be satisfied for a formula. Different variants
 of this problem exist. For example, some constraints must be satisfied (hard clauses) and MAX-SAT
 is applied on the remaining clauses called \emph{soft} clauses.
 The last related problem is quantified Boolean formula (QBF) where the quantifiers $\exists$ and
 $\forall$ are present in the formula. For example, $\forall x\, \exists y\, \exists z \, (x \lor y) \land z$.
-This particular form is a generalization of the SAT problem with PSPACE complexity.
+This particular form is a generalization of the SAT problem with PSPACE complexity~\cite{garey2002computers}.
 \subsection{Solving a SAT problem}
 Two kinds of algorithms exist to solve satisfiability problems.
 First, the \emph{incomplete} algorithms~\cite{kautz2009incomplete} which do not provide any guarantee that they will eventually report ,either a satisfiable assignment or declare the formula unsatisfiable. This kind of algorithm is out of scope of this thesis. 
 Second, the \emph{complete} algorithms, which provide a guarantee that if an assignment exists,
-it will be found or declare that formula unsatisfiable.
+it will be found or declared that formula is unsatisfiable.
 This section describes different \emph{complete }algorithm to solve a propositional formula.
 
 \subsubsection{A naive algorithm}
@@ -262,7 +262,7 @@ the clause $\omega_1$ is not satisfied and it remains 3 variables and so $2^3$ p
 divides the search space. Its objective is to find a literal that will generate a maximum of unit propagations. Intuitively, decision literals can be viewed as "guesses" and propagated literals can be viewed as "deductions". 
 Finding the optimal variable that will generate the maximum number of propagation is NP-Hard\cite{biere2009handbook}.
  Different heuristics exists to choose the decision variable,
-some of them are presented in~\Cref{sec:heuristics}.
+some of them are presented in Section~\ref{sec:heuristics}.
 %\input{algo/puredpll}
 %Another idea introduced by DPLL was \emph{elimination of pure literals},
 %a literal is said pure if it only appear on one sign (positive or negative) in the problem.
@@ -273,7 +273,7 @@ some of them are presented in~\Cref{sec:heuristics}.
 The principal weakness of DPLL algorithm is to make the same inconsistencies several times
 (principally due to chronological backtracking), leading to  unnecessary CPU usage.\\
 Conflict Driven Clause Learning (CDCL) \cite{marques1999grasp} is a sound and complete algorithm
-that overcomes the weakness of DPLL.
+that overcomes this weakness.
 
 \Cref{algo:cdcl} gives an overview of CDCL, Like DPLL,  it walks on a binary search tree.
 Initially, the  assignment is empty and the decision level that 
@@ -382,8 +382,10 @@ used in almost all state-of-the-art solvers.
 
 \textbf{Cleaning clauses database.}
 
-Storing  all learned clauses will end up by a memory issue\hakan{AND BLA BLA}. So, we need to develop a policy to eliminate
-some of them. In the literature, different criteria exist,
+Storing  all learned clauses will end up by a memory issue and unit propagation will be increasingly costly.
+ So, we need to develop a policy to eliminate some of them. These clauses are redundant with regards to the initial 
+ problem, removing them will not affect the satisfiability of the formula.
+  In the literature, different criteria exist,
  the size of the clause is one of them and is very often used by solvers. 
  A small clause have better chance to participate to the unit propagation and so be useful for the solving.
  As a consequence, large clauses are removed.
@@ -411,7 +413,7 @@ the resolvent clause subsumes the original one. For example, $\omega_1 = \{x_1, 
  then the resolvent clause will be $\omega_3 = \{x_1, x_3\}$ which subsumes $\omega_2$. This principle
 is implemented in \texttt{SatElite}~\cite{een2005effective} preprocessor engine and is used in almost all modern SAT solvers.
 Other simplification techniques exist such that \emph{Gaussian elimination} which detects sub formula in a XOR-SAT
-form and solve it in a polynomial time\hakan{REF }. This technique can also be used in inprocessing~\cite{soos2010enhanced}. 
+form and solve it in a polynomial time~\cite{moore2011nature}. This technique can also be used in inprocessing~\cite{soos2010enhanced}. 
 Some techniques exploit the structure of the original formula and add relevant clauses to speed up the resolution
 time of the SAT solver. One of them uses \textit{community structure} of the formula to find good clauses to add into.
 A preprocessor engine doing that is  \texttt{modprep}~\cite{ansotegui2015using}.
@@ -419,10 +421,12 @@ The usage of symmetries also adds relevant clauses in the formula and will be de
 \subsection{Parallel SAT solving}
 With the emergence of multi-core architectures and the increasing power of computers, one way to optimize the solving
 of a SAT problem is the exploitation of these cores. %Actually, SAT problems are a good candidate for parallelism.
-\emph{Portfolio} is a technique that launches several SAT solvers in parallel with different heuristics (decisions, restarts, ...) that 
-communicates or not between them. When one of them finds a solution or finds that none exists, the overall computation is finished.\hakan{REF}
+\emph{Portfolio}, first introduced in \emph{ManySAT}~\cite{hamadi2008manysat}, is a technique that launches several SAT solvers in parallel with different heuristics (decisions, restarts, ...) that 
+communicates or not between them. When one of them finds a solution or finds that none exists, the overall computation is finished.
 Another technique to develop a parallel SAT solver is called \emph{divide and conquer}. In this technique,
-the search space is divided  dynamically and submitted to different solvers that cooperate to find a solution.\hakan{REF}
+the search space is divided  dynamically and submitted to different solvers that cooperate to find a solution and used in
+different solvers like for example~\cite{chu2008pminisat, lewis2007multithreaded}
+
  Some specific techniques like load balancing and work stealing is applied to avoid a solver to be idle.
 A recent framework \emph{PaInleSS} (a Framework for Parallel SAT Solving) can be used to easily create a new parallel 
 SAT solver with different heuristics~\cite{le2017painless}~\cite{le2019modular}. 
