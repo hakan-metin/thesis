@@ -1,37 +1,71 @@
-\chapter{Conclusion And Future Works}\label{chap:conclu}
-
-
-
+\chapter{Conclusion and Future Works}\label{chap:conclu}
 
 
 
 In this thesis, we have presented approaches to increase the performance of solving 
 Boolean satisfiability problem (SAT) in presence of symmetries. 
 The presence of symmetry in a problem hinders the performance of the solver.
-Some trivial question for an human, like Can 100 pigeons fit in 99 holes?,
+Some trivial question for a human, like Can 100 pigeons fit in 99 holes?,
 becomes almost impossible for a solver. The solver will explore each pair of pigeon, hole and 
-will face to a combinatorial explosion.To deal with symmetries, we study the symmetry detection 
-and the symmetry exploitation.
+will face to a combinatorial explosion.
+%This thesis presents novel algorithm to deal with SAT problem in presence of symmetries.
+After a study of the literature on the SAT solving (see \Cref{chap:preliminaries}), and the study of existing 
+approaches to deal with symmetries in SAT (see \Cref{chap:symmetryinsat}). We highlight the strength and weaknesses of these approaches. 
+%
+%To deal with symmetries, we study the syntactical 
+%symmetry detection and the symmetry exploitation.
+%
 
-In \Cref{chap:symmSAT}, we develop $\libdsb$ a library that perform dynamic symmetry breaking.
+Our first symmetry based approach (see \Cref{chap:symmSAT})introduces the notion of effective symmetry breaking predicates (esbp)
+that borrows the principle of static symmetry breaking breaking approach but operating dynamically\cite{metin2018cdclsym}.
+This approach overcomes the blow up caused by the pre-generation of \textit{sbp} in the state-of-the-art 
+static approaches. The extensive evaluation shows that our approach improves on state-of-the-art static 
+symmetry breaking approaches.
+The method is encapsulated in a library called $\libdsb$ and can be integrated easily to any
+CDCL-like SAT solvers. It is released under GPL-v3 license and is available at \url{https://github.com/lip6/cosy}.
 
-It can be integrated easily to any CDCL solvers. It uses the strength of static symmetry breaking 
-
-Experimental results show that our work challenge current state of the art symmetry breaking techniques
-
-
-Nowadays, SAT solvers can handled huge problems with thousands of variables and clauses. 
-It is primary due to efficiently cut off search space.
-
-studies of detection and exploitation of symmetry breaking techniques.
-
-Symmetries are 
+Though easy to use and effectiveness, this method cannot handle some problems that are easily solved by other
+dynamic symmetry breaking approach like Symmetry Propagation (SP)~\cite{Devriendt12}.
+\Cref{chap:compose} presents our second contribution that aims to combine two dynamic symmetry breaking approach, our first algorithm  with the SP approach. In terms of performance, the combined version not brings big difference
+compared to the use of esbp. Nevertheless it can solve few instances that cannot be solved with previous approaches.
+Overall,  this  work  answers  to  the  precise  question: "Is is possible to accelerate the traversal while pruning the tree
+with symmetries?".We clearly show that the answer is yes, thanks to the introduced theoretical notion of local symmetries.
 
 
+%This approach use a new
+%
+%This approach can solve few set of instances that
+%cannot be solved with our works.
+%
+%that are
+%The first 
+%In \Cref{chap:symmSAT}, we develop $\libdsb$ a library that perform dynamic symmetry breaking.
+%
+%It can be integrated easily to any CDCL solvers. It uses the strength of static symmetry breaking 
+%
+%Experimental results show that our work challenge current state of the art symmetry breaking techniques
+%
+%
+%Nowadays, SAT solvers can handled huge problems with thousands of variables and clauses. 
+%It is primary due to efficiently cut off search space.
+%
+%studies of detection and exploitation of symmetry breaking techniques.
+%
+%Symmetries are 
+%
 
 \section{Perspectives}
+In the literature, some other dynamic approach like SEL\cite{devriendt2017symmetric} exists. Like SP approach,
+it accelerates the tree traversal using symmetries. Another hybrid approach to combine esbp and SEL may improve the
+performance of the solver. Actually, SEL has fewer requirements than SP and author of both papers demonstrates that
+SEL is a super-set of SP. This hybrid approach will accelerate the solving time.
+Theoretically, we can use the same notion of local symmetries to combine these approaches.
+Different verification tools like Alloy\footnote{\url{http://alloytools.org/}} use a SAT solver to check properties and find
+counter-example. An integration of our symmetry based SAT solver may improve the performance of such tool.
 
-
+Finally, a lot of research is based on parallel SAT solving, due to the recent multi-core architecture. In the general case,
+this approach not use any symmetry breaking approaches. An integration of such approach may improve the overall performance.
+A theoretical and practical study may demonstrate if it is possible and can be treated efficiently.
 
 %% Local Variables:
 %% TeX-master: "main.tex"
