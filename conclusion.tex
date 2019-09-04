@@ -81,6 +81,12 @@ SEL is a super-set of SP. For these reason, this hybrid approach will probably g
 maybe solve some unsolved symmetric problems.
 An approach that mimic the previous work could create this new combination, thanks again to the local symmetries.
 
+To improve the performance, we can use also parallel SAT solver. Due to the emergence of multi-core machines
+many research has been done in this area. In the general case, cooperation based approach (divide and conquer) and
+competition base approach (portfolio)  not use any symmetry breaking strategy and will explore the full search space.
+An integration of symmetry breaking may improve the overall performance of the solver.
+A theoretical and practical study may demonstrate if it increase the performance and if it is more efficient in 
+portfolios or divide and conquer strategy.
 
 
 SAT solvers are present in different tools that use it for checking different properties. For example, 
@@ -95,9 +101,7 @@ found with classical symmetry detection algorithm. Suppose that, the produces gr
 edges. To deal with partial symmetries the use of the notion of local symmetries can be the starting point.
 
 
-Finally, a lot of research is based on parallel SAT solving, due to the recent multi-core architecture. In the general case,
-this approach not use any symmetry breaking approaches. An integration of such approach may improve the overall performance.
-A theoretical and practical study may demonstrate if it is possible and can be treated efficiently.
+Finally, a lot of research is based on parallel SAT solving, due to the recent multi-core architecture. 
 
 %% Local Variables:
 %% TeX-master: "main.tex"
