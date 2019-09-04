@@ -189,6 +189,11 @@ J.~Kobler, U.~Sch{\"o}ning, and J.~Tor{\'a}n.
 \newblock {\em The graph isomorphism problem: its structural complexity}.
 \newblock Springer Science \& Business Media, 2012.
 
+\bibitem{le2008sat}
+D.~Le~Berre and A.~Parrain.
+\newblock On sat technologies for dependency management and beyond.
+\newblock 2008.
+
 \bibitem{le2017painless}
 L.~Le~Frioux, S.~Baarir, J.~Sopena, and F.~Kordon.
 \newblock Painless: a framework for parallel sat solving.

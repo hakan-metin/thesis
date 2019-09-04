@@ -69,13 +69,24 @@ with symmetries?".We clearly show that the answer is yes, thanks to the introduc
 %
 
 \section{Perspectives}
-In the literature, some other dynamic approach like SEL\cite{devriendt2017symmetric} exists. Like SP approach,
-it accelerates the tree traversal using symmetries. Another hybrid approach to combine esbp and SEL may improve the
-performance of the solver. Actually, SEL has fewer requirements than SP and author of both papers demonstrates that
-SEL is a super-set of SP. This hybrid approach will accelerate the solving time.
-Theoretically, we can use the same notion of local symmetries to combine these approaches.
-Different verification tools like Alloy\footnote{\url{http://alloytools.org/}} use a SAT solver to check properties and find
-counter-example. An integration of our symmetry based SAT solver may improve the performance of such tool.
+
+Despite the new instances that have been resolved by our approach, much remains to be done in this area.
+Indeed, some highly symmetric instances cannot be resolved by the state-of-the-art approaches.
+This section gives us some suggestions for improvement of symmetry based approach to solve SAT problems.
+
+In the literature, it will exist other dynamic approach than SP like for example Symmetry Explanation Learning (SEL)\cite{devriendt2017symmetric}. Like SP approach, it aims to accelerate the tree traversal using symmetries.
+Like our combo approach with SP, a combination with SEL will be possible.
+Actually, SEL has fewer requirements than SP and author of these two papers demonstrates that
+SEL is a super-set of SP. For these reason, this hybrid approach will probably give us much better performance and 
+maybe solve some unsolved symmetric problems.
+An approach that mimic the previous work could create this new combination, thanks again to the local symmetries.
+
+
+
+SAT solvers are present in different tools that use it for checking different properties. For example, 
+the IDE Eclipse use a SAT solver to check dependencies on installed packages \cite{le2008sat};
+a verification tools like Alloy\footnote{\url{http://alloytools.org/}} use a SAT solver to check properties and find
+counter-example for software modeling. In the second example, an integration of our symmetry based SAT solver may improve the performance of the verification.
 
 
 On some big instances, the computation of symmetries can be a limiting factor. An ideal approach is to find 
