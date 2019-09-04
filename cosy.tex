@@ -1,4 +1,4 @@
-\chapter{Between Static and Dynamic\\ Symmetry Breaking}\label{chap:symmSAT}
+\chapter{SymmSAT: Between Static and Dynamic\\ Symmetry Breaking}\label{chap:symmSAT}
 \minitoc
 This chapter presents our first contribution published in TACAS 2018 conference~\ref{algorithm:cdcl_cosy}. 
 \section{General idea}
@@ -144,17 +144,17 @@ Principle of CDCL is described in section \ref{sec:cdcl}, \cref{algorithm:cdcl_c
  one of the two variables is not assigned, they are considered  to have different values.
  
  When new literals are assigned, only active symmetries need to have their
- $\track[g]$ updated (line $2$). This update is done thanks to a while
- loop (lines $4-5$).
+ $\track[g]$ updated (\cref{alg:esbp:update}). This update is done thanks to a while
+ loop (\cref{alg:esbp:loop1,alg:esbp:loop2}).
  
  When literals are canceled, we need to update the status of symmetries for
  which some variable $v$ before $\track[g]$, or $g^{-1}(v)$, becomes unassigned
- (lines $9-10$). Symmetries that were inactive may be reactivated (line $11$).
+ (\cref{alg:esbp:min}). Symmetries that were inactive may be reactivated (\cref{alg:esbp:reactivate}).
  
  The current assignment is not a \textit{lex-leader} if some symmetry $g$ is a
  reducer. This is detected by comparing the value of $\track[g]$ with the value
- of $g^{-1}(\track[g])$ (line $16$). The function \texttt{isNotLexLeader} also
- marks symmetries as \emph{inactive} when appropriate (lines $18-19$).
+ of $g^{-1}(\track[g])$ (\cref{alg:esbp:notmin}). The function \texttt{isNotLexLeader} also
+ marks symmetries as \emph{inactive} when appropriate (\cref{alg:esbp:inactive1,alg:esbp:inactive2}).
  
  \subsubsection{Generation of the \emph{esbp}.} When the current assignment
  cannot be a \textit{lex-leader}, some symmetry $g$ is a reducer. The function
@@ -168,10 +168,10 @@ Principle of CDCL is described in section \ref{sec:cdcl}, \cref{algorithm:cdcl_c
   
   \Fn{\notifyAssigned{$\alpha$: assignment}
   }{
-   \ForEach{active $g \in  G$}{
+   \ForEach{active $g \in  G$}{\label{alg:esbp:update}
     $v \gets \track[g]$\;
-    \While{ $\{v, g^{-1}(v)\}\subseteq\alpha $ \textbf{or} $\{\neg v, \neg g^{-1}(v)\} \subseteq\alpha$ }{
-     $v \gets$ next variable in $\Vars_g$\;
+    \While{ $\{v, g^{-1}(v)\}\subseteq\alpha $ \textbf{or} $\{\neg v, \neg g^{-1}(v)\} \subseteq\alpha$ }{ \label{alg:esbp:loop1}
+     $v \gets$ next variable in $\Vars_g$\; \label{alg:esbp:loop2}
     }
     $\track[g] \gets v$
    }
@@ -179,24 +179,23 @@ Principle of CDCL is described in section \ref{sec:cdcl}, \cref{algorithm:cdcl_c
   
   \Fn{\notifyCancelled{$\alpha$: assignment}}{
    \ForEach{$g \in G$}{
-    $u \gets \min \{ v \in \Vars_g \mid \{v, \neg v\} \cap \alpha = \emptyset \text{ or } \{g^{-1}(v), \neg g^{-1}(v)\} \cap \alpha = \emptyset \}$\;
+    $u \gets \min \{ v \in \Vars_g \mid \{v, \neg v\} \cap \alpha = \emptyset \text{ or } \{g^{-1}(v), \neg g^{-1}(v)\} \cap \alpha = \emptyset \}$\;\label{alg:esbp:min}
     \If{$u \preceq \track[g]$}{
-     mark $g$ as active\;
+     mark $g$ as active\;\label{alg:esbp:reactivate}
      $\track[g] \gets u$\;
     }
     
    }
   }
   
-  
   \Fn{\isNotMinimal{$\alpha$: assignment}}{
    \ForEach{active $g \in G$}{
     $v \gets \track[g]$\;
-    \If{$\{v, \neg g^{-1}(v)\}\subseteq\alpha$} {
+    \If{$\{v, \neg g^{-1}(v)\}\subseteq\alpha$} {\label{alg:esbp:notmin}
      \Return \true  \tcp*{$g$ is a reducer}
     }
-    \If{$\{\neg v, g^{-1}(v)\}\subseteq\alpha$}{
-     mark $g$ as inactive
+    \If{$\{\neg v, g^{-1}(v)\}\subseteq\alpha$}{\label{alg:esbp:inactive1}
+     mark $g$ as inactive \label{alg:esbp:inactive2}
      \tcp*{$g$ can't reduce $\alpha$ or its extensions}
     }
     
@@ -222,7 +221,7 @@ Principle of CDCL is described in section \ref{sec:cdcl}, \cref{algorithm:cdcl_c
   \caption{the functions keeping track of the status of the symmetries and generating the \emph{esbp}.}
   \label{algo:keep_status}
   
- \end{algorithm}
+ \end{algorithm}%
  
  
  
@@ -496,7 +495,7 @@ instances in all but four of the \unsat categories ; it then also solves the
 highest number of instances among its competitors. This shows the interest
 of our approach for \unsat instances. Since symmetries are used to reduce the
 search space, we were expecting that it will bring the most performance gain
-for \unsat instances.
+for $\unsat$ instances.
 The situation for \sat instances is more mitigated (Table~\ref{table:benchSAT}),
 especially when using \saucy{}. Again, this is not very surprising: our method
 may cut the exploration of a satisfying assignment because it is not a
@@ -600,22 +599,33 @@ benchmark.
 
 \section{Related Works}
 Usage of symmetry property dynamically allows the solver to adapt classical heuristics and symmetry based one on the fly.
-For example, some restart heuristics are based on the number of conflicts, taking into account injection of ESBP may impact
+For example, some restart heuristics are based on the number of conflicts, taking into account injection of esbp may impact
 the performance of the overall SAT solver. 
+
 \subsection{Adapt heuristics dynamically}
 Other heuristics on the symmetry handling may increase the performance. We present here some of them.
-In some cases multiple permutations are reducer at the same time, and each one generate different symmetry breaking constraints.
-The backtrack level of the solver and the pruning capacity depends heavily on the chosen one. In the provided library, first reducer permutation generates the constraints. Inject symmetry breaking predicates when it was detected at the beginning of the 
-unit propagation or at the end will change the solver behavior. In the first case, ESBP is more important of a classical conflict
-if bot occurs and the inverse on the second case. We can even ignore the conflict and just add the constraints to clause database.
-This prevents the solver to get multiple time on non-minimal part of search. We can allow to go one time for satisfiable  
-for example. Effectively, if the solution is easy to find in this symmetrical branch and much harder on the lex leader, it may
-have a positive impact.
+In some cases, multiple permutations can be reducer at the same time, and each one generate different symmetry breaking constraints.
+The backtrack level of the solver and the pruning capacity depends heavily on the chosen one. In the provided library, first reducer permutation generates the constraints. 
+
+Another heuristic point is when inject the symmetry breaking predicates, two possible choices are possible, first
+before the unit propagation and secondly at the end of the propagation. This choice will impact the solver behavior.
+In the first case, esbp take the lead over  classical conflict (if its occurs). Conversely, in the second case a classical conflict
+take the lead over esbp. This can be specially useful on SAT problems because esbp can eliminate non lex-leader SAT assignment.
+To emphasize this behavior, we can just add esbp to the clause database, this gives to the solver to find a solution in this 
+symmetrical branch but avoid to get multiple time on non-minimal part of search. 
+
+
+
 \subsection{Change the Order Dynamically}
-As seen before, ordering relation between variable influence lex-leader and the generated constraints. This order is chosen 
-heuristically, changing this order dynamically is possible but with some requirement. All generated constraints and all deduced 
-clause from a symmetry breaking predicates needs to be completely removed. If these constraints are not removed, inconsistencies 
-may appear and a satisfiable problem become unsatisfiable.
+As seen before, ordering relation between variable influence lex-leader and the generated constraints. 
+The main idea is that the symmetry breaking order follows the decision heuristics of the sat solver, then symmetry breaking
+can decide quickly is the current assignment can be reduced or not.
+
+Changing this order dynamically is possible with some requirements. All esbps  and all deduced 
+clauses from a symmetry breaking predicates needs to be removed. If these constraints are not deleted, inconsistencies 
+may appear and a satisfiable problem become unsatisfiable. 
+%So, changing this order will force the solver to forget all learned clauses that makes the strength of CDCL solver. 
+
 
 
 \subsection{Impact of the sign in variable ordering}
@@ -624,16 +634,15 @@ may impact drastically the performance of the solver.
 
 To illustrate it, we execute \textit{hole100}, the pigeonhole problem with 100 holes and 101 pigeons with 
 the increase order and change only the sign.
-With  $\false < \true$, the solver generates 20\,619 ESBP and takes 13.8 seconds to solve it.
-With the inverse order, $\true < \false$, it generates 33\,263 ESBP ans solve it in 93.4 seconds.
+With  $\false < \true$, the solver generates 20\,619 esbps and takes 13.8 seconds to solve it.
+With the inverse order, $\true < \false$, it generates 33\,263 esbps ans solve it in 93.4 seconds.
 
 Following figures~\ref{table:compare_sign_order} show this difference on 500 symmetric instances with
-a scatter plot that compare orders, \texttt{MiniSymFT} is $\true < \false$ and  \texttt{MiniSymTF} is $\false < \true$.
-On the left, we compare the duration of the solver, \texttt{MiniSymTF} is more efficient on some \unsat instances.
-The right figure shows the number of generated ESBP by solvers in log scale. On some instance, it will generate 
-approximately the same number of ESBP. But the difference can an order of magnitude higher. A high number of ESBP is not necessarily
-better. If few number of ESBP cut-off a huge search space it can be sufficient for the solver to prove the existence or not 
-of a solution, variable ordering impact also.
+a scatter plot that compare the same order with different sign, \texttt{MiniSymFT} is the solver in which $\false < \true$ and  \texttt{MiniSymTF} is the solver in which $\true < \false$.
+On the left, we compare the duration of the solver, as we can see \texttt{MiniSymTF} is more efficient on some $\unsat$ instances (red plus in the figure).
+The right figure shows the number of generated esbp by solvers in log scale. On some instance, it will generate 
+approximately the same number of esbp. But the difference can an order of magnitude higher.
+However, a high number of esbp is not necessarily better. If few number of esbp cut-off a huge search space it can be sufficient for the solver to prove the existence or not of a solution.
 
 
 \begin{table}[!htbp]
@@ -641,7 +650,7 @@ of a solution, variable ordering impact also.
 		\includegraphics[width=.3\textheight]{img/scatter_compare}%
 	}
 	\hspace{1em}
-	\subfloat[Number of ESBP]{%
+	\subfloat[Number of esbp]{%
 		\includegraphics[width=.375\textheight]{img/scatter_esbp_compare}%
 	}
 	\vspace*{0.1cm}

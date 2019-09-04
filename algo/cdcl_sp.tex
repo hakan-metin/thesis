@@ -31,7 +31,7 @@
 					\tcp*{$\varphi$ is $\unsat$}
 				}
 				$\omega \gets$ \analyzeConflict{}\;
-				$dl \gets$ \backjumpPolicy{}\;
+				$(dl,\alpha) \gets$ \backjumpPolicy{}\;
 				$\varphi \gets \varphi \cup \{\omega$\} \;
 				\colorsp{\CSP.\cancelSymmetries{}}\; \label{algo:cdclsp:cancel}	
 			}

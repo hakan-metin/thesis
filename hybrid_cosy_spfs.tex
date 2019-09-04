@@ -1,7 +1,7 @@
 \chapter{Compose dynamic symmetry handling}\label{chap:compose}
 \minitoc
 \section{Composition of SP and SymmSAT}
-Recently, we developed an approach that reuses the
+In the previous chapter, we present an approach that reuses the
 principles of the static approaches, but operates dynamically (namely, the effective symmetry breaking approach~\cite{metin2018cdclsym}):
  the symmetries are broken during the search process without any pre-generation of the \textit{sbp}. The main
 advantage of this technique is to cope with the heavy (and potentially
@@ -292,13 +292,16 @@ scatter plot: on a large majority of UNSAT problems, the ratio goes in favor
 of \texttt{minisat-SymSp} w.r.t. \texttt{minisat-Sym}. This confirms the
 positive impact of SPA when applied in conjunction with ESBA.
 
+
+\hakan{Mettre cela en future works dans la conclusion finale}
+
 \section{Another combo approach}
 Introducing local symmetries allow us to use it with another dynamic approach : 
 \textit{Symmetry Explanation Learning} (SEL). It computes the symmetrical learning clause and
 include it in the solver clauses when it can be used in the unit propagation or leads to a conflict.
 With local symmetries, each clause has a set of allowed symmetries, when a symmetry wants to 
 add a symmetrical clause, it suffices to check if this permutation belongs to local symmetries.
-\hakan{Naive approach no stab .}
+
  
 \section{Exploitation of local symmetries}
 Local symmetries seen previously allows to exploit symmetries in different ways.

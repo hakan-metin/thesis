@@ -4,13 +4,28 @@
 
 In this thesis, we have presented approaches to increase the performance of solving 
 Boolean satisfiability problem (SAT) in presence of symmetries. 
-The presence of symmetry in a problem hinders the performance of the solver.
+Symmetries are natural things that can be found in different class of problems like
+graph coloring problems, fpga routing, etc.
+The presence of symmetry in a problem hinders the performance of the solver. It forces
+the solver to explore every symmetric branch of the search tree and will face to a combinatorial explosion.
 Some trivial question for a human, like Can 100 pigeons fit in 99 holes?,
-becomes almost impossible for a solver. The solver will explore each pair of pigeon, hole and 
-will face to a combinatorial explosion.
+where each pigeon (hole) are symmetric becomes impossible for a solver. 
+
+%It will explore each pair of pigeon, hole and cannot solve this problem.
+
+To deal with symmetries in problems, two approaches of symmetry breaking exists (see \Cref{chap:symmetryinsat}).
+The first one namely called static symmetry breaking approach acts as a preprocessor that augment the initial
+problem to prune symmetrical assignments of the search tree. The second one namely called dynamic symmetry breaking 
+acts during the solving of the solver. It can like in the static approach prune the symmetrical assignment of the 
+search tree or accelerate its traversal using symmetrical facts.
+Each approach has its weaknesses and strengths. However, some highly symmetrical instances cannot be solved with
+state-of-the-art approaches. This thesis will try to take the best of different approaches to solve 
+the hard one.
+
+
 %This thesis presents novel algorithm to deal with SAT problem in presence of symmetries.
-After a study of the literature on the SAT solving (see \Cref{chap:preliminaries}), and the study of existing 
-approaches to deal with symmetries in SAT (see \Cref{chap:symmetryinsat}). We highlight the strength and weaknesses of these approaches. 
+%After a study of the literature on the SAT solving (see \Cref{chap:preliminaries}), and the study of existing 
+%approaches to deal with symmetries in SAT (see \Cref{chap:symmetryinsat}). We highlight the strength and weaknesses of these approaches. 
 %
 %To deal with symmetries, we study the syntactical 
 %symmetry detection and the symmetry exploitation.
@@ -37,8 +52,7 @@ with symmetries?".We clearly show that the answer is yes, thanks to the introduc
 %This approach can solve few set of instances that
 %cannot be solved with our works.
 %
-%that are
-%The first 
+%that are %The first 
 %In \Cref{chap:symmSAT}, we develop $\libdsb$ a library that perform dynamic symmetry breaking.
 %
 %It can be integrated easily to any CDCL solvers. It uses the strength of static symmetry breaking 
@@ -62,6 +76,13 @@ SEL is a super-set of SP. This hybrid approach will accelerate the solving time.
 Theoretically, we can use the same notion of local symmetries to combine these approaches.
 Different verification tools like Alloy\footnote{\url{http://alloytools.org/}} use a SAT solver to check properties and find
 counter-example. An integration of our symmetry based SAT solver may improve the performance of such tool.
+
+
+On some big instances, the computation of symmetries can be a limiting factor. An ideal approach is to find 
+symmetries during the computation will be ideal. Moreover, some instances can have partial symmetries that cannot be 
+found with classical symmetry detection algorithm. Suppose that, the produces graph is symmetric only if we ignore some 
+edges. To deal with partial symmetries the use of the notion of local symmetries can be the starting point.
+
 
 Finally, a lot of research is based on parallel SAT solving, due to the recent multi-core architecture. In the general case,
 this approach not use any symmetry breaking approaches. An integration of such approach may improve the overall performance.
