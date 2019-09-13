@@ -16,7 +16,7 @@ where each pigeon (hole) are symmetric becomes impossible for a solver.
 To deal with symmetries in problems, two approaches of symmetry breaking exists (see \Cref{chap:symmetryinsat}).
 The first one namely called static symmetry breaking approach acts as a preprocessor that augment the initial
 problem to prune symmetrical assignments of the search tree. The second one namely called dynamic symmetry breaking 
-acts during the solving of the solver. It can like in the static approach prune the symmetrical assignment of the 
+acts during the solving of the solver. Like in the static approach, it can  prune the symmetrical assignment of the 
 search tree or accelerate its traversal using symmetrical facts.
 Each approach has its weaknesses and strengths. However, some highly symmetrical instances cannot be solved with
 state-of-the-art approaches. This thesis will try to take the best of different approaches to solve 
@@ -32,14 +32,14 @@ the hard one.
 %
 
 Our first symmetry based approach (see \Cref{chap:symmSAT})introduces the notion of effective symmetry breaking predicates (esbp)
-that borrows the principle of static symmetry breaking breaking approach but operating dynamically\cite{metin2018cdclsym}.
+that borrows the principle of static symmetry breaking approach but operating dynamically\cite{metin2018cdclsym}.
 This approach overcomes the blow up caused by the pre-generation of \textit{sbp} in the state-of-the-art 
 static approaches. The extensive evaluation shows that our approach improves on state-of-the-art static 
 symmetry breaking approaches.
 The method is encapsulated in a library called $\libdsb$ and can be integrated easily to any
 CDCL-like SAT solvers. It is released under GPL-v3 license and is available at \url{https://github.com/lip6/cosy}.
 
-Though easy to use and effectiveness, this method cannot handle some problems that are easily solved by other
+Though easy to use and effective, this method cannot handle some problems that are easily solved by other
 dynamic symmetry breaking approach like Symmetry Propagation (SP)~\cite{Devriendt12}.
 \Cref{chap:compose} presents our second contribution that aims to combine two dynamic symmetry breaking approach, our first algorithm  with the SP approach. In terms of performance, the combined version not brings big difference
 compared to the use of esbp. Nevertheless it can solve few instances that cannot be solved with previous approaches.
@@ -94,12 +94,20 @@ the IDE Eclipse use a SAT solver to check dependencies on installed packages \ci
 a verification tools like Alloy\footnote{\url{http://alloytools.org/}} use a SAT solver to check properties and find
 counter-example for software modeling. In the second example, an integration of our symmetry based SAT solver may improve the performance of the verification.
 
-\hakan{retravailler + example}
-Finally, on some big instances, the computation of symmetries can be the limiting factor. An ideal approach is to find 
-symmetries during the computation will be ideal. %This method will be very difficult 
-Moreover, some instances can have partial symmetries that cannot be 
-found with classical symmetry detection algorithm. Suppose that, the produces graph is symmetric only if we ignore some 
-edges. To deal with partial symmetries the use of the notion of local symmetries can be the starting point.
+
+All approaches that we proposed suppose that we compute the symmetries of the problem before solving it.
+But, on some big instances, the computation of symmetries can be the limiting factor. An optimal approach
+will be to find them during the solving or maybe find them opportunistically in sense that we can stop it when some of 
+symmetries are found.
+Moreover, it can open the door to partial symmetries, in sense that we need to ignore some vertex (edges) to discover
+some symmetries.This partial symmetries cannot be found with classical symmetry detection algorithm and will probably
+increase the performance.
+
+
+
+
+%Suppose that, the produces graph is symmetric only if we ignore some 
+%edges. To deal with partial symmetries the use of the notion of local symmetries can be the starting point.
 
 
  

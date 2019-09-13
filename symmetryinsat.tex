@@ -8,9 +8,8 @@ Consider the problem of searching a pattern in butterfly wings.
 Most butterflies has exactly the same wings halves. After checking that both wings are symmetric
 (process called symmetry detection), the pattern can be searched in only one wing. Searching this pattern in the other wing is useless (process called symmetry exploitation). 
 
-In this chapter, we show how to detect that a given formula presents symmetries and how to
+In this chapter, we show how to detect that a given formula has symmetries and how to
 exploit them to accelerate the solving.
-
 
 %Some instances exhibit symmetries and not taking them into account forces solvers to needlessly explore isomorphic search space.  
 
@@ -30,8 +29,8 @@ operation such as the following axioms are satisfied:
  \item \emph{inverse}:  $\forall a \in G, \exists b \in G$, commonly denoted $a^{-1}$ such that
  $a * a^{-1} = a^{-1} * a = e$
 \end{itemize}
-Note that, \emph{commutativity} (i.e, $\ a * b = b * a$, for $a, b \in G$) is not a required axiom,.
-If it satisfies this axiom, the group is said \emph{abelian}.
+Note that, \emph{commutativity} (i.e, $\ a * b = b * a$, for $a, b \in G$) is not a required axiom.
+If it satisfies it, the group is said \emph{abelian}.
 Moreover, the last definition leads to important properties: i) uniqueness of the identity element. 
 To prove this property, assume $\langle G, * \rangle$ a group with two identity elements $e$ and $f$ 
 then $ e = e * f = f$.
@@ -46,11 +45,15 @@ b & = & b * e & \\
 & = & c           &   \text{\emph{identity} rule}
 \end{array}$
 
+We denote the structure G* as G when the context makes it clear that G is a group with bin ...
+
+
 The structure $\langle G, * \rangle$ is denoted simply $G$ when clear from the context that G is a group
-with a binary operation. In this thesis, we are interested only in \emph{finite} groups, i.e,
-with a finite number of elements.
+with a binary operation. In this thesis, we only consider \emph{finite} groups, i.e, with a finite number of elements.
+
 Given a group $G$, a \emph{subgroup} is a non-empty subset of $G$ which is also a group with 
-the same binary operation. We denote $H \leq G$, the subgroup If $H$ of $G$.
+the same binary operation. We denote $H \leq G$, the subgroup $H$ of $G$.
+
 A group has at least two subgroups: i) the subgroup composed of the identity element $\{e\}$, called the \emph{trivial} subgroup; ii) the subgroup composed of itself, called \emph{improper} subgroup. All other subgroups are \emph{proper}.
 
 \subsubsection{Generators of a group}
@@ -690,9 +693,9 @@ the search space with a different manner and affect performance negatively.
 \subsection{Dynamic symmetry breaking}
 
 
-Dynamic symmetry breaking approaches aims at exploiting the symmetries during the solving by \hakan{Chnager}altering search space dynamically. This is possible with the integration of symmetry breaking approach in the solving algorithm. It uses symmetries presents in the formula to propagate symmetrical facts.
-As consequence, the solver reduces the number of decisions, that are chosen heuristically and increase the number of propagation
-%that are consequence of the formula. 
+Dynamic symmetry breaking approaches aims at exploiting the symmetries during the solving by altering the behavior of the solver.
+During the solving, the solver uses symmetries (presents in the formula) to remove symmetric assignments or to propagate symmetrical facts.
+Propagating symmetrical facts has as consequence to reduce the number of decisions, that are chosen heuristically and increase the number of propagations.
 In other words, symmetries allow to transform some "guesses" to "deductions". So, it improves performance of the underlying solver.
 In the literature, different approaches of dynamic symmetry breaking exists, this section presents the most important of them.
 
@@ -761,7 +764,8 @@ Active symmetries needs strong requirement and can be applied rarely.
 Devriendt et al~\cite{Devriendt12} improves the notion of active symmetries in the SAT context by
 introducing the notion \emph{weakly active} symmetries, that relax some constraints.
 
-\hakan{revoir def avec soheib}
+%\hakan{revoir def avec soheib}
+
 \begin{definition}[Weakly active symmetry]
  \label{def:weakly_active_symmetry}
  Let $\varphi$ be a formula and ($\delta, \alpha, \gamma$) a state of a CDCL solver in which $\delta$ is the set of decisions
