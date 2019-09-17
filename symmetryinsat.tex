@@ -29,9 +29,9 @@ operation such as the following axioms are satisfied:
  \item \emph{inverse}:  $\forall a \in G, \exists b \in G$, commonly denoted $a^{-1}$ such that
  $a * a^{-1} = a^{-1} * a = e$
 \end{itemize}
-Note that, \emph{commutativity} (i.e, $\ a * b = b * a$, for $a, b \in G$) is not a required axiom.
+Note that, \emph{commutativity} (i.e. $\ a * b = b * a$, for $a, b \in G$) is not a required axiom.
 If it satisfies it, the group is said \emph{abelian}.
-Moreover, the last definition leads to important properties: i) uniqueness of the identity element. 
+The last definition leads to important properties: i) uniqueness of the identity element. 
 To prove this property, assume $\langle G, * \rangle$ a group with two identity elements $e$ and $f$ 
 then $ e = e * f = f$.
 ii) Uniqueness of the inverse element. To prove this property, suppose that an element $x_1$ has two inverses,
@@ -45,11 +45,8 @@ b & = & b * e & \\
 & = & c           &   \text{\emph{identity} rule}
 \end{array}$
 
-We denote the structure G* as G when the context makes it clear that G is a group with bin ...
-
-
 The structure $\langle G, * \rangle$ is denoted simply $G$ when clear from the context that G is a group
-with a binary operation. In this thesis, we only consider \emph{finite} groups, i.e, with a finite number of elements.
+with a binary operation. In this thesis, we only consider \emph{finite} groups, i.e. group with a finite number of elements.
 
 Given a group $G$, a \emph{subgroup} is a non-empty subset of $G$ which is also a group with 
 the same binary operation. We denote $H \leq G$, the subgroup $H$ of $G$.
@@ -100,7 +97,7 @@ as the \emph{orbits} of $X$ under $G$. The orbit of an element $x$ under group $
 from the context) is the set. $[x]_G = \{g.x \mid g \in G\}$
 
 \section{Symmetries in SAT}
-The previous mathematical definition of group theory can be applied to a CNF formula.
+The previous mathematical definitions of group theory can be applied to a CNF formula.
 The symmetric group of permutations of $\Vars$ (i.e., bijections from $\Vars$ to $\Vars$) is noted
 $\Group(\Vars)$. The group $\Group(\Vars)$ naturally acts on the set of literals: for $g
 \in \Group(\Vars)$ and a literal $\ell \in \Lits $, $g.\ell = g(\ell)$ if $\ell$ is a
@@ -168,10 +165,9 @@ Symmetry of a formula $\varphi$ preserves the satisfaction, for every \emph{comp
 %
 %The next section presents how to compute the set of \emph{generators} of a given formula.
 
-These symmetries can be obtained either \textit{syntacticaly} or \textit{semanticaly}.
+These symmetries can be obtained either \textit{syntactically} or \textit{semantically}.
 Semantical symmetries are independent of any particular representation of the problem. Conversely,
-syntactic symmetries depend of the encoding of the problem and leads to different symmetries.
-The next section presents the detection of syntactical symmetries.
+syntactic symmetries depend of the encoding of the problem and can leads to different symmetries.
 
  We say that $g\in \Group(\Vars)$ is a \textit{symmetry of $ \varphi$} if the following conditions holds:
 \begin{itemize}[topsep=0em]
@@ -179,8 +175,11 @@ The next section presents the detection of syntactical symmetries.
 	\item $g$  commutes with the negation: $g.\neg l  = \neg (g.l)$
 \end{itemize}
 
+%The next section presents the detection of syntactical symmetries.
+
 \section{Symmetry detection in SAT}
-For the detection of symmetries in SAT, we fist introduce the graph automorphism notion.
+For the detection of symmetries in SAT, we first introduce the graph automorphism notion.
+
 Given a colored graph $Gr = (V, E, \gamma)$, with a set of vertices set $V \in  [1, n] $, a set of edges $E$ and
 $\gamma$ a mapping: $V \rightarrow C$, where C is a set of \emph{colors}.
 An automorphism of $Gr$ is a permutation on its vertices, $aut :V \rightarrow V$,
@@ -191,7 +190,7 @@ such that:
 \end{itemize}
 The graph automorphism problem is to find if a given graph has a non-trivial permutation group. 
 The computational complexity of this algorithm is conjectured to be strictly between P and NP~\cite{kobler2012graph,toran2004hardness}.
-Several tools exist to tackle this problem like \saucy~\cite{katebi2010symmetry},
+Several tools exist to handle this problem like \saucy~\cite{katebi2010symmetry},
 \bliss~\cite{JunttilaKaski:ALENEX2007}, \nauty~\cite{mckay2003nauty}, etc.
 
 %There exists different ways to encode a SAT problem, which lead to different symmetries of this problem.
@@ -209,7 +208,7 @@ $m$ clauses and $n$ variables, the graph is constructed as follows~\cite{biere20
  \item \emph{boolean consistency edges}: connect each pair of literals that correspond to the same variable.
 \end{itemize}
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
  \begin{minipage}[c]{.2\textwidth}
   $\omega_{1} = \{ x_{1}, x_{2}, x_{3} \}$ \\
   $\omega_{2} = \{ x_{4}, x_{5}, x_{6} \}$ \\
@@ -252,16 +251,18 @@ edges for Boolean consistency (red edges in the figure) and 24 edges that rely c
 
 An optimization to reduce the number of graph vertices is possible. It is achieved by modeling binary clause
 using graph edges instead of graph vertices.  However, in some particular cases, it can produce
-spurious permutations, where Boolean consistency is not respected~\cite{aloul2003solving}.
-To ensure that the permutation is valid, it must commutes with the negation:
+spurious permutations (i.e. Boolean consistency is not respected~\cite{aloul2003solving}).
+To ensure that the permutation is valid, the following condition must be satisfied:
 $$\forall x \in \support_g, g.\neg x == \neg g.x$$
-We check if the image of the negation of $x$ is equals to the negation of the image of $x$,
-for each element $x$ in the support of the permutation.
+
+In other words, we check if the image of the negation of $x$ is equals to the negation of the image of $x$,
+or each element $x$ in the support of the permutation.
+
 This optimization reduces considerably the size of the 
 graph and, accelerates the symmetry detection.
 In the previous example, we can remove 12 nodes and 12 edges. More generally,
 we can remove from the graph as many nodes and edges as binary clauses on the formula.
-\Cref{fig:graph_opt} represents the optimized version the graph.
+\Cref{fig:graph_opt} represents the optimized graph for the detection of automorphism.
 
 \begin{figure}[!htbp]
  \begin{minipage}[r]{.2\textwidth}
@@ -287,8 +288,7 @@ we can remove from the graph as many nodes and edges as binary clauses on the fo
 
 After the construction of such a graph, it is given to an automorphism tool.
 This last will produce its set of generators.
-With the previous graph, the following generators are obtained using $\bliss$:
-
+With the previous graph, the following generators are obtained using $\bliss$ as the automorphism tool:
 
 \begin{center}
  \begin{minipage}[c]{.635\textwidth}
@@ -298,19 +298,7 @@ With the previous graph, the following generators are obtained using $\bliss$:
  \end{minipage}
 \end{center}
 
-%These permutations generate the group of symmetries of the formula,
-%and so induce an equivalence relation.
-%\Cref{fig:orbit} shows a graphical representation of an orbit, where each node represents a literal.
-%Two literals are linked with an arc if it exists a permutation that maps one to the other. 
-%An orbit must be a \emph{strongly connected component} (SCC) and some of them have a particular form 
-% \Cref{sec:matrix-sbp} shows how to exploit this form.
  
-%\begin{figure}[!htbp]
-% \input{fig/exemple-orbits}
-% \caption{Graphical representation of an orbit}
-% \label{fig:orbit}
-%\end{figure}
-
 \section{Usage of symmetries}
 
 
@@ -341,9 +329,9 @@ fruitlessly the symmetric search space, i.e, try all possible combinations of co
 Solving this problem with a standard SAT solver, like MiniSAT~\cite{een2003extensible},
  turns out to be very time consuming (and even impossible, in reasonable time, for high values of $n$). 
 To avoid this combinatorial explosion, a technique called \emph{symmetry breaking} allows a SAT solver to avoid the visit of symmetric search space. To do so, it exists two principles , known as \emph{static symmetry breaking}
-and \emph{dynamic symmetry breaking}. In the first one, visiting one assignment for each orbit is sufficient to determine the satisfiability of the whole formula. So, symmetry breaking constraints that invalidate symmetric 
-assignments are added to the initial problem before the start of solving (statically). The second one alters
-the search space during the solving (dynamically), it will accelerate tree traversal using symmetrical facts.
+and \emph{dynamic symmetry breaking}. In the general case, visiting one assignment for each orbit is sufficient to determine the satisfiability of the whole formula.
+So, in the first case, symmetry breaking constraints that invalidate symmetric assignments are added to the initial problem before the start of solving (statically). The second one alters
+the search space during the solving (dynamically), it will like in the static approach prune symmetric search space or it can accelerate tree traversal using symmetrical facts.
 In fact, some decisions will be transformed into propagations and so accelerate the overall solving time.
   
 In the following sections, we present in detail the two principles.
@@ -371,7 +359,7 @@ In the following sections, we present in detail the two principles.
 This section explains how to statically exploit symmetrical properties of a SAT problem.
 In this approach, only one assignment (branch) from each orbit is visited and all others are
 omitted.% to deduce the satisfiability of the formula by adding constraints.
- This leads us to the following questions:
+This leads us to the following questions:
 \begin{enumerate}
 	\item How to generate constraints that forbid symmetrical assignments?
 	\item How  to choose branch that is equivalent to all symmetric ones?
@@ -426,21 +414,21 @@ only one assignment per orbit (for instance each lex-leader).
 % % \includegraphics[width=2in]{fig/assignment-lex-leader}
 % \input{fig/assignment-lex-leader}
 % \caption{Show lex-leader per orbit}
-% \label{fig:lex-leader}
+% \label{fig:lex-leader}  
 %\end{figure}
 
-The set of lex-leader predicates for a permutation $g \in G_\varphi$ is defined as:
+
+To answer the first question, the set of lex-leader predicates for a permutation $g \in G_\varphi$ is defined as:
 $$LL_g = \forall i : (\forall j < i : x_j = g.x_j) \Rightarrow  x_i \preceq g.x_i$$
 In other words, each assignment that have a variable such that its image under $g$ is smaller according to the ordering relation $\prec$, is pruned by $LL_g$.
 Conjunction of $LL_g$, for all permutations  $g \in G_{\varphi} $ results a sound and complete set of symmetry breaking predicates also called \emph{full symmetry breaking}.
-Only lex-leader assignment will be visited 
-for each orbit. But,  the size of the \textit{sbps} can be exponential in the number of variables of
-the problem so that they cannot be totally computed.So, Finding the lex-leader of an orbit is computationally hard~\cite{Luks2004}. 
-Conjunction of $LL_g$ for some $H \subset G_{\varphi} \mid g \in H$ results a set of symmetry breaking predicates 
+In this case, only the lex-leader assignment will be visited for each orbit.
+However, the size of the \textit{sbps} can be exponential in the number of variables of the problem and so, they cannot be totally computed.
+To overcome this problem, only a subgroup is considered, in this case 
+conjunction of $LL_g$ for $H \subset G_{\varphi}$ (such that $g$ is a permutation of the subgroup= results a set of symmetry breaking predicates 
 that aims at visiting at least one assignment per orbit and is called \emph{partial symmetry breaking}.
 In this situation, several assignments per orbit can be visited but bring often considerable reduction of the
-search space.
-Partial symmetry breaking gives a good trade-off between the number of generated constraints and the reduction of the search space.
+search space. Partial symmetry breaking gives a good trade-off between the number of generated constraints and the reduction of the search space.
 In the partial and full symmetry breaking, the set of symmetry breaking predicates generated is denoted by $\psi$.
 
 %\hakan{A REVOIR}
@@ -574,22 +562,23 @@ Some formulas exhibit a specific type of symmetry, called \emph{row (column) int
 a subset of variables structured as a two-dimensional matrix. Each row (column) is interchangeable,
 so, all variables of a row (column) permute with any other one.
 This form of symmetry is common in different kind of problems like the pigeon hole problem in which
-pigeons and holes are interchangeable.% or in the delivery system in which trucks of a fleet are interchangeables.
+pigeons and holes are interchangeable. % or in the delivery system in which trucks of a fleet are interchangeables.
 The usage of row (column) interchangeability can significantly improve SAT performance. 
 Actually symmetries can be eliminated by the addition 
 of only a linear number of symmetry-breaking constraints~\cite{flener2002breaking}. 
-One condition must be satisfied to ensure this linear number of constraints:
+To ensure this linear number of constraints, one condition must be satisfied :
 the lexicographic order of variables needs to respect the structure of the matrix.
 In practice, automorphism tools give only  set of generators that contains no information on
 the structure of the group. 
 Authors of $\breakid$~\cite{devriendt2016improved} develop an algorithm to detect this specific 
 structure and exploit it.
 
-An improvement of static symmetry breaking was made by Devriendt et al~\cite{devriendt2016improved} with a tool 
-called $\breakid$. It exploits some properties from the structure of the generators. On some cases, 
-a linear number of constraints allows to visit only one assignment for each orbit.
- It also tries to add a maximum of binary clauses.
- These can accelerate the unit propagation and participate to the conflict analysis.
+%Another improvement made by $\breakid$ is the exploitation of binary constraints
+%An improvement of static symmetry breaking was made by Devriendt et al~\cite{devriendt2016improved} with a tool 
+%called $\breakid$. It exploits some properties from the structure of the generators. On some cases, 
+%a linear number of constraints allows to visit only one assignment for each orbit.
+% It also tries to add a maximum of binary clauses.
+% These can accelerate the unit propagation and participate to the conflict analysis.
 
 \subsubsection{Binary lex-leader constraints}
 
@@ -708,11 +697,12 @@ To take part of this property, Instead of using the classical decision heuristic
 variable, all symmetric variable are considered at the same time (k-branching). 
 Roughly speaking,
 all variable in the same orbit are assigned/unassigned at the same time. So, all possible valuation 
-of the orbit can be checked once. Only the number of true and false literals matters.
-On this case, computing the number of possible valuations is trivial in this particular 
-form of group. For example, consider the permutations $g_1 = (1\\ 2)$
-Only one of the valuation $F T$ or $ T F$ (one true value and one false value) must be checked. And of course,
-$F F$ and $T T$ to determine the satisfiability of the formula.
+of the orbit can be checked once. In this approach, only the number of true and false literals matters
+and computing the number of possible valuations is trivial in this particular 
+form of group. For example, consider the permutations: $g_1 = (1\, 2)$,
+only one of the valuation $F T$ (variable $1$ assigned to the false value and variable $2$ assigned to the true value) or the reverse assignment ($T F$).
+ So, one true value and one false value must be checked in addition to the 
+$F F$ and $T T$ assignments to determine the satisfiability of the formula.
  The order in which the valuations are checked has a tremendous impact on solver performance. 
 This approach has good results when the group of symmetry presents particular form.
 In the general case, when we consider any group, computing the number of possible valuation will be very difficult and this approach is not applicable.
@@ -726,7 +716,8 @@ The general idea of this approach is to propagate symmetrical literals of those 
 In other words, it accelerates the tree traversal by ``transforming some guessing (decisions) to deductions (propagations)''.
 Indeed, the problem that presents symmetries makes possible to deduce some value 
 for the variables that would be guessed if symmetry properties were ignored.
-These deductions will reduce the overall tree traversal depth and hence, will eventually accelerate the solving process. To explain this approach, some definitions are required.
+These deductions will reduce the overall tree traversal depth and hence, will eventually accelerate the solving process. To explain this approach, 
+let first give some definitions.
 
 \begin{definition}[Logical consequence]
  \label{def:logical_consequence}
@@ -757,10 +748,12 @@ Definition~\ref{def:active_symmetry} leads to the following proposition:
 The previous proposition states that an active symmetry $g$ for a partial assignment $\alpha$ is still valid for
 the formula $\varphi \cup \alpha$. So when a literal $l$ is propagated, and a symmetry $g$ is active for a
 partial assignment $\alpha$, the solver can also propagate $g.l$. 
-Moreover, the group theory allows to compose permutations, and the composition of two active symmetries is also an active symmetry, so the solver can also propagate. $g^2.l, g^3.l, ... $
+Moreover, the group theory allows to compose permutations, and the composition of two active symmetries is also an active symmetry,
+so the solver can also propagate. $g^2.l, g^3.l, ... $
 
 
-Active symmetries needs strong requirement and can be applied rarely.
+
+Active symmetries needs strong requirement and so their applications are limited.
 Devriendt et al~\cite{Devriendt12} improves the notion of active symmetries in the SAT context by
 introducing the notion \emph{weakly active} symmetries, that relax some constraints.
 
@@ -795,9 +788,8 @@ Moreover, weakly active symmetries allow more propagations and so are more effic
 
 Symmetry propagation gives good performances on many symmetric instances.
 The overall performance of the symmetry propagation is intrinsically related to the decision heuristics of the underlying SAT solver.
-
-Note that, this approach don't discard any assignments like in the static approaches where 
-non lex-leader assignments are eliminated.
+%In addition, this approach don't discard any assignments like in the static approaches where 
+%non lex-leader assignments are eliminated.
 
 %One optimization of symmetry propagation is the following proposition, as seen in 
 % each propagated clause has a reason which is an assertive clause.
@@ -812,44 +804,48 @@ is \emph{Symmetry Explanation Learning}~\cite{devriendt2017symmetric} (SEL).
 Symmetries of a formula leaves this last invariant. Moreover, all learned clauses are logical consequences of the problem, symmetric of these clauses are also valid.
 Unlike Symmetry explanation scheme~\cite{benhamou2010enhancing} (SLS) where all symmetrical learned clauses
 are added to the clause database.
-The idea of this approach is to learn useful symmetrical variants of learned clauses.
+The idea of this approach is to learn useful symmetrical variants of learnt clauses.
  A clause is said to be useful if it participates to the unit propagation or conflict analysis.
-Computing all symmetrical learnt clauses will create a huge overhead and will be intractable 
-on real problems.
+Computing all symmetrical learnt clauses will create a huge overhead in terms of computation time and memory.
+Its usage will be limited on huge problems.
 % As symmetries leave the formula, the symmetrical clauses can be already
 %in managed clause by the solver and make unit propagation heavier.
 
-SEL uses the following fact:
-during unit propagation, propagated literals have reason clauses that are assertives.
-Generally, symmetries permute only few literals in a clause and so symmetrical clauses of those reason clauses may
-also be assertives and participate to their unit propagations.
- These clauses are stored in different learning database and 
+To avoid the previous drawback, SEL uses the following fact:
+i) All modern CDCL solvers needs to maintain the implication graph and so stores the reason of the propagated literals and
+obviously this reason is assertive.
+ii) Symmetries permute only few literals in a clause and so the probability that symmetrical clauses are also assertive is high.
+So, symmetrical clauses may also participate to the unit propagation.
+iii) These clauses are stored in different learning database and 
 treated separately. The solver promotes these clauses when they are effectively useful
 at the end of unit propagation. As unit propagation is done until fix point, it
 ensures no duplicate clause is added to the problem.
-To limit memory impact, symmetrical clauses are removed when the propagated literal are unassigned.
+iiii) To limit memory impact, symmetrical clauses are removed when the propagated literal are unassigned.
 responsible of the computation is removed from the assignment.
 
-SEL provides some interesting properties:
+Moreover, SEL provides some interesting properties:
 first, the authors prove that SEL propagations are a super-set of the one provided by SP. 
 It also does not need to track any status of symmetries (as opposite to SP).
 Like SP no satisfying assignment are discarded.
-The negative point is that SEL may flood the solver if the used set of symmetries is big and take time 
-to compute symmetrical clauses. 
+Nonetheless, The negative point is that SEL may flood the solver if the used set of symmetries is big. 
 
 
 \subsection{Conclusion} 
 
 Dynamic symmetry breaking approach exploits the symmetry property of the formula during the solving.
-Different approaches exist, some forbid non lex-leader assignments
-and so prune the search space. Others, use the symmetry to propagate symmetrical facts.
-mainly, they transform decisions (guesses) to propagations (deductions). 
-Moreover, as they are integrated directly to the search engine, solvers can adapt their heuristics dynamically.
-Dynamic symmetry breaking  approaches prevent the creation, as in static symmetry breaking, of potentially useless clause that increase the size of the original formula.
-Moreover, the computation of \textit{local symmetries} becomes possible. Effectively, some symmetry can 
-appear during the solving algorithm, exploiting these symmetries is not possible on the static approach. 
+It prevents the creation, as in static symmetry breaking, of potentially useless clause that increase the size of the original formula.
+Different approaches exist, one use k-branching that allow to visit only lex-leader assignment but can be applied only in particular form group.
+Others, use the symmetry to propagate symmetrical facts.
+Mainly, they transform decisions (guesses) to propagations (deductions), that accelerate the tree traversal and may improve the overall
+performance of the solver.Moreover, as they are integrated directly to the search engine, solvers can adapt their heuristics dynamically, like for
+example the restart.
 However, the integration of dynamic approach must be done carefully, CDCL algorithm is highly optimized and 
 fine tuned search engines. The integration of symmetry breaking can slow down its core engine
+
+
+%Moreover, the computation of \textit{local symmetries} becomes possible. Effectively, some symmetry can 
+%appear during the solving algorithm, exploiting these symmetries is not possible on the static approach. 
+%
 
 
 %SAT solvers are fine tuned algorithm to solve propositional formula, adding additional component that modify 
