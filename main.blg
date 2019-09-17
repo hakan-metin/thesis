@@ -1,6 +1,49 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: main.aux
+This is BibTeX, Version 0.99d (TeX Live 2019/dev/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: main.aux
 The style file: abbrv.bst
 Database file #1: main.bib
 Warning--empty booktitle in le2008sat
 Warning--empty booktitle in Russell1994ArtiCI
+You've used 54 entries,
+            2118 wiz_defined-function locations,
+            795 strings with 12255 characters,
+and the built_in function-call counts, 22103 in all, are:
+= -- 2287
+> -- 919
+< -- 35
++ -- 372
+- -- 304
+* -- 1440
+:= -- 3380
+add.period$ -- 184
+call.type$ -- 54
+change.case$ -- 305
+chr.to.int$ -- 0
+cite$ -- 56
+duplicate$ -- 929
+empty$ -- 1776
+format.name$ -- 304
+if$ -- 4879
+int.to.chr$ -- 0
+int.to.str$ -- 54
+missing$ -- 58
+newline$ -- 273
+num.names$ -- 110
+pop$ -- 380
+preamble$ -- 1
+purify$ -- 255
+quote$ -- 0
+skip$ -- 711
+stack$ -- 0
+substring$ -- 1561
+swap$ -- 335
+text.length$ -- 35
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 206
+warning$ -- 2
+while$ -- 228
+width$ -- 56
+write$ -- 614
 (There were 2 warnings)

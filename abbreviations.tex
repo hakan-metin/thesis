@@ -6,9 +6,139 @@
 
 \newcommand{\result}[1]{#1}
 
-\newtheorem{definition}{Definition}{\bfseries}{\itshape}
-\newtheorem{proposition}{Proposition}{\bfseries}{\itshape}
-\newtheorem{theorem}{Theorem}{\bfseries}{\itshape}
+
+%\newcounter{theo}[section]\setcounter{theo}{0}
+%\renewcommand{\thetheo}{\arabic{section}.\arabic{theo}}
+%\newenvironment{theo}[2][]{%
+%	\refstepcounter{theo}
+%	
+%	% Code for box design goes here.
+%	
+%	\begin{mdframed}[]\relax}{%
+%	\end{mdframed}
+
+%\ifstrempty{#1}%
+%% if condition (without title)
+%{\mdfsetup{%
+%		frametitle={%
+%			\tikz[baseline=(current bounding box.east),outer sep=0pt]
+%			\node[anchor=east,rectangle,fill=blue!20]
+%			{\strut Theorem~\thetheo};}
+%	}%
+%	% else condition (with title)
+%}{\mdfsetup{%
+%		frametitle={%
+%			\tikz[baseline=(current bounding box.east),outer sep=0pt]
+%			\node[anchor=east,rectangle,fill=blue!20]
+%			{\strut Theorem~\thetheo:~#1};}%
+%	}%
+%}%
+%% Both conditions
+%\mdfsetup{%
+%	innertopmargin=10pt,linecolor=blue!20,%
+%	linewidth=2pt,topline=true,%
+%	frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+%}
+%\newcounter{definition}[section]\setcounter{theo}{0}
+%\renewcommand{\thetheo}{\arabic{section}.\arabic{theo}}
+
+
+%\usepackage{DejaVuSans}
+%\usepackage[T1]{fontenc}
+
+
+\newcounter{theo}[section]\setcounter{theo}{0}
+\renewcommand{\thetheo}{\arabic{section}.\arabic{theo}}
+\newenvironment{definition}[1][]{%
+	\refstepcounter{theo}%
+	\ifstrempty{#1}%
+	{\mdfsetup{%
+			frametitle={%
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[anchor=east,rectangle,fill=blue!20]
+				{\strut Theorem~\thetheo};}}
+	}%
+	{\mdfsetup{%
+			frametitle={%
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[anchor=east,rectangle,fill=blue!20]
+				{\strut Definition~\thetheo:~#1};}}%
+	}%
+	\mdfsetup{innertopmargin=10pt,linecolor=blue!20,%
+		linewidth=2pt,topline=true,%
+		frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+	}
+	\begin{mdframed}%
+	}{\end{mdframed}}
+
+
+
+\newcounter{lem}[section]\setcounter{lem}{0}
+\renewcommand{\thelem}{\arabic{section}.\arabic{lem}}
+\newenvironment{proposition}[1][]{%
+	\refstepcounter{lem}%
+	\ifstrempty{#1}%
+	{\mdfsetup{%
+			frametitle={%
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[anchor=east,rectangle,fill=green!20]
+				{\strut Proposition~\thelem};}}
+	}%
+	{\mdfsetup{%
+			frametitle={%
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[anchor=east,rectangle,fill=green!20]
+				{\strut Proposition~\thetheo:~#1};}}%
+	}%
+	\mdfsetup{innertopmargin=10pt,linecolor=green!20,%
+		linewidth=2pt,topline=true,%
+		frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+	}
+	\begin{mdframed}%
+	}{\end{mdframed}}
+	
+	
+	\newcounter{the}[section]\setcounter{the}{0}
+	\renewcommand{\thethe}{\arabic{section}.\arabic{the}}
+	\newenvironment{theorem}[1][]{%
+		\refstepcounter{the}%
+		\ifstrempty{#1}%
+		{\mdfsetup{%
+				frametitle={%
+					\tikz[baseline=(current bounding box.east),outer sep=0pt]
+					\node[anchor=east,rectangle,fill=red!20]
+					{\strut Theorem~\thethe};}}
+		}%
+		{\mdfsetup{%
+				frametitle={%
+					\tikz[baseline=(current bounding box.east),outer sep=0pt]
+					\node[anchor=east,rectangle,fill=red!20]
+					{\strut Theorem~\thetheo:~#1};}}%
+		}%
+		\mdfsetup{innertopmargin=10pt,linecolor=red!20,%
+			linewidth=2pt,topline=true,%
+			frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+		}
+		\begin{mdframed}%
+		}{\end{mdframed}}
+	
+%\newenvironment{definition}[1]
+%{\mdfsetup{
+%		frametitle={\colorbox{white}{Definition: \space#1\space}},
+%		innertopmargin=10pt,
+%		frametitleaboveskip=-\ht\strutbox,
+%		frametitlealignment=\center
+%	}
+%	\begin{mdframed}%
+%	}
+%	{\end{mdframed}}
+
+%\newmdtheoremenv{definition}{Definition}{\bfseries}{\itshape}
+%\newtcolorbox{definition}{title=Definition:}%
+%{colframe=gray!50!black,fonttitle=\bfseries}{}
+
+%\newtheorem{proposition}{Proposition}{\bfseries}{\itshape}
+%\newtheorem{theorem}{Theorem}{\bfseries}{\itshape}
 
 %%% Common abbreviations ======================================================
 \usepackage{hyphenat}
