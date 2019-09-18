@@ -47,8 +47,8 @@
 %\usepackage[T1]{fontenc}
 
 
-\newcounter{theo}[section]\setcounter{theo}{0}
-\renewcommand{\thetheo}{\arabic{section}.\arabic{theo}}
+\newcounter{theo}[chapter]\setcounter{theo}{0}
+\renewcommand{\thetheo}{\arabic{chapter}.\arabic{theo}}
 \newenvironment{definition}[1][]{%
 	\refstepcounter{theo}%
 	\ifstrempty{#1}%
@@ -56,7 +56,7 @@
 			frametitle={%
 				\tikz[baseline=(current bounding box.east),outer sep=0pt]
 				\node[anchor=east,rectangle,fill=blue!20]
-				{\strut Theorem~\thetheo};}}
+				{\strut Definition~\thetheo};}}
 	}%
 	{\mdfsetup{%
 			frametitle={%
@@ -72,23 +72,22 @@
 	}{\end{mdframed}}
 
 
-
-\newcounter{lem}[section]\setcounter{lem}{0}
-\renewcommand{\thelem}{\arabic{section}.\arabic{lem}}
+\newcounter{clem}[chapter]\setcounter{clem}{0}
+\renewcommand{\theclem}{\arabic{chapter}.\arabic{clem}}
 \newenvironment{proposition}[1][]{%
-	\refstepcounter{lem}%
+	\refstepcounter{clem}%
 	\ifstrempty{#1}%
 	{\mdfsetup{%
 			frametitle={%
 				\tikz[baseline=(current bounding box.east),outer sep=0pt]
 				\node[anchor=east,rectangle,fill=green!20]
-				{\strut Proposition~\thelem};}}
+				{\strut Proposition~\theclem};}}
 	}%
 	{\mdfsetup{%
 			frametitle={%
 				\tikz[baseline=(current bounding box.east),outer sep=0pt]
 				\node[anchor=east,rectangle,fill=green!20]
-				{\strut Proposition~\thetheo:~#1};}}%
+				{\strut Proposition~\theclem:~#1};}}%
 	}%
 	\mdfsetup{innertopmargin=10pt,linecolor=green!20,%
 		linewidth=2pt,topline=true,%
@@ -98,22 +97,22 @@
 	}{\end{mdframed}}
 	
 	
-	\newcounter{the}[section]\setcounter{the}{0}
-	\renewcommand{\thethe}{\arabic{section}.\arabic{the}}
+	\newcounter{ctheo}[chapter]\setcounter{ctheo}{0}
+	\renewcommand{\thectheo}{\arabic{chapter}.\arabic{ctheo}}
 	\newenvironment{theorem}[1][]{%
-		\refstepcounter{the}%
+		\refstepcounter{ctheo}%
 		\ifstrempty{#1}%
 		{\mdfsetup{%
 				frametitle={%
 					\tikz[baseline=(current bounding box.east),outer sep=0pt]
 					\node[anchor=east,rectangle,fill=red!20]
-					{\strut Theorem~\thethe};}}
+					{\strut Theorem~\thectheo};}}
 		}%
 		{\mdfsetup{%
 				frametitle={%
 					\tikz[baseline=(current bounding box.east),outer sep=0pt]
 					\node[anchor=east,rectangle,fill=red!20]
-					{\strut Theorem~\thetheo:~#1};}}%
+					{\strut Theorem~\thectheo:~#1};}}%
 		}%
 		\mdfsetup{innertopmargin=10pt,linecolor=red!20,%
 			linewidth=2pt,topline=true,%

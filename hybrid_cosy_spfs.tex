@@ -59,8 +59,8 @@ $\varphi_e^k \cup \varphi_d^k$ is retrieved. It suffices to operate the intersec
 %Just say your approach keeps track of a set of particular symmetries for each clause. For a deduced clause, this set of symmetry captures which esbp's were involved in a deduced clause's derivation. The intersection of these sets is a superset of the globally unbroken symmetries, and a strict superset after clause deletion.
 
 \subsection{Local Symmetries}
-The general and formal framework that embodies the above idea is given by the following. It first relies on the notion of \textit{local symmetries} that we introduce in \cref{def:ls}.
-\begin{definition}
+The general and formal framework that embodies the above idea is given by the following. It first relies on the notion of \textit{local symmetries} that we introduce in Definition~\ref{def:ls}.
+\begin{definition}[Local Symmetries]
  \label{def:ls}
  Let $\varphi$ be a formula. We define $L_{\omega,\varphi}$, 
  the set of \textit{local symmetries} for a clause $\omega$, and with respect to 
@@ -287,10 +287,12 @@ effectiveness. However, it is the least fast when coming to solved intersection.
 This is clearly due to the double cost paid for tracking the symmetries' status
 (one for ESBA and the other for SPA). Having a unified management of
 symmetries tracking would probably reduce this cost.
+
 \begin{center}
 \begin{figure}[!htbp]
- \includegraphics[scale=0.5]{img/full-INFGB-ratio-vscosy.pdf}
- \includegraphics[scale=0.5]{img/full-INFGB-ratio-vsspfs.pdf}
+	\centering
+ \includegraphics[scale=0.6]{img/full-INFGB-ratio-vscosy.pdf}%
+ \includegraphics[scale=0.6]{img/full-INFGB-ratio-vsspfs.pdf}%
  \caption{Comparison of the ratio between the number of decisions and the number of propagation for the combo w.r.t. ESBA and SPA.}
  \label{fig:ratio}
 \end{figure}
@@ -312,19 +314,19 @@ scatter plot: on a large majority of UNSAT problems, the ratio goes in favor
 of \texttt{minisat-SymSp} w.r.t. \texttt{minisat-Sym}. This confirms the
 positive impact of SPA when applied in conjunction with ESBA.
 
-
-\hakan{Mettre cela en future works dans la conclusion finale}
-
-\section{Another combo approach}
-Introducing local symmetries allow us to use it with another dynamic approach : 
-\textit{Symmetry Explanation Learning} (SEL). It computes the symmetrical learning clause and
-include it in the solver clauses when it can be used in the unit propagation or leads to a conflict.
-With local symmetries, each clause has a set of allowed symmetries, when a symmetry wants to 
-add a symmetrical clause, it suffices to check if this permutation belongs to local symmetries.
-
- 
-\section{Exploitation of local symmetries}
-Local symmetries seen previously allows to exploit symmetries in different ways.
-Effectively, we can consider symmetries on a part of the problem. Only clauses that are really used
-by the solver i.e in the implication graph can be processed.
-To obtain the symmetries of the current sub problem is the intersection of local symmetries.
+%
+%\hakan{Mettre cela en future works dans la conclusion finale}
+%
+%\section{Another combo approach}
+%Introducing local symmetries allow us to use it with another dynamic approach : 
+%\textit{Symmetry Explanation Learning} (SEL). It computes the symmetrical learning clause and
+%include it in the solver clauses when it can be used in the unit propagation or leads to a conflict.
+%With local symmetries, each clause has a set of allowed symmetries, when a symmetry wants to 
+%add a symmetrical clause, it suffices to check if this permutation belongs to local symmetries.
+%
+% 
+%\section{Exploitation of local symmetries}
+%Local symmetries seen previously allows to exploit symmetries in different ways.
+%Effectively, we can consider symmetries on a part of the problem. Only clauses that are really used
+%by the solver i.e in the implication graph can be processed.
+%To obtain the symmetries of the current sub problem is the intersection of local symmetries.

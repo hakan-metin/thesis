@@ -19,6 +19,7 @@ are preprocessors, so their combination with other techniques, such as
 their parameters during the solving turns out to be tough. For all
 these reasons, some classes of SAT problems cannot be solved easily yet despite
 the presence of symmetries.
+
 To handle these issues, we propose a new
 approach that reuses the principles of the static approaches, but operates
 dynamically: the symmetries are broken during the search process without any
@@ -30,9 +31,9 @@ respect to an assignment $\alpha$) and \emph{effective symmetric breaking predic
 
 \begin{definition}[Reducer, inactive and active permutation]
   A permutation $g$ is a \emph{reducer} of an assignment $\alpha$ if $g.\alpha < \alpha$ 
-  (hence $\alpha$ cannot be the lex-leader of its orbit. $g$ reduces it and all its extensions). $g$ is
- \emph{inactive} on $\alpha$ when $\alpha < g.\alpha$ (so $g$ cannot reduce $\alpha$ and all
- the extensions). A symmetry is said to be \emph{active} with respect to $\alpha$
+  (hence $\alpha$ cannot be the lex-leader of its orbit. The permutation  $g$ reduces the assignment and all its extensions).\\
+	The permutation $g$ is \emph{inactive} on $\alpha$ when $\alpha < g.\alpha$ (so $g$ cannot reduce $\alpha$ and all
+ its extensions). A symmetry is said to be \emph{active} with respect to $\alpha$
  when it is neither inactive nor a reducer of $\alpha$. 
 \end{definition}
 Proposition~\ref{prop:status} restates this definition in terms of variables
@@ -66,19 +67,20 @@ When $g$ is a \textit{reducer} of $\alpha$ we can define a predicate that contra
  $$\alpha \not\models \psi \text{ and for all }\beta \in \Assignments(\Vars), \beta \not\models \psi \Rightarrow g.\beta < \beta$$
 \end{definition}
 The next definition gives a way to obtain such an effective symmetry-breaking predicate from an assignment and a reducer.
-\begin{definition}[A construction of an \emph{esbp}]
- \label{def:eta}
+\begin{definition}[A construction of an \emph{esbp}]\label{def:eta}
  Let $\varphi$ be a formula.
  Let $g$ be a symmetry of $\varphi$ that reduces an assignment $\alpha$.
  Let $v$ be the variable whose existence is given by item 1. in Proposition~\ref{prop:status}.
  Let $U = \{ v', \neg v' \mid v' \in \Vars_g \text{ and } v'~\preceq~v\}$.
- We define $\eta(\alpha, g)$ as $(U \cup g^{-1}.U) \setminus \alpha$.
+ We define $\eta(\alpha, g)$ as $(U \cup g.U) \setminus \alpha$.
 \end{definition}
+
+
 \textbf{Example}. Let us consider $\Vars = \{x_1, x_2, x_3, x_4, x_5\}$, $g =
 (x_1\,x_3)(x_2\,x_4)$, and a partial assignment $\alpha = \{x_1, x_2,
 x_3, \neg x_4\}$. Then, $g.\alpha = \{x_1, \neg x_2, x_3, x_4\}$ and $v = x_2$.
 So, $U = \{x_1, \neg x_1, x_2, \neg x_2\}$ and $g^{-1}.U = \{x_3, \neg x_3,
-x_4, \neg x_4\}$ and we can deduce than $\eta(\alpha, g) = (U \cup g^{-1}.U)
+x_4, \neg x_4\}$ and following the Definition \ref{def:eta}, we can deduce than $\eta(\alpha, g) = (U \cup g.U)
 \setminus \alpha = \{\neg x_1, \neg x_2, \neg x_3, x_4\}$.
 \begin{proposition}
  \label{prop:eta}
@@ -167,8 +169,8 @@ injection of an \emph{esbp} computed on the fly.
  
  \subsubsection{Generation of the \emph{esbp}.} When the current assignment
  cannot be a \textit{lex-leader}, some symmetry $g$ is a reducer. The function
- \texttt{generateEsbp} computes the $\eta(\alpha, g)$ of~\Cref{def:eta},
-the effective symmetry-breaking predicate of~\Cref{prop:eta}. This will
+ \texttt{generateEsbp} computes the $\eta(\alpha, g)$ of Definition~\ref{def:eta},
+the effective symmetry-breaking predicate of Proposition~\ref{prop:eta}. This will
  prevent the CDCL engine to explore further the current partial assignment.
  
  \begin{algorithm}[!htbp]
@@ -617,22 +619,20 @@ the performance of the overall SAT solver.
 \subsection{Adapt heuristics dynamically}
 Other heuristics on the symmetry handling may increase the performance. We present here some of them.
 In some cases, multiple permutations can be reducers at the same time, and each one generates different symmetry breaking constraints.
-The backtrack and the pruning capacity depend heavily on the chosen constraint. In our library, the first reducer permutation generates the constraint. 
+The backtrack and the pruning capacity depend heavily on the chosen constraint. In our library, the first reducer permutation generates the \textit{esbp}. 
 
 Another point concerns the injection of the symmetry breaking predicates. Two choices are possibles, first,
 before the unit propagation and second, at the end of the propagation. This choice will impact the solver behavior.
 In the first case, esbp takes the lead over the classical conflict (if its occurs). Conversely, in the second case, the classical conflict
 takes the lead over esbp. This can be, specially, useful on SAT problems because esbp can eliminate non lex-leader SAT assignment.
-To emphasize this behavior, the conflict of the esbp can be ignored in the sense that it is just added into clause database
-and so participate to the next unit propagation. This gives to the solver the ability to find a solution
-symmetrical branch but avoid to get multiple times on non-minimal part of search. 
+To emphasize this behavior, the conflict of the esbp can be ignored in the sense that the conflict clause is just added into the clause database and so will participate to the next unit propagation. This gives to the solver the ability to find a solution symmetrical branch but avoid to get multiple times on non-minimal part of search. I can be useful if we know in advance that the problem is satisfiable.
 
 
 
 \subsection{Change the Order Dynamically}
-As seen before, the ordering relationship between variables influence the minimal value of each orbit and the generated constraints. 
-The main idea is that the symmetry breaking order follows the decision heuristics of the sat solver, then symmetry breaking
-can decide quickly if the current assignment is a reducer or not.
+As seen before, the ordering relationship between variables influence the minimal value of each orbit (lex-leader) and the generated constraints. The symmetry controller is "waiting" for the solver that assign the variables that allows it to decide if the current assignment is the lex-leader.
+
+The main idea to change dynamically the order, and so the lex-leader, is that the symmetry breaking order follows the decision heuristics of the solver, then symmetry controller can decide quickly if the current assignment is minimal.
 
 Changing this order dynamically is possible with some requirements: all esbps  and all deduced 
 clauses from a symmetry breaking predicates need to be removed. If these constraints are not deleted,

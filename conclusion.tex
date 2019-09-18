@@ -3,13 +3,13 @@
 
 
 In this thesis, we have presented approaches to increase the performance of solving 
-Boolean satisfiability problem (SAT) in presence of symmetries. 
+Boolean satisfiability problem (SAT) (see Chapter\ref{chap:preliminaries}) in presence of symmetries. 
 Symmetries are natural things that can be found in different class of problems like
 graph coloring problems, fpga routing, etc.
 The presence of symmetry in a problem hinders the performance of the solver. It forces
-the solver to explore every symmetric branch of the search tree and will face to a combinatorial explosion.
-Some trivial question for a human, like Can 100 pigeons fit in 99 holes?,
-where each pigeon (hole) are symmetric becomes impossible for a solver. 
+it to explore every symmetric branch of the search tree and will face to a combinatorial explosion.
+Some trivial question for a human, like: Can 100 pigeons fit in 99 holes?,
+where each pigeon (hole) are symmetric becomes impossible for a state-of-the-art solver. 
 
 %It will explore each pair of pigeon, hole and cannot solve this problem.
 
@@ -19,8 +19,8 @@ problem to prune symmetrical assignments of the search tree. The second one name
 acts during the solving of the solver. Like in the static approach, it can  prune the symmetrical assignment of the 
 search tree or accelerate its traversal using symmetrical facts.
 Each approach has its weaknesses and strengths. However, some highly symmetrical instances cannot be solved with
-state-of-the-art approaches. This thesis will try to take the best of different approaches to solve 
-the hard one.
+state-of-the-art approaches. In this thesis, we improve current symmetry breaking approaches to 
+deals with more symmetric formulas.
 
 
 %This thesis presents novel algorithm to deal with SAT problem in presence of symmetries.
@@ -31,8 +31,7 @@ the hard one.
 %symmetry detection and the symmetry exploitation.
 %
 
-Our first symmetry based approach (see \Cref{chap:symmSAT})introduces the notion of effective symmetry breaking predicates (esbp)
-that borrows the principle of static symmetry breaking approach but operating dynamically\cite{metin2018cdclsym}.
+Our first symmetry based approach (see \Cref{chap:symmSAT})introduces the notion of effective symmetry breaking predicates (esbp) that borrows the principle of static symmetry breaking approach but operating dynamically\cite{metin2018cdclsym}.
 This approach overcomes the blow up caused by the pre-generation of \textit{sbp} in the state-of-the-art 
 static approaches. The extensive evaluation shows that our approach improves on state-of-the-art static 
 symmetry breaking approaches.
@@ -43,8 +42,7 @@ Though easy to use and effective, this method cannot handle some problems that a
 dynamic symmetry breaking approach like Symmetry Propagation (SP)~\cite{Devriendt12}.
 \Cref{chap:compose} presents our second contribution that aims to combine two dynamic symmetry breaking approach, our first algorithm  with the SP approach. In terms of performance, the combined version not brings big difference
 compared to the use of esbp. Nevertheless it can solve few instances that cannot be solved with previous approaches.
-Overall,  this  work  answers  to  the  precise  question: "Is is possible to accelerate the traversal while pruning the tree
-with symmetries?".We clearly show that the answer is yes, thanks to the introduced theoretical notion of local symmetries.
+Overall,  this  work  answers  to  the  precise  question: "Is it possible to accelerate the traversal while pruning the tree with symmetries?".We clearly show that the answer is yes, thanks to the introduced theoretical notion of local symmetries.
 
 
 %This approach use a new
