@@ -30,10 +30,61 @@
 %\`A tous, \textbf{merci infiniment} !
 
 %
-%\chapter*{Résumé}
-%
-% Ceci est le résumé.
-% 
-%\chapter*{Abstract}
-%
-%This is an abstract.
+\chapter*{Résumé}
+
+Cette thèse traite la résolution du problème de satisfaisabilité booléenne (SAT)
+qui peut être définit de la façon suivante,
+étant donné une formule propositionnelle (généralement les contraintes d'un problème codé),
+La résolution de SAT consiste à décider si la formule est satisfaisante (toutes les contraintes peuvent être satisfaites) ou insatisfaisante (il n'y a aucun moyen de satisfaire toutes les contraintes en même
+temps). Ce calcul est effectué par un solveur SAT qui répond usuellement $\sat$ lorsque la formule est satisfaisante et $\unsat$ sinon.
+ 
+Le problème SAT a été le premier problème à avoir été prouvé NP-Complet. Cela signifie que
+l'on ne connaît pas d'algorithme capable le résoudre avec une complexité polynomiale.
+Si un tel algorithme existe, cela résoudrai l'un des sept problèmes du prix du millénaire, à savoir 
+P vs NP.
+
+Malgré cette complexité, les solveurs SAT deviennent de plus en plus efficace.
+Au cours des dernières décennies, ceux-ci peuvent traiter des problèmes de plus en plus complexes dans différents domaines: comme les méthodes formelles telles que: la vérification du modèle borné (BMC)\cite{bmc_99} ; l'intelligence artificielle : décision de planification~\cite{planning_92} ; l'informatique : inférence haplotype~\cite{biology_06}. 
+Dans un travail récent, des chercheurs ont réussi a prouver à l'aide d'un solveur SAT, une borne maximum
+pour le problème de coloration des triplets Pythagoriciens~\cite{heule2016solving}, avec une preuve pesant 200 TB.
+
+Ce succès vient de l'introduction d'heuristiques sophistiquées et de l'optimisation de l'algorithme de
+résolution des conflits appelé "Conflict Driven Clause Learning" (CDCL). Il est basé sur le premier
+algorithme (avec une utilisation non intensif en mémoire) nommé par ses auteurs Davis, Putnam, Logemann
+et Loveland (DPLL)\cite{dpll_62}.
+
+
+Cependant, certains problèmes possèdent un espace de recherche énorme et ne peuvent pas 
+être traité par un solveur SAT. Un exemple d'un tel problème peut être le problème de tournées de véhicules (VRP). 
+Il s'agit du service d'entreprise de livraison, dans lequel étant donné une flotte de véhicules basés dans un dépôt, ceux ci doivent faire des rondes entre des clients qui ont demandés chacun une certaine quantité de marchandises. Le circuit effectué par un véhicule pour la visite de tous les clients
+est appelé la tournée du véhicule. L'objectif est de trouver la tournée qui minimise les coûts de livraison (monétaire, distance, temps, ....).
+
+
+Dans le problème précédent, renommer l'ensemble de véhicules identiques nous donnera exactement le même problème. C'est ce qu'on appelle une symétrie. En général, une symétrie est une transformation qui laisse un objet (ou un aspect de l'objet) inchangé. Les symétries sont généralement définie comme une propriété syntaxique d'un problème lorsque leur présence est inhérente à l'encodage du problème.
+Dans ce cas, une permutation des variables préservent la spécification originale du problème.
+Dans le cas où les symétries sont indépendantes d'une représentation particulière du problème, il s'agit de symétries sémantiques.
+
+La présence de symétrie dans un problème force l'algorithme de recherche à explorer en vain l'espace de recherche symétrique et entrave considérablement ses performances. La rupture de symétrie est une approche qui évite au solveur de visiter l'espace de recherche symétrique.
+La première étape pour exploiter la symétrie est de les trouver. Dans le contexte de SAT, la détection de la symétrie syntaxique se fait par une transformation de la spécification en un graphe coloré et d'application d'un outil d'automorphisme de graphe.
+
+
+Lorsque les symétries sont calculées, l'approche la plus courante pour les exploiter est d'utiliser une technique de rupture de symétrie statique. Celui ci consiste à prendre le problème symétrique en entrée et à produire une formule équivalente en éliminant les symétries présentes. Cette technique est dite 
+statique car elle est effectué avant la résolution du problème SAT. 
+
+Pour produire une formule équivalente sans présence de symétries, le problème est augmenté par des 
+contraintes de rupture de  symétries (sbp). Celles ci empêchent le solveur d'explorer l'espace de recherche symétrique. Plusieurs outils tels que $\shatter$~\cite{} et $\breakid$~\cite{} utilise cette technique. En général, cette approche a de bon résultats dans plusieurs instances symétrique mais possède des défauts.
+Le nombre de contraintes ajoutées peut être exponentielle par rapport à la taille du problème, ce qui a
+pour conséquence de ralentir l'algorithme principal du solveur. Certains problèmes hautement symétrique
+ne peuvent pas être résolus avec cette technique.
+
+Une autre approche consiste à utiliser les symétries pendent l'algorithme du solveur SAT, plus précisément à modifier son comportement en utilisant les symétries.
+Cette approche est dite dynamique.
+ Les faits symétriques sont déduit
+à partir des déductions que le solveur a construit. Avec l'absence du module de symétrie, tous les 
+faits devront être explorer en vain. Ces faits symétrique vont augmenter les performances du solveur.
+Différent outils tel que \textit{Symmchaff}, \textit{Symmetry Propagation (SP)}, \textit{Syymmetry Learning Scheme (SLS)} utilisent l'approche de rupture de symétrie dynamique.
+
+
+\chapter*{Abstract}
+
+This is an abstract.
