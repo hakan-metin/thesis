@@ -73,7 +73,27 @@ La Figure~\ref{fig:cdclflow} présente sous forme d'un organigramme le fonctionn
 Cependant certains problème présente des symétries, certaines branches de l'espace de recherche 
 sont donc équivalentes à la symétrie près. Prenons comme exemple le $\guillemotleft$problème des pigeons $\guillemotright$ dans lequel nous avons un ensemble de pigeons qui doivent êtres attribués à des nids différents. Dans ce problème il y a un nids de moins que le nombre de pigeons.
 Le but de ce problème est de déterminer si il est possible d'attribuer un nid différent à chaque pigeon.
- La figure ... pressente un instance de ce problème.
+ La figure~\ref{fig:holefr} pressente un instance de ce problème.
+ 
+ 
+ \begin{figure}[!htbp]
+ 	\centering
+ 	\begin{tikzpicture}[
+ 	start chain = going right,
+ 	node distance = 0pt,
+ 	AStyle/.style={draw, minimum width=2em, minimum height=2em, 
+ 		outer sep=0pt, on chain, fill=yellow!0!white}]
+ 	\node [AStyle] (1) {\huge\textcolor{gray}{\PHdove}};
+ 	\node [AStyle] (4) {\huge\textcolor{gray}{\PHdove}};
+ 	\node [AStyle] (5) {\huge\textcolor{gray}{\PHdove}};
+ 	\node [AStyle, draw] (6) {\huge\textcolor{gray}{\PHdove}};
+ 	\node [ minimum width=2em, minimum height=2em, 
+ 	outer sep=1pt, on chain] (7) {\huge\textcolor{gray}{\PHdove}};
+ 	\end{tikzpicture}
+ 	\caption{Représentation graphique d'une instance du problème des pigeons(5 pigeons, 4 nids)}
+ 	\label{fig:holefr}
+ \end{figure}
+ 
  
 Pour un humain, la réponse à ce problème est évidente, un solveur de l'état de l'art va parcourir toutes 
 les combinaisons possibles (pigeon, nid), cela qui mène a une explosion combinatoire.
@@ -86,7 +106,7 @@ pour un nombre de pigeons supérieur a 15.
 %est appelé la tournée du véhicule. L'objectif est de trouver la tournée qui minimise les coûts de livraison (monétaire, distance, temps, ....).
 %
 %
-%Dans le problème précédent, renommer l'ensemble de véhicules identiques nous donnera exactement le même problème. C'est ce qu'on appelle une symétrie. 
+%Dans le problème précédent, renommer l'ensemble de véhicules identiques nous donnera exactement le même problème. C'est ce qu'on appelle une symétrie.
 
 De manière plus  général, une symétrie est une transformation qui laisse un objet (ou un aspect de l'objet) inchangé. Les symétries sont généralement définie comme une propriété syntaxique d'un problème lorsque leur présence est inhérente à l'encodage du problème.
 Dans ce cas, une permutation des variables préservent la spécification originale du problème.
@@ -95,7 +115,7 @@ Dans le cas où les symétries sont indépendantes d'une représentation particu
 La présence de symétrie dans un problème force l'algorithme de recherche à explorer en vain l'espace de recherche symétrique et entrave considérablement ses performances. La rupture de symétrie est une approche qui évite au solveur de visiter l'espace de recherche symétrique.
 
 Pour pouvoir exploiter les symétries, la première étape consiste à les trouver. Dans le contexte de la satisfaction booléenne, la détection des symétries syntaxique se fait par tout d'abord par la transformation de la spécification en un graphe coloré et ensuite à l'application d'un outil d'automorphisme de graphe.
-Différent outils qui traitent ce problème existe dans l'état de l'art tel que $\bliss$~\cite{JunttilaKaski:ALENEX2007}, $\saucy$~\cite{katebi2010symmetry}, ...
+Différent outils traitent ce problème dans l'état de l'art tel que $\bliss$~\cite{JunttilaKaski:ALENEX2007}, $\saucy$~\cite{katebi2010symmetry}, ...
 
 
 Lorsque les symétries sont obtenues à l'aide de ces outils, l'approche la plus courante pour les exploiter est d'utiliser une technique de rupture de symétrie statique. Celui ci consiste à prendre le problème symétrique en entrée et à produire une formule équivalente en éliminant les symétries présentes dans le problème.
@@ -105,27 +125,25 @@ Pour produire une formule équivalente sans présence de symétries, le problèm
 contraintes de rupture de  symétries (e $\guillemotleft$symmetry breaking predicates $\guillemotright$ sbp). Celles ci empêchent le solveur d'explorer l'espace de recherche symétrique. 
 Autrement dit, si l'on considère notre exemple précédent avec les pigeons, le premier pigeon est attribué a un
 exactement un nid, la symétrie est alors "cassé".
-Plusieurs outils tels que $\shatter$~\cite{} et $\breakid$~\cite{} utilisent cette technique pour accélérer le solveur en présence de symétries.
-En général, cette approche a de bon résultats dans plusieurs instances symétrique mais possède des défauts.
-Le nombre de contraintes ajoutées peut être exponentielle par rapport à la taille du problème, ce qui a
-pour conséquence de ralentir l'algorithme principal du solveur. De plus, étant donné que ce calcul est effectué
-avant le lancement du calcul du solveur, celui-ci ne peut pas différentier les contraintes originales du problème
-et les contraintes de rupture de symétrie. Avec cette information, le solveur peut modifier ces heuristiques, ce 
-qui peut augmenter ces performances.
-Certains problèmes avec de nombreuses symétries ne peuvent pas être traités avec cette technique.
 
-Une autre approche consiste à utiliser les symétries pendent l'algorithme du solveur SAT, plus précisément à modifier son comportement en utilisant les symétries.
-Cette approche est dite dynamique.
-Les faits symétriques sont déduit à partir des déductions que le solveur a construit. 
-Avec l'absence du module de symétrie, tous les 
-faits devront être explorer en vain. Ces faits symétrique vont augmenter les performances du solveur.
-Différent outils tel que \textit{Symmchaff}, \textit{Symmetry Propagation (SP)}, \textit{Symmetry Learning Scheme (SLS)} utilisent l'approche de rupture de symétrie dynamique.
+Plusieurs outils tels que $\shatter$~\cite{} et $\breakid$~\cite{} utilisent cette technique pour accélérer le calcul du solveur en présence de symétries.
+En général, cette approche apporte de bon résultats dans différentes instances symétriques mais possède des défauts. Parmi cela nous pouvons cité le nombre de contraintes ajoutées qui peut être exponentielle par rapport à la taille du problème, ce qui a pour conséquence de ralentir l'algorithme principal du solveur.
+De plus, étant donné que ce calcul est effectué avant le lancement du calcul du solveur, celui-ci ne peut pas différentier les contraintes originales du problème avec les contraintes de rupture de symétrie. Avec cette information, le solveur peut modifier ces heuristiques, ce qui peut augmenter ces performances.
+Pour ces raisons, certains problèmes avec de nombreuses symétries ne peuvent pas être traités avec cette technique.
+
+Une autre approche dite rupture de symétrie dynamique consiste à utiliser les symétries durant l'algorithme de recherche du solveur SAT, plus précisément à modifier son comportement pour exploiter les propriétés de symétrie du problème. Cette approche consiste à déduire des faits symétrique par rapport aux déductions effectués par le solveur. Lorsque ces faits sont ignorés le solveur va explorer en vain l'espace de recherche symétrique.
+Ces déductions réduisent le nombre de décisions qui sont des suppositions du solveur qui sont choisit de 
+manière heuristiques et augmentent le nombre de propagations qui sont les déductions logique faites par le solveur. En d'autres termes, cette approche transforme les suppositions du solveur en déductions logiques.
+Différents outils utilisent cette approche, nous pouvons cité parmi cela \textit{Symmchaff}
+qui exploite que certains type spécifique de symétries, \textit{Symmetry Propagation (SP)}, \textit{Symmetry Learning Scheme (SLS)}, \textit{Symmetry Explanation Learning (SEL)} qui ajoutent les symétrique des
+clauses apprises pour permettre les déductions symétriques.
+Étant donné que cette approche est dynamique, il est possible pour le solveur 
+d'intégrer des heuristiques spécifiques ou encore de combiner les différentes technique de rupture de symétrie.
 
 
 Cette thèse vise à améliorer l'existant et rendre les solveurs plus performants en présence de symétries et
 propose différente contributions allant dans ce sens.  
 
-\subsection{Première Contribution}
 
 Notre première contribution consiste à mimer le comportement de la rupture de symétrie statique mais 
 opère dynamiquement, pendant l'exécution du solveur. On ajoute dans le solveur un composant de symétrie opportuniste qui va détecter que le solveur parcours un espace de recherche symétrique et va ajouter
@@ -145,6 +163,12 @@ $\libdsb$ est open source fournit sous la licence GPLv3 et est disponible sur Gi
 Nous avons comparés les performances de notre approche avec le solveur $\minisat$
 Les nombreuses expérimentations effectuées sur les instances symétrique de la SAT Competiton~\cite{jarvisalo2012international} sur les six dernière année nous démontre que notre approche est aussi performante que les approches de ruptures de symétries statiques.
 
+
+Malgré les très bon résultats obtenue par notre approche certains problèmes qui sont résolue très 
+rapidement par Symmetry Propagation (SP) ne peuvent pa être traité par notre approche et vise versa.
+C'est pourquoi notre deuxième contribution consiste à combiner notre première contribution avec SP.
+Pour cela différentes analyses théoriques et pratique ont dû être mis en place pour produire cette version
+combiné qui bénéficie du meilleur des deux mondes.
 
 \chapter*{Abstract}
 
