@@ -42,6 +42,12 @@ A.~Biere.
 \newblock In {\em International Conference on Theory and Applications of
   Satisfiability Testing}, pages 28--33. Springer, 2008.
 
+\bibitem{biere1999symbolic}
+A.~Biere, A.~Cimatti, E.~Clarke, and Y.~Zhu.
+\newblock Symbolic model checking without bdds.
+\newblock In {\em International conference on tools and algorithms for the
+  construction and analysis of systems}, pages 193--207. Springer, 1999.
+
 \bibitem{bmc_99}
 A.~Biere, A.~Cimatti, E.~Clarke, and Y.~Zhu.
 \newblock Symbolic model checking without bdds.

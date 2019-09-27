@@ -30,28 +30,32 @@
 %\`A tous, \textbf{merci infiniment} !
 
 %
-\chapter*{Résumé Long en Français}
+\chapter*{Résumé Long}
 
-Cette thèse traite la résolution du problème de satisfaisabilité booléenne (SAT)
-qui peut être définit de la façon suivante,
-étant donné une formule propositionnelle (généralement les contraintes d'un problème codé),
-La résolution de SAT consiste à décider si la formule est satisfaisante (toutes les contraintes peuvent être
-satisfaites) ou insatisfaisante (il n'y a aucun moyen de satisfaire toutes les contraintes en même
-temps). Ce calcul est effectué par un solveur SAT qui répond usuellement $\sat$ lorsque la formule est satisfaisante et $\unsat$ sinon.
- 
-Le problème SAT a été le premier problème à avoir été prouvé NP-Complet. Cela signifie que
-l'on ne connaît pas d'algorithme capable le résoudre avec une complexité polynomiale.
-Si un tel algorithme existe, cela résoudrai l'un des sept problèmes du prix du millénaire, à savoir 
-P vs NP.
 
-Malgré cette complexité, les solveurs SAT deviennent de plus en plus efficace.
-Au cours des dernières décennies, ceux-ci peuvent traiter des problèmes de plus en plus complexes dans différents domaines: comme les méthodes formelles telles que: la vérification du modèle borné (BMC)\cite{bmc_99} ; l'intelligence artificielle : décision de planification~\cite{planning_92} ; l'informatique : inférence haplotype~\cite{biology_06}. 
+Cette thèse traite la résolution du problème de satisfaisabilité booléenne (SAT).
+Le problème de satisfabilité est un problème important qui traitent de problèmes importants dans différent domaines tel 
+que la décision de planification~\cite{planning_92}, la biologie~\cite{biology_06}, la vérification de logiciel et de 
+matériel informatique~\cite{biere1999symbolic}, de raisonnement automatique~\cite{heule2016solving}.
+Leurs évolutions au cours des dernières décennies leurs ont permis de traiter des problèmes de plus en plus complexe.
 Dans un travail récent, des chercheurs ont réussi a prouver à l'aide d'un solveur SAT, une borne maximum
-pour le problème de coloration des triplets Pythagoriciens~\cite{heule2016solving}, avec une preuve pesant 200 TB.
+pour le problème de coloration des triplets Pythagoriciens~\cite{heule2016solving}, avec une preuve de 200 TB.
 
-Ce succès vient de l'introduction d'heuristiques sophistiquées et de l'optimisation de l'algorithme de
-résolution des conflits appelé $\guillemotleft$ Conflict Driven Clause Learning$\guillemotright$ (CDCL). Il est basé sur le premier
-algorithme (avec une utilisation non intensif en mémoire) nommé par ses auteurs Davis, Putnam, Logemann
+
+Le principe de base de SAT est de déterminer si une formule propositionnelle
+est satisfaisable, c'est à dire toutes les contraintes peuvent être satisfaites,
+ou insatisfaisable, c'est à dire il n'y a aucun moyen de satisfaire toutes les contraintes avec une même affectation.
+Ce calcul est effectué par un solveur SAT qui répond usuellement $\sat$ lorsque la formule est satisfaisable et $\unsat$ dans le cas
+contraire.
+Le problème SAT a été le premier problème à avoir été prouvé NP-Complet. Cela signifie que
+l'on ne connaît pas d'algorithme capable de résoudre le problème avec une complexité polynomiale.
+La résolution du problème est l'un des sept prix du millénaire, à savoir P = NP.
+
+
+Malgré cette complexité, les solveurs SAT sont capables de résoudre de plus en plus de problème complexe.
+Ce succès vient de l'introduction de différentes heuristiques sophistiquées et de l'optimisation de l'algorithme de
+résolution des conflits appelé $\guillemotleft$ Conflict Driven Clause Learning$\guillemotright$ (CDCL) qui est basé sur le premier
+algorithme (avec une utilisation non intensif de la  mémoire) nommé par ses auteurs Davis, Putnam, Logemann
 et Loveland (DPLL)\cite{dpll_62}.
 
 
@@ -59,7 +63,7 @@ Cette algorithme peut être vu sous forme de l'exploration d'un arbre ou chaque 
 une affectation. Il y a donc au total $2^n$ branches, avec $n$ le nombre de variables du problèmes.
 Le principe de cet algorithme est d'explorer cet arbre binaire. 
 La première étape consiste à choisir une variable dite de décision avec une polarité qui permet l'exploration
-de l'arbre de recherche. Ensuite, les déductions logiques à partir de l'affection courantes sont effectuées. 
+de l'arbre de recherche. Puis, d'effectuer les déductions logiques à partir de l'affection. 
 Si l'algorithme découvre un conflit, c'est à dire que l'affectation courante n'est pas capable de satisfaire au moins une contrainte du problème, l'algorithme va calculé une clause dite de conflit qui permet d'élaguer 
 cet espace de recherche qui ne contient pas de solution. Cette clause est une information redondante par
 rapport au problème initial. Si aucun conflit n'est présent, l'algorithme choisit à nouveau une variable de décision. L'algorithme termine lorsque soit toutes les variables sont affecté au quel cas le problème 
@@ -95,10 +99,10 @@ Le but de ce problème est de déterminer si il est possible d'attribuer un nid 
  \end{figure}
  
  
-Pour un humain, la réponse à ce problème est évidente, un solveur de l'état de l'art va parcourir toutes 
-les combinaisons possibles (pigeon, nid), cela qui mène a une explosion combinatoire.
-Résoudre ce problème avec un solveur s'avère très chronophage et même impossible dans des temps raisonnable
-pour un nombre de pigeons supérieur a 15.
+Pour un humain, la réponse à ce problème est évidente, mais un solveur de l'état de l'art va parcourir toutes 
+les combinaisons possibles de couples (pigeon, nid), cela le mène a une explosion combinatoire.
+Pour cette raison, résoudre ce problème avec un solveur s'avère très chronophage et même impossible dans des temps raisonnable
+pour un nombre de pigeons supérieur a environ 15.
 
 %Cependant, certains problèmes possèdent un espace de recherche énorme et ne peuvent pas 
 %être traité par un solveur SAT. Un exemple d'un tel problème peut être le problème de tournées de véhicules (VRP). 
@@ -153,20 +157,53 @@ de rupture de symétrie  statique la contraintes est forcément utilisé par le 
 inutile est inséré dans le solveur. Cela a pour conséquence de réduire le nombre de contrainte et donc 
 ne ralentit pas les solveur.
 
+
 Ce composant de symétrie est fournit sous forme d'une bibliothèque codé en C++ et se nomme $\libdsb$.
 Elle peut s'interfacer avec n'importe quelle solveur de type CDCL. 
 Nous l'avons interfacé avec un solveur de l'état de l'art nommé $\minisat$~\cite{een2003extensible}. Au total, l' intégration de $\libdsb$ ajoute environ 60 lignes de code 
 et augmente de code de $\minisat$ de 3\%.
-$\libdsb$ est open source fournit sous la licence GPLv3 et est disponible sur Github à l'adresse \url{https://github.com/lip6/cosy}.
+$\libdsb$ est open source fournit sous la licence GPLv3 et est disponible sur Github à l'adresse suivante: \url{https://github.com/lip6/cosy}.
 
 
 Nous avons comparés les performances de notre approche avec le solveur $\minisat$
-Les nombreuses expérimentations effectuées sur les instances symétrique de la SAT Competiton~\cite{jarvisalo2012international} sur les six dernière année nous démontre que notre approche est aussi performante que les approches de ruptures de symétries statiques.
+Les nombreuses expérimentations effectuées sur les instances symétrique de la SAT Competiton~\cite{jarvisalo2012international} sur les six dernière années nous démontre que notre approche est aussi performante que les approches de ruptures de symétries statiques.
+La figure~\ref{fig:frcactus} nous montre les résultats obtenus par notre approche par rapport à l'état de l'art sous forme 
+d'un cactus plot, l'axe des abscisses nous montre le nombre d'instance réussi par chacun des solveurs et sur l'axe des ordonné nous pouvons voir
+le temps de calcul des solveurs. Comme nous pouvons le constater les résultats diffèrent avec l'utilisation de l'outil d'automorphisme de 
+graphe $\saucy$ ou $\bliss$. La principale différence entre ces deux outils est le nombre de permutations obtenus. $\bliss$ nous donne plus
+de permutations que $\saucy$. Cela permet a notre outil $\cdclsym$ qui est une intégration de notre bibliothèque dans $\minisat$, d'atteindre 
+un nombre d'instances résolues de environ 780 alors que le deuxième meilleur outil $\breakid$ atteint un nombre d'instance résolue de environ 760.
+
+
+\begin{figure}[!htbp]
+	\centering
+	\subfloat[with \saucy]{{\includegraphics[scale=0.36]{img/saucy-result}}}%
+	\qquad
+	\subfloat[with \bliss]{{\includegraphics[scale=0.36]{img/bliss-result}}}%
+	\caption{cactus plot  total number of instances}%
+	\label{fig:frcactus}%
+\end{figure}
+
 
 
 Malgré les très bon résultats obtenue par notre approche certains problèmes qui sont résolue très 
 rapidement par Symmetry Propagation (SP) ne peuvent pa être traité par notre approche et vise versa.
-C'est pourquoi notre deuxième contribution consiste à combiner notre première contribution avec SP.
+SP est une approche qui a pour but d'accélérer la traversé de l'espace de recherche en déduisant des faits symétrique 
+à partir des déductions effectué par le solveur. A l'inverse notre approche consiste à éliminer les espaces de recherche 
+symétriques. Ces deux approches sont donc orthogonales.
+Notre deuxième contribution consiste à déterminer si cette combinaison est possible qui se résume donc à la question suivante:\\
+Est il possible d'accélérer la traversé de l'espace de recherche tout en éliminant l'espace de symétrique ?
+
+Pour que cette approche soit correcte, la contrainte qu'il faut absolument respecté est que la symétrie utilisé pour déduire les
+faits symétriques doit être valide dans le problème actuel. Effectivement les clauses ajoutés pour éliminer l'espace de recherche
+symétrique vont casser celle ci qui ne peuvent donc plus être utilisé pour propager les faits symétriques.
+L'approche naïve qui consiste a enlever la symétrie dès lors qu'une contrainte de rupture de symétrie est ajouté mènerait très vite
+à l'ensemble vide. Notre approche consiste a traqué les clauses utilisé et à connaître a tout instant l'ensemble des symétries
+valide grâce à l'introduction dite de symétrie locale pour chaque clause.
+
+Les expérimentations effectuées 
+
+
 Pour cela différentes analyses théoriques et pratique ont dû être mis en place pour produire cette version
 combiné qui bénéficie du meilleur des deux mondes.
 

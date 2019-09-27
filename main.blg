@@ -3,47 +3,48 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
 The style file: abbrv.bst
 Database file #1: main.bib
+Warning--I didn't find a database entry for ""
 Warning--empty booktitle in le2008sat
 Warning--empty booktitle in Russell1994ArtiCI
-You've used 54 entries,
+You've used 55 entries,
             2118 wiz_defined-function locations,
-            795 strings with 12255 characters,
-and the built_in function-call counts, 22103 in all, are:
-= -- 2287
-> -- 919
-< -- 35
-+ -- 372
-- -- 304
-* -- 1440
-:= -- 3380
-add.period$ -- 184
-call.type$ -- 54
-change.case$ -- 305
+            797 strings with 12365 characters,
+and the built_in function-call counts, 22630 in all, are:
+= -- 2343
+> -- 942
+< -- 36
++ -- 381
+- -- 312
+* -- 1474
+:= -- 3456
+add.period$ -- 188
+call.type$ -- 55
+change.case$ -- 312
 chr.to.int$ -- 0
-cite$ -- 56
-duplicate$ -- 929
-empty$ -- 1776
-format.name$ -- 304
-if$ -- 4879
+cite$ -- 57
+duplicate$ -- 952
+empty$ -- 1817
+format.name$ -- 312
+if$ -- 5000
 int.to.chr$ -- 0
-int.to.str$ -- 54
-missing$ -- 58
-newline$ -- 273
-num.names$ -- 110
-pop$ -- 380
+int.to.str$ -- 55
+missing$ -- 59
+newline$ -- 278
+num.names$ -- 112
+pop$ -- 390
 preamble$ -- 1
-purify$ -- 255
+purify$ -- 261
 quote$ -- 0
-skip$ -- 711
+skip$ -- 729
 stack$ -- 0
-substring$ -- 1561
-swap$ -- 335
-text.length$ -- 35
+substring$ -- 1598
+swap$ -- 346
+text.length$ -- 36
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 206
+type$ -- 210
 warning$ -- 2
-while$ -- 228
-width$ -- 56
-write$ -- 614
-(There were 2 warnings)
+while$ -- 233
+width$ -- 57
+write$ -- 626
+(There were 3 warnings)
