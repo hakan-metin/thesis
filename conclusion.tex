@@ -2,22 +2,22 @@
 
 
 
-In this thesis, we have presented approaches to increase the performance of solving 
+This thesis presented different approaches to increase the performance of solving 
 Boolean satisfiability problem (SAT) (see Chapter\ref{chap:preliminaries}) in presence of symmetries. 
-Symmetries are natural things that can be found in different class of problems like
-graph coloring problems, fpga routing, etc.
-The presence of symmetry in a problem hinders the performance of the solver. It forces
-it to explore every symmetric branch of the search tree and will face to a combinatorial explosion.
+Symmetries are common and  can be found in different classes of problems like
+graph coloring, FPGA routing, etc.
+The presence of symmetries in a problem hinders the performance of the solver. It forces
+it to explore every symmetric branch of the search tree thus facing to a combinatorial explosion.
 Some trivial question for a human, like: Can 100 pigeons fit in 99 holes?,
 where each pigeon (hole) are symmetric becomes impossible for a state-of-the-art solver. 
 
 %It will explore each pair of pigeon, hole and cannot solve this problem.
 
-To deal with symmetries in problems, two approaches of symmetry breaking exists (see \Cref{chap:symmetryinsat}).
-The first one namely called static symmetry breaking approach acts as a preprocessor that augment the initial
-problem to prune symmetrical assignments of the search tree. The second one namely called dynamic symmetry breaking 
-acts during the solving of the solver. Like in the static approach, it can  prune the symmetrical assignment of the 
-search tree or accelerate its traversal using symmetrical facts.
+To deal with symmetries in SAT problems, two approaches exists (see \Cref{chap:symmetryinsat}).
+The first one called static symmetry breaking approach, acts as a preprocessor augmenting the initial
+problem to prune symmetrical assignments of the search tree. The second one called dynamic symmetry breaking,
+acts during the solving. Like in the static approach, it prunes the symmetrical assignments of the 
+search tree or accelerates its traversal using symmetrical facts.
 Each approach has its weaknesses and strengths. However, some highly symmetrical instances cannot be solved with
 state-of-the-art approaches. In this thesis, we improve current symmetry breaking approaches to 
 deals with more symmetric formulas.
@@ -32,8 +32,8 @@ deals with more symmetric formulas.
 %
 
 Our first symmetry based approach (see \Cref{chap:symmSAT})introduces the notion of effective symmetry breaking predicates (esbp) that borrows the principle of static symmetry breaking approach but operating dynamically\cite{metin2018cdclsym}.
-This approach overcomes the blow up caused by the pre-generation of \textit{sbp} in the state-of-the-art 
-static approaches. The extensive evaluation shows that our approach improves on state-of-the-art static 
+This approach overcomes the combinatorial explosion caused by the pre-generation of \textit{sbp} in the state-of-the-art static approaches.
+An extensive evaluation shows that our approach improves on state-of-the-art static 
 symmetry breaking approaches.
 The method is encapsulated in a library called $\libdsb$ and can be integrated easily to any
 CDCL-like SAT solvers. It is released under GPL-v3 license and is available at \url{https://github.com/lip6/cosy}.
@@ -42,7 +42,7 @@ Though easy to use and effective, this method cannot handle some problems that a
 dynamic symmetry breaking approach like Symmetry Propagation (SP)~\cite{Devriendt12}.
 \Cref{chap:compose} presents our second contribution that aims to combine two dynamic symmetry breaking approach, our first algorithm  with the SP approach. In terms of performance, the combined version not brings big difference
 compared to the use of esbp. Nevertheless it can solve few instances that cannot be solved with previous approaches.
-Overall,  this  work  answers  to  the  precise  question: "Is it possible to accelerate the traversal while pruning the tree with symmetries?".We clearly show that the answer is yes, thanks to the introduced theoretical notion of local symmetries.
+Overall,  this  work  answers  to  the  precise  question: "Is it possible to accelerate the traversal while pruning the tree with symmetries?".We clearly show that the answer is yes, thanks to the notion of \textit{local symmetries}.
 
 
 %This approach use a new
@@ -68,38 +68,36 @@ Overall,  this  work  answers  to  the  precise  question: "Is it possible to ac
 
 \section{Perspectives}
 
-Despite the new instances that have been resolved by our approach, much remains to be done in this area.
-Indeed, some highly symmetric instances cannot be resolved by the state-of-the-art approaches.
-This section gives us some suggestions for improvement of symmetry based approach to solve SAT problems.
+Despite the new instances that have been resolved by our approach, yet remains to be done in this area.
+Indeed, some highly symmetric instances cannot be resolved by the state-of-the-art approaches and ours.
+This section gives some suggestions to improve symmetry based approaches to solve SAT problems.
 
-In the literature, it will exist other dynamic approach than SP like for example Symmetry Explanation Learning (SEL)\cite{devriendt2017symmetric}. Like SP approach, it aims to accelerate the tree traversal using symmetries.
-Like our combo approach with SP, a combination with SEL will be possible.
+In the literature, other dynamic approach exists such as for example Symmetry Explanation Learning (SEL)\cite{devriendt2017symmetric}. Like SP approach, it aims to accelerate the tree traversal using symmetries.
+Like our combo approach with SP, a combination with SEL should be possible.
 Actually, SEL has fewer requirements than SP and author of these two papers demonstrates that
-SEL is a super-set of SP. For these reason, this hybrid approach will probably give us much better performance and 
+SEL is a super-set of SP. For these reason, this hybrid approach would probably give us much better performance and 
 maybe solve some unsolved symmetric problems.
-An approach that mimic the previous work could create this new combination, thanks again to the local symmetries.
+An approach that mimics the previous work could create this new combination, thanks again to the local symmetries.
 
-To improve the performance, we can use also parallel SAT solver. Due to the emergence of multi-core machines
+To improve performances, we can also use parallel SAT solver. Due to the emergence of multi-core machines
 many research has been done in this area. In the general case, cooperation based approach (divide and conquer) and
 competition base approach (portfolio)  not use any symmetry breaking strategy and will explore the full search space.
 An integration of symmetry breaking may improve the overall performance of the solver.
-A theoretical and practical study may demonstrate if it increase the performance and if it is more efficient in 
+A theoretical and practical study may demonstrate if it increase performances and whether it is more efficient in 
 portfolios or divide and conquer strategy.
 
 
 SAT solvers are present in different tools that use it for checking different properties. For example, 
-the IDE Eclipse use a SAT solver to check dependencies on installed packages \cite{le2008sat};
+ Eclipse uses a SAT solver to check for dependencies on installed packages \cite{le2008sat};
 a verification tools like Alloy\footnote{\url{http://alloytools.org/}} use a SAT solver to check properties and find
-counter-example for software modeling. In the second example, an integration of our symmetry based SAT solver may improve the performance of the verification.
+counter-example for software modeling. Integration of our symmetry based SAT solver may improve the performance ofsuch products.
 
 
-All approaches that we proposed suppose that we compute the symmetries of the problem before solving it.
-But, on some big instances, the computation of symmetries can be the limiting factor. An optimal approach
-will be to find them during the solving or maybe find them opportunistically in sense that we can stop it when some of 
-symmetries are found.
-Moreover, it can open the door to partial symmetries, in sense that we need to ignore some vertex (edges) to discover
-some symmetries.This partial symmetries cannot be found with classical symmetry detection algorithm and will probably
-increase the performance.
+All approaches we proposed suppose that we compute the symmetries of the problem before solving it.
+But, on some large instances, the computation of symmetries is a limiting factor. An optimal approach
+would be to find them during the solving or maybe find them "opportunistically" in the sense that we can stop the search of symmetries when some are found.
+Moreover, this work can be used for partial symmetries, i.e, 
+the symmetries present only with partial assignment of the solver.
 
 
 

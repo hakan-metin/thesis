@@ -13,13 +13,13 @@ satisfied) or unsatisfiable (i.e, there is no way to satisfy all constraints at 
 This computation is made by a SAT solver that answer $\sat$ when the formula is satisfiable
 and $\unsat$ otherwise.
 
-SAT is the first problem that has been proven NP-complete in 1971~\cite{cook1971complexity}, this 
-means that every NP problem can be solved by transforming it into SAT. Solving this problem in 
+SAT is the first problem that has been proven to be NP-complete in 1971~\cite{cook1971complexity}, this 
+means that every NP problem can be solved by encoding it into a SAT one. Solving this problem in 
 polynomial time is equivalent to the P versus NP, one of the seven millennium prize problem.
 
 
-Despite this complexity, SAT solver are becoming more and more powerful.
-Over the last decades, these can handle more and more complicated problems in different domains:
+Despite this complexity, SAT solvers are becoming more and more powerful.
+Over the last decades, these can handle more and more complex problems in different domains:
 like \emph{formal methods} such that: bounded model checking (BMC)~\cite{bmc_99}; \emph{artificial intelligence}: planning decision~\cite{planning_92}; \emph{Informatics} : Haplotype inference~\cite{biology_06}.
 In recent work, researchers have succeeded in proving, using a SAT solver, a maximum limit
 for the problem of colouring Pythagorean triples~\cite{heule2016solving}, with proof weighing 200 TB.
@@ -31,21 +31,21 @@ intensive algorithm named by its authors Davis, Putnam, Logemann, and Loveland (
 
 Some problems have a huge search space and some of their instances cannot be handled.
 An example of such a problem can be the vehicle routing problem (VRP).
-It concerns the service of delivery company, in which
+It concerns the service of a delivery company, in which
 given a fleet of vehicles based in a depot, they must make rounds between several customers  who have requested
 each a certain amount of goods. All clients visited by a vehicle refers to the tour of the vehicle. 
 The goal is to find the tour that minimizes the delivery cost (monetary, distance, time, ...).
 Finding the optimal solution for VRP problem is NP-Hard~\cite{toth2002vehicle}.
 
 On an instance of this problem, renaming the set of identical vehicles will give us exactly the same problem.
-This is called a \textit{symmetry}. In general, a symmetry is a transformation that leaves an object (or some aspect of the object) unchanged. Symmetries are typically defined as a \textit{syntactical} property of a problem when its presence is inherent to the encoding of the problem. A permutation of variable preserves the original specification. In the case where the symmetries are independent of any 
+This is called a \textit{symmetry}. In general, a symmetry is a transformation that leaves an object (or some aspect of the object) unchanged. Symmetries are typically defined as a \textit{syntactical} property of a problem when its presence is inherent to the encoding of the problem. A permutation of variables preserves the original specification. In the case where the symmetries are independent of any 
 particular representation of the problem, it is called \textit{semantic}.
 
 
-The presence of symmetry in a problem forces the search algorithm to fruitlessly explore symmetric
+The presence of symmetries in a problem lead the search algorithm to fruitlessly explore symmetric
 search space and greatly hinders its performance. \textit{Symmetry breaking} is an approach that
-avoid the solver to visit symmetric search space. The first step to exploit symmetry is to find them.
-In context of SAT, the detection of syntactical symmetry is done by a transforming the specification
+avoid the solver to visit symmetric part of the search space. The first step to exploit symmetry is to find them.
+In SAT, the detection of syntactical symmetry is done by transforming the specification
 in a colored graph and then apply a graph automorphism tool.
 
 
@@ -81,12 +81,14 @@ in a colored graph and then apply a graph automorphism tool.
 When symmetries are computed, the most common approach to exploit them is to use a \emph{static symmetry breaking} technique.
 It takes the symmetric problem as input and produces a satisfiability equivalent formula by eliminating symmetries. This is done by augmenting the problem with constraints that force the solver to not explore the symmetric search  spaces. It is a easy to integrate static symmetry breaking, no modification of the solver is necessary.
 In addition, this approach works well on many symmetric applications.
-However, some highly symmetric instances cannot be solved using this technique.
+However, some highly symmetric instances cannot be solved using this technique. Effectively the number of
+symmetry breaking constraints can be exponential in relation to the size of the problem and slow down the solver.
 
 
-Another approach to handle symmetry is \emph{dynamic symmetry breaking} techniques. In this one, the management of
-symmetries is done during the search algorithm. Different approaches exist, on the first, the behavior of the solver is analyzed to avoid it to visit symmetric search space. On the other approach, some symmetrical facts are deduced from the
-state of the solver. This has the effect of accelerating the tree traversal of the solver and so the solving time.
+
+Another approach to handle symmetry is \emph{dynamic symmetry breaking}. Here, the management of
+symmetries is done during the search. Different approaches exist. First, the behavior of the solver is analyzed to avoid it to visit symmetric part of the search space. Also, some symmetrical facts can be deduced from the
+state of the solver. This has the effect of accelerating the tree traversal of the solver and reduce the solving time.
 
 
 
@@ -168,14 +170,15 @@ improve them.
 %
 
 This thesis addresses the challenge of optimizing the solving of a SAT problem in presence of
-symmetry. In detail, my research exploits symmetry breaking during the solving.
+symmetries. In detail, my research exploits symmetry breaking during the solving.
 %Understanding state-of-the-art techniques allows us to improve it.
-Two majors contributions are detailed in this thesis. The first one uses the strengths of static symmetry 
-breaking approach and applied it dynamically to avoid the drawbacks of the approach. It adds an opportunistic symmetry controller that avoids visiting symmetric search spaces. Benchmarks show that this approach allows to solve very hard symmetric problems.
+Two majors contributions are presented. The first one uses the strengths of static symmetry 
+breaking approach and applied it dynamically to avoid the drawbacks of the approach. It adds an opportunistic symmetry controller that avoids visiting symmetric part of the search spaces. Benchmarks show that this makes it possible
+ to solve very difficult symmetric problems.
 The second contribution uses the previous one and combines it with state-of-the-art dynamic 
-symmetry breaking approach and so takes the best of 2 worlds. This combination leads to 
+symmetry breaking approach and so takes the best of two worlds. This combination leads to 
 important theoretical step for the usage of \emph{partial symmetry breaking} with the usage of 
-\ emph{local symmetries}. 
+\emph{local symmetries}. 
  
 
 %\section{Structure of the manuscript}
@@ -183,32 +186,30 @@ important theoretical step for the usage of \emph{partial symmetry breaking} wit
 The remaining of this document is organized in 6 chapters. Chapter 2 describes the state of
 the art for the Boolean satisfiability problem, Chapter 3 focuses on the symmetry present in SAT.
 Chapter 4 focuses on the first contribution that uses dynamically the symmetries.
-Chapter 5 describes our second solution to combine our first with another state-of-the-art  
-dynamic symmetry breaking approach and Chapter 6 concludes the thesis. More precisely:
+Chapter 5 describes our second proposal and Chapter 6 concludes the thesis. More precisely:
  
 \textbf{The Boolean Satisfiability Problem}
 
 The goal of \cref{chap:preliminaries} is to better understand what is SAT. 
 It describes in detail the basics
 about propositional logic that will be used in the rest of the manuscript. Satisfiability is a hard
-problem but some particular forms that are easy to solve such as 2-SAT, Horn SAT and Xor-SAT will be presented.
-This chapter describes also the original DPLL algorithm, and the
+problem but some particular forms that are easier to solve such as 2-SAT, Horn SAT and Xor-SAT are presented.
+This chapter also describes  the original DPLL algorithm, and the
 nowadays used CDCL algorithm and their important points. SAT can nowadays handle
-sophisticated problems, to achieve this performance, modern efficient SAT solvers use different heuristics.
- An overview of these will be presented. Finally, with the presence of multi
-core machines, an overview of the state-of-the-art parallel SAT solving will be presented.
+sophisticated problems, thanks to different heuristics.
+ An overview of these are presented. Finally, with the presence of multi
+core machines, an overview of the state-of-the-art parallel SAT solving are presented.
 
 
-\textbf{Symmetry and SAT}
+\textbf{Symmetries and SAT}
 
 The goal of \Cref{chap:symmetryinsat} is to better understand what is a symmetry. 
-It requires an understanding of the group theory, so we first explain its basics and the notation that will be
- used in the rest of the manuscript.
+It requires an understanding of the group theory, and the notation used in the rest of the manuscript.
 This chapter also presents the process to find the (syntactic) symmetries of a SAT problem.
  This computation involves the creation of a graph from the problem and the computation of an
-automorphism tool. After obtaining the symmetries, the second part will present how to
+automorphism tool. After obtaining the symmetries, the second part presents how to
 exploit them for reducing the search space of the solver. The two major approaches that
-are the static symmetry breaking approach and dynamic symmetry breaking approach.
+are the static symmetry breaking approach and the dynamic symmetry breaking approach.
 Static symmetry breaking is so far the most popular approach to take advantage of symmetries. It relies on a symmetry preprocessor which augments the initial problem with constraints that force the solver to consider only a few configurations among the many symmetric ones.
 Dynamic symmetry breaking exploits the symmetries during the computation of the SAT solver to accelerate the
 tree traversal of the SAT solver using symmetrical facts or avoids symmetric configurations like in the 
