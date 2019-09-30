@@ -1,13 +1,13 @@
 {\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {2.1}SAT basics}{\reset@font\mtcSfont 7}{section.2.1}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Normal forms}{\reset@font\mtcSSfont 9}{section*.8}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode An NP-complete problem}{\reset@font\mtcSSfont 11}{section*.10}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Some easy to solve forms}{\reset@font\mtcSSfont 11}{section*.11}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Some related problems}{\reset@font\mtcSSfont 12}{section*.12}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Solving a SAT problem}{\reset@font\mtcSSfont 12}{section*.13}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode A naive algorithm}{\reset@font\mtcSSSfont 12}{section*.14}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Davis Putnam Logemann Loveland algorithm (DPLL)}{\reset@font\mtcSSSfont 13}{section*.16}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Conflict Driven Clause Learning (CDCL) algorithm}{\reset@font\mtcSSSfont 14}{section*.19}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Conflict Analysis}{\reset@font\mtcSSfont 15}{section*.21}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Heuristics}{\reset@font\mtcSSfont 18}{section*.24}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Preprocessing / Inprocessing}{\reset@font\mtcSSfont 19}{section*.25}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Optimizing SAT solving}{\reset@font\mtcSSfont 19}{section*.26}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Normal forms}{\reset@font\mtcSSfont 9}{section*.11}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode An NP-complete problem}{\reset@font\mtcSSfont 11}{section*.13}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Some easy to solve forms}{\reset@font\mtcSSfont 11}{section*.14}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Some related problems}{\reset@font\mtcSSfont 12}{section*.15}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Solving a SAT problem}{\reset@font\mtcSSfont 12}{section*.16}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode A naive algorithm}{\reset@font\mtcSSSfont 12}{section*.17}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Davis Putnam Logemann Loveland algorithm (DPLL)}{\reset@font\mtcSSSfont 13}{section*.19}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Conflict Driven Clause Learning (CDCL) algorithm}{\reset@font\mtcSSSfont 14}{section*.22}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Conflict Analysis}{\reset@font\mtcSSfont 15}{section*.24}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Heuristics}{\reset@font\mtcSSfont 18}{section*.27}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Preprocessing / Inprocessing}{\reset@font\mtcSSfont 19}{section*.28}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Optimizing SAT solving}{\reset@font\mtcSSfont 19}{section*.29}}
