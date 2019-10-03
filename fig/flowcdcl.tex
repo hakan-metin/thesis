@@ -1,0 +1,92 @@
+
+\begin{figure}[!htbp]
+\begin{tikzpicture}[node distance=1.5cm,
+,every node/.style={scale=0.7,fill=white, font=\sffamily}, align=center]
+% Specification of nodes (position, etc.)
+\tikzset{%	
+	>={Latex[width=2mm,length=2mm]},
+	% Specifications for style of nodes:
+	base/.style = {rectangle, rounded corners, draw=black,
+		minimum width=2cm, minimum height=1cm,
+		text centered, font=\sffamily},
+	question/.style = {base, diamond, fill=blue!15},
+	unsat/.style = {base, fill=red!30,minimum width=3cm},
+	sat/.style = {base, fill=green!30,minimum width=3cm},
+	process/.style = {base, minimum width=2.5cm, fill=orange!15,
+		font=\ttfamily},
+}
+\node (isfin) [question] {Variables toutes \\assignées ?};
+\node (dec)     [process, below = of isfin]          {Choix variable \\ de decision};
+\node (sdec)     [right = of dec]          {};
+\node (idec) [left = of isfin]  {};
+\node (prop)    [process, below = of dec ]          {Propagation unitaire};
+\node (conf)    [question, below = of prop] { Conflit ?};
+\node (confanalyse) [process, below = of conf] {Analyse du \\ conflit};
+\node (learn) [process] at ($(prop) + (160pt, 0)$) {Apprentissage de la \\ clause de conflit};
+\node (isend) [question] at ($(confanalyse) + (160pt, 0)$) {Niveau de \\decision zero ?};
+\node (end) [unsat] at ($(isend) + (140pt, 0)$) {$\unsat$};
+\node (ends) [sat] at ($(isfin) + (+160pt, 0)$){$\sat$};
+
+
+\draw[->, thick]     (sdec) -- (dec);
+\draw[->, thick]     (dec) -- (prop);
+\draw[->, thick]     (prop) -- (conf);
+\draw[->, thick]     (conf) -| node [yshift=5.5 cm] {non}(idec.center) -- (isfin);
+\draw[->, thick]     (conf) -- node {oui} (confanalyse);
+\draw[->, thick]     (isfin) -- node {non}(dec);
+\draw[->, thick]     (confanalyse) --(isend);
+\draw[->, thick]     (isend) -- node {oui}(end);
+\draw[->, thick]     (isfin) -- node {oui}(ends);
+\draw[->, thick]     (learn) -- (prop);
+\draw[->, thick]     (isend) -- node [] {non}(learn);
+
+\end{tikzpicture}
+\caption{Organigramme de l'algorithme CDCL}
+\label{fig:cdclflow}
+\end{figure}
+
+%\begin{figure}[!htbp]
+%	\begin{tikzpicture}[node distance=1.5cm,
+%	,every node/.style={scale=0.7,fill=white, font=\sffamily}, align=center]
+%	% Specification of nodes (position, etc.)
+%	\tikzset{%	
+%		>={Latex[width=2mm,length=2mm]},
+%		% Specifications for style of nodes:
+%		base/.style = {rectangle, rounded corners, draw=black,
+%			minimum width=2cm, minimum height=1cm,
+%			text centered, font=\sffamily},
+%		question/.style = {base, diamond, fill=blue!15},
+%		unsat/.style = {base, fill=red!30,minimum width=3cm},
+%		sat/.style = {base, fill=green!30,minimum width=3cm},
+%		process/.style = {base, minimum width=2.5cm, fill=orange!15,
+%			font=\ttfamily},
+%	}
+%	\node (isfin) [question] {All vars\\ assign?};
+%	\node (dec)     [process, below = of isfin]          {Choose decision var};
+%	\node (sdec)     [right = of dec]          {};
+%	\node (idec) [left = of isfin]  {};
+%	\node (prop)    [process, below = of dec ]          {Unit Propagation};
+%	\node (conf)    [question, below = of prop] { IsConflict?};
+%	\node (confanalyse) [process, below = of conf] {Conflict Analysis};
+%	\node (learn) [process] at ($(prop) + (160pt, 0)$) {Learn conflict clause};
+%	\node (isend) [question] at ($(confanalyse) + (160pt, 0)$) {is level\\zero?};
+%	\node (end) [unsat] at ($(isend) + (140pt, 0)$) {$\unsat$};
+%	\node (ends) [sat] at ($(isfin) + (+160pt, 0)$){$\sat$};
+%	
+%	
+%	\draw[->, thick]     (sdec) -- (dec);
+%	\draw[->, thick]     (dec) -- (prop);
+%	\draw[->, thick]     (prop) -- (conf);
+%	\draw[->, thick]     (conf) -| node [yshift=5.5 cm] {no}(idec.center) -- (isfin);
+%	\draw[->, thick]     (conf) -- node {yes} (confanalyse);
+%	\draw[->, thick]     (isfin) -- node {no}(dec);
+%	\draw[->, thick]     (confanalyse) --(isend);
+%	\draw[->, thick]     (isend) -- node {yes}(end);
+%	\draw[->, thick]     (isfin) -- node {yes}(ends);
+%	\draw[->, thick]     (learn) -- (prop);
+%	\draw[->, thick]     (isend) -- node [] {no}(learn);
+%	
+%	\end{tikzpicture}
+%	\caption{Organigramme de l'algorithme CDCL}
+%	\label{fig:cdclflow}
+%\end{figure}
