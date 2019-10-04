@@ -1,4 +1,4 @@
-\chapter{Compose dynamic symmetry handling}\label{chap:compose}
+﻿\chapter{Compose dynamic symmetry handling}\label{chap:compose}
 \minitoc
 \section{Composition of SP and SymmSAT}
 In the previous chapter, we presented an approach that reuses the
@@ -9,7 +9,7 @@ blocking) pre-generation phase of the static-based approaches. It also gives
 more flexibility for adjusting some parameters on the fly. 
 Nevertheless, we also observed that many formulas easily solved by the pure
 dynamic approaches remained unsolvable by our approach and vice versa. This is
-particularly true when comparing  with the \textit{symmetry propagation} technique developed by
+particularly true when compared with the \textit{symmetry propagation} technique developed by
 Devriendt et al.~\cite{Devriendt12}.
 Hence, our goal is to explore the composition of our algorithm with the  \textit{symmetry propagation} technique in
 a new approach that would mix the advantages of the two classes of techniques while alleviating their drawbacks. At first sight,
@@ -34,7 +34,6 @@ allowed permutations in place of those of $\varphi$.
 A first naive solution could be to recompute, dynamically, the set of symmetries of $\varphi
 \cup \varphi_e \cup \varphi_d$ for each new $\varphi_e \cup \varphi_d$, but
 this would be an intractable solution generating a huge complexity. 
-
 A  computationally less expensive solution would be to keep track of all globally unbroken symmetries as the clauses of $\varphi_e$ are injected during the solving process: considering formula $\varphi$ and 
 a set of esbps $\varphi_e$ then the set of global unbroken symmetries is:
 $$GUS = \underset{\omega_e \in \varphi_e}{\bigcap}Stab(\omega_e) \cap G_{\varphi}$$
@@ -55,9 +54,7 @@ Consider formula $\varphi^\prime$ as before. It can be rewritten as:
 $$\varphi^\prime=\varphi \, \underset{i}{\bigcup}(\varphi_e^i \cup \varphi_d^i) \text{ , such that } \varphi_e \cup \varphi_d = \underset{i}{\bigcup}(\varphi_e^i \cup \varphi_d^i) \text{ and } \varphi \cup \varphi_e^i \models \varphi_d^i  \text{ for all } i$$
 So, $GUS_i = \underset{\omega_e \in \varphi_e^i}{\bigcap}Stab(\omega_e) \cap G_{\varphi}$ is a valid set of symmetries for the sub-formula $\varphi \cup \varphi_e^i \cup \varphi_d^i$, and $GUS$ can be obtained by $GUS = \underset{i}{\bigcap} GUS_i$. If some esbp clauses are added to $\varphi^\prime$, then the new $GUS$ is computed as described in (1). The novelty here comes with the retrieval of some set of clauses: by keeping track of the symmetries associated to each sub-formula ($GUS_i$), it is now easy to recompute a valid set of symmetries for $\varphi^\prime$ when some set
 $\varphi_e^k \cup \varphi_d^k$ is retrieved. It suffices to operate the intersection on the valid symmetries of the rest of the sub-formulas: $GUS = \underset{i \neq k}{\bigcap} GUS_i$.
-
 %Just say your approach keeps track of a set of particular symmetries for each clause. For a deduced clause, this set of symmetry captures which esbp's were involved in a deduced clause's derivation. The intersection of these sets is a superset of the globally unbroken symmetries, and a strict superset after clause deletion.
-
 \subsection{Local Symmetries}
 The general and formal framework that embodies the above idea is given by the following. It first relies on the notion of \textit{local symmetries} that we introduce in Definition~\ref{def:ls}.
 \begin{definition}[Local Symmetries]
@@ -109,7 +106,6 @@ section as the basis of our combo approach in a concrete
 Conflict-Driven Clause Learning (CDCL)-like solver.
 First recall the algorithm of symmetry propagation used for the combination of two approaches.
 \input{algo/cdcl_sp}
-
 {\cdclsp} (see Algorithm~\ref{algo:cdclsp}) implements SPA, and also has a
 structure similar to the one of {\cdcl}. In this algorithm, the symmetry
 propagation actions are executed by the controller component (\texttt{spController})
@@ -147,19 +143,15 @@ Let us detail the critical points.
  \item \Cref{algo:symsp:updateact}: \texttt{updateActiveSymmetriesSym} extends function \texttt{updateActiveSymmetries} of algorithm~\ref{algo:cdclsp}. The reason clause, $\omega_l$, of each propagated literal, $l$, by the \texttt{unitPropagation} function is analyzed. Each symmetry of the complement set (to $G_{\varphi}$) of the set local symmetries of $\omega_r$ is marked \textit{inactive}, if it is not already marked so. $l$ becomes responsible of this deactivation. 
 \end{itemize}
 
-
 \subsection{Illustrative Example}
-
 Consider the following permutation $G = \{ g_1 = (x_1 x_2) (x_3 x_4)  , g_2 = (x_3 x_4) (x_5 x_6) \}$,
 the lexicographic ordering relation of variables with $\true < \false$ and 
 the current assignment $\alpha = \{\neg x_7 \}$.
-Suppose the permutation $g_1$ already generate the $esbp$ $\omega_e = \{ x_1 \neg x_2\}$ then, associated local symmetry is 
+Suppose the permutation $g_1$ already generates the $esbp$ $\omega_e = \{ x_1 \neg x_2\}$ then, associated local symmetry is 
 $g_2$ because it stabilizes $\omega_e$ ($g_2.\omega_e = \omega_e)$. Then, suppose a conflict occurs and the resulting clause is
 $\omega_d = \{x_4\, x_7\}$. In the conflict analysis, this clause is deduced by original clauses and $\omega_e$.
- So, it have the same valid symmetries as $\omega_e$. As $g_2.\omega_d = \{x_3\, x_7\}$ is an assertive clause and $g_2$ is a valid 
+ So, it has the same valid symmetries as $\omega_e$. As $g_2.\omega_d = \{x_3\, x_7\}$ is an assertive clause and $g_2$ is a valid 
  permutation for this clause SP can propagate $x_3$ (the symmetrical of $\omega_d)$
-
-
 
 \subsection{Implementation}
 We have implemented our combo on top of the
@@ -181,7 +173,6 @@ have been performed with a modified version of the well-known \minisat{} solver 
 SPA; \texttt{minisat-Sym}, for ESBA; and \texttt{minisat-SymSP}, for the
 combo. Symmetries of the SAT problems have been computed by
 \bliss{}~\cite{JunttilaKaski:ALENEX2007}.
-
 We selected from the last seven editions of the SAT contest
 \cite{jarvisalo2012international}, the CNF problems for which \bliss{} finds
 some symmetries that could be computed in at most $1000s$ of CPU time. We
@@ -194,11 +185,11 @@ $4000$ proposed by the seven editions of the contest (from 2012 to 2018).
   \toprule
   Benchmark  &\texttt{minisat-Sp} & \texttt{minisat-Sym} & \texttt{minisat-SymSP}\\
   \hline 
-  Generators 0–20 (704) & 194&197&\cellcolor{gray!30,}\textbf{198}\\
-  Generators 20–40 (136) & 33&\cellcolor{gray!30}\textbf{34}&\cellcolor{gray!30}\textbf{34}\\
-  Generators 40–60 (141) & 28&28&\cellcolor{gray!30}\textbf{29}\\
-  Generators 60–80 (168) & \cellcolor{gray!30}\textbf{65}&64&\cellcolor{gray!30}\textbf{65}\\
-  Generators 80–100 (51) & 28&\cellcolor{gray!30}\textbf{34}&\cellcolor{gray!30}\textbf{34}\\
+  Generators 0â€“20 (704) & 194&197&\cellcolor{gray!30,}\textbf{198}\\
+  Generators 20â€“40 (136) & 33&\cellcolor{gray!30}\textbf{34}&\cellcolor{gray!30}\textbf{34}\\
+  Generators 40â€“60 (141) & 28&28&\cellcolor{gray!30}\textbf{29}\\
+  Generators 60â€“80 (168) & \cellcolor{gray!30}\textbf{65}&64&\cellcolor{gray!30}\textbf{65}\\
+  Generators 80â€“100 (51) & 28&\cellcolor{gray!30}\textbf{34}&\cellcolor{gray!30}\textbf{34}\\
   Generators  \textgreater100 (200) & 58&59&\cellcolor{gray!30}\textbf{60}\\
   \hline 
   TOTAL no dup (1400) & 406 & 416 & \cellcolor{gray!30,}\textbf{420}\\
@@ -215,11 +206,11 @@ $4000$ proposed by the seven editions of the contest (from 2012 to 2018).
   \toprule
   Benchmark  &\texttt{minisat-Sp} & \texttt{minisat-Sym} & \texttt{minisat-SymSP}\\
   \hline 
-  Generators 0–20 (704) & \cellcolor{gray!30,}\textbf{233}&220&226\\
-  Generators 20–40 (136) & 50&\cellcolor{gray!30}\textbf{54}&\cellcolor{gray!30}\textbf{54}\\
-  Generators 40–60 (141) & 75&\cellcolor{gray!30}\textbf{83}&\cellcolor{gray!30}\textbf{83}\\
-  Generators 60–80 (168) & \cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}&10\\
-  Generators 80–100 (51) & \cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}\\
+  Generators 0â€“20 (704) & \cellcolor{gray!30,}\textbf{233}&220&226\\
+  Generators 20â€“40 (136) & 50&\cellcolor{gray!30}\textbf{54}&\cellcolor{gray!30}\textbf{54}\\
+  Generators 40â€“60 (141) & 75&\cellcolor{gray!30}\textbf{83}&\cellcolor{gray!30}\textbf{83}\\
+  Generators 60â€“80 (168) & \cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}&10\\
+  Generators 80â€“100 (51) & \cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}\\
   Generators \textgreater100 (200) & 90&\cellcolor{gray!30,}\textbf{109}&107\\
   \hline 
   TOTAL no dup (1400) & 470&488&\cellcolor{gray!30,}\textbf{491}\\
@@ -229,14 +220,12 @@ $4000$ proposed by the seven editions of the contest (from 2012 to 2018).
  \caption{Comparison of the number of UNSAT problems solved by each approach.}
  \label{tab:unsat}
 \end{table}
-
 All experiments have been conducted using the following settings: each solver
 has been run once on each problem, with a time-out of 7200 seconds (including
 the execution time of symmetry generation) and limited to 64 GB of memory.
 Experiments were executed on a computer with an Intel Xeon Gold 6148 CPU
 @ 2.40 GHz featuring 80 cores and 1500 GB of memory, running a Linux 4.17.18,
 along with g++ compiler version 8.2.
-
 Tables \ref{tab:sat} and \ref{tab:unsat} present the obtained results for SAT
 and UNSAT problems respectively. The first column of each table lists the
 classes of problems on which we operated our experiments: we classify the
@@ -248,9 +237,9 @@ Globally, we observe that the combo approach can be effective in many classes
 of symmetrical problems. For SAT problems, the combo has better results than the
 two other approaches (4 more SAT problems when compared to the best of the two
 others) and this is despite the significant cost paid for the tracking of the
-symmetries' status. When looking at the UNSAT problems, things are more
+symmetries’ status. When looking at the UNSAT problems, things are more
 mitigated. Although, the total number of solver problems is greater than the
-best of the two others, we believe that the cost for tracking the symmetries'
+best of the two others, we believe that the cost for tracking the symmetries’
 status has an impact on the performances. This can be observed on the first and
 last lines of Tables~\ref{tab:unsat}: when the number of generators is small
 (first line), the ESBA benefits greatly from the SPA. When the number of
@@ -280,24 +269,22 @@ PAR-2 and the CTI time measures. PAR-2 is the official ranking measure used in
 the yearly SAT contests~\cite{jarvisalo2012international}. CTI measures the
 Cumulative solving Time of the problem Intersection (i.e., 825 problems solved
 by all solvers). While PAR-2 value gives a global indication on the
-effectiveness of an approach, CTI is a good mean to evaluate its speed compared
+effectiveness of an approach, CTI is a good measure to evaluate its speed compared
 to other approaches.
 Hence, we observe that the combo has a better PAR-2 score, and this shows its
 effectiveness. However, it is the least fast when coming to solved intersection.
-This is clearly due to the double cost paid for tracking the symmetries' status
+This is clearly due to the double cost paid for tracking the symmetries’ status
 (one for ESBA and the other for SPA). Having a unified management of
 symmetries tracking would probably reduce this cost.
-
 \begin{center}
 \begin{figure}[!htbp]
-	\centering
+ \centering
  \includegraphics[scale=0.6]{img/full-INFGB-ratio-vscosy.pdf}%
  \includegraphics[scale=0.6]{img/full-INFGB-ratio-vsspfs.pdf}%
  \caption{Comparison of the ratio between the number of decisions and the number of propagation for the combo w.r.t. ESBA and SPA.}
  \label{fig:ratio}
 \end{figure}
 \end{center}
-
 To go further in our analyze, we also compared the ratio between the number of
 decisions and the number of propagation. This is a fair measure to assess the
 quality of a SAT solving approach: if the ratio is small, then this means that
@@ -305,15 +292,14 @@ the developed algorithm is producing more deduced facts than making guesses,
 which is the best way to conclude quickly on a problem!
 The scatter plots of Fig.\ref{fig:ratio} show a comparison between the
 aforementioned ratios. When comparing \texttt{minisat-Sp} to
-\texttt{minisat-SymSp} (right hand side scatter plot), we observe that the
+\texttt{minisat-SymSp} (right-hand side scatter plot), we observe that the
 ratio goes in favor of \texttt{minisat-Sp} for the problems solved by both
 approaches. This is an expected result since the main objective of SPA is to
 minimize the number of decisions while augmenting the number of propagation.
-What is important to underline here is highlighted on the left hand side
+What is important to underline here is highlighted on the left-hand side
 scatter plot: on a large majority of UNSAT problems, the ratio goes in favor
 of \texttt{minisat-SymSp} w.r.t. \texttt{minisat-Sym}. This confirms the
 positive impact of SPA when applied in conjunction with ESBA.
-
 %
 %\hakan{Mettre cela en future works dans la conclusion finale}
 %
