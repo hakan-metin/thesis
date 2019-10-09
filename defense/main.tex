@@ -4,6 +4,7 @@
 \usepackage{mathrsfs}
 \usepackage{pgf}
 \usepackage{amsmath}
+\usepackage{amsmath,times} %% times package needed only to load TNR text font
 \usepackage{array}
 \usepackage{pifont}% http://ctan.org/pkg/pifont
 \newcommand{\cmark}{\ding{51}}%
@@ -72,6 +73,7 @@
 \begin{frame}
 
 \frametitle{Motivation}
+Applications:
 	\begin{itemize}
 		\item planning
 		\item scheduling
@@ -81,7 +83,31 @@
 	\end{itemize}
 \end{frame}
 %% ----------------------------------------------------------------------------
+\begin{frame}
 
+\frametitle{Outline}
+\begin{enumerate}
+	\item SAT
+	\begin{itemize}
+		\item SAT solving
+		\item Symmetry 
+		\item Challenges
+	\end{itemize}
+	\item Tackling the explosion in the static symmetry breaking approach
+	\begin{itemize}
+		\item 
+		\item
+		\item Experimental results
+	\end{itemize}
+	\item Taking the maximum benefits from static and dynamic approaches
+	\begin{itemize}
+		\item a
+		\item b
+		\item Experimental results
+	\end{itemize}
+\end{enumerate}
+\end{frame}
+%% ----------------------------------------------------------------------------
 \begin{frame}
 
 \tikzstyle{every picture}+=[remember picture]
@@ -190,177 +216,155 @@ Attribute each group to a class room
 %Attribute each group to a class room
 %\end{frame}
 %% ----------------------------------------------------------------------------
-\begin{frame}
-\frametitle{Encoding the problem}
-\begin{columns}
-	\begin{column}{0.1\textwidth}
-		\small
-	$(A,1) (A,2) (A,3)$\\
-	$(B,1) (B,2) (B,3)$\\
-	$(C,1) (C,2) (C,3)$\\
-	\vspace{1em}
-	$ \neg (A,1)  \neg (B,1)$\\
-	$ \neg (A,1)  \neg (C,1)$\\
-	$ \neg (B,1)  \neg (C,1)$\\
-	\vspace{1em}
-	$ \neg (A,2)  \neg (B,2)$\\
-	$ \neg (A,2)  \neg (C,2)$\\
-	$ \neg (B,2)  \neg (C,2)$\\
-	\vspace{1em}
-	$ \neg (A,3)  \neg (B,3)$\\
-	$ \neg (A,3)  \neg (C,3)$\\
-	$ \neg (B,3)  \neg (C,3)$\\
-	\end{column}
-	\begin{column}{0.2\textwidth}  %%<--- here
-		\small
-$ x_1 \lor  x_2 \lor x_3 $ \\
-$x_4 \lor  x_5 \lor x_6 $ \\
-$x_7 \lor  x_8 \lor x_9 $ \\
-	\vspace{1em}
-$ \neg x_1 \lor  \neg x_4 $ \\
-$ \neg x_1 \lor  \neg x_7 $ \\
-$ \neg x_4 \lor  \neg x_7 $ \\
-	\vspace{1em}
-$\neg x_2 \lor  \neg x_5 $ \\
-$ \neg x_2 \lor  \neg x_8 $ \\
-$ \neg x_5 \lor  \neg x_8 $ \\
-	\vspace{1em}
-$ \neg x_3 \lor  \neg x_6 $ \\
-$ \neg x_3 \lor  \neg x_9 $ \\
-$ \neg x_6 \lor  \neg x_9 $ \\
-	\end{column}
-\end{columns}
-
-%$\omega_1 = x_1 \lor  x_2 \lor x_3 $ \\
-%$\omega_2 = x_4 \lor  x_5 \lor x_6 $ \\
-%$\omega_3 = x_7 \lor  x_8 \lor x_9 $ \\
-%\vspace{1em}
-%$\omega_4 = \neg x_1 \lor  \neg x_4 $ \\
-%$\omega_5 = \neg x_1 \lor  \neg x_7 $ \\
-%$\omega_6 = \neg x_4 \lor  \neg x_7 $ \\
-%\vspace{1em}
-%$\omega_7 = \neg x_2 \lor  \neg x_5 $ \\
-%$\omega_8 = \neg x_2 \lor  \neg x_8 $ \\
-%$\omega_9 = \neg x_5 \lor  \neg x_8 $ \\
-%\vspace{1em}
-%$\omega_{10} = \neg x_3 \lor  \neg x_6 $ \\
-%$\omega_{11} = \neg x_3 \lor  \neg x_9 $ \\
-%$\omega_{12} = \neg x_6 \lor  \neg x_9 $ \\
-
-\end{frame}
-
-%% ----------------------------------------------------------------------------
-\begin{frame}
-\frametitle{Encoding the problem}
-\begin{columns}
-	\begin{column}{0.1\textwidth}
-		\small
-		$(A,1) (A,2) $\\
-		$(B,1) (B,2) $\\
-		$(C,1) (C,2) $\\
-		\vspace{1em}
-		$ \neg (A,1)  \neg (B,1)$\\
-		$ \neg (A,1)  \neg (C,1)$\\
-		$ \neg (B,1)  \neg (C,1)$\\
-		\vspace{1em}
-		$ \neg (A,2)  \neg (B,2)$\\
-		$ \neg (A,2)  \neg (C,2)$\\
-		$ \neg (B,2)  \neg (C,2)$\\
-	\end{column}
-	\begin{column}{0.2\textwidth}  %%<--- here
-		\small
-		$ x_1 \lor  x_2 $ \\
-		$x_3 \lor  x_4  $ \\
-		$x_5 \lor  x_6 $ \\
-		\vspace{1em}
-		$ \neg x_1 \lor  \neg x_3 $ \\
-		$ \neg x_1 \lor  \neg x_5 $ \\
-		$ \neg x_3 \lor  \neg x_5 $ \\
-		\vspace{1em}
-		$\neg x_2 \lor  \neg x_4 $ \\
-		$ \neg x_2 \lor  \neg x_6 $ \\
-		$ \neg x_4 \lor  \neg x_6 $ \\
-	\end{column}
-\end{columns}
-
-%$\omega_1 = x_1 \lor  x_2 \lor x_3 $ \\
-%$\omega_2 = x_4 \lor  x_5 \lor x_6 $ \\
-%$\omega_3 = x_7 \lor  x_8 \lor x_9 $ \\
-%\vspace{1em}
-%$\omega_4 = \neg x_1 \lor  \neg x_4 $ \\
-%$\omega_5 = \neg x_1 \lor  \neg x_7 $ \\
-%$\omega_6 = \neg x_4 \lor  \neg x_7 $ \\
-%\vspace{1em}
-%$\omega_7 = \neg x_2 \lor  \neg x_5 $ \\
-%$\omega_8 = \neg x_2 \lor  \neg x_8 $ \\
-%$\omega_9 = \neg x_5 \lor  \neg x_8 $ \\
-%\vspace{1em}
-%$\omega_{10} = \neg x_3 \lor  \neg x_6 $ \\
-%$\omega_{11} = \neg x_3 \lor  \neg x_9 $ \\
-%$\omega_{12} = \neg x_6 \lor  \neg x_9 $ \\
-
-\end{frame}
+%\begin{frame}
+%\frametitle{Encoding the problem}
+%\begin{columns}
+%	\begin{column}{0.1\textwidth}
+%		\small
+%	$(A,1) (A,2) (A,3)$\\
+%	$(B,1) (B,2) (B,3)$\\
+%	$(C,1) (C,2) (C,3)$\\
+%	\vspace{1em}
+%	$ \neg (A,1)  \neg (B,1)$\\
+%	$ \neg (A,1)  \neg (C,1)$\\
+%	$ \neg (B,1)  \neg (C,1)$\\
+%	\vspace{1em}
+%	$ \neg (A,2)  \neg (B,2)$\\
+%	$ \neg (A,2)  \neg (C,2)$\\
+%	$ \neg (B,2)  \neg (C,2)$\\
+%	\vspace{1em}
+%	$ \neg (A,3)  \neg (B,3)$\\
+%	$ \neg (A,3)  \neg (C,3)$\\
+%	$ \neg (B,3)  \neg (C,3)$\\
+%	\end{column}
+%	\begin{column}{0.2\textwidth}  %%<--- here
+%		\small
+%$ x_1 \lor  x_2 \lor x_3 $ \\
+%$x_4 \lor  x_5 \lor x_6 $ \\
+%$x_7 \lor  x_8 \lor x_9 $ \\
+%	\vspace{1em}
+%$ \neg x_1 \lor  \neg x_4 $ \\
+%$ \neg x_1 \lor  \neg x_7 $ \\
+%$ \neg x_4 \lor  \neg x_7 $ \\
+%	\vspace{1em}
+%$\neg x_2 \lor  \neg x_5 $ \\
+%$ \neg x_2 \lor  \neg x_8 $ \\
+%$ \neg x_5 \lor  \neg x_8 $ \\
+%	\vspace{1em}
+%$ \neg x_3 \lor  \neg x_6 $ \\
+%$ \neg x_3 \lor  \neg x_9 $ \\
+%$ \neg x_6 \lor  \neg x_9 $ \\
+%	\end{column}
+%\end{columns}
+%
+%%$\omega_1 = x_1 \lor  x_2 \lor x_3 $ \\
+%%$\omega_2 = x_4 \lor  x_5 \lor x_6 $ \\
+%%$\omega_3 = x_7 \lor  x_8 \lor x_9 $ \\
+%%\vspace{1em}
+%%$\omega_4 = \neg x_1 \lor  \neg x_4 $ \\
+%%$\omega_5 = \neg x_1 \lor  \neg x_7 $ \\
+%%$\omega_6 = \neg x_4 \lor  \neg x_7 $ \\
+%%\vspace{1em}
+%%$\omega_7 = \neg x_2 \lor  \neg x_5 $ \\
+%%$\omega_8 = \neg x_2 \lor  \neg x_8 $ \\
+%%$\omega_9 = \neg x_5 \lor  \neg x_8 $ \\
+%%\vspace{1em}
+%%$\omega_{10} = \neg x_3 \lor  \neg x_6 $ \\
+%%$\omega_{11} = \neg x_3 \lor  \neg x_9 $ \\
+%%$\omega_{12} = \neg x_6 \lor  \neg x_9 $ \\
+%
+%\end{frame}
+%
+%%% ----------------------------------------------------------------------------
+%\begin{frame}
+%\frametitle{Encoding the problem}
+%\begin{columns}
+%	\begin{column}{0.1\textwidth}
+%		\small
+%		$(A,1) (A,2) $\\
+%		$(B,1) (B,2) $\\
+%		$(C,1) (C,2) $\\
+%		\vspace{1em}
+%		$ \neg (A,1)  \neg (B,1)$\\
+%		$ \neg (A,1)  \neg (C,1)$\\
+%		$ \neg (B,1)  \neg (C,1)$\\
+%		\vspace{1em}
+%		$ \neg (A,2)  \neg (B,2)$\\
+%		$ \neg (A,2)  \neg (C,2)$\\
+%		$ \neg (B,2)  \neg (C,2)$\\
+%	\end{column}
+%	\begin{column}{0.2\textwidth}  %%<--- here
+%		\small
+%		$ x_1 \lor  x_2 $ \\
+%		$x_3 \lor  x_4  $ \\
+%		$x_5 \lor  x_6 $ \\
+%		\vspace{1em}
+%		$ \neg x_1 \lor  \neg x_3 $ \\
+%		$ \neg x_1 \lor  \neg x_5 $ \\
+%		$ \neg x_3 \lor  \neg x_5 $ \\
+%		\vspace{1em}
+%		$\neg x_2 \lor  \neg x_4 $ \\
+%		$ \neg x_2 \lor  \neg x_6 $ \\
+%		$ \neg x_4 \lor  \neg x_6 $ \\
+%	\end{column}
+%\end{columns}
+%
+%%$\omega_1 = x_1 \lor  x_2 \lor x_3 $ \\
+%%$\omega_2 = x_4 \lor  x_5 \lor x_6 $ \\
+%%$\omega_3 = x_7 \lor  x_8 \lor x_9 $ \\
+%%\vspace{1em}
+%%$\omega_4 = \neg x_1 \lor  \neg x_4 $ \\
+%%$\omega_5 = \neg x_1 \lor  \neg x_7 $ \\
+%%$\omega_6 = \neg x_4 \lor  \neg x_7 $ \\
+%%\vspace{1em}
+%%$\omega_7 = \neg x_2 \lor  \neg x_5 $ \\
+%%$\omega_8 = \neg x_2 \lor  \neg x_8 $ \\
+%%$\omega_9 = \neg x_5 \lor  \neg x_8 $ \\
+%%\vspace{1em}
+%%$\omega_{10} = \neg x_3 \lor  \neg x_6 $ \\
+%%$\omega_{11} = \neg x_3 \lor  \neg x_9 $ \\
+%%$\omega_{12} = \neg x_6 \lor  \neg x_9 $ \\
+%\end{frame}
 %% ----------------------------------------------------------------------------
 \begin{frame}
 \frametitle{SAT}
 \centering
 \begin{tikzpicture}
-\tikzstyle{box} = [draw, minimum height = 1.5cm, minimum width=3.5cm,
-				anchor=north,text centered,text width = 0.25\textwidth, text depth = .75cm]
+\tikzstyle{box} = [draw, minimum width=3.5cm,
+				]
 \tikzstyle{result} = [draw, minimum width=2.5cm, minimum height=1cm]
 \node[box] (input) {Logic Formula};    
 
-\node<2->[draw, ellipse] (cnf) at ($(input) + (0pt, -10pt)$) {\scriptsize CNF};
+%\node<2->[draw, ellipse] (cnf) at ($(input) + (0pt, -10pt)$) {\scriptsize CNF};
 
-\node[box] (solver) at ($(input) + (0pt, -50pt)$) {Solver};
-\node<3->[draw, ellipse] (cnf) at ($(solver) + (-25pt, -10pt)$) {\scriptsize DPLL};
-\node<3->[draw, ellipse] (cnf) at ($(solver) + (25pt, -10pt)$) {\scriptsize CDCL};
+\node[box] (solver) at ($(input) + (0pt, -30pt)$) {Solver};
+%\node<3->[draw, ellipse] (cnf) at ($(solver) + (-25pt, -10pt)$) {\scriptsize DPLL};
+%\node<3->[draw, ellipse] (cnf) at ($(solver) + (25pt, -10pt)$) {\scriptsize CDCL};
 
-\node[result] (sat) at ($(solver) + (-70pt, -90pt)$) {Satisfiable};
-\node[result] (unsat) at ($(solver) + (70pt, -90pt)$) {Unsatisfiable};
+\node[result] (sat) at ($(solver) + (-70pt, -60pt)$) {Satisfiable ($\SAT$)};
+\node[result] (unsat) at ($(solver) + (70pt, -60pt)$) {Unsatisfiable ($\UNSAT$)};
 
 \draw[->] (input) -> (solver);
 \draw[->] (solver) -> node[midway,fill=white] {assignment}  (sat);
 \draw[->] (solver) -> node[midway,fill=white] {proof}(unsat);
 \end{tikzpicture}
+\vfill
+\begin{overlayarea}{\textwidth}{.2\textwidth}
+	\vfill
+	\centering
+\only<2>{
+$\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{\text{Clause with literals } x_1, x_2, \neg x_3}$
+}% visible 2
 
+\vfill
+\only<3>{
+	$\overbrace{\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{Clause}\land (\neg x_1 \lor \neg x_2) \land (x_2 \lor \neg x_4)}^\text{Formula (CNF)}$
+}% visible 3
+\end{overlayarea}
 \end{frame}
 
 
 %% ----------------------------------------------------------------------------
-\begin{frame}
-\frametitle{Conjunctive Normal Form (CNF)}
-\scriptsize
-
-$(x_2 x_3)(x_5 x_6)(x_8 x_9)(\neg x_2 \neg x_3)(\neg x_5 \neg x_6)(\neg x_8 \neg x_9)$
-$(x_4 x_7)(x_5 x_8)(x_6 x_9)(\neg x_4 \neg x_7)(\neg x_5 \neg x_8)(\neg x_6 \neg x_9)$\\
-$(x_1 x_2)(x_4 x_5)(x_7 x_8)(\neg x_1 \neg x_2)(\neg x_4 \neg x_5)(\neg x_7 \neg x_8)$\\
-$(x_1 x_4)(x_2 x_5)(x_3 x_6)(\neg x_1 \neg x_4)(\neg x_2 \neg x_5)(\neg x_3 \neg x_6)$\\
-	
-	
-	$(x_2 x_3)(x_5 x_6)(x_8 x_9)$\\
-	$(x_4 x_7)(x_5 x_8)(x_6 x_9)$\\
-	$(x_1 x_2)(x_4 x_5)(x_7 x_8)$\\
-	$(x_1 x_4)(x_2 x_5)(x_3 x_6)$\\
-	
-	\vfill
-	
-
-$
-(x_1 \lor x_2 \lor x_3) \land
-(x_4 \lor x_5 \lor x_6) \land
-(x_7 \lor x_8 \lor x_9) \land
-(\neg x_1 \lor \neg x_4) \land
-(\neg x_1 \lor \neg x_7) \land
-(\neg x_4 \lor \neg x_7) \land
-(\neg x_2 \lor \neg x_5) \land
-(\neg x_2 \lor \neg x_8) \land
-(\neg x_5 \lor \neg x_8) \land
-(\neg x_3 \lor \neg x_6) \land
-(\neg x_3 \lor \neg x_9) \land
-(\neg x_6 \lor \neg x_9) 
-$
-\end{frame}
 
 
 \begin{frame}
@@ -385,21 +389,30 @@ $
 			(\neg x_3 \lor \neg x_9) \land
 			(\neg x_6 \lor \neg x_9)$\\
 	\end{tabular}}\\
-	\visible<2-> {
+	\only<2> {
 		
 		$\Downarrow$ & $\Downarrow$  \\
 		
 		colored graph & 
-		\includegraphics[scale=0.27]{example-image-a}\\ \\
+		\includegraphics[scale=0.1]{images/graph}\\ \\
 	}
+
+	\visible<3-> {
+	
+	$\Downarrow$ & $\Downarrow$  \\
+	
+	colored graph & 
+	\includegraphics[scale=0.05]{images/graph}\\ \\
+}
 	\visible<3-> {
 		$\|$ & $\|$  \\
-		
 		graph automorphism & 
 		\small{(\texttt{bliss} \footnote{http://www.tcs.hut.fi/Software/bliss/} or 
 			\texttt{saucy} \footnote{http://vlsicad.eecs.umich.edu/BK/SAUCY/})} 
 		\\
 	}
+
+
 	\visible<4-> {
 		$\Downarrow$ & $\Downarrow$  \\
 		
@@ -415,41 +428,7 @@ $
 \end{tabular}
 \end{frame}
 %% ----------------------------------------------------------------------------
-\begin{frame}
-\frametitle{SAT}
-%	Algorithm solving 
-%	CDCL
-%	
-%	NP complete problem
 
-\begin{tikzpicture}[sibling distance=10em,]
-\tikzstyle{e} = [draw, circle];
-	\node[e](top) {$x_1$}
-		child % level 1 left
-		{
-			 node[e](l) {$x_2$}
-			 child { % level 2.1 left
-			 	node[e](ll) {$x_4$}
-			 }
-		 	child { % level 2.1 right
-		 		node[e](lr){$x_5$}
-		 	}
-		}
-		child { % level 1 right
-			 node[e](r) {$x_3$}
-			  child { % level 2.2 left
-			 	node[e](rl) {$x_6$}
-			 }
-			 child { % level 2.2 right
-			 	node[e](rr){$x_7	$}
-			 }
-		};
-	
-\end{tikzpicture}
-
-
-\end{frame}
-%% ----------------------------------------------------------------------------
 \begin{frame}
 \frametitle{SAT}
 	example solving arbre
@@ -506,109 +485,100 @@ $
 	\end{tikzpicture}
 
 \end{frame}
-%% ----------------------------------------------------------------------------
-\begin{frame}
-\frametitle{TEST Conflict Driven Clause Learning Algorithm (CDCL)}
-
-\centering
-
-\begin{tikzpicture}[scale=1,every node/.style={scale=1,fill=white, font=\sffamily}, align=center]
-% Specification of nodes (position, etc.)
-%    \tikzstyle{every node}=[font=\small]
-\tikzset{%	
-	>={Latex[width=2mm,length=2mm]},
-	% Specifications for style of nodes:
-	base/.style = {rectangle, rounded corners, draw=black,
-		text centered, font=\scriptsize},
-	question/.style = {draw, diamond, fill=blue!15, font=\tiny},
-	question/.style = {base, diamond, fill=blue!15},
-	unsat/.style = {base, fill=red!30,minimum width=2cm},
-	sat/.style = {base, fill=green!30,minimum width=2cm},
-	process/.style = {base, fill=orange!25,
-		font=\scriptsize},
-	processcurr/.style = {process, thick, line width=0.7mm, draw=purple!80 },
-	questioncurr/.style = {question,line width=0.7mm, draw=purple!80},
-	line/.style = {->, thick },
-	linecurr/.style = {line, line width=0.7mm, draw=purple!80},
-}
-\node (isfin) [question] { All vars\\ assign?};
-\node (dec)     [process, below = of isfin]          {Choose decision var};
-\node (sdec)     [right = of dec]          {};
-\node (idec) [left = of isfin]  {};
-\node (prop)    [process] at ($(dec) + (0pt, -30pt)$)          {Unit Propagation};
-\node (conf)    [question] at ($(prop) + (0pt, -50pt)$){\tiny IsConflict?};
-\node (confanalyse) [process, below = of conf] {Conflict Analysis};
-\node (learn) [process] at ($(prop) + (90pt, 0)$) {Learn conflict clause};
-\node (isend) [question] at ($(confanalyse) + (90pt, 0)$) {is level\\zero?};
-\node (end) [unsat] at ($(isend) + (90pt, 0)$) {$unsatiasfiable$};
-\node (ends) [sat] at ($(isfin.north east) + (+90pt, 0)$){$satisfiable$};
-
-\draw[line]     (sdec) -- (dec);
-\draw[line]     (dec) -- (prop);
-\draw[line]     (prop) -- (conf);
-\draw[line]     (conf) -| node [yshift=4.5 cm] {no}(idec.center) -- (isfin);
-\draw[line]     (conf) -- node {yes} (confanalyse);
-\draw[line]     (isfin) -- node {no}(dec);
-\draw[line]     (confanalyse) --(isend);
-\draw[line]     (isend) -- node {yes}(end);
-\draw[line]     (isfin.north east) -- node {yes}(ends);
-\draw[line]     (learn) -- (prop);
-\draw[line]     (isend) -- node [] {no}(learn);	
-\end{tikzpicture}
-
-\end{frame}
 
 %% ----------------------------------------------------------------------------
 \begin{frame}
 \frametitle{Tree}
 
 \begin{tikzpicture}
-%\def\layersep{1.5cm}
-%\def\unitsep{1.5cm}
-%
-%\foreach \x in {1,...,4}
-%\path   node[decision] (L_2_\x) at (\x*\unitsep,2*\layersep){};
-%\foreach \x in {1,...,2}
-%
-%\path   node[decision] (L_3_\x) at ({(1+\x)*\unitsep},3*\layersep){};
-%\foreach \x in {1,...,1}
-%\path   node[decision] (L_4_\x) at ({(1+\x)*\unitsep},4*\layersep){};
-
-
-\newcommand{\x}{1}
+\newcommand{\x}{2.07}
 \newcommand{\y}{-1.5}
 
-\tikzstyle{decision}=[circle,draw,thick,fill=blue!30]
+\tikzstyle{decision}=[circle,draw,thick,fill=blue!30,font=\scriptsize]
 \tikzstyle{unsat}=[draw,thick,fill=red]
+\tikzstyle{link}=[->,>=latex,rounded corners=5pt,thick]
+\tikzstyle{trlink}=[link,nearly transparent]
+\tikzstyle{mid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=1,font=\scriptsize]
+\tikzstyle{trmid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=0.3,font=\scriptsize]
 
-    \node[decision](r) at (0,0) {$x_1$};
+	% layer 1
+    \node[decision](t) at (0,0) {$x_1$};
+    
+    % layer 2
     \node[decision](l) at (-\x,\y) {$x_2$};
     \node[decision](r) at (\x,\y) {$x_2$};
     
-    \node[decision](l) at (-\x-\x*0.5,2*\y) {$x_2$};
-    \node[decision](l) at (-\x+\x*0.5,2*\y) {$x_2$};
+    % layer 3
+    \node[decision](ll) at (-\x-\x*0.5,2*\y) {$x_3$};
+    \node[decision](lr) at (-\x+\x*0.5,2*\y) {$x_3$};
+    \node[decision](rl) at (\x-\x*0.5,2*\y) {$x_3$};
+    \node[decision](rr) at (\x+\x*0.5,2*\y) {$x_3$};
     
-    \node[unsat](l) at (-\x-\x*0.5-\x*0.25,3*\y) {};
-    \node[unsat](l) at (-\x-\x*0.5+\x*0.25,3*\y) {};
-    
-    \node[unsat](l) at (-\x+\x*0.5-\x*0.25,3*\y) {};
-    
-    
-      %\node[unsat](l) at (-\x-\x*0.5+\x*0.25,3*\y) {};
-    
-%	\node[decision](l) at (-\x,\y) {$x_2$};
-%	\node[decision](r) at (\x,\y) {$x_2$};
-%	
-%	\node[decision](ll) at (-\x*2+\x*0.5*1,2*\y-0.75) {$x_3$};
-%	\node[decision](lr) at (-\x*2+\x*0.5*3,2*\y-0.75) {$x_3$};
-%	\node[decision](rl) at (-\x*2+\x*0.5*5,2*\y-0.75) {$x_3$};
-%	\node[decision](rr) at (-\x*2+\x*0.5*7,2*\y-0.75) {$x_3$};
-%	
-%	
-%	\foreach \x in {0,...,7}
-%	\node[unsat](llr) at (-2.75+0.75*\x,-4.5) {};
+	% layer 4
+    \node[decision](lll) at (-\x-\x*0.5-\x*0.25,3*\y) {$x_4$};
+    \node[decision](llr) at (-\x-\x*0.5+\x*0.25,3*\y) {$x_4$};
+    \node[decision](lrl) at (-\x+\x*0.5-\x*0.25,3*\y) {$x_4$};
+    \node[decision](lrr) at (-\x+\x*0.5+\x*0.25,3*\y) {$x_4$};
+    \node[decision](rll) at (\x-\x*0.5-\x*0.25,3*\y) {$x_4$};
+    \node[decision](rlr) at (\x-\x*0.5+\x*0.25,3*\y) {$x_4$};
+    \node[decision](rrl) at (\x+\x*0.5-\x*0.25,3*\y) {$x_4$};
+    \node[decision](rrr) at (\x+\x*0.5+\x*0.25,3*\y) {$x_4$};
+
+	% layer 5
+    \node[unsat](llll) at (-\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+    \node[unsat](lllr) at (-\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+    \node[unsat](llrl) at (-\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+	\node[unsat](llrr) at (-\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {};
+    \node[unsat](lrll) at (-\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+    \node[unsat](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+    \node[unsat](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+    \node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
+    \node[unsat](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+	\node[unsat](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+	\node[unsat](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+	\node[unsat](rlrr) at (\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {};
+	\node[unsat](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+	\node[unsat](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+	\node[unsat](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+	\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
+
+
+	\draw[trlink] (t) ->  node [trmid] {$0$} (l);
+	\draw[link] (t) -> node [mid] {$1$} (r);
 	
-%	\node[decision](x3) at (\x*2-0.75,2*\y-0.5) {$x_5$};
+	\draw[link] (l) ->  node [mid] {$0$} (ll);
+	\draw[link] (l) -> node [mid] {$1$} (lr);
+	\draw[link] (r) ->  node [mid] {$0$} (rl);
+	\draw[link] (r) -> node [mid] {$1$} (rr);
+	
+	\draw[link] (ll) -> node [mid] {$0$} (lll);
+	\draw[link] (ll) -> node [mid] {$1$} (llr);
+	\draw[link] (lr) -> node [mid] {$0$} (lrl);
+	\draw[link] (lr) -> node [mid] {$1$} (lrr);
+	
+	\draw[link] (rl) -> node [mid] {$0$} (rll);
+	\draw[link] (rl) -> node [mid] {$1$} (rlr);
+	\draw[link] (rr) -> node [mid] {$0$} (rrl);
+	\draw[link] (rr) -> node [mid] {$1$} (rrr);
+	
+	
+	\draw[link] (lll) -> node [mid] {$0$} (llll);
+	\draw[link] (lll) -> node [mid] {$1$} (lllr);
+	\draw[link] (llr) -> node [mid] {$0$} (llrl);
+	\draw[link] (llr) -> node [mid] {$1$} (llrr);
+	\draw[link] (lrl) -> node [mid] {$0$} (lrll);
+	\draw[link] (lrl) -> node [mid] {$1$} (lrlr);
+	\draw[link] (lrr) -> node [mid] {$0$} (lrrl);
+	\draw[link] (lrr) -> node [mid] {$1$} (lrrr);
+	
+	\draw[link] (rll) -> node [mid] {$0$} (rlll);
+	\draw[link] (rll) -> node [mid] {$1$} (rllr);
+	\draw[link] (rlr) -> node [mid] {$0$} (rlrl);
+	\draw[link] (rlr) -> node [mid] {$1$} (rlrr);
+	\draw[link] (rrl) -> node [mid] {$0$} (rrll);
+	\draw[link] (rrl) -> node [mid] {$1$} (rrlr);
+	\draw[link] (rrr) -> node [mid] {$0$} (rrrl);
+	\draw[link] (rrr) -> node [mid] {$1$} (rrrr);
 	
 \end{tikzpicture}
 
@@ -622,6 +592,41 @@ $
   \bibliographystyle{alpha}
   \bibliography{main}
 \end{frame}
+
+%
+%\begin{frame}
+%\frametitle{Conjunctive Normal Form (CNF)}
+%\scriptsize
+%
+%$(x_2 x_3)(x_5 x_6)(x_8 x_9)(\neg x_2 \neg x_3)(\neg x_5 \neg x_6)(\neg x_8 \neg x_9)$
+%$(x_4 x_7)(x_5 x_8)(x_6 x_9)(\neg x_4 \neg x_7)(\neg x_5 \neg x_8)(\neg x_6 \neg x_9)$\\
+%$(x_1 x_2)(x_4 x_5)(x_7 x_8)(\neg x_1 \neg x_2)(\neg x_4 \neg x_5)(\neg x_7 \neg x_8)$\\
+%$(x_1 x_4)(x_2 x_5)(x_3 x_6)(\neg x_1 \neg x_4)(\neg x_2 \neg x_5)(\neg x_3 \neg x_6)$\\
+%
+%
+%$(x_2 x_3)(x_5 x_6)(x_8 x_9)$\\
+%$(x_4 x_7)(x_5 x_8)(x_6 x_9)$\\
+%$(x_1 x_2)(x_4 x_5)(x_7 x_8)$\\
+%$(x_1 x_4)(x_2 x_5)(x_3 x_6)$\\
+%
+%\vfill
+%$
+%(x_1 \lor x_2 \lor x_3) \land
+%(x_4 \lor x_5 \lor x_6) \land
+%(x_7 \lor x_8 \lor x_9) \land
+%(\neg x_1 \lor \neg x_4) \land
+%(\neg x_1 \lor \neg x_7) \land
+%(\neg x_4 \lor \neg x_7) \land
+%(\neg x_2 \lor \neg x_5) \land
+%(\neg x_2 \lor \neg x_8) \land
+%(\neg x_5 \lor \neg x_8) \land
+%(\neg x_3 \lor \neg x_6) \land
+%(\neg x_3 \lor \neg x_9) \land
+%(\neg x_6 \lor \neg x_9) 
+%$
+%\end{frame}
+%
+
 
 
 \end{document}
