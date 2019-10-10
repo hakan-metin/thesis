@@ -1,4 +1,4 @@
-﻿\clearpage\null\vfill
+\clearpage\null\vfill
 \thispagestyle{empty}
 \begin{minipage}[b]{.9\textwidth}
   \begin{center}
@@ -17,7 +17,7 @@
 \thispagestyle{empty}
 \vspace*{\stretch{1}}
 \begin{flushright}
-  \textit{Ah, la thÃ¨se.}
+  \textit{Ah, la thèse.}
 \end{flushright}
 \vspace*{\stretch{7}}
 %
@@ -27,216 +27,250 @@
 %
 %\`A tous, \textbf{merci infiniment} !
 %
-\chapter*{RÃ©sumÃ© Long}
 
-Cette thÃ¨se traite la rÃ©solution du problÃ¨me de satisfaisabilitÃ© boolÃ©enne (SAT).
-Le problÃ¨me de satisfabilitÃ© est un problÃ¨me important qui traite de problÃ¨mes importants dans diffÃ©rents domaines tels 
-que la dÃ©cision de planification~\cite{planning_92}, la biologie~\cite{biology_06}, la vÃ©rification de logiciel et de 
-matÃ©riel informatique~\cite{biere1999symbolic}, de raisonnement automatique~\cite{heule2016solving}.
-Leurs Ã©volutions au cours des derniÃ¨res dÃ©cennies leur ont permis de traiter des problÃ¨mes de plus en plus complexes.
-Dans un travail rÃ©cent, des chercheurs ont rÃ©ussi a prouver Ã  l'aide d'un solveur SAT, une borne maximum
-pour le problÃ¨me de coloration des triplets pythagoriciens~\cite{heule2016solving}, avec une preuve de 200 TB.
+\chapter*{Résumé Long}
 
-Le principe de base de SAT est de dÃ©terminer si une formule propositionnelle
-est satisfaisable, c'est Ã  dire que toutes les contraintes peuvent Ãªtre satisfaites,
-ou insatisfaisable, c'est-Ã -dire qu'il n'y a aucun moyen de satisfaire toutes les contraintes avec une mÃªme affectation.
-Ce calcul est effectuÃ© par un solveur SAT qui rÃ©pond usuellement $\sat$ lorsque la formule est satisfaisable et $\unsat$ dans le cas
-contraire. Le problÃ¨me SAT a Ã©tÃ© le premier problÃ¨me Ã  avoir Ã©tÃ© prouvÃ© NP-Complet. Cela signifie que
-l'on ne connait pas d'algorithme capable de rÃ©soudre le problÃ¨me avec une complexitÃ© polynomiale.
-La rÃ©solution du problÃ¨me est l'un des sept prix du millÃ©naire, Ã  savoir P = NP.
 
-MalgrÃ© cette complexitÃ©, les solveurs SAT sont capables de rÃ©soudre de plus en plus de problÃ¨mes complexes.
-Ce succÃ¨s vient de l'introduction de diffÃ©rentes heuristiques sophistiquÃ©es et de 
-l'algorithme de rÃ©solution, le $\guillemotleft$ Conflict Driven Clause Learning$\guillemotright$ (CDCL).
-Il est basÃ© sur l'algorithme nommÃ© par ses auteurs Davis, Putnam, Logemann et Loveland (DPLL)\cite{dpll_62},
-l'un des premier algorithme avec une utilisation non intensive de la mÃ©moire.
+Cette thèse traite la résolution du problème de satisfaisabilité booléenne (SAT).
+SAT traite des problèmes importants dans différents domaines tels 
+que la planification~\cite{planning_92}, la biologie~\cite{biology_06}, la vérification de logiciel et de 
+matériel~\cite{biere1999symbolic}, de raisonnement automatique~\cite{heule2016solving}.
+Leurs évolutions au cours des dernières décennies leur ont permis de traiter des problèmes de plus en plus complexes.
+Dans un travail récent, des chercheurs ont réussi a prouver à l'aide d'un solveur SAT, une borne maximum
+pour le problème de coloration des triplets pythagoriciens, avec une preuve de 200 TB~\cite{heule2016solving}.
+
+
+Étant un problème SAT, l'objectif est de  déterminer si il est possible de satisfaire toutes les contraintes du
+problème, si c'est le cas on dit que le problème est satisfaisable, si non il est insatifaisable.
+% satisfaisable ou non.
 %
-%Cet algorithme est basÃ© sur  
+% c'est à dire que toutes les contraintes peuvent être satisfaites,
+%ou insatisfaisable, c'est-à-dire qu'il n'y a aucun moyen de satisfaire toutes les contraintes avec une même affectation.
+Ce calcul est effectué par un solveur SAT qui répond $\sat$ lorsque la formule est satisfaisable et $\unsat$ dans le cas
+contraire. SAT a été le premier problème à avoir été prouvé NP-Complet~\cite{cook1971complexity}. Cela signifie que
+l'on ne connait pas d'algorithme capable de résoudre le problème avec une complexité polynomiale.
+La résolution du problème est l'un des sept prix du millénaire, à savoir P = NP.
+
+
+Malgré cette complexité, les solveurs SAT sont capables de résoudre de plus en plus de problèmes complexes.
+Ce succès vient de l'introduction de différentes heuristiques sophistiquées et de 
+l'algorithme de résolution utilisé, $\guillemotleft$ Conflict Driven Clause Learning$\guillemotright$ (CDCL).
+Il est basé sur l'algorithme DPLL nommé suivant ses auteurs Davis, Putnam, Logemann et Loveland~\cite{dpll_62},
+l'un des premier algorithme avec une utilisation non intensive de la mémoire.
+
+%
+%Cet algorithme est basé sur  
 %et Loveland (DPLL)\cite{dpll_62}.
 %
 %
 %l'optimisation de l'algorithme de
-%rÃ©solution des conflits appelÃ© $\guillemotleft$ Conflict Driven Clause Learning$\guillemotright$ (CDCL) qui est basÃ©e sur le premier
-%algorithme (avec une utilisation non intensive de la  mÃ©moire) nommÃ© par ses auteurs Davis, Putnam, Logemann
+%résolution des conflits appelé $\guillemotleft$ Conflict Driven Clause Learning$\guillemotright$ (CDCL) qui est basée sur le premier
+%algorithme (avec une utilisation non intensive de la  mémoire) nommé par ses auteurs Davis, Putnam, Logemann
 %et Loveland (DPLL)\cite{dpll_62}.
-\hakan{Enlever toutes la partie explicative de CDCL ?}
-L'algorithme CDCL peut Ãªtre vu sous forme de l'exploration d'un arbre binaire dans lequel  chaque branche reprÃ©sente 
-une affectation. Il y a donc au total $2^n$ branches, avec $n$ le nombre de variables du problÃ¨me.
-Le principe de cet algorithme est d'explorer cet arbre binaire. 
-La premiÃ¨re Ã©tape consiste Ã  choisir une variable dite de dÃ©cision avec une polaritÃ© qui permet l'exploration
-de l'arbre de recherche. Puis, d'effectuer les dÃ©ductions logiques Ã  partir de l'affection. 
-Si l'algorithme dÃ©couvre un conflit, c'est-Ã -dire que l'affectation courante n'est pas capable de satisfaire au moins une contrainte du problÃ¨me, l'algorithme va calculer une clause dite de conflit qui permet d'Ã©laguer 
-cet espace de recherche qui ne contient pas de solution. Cette clause est une information redondante par
-rapport au problÃ¨me initial. Si aucun conflit n'est prÃ©sent, l'algorithme choisit Ã  nouveau une variable de dÃ©cision. L'algorithme termine lorsque soit toutes les variables sont affectÃ©es auquel cas le problÃ¨me 
-est satisfait, soit un conflit est apparu avec uniquement des dÃ©ductions logiques auquel cas le
-problÃ¨me est non satisfaisant.
-La Figure~\ref{fig:cdclflow} prÃ©sente sous forme d'un organigramme le fonctionnement de l'algorithme CDCL.
+
+Le CDCL peut être vu suivant l'exploration d'un arbre binaire avec au total $2^n$ branches, avec $n$ le nombre de variables du problème.
+La première étape consiste à choisir une variable dite de décision puis, d'effectuer les déductions logiques à partir de l'affection. 
+Si l'algorithme se trouve dans une situation de conflit, c'est-à-dire, que l'affectation courante n'est pas capable de satisfaire au moins une contrainte du problème, l'algorithme va calculer une clause dite de conflit qui permet d'élaguer 
+cet espace de recherche. Avec cette contrainte le solveur effectue un \textit{backjump}, c'est à dire, qu'il remonte dans l'arbre
+de recherche pour explorer une autre branche.
+%Cette clause est une information redondante par rapport au problème initial.
+Si aucun conflit n'est présent, l'algorithme choisit à nouveau une variable de décision. L'algorithme termine lorsque soit toutes les variables sont affectées auquel cas le problème est satisfaisable, soit un conflit est apparu avec uniquement des déductions logiques auquel cas le
+problème est non satisfaisable.
+La Figure~\ref{fig:cdclflow} présente sous forme d'un organigramme le fonctionnement de l'algorithme CDCL.
 \input{fig/flowcdcl}
 
-Cependant certains problÃ¨mes prÃ©sentent des symÃ©tries, certaines branches de l'espace de recherche 
-sont donc Ã©quivalentes Ã  la symÃ©trie prÃ¨s. Prenons comme exemple le $\guillemotleft$problÃ¨me des pigeons $\guillemotright$ dans lequel nous avons un ensemble de pigeons qui doivent Ãªtres attribuÃ©s Ã  des nids diffÃ©rents. Dans ce problÃ¨me il y a un nid de moins que le nombre de pigeons.
-Le but de ce problÃ¨me est de dÃ©terminer sâ€™ il est possible d'attribuer un nid diffÃ©rent Ã  chaque pigeon.
- La figure~\ref{fig:holefr} pressent une instance de ce problÃ¨me.
- 
- 
- \begin{figure}[!htbp]
-  \centering
-  \begin{tikzpicture}[
-  start chain = going right,
-  node distance = 0pt,
-  AStyle/.style={draw, minimum width=2em, minimum height=2em, 
-   outer sep=0pt, on chain, fill=yellow!0!white}]
-  \node [AStyle] (1) {\huge\textcolor{gray}{\PHdove}};
-  \node [AStyle] (4) {\huge\textcolor{gray}{\PHdove}};
-  \node [AStyle] (5) {\huge\textcolor{gray}{\PHdove}};
-  \node [AStyle, draw] (6) {\huge\textcolor{gray}{\PHdove}};
-  \node [ minimum width=2em, minimum height=2em, 
-  outer sep=1pt, on chain] (7) {\huge\textcolor{gray}{\PHdove}};
-  \end{tikzpicture}
-  \caption{ReprÃ©sentation graphique d'une instance du problÃ¨me des pigeons(5 pigeons, 4 nids)}
-  \label{fig:holefr}
- \end{figure}
- 
- 
-Pour un humain, la rÃ©ponse Ã  ce problÃ¨me est Ã©vidente, mais un solveur de l'Ã©tat de l'art va parcourir toutes 
-les combinaisons possibles de couples (pigeon, nid), cela le mÃ¨ne Ã  une explosion combinatoire.
-Pour cette raison, rÃ©soudre ce problÃ¨me avec un solveur s'avÃ¨re trÃ¨s chronophage et mÃªme impossible dans des temps raisonnables
-pour un nombre de pigeons supÃ©rieur Ã  environ 15.
-%Cependant, certains problÃ¨mes possÃ¨dent un espace de recherche Ã©norme et ne peuvent pas 
-%Ãªtre traitÃ© par un solveur SAT. Un exemple d'un tel problÃ¨me peut Ãªtre le problÃ¨me de tournÃ©es de vÃ©hicules (VRP). 
-%Il s'agit du service d'entreprise de livraison, dans lequel Ã©tant donnÃ© une flotte de vÃ©hicules basÃ©s dans un dÃ©pÃ´t, ceux ci doivent faire des rondes entre des clients qui ont demandÃ©s chacun une certaine quantitÃ© de marchandises. Le circuit effectuÃ© par un vÃ©hicule pour la visite de tous les clients
-%est appelÃ© la tournÃ©e du vÃ©hicule. L'objectif est de trouver la tournÃ©e qui minimise les coÃ»ts de livraison (monÃ©taire, distance, temps, ....).
-%
-%
-%Dans le problÃ¨me prÃ©cÃ©dent, renommer l'ensemble de vÃ©hicules identiques nous donnera exactement le mÃªme problÃ¨me. C'est ce qu'on appelle une symÃ©trie.
-De maniÃ¨re plus  gÃ©nÃ©rale, une symÃ©trie est une transformation qui laisse un objet (ou un aspect de l'objet) inchangÃ©. Les symÃ©tries sont gÃ©nÃ©ralement dÃ©finies comme une propriÃ©tÃ© syntaxique d'un problÃ¨me lorsque leur prÃ©sence est inhÃ©rente Ã  l'encodage du problÃ¨me.
-Dans ce cas, une permutation des variables prÃ©serve la spÃ©cification originale du problÃ¨me.
-Dans le cas oÃ¹ les symÃ©tries sont indÃ©pendantes d'une reprÃ©sentation particuliÃ¨re du problÃ¨me, il s'agit de symÃ©tries sÃ©mantiques.
-La prÃ©sence de symÃ©trie dans un problÃ¨me force l'algorithme de recherche Ã  explorer en vain l'espace de recherche symÃ©trique et entrave considÃ©rablement ses performances. La rupture de symÃ©trie est une approche qui Ã©vite au solveur de visiter l'espace de recherche symÃ©trique.
-Pour pouvoir exploiter les symÃ©tries, la premiÃ¨re Ã©tape consiste Ã  les trouver. Dans le contexte de la satisfaction boolÃ©enne, la dÃ©tection des symÃ©tries syntaxique se fait tout d'abord par la transformation de la spÃ©cification en un graphe colorÃ© et ensuite Ã  l'application d'un outil d'automorphisme de graphe sur celui-ci.
-DiffÃ©rents outils traitent de ce problÃ¨me dans l'Ã©tat de l'art tel que $\bliss$~\cite{JunttilaKaski:ALENEX2007}, $\saucy$~\cite{katebi2010symmetry}, â€¦
 
-Lorsque les symÃ©tries sont obtenues Ã  l'aide de ces outils, l'approche la plus courante pour les exploiter est d'utiliser une approche de rupture de symÃ©trie statique. Elle est dite statique, car le traitement de cette approche  est effectuÃ©e avant la rÃ©solution du problÃ¨me SAT.
-Cette approche consiste Ã  prendre le problÃ¨me symÃ©trique en entrÃ©e et Ã  produire une formule Ã  satisfaction Ã©quivalente en Ã©liminant les symÃ©tries prÃ©sentes. Le problÃ¨me en sortie ne peut pas Ãªtre insatisfaisable si le problÃ¨me initial est satisfaisable.
-Pour produire une formule Ã©quivalente sans prÃ©sence de symÃ©tries, le problÃ¨me est augmentÃ© par des 
-contraintes de rupture de  symÃ©tries ($\guillemotleft$symmetry breaking predicates $\guillemotright$ sbp). Celles-ci empÃªchent le solveur d'explorer l'espace de recherche symÃ©trique. 
-Autrement dit, si l'on considÃ¨re notre exemple prÃ©cÃ©dent avec les pigeons, le premier pigeon est attribuÃ© a un
-exactement un nid, la symÃ©trie est alors Â«cassÃ©Â».
-Plusieurs outils tels que $\shatter$~\cite{aloul06} et $\breakid$~\cite{devriendt2016improved}  utilisent cette technique pour accÃ©lÃ©rer le calcul du solveur en prÃ©sence de symÃ©tries.
-En gÃ©nÃ©ral, cette approche apporte de bons rÃ©sultats dans diffÃ©rentes instances symÃ©triques, mais possÃ¨de des dÃ©fauts. Parmi eux, nous pouvons citer le nombre de contraintes ajoutÃ©es qui peut Ãªtre exponentiel par rapport Ã  la taille du problÃ¨me, ce qui a pour consÃ©quence de ralentir l'algorithme principal du solveur.
-De plus, Ã©tant donnÃ© que ce calcul est effectuÃ© avant le lancement du solveur, cette approche peut Ãªtre difficilement combiner avec d'autre technique de rupture de symÃ©tries. Aussi celui-ci ne peut pas distinguer les contraintes originales du problÃ¨me avec les contraintes de rupture de symÃ©trie. Avec cette information, le solveur peut modifier ces heuristiques pour augmenter ces performances. De plus, 
-Pour ces raisons, certains problÃ¨mes avec de nombreuses symÃ©tries ne peuvent pas Ãªtre traitÃ©s avec cette approche.
-Une autre approche dite rupture de symÃ©trie dynamique consiste Ã  utiliser les symÃ©tries durant l'algorithme de recherche du solveur SAT, plus prÃ©cisÃ©ment Ã  modifier son comportement pour exploiter les propriÃ©tÃ©s de symÃ©trie du problÃ¨me. Cette approche consiste Ã  dÃ©duire des faits symÃ©triques par rapport aux dÃ©ductions effectuÃ©es par le solveur. Lorsque ces faits sont ignorÃ©s, le solveur va explorer en vain l'espace de recherche symÃ©trique.
-Ces dÃ©ductions rÃ©duisent le nombre de dÃ©cisions qui sont des suppositions du solveur qui sont choisies de 
-maniÃ¨re heuristique et augmentent le nombre de propagations qui sont les dÃ©ductions logiques faites par le solveur. 
-En d'autres termes, cette approche transforme les suppositions du solveur en dÃ©ductions logiques.
-DiffÃ©rents outils utilisent cette approche, nous pouvons citÃ© parmi eux, \textit{Symmchaff}
-qui exploite que certains types spÃ©cifiques de symÃ©tries, \textit{Symmetry Propagation (SP)}, \textit{Symmetry Learning Scheme (SLS)}, \textit{Symmetry Explanation Learning (SEL)} qui ajoutent les symÃ©trique des
-clauses apprises pour permettre les dÃ©ductions symÃ©triques.
-Ã‰tant donnÃ© que cette approche est dynamique, il est possible pour le solveur 
-d'intÃ©grer des heuristiques spÃ©cifiques ou encore de combiner les diffÃ©rentes techniques de rupture de symÃ©trie.
+Certains problèmes présentent des symétries, dans ce cas, des branches de l'espace de recherche 
+sont identiques à une symétrie près et le solveur effectue donc du travail inutile.
+Pour illustrer ce problème, prenons comme exemple le $\guillemotleft$problème des pigeons $\guillemotright$ dans lequel nous avons un ensemble de pigeons qui doivent êtres attribués à des nids différents. Dans ce problème il y a un nid de moins que le nombre de pigeons.
+Le but de ce problème est de déterminer s’ il est possible d'attribuer un nid différent à chaque pigeon.
+La figure~\ref{fig:holefr} présente une instance de ce problème.
 
-Cette thÃ¨se vise Ã  amÃ©liorer l'existant et rendre les solveurs plus performants en prÃ©sence de symÃ©tries et
-propose diffÃ©rentes contributions allant dans ce sens.  
 
-Notre premiÃ¨re contribution consiste Ã  mimer le comportement de la rupture de symÃ©trie statique, mais 
-opÃ¨re dynamiquement, pendant l'exÃ©cution du solveur. On ajoute dans le solveur un composant de symÃ©trie opportuniste qui va dÃ©tecter que le solveur parcours un espace de recherche symÃ©trique et va ajouter Ã  celui-ci une contrainte appelÃ©e $\guillemotleft$ effectective symmetry breaking predicate $\guillemotright$ qui va empÃªcher le solveur de rester dans
-l'espace de recherche symÃ©trique. Cela a pour consÃ©quence de rÃ©duire le nombre de contraintes et donc 
-ne ralentit pas les solveur.
-% Cette contrainte est dite effective, car 
-% Ã  l'inverse de l'approche 
-%de rupture de symÃ©trie  statique la contrainte est forcÃ©ment utilisÃ©e par le solveur. Aucune contrainte
-%inutile nâ€™est insÃ©rÃ©e dans le solveur. 
-Ce composant de symÃ©trie est fourni sous forme d'une bibliothÃ¨que codÃ©e en C++ et se nomme $\libdsb$.
-Elle peut s'interfacer avec n'importe quelle solveur de type CDCL. 
-Pour conduire nos expÃ©riences, nous l'avons interfacÃ© avec un solveur de l'Ã©tat de l'art nommÃ© $\minisat$~\cite{een2003extensible}. Au total, l' intÃ©gration dâ€™ $\libdsb$ ajoute environ 60 lignes de code 
-et augmente de code de $\minisat$ de 3\%.
-$\libdsb$ est open source fournit sous la licence GPLv3 et est disponible sur Github Ã  l'adresse suivante: \url{https://github.com/lip6/cosy}.
-
-Pour Ã©valuer notre approche, nous avons comparÃ© une version du solveur $\minisat$ combinÃ© avec la bibliothÃ¨que $\libdsb$, que nous avons appelÃ© $\cdclsym$ avec les solveurs de l'Ã©tat de l'art.
-Ces expÃ©rimentations se sont effectuÃ©es sur les instances de la SAT Competiton~\cite{jarvisalo2012international} sur les six derniÃ¨res annÃ©es de 2012 Ã  2017 oÃ¹ $\bliss$ a rÃ©ussi a trouver des symÃ©tries. Au total, nous avons obtenue 1350 instances.
-La figure~\ref{fig:frcactus} nous montre les rÃ©sultats obtenus sous forme d'un cactus plot, 
-dans lequel l'axe des abscisses nous montre le nombre d'instances rÃ©ussi par chacun des solveurs et l'axe des ordonnÃ©es nous montre le temps de calcul des solveurs.
-Nous avons conduit ces expÃ©riences avec deux outils d'automorphisme de graphe, Ã  savoir 
- $\saucy$ Ã  gauche de la figure et $\bliss$ Ã  droite de la figure. 
- 
-Comme nous pouvons le constater, les rÃ©sultats sont meilleurs  avec l'utilisation de l'outil d'automorphisme de 
-graphe $\bliss$. La principale diffÃ©rence entre les deux outils est le nombre de permutations obtenues.
- $\bliss$ nous donne plus de permutations que $\saucy$, cela permet a notre outil $\cdclsym$ d'atteindre 
-un nombre d'instances rÃ©solues de 775 alors que le deuxiÃ¨me meilleur outil $\breakid$ atteint un nombre d'instances rÃ©solues de 749 avec $\bliss$. Toutes les expÃ©riences Ã©taient limitÃ© avec une durÃ©e de 5000 secondes.
-Ces expÃ©riences nous dÃ©montrent que notre approche est aussi performante que les approches de ruptures de symÃ©tries statiques.
 \begin{figure}[!htbp]
- \centering
- \subfloat[with \saucy]{{\includegraphics[scale=0.36]{img/saucy-result}}}%
- \qquad
- \subfloat[with \bliss]{{\includegraphics[scale=0.36]{img/bliss-result}}}%
- \caption{cactus plot  total number of instances}%
- \label{fig:frcactus}%
+	\centering
+	\begin{tikzpicture}[
+	start chain = going right,
+	node distance = 0pt,
+	AStyle/.style={draw, minimum width=2em, minimum height=2em, 
+		outer sep=0pt, on chain, fill=yellow!0!white}]
+	\node [AStyle] (1) {\huge\textcolor{gray}{\PHdove}};
+	\node [AStyle] (4) {\huge\textcolor{gray}{\PHdove}};
+	\node [AStyle] (5) {\huge\textcolor{gray}{\PHdove}};
+	\node [AStyle, draw] (6) {\huge\textcolor{gray}{\PHdove}};
+	\node [ minimum width=2em, minimum height=2em, 
+	outer sep=1pt, on chain] (7) {\huge\textcolor{gray}{\PHdove}};
+	\end{tikzpicture}
+	\caption{Représentation graphique d'une instance du problème des pigeons (5 pigeons, 4 nids)}
+	\label{fig:holefr}
 \end{figure}
-MalgrÃ© les trÃ¨s bons rÃ©sultats obtenus par notre approche certains problÃ¨mes qui sont rÃ©solus trÃ¨s 
-rapidement les approches de rupture de symÃ©trie dynamique tel que  Symmetry Propagation (SP) ne peuvent pas Ãªtre traitÃ© par notre approche et vise versa.
-SP est une approche qui a pour but d'accÃ©lÃ©rer la traversÃ©e de l'espace de recherche en dÃ©duisant des faits symÃ©triques Ã  partir des dÃ©ductions effectuÃ©es par le solveur.
- Ã€ l'inverse notre approche consiste Ã  Ã©liminer les espaces de recherche 
-symÃ©triques. %Ces deux approches sont donc orthogonales.
-Notre deuxiÃ¨me contribution consiste Ã  dÃ©terminer si cette combinaison est possible qui se rÃ©sume donc Ã  la question suivante:
-Est-il possible d'accÃ©lÃ©rer la traversÃ©e de l'espace de recherche tout en Ã©liminant l'espace de symÃ©trique ?
-Pour que cette approche soit correcte, la contrainte qu'il faut absolument respectÃ©e est que la symÃ©trie utilisÃ©e pour dÃ©duire les
-faits symÃ©triques doit Ãªtre valide dans le problÃ¨me actuel. Effectivement les clauses ajoutÃ©es pour Ã©liminer l'espace de recherche
-symÃ©trique vont casser celle-ci qui ne peut donc plus Ãªtre utilisÃ©e pour propager les faits symÃ©triques.
-L'approche naÃ¯ve qui consiste Ã  enlever les symÃ©tries dÃ¨s lors qu'une contrainte de rupture de symÃ©trie est ajoutÃ©e. Le problÃ¨me avec cette approche est que l'ensemble vide est trÃ¨s vie atteint et donc plus aucune dÃ©duction symÃ©trique ne peux Ãªtre faites. Notre approche consiste Ã  traquer les clauses utilisÃ©es par le solveur et Ã  connaitre Ã  tout instant l'ensemble des symÃ©tries valide grÃ¢ce Ã  l'introduction dite de symÃ©trie locale pour chaque clause.
+
+
+Pour un humain, la réponse à ce problème est évidente, mais un solveur de l'état de l'art va parcourir toutes 
+les combinaisons possibles de couples (pigeon, nid) et cela le mène à une explosion combinatoire.
+Pour cette raison, résoudre ce problème avec un solveur SAT standart s'avère très chronophage et même impossible dans des temps raisonnables
+pour un nombre de pigeons supérieur à 15.
+
+%Cependant, certains problèmes possèdent un espace de recherche énorme et ne peuvent pas 
+%être traité par un solveur SAT. Un exemple d'un tel problème peut être le problème de tournées de véhicules (VRP). 
+%Il s'agit du service d'entreprise de livraison, dans lequel étant donné une flotte de véhicules basés dans un dépôt, ceux ci doivent faire des rondes entre des clients qui ont demandés chacun une certaine quantité de marchandises. Le circuit effectué par un véhicule pour la visite de tous les clients
+%est appelé la tournée du véhicule. L'objectif est de trouver la tournée qui minimise les coûts de livraison (monétaire, distance, temps, ....).
+%
+%
+%Dans le problème précédent, renommer l'ensemble de véhicules identiques nous donnera exactement le même problème. C'est ce qu'on appelle une symétrie.
+
+De manière plus  générale, une symétrie est une transformation qui laisse un objet (ou un aspect de l'objet) inchangé. Les symétries sont généralement définies comme une propriété syntaxique d'un problème lorsque leur présence est inhérente à l'encodage du problème.
+Dans ce cas, une permutation des variables préserve la spécification originale du problème.
+Dans le cas où les symétries sont indépendantes d'une représentation particulière du problème, il s'agit de symétries sémantiques.
+
+La présence de symétrie dans un problème force l'algorithme de recherche à explorer en vain l'espace de recherche symétrique et entrave considérablement ses performances. La rupture de symétrie est une approche qui évite au solveur de visiter les espaces de recherche isomorphes.
+
+Pour pouvoir exploiter les symétries, la première étape consiste à les trouver. Dans le contexte de la satisfaction booléenne, la détection des symétries syntaxique se fait tout d'abord par la transformation de la spécification en un graphe coloré et ensuite à l'application d'un outil d'automorphisme de graphe sur celui-ci.
+Différents outils traitent de ce problème dans l'état de l'art, tel que, $\bliss$~\cite{JunttilaKaski:ALENEX2007}, $\saucy$~\cite{katebi2010symmetry}, …
+
+
+Lorsque les symétries sont obtenues, la façon la plus courante pour les exploiter est d'utiliser une approche de rupture de symétrie statique. Elle est dite statique, car le traitement de cette approche  est effectuée avant la résolution du problème SAT.
+Ceci consiste à prendre le problème symétrique en entrée et à produire une formule à satisfaction, équivalente, en éliminant les symétries présentes. %Le problème en sortie ne peut pas être insatisfaisable si le problème initial est satisfaisable.
+Pour produire une formule équivalente sans présence de symétries, le problème est augmenté par des 
+contraintes de rupture de  symétries ($\guillemotleft$symmetry breaking predicates $\guillemotright$ sbp). Celles-ci empêchent le solveur d'explorer les espaces de recherche isomorphes. 
+Si l'on considère l'exemple précédent avec les pigeons, le premier pigeon est attribué a un
+exactement un nid, la symétrie est alors «rompue».
+
+Plusieurs outils, tels que $\shatter$~\cite{aloul06} et $\breakid$~\cite{devriendt2016improved}, utilisent cette technique pour accélérer le calcul du solveur en présence de symétries.
+En général, cette approche aboutit à de bons résultats dans différentes instances symétriques, cependant possède des défauts. Parmi eux, nous pouvons citer le nombre de contraintes ajoutées qui peut être exponentiel par rapport à la taille du problème. Ceci 
+a pour conséquence de ralentir l'algorithme principal du solveur.
+De plus, étant donné que ce calcul est effectué avant le lancement du solveur, cette approche peut être difficilement combiner avec d'autre technique de rupture de symétries. Aussi, celui-ci ne peut pas distinguer les contraintes originales du problème avec les contraintes de rupture de symétrie. Avec cette information, le solveur peut modifier ces heuristiques pour augmenter ces performances.
+Pour ces raisons, certains problèmes avec de nombreuses symétries ne peuvent pas être traités efficacement avec cette approche.
+
+Une autre approche dite rupture de symétrie dynamique consiste à utiliser les symétries durant l'algorithme de recherche du solveur SAT, plus précisément, à modifier son comportement pour exploiter les propriétés de symétrie du problème. Cette approche consiste à déduire des faits symétriques par rapport aux déductions effectuées par le solveur. Lorsque ces faits sont ignorés, le solveur va explorer en vain l'espace de recherche symétrique.
+Ces déductions réduisent le nombre de décisions qui sont des suppositions du solveur, choisies de 
+manière heuristique et, augmentent le nombre de propagations qui sont les déductions logiques faites par le solveur. 
+Cette approche transforme donc les suppositions du solveur en déductions logiques.
+Différents outils utilisent cette approche, nous pouvons citer, \textit{Symmchaff}
+qui n'exploite que certains types spécifiques de symétries, \textit{Symmetry Propagation (SP)}, \textit{Symmetry Learning Scheme (SLS)} et \textit{Symmetry Explanation Learning (SEL)} qui ajoutent les symétriques des
+clauses apprises pour permettre les déductions symétriques.
+Étant donné que cette approche est dynamique, il est possible pour le solveur 
+d'intégrer des heuristiques spécifiques ou encore de combiner les différentes techniques de rupture de symétrie.
+
+
+Cette thèse vise à améliorer l'existant et rendre les solveurs plus performants en présence de symétries et
+propose différentes contributions allant dans ce sens.  
+
+
+Notre première contribution consiste à mimer le comportement de la rupture de symétrie statique, mais 
+opère dynamiquement, pendant l'exécution du solveur. On ajoute dans le solveur un composant de symétrie opportuniste qui va détecter que le solveur parcours un espace de recherche symétrique et va ajouter à celui-ci une contrainte appelée $\guillemotleft$ effectective symmetry breaking predicate $\guillemotright$ qui va empêcher le solveur de rester dans
+l'espace de recherche en question. Cela a pour conséquence de réduire le nombre de contraintes et donc 
+ne ralentit pas les solveur.
+
+% Cette contrainte est dite effective, car 
+% à l'inverse de l'approche 
+%de rupture de symétrie  statique la contrainte est forcément utilisée par le solveur. Aucune contrainte
+%inutile n’est insérée dans le solveur. 
+
+Ce composant de symétrie est fourni sous forme d'une bibliothèque codée en C++ et se nomme $\libdsb$.
+Elle peut s'interfacer avec n'importe quelle solveur de type CDCL. 
+Pour conduire nos expériences, nous l'avons interfacé avec un solveur de l'état de l'art nommé $\minisat$~\cite{een2003extensible}. Au total, l' intégration d’ $\libdsb$ ajoute environ 60 lignes de code 
+et augmente de code de $\minisat$ de 3\%.
+$\libdsb$ est $\guillemotleft$ open source$\guillemotright$ fournit sous une licence GPLv3 et est disponible sur Github à l'adresse suivante: \url{https://github.com/lip6/cosy}.
+
+
+Pour évaluer notre approche, nous avons comparé une version du solveur $\minisat$ combiné avec la bibliothèque $\libdsb$, que nous avons appelé $\cdclsym$ avec les solveurs de l'état de l'art.
+Ces expérimentations se sont effectuées sur les instances de la SAT Competiton~\cite{jarvisalo2012international} sur les six dernières années de 2012 à 2017 où $\bliss$ a réussi a trouver des symétries. Au total, nous avons obtenue 1350 instances.
+
+La figure~\ref{fig:frcactus} nous montre les résultats obtenus sous forme d'un cactus plot, 
+dans lequel l'axe des abscisses nous montre le nombre d'instances réussi par chacun des solveurs et l'axe des ordonnées nous montre le temps de calcul des solveurs.
+Nous avons conduit ces expériences avec deux outils d'automorphisme de graphe, à savoir 
+$\saucy$ à gauche de la figure et $\bliss$ à droite de la figure. 
+
+Comme nous pouvons le constater, les résultats sont meilleurs  avec l'utilisation de l'outil d'automorphisme de 
+graphe $\bliss$. La principale différence entre les deux outils est le nombre de permutations obtenues.
+$\bliss$ nous donne plus de permutations que $\saucy$, cela permet a notre outil $\cdclsym$ d'atteindre 
+un nombre d'instances résolues de 775 alors que le deuxième meilleur outil $\breakid$ atteint un nombre d'instances résolues de 749 avec $\bliss$. Toutes les expériences étaient limité avec une durée à 5000 secondes.
+
+Ces expériences nous démontrent que notre approche est aussi performante que les approches de ruptures de symétries statiques.
+\begin{figure}[!htbp]
+	\centering
+	\subfloat[with \saucy]{{\includegraphics[scale=0.36]{img/saucy-result}}}%
+	\qquad
+	\subfloat[with \bliss]{{\includegraphics[scale=0.36]{img/bliss-result}}}%
+	\caption{cactus plot  total number of instances}%
+	\label{fig:frcactus}%
+\end{figure}
+
+Malgré les très bons résultats obtenus par notre approche, certains problèmes qui sont résolus très 
+rapidement par les approches de rupture de symétrie dynamique tel que  Symmetry Propagation (SP) ne pouvaient toujours pas être traité par notre approche et vise-versa.
+SP est une approche qui a pour but d'accélérer la traversée de l'espace de recherche en déduisant des faits symétriques à partir des déductions effectuées par le solveur.
+À l'inverse notre approche consiste à éliminer les espaces de recherche 
+symétriques. %Ces deux approches sont donc orthogonales.
+Notre deuxième contribution consiste à déterminer si cette combinaison est possible. Elle se résume donc à la question suivante:
+Est-il possible d'accélérer la traversée de l'espace de recherche tout en éliminant les espaces de symétriques ?
+
+Pour que cette approche soit correcte, la contrainte qu'il faut absolument respectée est que la symétrie utilisée pour déduire les
+faits symétriques doit être valide dans le problème. En effet, les clauses ajoutées pour éliminer l'espace de recherche
+symétrique vont rompre cette symétrie. Cette dernière ne peut donc plus être utilisée pour propager les faits symétriques.
+Une approche naïve est de supprimer chaque symétries dès lors qu'une contrainte de rupture de symétrie a été ajoutée.
+Le problème avec cette approche est que l'ensemble vide est très vite atteint et donc que plus aucune déduction symétrique ne peux être faites. Notre approche consiste à traquer les clauses utilisées par le solveur et à connaître à tout instant l'ensemble des symétries valide grâce à l'introduction dite de la notion de symétrie locale pour chaque clause.
+
+\vspace{2em}
+
 \begin{table}[!htbp]\footnotesize
- \centering
- \resizebox{1 \textwidth}{!}{
- \begin{tabular}{l|ccc}
-  \toprule
-  Benchmark  &\texttt{minisat-Sp} & \texttt{minisat-Sym} & \texttt{minisat-SymSP}\\
-  \hline 
-  Permutations 0â€“20 (704) & 194&197&\cellcolor{gray!30,}\textbf{198}\\
-  Permutations 20â€“40 (136) & 33&\cellcolor{gray!30}\textbf{34}&\cellcolor{gray!30}\textbf{34}\\
-  Permutations 40â€“60 (141) & 28&28&\cellcolor{gray!30}\textbf{29}\\
-  Permutations 60â€“80 (168) & \cellcolor{gray!30}\textbf{65}&64&\cellcolor{gray!30}\textbf{65}\\
-  Permutations 80â€“100 (51) & 28&\cellcolor{gray!30}\textbf{34}&\cellcolor{gray!30}\textbf{34}\\
-  Permutations  \textgreater100 (200) & 58&59&\cellcolor{gray!30}\textbf{60}\\
-  \hline 
-  TOTAL no dup (1400) & 406 & 416 & \cellcolor{gray!30,}\textbf{420}\\
-  \bottomrule
- \end{tabular}
- }
- \caption{Comparaison des approches sur les instances SAT.}
- \label{tab:satfr}
+	\centering
+	\resizebox{1 \textwidth}{!}{
+		\begin{tabular}{l|ccc}
+			\toprule
+			Benchmark  &\texttt{minisat-Sp} & \texttt{minisat-Sym} & \texttt{minisat-SymSP}\\
+			\hline 
+			Permutations 0–20 (704) & 194&197&\cellcolor{gray!30,}\textbf{198}\\
+			Permutations 20–40 (136) & 33&\cellcolor{gray!30}\textbf{34}&\cellcolor{gray!30}\textbf{34}\\
+			Permutations 40–60 (141) & 28&28&\cellcolor{gray!30}\textbf{29}\\
+			Permutations 60–80 (168) & \cellcolor{gray!30}\textbf{65}&64&\cellcolor{gray!30}\textbf{65}\\
+			Permutations 80–100 (51) & 28&\cellcolor{gray!30}\textbf{34}&\cellcolor{gray!30}\textbf{34}\\
+			Permutations  \textgreater100 (200) & 58&59&\cellcolor{gray!30}\textbf{60}\\
+			\hline 
+			TOTAL no dup (1400) & 406 & 416 & \cellcolor{gray!30,}\textbf{420}\\
+			\bottomrule
+		\end{tabular}
+	}
+	\caption{Comparaison des approches sur les instances SAT.}
+	\label{tab:satfr}
 \end{table}%
 
+
 \begin{table}[!htbp]\footnotesize
- \centering
- \resizebox{1 \textwidth}{!}{
- \begin{tabular}{l|ccc}
-  \toprule
-  Benchmark  &\texttt{minisat-Sp} & \texttt{minisat-Sym} & \texttt{minisat-SymSP}\\
-  \hline 
-  Permutations 0â€“20 (704) & \cellcolor{gray!30,}\textbf{233}&220&226\\
-  Permutations 20â€“40 (136) & 50&\cellcolor{gray!30}\textbf{54}&\cellcolor{gray!30}\textbf{54}\\
-  Permutations 40â€“60 (141) & 75&\cellcolor{gray!30}\textbf{83}&\cellcolor{gray!30}\textbf{83}\\
-  Permutations 60â€“80 (168) & \cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}&10\\
-  Permutations 80â€“100 (51) & \cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}\\
-  Permutations \textgreater100 (200) & 90&\cellcolor{gray!30,}\textbf{109}&107\\
-  \hline 
-  TOTAL no dup (1400) & 470&488&\cellcolor{gray!30,}\textbf{491}\\
-  \bottomrule
- \end{tabular}
- }
- \caption{Comparaison des approches sur les instances UNSAT.}
- \label{tab:unsatfr}
+	\centering
+	\resizebox{1 \textwidth}{!}{
+		\begin{tabular}{l|ccc}
+			\toprule
+			Benchmark  &\texttt{minisat-Sp} & \texttt{minisat-Sym} & \texttt{minisat-SymSP}\\
+			\hline 
+			Permutations 0–20 (704) & \cellcolor{gray!30,}\textbf{233}&220&226\\
+			Permutations 20–40 (136) & 50&\cellcolor{gray!30}\textbf{54}&\cellcolor{gray!30}\textbf{54}\\
+			Permutations 40–60 (141) & 75&\cellcolor{gray!30}\textbf{83}&\cellcolor{gray!30}\textbf{83}\\
+			Permutations 60–80 (168) & \cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}&10\\
+			Permutations 80–100 (51) & \cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}\\
+			Permutations \textgreater100 (200) & 90&\cellcolor{gray!30,}\textbf{109}&107\\
+			\hline 
+			TOTAL no dup (1400) & 470&488&\cellcolor{gray!30,}\textbf{491}\\
+			\bottomrule
+		\end{tabular}
+	}
+	\caption{Comparaison des approches sur les instances UNSAT.}
+	\label{tab:unsatfr}
 \end{table}
-les expÃ©rimentations pour Ã©valuer les performances de l'approche se sont effectuÃ©es sur les instances de la SAT Competiton sur les sept derniÃ¨res annÃ©es de 2012 Ã  2018 oÃ¹ $\bliss$ a trouver des symÃ©tries. Au total, nous avons obtenue un total de 1400 instances. 
-Les tables \ref{tab:satfr} et \ref{tab:unsatfr} prÃ©sentent respectivement
-les rÃ©sultats obtenues four les problÃ¨mes $\sat$ et $\unsat$.
-La premiÃ¨re colonne de chaque tableau Ã©numÃ¨re les classes de problÃ¨mes sur lesquelles nous avons effectuÃ© nos expÃ©riences: nous classons les problÃ¨mes en fonction du nombre de symÃ©tries qu'ils admettent. Une ligne notÃ©e "permutations X-Y (Z)" regroupe les problÃ¨mes Z ayant entre X et Y gÃ©nÃ©rateurs (symÃ©tries). Les autres colonnes indiquent le nombre de problÃ¨mes rÃ©solus par chaque approche. Les trois solveurs comparÃ©s sont respectivement
-\texttt{minisat-Sp}, le solveur $\minisat$ avec l'approche SP; \texttt{minisat-Sym} le solveur $\minisat$ avec $\libdsb$ et \texttt{minisat-SymSP} le solveur avec l'approche combinÃ©.
-Globalement, nous observons que l'approche combinÃ©e est efficace dans de nombreuses classes de problÃ¨mes symÃ©triques. Pour les problÃ¨mes de SAT, la combinaison a de meilleurs rÃ©sultats que les deux autres approches (4 problÃ¨mes de SAT en plus par rapport au meilleur des deux autres). Lorsqu'on examine les problÃ¨mes de l'UNSAT, les rÃ©sultats sont plus mitigÃ©es. Cela est du au coÃ»t mis en place pour maintenir a jour les structures
-de chacun des deux approches de maniÃ¨re indÃ©pendante.
-Cependant l'approche combinÃ© apporte de meilleure rÃ©sultats dans le nombre total d'instances rÃ©solues.
-%Cette deuxiÃ¨me contribution rÃ©ponds Ã  la question, Est-il possible d'accÃ©lÃ©rer la traversÃ©e de l'espace de recherche tout en Ã©liminant l'espace de symÃ©trique ?
-%La rÃ©ponse est positive grÃ¢ce Ã  l'introduction des symÃ©tries locales. 
+
+Les expérimentations pour évaluer les performances de l'approche se sont effectuées sur les instances de la SAT Competiton sur sept années 
+(de 2012 à 2018) où $\bliss$ a trouver des symétries. Au total, nous avons obtenue un total de 1400 instances. 
+Les tables \ref{tab:satfr} et \ref{tab:unsatfr} présentent respectivement
+les résultats obtenues four les problèmes $\sat$ et $\unsat$.
+La première colonne de chaque tableau énumère les classes de problèmes sur lesquelles nous avons effectué nos expériences: nous classons les problèmes en fonction du nombre de symétries qu'ils admettent. Une ligne notée "permutations X-Y (Z)" regroupe les problèmes Z ayant entre X et Y générateurs (symétries). Les autres colonnes indiquent le nombre de problèmes résolus par chaque approche. Les trois solveurs comparés sont respectivement
+\texttt{minisat-Sp}, le solveur $\minisat$ avec l'approche SP; \texttt{minisat-Sym} le solveur $\minisat$ avec $\libdsb$ et \texttt{minisat-SymSP} le solveur avec l'approche combiné.
+
+Globalement, nous observons que l'approche combinée est efficace dans de nombreuses classes de problèmes symétriques. Pour les problèmes de SAT, la combinaison a de meilleurs résultats que les deux autres approches (4 problèmes de SAT en plus par rapport au meilleur des deux autres). Lorsqu'on examine les problèmes de l'UNSAT, les résultats sont plus mitigées. Cela est du au coût mis en place pour maintenir à jour les structures de chacune des deux approches de manière indépendante.
+Cependant l'approche combinée apporte de meilleure résultats dans le nombre total d'instances résolues.
+
+%Cette deuxième contribution réponds à la question, Est-il possible d'accélérer la traversée de l'espace de recherche tout en éliminant l'espace de symétrique ?
+%La réponse est positive grâce à l'introduction des symétries locales. 
+
 \chapter*{Abstract}
 Nowadays, logic is omnipresent and it is used in different domains such as logic optimization, test pattern generation, formal verification and functional simulation, etc
 One method to solve this kind of problem is satisfiability problem (SAT).
