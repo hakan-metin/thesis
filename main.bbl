@@ -259,6 +259,13 @@ H.~Metin, S.~Baarir, M.~Colange, and F.~Kordon.
 \newblock In {\em International Conference on Tools and Algorithms for the
   Construction and Analysis of Systems}, pages 99--114. Springer, 2018.
 
+\bibitem{metin2019composing}
+H.~Metin, S.~Baarir, and F.~Kordon.
+\newblock Composing symmetry propagation and effective symmetry breaking for
+  sat solving.
+\newblock In {\em NASA Formal Methods Symposium}, pages 316--332. Springer,
+  2019.
+
 \bibitem{moore2011nature}
 C.~Moore and S.~Mertens.
 \newblock {\em The nature of computation}.
