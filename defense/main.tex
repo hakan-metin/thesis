@@ -3,6 +3,7 @@
 \usepackage{tabularx}
 \usepackage{mathrsfs}
 \usepackage{pgf}
+
 \usepackage{amsmath}
 \usepackage{amsmath,times} %% times package needed only to load TNR text font
 \usepackage{array}
@@ -25,7 +26,6 @@
 \usetikzlibrary{patterns}
 \usetikzlibrary{arrows.meta}
 \usepackage{color, soul}
-
 
 \input{abbr}
 
@@ -73,37 +73,39 @@
 \begin{frame}
 
 \frametitle{Motivation}
-Applications:
-	\begin{itemize}
-		\item planning
-		\item scheduling
-		\item combinatorial design
-		\item system analysis (model-checking)
-		\item etc
-	\end{itemize}
+SAT is widely used in different domains:
+
+\begin{itemize}
+	\item Artificial intelligence (planning, games, ...)
+	\item Bioinformatics (haplotype inference, ...)
+	\item Security (cryptanalysis, inversion attack on hash function)
+	\item Computationally hard problems (graph coloring, ...)
+	\item Formal Methods (hardware model checking, ...)
+\end{itemize}
+
 \end{frame}
 %% ----------------------------------------------------------------------------
 \begin{frame}
-
+ %Tackling the explosion in the static symmetry breaking approach
+ %Taking the maximum benefits from static and dynamic approaches
 \frametitle{Outline}
 \begin{enumerate}
-	\item SAT
+	\item \textcolor{UPMCEngagementBlueB}{SAT overview}
 	\begin{itemize}
-		\item SAT solving
-		\item Symmetry 
-		\item Challenges
+		\item[] SAT basics
+		\item[] SAT and symmetries
 	\end{itemize}
-	\item Tackling the explosion in the static symmetry breaking approach
+\vspace{5pt}
+	\item \textcolor{UPMCEngagementBlueB}{Existing approaches}
 	\begin{itemize}
-		\item 
-		\item
-		\item Experimental results
+		\item[] Static symmetry breaking
+		\item[] Dynamic symmetry breaking
 	\end{itemize}
-	\item Taking the maximum benefits from static and dynamic approaches
+\vspace{5pt}
+	\item \textcolor{UPMCEngagementBlueB}{Contribution and results} 
 	\begin{itemize}
-		\item a
-		\item b
-		\item Experimental results
+		\item[] CDCL [Sym]
+		\item[] Combination of different approaches
 	\end{itemize}
 \end{enumerate}
 \end{frame}
@@ -122,99 +124,53 @@ Applications:
 	 & & \\
 	\tikz[baseline]{\node[anchor=base] (s1){};} & \tikz[baseline]{\node[anchor=base] (s2){};} & \tikz[baseline]{\node[anchor=base] (s3){};}\\
 	\includegraphics[scale=0.1]{images/south} & \includegraphics[scale=0.1]{images/simpson} & \includegraphics[scale=0.09]{images/titeuf}\\
-	A                                        & B                                           & C\\
+	A                                         & B                                           & C\\
 \end{tabular}
+
 
 \begin{tikzpicture}[overlay]
 \tikzstyle{line} = [<-, line width=0.5mm];
-\path[line]<1> (t1) edge  (s1.south);
-\path[line]<1> (t2) edge  (s2.south);
-\path[line]<1> (t3) edge  (s3.south);
+\visible<2>{
+\path[line] (t1) edge  (s1.south);
+\path[line] (t2) edge  (s2.south);
+\path[line] (t3) edge  (s3.south);
+}
+\visible<3>{
+\path[line, color=red] (t1) edge  (s2.south);
+\path[line, color=red] (t2) edge  (s1.south);
+\path[line, color=red] (t3) edge  (s3.south);
 
-\path[line]<2> (t1) edge  (s2.south);
-\path[line]<2> (t2) edge  (s1.south);
-\path[line]<2> (t3) edge  (s3.south);
+\path[line, color=orange] (t1) edge  (s1.south);
+\path[line, color=orange] (t2) edge  (s3.south);
+\path[line, color=orange] (t3) edge  (s2.south);
 
-\path[line]<3> (t1) edge  (s1.south);
-\path[line]<3> (t2) edge  (s3.south);
-\path[line]<3> (t3) edge  (s2.south);
+\path[line, color=blue] (t1) edge  (s3.south);
+\path[line, color=blue] (t2) edge  (s2.south);
+\path[line, color=blue] (t3) edge  (s1.south);
 
-\path[line]<4> (t2) edge  (s1.south);
-\path[line]<4> (t3) edge  (s2.south);
-\path[line]<4> (t1) edge  (s3.south);
+\path[line, color=green] (t2.south west) edge  (s1.south);
+\path[line, color=green] (t3.south west) edge  (s2.south);
+\path[line, color=green] (t1.south west) edge  (s3.south);
 
-\path[line]<5> (t1) edge  (s2.south);
-\path[line]<5> (t2) edge  (s3.south);
-\path[line]<5> (t3) edge  (s1.south);
-
+\path[line, color=purple] (t1.south west) edge  (s2.south);
+\path[line, color=purple] (t2.south west) edge  (s3.south);
+\path[line, color=purple] (t3.south west) edge  (s1.south);
+}
 \end{tikzpicture}
 
 \vfill
-Attribute each group to a class room
+Is it possible to attribute each group to a classroom ?\\
+\begin{center}
+	\visible<2->{YES!}
+	\visible<3->{Many solutions}
+\end{center}
+
+
 \end{frame}
 %% ----------------------------------------------------------------------------
 
-\begin{frame}
-
-\tikzstyle{every picture}+=[remember picture]
-\frametitle{SAT an example 2 }
-\everymath{\displaystyle}
-\centering
-
-\begin{tabular}{cc}
-	\includegraphics[scale=0.07]{images/room} & \includegraphics[scale=0.07]{images/room}\\
-	\tikz[baseline]{\node[anchor=base] (r1){1};} & \tikz[baseline]{\node[anchor=base] (r2){2};}\\
-\end{tabular}
-
-\begin{tabular}{ccc}
-	\tikz[baseline]{\node[anchor=base] (g1){};} & \tikz[baseline]{\node[anchor=base] (g2){};} & \tikz[baseline]{\node[anchor=base] (g3){};}\\
-	\includegraphics[scale=0.1]{images/south} & \includegraphics[scale=0.1]{images/simpson} & \includegraphics[scale=0.09]{images/titeuf}\\
-	A                                        & B                                           & C\\
-\end{tabular}
-
-\begin{tikzpicture}[overlay]
-\tikzstyle{line} = [<-, line width=0.5mm];
-\path[line]<2> (r1) edge  (g1.south);
-\path[line]<2> (r2) edge  (g2.south);
-
-\path[line]<3> (r1) edge  (g2.south);
-\path[line]<3> (r2) edge  (g1.south);
-
-\path[line]<4> (r1) edge  (g1.south);
-\path[line]<4> (r2) edge  (g3.south);
-
-\path[line]<5> (r1) edge  (g3.south);
-\path[line]<5> (r2) edge  (g1.south);
 
 
-\path[line]<6> (r1) edge  (g2.south);
-\path[line]<6> (r2) edge  (g3.south);
-
-\path[line]<7> (r1) edge  (g3.south);
-\path[line]<7> (r2) edge  (g2.south);
-
-\end{tikzpicture}
-
-\vfill
-Attribute each group to a class room
-\end{frame}
-
-%\begin{frame}
-%  \frametitle{SAT an example}
-%  
-%  \centering
-% \begin{tabular}{c|c |c}
-% 	  \includegraphics[scale=0.07]{images/room} & \includegraphics[scale=0.07]{images/room}& \includegraphics[scale=0.07]{images/room}\\
-% 	   1                                        & 2                                        & 3\\
-% \end{tabular}
-%\vfill
-% \begin{tabular}{c|c|c}
-%	\includegraphics[scale=0.1]{images/south} & \includegraphics[scale=0.1]{images/simpson} & \includegraphics[scale=0.09]{images/titeuf}\\
-%	 A                                        & B                                           & C\\
-%\end{tabular}
-%\vfill
-%Attribute each group to a class room
-%\end{frame}
 %% ----------------------------------------------------------------------------
 %\begin{frame}
 %\frametitle{Encoding the problem}
@@ -333,7 +289,9 @@ Attribute each group to a class room
 \tikzstyle{box} = [draw, minimum width=3.5cm,
 				]
 \tikzstyle{result} = [draw, minimum width=2.5cm, minimum height=1cm]
-\node[box] (input) {Logic Formula};    
+
+\node[box] (hlp) {High level problem};    
+\node[box] (input) at ($(hlp) + (0pt, -30pt)$){Logic Formula};    
 
 %\node<2->[draw, ellipse] (cnf) at ($(input) + (0pt, -10pt)$) {\scriptsize CNF};
 
@@ -344,6 +302,7 @@ Attribute each group to a class room
 \node[result] (sat) at ($(solver) + (-70pt, -60pt)$) {Satisfiable ($\SAT$)};
 \node[result] (unsat) at ($(solver) + (70pt, -60pt)$) {Unsatisfiable ($\UNSAT$)};
 
+\draw[->] (hlp) -> (input);
 \draw[->] (input) -> (solver);
 \draw[->] (solver) -> node[midway,fill=white] {assignment}  (sat);
 \draw[->] (solver) -> node[midway,fill=white] {proof}(unsat);
@@ -582,6 +541,51 @@ $\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{\text{Clause with literals } x_1, x_
 	
 \end{tikzpicture}
 
+\end{frame}
+
+
+\begin{frame}
+	\tikzstyle{every picture}+=[remember picture]
+	\frametitle{SAT an example 2 }
+	\everymath{\displaystyle}
+	\centering
+	
+	\begin{tabular}{cc}
+		\includegraphics[scale=0.07]{images/room} & \includegraphics[scale=0.07]{images/room}\\
+		\tikz[baseline]{\node[anchor=base] (r1){1};} & \tikz[baseline]{\node[anchor=base] (r2){2};}\\
+	\end{tabular}
+	
+	\begin{tabular}{ccc}
+		\tikz[baseline]{\node[anchor=base] (g1){};} & \tikz[baseline]{\node[anchor=base] (g2){};} & \tikz[baseline]{\node[anchor=base] (g3){};}\\
+		\includegraphics[scale=0.1]{images/south} & \includegraphics[scale=0.1]{images/simpson} & \includegraphics[scale=0.09]{images/titeuf}\\
+		A                                        & B                                           & C\\
+	\end{tabular}
+	
+	\visible<2->{
+		\begin{tikzpicture}[overlay]
+		\tikzstyle{line} = [<-, line width=0.5mm];
+		\path[line]<2> (r1) edge  (g1.south);
+		\path[line]<2> (r2) edge  (g2.south);
+		
+		\path[line]<3> (r1) edge  (g2.south);
+		\path[line]<3> (r2) edge  (g1.south);
+		
+		\path[line]<4> (r1) edge  (g1.south);
+		\path[line]<4> (r2) edge  (g3.south);
+		
+		\path[line]<5> (r1) edge  (g3.south);
+		\path[line]<5> (r2) edge  (g1.south);
+		
+		
+		\path[line]<6> (r1) edge  (g2.south);
+		\path[line]<6> (r2) edge  (g3.south);
+		
+		\path[line]<7> (r1) edge  (g3.south);
+		\path[line]<7> (r2) edge  (g2.south);
+		\end{tikzpicture}
+	}
+	\vfill
+	Attribute each group to a class room
 \end{frame}
 
 %% ----------------------------------------------------------------------------
