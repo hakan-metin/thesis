@@ -32,15 +32,15 @@
 
 
 Cette thèse traite la résolution du problème de satisfaisabilité booléenne (SAT).
-SAT traite des problèmes importants dans différents domaines tels 
+SAT permet de résoudre des problèmes importants dans différents domaines tels 
 que la planification~\cite{planning_92}, la biologie~\cite{biology_06}, la vérification de logiciel et de 
-matériel~\cite{biere1999symbolic}, de raisonnement automatique~\cite{heule2016solving}.
-Leurs évolutions au cours des dernières décennies leur ont permis de traiter des problèmes de plus en plus complexes.
-Dans un travail récent, des chercheurs ont réussi a prouver à l'aide d'un solveur SAT, une borne maximum
+matériel~\cite{biere1999symbolic}, de raisonnement automatique~\cite{heule2016solving} etc.
+L'evolution des eurs évolutions au cours des dernières décennies leur ont permis de traiter des problèmes de plus en plus complexes.
+Des travaux récents ont réussi a prouver à l'aide d'un solveur SAT, une borne maximum
 pour le problème de coloration des triplets pythagoriciens, avec une preuve de 200 TB~\cite{heule2016solving}.
 
 
-Étant un problème SAT, l'objectif est de  déterminer si il est possible de satisfaire toutes les contraintes du
+Étant donné un problème SAT, l'objectif est de  déterminer si il est possible de satisfaire toutes les contraintes du
 problème, si c'est le cas on dit que le problème est satisfaisable, si non il est insatifaisable.
 % satisfaisable ou non.
 %
@@ -49,7 +49,7 @@ problème, si c'est le cas on dit que le problème est satisfaisable, si non il 
 Ce calcul est effectué par un solveur SAT qui répond $\sat$ lorsque la formule est satisfaisable et $\unsat$ dans le cas
 contraire. SAT a été le premier problème ayant été prouvé NP-Complet~\cite{cook1971complexity}. Cela signifie que
 l'on ne connait pas d'algorithme capable de résoudre le problème avec une complexité polynomiale.
-La résolution du problème est l'un des sept prix du millénaire, à savoir P = NP.
+%La résolution du problème est l'un des sept prix du millénaire, à savoir P = NP.
 
 
 Malgré cette complexité, les solveurs SAT sont capables de résoudre de plus en plus de problèmes complexes.
@@ -74,16 +74,21 @@ Si l'algorithme se trouve dans une situation de conflit, c'est-à-dire, que l'af
 cet espace de recherche. Avec cette contrainte le solveur effectue un \textit{backjump}, c'est à dire, qu'il remonte dans l'arbre
 de recherche pour explorer une autre branche.
 %Cette clause est une information redondante par rapport au problème initial.
-Si aucun conflit n'est présent, l'algorithme choisit à nouveau une variable de décision. L'algorithme termine  soit lorsque toutes les variables sont affectées auquel cas le problème est satisfaisable, soit un conflit est apparu avec uniquement des déductions logiques auquel cas le
+Si aucun conflit n'est présent, l'algorithme choisit à nouveau une variable de décision. L'algorithme termine  soit lorsque toutes les variables sont affectées auquel cas le problème est satisfaisable, soit lorsque un conflit est apparu avec uniquement des déductions logiques auquel cas le
 problème est non satisfaisable.
 La Figure~\ref{fig:cdclflow} présente sous forme d'un organigramme le fonctionnement de l'algorithme CDCL.
 \input{fig/flowcdcl}
 
 
 Certains problèmes présentent des symétries, dans ce cas, des branches de l'espace de recherche 
-sont identiques à une permutation près et le solveur effectue donc du travail inutile.
-Pour illustrer ce problème, prenons comme exemple le $\guillemotleft$problème des pigeons $\guillemotright$ dans lequel nous avons un ensemble de pigeons qui doivent êtres attribués à des nids différents. Dans ce problème il y a un nid de moins que le nombre de pigeons.
-Le but de ce problème est de déterminer si il est possible d'attribuer un nid différent à chaque pigeon.
+sont identiques à une permutation près, on dit que cet espace de recherche est isomorphe.
+Si une branche de l'espace de recherche est solution du problème alors toutes les branches symétriques
+sont également des solutions. Dans le cas inverse si il n'existe pas de solution dans une branche alors il en
+existe pas dans aucune des branches symétriques.
+En parcourant les espaces isomorphe, le solveur effectue donc du travail inutile.
+
+Pour illustrer ce problème, prenons comme exemple le problème des tiroirs (\textit{pigeonhole problem}) dans lequel nous avons un ensemble de pigeons qui doivent êtres attribués à des nids différents. Dans ce problème il y a un nid de moins que le nombre de pigeons.
+Le but de ce problème est de déterminer s'il est possible d'attribuer un nid différent à chaque pigeon.
 La figure~\ref{fig:holefr} présente une instance de ce problème.
 
 
@@ -123,7 +128,7 @@ De manière plus  générale, une symétrie est une transformation qui laisse un
 Dans ce cas, une permutation des variables préserve la spécification originale du problème.
 Dans le cas où les symétries sont indépendantes d'une représentation particulière du problème, il s'agit de symétries sémantiques.
 
-La présence de symétrie dans un problème force l'algorithme de recherche à explorer en vain l'espace de recherche symétrique et entrave considérablement ses performances. La rupture de symétrie est une approche qui évite au solveur de visiter les espaces de recherche isomorphes.
+La présence de symétrie dans un problème force l'algorithme de recherche à explorer en vain l'espace de recherche symétrique et entrave considérablement ses performances.  La rupture de symétrie est une approche qui évite au solveur de visiter les espaces de recherche isomorphes.
 
 Pour pouvoir exploiter les symétries, la première étape consiste à les trouver. Dans le contexte de la satisfaction booléenne, la détection des symétries syntaxiques se fait tout d'abord par la transformation de la spécification en un graphe coloré et ensuite à l'application d'un outil d'automorphisme de graphe sur celui-ci.
 Différents outils traitent de ce problème dans l'état de l'art, tel que, $\bliss$~\cite{JunttilaKaski:ALENEX2007}, $\saucy$~\cite{katebi2010symmetry}, …
@@ -132,14 +137,15 @@ Différents outils traitent de ce problème dans l'état de l'art, tel que, $\bl
 Lorsque les symétries sont obtenues, la façon la plus courante pour les exploiter est d'utiliser une approche de rupture de symétrie statique. Elle est dite statique, car le traitement de cette approche  est effectuée avant la résolution du problème SAT.
 Ceci consiste à prendre le problème symétrique en entrée et à produire une formule à satisfaction équivalente, en éliminant les symétries présentes. %Le problème en sortie ne peut pas être insatisfaisable si le problème initial est satisfaisable.
 Pour produire une formule équivalente sans présence de symétries, le problème est augmenté par des 
-contraintes de rupture de  symétries ($\guillemotleft$symmetry breaking predicates $\guillemotright$ sbp). Celles-ci empêchent le solveur d'explorer les espaces de recherche isomorphes. 
+contraintes de rupture de  symétries ou \textit{symmetry breaking predicates (sbp)} en anglais.
+ Celles-ci empêchent le solveur d'explorer les espaces de recherche isomorphes. 
 Si l'on considère l'exemple précédent avec les pigeons, le premier pigeon est attribué a un
 exactement un nid, la symétrie est alors «rompue».
 
 Plusieurs outils, tels que $\shatter$~\cite{aloul06} et $\breakid$~\cite{devriendt2016improved}, utilisent cette technique pour accélérer le calcul du solveur en présence de symétries.
-En général, cette approche aboutit à de bons résultats dans différentes instances symétriques, cependant possède des défauts. Parmi eux, nous pouvons citer le nombre de contraintes ajoutées qui peut être exponentiel par rapport à la taille du problème. Ceci 
+En général, cette approche aboutit à de bons résultats dans différentes instances symétriques, cependant elle possède des défauts. Parmi eux, nous pouvons citer le nombre de contraintes ajoutées qui peut être exponentiel par rapport à la taille du problème. Ceci 
 a pour conséquence de ralentir l'algorithme principal du solveur.
-De plus, étant donné que ce calcul est effectué avant le lancement du solveur, cette approche peut être difficilement combinée avec d'autre technique de rupture de symétries. Aussi, elle ne peut pas distinguer les contraintes originales du problème avec les contraintes de rupture de symétrie. Avec cette information, le solveur peut modifier ses heuristiques pour augmenter ses performances.
+De plus, étant donné que ce calcul est effectué avant le lancement du solveur, cette approche peut être difficilement combinée avec d'autre technique de rupture de symétries. Aussi, cette approche ne peut pas distinguer les contraintes originales du problème avec les contraintes de rupture de symétrie. Avec cette information, le solveur peut modifier ses heuristiques pour augmenter ses performances.
 Pour ces raisons, certains problèmes avec de nombreuses symétries ne peuvent pas être traités efficacement avec cette approche.
 
 Une autre approche dite rupture de symétrie dynamique consiste à utiliser les symétries durant l'algorithme de recherche du solveur SAT, plus précisément, à modifier son comportement pour exploiter les propriétés de symétrie du problème. Cette approche consiste à déduire des faits symétriques par rapport aux déductions effectuées par le solveur. Lorsque ces faits sont ignorés, le solveur va explorer en vain l'espace de recherche symétrique.
@@ -171,7 +177,7 @@ Ce composant de symétrie est fourni sous forme d'une bibliothèque codée en C+
 Elle peut s'interfacer avec n'importe quelle solveur de type CDCL. 
 Pour conduire nos expériences, nous l'avons interfacé avec un solveur de l'état de l'art nommé $\minisat$~\cite{een2003extensible}. Au total, l' intégration de $\libdsb$ ajoute environ 60 lignes de code 
 et augmente le code de $\minisat$ de 3\%.
-$\libdsb$ est $\guillemotleft$ open source$\guillemotright$, fournit sous une licence GPLv3 et est disponible sur Github à l'adresse suivante: \url{https://github.com/lip6/cosy}.
+$\libdsb$ est $\guillemotleft$ open source$\guillemotright$, fournit sous une licence GPLv3 et est disponible sur Github \footnote{\url{https://github.com/lip6/cosy}}.
 
 
 Pour évaluer notre approche, nous avons comparé une version du solveur $\minisat$ combiné avec la bibliothèque $\libdsb$, que nous avons appelé $\cdclsym$ avec les solveurs de l'état de l'art.
@@ -185,7 +191,7 @@ $\saucy$ à gauche de la figure et $\bliss$ à droite de la figure.
 Comme nous pouvons le constater, les résultats sont meilleurs  avec l'utilisation de l'outil d'automorphisme de 
 graphe $\bliss$. La principale différence entre les deux outils est le nombre de permutations obtenues.
 $\bliss$ nous donne plus de permutations que $\saucy$, cela permet a notre outil $\cdclsym$ d'atteindre 
-un nombre d'instances résolues de 775 alors que le deuxième meilleur outil $\breakid$ atteint un nombre d'instances résolues de 749 avec $\bliss$. Toutes les expériences étaient limitées avec une durée à 5000 secondes.
+un nombre d'instances résolues de 775 alors que le deuxième meilleur outil $\breakid$ atteint un nombre d'instances résolues de 749 avec $\bliss$. Toutes les expériences étaient limitées à une durée à 5000 secondes.
 
 Ces expériences nous démontrent que notre approche est aussi performante que les approches de rupture de symétrie statique.
 \begin{figure}[!htbp]
@@ -208,7 +214,7 @@ Est-il possible d'accélérer la traversée de l'espace de recherche tout en él
 Pour que cette approche soit correcte, la contrainte qu'il faut absolument respectée est que la symétrie utilisée pour déduire les
 faits symétriques doit être valide dans le problème. En effet, les clauses ajoutées pour éliminer l'espace de recherche
 symétrique vont rompre cette symétrie. Cette dernière ne peut donc plus être utilisée pour propager les faits symétriques.
-Une approche naïve est de supprimer chaque symétries dès lors qu'une contrainte de rupture de symétrie a été ajoutée.
+Une approche naïve est de supprimer chacune des symétries dès lors qu'une contrainte de rupture de symétrie a été ajoutée.
 Le problème avec cette approche est que l'ensemble vide est très vite atteint et donc que plus aucune déduction symétrique ne peux être faites. Notre approche consiste à traquer les clauses utilisées par le solveur et à connaître à tout instant l'ensemble des symétries valide grâce à l'introduction dite de la notion de symétrie locale pour chaque clause.
 
 \vspace{2em}
