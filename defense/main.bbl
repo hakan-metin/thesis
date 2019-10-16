@@ -1,3 +1,19 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{MSS99}
+
+\bibitem[Coo71]{cook1971complexity}
+Stephen~A Cook.
+\newblock The complexity of theorem-proving procedures.
+\newblock In {\em Proceedings of the third annual ACM symposium on Theory of
+  computing}, pages 151--158. ACM, 1971.
+
+\bibitem[DLL62]{dpll_62}
+Martin Davis, George Logemann, and Donald Loveland.
+\newblock A machine program for theorem-proving.
+\newblock {\em Commun. ACM}, 5(7):394--397, July 1962.
+
+\bibitem[MSS99]{marques1999grasp}
+Joao~P Marques-Silva and Karem~A Sakallah.
+\newblock Grasp: A search algorithm for propositional satisfiability.
+\newblock {\em IEEE Transactions on Computers}, 48(5):506--521, 1999.
 
 \end{thebibliography}

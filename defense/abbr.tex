@@ -62,3 +62,10 @@ align=center,fill=propa-grey]
 
 \def\ok{\textcolor{green}{\cmark}}
 \def\ko{\textcolor{red}{\xmark}}
+
+
+
+\tikzset{onslide/.code args={<#1>#2}{%
+		\only<#1>{\pgfkeysalso{#2}} % \pgfkeysalso doesn't change the path
+}}
+

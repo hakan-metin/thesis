@@ -13,7 +13,6 @@
 % \usepackage{enumitem}
 \usepackage[ruled]{algorithm2e}
 \usepackage{underoverlap}
-
 % \usepackage{algorithm}
 \usepackage{algpseudocode}
 
@@ -22,12 +21,14 @@
 \usetikzlibrary{shapes.geometric}
 \usetikzlibrary{arrows,shapes,positioning}
 \usetikzlibrary{calc,decorations.markings}
+\usetikzlibrary{decorations.markings}
 \usetikzlibrary{decorations.text}
 \usetikzlibrary{patterns}
 \usetikzlibrary{arrows.meta}
 \usepackage{color, soul}
 
 \input{abbr}
+
 
 
 \begin{document}
@@ -293,6 +294,7 @@ Is it possible to attribute each group to a classroom?\\
 \node[box] (hlp) {High level problem};    
 \node[box] (input) at ($(hlp) + (0pt, -50pt)$){Logic Formula};    
 
+\node[box, line width=0.4mm, minimum width=10cm,minimum height=5cm,label={[fill=white,xshift=4.0cm, yshift=-0.3cm]SAT}]  at (0pt, -100pt){};
 %\node<2->[draw, ellipse] (cnf) at ($(input) + (0pt, -10pt)$) {\scriptsize CNF};
 
 \node[box] (solver) at ($(input) + (0pt, -30pt)$) {Solver};
@@ -305,8 +307,8 @@ Is it possible to attribute each group to a classroom?\\
 \visible<1>{\draw[->] (hlp) -> (input);}
 \visible<2->{\draw[->] (hlp) -> node [midway, fill=white]{CNF} (input);}
 \draw[->] (input) -> (solver);
-\draw[->] (solver) -> node[midway,fill=white] {assignment}  (sat);
-\draw[->] (solver) -> node[midway,fill=white] {proof}(unsat);
+\draw[->] (solver) -> node[midway,fill=white] {Assignment ($\alpha$)}  (sat);
+\draw[->] (solver) -> node[midway,fill=white] {Proof}(unsat);
 \end{tikzpicture}
 \vfill
 \begin{overlayarea}{\textwidth}{.2\textwidth}
@@ -331,15 +333,15 @@ $\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{\text{Clause with literals } x_1, x_
 \begin{frame}
 \frametitle{SAT Solving}
 
-	Solving SAT formula is known to be \textbf{NP-complete} REF
+	Solving SAT formula is known to be \textbf{NP-complete}~\cite{cook1971complexity}
 	\vfill
 	Enumerative Algorithm:
 	\begin{itemize}
-		\item Davis, Putnam, Logemann, and Loveland (DPLL) REF
+		\item Davis, Putnam, Logemann, and Loveland (DPLL)~\cite{dpll_62}
 		\begin{itemize}
 			\item Boolean Constraint Propagation (BCP)
 		\end{itemize}
-		\item Conflict Driven Clause Learning (CDCL) REF
+		\item Conflict Driven Clause Learning (CDCL)~\cite{marques1999grasp}
 		\begin{itemize}
 			\item derived from DPLL
 			\item clause learning
@@ -402,12 +404,17 @@ $\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{\text{Clause with literals } x_1, x_
 %% ----------------------------------------------------------------------------
 \begin{frame}
 \frametitle{CDCL in action TODO}
-Present unit propagation + conflit (clause learning)
-\begin{tikzpicture}
-\newcommand{\x}{2.07}
+%Present unit propagation + conflit (clause learning)
+
+ \begin{columns}[t]
+	\begin{column}[T]{.6\textwidth}
+\begin{tikzpicture}[scale=0.8, every node/.style={scale=0.8}]
+\newcommand{\x}{3}
 \newcommand{\y}{-1.5}
 
-\tikzstyle{decision}=[circle,draw,thick,fill=blue!30,font=\scriptsize]
+\tikzstyle{decision}=[circle,draw,thick,fill=blue!30,font=\scriptsize,anchor=base]
+\tikzstyle{space}=[regular polygon, regular polygon sides=3, minimum height=1cm, anchor=base,xshift=-0.25cm,yshift=-0.25cm,
+ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \tikzstyle{unsat}=[draw,thick,fill=red]
 \tikzstyle{link}=[->,>=latex,rounded corners=5pt,thick]
 \tikzstyle{trlink}=[link,nearly transparent]
@@ -418,24 +425,24 @@ Present unit propagation + conflit (clause learning)
     \node[decision](t) at (0,0) {$x_1$};
     
     % layer 2
-    \node[decision](l) at (-\x,\y) {$x_2$};
-    \node[decision](r) at (\x,\y) {$x_2$};
+    \node[decision](l) at (-\x,\y) {$x_4$};
+    \node[space](r) at (\x,\y) {};
     
     % layer 3
-    \node[decision](ll) at (-\x-\x*0.5,2*\y) {$x_3$};
+    \node[decision](ll) at (-\x-\x*0.5,2*\y) {$x_7$};
     \node[decision](lr) at (-\x+\x*0.5,2*\y) {$x_3$};
-    \node[decision](rl) at (\x-\x*0.5,2*\y) {$x_3$};
-    \node[decision](rr) at (\x+\x*0.5,2*\y) {$x_3$};
+%    \node[decision](rl) at (\x-\x*0.5,2*\y) {$x_3$};
+%    \node[decision](rr) at (\x+\x*0.5,2*\y) {$x_3$};
     
 	% layer 4
     \node[decision](lll) at (-\x-\x*0.5-\x*0.25,3*\y) {$x_4$};
     \node[decision](llr) at (-\x-\x*0.5+\x*0.25,3*\y) {$x_4$};
     \node[decision](lrl) at (-\x+\x*0.5-\x*0.25,3*\y) {$x_4$};
     \node[decision](lrr) at (-\x+\x*0.5+\x*0.25,3*\y) {$x_4$};
-    \node[decision](rll) at (\x-\x*0.5-\x*0.25,3*\y) {$x_4$};
-    \node[decision](rlr) at (\x-\x*0.5+\x*0.25,3*\y) {$x_4$};
-    \node[decision](rrl) at (\x+\x*0.5-\x*0.25,3*\y) {$x_4$};
-    \node[decision](rrr) at (\x+\x*0.5+\x*0.25,3*\y) {$x_4$};
+%    \node[decision](rll) at (\x-\x*0.5-\x*0.25,3*\y) {$x_4$};
+%    \node[decision](rlr) at (\x-\x*0.5+\x*0.25,3*\y) {$x_4$};
+%    \node[decision](rrl) at (\x+\x*0.5-\x*0.25,3*\y) {$x_4$};
+%    \node[decision](rrr) at (\x+\x*0.5+\x*0.25,3*\y) {$x_4$};
 
 	% layer 5
     \node[unsat](llll) at (-\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
@@ -446,33 +453,33 @@ Present unit propagation + conflit (clause learning)
     \node[unsat](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
     \node[unsat](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
     \node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
-    \node[unsat](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
-	\node[unsat](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {};
-	\node[unsat](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-	\node[unsat](rlrr) at (\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {};
-	\node[unsat](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
-	\node[unsat](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
-	\node[unsat](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-	\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
+    
+%    \node[unsat](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+%	\node[unsat](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+%	\node[unsat](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+%	\node[unsat](rlrr) at (\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {};
+%	\node[unsat](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+%	\node[unsat](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+%	\node[unsat](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+%	\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
 
 
-	\draw[link] (t) ->  node [trmid] {$0$} (l);
-	\draw[link] (t) -> node [mid] {$1$} (r);
-	
+	\draw[link] (t) ->  node [mid] {$0$} (l);
+	\draw[link] (t) -> node [mid] {$1$} (r.north);
 	\draw[link] (l) ->  node [mid] {$0$} (ll);
 	\draw[link] (l) -> node [mid] {$1$} (lr);
-	\draw[link] (r) ->  node [mid] {$0$} (rl);
-	\draw[link] (r) -> node [mid] {$1$} (rr);
+%	\draw[link] (r) ->  node [mid] {$0$} (rl);
+%	\draw[link] (r) -> node [mid] {$1$} (rr);
 	
 	\draw[link] (ll) -> node [mid] {$0$} (lll);
 	\draw[link] (ll) -> node [mid] {$1$} (llr);
 	\draw[link] (lr) -> node [mid] {$0$} (lrl);
 	\draw[link] (lr) -> node [mid] {$1$} (lrr);
 	
-	\draw[link] (rl) -> node [mid] {$0$} (rll);
-	\draw[link] (rl) -> node [mid] {$1$} (rlr);
-	\draw[link] (rr) -> node [mid] {$0$} (rrl);
-	\draw[link] (rr) -> node [mid] {$1$} (rrr);
+%	\draw[link] (rl) -> node [mid] {$0$} (rll);
+%	\draw[link] (rl) -> node [mid] {$1$} (rlr);
+%	\draw[link] (rr) -> node [mid] {$0$} (rrl);
+%	\draw[link] (rr) -> node [mid] {$1$} (rrr);
 	
 	
 	\draw[link] (lll) -> node [mid] {$0$} (llll);
@@ -484,20 +491,37 @@ Present unit propagation + conflit (clause learning)
 	\draw[link] (lrr) -> node [mid] {$0$} (lrrl);
 	\draw[link] (lrr) -> node [mid] {$1$} (lrrr);
 	
-	\draw[link] (rll) -> node [mid] {$0$} (rlll);
-	\draw[link] (rll) -> node [mid] {$1$} (rllr);
-	\draw[link] (rlr) -> node [mid] {$0$} (rlrl);
-	\draw[link] (rlr) -> node [mid] {$1$} (rlrr);
-	\draw[link] (rrl) -> node [mid] {$0$} (rrll);
-	\draw[link] (rrl) -> node [mid] {$1$} (rrlr);
-	\draw[link] (rrr) -> node [mid] {$0$} (rrrl);
-	\draw[link] (rrr) -> node [mid] {$1$} (rrrr);
-	
+%	\draw[link] (rll) -> node [mid] {$0$} (rlll);
+%	\draw[link] (rll) -> node [mid] {$1$} (rllr);
+%	\draw[link] (rlr) -> node [mid] {$0$} (rlrl);
+%	\draw[link] (rlr) -> node [mid] {$1$} (rlrr);
+%	\draw[link] (rrl) -> node [mid] {$0$} (rrll);
+%	\draw[link] (rrl) -> node [mid] {$1$} (rrlr);
+%	\draw[link] (rrr) -> node [mid] {$0$} (rrrl);
+%	\draw[link] (rrr) -> node [mid] {$1$} (rrrr);
 \end{tikzpicture}
-
+\end{column}
+\begin{column}[T]{.4\textwidth}
+	\scriptsize
+	\begin{itemize} 
+	\item[] $\omega_{1} = \{x_1  ,  x_2  ,  x_3\}$
+	\item[] $\omega_{2} = \{x_4  ,  x_5  ,  x_6\} $
+	\item[] $\omega_{3} = \{x_7  ,  x_8  ,  x_9\} $
+	\item[] $\omega_{4} = \{\neg x_1  ,  \neg x_4\} $
+	\item[] $\omega_{5} = \{\neg x_1  ,  \neg x_7\} $
+	\item[] $\omega_{6} = \{\neg x_4  ,  \neg x_7\} $
+	\item[] $\omega_{7} = \{\neg x_2  ,  \neg x_5\} $
+	\item[] $\omega_{8} = \{\neg x_2  ,  \neg x_8\} $
+	\item[] $\omega_{9} = \{\neg x_5  ,  \neg x_8\} $
+	\item[] $\omega_{10} = \{\neg x_3  ,  \neg x_6\} $
+	\item[] $\omega_{11} = \{\neg x_3  ,  \neg x_9\} $
+	\item[] $\omega_{12} = \{\neg x_6  ,  \neg x_9) $
+	\end{itemize}
+	\end{column}
+\end{columns}
 \end{frame}
-
 %% ----------------------------------------------------------------------------
+
 \begin{frame}
 \tikzstyle{every picture}+=[remember picture]
 \frametitle{An UNSAT example}
@@ -557,7 +581,44 @@ Is it possible to attribute each group to a classroom?\\
 
 \begin{frame}
 	\frametitle{Symmetry}
-	
+	\scriptsize
+	 \begin{columns}[t]
+		\begin{column}[T]{.3\textwidth}
+		\scriptsize
+		\begin{itemize} 
+		\item[] $\omega_{1} = \{x_1  ,  x_2  ,  x_3\}$
+		\item[] $\omega_{2} = \{x_4  ,  x_5  ,  x_6\} $
+		\item[] $\omega_{3} = \{x_7  ,  x_8  ,  x_9\} $
+		\item[] $\omega_{4} = \{\neg x_1  ,  \neg x_4\} $
+		\item[] $\omega_{5} = \{\neg x_1  ,  \neg x_7\} $
+		\item[] $\omega_{6} = \{\neg x_4  ,  \neg x_7\} $
+		\item[] $\omega_{7} = \{\neg x_2  ,  \neg x_5\} $
+		\item[] $\omega_{8} = \{\neg x_2  ,  \neg x_8\} $
+		\item[] $\omega_{9} = \{\neg x_5  ,  \neg x_8\} $
+		\item[] $\omega_{10} = \{\neg x_3  ,  \neg x_6\} $
+		\item[] $\omega_{11} = \{\neg x_3  ,  \neg x_9\} $
+		\item[] $\omega_{12} = \{\neg x_6  ,  \neg x_9) $
+		\end{itemize}
+		\end{column}
+		\begin{column}[T]{.3\textwidth}
+		\scriptsize
+		\begin{itemize} 
+		\item[] $\omega_{1} = \{x_1  ,  x_2  ,  x_3\}$
+		\item[] $\omega_{2} = \{x_4  ,  x_5  ,  x_6\} $
+		\item[] $\omega_{3} = \{x_7  ,  x_8  ,  x_9\} $
+		\item[] $\omega_{4} = \{\neg x_1  ,  \neg x_4\} $
+		\item[] $\omega_{5} = \{\neg x_1  ,  \neg x_7\} $
+		\item[] $\omega_{6} = \{\neg x_4  ,  \neg x_7\} $
+		\item[] $\omega_{7} = \{\neg x_2  ,  \neg x_5\} $
+		\item[] $\omega_{8} = \{\neg x_2  ,  \neg x_8\} $
+		\item[] $\omega_{9} = \{\neg x_5  ,  \neg x_8\} $
+		\item[] $\omega_{10} = \{\neg x_3  ,  \neg x_6\} $
+		\item[] $\omega_{11} = \{\neg x_3  ,  \neg x_9\} $
+		\item[] $\omega_{12} = \{\neg x_6  ,  \neg x_9) $
+	\end{itemize}
+	\end{column}
+\end{columns}
+
 	Symmetry of formula:
 	A symmetry (permuation) $g$ is a bijective function (on variables) that leaves $\varphi$ invariant.
 	
@@ -595,6 +656,115 @@ Is it possible to attribute each group to a classroom?\\
 \end{frame}
 
 %% ----------------------------------------------------------------------------
+\begin{frame}
+	\begin{tikzpicture}[scale=1, every node/.style={scale=1}]
+	
+	
+
+
+%	  \tikzset{
+%		invisible/.style={opacity=0},
+%		visible on/.style={
+			
+%		}
+%		visible on/.style={alt=#1{}{invisible}},
+%		alt/.code args={<#1>#2#3}{%
+%			\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+%		},
+%	}
+	
+	\newcommand{\x}{2.07}
+	\newcommand{\y}{-1.5}
+	
+	\tikzstyle{decision}=[circle,draw,thick,fill=blue!30,font=\scriptsize]
+	\tikzstyle{unsat}=[draw,thick,fill=red]
+	\tikzstyle{link}=[->,>=latex,rounded corners=5pt,thick]
+	\tikzstyle{transparent} = [nearly transparent]
+	\tikzstyle{mid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=1,font=\scriptsize]
+	\tikzstyle{trmid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=0.3,font=\scriptsize]
+	
+	% layer 1
+	\node[decision](t) at (0,0) {$x_1$};
+	
+	% layer 2
+	\node[decision](l) at (-\x,\y) {$x_2$};
+	\node[decision](r) at (\x,\y) {$x_2$};
+	
+	% layer 3
+	\node[decision](ll) at (-\x-\x*0.5,2*\y) {$x_3$};
+	\node[decision](lr) at (-\x+\x*0.5,2*\y) {$x_3$};
+	\node[decision,onslide={<2>, transparent}](rl) at (\x-\x*0.5,2*\y) {$x_3$};
+	\node[decision](rr) at (\x+\x*0.5,2*\y) {$x_3$};
+	
+	% layer 4
+	\node[decision](lll) at (-\x-\x*0.5-\x*0.25,3*\y) {$x_4$};
+	\node[decision](llr) at (-\x-\x*0.5+\x*0.25,3*\y) {$x_4$};
+	\node[decision](lrl) at (-\x+\x*0.5-\x*0.25,3*\y) {$x_4$};
+	\node[decision](lrr) at (-\x+\x*0.5+\x*0.25,3*\y) {$x_4$};
+	\node[decision](rll) at (\x-\x*0.5-\x*0.25,3*\y) {$x_4$};
+	\node[decision](rlr) at (\x-\x*0.5+\x*0.25,3*\y) {$x_4$};
+	\node[decision](rrl) at (\x+\x*0.5-\x*0.25,3*\y) {$x_4$};
+	\node[decision](rrr) at (\x+\x*0.5+\x*0.25,3*\y) {$x_4$};
+	
+	% layer 5
+	\node[unsat](llll) at (-\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+	\node[unsat](lllr) at (-\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+	\node[unsat](llrl) at (-\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+	\node[unsat](llrr) at (-\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {};
+	\node[unsat](lrll) at (-\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+	\node[unsat](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+	\node[unsat](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+	\node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
+	\node[unsat](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+	\node[unsat](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+	\node[unsat](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+	\node[unsat](rlrr) at (\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {};
+	\node[unsat](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+	\node[unsat](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+	\node[unsat](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+	\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
+	
+	
+	\draw[link] (t) ->  node [mid] {$0$} (l);
+	\draw[link] (t) -> node [mid] {$1$} (r);
+	
+	\draw[link] (l) ->  node [mid] {$0$} (ll);
+	\draw[link] (l) -> node [mid] {$1$} (lr);
+	\draw[link] (r) ->  node [mid] {$0$} (rl);
+	\draw[link] (r) -> node [mid] {$1$} (rr);
+	
+	\draw[link] (ll) -> node [mid] {$0$} (lll);
+	\draw[link] (ll) -> node [mid] {$1$} (llr);
+	\draw[link] (lr) -> node [mid] {$0$} (lrl);
+	\draw[link] (lr) -> node [mid] {$1$} (lrr);
+	
+	\draw[link,onslide={<2>, transparent}] (rl) -> node [mid,onslide={<2>, trmid}] {$0$} (rll);
+	\draw[link] (rl) -> node [mid] {$1$} (rlr);
+	\draw[link] (rr) -> node [mid] {$0$} (rrl);
+	\draw[link] (rr) -> node [mid] {$1$} (rrr);
+	
+	
+	\draw[link] (lll) -> node [mid] {$0$} (llll);
+	\draw[link] (lll) -> node [mid] {$1$} (lllr);
+	\draw[link] (llr) -> node [mid] {$0$} (llrl);
+	\draw[link] (llr) -> node [mid] {$1$} (llrr);
+	\draw[link] (lrl) -> node [mid] {$0$} (lrll);
+	\draw[link] (lrl) -> node [mid] {$1$} (lrlr);
+	\draw[link] (lrr) -> node [mid] {$0$} (lrrl);
+	\draw[link] (lrr) -> node [mid] {$1$} (lrrr);
+	
+	\draw[link] (rll) -> node [mid] {$0$} (rlll);
+
+	\draw[link] (rll) -> node [mid] {$1$} (rllr);
+	\draw[link] (rlr) -> node [mid] {$0$} (rlrl);
+	\draw[link] (rlr) -> node [mid] {$1$} (rlrr);
+	\draw[link] (rrl) -> node [mid] {$0$} (rrll);
+	\draw[link] (rrl) -> node [mid] {$1$} (rrlr);
+	\draw[link] (rrr) -> node [mid] {$0$} (rrrl);
+	\draw[link] (rrr) -> node [mid] {$1$} (rrrr);
+	\end{tikzpicture}
+\end{frame}
+ 
 \begin{frame}
 	\frametitle{Static symmetry breaking}
 	TODO\\
@@ -878,7 +1048,7 @@ Perspectives:
 
 \begin{frame}[allowframebreaks,noframenumbering]
   \scriptsize
-  \nocite{*}
+%  \nocite{*}
   \bibliographystyle{alpha}
   \bibliography{main}
 \end{frame}
@@ -918,5 +1088,96 @@ Perspectives:
 %
 
 
+
+%\begin{tikzpicture}[scale=0.8, every node/.style={scale=0.8}]
+%\newcommand{\x}{2.07}
+%\newcommand{\y}{-1.5}
+%
+%\tikzstyle{decision}=[circle,draw,thick,fill=blue!30,font=\scriptsize]
+%\tikzstyle{unsat}=[draw,thick,fill=red]
+%\tikzstyle{link}=[->,>=latex,rounded corners=5pt,thick]
+%\tikzstyle{trlink}=[link,nearly transparent]
+%\tikzstyle{mid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=1,font=\scriptsize]
+%\tikzstyle{trmid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=0.3,font=\scriptsize]
+%
+%% layer 1
+%\node[decision](t) at (0,0) {$x_1$};
+%
+%% layer 2
+%\node[decision](l) at (-\x,\y) {$x_2$};
+%\node[decision](r) at (\x,\y) {$x_2$};
+%
+%% layer 3
+%\node[decision](ll) at (-\x-\x*0.5,2*\y) {$x_3$};
+%\node[decision](lr) at (-\x+\x*0.5,2*\y) {$x_3$};
+%\node[decision](rl) at (\x-\x*0.5,2*\y) {$x_3$};
+%\node[decision](rr) at (\x+\x*0.5,2*\y) {$x_3$};
+%
+%% layer 4
+%\node[decision](lll) at (-\x-\x*0.5-\x*0.25,3*\y) {$x_4$};
+%\node[decision](llr) at (-\x-\x*0.5+\x*0.25,3*\y) {$x_4$};
+%\node[decision](lrl) at (-\x+\x*0.5-\x*0.25,3*\y) {$x_4$};
+%\node[decision](lrr) at (-\x+\x*0.5+\x*0.25,3*\y) {$x_4$};
+%\node[decision](rll) at (\x-\x*0.5-\x*0.25,3*\y) {$x_4$};
+%\node[decision](rlr) at (\x-\x*0.5+\x*0.25,3*\y) {$x_4$};
+%\node[decision](rrl) at (\x+\x*0.5-\x*0.25,3*\y) {$x_4$};
+%\node[decision](rrr) at (\x+\x*0.5+\x*0.25,3*\y) {$x_4$};
+%
+%% layer 5
+%\node[unsat](llll) at (-\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+%\node[unsat](lllr) at (-\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+%\node[unsat](llrl) at (-\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+%\node[unsat](llrr) at (-\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {};
+%\node[unsat](lrll) at (-\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+%\node[unsat](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+%\node[unsat](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+%\node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
+%\node[unsat](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+%\node[unsat](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+%\node[unsat](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+%\node[unsat](rlrr) at (\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {};
+%\node[unsat](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+%\node[unsat](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+%\node[unsat](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+%\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
+%
+%
+%\draw[link] (t) ->  node [trmid] {$0$} (l);
+%\draw[link] (t) -> node [mid] {$1$} (r);
+%
+%\draw[link] (l) ->  node [mid] {$0$} (ll);
+%\draw[link] (l) -> node [mid] {$1$} (lr);
+%\draw[link] (r) ->  node [mid] {$0$} (rl);
+%\draw[link] (r) -> node [mid] {$1$} (rr);
+%
+%\draw[link] (ll) -> node [mid] {$0$} (lll);
+%\draw[link] (ll) -> node [mid] {$1$} (llr);
+%\draw[link] (lr) -> node [mid] {$0$} (lrl);
+%\draw[link] (lr) -> node [mid] {$1$} (lrr);
+%
+%\draw[link] (rl) -> node [mid] {$0$} (rll);
+%\draw[link] (rl) -> node [mid] {$1$} (rlr);
+%\draw[link] (rr) -> node [mid] {$0$} (rrl);
+%\draw[link] (rr) -> node [mid] {$1$} (rrr);
+%
+%
+%\draw[link] (lll) -> node [mid] {$0$} (llll);
+%\draw[link] (lll) -> node [mid] {$1$} (lllr);
+%\draw[link] (llr) -> node [mid] {$0$} (llrl);
+%\draw[link] (llr) -> node [mid] {$1$} (llrr);
+%\draw[link] (lrl) -> node [mid] {$0$} (lrll);
+%\draw[link] (lrl) -> node [mid] {$1$} (lrlr);
+%\draw[link] (lrr) -> node [mid] {$0$} (lrrl);
+%\draw[link] (lrr) -> node [mid] {$1$} (lrrr);
+%
+%\draw[link] (rll) -> node [mid] {$0$} (rlll);
+%\draw[link] (rll) -> node [mid] {$1$} (rllr);
+%\draw[link] (rlr) -> node [mid] {$0$} (rlrl);
+%\draw[link] (rlr) -> node [mid] {$1$} (rlrr);
+%\draw[link] (rrl) -> node [mid] {$0$} (rrll);
+%\draw[link] (rrl) -> node [mid] {$1$} (rrlr);
+%\draw[link] (rrr) -> node [mid] {$0$} (rrrl);
+%\draw[link] (rrr) -> node [mid] {$1$} (rrrr);
+%\end{tikzpicture}
 
 \end{document}
