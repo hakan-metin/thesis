@@ -1,4 +1,0 @@
-(x_2 x_3)(x_5 x_6)(x_8 x_9)(\neg x_2 \neg x_3)(\neg x_5 \neg x_6)(\neg x_8 \neg x_9)
-(x_4 x_7)(x_5 x_8)(x_6 x_9)(\neg x_4 \neg x_7)(\neg x_5 \neg x_8)(\neg x_6 \neg x_9)
-(x_1 x_2)(x_4 x_5)(x_7 x_8)(\neg x_1 \neg x_2)(\neg x_4 \neg x_5)(\neg x_7 \neg x_8)
-(x_1 x_4)(x_2 x_5)(x_3 x_6)(\neg x_1 \neg x_4)(\neg x_2 \neg x_5)(\neg x_3 \neg x_6)

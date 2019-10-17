@@ -1,9 +1,9 @@
-﻿\chapter{Introduction}\label{chap:intro}
+\chapter{Introduction}\label{chap:intro}
 
 The interest of using computers for logic deduction and reasoning can be traced in the nineteen centuries.
 In 1869,  William Stanley Jevons designed and built the first machine doing logic inference.
-With the progress of computers, it is used in different domains such as design automation process 
-(logic optimization, test pattern generation, formal verification and functional simulation, etc).
+With the progress of computers, logic is used in different domains such as design automation process 
+(logic optimization, test pattern generation, formal verification, functional simulation, etc).
 Nowadays, one of the methods used in Boolean reasoning is the automatic satisfiability (SAT).
 Given a propositional formula (generally the constraints of an encoded problem),
 SAT solving consists in deciding whether the formula is satisfiable (i.e., all constraints can be
@@ -16,28 +16,29 @@ polynomial time is equivalent to the P versus NP, one of the seven millennium pr
 
 Despite this complexity, SAT solvers are becoming more and more powerful.
 Over the last decades, these can handle more and more complex problems in different domains:
-like \emph{formal methods} such that: bounded model checking (BMC)~\cite{bmc_99}; \emph{artificial intelligence}: planning decision~\cite{planning_92}; \emph{Informatics} : Haplotype inference~\cite{biology_06}.
+like \emph{formal methods} such that: bounded model checking (BMC)~\cite{bmc_99}; \emph{artificial intelligence}: planning decision~\cite{planning_92}; \emph{Bio informatics} : Haplotype inference~\cite{biology_06}.
 In recent work, researchers have succeeded in proving, using a SAT solver, a maximum limit
 for the problem of coloring Pythagorean triples~\cite{heule2016solving}, with proof weighing 200 TB.
-This success comes from the introduction of sophisticated heuristics and optimization of the solving 
-algorithm called Conflict Driven Clause Learning (CDCL) algorithm. It is based on the first non memory
-intensive algorithm named by its authors Davis, Putnam, Logemann, and Loveland (DPLL)~\cite{dpll_62}.
+The success of SAT comes from the introduction of sophisticated heuristics and optimization of the solving 
+algorithm called Conflict Driven Clause Learning (CDCL) algorithm~\cite{marques1999grasp}.
+ It is based on the first non memory intensive algorithm named by its authors Davis, Putnam, Logemann, and Loveland (DPLL)~\cite{dpll_62}.
 
-Some problems have a huge search space and some of their instances cannot be handled.
+Nevertheless, some problems have a huge search space and some of their instances cannot be handled.
 An example of such a problem can be the vehicle routing problem (VRP).
 It concerns the service of a delivery company, in which
 given a fleet of vehicles based in a depot, they must make rounds between several customers  who have requested
 each a certain amount of goods. All clients visited by a vehicle refers to the tour of the vehicle. 
-The goal is to find the tour that minimizes the delivery cost (monetary, distance, time, …).
+The goal of this problem is to find the tour that minimizes the delivery cost with different criteria monetary, distance, time, …
 Finding the optimal solution for VRP problem is NP-Hard~\cite{toth2002vehicle}.
-On an instance of this problem, renaming the set of identical vehicles will give us exactly the same problem.
-This is called a \textit{symmetry}. In general, a symmetry is a transformation that leaves an object (or some aspect of the object) unchanged. Symmetries are typically defined as a \textit{syntactical} property of a problem when its presence is inherent to the encoding of the problem. A permutation of variables preserves the original specification. In the case where the symmetries are independent of any 
-particular representation of the problem, it is called \textit{semantic}.
+When we look more in detail on an instance of this problem, renaming the set of identical vehicles will give us exactly the same problem,
+this is called a \textit{symmetry}. More precisely, a symmetry is a transformation that leaves an object (or some aspect of the object) unchanged. Symmetries are typically defined as a \textit{syntactical} property of a problem when its presence is inherent to the encoding of the problem and so a permutation of variables preserves the original specification. In the case where symmetries are independent of any 
+particular representation of the problem, we speak of \textit{semantic} symmetry.
 
 The presence of symmetries in a problem leads the search algorithm to fruitlessly explore symmetric
-search space and greatly hinders its performance. \textit{Symmetry breaking} is an approach that
-avoids the solver to visit symmetric part of the search space. The first step to exploit symmetry is to find them.
-In SAT, the detection of syntactical symmetry is done by transforming the specification
+search spaces and greatly hinders its performance.
+ The approach that avoids the solver to visit these symmetrical search spaces is called \textit{Symmetry breaking}.
+But to exploit symmetries, it is still necessary to find them.
+To achieve this in SAT, the detection of syntactical symmetry is done by transforming the specification
 in a colored graph and then apply a graph automorphism tool.
 
 
@@ -66,17 +67,21 @@ in a colored graph and then apply a graph automorphism tool.
 %To exploit the symmetry of a problem, the first step is to find them.
 
 When symmetries are computed, the most common approach to exploit them is to use a \emph{static symmetry breaking} technique.
-It takes the symmetric problem as input and produces a satisfiability equivalent formula by eliminating symmetries. This is done by augmenting the problem with constraints that force the solver to not explore the symmetric search  spaces. It is a easy to integrate static symmetry breaking, no modification of the solver is necessary.
+It takes the symmetric problem as input and produces a satisfiability equivalent formula by eliminating symmetries. This is done by augmenting the problem with constraints that force the solver to not explore the symmetric search  spaces.
+This approach is a easy to integrate static symmetry breaking, no modification of the solver is necessary.
 In addition, this approach works well on many symmetric applications.
 However, some highly symmetric instances cannot be solved using this technique. Effectively the number of
-symmetry breaking constraints can be exponential in relation to the size of the problem and slow down the solver.
+symmetry breaking constraints can be exponential in relation to the size of the problem and its presence slow down the solver
+instead of increasing them.
 
-Another approach to handle symmetry is \emph{dynamic symmetry breaking}. Here, the management of
-symmetries is done during the search. Different approaches exist. First, the behavior of the solver is analyzed to avoid it to visit symmetric part of the search space. Also, some symmetrical facts can be deduced from the
+There are also another approach to handle symmetry called \emph{dynamic symmetry breaking}. Here, the management of
+symmetries is done during the search and different approaches exist. First, the behavior of the solver is analyzed to avoid 
+it to visit symmetric part of the search space and thus accelerates the resolution of the problem.
+Second, under some conditions some symmetrical facts can be deduced through symmetry from the
 state of the solver. This has the effect of accelerating the tree traversal of the solver and reduce the solving time.
 
-The challenge of this thesis is to understand the state of  the art approach in symmetry breaking and
-improve them.
+%The challenge of this thesis is to understand the state of  the art approach in symmetry breaking and
+%improve them.
 %all constraints of a formula can be satisfiable and answer ,
 % or it is not possible to satisfy all constraints and answer \unsat.
 %
@@ -151,7 +156,7 @@ improve them.
 This thesis addresses the challenge of optimizing the solving of a SAT problem in presence of
 symmetries. In detail, my research exploits symmetry breaking during the solving.
 %Understanding state-of-the-art techniques allows us to improve it.
-Two major contributions are presented. The first one uses the strengths of static symmetry 
+It provides two major contributions. The first one uses the strengths of static symmetry 
 breaking approach and applied it dynamically to avoid the drawbacks of the approach. It adds an opportunistic symmetry controller that avoids visiting symmetric part of the search spaces. Benchmarks show that this makes it possible
  to solve very difficult symmetric problems.
 The second contribution uses the previous one and combines it with state-of-the-art dynamic 
@@ -160,20 +165,20 @@ important theoretical step for the usage of \emph{partial symmetry breaking} wit
 \emph{local symmetries}. 
  
 %\section{Structure of the manuscript}
-The remaining of this document is organized in 6 chapters. Chapter 2 describes the state of
-the art for the Boolean satisfiability problem, Chapter 3 focuses on the symmetry present in SAT.
+The remaining of this document is organized in 6 chapters. Chapter 2 describes the state-of-the-art
+ for the Boolean satisfiability problem, Chapter 3 focuses on the symmetry present in SAT.
 Chapter 4 focuses on the first contribution that uses dynamically the symmetries.
 Chapter 5 describes our second proposal and Chapter 6 conclude the thesis. More precisely:
  
 \textbf{The Boolean Satisfiability Problem}
-The goal of \cref{chap:preliminaries} is to better understand what is SAT. 
+The goal of \Cref{chap:preliminaries} is to better understand what is SAT. 
 It describes in detail the basics
 about propositional logic that will be used in the rest of the manuscript. Satisfiability is a hard
-problem but some particular forms that are easier to solve such as 2-SAT, Horn SAT and Xor-SAT are presented.
-This chapter also describes  the original DPLL algorithm, and the
-nowadays used CDCL algorithm and their important points. SAT can nowadays handle
-sophisticated problems, thanks to different heuristics.
- An overview of these are presented. Finally, with the presence of multi
+problem but some particular forms that are easier to solve are presented such as 2-SAT, Horn SAT and Xor-SAT.
+This chapter also describes the original solving algorithm called DPLL, and the
+nowadays used one called Conflict Driven Clause Learning algorithm (CDCL).
+This last can handle sophisticated problems, thanks to different heuristics, 
+an overview of which will be presented. Finally, with the presence of multi
 core machines, an overview of the state-of-the-art parallel SAT solving are presented.
 
 \textbf{Symmetries and SAT}
