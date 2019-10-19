@@ -1,4 +1,4 @@
-﻿\chapter{The Boolean Satisfiability Problem}\label{chap:preliminaries}
+\chapter{The Boolean Satisfiability Problem}\label{chap:preliminaries}
 \minitoc
 In this thesis, our goal is to exploit the symmetry properties of SAT problems.
 Before, we get to the heart of the matter, we first introduce the Boolean satisfiability (SAT)  problem.
@@ -7,7 +7,9 @@ Before, we get to the heart of the matter, we first introduce the Boolean satisf
 %It answers $\sat$ when all constraints
 %present in the formula can be satisfied and $\unsat$ otherwise.
 \section{SAT basics}
-A satisfiability problem is constituted of \emph{Boolean} or \emph{propositional variables},
+The goal of SAT is to determine whether a propositional formula is satisfiable (i.e, all constraint can be satisfied)
+or unsatisfiable (i.e there us no way to satisfy all constraint at the same time).
+The formula is constituted of \emph{Boolean} or \emph{propositional variables},
 i.e. each variable has two possible values: true or false (noted respectively $\true$ or $\false$).
 We call \emph{literal}, a propositional variable or its negation.
 For a given variable $x$, the positive literal is represented by $x$ and the negative one by $\neg x$.
@@ -31,6 +33,7 @@ A \emph{truth table} gives an evaluation of all possible assignments for a given
 For convenience, true value (\true) is also represented by $1$, and false value (\false) is represented by $0$.
 When a formula is always true, independently from the assignment, it is called a \emph{tautology}: $x \lor \neg x$ is 
 an example of tautologous formula.
+
 \begin{table}[!htbp]
  \centering
  \begin{tabular}{cc|ccc}
@@ -55,10 +58,14 @@ A formula is said to be
 otherwise the formula is \emph{unsatisfiable} (\unsat).
 In order to compare different formulas, we define here the concepts of logical equivalence and logical consequence
 respectively defined in Definition~\ref{def:equiv} and Definition~\ref{def:logcons}.
+
+\vspace{1em}
+
 \begin{definition}[Logical equivalence]\label{def:equiv}
  Two formulas $\varphi$ and $\psi$ are equivalent iff every assignment $\alpha$ that satisfies 
  formula $\varphi$  also models the formula $\psi$ and vice versa, denoted by $\varphi \equiv \psi$.
 \end{definition}
+
 
 \begin{definition}[Logical consequence]\label{def:logcons}
  A formula $\psi$ is a \emph{logical consequence} of a formula $\varphi$ if every model of $\varphi$
@@ -67,34 +74,39 @@ respectively defined in Definition~\ref{def:equiv} and Definition~\ref{def:logco
 
 \subsection{Normal forms}
 In Boolean logic, it exists some particular form of formula, called \emph{normal form}.
-To introduce some of them, we first need to present the concepts of \emph{cube} and \emph{clause}.
+ To introduce some of them, we first need to present the concepts of \emph{cube} and \emph{clause}.
 \begin{definition}[Cube]
 A cube $\gamma$ is a finite conjunction of literals represented equivalently by:
 $$\gamma = \bigwedge_{i=1}^k l_i $$
 \end{definition}
+
 \begin{definition}[Clause]
 A \emph{clause} $\omega$ is a finite disjunction of literals represented equivalently by:
 $$\omega = \bigvee_{i=1}^k l_i \text{, or by the set of its literals } \omega = \{l_i\}_{i \in \llbracket 1,k \rrbracket}$$
 \end{definition}
+
 With respect to its size, a clause is said to be \emph{unary, binary, ternary, $n$-ary} if it contains respectively one, two, three, or $n$ literals.
 %The clause form has a property called \emph{subsumption}. 
-Clauses have the following property that can be exploited to simplify the formula
+Clauses have the following property that can be exploited to simplify the formula.
 When a clause $\omega_1$ is a subset of another clause $\omega_2$, noted $\omega_1 \subset \omega_2$,
 we say that $\omega_{1}$ subsumes $\omega_{2}$.
  And any assignment that satisfies $\omega_1$ will also satisfy $\omega_2$. So, $\omega_2$ is \emph{redundant} \textit{w.r.t.}  can be removed from the formula.
-
+ 
+ \clearpage
+ 
 \begin{definition}[Conjunctive Normal Form]
  \emph{Conjunctive Normal Form} (CNF) of a formula is a finite conjunction of clauses represented by
  $$\varphi = \bigwedge_{i=1}^k \omega_i \text{ (or by the set of its clauses } \varphi = \{\omega_i\}_{i \in \llbracket 1,k \rrbracket}\text{)}$$
 \end{definition}
-  
-  
+
  \begin{definition}[Disjunctive normal form]
 \emph{Disjunctive normal form} (DNF) of a formula is finite disjunction of cubes represented by
 $$\varphi = \bigvee_{i=1}^k \gamma_i \text{ (or by the set of its cubes } \varphi = \{\gamma_i\}_{i \in \llbracket 1,k \rrbracket}\text{)}$$
  \end{definition}
+
 The following table is a summary of the laws that allow to transform any formula to
 a normal form.
+
 \begin{table}[!htbp]
  \centering
  \begin{tabular}{lllc}
@@ -180,6 +192,7 @@ one of the most important unsolved problems in theoretical computer science: the
  that is also one of the seven millennium prize problems.
 \subsection{Some easy to solve forms}
 Some particular instances of the SAT problem can be computed in polynomial time.
+
 \textbf{2-SAT~\cite{aspvall1979linear}.}
 In this particular form, the given CNF formula contains only binary clauses.
 In this case, a graph in which each clause is transformed into implication is created.
@@ -195,6 +208,7 @@ This algorithm can be computed in linear time complexity.
 %to determine the satisfiability of the formula.
 % If it is the case, the formula is \unsat. Otherwise 
 %a solution can be deduce and the problem is \sat. 
+
 \textbf{Horn SAT.}\cite{dowling1984linear} In this particular form, the given CNF formula contains only Horn clauses. It exists three forms
 of Horn clause: 
 \begin{itemize}[topsep=0pt,itemsep=1pt]
@@ -207,6 +221,7 @@ is reached.
 Roughly speaking, it satisfies all unit clauses in cascades. At the end of the procedure, either an empty clause is deduced and the problem
 is declared $\unsat$ or the fix point is reached and the formula is declared \sat.
  Like 2-SAT, this algorithm can also be computed in linear time complexity.
+ 
 \textbf{XOR SAT.}\cite{moore2011nature} In this particular form, each clause contains xor ($\oplus$) operator rather than or ($\lor$).
 This problem can be seen as a system of linear equations. Gaussian elimination is an algorithm that allows to solve this kind of
 problem is polynomial time, more exactly in $O(n^3)$.
@@ -226,7 +241,7 @@ Two kinds of algorithms exist to solve satisfiability problems.
 First, the \emph{incomplete} algorithms~\cite{kautz2009incomplete} which do not provide any guarantee that they will eventually report,
 either a satisfiable assignment or declare the formula unsatisfiable. This kind of algorithm is out of scope of this thesis. 
 Second, the \emph{complete} algorithms, which provide a guarantee that if an assignment exists,
-it will be found or declared that formula is unsatisfiable.
+it will be found or declare that formula is unsatisfiable.
 This section describes different \emph{complete} algorithm to solve a propositional formula.
 \subsubsection{A naive algorithm}
 A naive approach to solve a SAT problem is to try all possible assignments.
@@ -389,6 +404,7 @@ generalization of VSIDS and its goal is to optimize the \emph{learning rate} (LR
 learned clauses. The LRB of a variable is the weighted average (computed with \emph{exponential recency
 weighted average} (ERWA))  value taken by its LR over the time. Unassigned variable with the highest LRB is chosen as a decision. 
 %\hakan{A VOIR The idea behind this heuristics is to keep variables that used to generate learned clause in the search tree.}
+
 \textbf{Restarts.}
 Another important mechanism is \emph{restart}. Basically, the solver abandons its current assignment and 
 restart from the top of the tree, while maintaining some information, like learned clauses, scores of variables, etc.
@@ -397,12 +413,12 @@ Detecting this phenomenon has been widely treated in the literature~\cite{audema
 These strategies are based on counting the number of conflicts or on the monitoring the current search’s depth.
 Theoretically, a solver with restart has a better result~\cite{huang2007effect} and is today
 used in almost all state-of-the-art solvers.
+
 \textbf{Cleaning clause database.}
 Storing  all learned clauses will end up by a memory issue and the cost of unit propagation will increase.
  So, the solver needs to develop a policy to eliminate some of them. These clauses are redundant with regards to the initial 
  problem, removing them will not affect the satisfiability of the formula.
   In the literature, different criteria exist.
-  
  The size of the clause is one of them and is very often used by solvers. 
  A small clause has better chance to participate to the unit propagation and so be useful for the solving.
  As a consequence, large clauses are removed.\\
@@ -413,6 +429,7 @@ It is based on the number of decision levels present in the clause. The more cla
 and so will be deleted from the clause database.
  
 In current state-of-the-art solvers, multiple criteria are used and half of the learned clauses are removed during the clause database cleaning process.
+
 \subsection{Preprocessing / Inprocessing}
 In order to optimize solving time, some transformation can be applied to simplify the original formula.
 This is done by \emph{preprocessing} the formula before the start of the solving.
