@@ -59,6 +59,11 @@ A.~Biere, M.~Heule, and H.~van Maaren.
 \newblock {\em Handbook of satisfiability}, volume 185.
 \newblock IOS press, 2009.
 
+\bibitem{carlson2006millennium}
+J.~A. Carlson, A.~Jaffe, and A.~Wiles.
+\newblock {\em The millennium prize problems}.
+\newblock American Mathematical Society Providence, RI, 2006.
+
 \bibitem{chu2008pminisat}
 G.~Chu, P.~J. Stuckey, and A.~Harwood.
 \newblock Pminisat: a parallelization of minisat 2.0.

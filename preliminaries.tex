@@ -128,8 +128,8 @@ a normal form.
   \multirow{2}{*}{Distributive laws} & $x \lor (y \land z) \equiv (x \lor y) \land (x \lor z)$\\
            & $x \land (y \lor z) \equiv (x \land y) \lor (x \land z)$\\
  \hline        
- \multirow{2}{*}{Negation laws}  & $x \lor \neg x \equiv \false$\\
-        & $x \land \neg x \equiv \true$\\
+ \multirow{2}{*}{Negation laws}  & $x \lor \neg x \equiv \true$\\
+        & $x \land \neg x \equiv \false$\\
   \hline
    double negation law & $\neg (\neg x) \equiv x$ \\
   \hline
@@ -189,7 +189,7 @@ A problem is said to be NP-hard (non-deterministic polynomial-time hard) if an N
 can be reduced to another NP problem in polynomial time.
 If someone finds an algorithm that solves a SAT with a polynomial time algorithm, this answer 
 one of the most important unsolved problems in theoretical computer science: the P versus NP problem,
- that is also one of the seven millennium prize problems.
+ that is also one of the seven millennium prize problems~\cite{carlson2006millennium}.
 \subsection{Some easy to solve forms}
 Some particular instances of the SAT problem can be computed in polynomial time.
 
@@ -227,7 +227,7 @@ This problem can be seen as a system of linear equations. Gaussian elimination i
 problem is polynomial time, more exactly in $O(n^3)$.
 
 \subsection{Some related problems}
-A different kind of problems are related to SAT.% presented in this section.
+A different kind of problems are related to SAT.
 One of them is sharp-SAT (\#SAT)~\cite{valiant1979complexity}, its purpose is to count the number of satisfiable assignments in a formula.
 Another related problem is \textit{maximum satisfiability problem} (MAX-SAT)~\cite{biere2009handbook}. In this case, the problem
 is to find the maximum subset of clauses that can be satisfied for a formula. Different variants
@@ -290,8 +290,8 @@ When DPLL is executed on the formula of \Cref{fig:naive_algo}, after making deci
 $\neg x_1$ and $\neg x_2$, unit propagation detects that $x_3$ must be assigned to true.
 This propagation prevents to explore non-interesting assignments. Actually, when $x_3$ is set to false,
 the clause $\omega_1$ cannot be satisfied and as it remains 3 variables and so $2^3$ possible assignments
-(from $\alpha_1$ to $\alpha_8$). These assignments will be never checked.
-The performance of the DPLL algorithm is highly impacted on the chosen decision variable.
+(from $\alpha_1$ to $\alpha_8$). These assignments will never be checked.
+The performance of the DPLL algorithm is highly impacted by the decision variable chosen.
 \texttt{assignDecisionLiteral} is the procedure responsible of choosing it.
 Its objective is to find a literal that will generate a maximum of unit propagations.
 Intuitively, decision literals can be viewed as “guesses” and propagated literals can be viewed as “deductions”. 
@@ -308,7 +308,7 @@ The principal weakness of DPLL algorithm is to make the same inconsistencies sev
 (principally due to chronological backtracking), leading to  unnecessary CPU usage.
 Conflict Driven Clause Learning (CDCL) \cite{marques1999grasp} is a sound and complete algorithm
 that overcomes this weakness.
-\Cref{algo:cdcl} gives an overview of CDCL, Like DPLL,  it walks on a binary search tree.
+\Cref{algo:cdcl} gives an overview of CDCL, like DPLL,  it walks on a binary search tree.
 Initially, the  assignment is empty and the decision level that 
 indicates the depth of the search tree, noted by $dl$, is set to zero.
 The algorithm first applies unit propagation to the formula $\varphi$ for the  assignment $\alpha$ (\cref{alg:cdcl:unit}).
@@ -368,7 +368,7 @@ that are responsible of the contradiction and the \emph{conflict side} that cont
 Once the reason side of a conflict is established, a conflict-driven clause (or simply conflict clause) is produced.
 To build this clause, it suffices to negate the
 literals that have an ongoing arc to the  cut that contains the UIP. In \Cref{fig:implication-graph}, the produced
-clause will be $\omega_l = \{x_1, \neg x_4 \}$. Since the information of this clause is redundant regarding 
+learned clause will be $\omega_l = \{x_1, \neg x_4 \}$. Since the information of this clause is redundant regarding 
 the original formula. It can be added without any  restriction. The conflict clause can be simplified
 using the implication graph to reduce its size (by detecting redundancies~\cite{sorensson2009minimizing}).
  All learned clauses are stored in a clauses database.
@@ -462,7 +462,7 @@ of a SAT problem is the exploitation of these cores. %Actually, SAT problems are
 communicates or not between them. When one of them finds a solution or finds that none exists, the overall computation is finished.
 Another technique to develop a parallel SAT solver is called \emph{divide and conquer}. In this technique,
 the search space is divided  dynamically and submitted to different solvers that cooperate to find a solution and used in
-different solvers like, for example~\cite{chu2008pminisat, lewis2007multithreaded}
+different solvers like, for example~\cite{chu2008pminisat, lewis2007multithreaded}.
  Some specific techniques like load balancing and work stealing is applied to avoid a solver to be idle.
 A recent framework \emph{PaInleSS} (a Framework for Parallel SAT Solving) can be used to easily create a new parallel 
 SAT solver with different heuristics~\cite{le2017painless}~\cite{le2019modular}. 

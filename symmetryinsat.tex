@@ -1,4 +1,4 @@
-﻿\chapter{Symmetry and SAT}\label{chap:symmetryinsat}
+\chapter{Symmetry and SAT}\label{chap:symmetryinsat}
 \minitoc
 Despite the NP-Completeness character of the SAT problem, state-of-the-art solvers are able to treat many industrial problems.This is mainly due to the capacity of SAT solvers to prune search space with, for example, the learnt clauses.
 Another way to accelerate the solving is the exploitation of symmetries.
@@ -7,7 +7,7 @@ Consider the problem of searching a pattern in butterfly wings.
 Most butterflies have exactly the same wing halves. After checking that both wings are symmetric
 (process called symmetry detection), the pattern can be searched in only one wing. Searching this pattern in the other wing is useless (process called symmetry exploitation). 
 In this chapter, we show how to detect that a given formula has symmetries and how to
-exploit them to accelerate the solving.
+exploit them to accelerate the solving in the SAT context.
 %Some instances exhibit symmetries and not taking them into account forces solvers to needlessly explore isomorphic search space.  
 
 \section{Group Theory basics} 
@@ -319,7 +319,7 @@ The search algorithm explores
 fruitlessly the symmetric search space, i.e, try all possible combinations of couples (pigeon, hole).
 Solving this problem with a standard SAT solver, like MiniSAT~\cite{een2003extensible},
  turns out to be very time consuming (and even impossible, in a reasonable time, for high values of $n$). 
-To avoid this combinatorial explosion, a technique called \emph{symmetry breaking} allows a SAT solver to avoid the visit of symmetric search space. To do so, it exists two principles , known as \emph{static symmetry breaking}
+To avoid this combinatorial explosion, a technique called \emph{symmetry breaking} allows a SAT solver to avoid the visit of symmetric search space. For this purpose, it exists two principles , known as \emph{static symmetry breaking}
 and \emph{dynamic symmetry breaking}. In the general case, visiting one assignment for each orbit is sufficient to determine the satisfiability of the whole formula.
 So, in the first case, symmetry breaking constraints that invalidate symmetric assignments are added to the initial problem before the start of solving (statically). The second one alters
 the search space during the solving (dynamically), it will like in the static approach prune symmetric search space or it can accelerate tree traversal using symmetrical facts.
@@ -352,7 +352,7 @@ This leads us to the following questions:
  \item How  to choose branch that is equivalent to all symmetric ones?
 \end{enumerate}
 To answer question 2, we need to introduce an ordering relation between assignments
-\clearpage
+
 \begin{definition}[Assignments ordering]\label{def:assignment_ordering}%
  We assume a total order, $\prec$, on $\Vars$.  Given two assignments $(\alpha,\beta) \in \Assignments(\Vars)^2 $,%
  we say that $\alpha$ is strictly smaller than $\beta$, noted $\alpha < \beta$, if there exists a variable $v \in \Vars$%
@@ -428,12 +428,13 @@ In the partial and full symmetry breaking, the set of symmetry breaking predicat
 %This approach is more easy to set up and bring considerable reduction of the search spaces.
 %in some $G \subseteq G_{\varphi} $ results a sound and complete symmetry breaking predicates
 %but not necessarily \emph{complete} symmetry breaking predicates for $G_{\varphi}$ noted $\psi$.
+
 \begin{theorem}[Satisfiability preservation SBPs]
  \label{theorem:satisfiability_preservation_SBPs}
- Let $\varphi$ be a formula and $\psi$ the computed \textit{SBPs} for the set of symmetries in $G_{\varphi}$:
- 
+ Let $\varphi$ be a formula and $\psi$ the computed \textit{SBPs} for the set of symmetries in $G_{\varphi}$: 
  $$\varphi~and ~\varphi \wedge \psi \text{ are equi-satisfiable}.$$
 \end{theorem}
+
 \begin{proof}
  If $\varphi \wedge \psi$ is SAT then $\varphi$ is trivially SAT. If
  $\varphi$ is SAT, then there is some assignment $\beta$ that satisfies $\varphi$.
@@ -498,6 +499,7 @@ $\shatter$ is a tool ~\cite{aloul06} for partial symmetry breaking.
 It computes a compact lex-leader \textit{sbps} with the symmetries produced by $\saucy$~\cite{katebi2010symmetry}.
 The following table shows the number of symmetry breaking predicates and the
 number of auxiliary variables added to the original formula.
+
 \input{sbp-table}
 
 \Cref{tab:numsbp} presents the number of variables and clauses present in the formula and also the  
