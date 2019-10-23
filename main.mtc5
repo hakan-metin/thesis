@@ -1,15 +1,15 @@
 {\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {4.1}General idea}{\reset@font\mtcSfont 44}{section.4.1}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Algorithm}{\reset@font\mtcSSfont 46}{section*.50}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Symmetries Status Tracking.}{\reset@font\mtcSSSfont 48}{section*.52}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Generation of the \emph {esbp}.}{\reset@font\mtcSSSfont 48}{section*.53}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Illustrative example}{\reset@font\mtcSSfont 48}{section*.55}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Algorithm}{\reset@font\mtcSSfont 46}{section*.56}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Symmetries Status Tracking.}{\reset@font\mtcSSSfont 48}{section*.58}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Generation of the \emph {esbp}.}{\reset@font\mtcSSSfont 48}{section*.59}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Illustrative example}{\reset@font\mtcSSfont 48}{section*.61}}
 {\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {4.2}Implementation and Evaluation}{\reset@font\mtcSfont 50}{section.4.2}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \textsf {cosy}{}: an efficient implementation of the symmetry controller}{\reset@font\mtcSSfont 50}{section*.56}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Heuristics and Options.}{\reset@font\mtcSSSfont 50}{section*.57}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Integration in \texttt {MiniSAT}{}.}{\reset@font\mtcSSSfont 51}{section*.58}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Evaluation}{\reset@font\mtcSSfont 51}{section*.59}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \textsf {cosy}{}: an efficient implementation of the symmetry controller}{\reset@font\mtcSSfont 50}{section*.62}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Heuristics and Options.}{\reset@font\mtcSSSfont 50}{section*.63}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Integration in \texttt {MiniSAT}{}.}{\reset@font\mtcSSSfont 51}{section*.64}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Evaluation}{\reset@font\mtcSSfont 51}{section*.65}}
 {\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {4.3}Some optimization}{\reset@font\mtcSfont 55}{section.4.3}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Adapt heuristics dynamically}{\reset@font\mtcSSfont 55}{section*.66}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Change the Order Dynamically}{\reset@font\mtcSSfont 55}{section*.67}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Impact of the sign in variable ordering}{\reset@font\mtcSSfont 56}{section*.68}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Adapt heuristics dynamically}{\reset@font\mtcSSfont 55}{section*.72}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Change the Order Dynamically}{\reset@font\mtcSSfont 55}{section*.73}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Impact of the sign in variable ordering}{\reset@font\mtcSSfont 56}{section*.74}}
 {\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {4.4}Conclusion}{\reset@font\mtcSfont 57}{section.4.4}}

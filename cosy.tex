@@ -137,7 +137,7 @@ injection of an \emph{esbp} computed on the fly.
  
  All these functions rely on the $\track$ structure: a map of variables indexed
  by permutations. Initially, $\track[g] = \min_{\prec}(\support_g)$ for all $g \in G$ according to the ordering relation and all
- permutations are marked \textit{active}.
+ permutations are marked \textit{active}. 
  
  For each permutation, $g$, the symmetry controller keeps track of the smallest
  variable $\track[g]$ in the support of $g$ such that $\track[g]$ and
@@ -335,7 +335,7 @@ We compare \cdclsym{} using the occurrence order, value symmetries, and without
  
 \end{itemize}
 Each $\sat$ solution was successfully checked against the initial CNF. For \unsat
-situations, there is no way to provide an $\unsat$ certificate in presence of
+situations, there is no way to provide an $\unsat\,$ certificate in presence of
 symmetries. Nevertheless, we checked our results were also computed by the
 other measured tools. Unfortunately, out of the 1350 benchmarked formulas, we
 have no proof or evidence for the 15 $\unsat$ formulas computed by $\cdclsym{}$

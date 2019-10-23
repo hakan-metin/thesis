@@ -13,10 +13,10 @@ The formula is constituted of \emph{Boolean} or \emph{propositional variables},
 i.e. each variable has two possible values: true or false (noted respectively $\true$ or $\false$).
 We call \emph{literal}, a propositional variable or its negation.
 For a given variable $x$, the positive literal is represented by $x$ and the negative one by $\neg x$.
-Given a formula $\varphi$, we denote $\Vars_\varphi$ ($\Lits_\varphi$) the set of variables (literals) used in the formula (the index in $\Vars_\varphi$ and $\Lits_\varphi$ is usually omitted when
+Given a formula $\varphi$, we denote $\Vars_\varphi$ (respectively $\Lits_\varphi$) the set of variables (respectively literals) used in the formula (the index in $\Vars_\varphi$ and $\Lits_\varphi$ is usually omitted when
 clear from context).
-To build complex formulas, different operators are used, $\neg, \lor$ and $\land$ that are respectively negation, disjunction and conjunction. The remaining operators like, $\Rightarrow, \Leftrightarrow$ and
-$\oplus, \cdots$ can be expressed by the use of the basic ones.
+To build complex formulas, it is sufficient to use, $\neg, \lor$ and $\land$ which are respectively negation, disjunction and conjunction. The remaining operators like, $\Rightarrow, \Leftrightarrow$ and
+$\oplus, \cdots$ expressed using combinations of the basic ones.
 For example, $a \Rightarrow b$, can be expressed by $ \neg a \lor b$.
 Every binary operator adds a pair of parentheses to define explicitly the semantic of the formula.
 In the absence of parentheses, the following priority order applies (from the highest to the lowest priority):
@@ -73,7 +73,7 @@ respectively defined in Definition~\ref{def:equiv} and Definition~\ref{def:logco
 \end{definition}
 
 \subsection{Normal forms}
-In Boolean logic, it exists some particular form of formula, called \emph{normal form}.
+In Boolean logic, there are some particular form of formula, called \emph{normal form}.
  To introduce some of them, we first need to present the concepts of \emph{cube} and \emph{clause}.
 \begin{definition}[Cube]
 A cube $\gamma$ is a finite conjunction of literals represented equivalently by:
@@ -85,7 +85,7 @@ A \emph{clause} $\omega$ is a finite disjunction of literals represented equival
 $$\omega = \bigvee_{i=1}^k l_i \text{, or by the set of its literals } \omega = \{l_i\}_{i \in \llbracket 1,k \rrbracket}$$
 \end{definition}
 
-With respect to its size, a clause is said to be \emph{unary, binary, ternary, $n$-ary} if it contains respectively one, two, three, or $n$ literals.
+With respect to its size, a clause is said to be \emph{unary, binary, ternary,} $n$-ary if it contains respectively one, two, three, or $n$ literals.
 %The clause form has a property called \emph{subsumption}. 
 Clauses have the following property that can be exploited to simplify the formula.
 When a clause $\omega_1$ is a subset of another clause $\omega_2$, noted $\omega_1 \subset \omega_2$,
@@ -185,19 +185,19 @@ Note that each cube in the problem in DNF form is a solution in the equivalent C
 \subsection{An NP-complete problem}
 The SAT problem is the first NP-complete problem proven by Stephen Cook in 1971~\cite{cook1971complexity}.
 NP-completeness means that a SAT problem can be solved with a non-deterministic Turing machine in polynomial time (NP) and is also NP-hard.
-A problem is said to be NP-hard (non-deterministic polynomial-time hard) if an NP problem 
-can be reduced to another NP problem in polynomial time.
+A problem is said to be NP-hard (non-deterministic polynomial-time hard) if 
+any problem can be reduced to this problem in polynomial time.
 If someone finds an algorithm that solves a SAT with a polynomial time algorithm, this answer 
 one of the most important unsolved problems in theoretical computer science: the P versus NP problem,
  that is also one of the seven millennium prize problems~\cite{carlson2006millennium}.
 \subsection{Some easy to solve forms}
 Some particular instances of the SAT problem can be computed in polynomial time.
 
-\textbf{2-SAT~\cite{aspvall1979linear}.}
+\paragraph{2-SAT~\cite{aspvall1979linear}.}
 In this particular form, the given CNF formula contains only binary clauses.
 In this case, a graph in which each clause is transformed into implication is created.
 For example, the clause $x \lor y$ will be transformed into $ \neg x \Rightarrow y$ and $\neg y \Rightarrow x$.
-Then, \emph{strong connected component} (SCC) is computed to determine the satisfiability of the formula.
+Then, a \emph{strong connected component} (SCC) is computed to determine the satisfiability of the formula.
 If the same variable is present in both its positive and negative values in the same SCC then the formula is declared unsatisfiable,
 otherwise a solution can be deduced and so the problem is satisfiable. 
 This algorithm can be computed in linear time complexity.
@@ -209,8 +209,8 @@ This algorithm can be computed in linear time complexity.
 % If it is the case, the formula is \unsat. Otherwise 
 %a solution can be deduce and the problem is \sat. 
 
-\textbf{Horn SAT.}\cite{dowling1984linear} In this particular form, the given CNF formula contains only Horn clauses. It exists three forms
-of Horn clause: 
+\paragraph{Horn SAT.}\cite{dowling1984linear} In this particular form, the given CNF formula contains only Horn clauses. 
+There are three forms of Horn clauses: 
 \begin{itemize}[topsep=0pt,itemsep=1pt]
 \item \emph{strict Horn clause} that contains only one positive literal and at least one negative \\literal
 \item \emph{positive Horn clause} that contains only one positive literal and no negative literals
@@ -222,7 +222,7 @@ Roughly speaking, it satisfies all unit clauses in cascades. At the end of the p
 is declared $\unsat$ or the fix point is reached and the formula is declared \sat.
  Like 2-SAT, this algorithm can also be computed in linear time complexity.
  
-\textbf{XOR SAT.}\cite{moore2011nature} In this particular form, each clause contains xor ($\oplus$) operator rather than or ($\lor$).
+\paragraph{XOR SAT.}\cite{moore2011nature} In this particular form, each clause contains xor ($\oplus$) operator rather than or ($\lor$).
 This problem can be seen as a system of linear equations. Gaussian elimination is an algorithm that allows to solve this kind of
 problem is polynomial time, more exactly in $O(n^3)$.
 
@@ -357,19 +357,19 @@ This clause must be \textit{assertive} (i.e., all  literals are false except one
  \label{fig:implication-graph}
 \end{figure}
 \texttt{analyzeConflict} procedure analyzes this graph to find the reason of the conflict. To do that, a search of a
-\emph{unique implication point (UIP)} is performed. UIP of the last decision level of the implication graph is a variable
-which lies on every path from the decision to the conflict. Note that, there are many UIP for a given decision level.
+\emph{unique implication point (UIP)} is performed. A UIP of the last decision level of the implication graph is a variable
+which lies on every path from the decision to the conflict. Note that, there are many UIPs for a given decision level.
 In such case, UIPs are ordered according to the distance with the contradiction. The First UIP (FUIP) is the closest to
-the conflict. It is well known that the first UIP provides the smallest set of assignment that is responsible for the
+the conflict. It is well known that the FUIP provides the smallest set of assignment that is responsible for the
 contradiction~\cite{zhang2001efficient}.
 A UIP divides the implication graph in two sides with a \emph{cut}; the \emph{reason side} contains decision variables 
 that are responsible of the contradiction and the \emph{conflict side} that contains the conflict. 
- UIP is always in the reason side. \Cref{fig:implication-graph} depicts two cuts in the implication graph.
+ A UIP is always in the reason side. \Cref{fig:implication-graph} depicts two cuts in the implication graph.
 Once the reason side of a conflict is established, a conflict-driven clause (or simply conflict clause) is produced.
 To build this clause, it suffices to negate the
 literals that have an ongoing arc to the  cut that contains the UIP. In \Cref{fig:implication-graph}, the produced
 learned clause will be $\omega_l = \{x_1, \neg x_4 \}$. Since the information of this clause is redundant regarding 
-the original formula. It can be added without any  restriction. The conflict clause can be simplified
+the original formula, it can be added without any  restriction. The conflict clause can be simplified
 using the implication graph to reduce its size (by detecting redundancies~\cite{sorensson2009minimizing}).
  All learned clauses are stored in a clauses database.
  
@@ -381,20 +381,20 @@ to the opposite value at level 0. This means that this literal must be true with
 Adding the conflict clause prunes the search space that obviously contains no solution.
 This is the key point of the CDCL algorithm and the big difference with DPLL algorithm.
  In our example \Cref{fig:implication-graph}, the target decision level is 1.
-After backtrack, the conflict clause will be assertive and the first UIP is the only variable that has
+After backtracking, the conflict clause will be assertive and the FUIP is the only variable that has
 not a value and so will be propagated in the next step of the algorithm.
  
 \subsection{Heuristics}\label{sec:heuristics}
 This section gives an overview of different heuristics implemented in modern SAT solvers.
-\textbf{Decision heuristics}.
+\paragraph{Decision heuristics}.
  Decision variable has a huge impact on the 
 overall solving time. It influences the number of propagations and so 
 the depth of the search tree.
- Variable State Independent Decaying Sum (VSIDS)~\cite{moskewicz2001chaff} measure is one of the most famous decision heuristics and is used
+ The Variable State Independent Decaying Sum (VSIDS)~\cite{moskewicz2001chaff} measure is one of the most famous decision heuristics and is used
 nowadays in almost all solvers; each variable has an activity and  is increased by a multiplicative factor 
 when it participates to the resolution of a conflict.
 %A solver has thousands conflicts during the solving and so activity of variables are very volatile.
-Decision heuristics choose unassigned variable with the highest activity.
+Decision heuristics choose the unassigned variable with the highest activity.
 %\hakan{AVOIR
 %The idea behind this heuristic is to solve Ã¢â‚¬ËœhardÃ¢â‚¬â„¢ part of problem at the top of the search tree.
 %Hence, it is much more efficient when coupled with the restart heuristics}
@@ -405,16 +405,16 @@ learned clauses. The LRB of a variable is the weighted average (computed with \e
 weighted average} (ERWA))  value taken by its LR over the time. Unassigned variable with the highest LRB is chosen as a decision. 
 %\hakan{A VOIR The idea behind this heuristics is to keep variables that used to generate learned clause in the search tree.}
 
-\textbf{Restarts.}
+\paragraph{Restarts}
 Another important mechanism is \emph{restart}. Basically, the solver abandons its current assignment and 
 restart from the top of the tree, while maintaining some information, like learned clauses, scores of variables, etc.
  The restart prevents the solver to get stuck in the same part of the search space (phenomenon known as heavy tailing~\cite{gomes1997heavy}).
 Detecting this phenomenon has been widely treated in the literature~\cite{audemard2012refining,biere2008adaptive}.
 These strategies are based on counting the number of conflicts or on the monitoring the current search’s depth.
-Theoretically, a solver with restart has a better result~\cite{huang2007effect} and is today
+Theoretically, a solver with restarts has a better result~\cite{huang2007effect} and is today
 used in almost all state-of-the-art solvers.
 
-\textbf{Cleaning clause database.}
+\paragraph{Cleaning clause database.}
 Storing  all learned clauses will end up by a memory issue and the cost of unit propagation will increase.
  So, the solver needs to develop a policy to eliminate some of them. These clauses are redundant with regards to the initial 
  problem, removing them will not affect the satisfiability of the formula.
@@ -425,8 +425,8 @@ Storing  all learned clauses will end up by a memory issue and the cost of unit 
 \emph{Clause activity} is another criterion, a clause augments its activity when it participates to conflict analysis. 
 Clauses with lower activity that are not implied in the resolution of conflicts are removed.
  The last, often, used criterion is based on the Literal Block Distance (LBD) measure. It is a measure that computes the \emph{quality} of a clause.
-It is based on the number of decision levels present in the clause. The more clause has a high value of LBD and the more its quality is weak, 
-and so will be deleted from the clause database.
+It is based on the number of decision levels present in the clause. The more a clause has a high value of LBD and 
+the weaker its quality is, and so will be deleted from the clause database.
  
 In current state-of-the-art solvers, multiple criteria are used and half of the learned clauses are removed during the clause database cleaning process.
 
@@ -436,7 +436,7 @@ This is done by \emph{preprocessing} the formula before the start of the solving
 When it is used during the solving (usually after a restart), it is called \emph{inprocessing}.
 Simplification of the formula is made by removing clauses and/or variables.\\
 \emph{Variable elimination} simplification is based on the \emph{resolution inference rule}~\cite{robinson1965machine}.
-Consider two clauses $\omega_1 = \{x_1, x_i, ..., x_j \}$ and $\omega_2 = \{\neg x_1, y_i, ..., y_j\}$.
+Consider the two clauses $\omega_1 = \{x_1, x_i, ..., x_j \}$ and $\omega_2 = \{\neg x_1, y_i, ..., y_j\}$.
 The resolution inference rule allows to derive a clause $\omega_3 = \{x_i, ..., x_j, y_i, ..., y_j\}$ which is called
 the \emph{resolvent} as it results from solving two clauses on the literal $x_1$ and $\neg x_1$.
 %Moreover,  applying variable elimination until either an empty clause is derived (unsatisfiable formula) or 
@@ -448,11 +448,11 @@ $\omega_1 \subset  \omega_2$, then $\omega_2$ can be safely removed from the ori
 \emph{Self subsuming resolution} uses resolution rules and subsumption. at the same time,
 the resolvent clause subsumes the original one. For example, $\omega_1 = \{x_1, \neg x_2, x_3\}$ and $\omega_2 = \{x_1, \neg x_2, x_3, x_4\}$,
  then the resolvent clause will be $\omega_3 = \{x_1, x_3\}$ which subsumes $\omega_2$. This principle
-is implemented in \texttt{SatElite}~\cite{een2005effective} preprocessor engine and is used in almost all modern SAT solvers.
+is implemented in the \texttt{SatElite}~\cite{een2005effective} preprocessor engine and is used in almost all modern SAT solvers.
 Other simplification techniques exist such that \emph{Gaussian elimination} which detects sub formula in a XOR-SAT
 form and solve it in a polynomial time~\cite{moore2011nature}. This technique can also be used in inprocessing~\cite{soos2010enhanced}. 
 Some techniques exploit the structure of the original formula and add relevant clauses to speed up the resolution
-time of the SAT solver. One of them uses \textit{community structure} of the formula to find good clauses to add into.
+time of the SAT solver. One of them uses the \textit{community structure} of the formula to find good clauses to add into.
 A preprocessor engine doing that is \texttt{modprep}~\cite{ansotegui2015using}.
 %The usage of symmetries also adds relevant clauses in the formula and will be detailed in the next chapter.
 \subsection{Optimizing SAT solving}
@@ -467,7 +467,7 @@ different solvers like, for example~\cite{chu2008pminisat, lewis2007multithreade
 A recent framework \emph{PaInleSS} (a Framework for Parallel SAT Solving) can be used to easily create a new parallel 
 SAT solver with different heuristics~\cite{le2017painless}~\cite{le2019modular}. 
 Another way to optimize the solving time of SAT solver is the exploitation of symmetries. The rest of this manuscript will 
-detail how it allows to improve the performance of SAT solver in the presence of symmetries in the original formula.
+detail how this allows to improve the performance of SAT solvers in the presence of symmetries in the original formula.
 %Authors of this framework win the parallel tracks of SAT competition \footnote{\url{http://www.satcompetition.org/}} in 2018.
 %\begin{center}
 %\begin{tikzpicture}
