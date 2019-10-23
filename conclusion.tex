@@ -1,4 +1,4 @@
-﻿\chapter{Conclusion and Future Works}\label{chap:conclu}
+\chapter{Conclusion and Future Works}\label{chap:conclu}
 
 This thesis presented different approaches to increase the performance of solving 
 the Boolean satisfiability problem (SAT) (see Chapter\ref{chap:preliminaries}) in presence of symmetries. 
@@ -74,16 +74,18 @@ An integration of symmetry breaking may improve the overall performance of the s
 A theoretical and practical study may demonstrate if it increases performances and whether it is more efficient in 
 portfolios or divide and conquer strategy.
 
-SAT solvers are present in different tools that use it for checking different properties. For example, 
- Eclipse uses a SAT solver to check for dependencies on installed packages \cite{le2008sat};
+SAT solvers are present in different tools that use it for checking different properties. For instance, 
+ Eclipse uses a SAT solver to check for dependencies conflict on installed packages~\cite{le2008sat};
 a verification tools like Alloy\footnote{\url{http://alloytools.org/}} use a SAT solver to check properties and find
 counter-example for software modeling. Integration of our symmetry based SAT solver may improve the performance of such products.
 
 All approaches we proposed suppose that we compute the symmetries of the problem before solving it.
 But, on some large instances, the computation of symmetries is a limiting factor. An optimal approach
 would be to find them during the solving or maybe find them "opportunistically" in the sense that we can stop the search of symmetries when some are found.
-Moreover, this work can be used for partial symmetries, i.e., 
-the symmetries present only with partial assignment of the solver.
+
+Another perspective of this work is the exploitation of partial symmetries i.e., 
+the symmetries present only with partial assignment of the solver. The introduced local symmetries can be an entry
+point for this purpose. Partial symmetries widen the applicable scope of our techniques.
 
 
 %Suppose that, the produces graph is symmetric only if we ignore some 

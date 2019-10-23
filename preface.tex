@@ -17,7 +17,7 @@
 \thispagestyle{empty}
 \vspace*{\stretch{1}}
 \begin{flushright}
-  \textit{Ah, la thèse.}
+  \textit{À Seref, Keziban, Didem et Ilayda.}
 \end{flushright}
 \vspace*{\stretch{7}}
 %
@@ -270,7 +270,7 @@ Les tables \ref{tab:satfr} et \ref{tab:unsatfr} présentent respectivement
 les résultats obtenues four les problèmes $\sat$ et $\unsat$.
 La première colonne de chaque tableau énumère les classes de problèmes sur lesquelles nous avons effectué nos expériences: nous classons les problèmes en fonction du nombre de symétries qu'ils admettent. Une ligne notée "permutations X-Y (Z)" regroupe les problèmes Z ayant entre X et Y générateurs (symétries). Les autres colonnes indiquent le nombre de problèmes résolus par chaque approche. Les trois solveurs comparés sont respectivement
 \texttt{minisat-Sp}, le solveur $\minisat$ avec l'approche SP; \texttt{minisat-Sym} le solveur $\minisat$ avec $\libdsb$ et \texttt{minisat-SymSP} le solveur avec l'approche combiné.
-
+ 
 Globalement, nous observons que l'approche combinée est efficace dans de nombreuses classes de problèmes symétriques. Pour les problèmes de SAT, la combinaison a de meilleurs résultats que les deux autres approches (4 problèmes de SAT en plus par rapport au meilleur des deux autres). Lorsqu'on examine les problèmes de l'UNSAT, les résultats sont plus mitigées. Cela est du au coût mis en place pour maintenir à jour les structures de chacune des deux approches de manière indépendante.
 Cependant l'approche combinée apporte de meilleure résultats dans le nombre total d'instances résolues.
 
@@ -284,4 +284,4 @@ SAT solvers are more and more powerful and can handle large problems which seeme
 few years ago. However, some problems present symmetries which force the solver to explore fruitlessly
 the symmetric part of the search space and hinders the performance. 
 In this thesis, we set out to exploit symmetry properties of the problems in better ways.
-For this purpose, we propose two major contributions that aims to improve the state-of-the-art techniques and augment the number of solved instances. With an evaluation over the instances presented in the SAT competition, we show that our approach overcomes the state-of-the-art ones as it is able to solve more instances. 
+For this purpose, we propose two major contributions that aims to improve the state-of-the-art techniques and augment the number of solved instances. With an evaluation over the instances presented in the SAT competition, we show that our approach overcomes the state-of-the-art ones and is able to solve more instances. 
