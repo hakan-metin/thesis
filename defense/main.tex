@@ -319,7 +319,6 @@ Is it possible to attribute each group to a classroom?\\
 	\visible<2->{CNF Representation:\\}
 	\centering
 \only<2>{
-
 $\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{\text{Clause with literals } x_1, x_2, \neg x_3}$
 }% visible 2
 
@@ -327,10 +326,14 @@ $\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{\text{Clause with literals } x_1, x_
 \only<3>{
 	$\overbrace{\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{Clause}\land (\neg x_1 \lor \neg x_2) \land (x_2 \lor \neg x_4)}^\text{Formula (CNF)}$
 }% visible 3
-\end{overlayarea}
-Mettre set representation
-\end{frame}
 
+\only<4>{
+	\vspace{1em}
+	$(x_1 \lor x_2 \lor \neg x_3) \rightarrow \{x_1 , x_2 , \neg x_3\}$
+}
+\end{overlayarea}
+
+\end{frame}
 
 %% ----------------------------------------------------------------------------
 
@@ -642,57 +645,57 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \end{columns}
 \end{frame}
 
-\begin{frame}
-	\begin{tikzpicture}[every node/.style={scale=0.59}, scale=0.59]
-	\node[text width=3cm] (a) {
-		$\omega_1 = \{\cred{x_1}, x_2, x_3\}$ 
-		$\omega_2 = \{x_4, x_5, x_6\}$
-		$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \neg x_5\}$
-		$\omega_4 = \{\neg x_2, \neg x_4\}$
-		$\omega_5 = \{\neg x_3, \neg x_4\}$
-		$\omega_6 = \{\neg x_3, \neg x_6\}$
-	};
-
-	\node[text width=3cm] (b) at ($(a) + (3.5, 0)$) {
-		$\omega_1 = \{\cred{x_1}, x_2, x_3\}$ 
-		$\omega_2 = \{x_4, x_5, \cred{x_6\}}$
-		$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \neg x_5\}$
-		$\omega_4 = \{\neg x_2, \neg x_4\}$
-		$\omega_5 = \{\neg x_3, \neg x_4\}$
-		$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
-	};
-
-	
-	\node[text width=3cm] (c) at ($(b) + (3.5, 0)$) {
-		$\omega_1 = \{\cred{x_1}, x_2, x_3\}$ 
-		$\omega_2 = \{\cprop{x_4}, \cred{x_5}, \cred{x_6\}}$
-		$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \cgreen{\neg x_5\}}$
-		$\omega_4 = \{\neg x_2, \neg x_4\}$
-		$\omega_5 = \{\neg x_3, \neg x_4\}$
-		$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
-	};
-
-	
-	\node[text width=3cm] (d) at ($(c) + (3.5, 0)$) {
-		$\omega_1 = \{\cred{x_1}, x_2, x_3\}$ 
-		$\cgreen{\omega_2} = \{\cgreen{x_4}, \cred{x_5}, \cred{x_6\}}$
-		$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \cgreen{\neg x_5\}}$
-		$\omega_4 = \{\cprop{\neg x_2}, \cred{\neg x_4}\}$
-		$\omega_5 = \{\cprop{\neg x_3}, \cred{\neg x_4}\}$
-		$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
-	};
-
-
-	\node[text width=3cm] (e) at ($(d) + (3.5, 0)$) {
-		$\omega_1 = \{\cred{x_1}, \cred{x_2}, \cblue{x_3}\}$ 
-		$\cgreen{\omega_2} = \{\cgreen{x_4}, \cred{x_5}, \cred{x_6\}}$
-		$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \cgreen{\neg x_5\}}$
-		$\cgreen{\omega_4} = \{\cgreen{\neg x_2}, \cred{\neg x_4}\}$
-		$\omega_5 = \{\cblue{\neg x_3}, \cred{\neg x_4}\}$
-		$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
-	};
-	\end{tikzpicture}
-\end{frame}
+%\begin{frame}
+%	\begin{tikzpicture}[every node/.style={scale=0.59}, scale=0.59]
+%	\node[text width=3cm] (a) {
+%		$\omega_1 = \{\cred{x_1}, x_2, x_3\}$ 
+%		$\omega_2 = \{x_4, x_5, x_6\}$
+%		$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \neg x_5\}$
+%		$\omega_4 = \{\neg x_2, \neg x_4\}$
+%		$\omega_5 = \{\neg x_3, \neg x_4\}$
+%		$\omega_6 = \{\neg x_3, \neg x_6\}$
+%	};
+%
+%	\node[text width=3cm] (b) at ($(a) + (3.5, 0)$) {
+%		$\omega_1 = \{\cred{x_1}, x_2, x_3\}$ 
+%		$\omega_2 = \{x_4, x_5, \cred{x_6\}}$
+%		$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \neg x_5\}$
+%		$\omega_4 = \{\neg x_2, \neg x_4\}$
+%		$\omega_5 = \{\neg x_3, \neg x_4\}$
+%		$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
+%	};
+%
+%	
+%	\node[text width=3cm] (c) at ($(b) + (3.5, 0)$) {
+%		$\omega_1 = \{\cred{x_1}, x_2, x_3\}$ 
+%		$\omega_2 = \{\cprop{x_4}, \cred{x_5}, \cred{x_6\}}$
+%		$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \cgreen{\neg x_5\}}$
+%		$\omega_4 = \{\neg x_2, \neg x_4\}$
+%		$\omega_5 = \{\neg x_3, \neg x_4\}$
+%		$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
+%	};
+%
+%	
+%	\node[text width=3cm] (d) at ($(c) + (3.5, 0)$) {
+%		$\omega_1 = \{\cred{x_1}, x_2, x_3\}$ 
+%		$\cgreen{\omega_2} = \{\cgreen{x_4}, \cred{x_5}, \cred{x_6\}}$
+%		$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \cgreen{\neg x_5\}}$
+%		$\omega_4 = \{\cprop{\neg x_2}, \cred{\neg x_4}\}$
+%		$\omega_5 = \{\cprop{\neg x_3}, \cred{\neg x_4}\}$
+%		$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
+%	};
+%
+%
+%	\node[text width=3cm] (e) at ($(d) + (3.5, 0)$) {
+%		$\omega_1 = \{\cred{x_1}, \cred{x_2}, \cblue{x_3}\}$ 
+%		$\cgreen{\omega_2} = \{\cgreen{x_4}, \cred{x_5}, \cred{x_6\}}$
+%		$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \cgreen{\neg x_5\}}$
+%		$\cgreen{\omega_4} = \{\cgreen{\neg x_2}, \cred{\neg x_4}\}$
+%		$\omega_5 = \{\cblue{\neg x_3}, \cred{\neg x_4}\}$
+%		$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
+%	};
+%	\end{tikzpicture}
+%\end{frame}
 
 %% ----------------------------------------------------------------------------
 
@@ -746,12 +749,40 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 }
 
 \vfill
-Is it possible to attribute each group to a classroom?\\
+Is it possible to attribute each group to a classroom?
 \begin{center}
 	\visible<8->{No!}
+	\vfill
+	\visible<9->{Presence of symmetries hinders the performance of the solver}
 \end{center}
 
 \end{frame}
+
+%% ----------------------------------------------------------------------------
+
+\begin{frame}
+	\frametitle{Outline}
+	\begin{enumerate}
+		\item \textcolor{UPMCEngagementBlueB}{SAT overview}
+		\begin{itemize}
+			\item[] SAT basics
+			\item[] SAT and symmetries
+		\end{itemize}
+		\vspace{5pt}
+		\item \textcolor{UPMCEngagementBlueB}{Existing approaches}
+		\begin{itemize}
+			\item[] Static symmetry breaking
+			\item[] Dynamic symmetry breaking
+		\end{itemize}
+		\vspace{5pt}
+		\item \textcolor{UPMCEngagementBlueB}{Contribution and results} 
+		\begin{itemize}
+			\item[] \phantom{CDCL [Sym]}
+			\item[] \phantom{Combination of different approaches}
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
+
 %% ----------------------------------------------------------------------------
 \tikzstyle{every picture}+=[remember picture]
 \begin{frame}
@@ -821,6 +852,7 @@ Is it possible to attribute each group to a classroom?\\
 \end{tikzpicture}
 %	Symmetry of formula:
 \vfill
+\normalsize
 	A symmetry (permuation) $g$ is a bijective function (on variables) that leaves $\varphi$ invariant.
 %	
 %	\vfill
@@ -831,45 +863,127 @@ Is it possible to attribute each group to a classroom?\\
 	\vfill
 \end{frame}
 
-%% ----------------------------------------------------------------------------
-
 \begin{frame}
-\frametitle{Outline}
-\begin{enumerate}
-	\item \textcolor{UPMCEngagementBlueB}{SAT overview}
-	\begin{itemize}
-		\item[] SAT basics
-		\item[] SAT and symmetries
-	\end{itemize}
-	\vspace{5pt}
-	\item \textcolor{UPMCEngagementBlueB}{Existing approaches}
-	\begin{itemize}
-		\item[] Static symmetry breaking
-		\item[] Dynamic symmetry breaking
-	\end{itemize}
-	\vspace{5pt}
-	\item \textcolor{UPMCEngagementBlueB}{Contribution and results} 
-	\begin{itemize}
-		\item[] \phantom{CDCL [Sym]}
-		\item[] \phantom{Combination of different approaches}
-	\end{itemize}
-\end{enumerate}
+	\frametitle{Computing symmetries of a SAT problem}
+	% \setlength{\tabcolsep}{35pt}
+	
+	\newcolumntype{C}{ >{\centering\arraybackslash} m{5cm} }
+	\newcolumntype{D}{ >{\centering\arraybackslash} m{1cm} }
+	\begin{tabular}{CC}
+		$CNF\ formula$ &{\scriptsize
+			\begin{tabular}{c}
+				$(x_1 \lor x_2 \lor x_3) \land
+				(x_4 \lor x_5 \lor x_6) \land
+				(x_7 \lor x_8 \lor x_9) $\\
+				$\land (\neg x_1 \lor \neg x_4) \land
+				(\neg x_1 \lor \neg x_7) \land
+				(\neg x_4 \lor \neg x_7)$\\
+				$\land (\neg x_2 \lor \neg x_5) \land
+				(\neg x_2 \lor \neg x_8) \land
+				(\neg x_5 \lor \neg x_8)$ \\
+				$\land (\neg x_3 \lor \neg x_6) \land
+				(\neg x_3 \lor \neg x_9) \land
+				(\neg x_6 \lor \neg x_9)$\\
+		\end{tabular}}\\
+		\only<2> {
+			
+			$\Downarrow$ & $\Downarrow$  \\
+			
+			colored graph & 
+			\includegraphics[scale=0.1]{images/graph}\\ \\
+		}
+		
+		\visible<3-> {
+			
+			$\Downarrow$ & $\Downarrow$  \\
+			
+			colored graph & 
+			\includegraphics[scale=0.05]{images/graph}\\ \\
+		}
+		\visible<3-> {
+			$\|$ & $\|$  \\
+			graph automorphism & 
+			\small{(\texttt{bliss} \footnote{http://www.tcs.hut.fi/Software/bliss/} or 
+				\texttt{saucy} \footnote{http://vlsicad.eecs.umich.edu/BK/SAUCY/})} 
+			\\
+		}
+		
+		
+		\visible<4-> {
+			$\Downarrow$ & $\Downarrow$  \\
+			
+			set of symmetries & %\begin{frame}
+			%\tikzstyle{every picture}+=[remember picture]
+			%\frametitle{An UNSAT example}
+			%\everymath{\displaystyle}
+			%\centering
+			%
+			%\begin{tabular}{cc}
+			%	\includegraphics[scale=0.07]{images/room} & \includegraphics[scale=0.07]{images/room}\\
+			%	\tikz[baseline]{\node[anchor=base] (r1){1};} & \tikz[baseline]{\node[anchor=base] (r2){2};}\\
+			%\end{tabular}
+			%
+			%\begin{tabular}{ccc}
+			%	\tikz[baseline]{\node[anchor=base] (g1){};} & \tikz[baseline]{\node[anchor=base] (g2){};} & \tikz[baseline]{\node[anchor=base] (g3){};}\\
+			%	\includegraphics[scale=0.1]{images/south} & \includegraphics[scale=0.1]{images/simpson} & \includegraphics[scale=0.09]{images/titeuf}\\
+			%	A                                        & B                                           & C\\
+			%\end{tabular}
+			%
+			%\visible<2->{
+			%	\begin{tikzpicture}[overlay]
+			%	\tikzstyle{line} = [<-, line width=0.5mm];
+			%	\path[line]<3> (r1) edge  (g1.south);
+			%	\path[line]<3> (r2) edge  (g2.south);
+			%	
+			%	\path[line]<4> (r1) edge  (g2.south);
+			%	\path[line]<4> (r2) edge  (g1.south);
+			%	
+			%	\path[line]<5> (r1) edge  (g1.south);
+			%	\path[line]<5> (r2) edge  (g3.south);
+			%	
+			%	\path[line]<6> (r1) edge  (g3.south);
+			%	\path[line]<6> (r2) edge  (g1.south);
+			%	
+			%	\path[line]<7> (r1) edge  (g2.south);
+			%	\path[line]<7> (r2) edge  (g3.south);
+			%	
+			%	\path[line]<8> (r1) edge  (g3.south);
+			%	\path[line]<8> (r2) edge  (g2.south);
+			%	
+			%	\visible<9>{
+			%	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (-1.75, 4.25) {};
+			%  	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (1.8, 4.25) {};
+			%  	
+			%	\node[draw, minimum width=3.5cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (-3.5, 1.5) {};
+			%	\node[draw, minimum width=3.1cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (0.25, 1.5) {};
+			%	\node[draw, minimum width=3.5cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (3.9, 1.5) {};
+			%	}
+			%	\end{tikzpicture}
+			%}
+			%
+			%\vfill
+			%Is it possible to attribute each group to a classroom?\\
+			%\begin{center}
+			%	\visible<8->{No!}
+			%\end{center}
+			%
+			%\end{frame}
+			\scriptsize
+			\begin{tabular}{c}
+				$g_1 = (x_2 \enspace x_3)(x_5 \enspace x_6)(x_8 \enspace x_9)$\\
+				$g_2 = (x_4 \enspace x_7)(x_5 \enspace x_8)(x_6 \enspace x_9)$\\
+				$g_3 = (x_1 \enspace x_2)(x_4 \enspace x_5)(x_7 \enspace x_8)$\\
+				$g_4 = (x_1 \enspace x_4)(x_2 \enspace x_5)(x_3 \enspace x_6)$
+			\end{tabular}
+		}
+	\end{tabular}
 \end{frame}
 
 %% ----------------------------------------------------------------------------
 \begin{frame}
+	\frametitle{Using symmetries to prune search space}
+	\centering
 	\begin{tikzpicture}[scale=1, every node/.style={scale=1}]
-	
-%	  \tikzset{
-%		invisible/.style={opacity=0},
-%		visible on/.style={
-			
-%		}
-%		visible on/.style={alt=#1{}{invisible}},
-%		alt/.code args={<#1>#2#3}{%
-%			\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
-%		},
-%	}
 	
 	\newcommand{\x}{2.07}
 	\newcommand{\y}{-1.5}
@@ -888,7 +1002,7 @@ Is it possible to attribute each group to a classroom?\\
 	\node[decision](l) at (-\x,\y) {$x_2$};
 	\node[decision](r) at (\x,\y) {$x_2$};
 	
-	\visible<2>{\node[highlight](equiv) at (0,\y) {$\leftrightarrow$};}
+	\visible<2>{\node[highlight, scale=2](equiv) at (0,\y) {$\leftrightarrow$};}
 	
 	% layer 3
 	\node[decision](ll) at (-\x-\x*0.5,2*\y) {$x_4$};
@@ -962,30 +1076,82 @@ Is it possible to attribute each group to a classroom?\\
 	\draw[link] (rrr) -> node [mid] {$0$} (rrrl);
 	\draw[link] (rrr) -> node [mid] {$1$} (rrrr);
 	\end{tikzpicture}
+	\vfill
+\visible<2> {Adds additional constraints to prune search space.}
 \end{frame}
  
 \begin{frame}
-	\frametitle{Static symmetry breaking}
-	TODO\\
+	\frametitle{Generates symmetry breaking predicates (SBP)}
+\begin{itemize}
+	\item Define lexicographic order
+	\begin{itemize}
+		\item Define total order on variables
+		\item Define minimal value
+	\end{itemize}
+	\item Forbid non minimal assignment with addition of SBP
+\end{itemize}	
+
+	\vfill
+	Example:\\
+	\begin{itemize}
+		\item[]	$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8 ; \hfill \true < \false $ 
+		\item[] 	$(x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
+	\end{itemize}
+
+	\vfill
+	\begin{tabular} {ll}
+		 $x_1 \leq x_2$	& $x_1 \lor \neg x_2$\\
+		 \hline
+		 $x_1 = x_2 \rightarrow x_4 \leq x_5$ &  $ x_1 \lor x_2 \lor x_4 \lor \neg x_5 $\\
+		 									  &  $ \neg  x_1 \lor \neg x_2 \lor x_4 \lor \neg x_5 $\\
+		 									  \hline 
+		 $x_1 = x_2 \land x_4 = x_5 \rightarrow x_8 \leq x_3$ & $ x_1 \lor x_2 \lor x_4 \lor x_5 \lor x_7 \lor \neg x_8 $\\
+		 													  & $ \neg x_1 \lor  \neg x_2 \lor x_4 \lor x_5 \lor x_7 \lor \neg x_8 $\\
+		 													  & $\cdots$
+	\end{tabular}
 	
-	Tree example with hide symmetric search space\\
-	
-	Easy to use, no modification of the solver \\
-	
-	Inject additional constraints to the problem symmetry breaking predicates sbp\\
-	
-Different tools Shatter, BreakID
+%	TODO\\
+%	
+%	Tree example with hide symmetric search space\\
+%	
+%	Easy to use, no modification of the solver \\
+%	
+%	Inject additional constraints to the problem symmetry breaking predicates sbp\\
+%	
+%Different tools Shatter, BreakID
+
 \end{frame}
 
 
 
 %% ----------------------------------------------------------------------------
 \begin{frame}
-\frametitle{Example}
-TODO\\
+\frametitle{Static symmetry breaking}
+\begin{center}
+	
 
-Show search tree and remove symmetrical search space tree
-
+\begin{tikzpicture}
+	\tikzstyle{box} = [draw, minimum width=1.5cm]
+	
+	\node[box,minimum height=1.2cm] (cnf) {CNF};
+	\node[box] (sym) at (-3, -1) { Symmetries};
+	\node[box,minimum height=1.2cm] (sbp) at (0, -2) { SBPs};
+	
+	\node[box, minimum height=3.5cm, minimum width=2cm, line width=0.5mm, opacity=0,onslide={<2>, opacity=1}] at (0, -1) (full) {$\land$};
+	\node[box,minimum height=1.2cm, opacity=0, onslide={<2>,opacity=1}] (solver) at (3, -1) { SAT solver};
+	
+	\draw[->, thick, bend left = 30] (cnf) to [bend right=30] node [midway, left, fill=white] {compute symmetries} (sym);
+	\draw[->, thick, bend left = 30] (sym) to [bend right=30] node [midway, left, fill=white] {generates SBPs} (sbp);
+	
+	\draw[->, thick, opacity=0, onslide={<2>,opacity=1}] (full) to [] (solver);
+\end{tikzpicture}
+\end{center}
+\vfill
+\begin{itemize}
+	\item<3-> \textcolor{hgreen}{Works well on many symmetric instances}
+	\vfill
+	\item<4-> \textcolor{red}{The solver can "explode" instead of being helped}
+\end{itemize}
 \end{frame}
 
 %% ----------------------------------------------------------------------------
@@ -1125,121 +1291,121 @@ Perspectives:
 \end{frame}
 
 
-\begin{frame}
-\frametitle{Computing symmetries of a SAT problem}
-% \setlength{\tabcolsep}{35pt}
-
-\newcolumntype{C}{ >{\centering\arraybackslash} m{5cm} }
-\newcolumntype{D}{ >{\centering\arraybackslash} m{1cm} }
-\begin{tabular}{CC}
-	$CNF\ formula$ &{\scriptsize
-		\begin{tabular}{c}
-			$(x_1 \lor x_2 \lor x_3) \land
-			(x_4 \lor x_5 \lor x_6) \land
-			(x_7 \lor x_8 \lor x_9) $\\
-			$\land (\neg x_1 \lor \neg x_4) \land
-			(\neg x_1 \lor \neg x_7) \land
-			(\neg x_4 \lor \neg x_7)$\\
-			$\land (\neg x_2 \lor \neg x_5) \land
-			(\neg x_2 \lor \neg x_8) \land
-			(\neg x_5 \lor \neg x_8)$ \\
-			$\land (\neg x_3 \lor \neg x_6) \land
-			(\neg x_3 \lor \neg x_9) \land
-			(\neg x_6 \lor \neg x_9)$\\
-	\end{tabular}}\\
-	\only<2> {
-		
-		$\Downarrow$ & $\Downarrow$  \\
-		
-		colored graph & 
-		\includegraphics[scale=0.1]{images/graph}\\ \\
-	}
-	
-	\visible<3-> {
-		
-		$\Downarrow$ & $\Downarrow$  \\
-		
-		colored graph & 
-		\includegraphics[scale=0.05]{images/graph}\\ \\
-	}
-	\visible<3-> {
-		$\|$ & $\|$  \\
-		graph automorphism & 
-		\small{(\texttt{bliss} \footnote{http://www.tcs.hut.fi/Software/bliss/} or 
-			\texttt{saucy} \footnote{http://vlsicad.eecs.umich.edu/BK/SAUCY/})} 
-		\\
-	}
-	
-	
-	\visible<4-> {
-		$\Downarrow$ & $\Downarrow$  \\
-		
-		set of symmetries & %\begin{frame}
-		%\tikzstyle{every picture}+=[remember picture]
-		%\frametitle{An UNSAT example}
-		%\everymath{\displaystyle}
-		%\centering
-		%
-		%\begin{tabular}{cc}
-		%	\includegraphics[scale=0.07]{images/room} & \includegraphics[scale=0.07]{images/room}\\
-		%	\tikz[baseline]{\node[anchor=base] (r1){1};} & \tikz[baseline]{\node[anchor=base] (r2){2};}\\
-		%\end{tabular}
-		%
-		%\begin{tabular}{ccc}
-		%	\tikz[baseline]{\node[anchor=base] (g1){};} & \tikz[baseline]{\node[anchor=base] (g2){};} & \tikz[baseline]{\node[anchor=base] (g3){};}\\
-		%	\includegraphics[scale=0.1]{images/south} & \includegraphics[scale=0.1]{images/simpson} & \includegraphics[scale=0.09]{images/titeuf}\\
-		%	A                                        & B                                           & C\\
-		%\end{tabular}
-		%
-		%\visible<2->{
-		%	\begin{tikzpicture}[overlay]
-		%	\tikzstyle{line} = [<-, line width=0.5mm];
-		%	\path[line]<3> (r1) edge  (g1.south);
-		%	\path[line]<3> (r2) edge  (g2.south);
-		%	
-		%	\path[line]<4> (r1) edge  (g2.south);
-		%	\path[line]<4> (r2) edge  (g1.south);
-		%	
-		%	\path[line]<5> (r1) edge  (g1.south);
-		%	\path[line]<5> (r2) edge  (g3.south);
-		%	
-		%	\path[line]<6> (r1) edge  (g3.south);
-		%	\path[line]<6> (r2) edge  (g1.south);
-		%	
-		%	\path[line]<7> (r1) edge  (g2.south);
-		%	\path[line]<7> (r2) edge  (g3.south);
-		%	
-		%	\path[line]<8> (r1) edge  (g3.south);
-		%	\path[line]<8> (r2) edge  (g2.south);
-		%	
-		%	\visible<9>{
-		%	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (-1.75, 4.25) {};
-		%  	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (1.8, 4.25) {};
-		%  	
-		%	\node[draw, minimum width=3.5cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (-3.5, 1.5) {};
-		%	\node[draw, minimum width=3.1cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (0.25, 1.5) {};
-		%	\node[draw, minimum width=3.5cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (3.9, 1.5) {};
-		%	}
-		%	\end{tikzpicture}
-		%}
-		%
-		%\vfill
-		%Is it possible to attribute each group to a classroom?\\
-		%\begin{center}
-		%	\visible<8->{No!}
-		%\end{center}
-		%
-		%\end{frame}
-		\scriptsize
-		\begin{tabular}{c}
-			$g_1 = (x_2 \enspace x_3)(x_5 \enspace x_6)(x_8 \enspace x_9)$\\
-			$g_2 = (x_4 \enspace x_7)(x_5 \enspace x_8)(x_6 \enspace x_9)$\\
-			$g_3 = (x_1 \enspace x_2)(x_4 \enspace x_5)(x_7 \enspace x_8)$\\
-			$g_4 = (x_1 \enspace x_4)(x_2 \enspace x_5)(x_3 \enspace x_6)$
-		\end{tabular}
-	}
-\end{tabular}
-\end{frame}
+%\begin{frame}
+%\frametitle{Computing symmetries of a SAT problem}
+%% \setlength{\tabcolsep}{35pt}
+%
+%\newcolumntype{C}{ >{\centering\arraybackslash} m{5cm} }
+%\newcolumntype{D}{ >{\centering\arraybackslash} m{1cm} }
+%\begin{tabular}{CC}
+%	$CNF\ formula$ &{\scriptsize
+%		\begin{tabular}{c}
+%			$(x_1 \lor x_2 \lor x_3) \land
+%			(x_4 \lor x_5 \lor x_6) \land
+%			(x_7 \lor x_8 \lor x_9) $\\
+%			$\land (\neg x_1 \lor \neg x_4) \land
+%			(\neg x_1 \lor \neg x_7) \land
+%			(\neg x_4 \lor \neg x_7)$\\
+%			$\land (\neg x_2 \lor \neg x_5) \land
+%			(\neg x_2 \lor \neg x_8) \land
+%			(\neg x_5 \lor \neg x_8)$ \\
+%			$\land (\neg x_3 \lor \neg x_6) \land
+%			(\neg x_3 \lor \neg x_9) \land
+%			(\neg x_6 \lor \neg x_9)$\\
+%	\end{tabular}}\\
+%	\only<2> {
+%		
+%		$\Downarrow$ & $\Downarrow$  \\
+%		
+%		colored graph & 
+%		\includegraphics[scale=0.1]{images/graph}\\ \\
+%	}
+%	
+%	\visible<3-> {
+%		
+%		$\Downarrow$ & $\Downarrow$  \\
+%		
+%		colored graph & 
+%		\includegraphics[scale=0.05]{images/graph}\\ \\
+%	}
+%	\visible<3-> {
+%		$\|$ & $\|$  \\
+%		graph automorphism & 
+%		\small{(\texttt{bliss} \footnote{http://www.tcs.hut.fi/Software/bliss/} or 
+%			\texttt{saucy} \footnote{http://vlsicad.eecs.umich.edu/BK/SAUCY/})} 
+%		\\
+%	}
+%	
+%	
+%	\visible<4-> {
+%		$\Downarrow$ & $\Downarrow$  \\
+%		
+%		set of symmetries & %\begin{frame}
+%		%\tikzstyle{every picture}+=[remember picture]
+%		%\frametitle{An UNSAT example}
+%		%\everymath{\displaystyle}
+%		%\centering
+%		%
+%		%\begin{tabular}{cc}
+%		%	\includegraphics[scale=0.07]{images/room} & \includegraphics[scale=0.07]{images/room}\\
+%		%	\tikz[baseline]{\node[anchor=base] (r1){1};} & \tikz[baseline]{\node[anchor=base] (r2){2};}\\
+%		%\end{tabular}
+%		%
+%		%\begin{tabular}{ccc}
+%		%	\tikz[baseline]{\node[anchor=base] (g1){};} & \tikz[baseline]{\node[anchor=base] (g2){};} & \tikz[baseline]{\node[anchor=base] (g3){};}\\
+%		%	\includegraphics[scale=0.1]{images/south} & \includegraphics[scale=0.1]{images/simpson} & \includegraphics[scale=0.09]{images/titeuf}\\
+%		%	A                                        & B                                           & C\\
+%		%\end{tabular}
+%		%
+%		%\visible<2->{
+%		%	\begin{tikzpicture}[overlay]
+%		%	\tikzstyle{line} = [<-, line width=0.5mm];
+%		%	\path[line]<3> (r1) edge  (g1.south);
+%		%	\path[line]<3> (r2) edge  (g2.south);
+%		%	
+%		%	\path[line]<4> (r1) edge  (g2.south);
+%		%	\path[line]<4> (r2) edge  (g1.south);
+%		%	
+%		%	\path[line]<5> (r1) edge  (g1.south);
+%		%	\path[line]<5> (r2) edge  (g3.south);
+%		%	
+%		%	\path[line]<6> (r1) edge  (g3.south);
+%		%	\path[line]<6> (r2) edge  (g1.south);
+%		%	
+%		%	\path[line]<7> (r1) edge  (g2.south);
+%		%	\path[line]<7> (r2) edge  (g3.south);
+%		%	
+%		%	\path[line]<8> (r1) edge  (g3.south);
+%		%	\path[line]<8> (r2) edge  (g2.south);
+%		%	
+%		%	\visible<9>{
+%		%	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (-1.75, 4.25) {};
+%		%  	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (1.8, 4.25) {};
+%		%  	
+%		%	\node[draw, minimum width=3.5cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (-3.5, 1.5) {};
+%		%	\node[draw, minimum width=3.1cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (0.25, 1.5) {};
+%		%	\node[draw, minimum width=3.5cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (3.9, 1.5) {};
+%		%	}
+%		%	\end{tikzpicture}
+%		%}
+%		%
+%		%\vfill
+%		%Is it possible to attribute each group to a classroom?\\
+%		%\begin{center}
+%		%	\visible<8->{No!}
+%		%\end{center}
+%		%
+%		%\end{frame}
+%		\scriptsize
+%		\begin{tabular}{c}
+%			$g_1 = (x_2 \enspace x_3)(x_5 \enspace x_6)(x_8 \enspace x_9)$\\
+%			$g_2 = (x_4 \enspace x_7)(x_5 \enspace x_8)(x_6 \enspace x_9)$\\
+%			$g_3 = (x_1 \enspace x_2)(x_4 \enspace x_5)(x_7 \enspace x_8)$\\
+%			$g_4 = (x_1 \enspace x_4)(x_2 \enspace x_5)(x_3 \enspace x_6)$
+%		\end{tabular}
+%	}
+%\end{tabular}
+%\end{frame}
 
 
 
