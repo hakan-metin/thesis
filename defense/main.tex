@@ -15,8 +15,22 @@
 \usepackage{underoverlap}
 % \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{tabularx}
+\usepackage{mathrsfs}
+\usepackage{pgf}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[nointegrals]{wasysym}
+\usepackage{xcolor,colortbl}
 
+\usepackage{multirow}
+\usepackage{adjustbox}
 
+\usepackage{booktabs}
+\usepackage{subfig}
+
+\usepackage{pifont}% http://ctan.org/pkg/pifont
 \usepackage{tikz}
 \usetikzlibrary{calc, chains, decorations.pathmorphing}
 \usetikzlibrary{shapes.geometric}
@@ -1094,7 +1108,7 @@ Is it possible to attribute each group to a classroom?
 	\vfill
 	Example:\\
 	\begin{itemize}
-		\item[]	$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8 ; \hfill \true < \false $ 
+		\item[]	$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8 ;  \false < \true$ 
 		\item[] 	$(x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
 	\end{itemize}
 
@@ -1137,13 +1151,13 @@ Is it possible to attribute each group to a classroom?
 	\node[box] (sym) at (-3, -1) { Symmetries};
 	\node[box,minimum height=1.2cm] (sbp) at (0, -2) { SBPs};
 	
-	\node[box, minimum height=3.5cm, minimum width=2cm, line width=0.5mm, opacity=0,onslide={<2>, opacity=1}] at (0, -1) (full) {$\land$};
-	\node[box,minimum height=1.2cm, opacity=0, onslide={<2>,opacity=1}] (solver) at (3, -1) { SAT solver};
+	\node[box, minimum height=3.5cm, minimum width=2cm, line width=0.5mm, opacity=0,onslide={<2->, opacity=1}] at (0, -1) (full) {$\land$};
+	\node[box,minimum height=1.2cm, opacity=0, onslide={<2->,opacity=1}] (solver) at (3, -1) { SAT solver};
 	
 	\draw[->, thick, bend left = 30] (cnf) to [bend right=30] node [midway, left, fill=white] {compute symmetries} (sym);
 	\draw[->, thick, bend left = 30] (sym) to [bend right=30] node [midway, left, fill=white] {generates SBPs} (sbp);
 	
-	\draw[->, thick, opacity=0, onslide={<2>,opacity=1}] (full) to [] (solver);
+	\draw[->, thick, opacity=0, onslide={<2->,opacity=1}] (full) to [] (solver);
 \end{tikzpicture}
 \end{center}
 \vfill
@@ -1157,9 +1171,8 @@ Is it possible to attribute each group to a classroom?
 %% ----------------------------------------------------------------------------
 \begin{frame}
 \frametitle{Dynamic Symmetry Breaking}
-TODO\\
 
-Accelerate tree traversal\\
+Modify solver behavior to accelerate tree traversal 
 
 modify solver \\
 
@@ -1204,43 +1217,267 @@ Build an example
 \end{frame}
 
 %% ----------------------------------------------------------------------------
+%\begin{frame}
+%\frametitle{Our contribution CDCL[Sym]}
+%
+%Tackling the explosion problem in the static symmetry breaking approaches.
+%
+%
+%Compute and inject ESBP \textcolor{hgreen}{opportunistically} during the solving\\
+%
+%\end{frame}
+%
+
+
+%% ----------------------------------------------------------------------------
+
 \begin{frame}
-\frametitle{CDCL[Sym] idea}
-TODO\\
+\frametitle{Our contribution CDCL[Sym]}
 
-Tackling the explosion problem in the static
-symmetry breaking approaches.
+\centering
+
+\begin{tikzpicture}[scale=0.9,every node/.style={scale=0.5,fill=white, font=\sffamily}, align=center]
+% Specification of nodes (position, etc.)
+\tikzset{%	
+	>={Latex[width=2mm,length=2mm]},
+	% Specifications for style of nodes:
+	base/.style = {rectangle, rounded corners, draw=black,
+		minimum width=2cm, minimum height=1cm,
+		text centered, font=\sffamily},
+	question/.style = {base, diamond, fill=blue!15},
+	question/.style = {base, diamond, fill=blue!15},
+	unsat/.style = {base, fill=red!30,minimum width=3cm},
+	sat/.style = {base, fill=green!30,minimum width=3cm},
+	process/.style = {base, minimum width=2.5cm, fill=orange!25,
+		font=\ttfamily},
+	processcurr/.style = {process, thick, line width=0.7mm, draw=purple!80 },
+	questioncurr/.style = {question,line width=0.7mm, draw=purple!80},
+	line/.style = {->, thick },
+	linecurr/.style = {line, line width=0.7mm, draw=purple!80},
+}
+
+\node (isfin) [question] {All vars\\ assign?};
+\node (dec)     [process, below = of isfin]          {Choose decision var};
+\node (sdec)     [right = of dec]          {};
+\node (idec) [left = of isfin]  {};
+\node (prop)    [process] at ($(dec) + (0pt, -30pt)$)          {Unit Propagation};
 
 
-Compute and inject ESBP opportunistically during the solving\\
+\node (conf)    [question] at ($(prop) + (0pt, -50pt)$){ Is Conflict?};
+\node (confanalyse) [process, below = of conf] {Conflict Analysis};
+\node (learn) [process] at ($(prop) + (90pt, 0)$) {Learn conflict clause};
+\node (isend) [question] at ($(confanalyse) + (90pt, 0)$) {is level\\zero?};
+\node (end) [unsat] at ($(isend) + (90pt, 0)$) {$unsatiasfiable$};
+\node (ends) [sat] at ($(isfin.north east) + (+90pt, 0)$){$satisfiable$};
+
+\node[opacity=0,onslide={<2>,opacity=1},draw, rounded corners=4pt,draw=blue, line width=0.4mm, minimum width=4cm,minimum height=7cm,label={[opacity=0,onslide={<2>,opacity=1},fill=white,xshift=-1.0cm, yshift=-7.5cm]\textcolor{blue}{Symmetry controller}}]  at (-90pt, -160pt){};
+\node (ismin)  [question,opacity=0,onslide={<2>,opacity=1}] at ($(conf) + (-90pt, 0pt)$)  {Is assignment\\minimal?};
+\node (genesbp)  [process,opacity=0,onslide={<2>,opacity=1}] at ($(confanalyse) + (-90pt, 0pt)$)  {Generate ESBP};
 
 
-Symmetry Controller in CDCL\\
 
+\draw[line]     (sdec) -- (dec);
+\draw[line]     (dec) -- (prop);
+\draw[line]     (prop) -- (conf);
+\draw[line,opacity=1,onslide={<2>,opacity=0}]     (conf) -| node [yshift=4.5 cm] {no}(idec.center) -- (isfin);
+
+\draw[line]     (conf) -- node {yes} (confanalyse);
+\draw[line]     (isfin) -- node {no}(dec);
+\draw[line]     (confanalyse) --(isend);
+\draw[line]     (isend) -- node {yes}(end);
+\draw[line]     (isfin.north east) -- node {yes}(ends);
+\draw[line]     (learn) -- (prop);
+\draw[line]     (isend) -- node [] {no}(learn);	
+
+\draw[line,opacity=0,onslide={<2>,opacity=1}]     (ismin) |- node [] {yes}(idec.center) -- (isfin);
+\draw[line,opacity=0,onslide={<2>,opacity=1}]     (ismin) -- node [] {no} (genesbp);	
+\draw[line,opacity=0,onslide={<2>,opacity=1}]     (conf) -- node [] {no} (ismin);	
+\draw[line,opacity=0,onslide={<2>,opacity=1}]     (genesbp) -- (confanalyse);
+
+\end{tikzpicture}
 
 \end{frame}
 %% ----------------------------------------------------------------------------
 
 \begin{frame}
 \frametitle{Symmetry status}
-TODO\\
 
-Reducer, Inactive, active\\
+\begin{itemize}
+	\item \texttt{reducer}: $\sigma(\alpha) \prec \alpha$
+	\item \texttt{inactive} : $\alpha \prec \sigma(\alpha)$
+	\item \texttt{active} : \textit{not enough information}
+\end{itemize}
 
+\vfill
+
+\begin{block}{Efficient implementation of symmetry status}
+
+\centering 	Keep track the smallest unassigned variable $x$ :
+
+\vfill
+
+	\begin{enumerate}
+		\item $\alpha(\sigma(x)) \leq \alpha(x),$ \small then $\sigma$ is \texttt{reducer}
+		$\Rightarrow$ Effective SBP (ESBP)
+		\item $ \alpha(x) \leq \alpha(\sigma(x)),$ then $\sigma$ is \texttt{inactive}
+		$\Rightarrow \sigma$ cannot reduce $\alpha$
+		\item $\alpha(\sigma(x))$ or $\alpha(x)$ is unassigned then $\sigma$ is
+		\texttt{active}
+	\end{enumerate}
+\end{block}  
+\vspace{2em}
+
+Update whenever variables are assigned / unassigned
 \end{frame}
 %% ----------------------------------------------------------------------------
 
 \begin{frame}
 \frametitle{Example}
-TODO\\
 
-\end{frame}
+	$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8  \enspace ; \enspace  \false < \true$ 
+	
+%	$(x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
+ %                 	$g_1 = (x_2 \enspace x_3)(x_5 \enspace x_6)(x_8 \enspace x_9)$\\
+                  	
+ \vfill 
+ 	
+ \begin{tabular}{lllllll|ll}
+      	$g_1$ =  & ($\only<1>{x_2}\only<2->{\textcolor{red}{x_2}} $ & $\only<1-2>{x_3}\only<3->{\textcolor{red}{x_3}}) $ & $ (x_5 $ & $ x_6)$ & $ (x_8 $ & $ x_9)$ & $x = \only<1>{x_2}\only<2>{\textcolor{red}{x_2}}\only<3>{x_5}$ & $g.x = \only<1-2>{x_3}\only<3->{\textcolor{black}{x_6}} $	\\
+      	& $\only<1-2>{\enspace \uparrow}$&  & $\only<3>{\enspace \uparrow}$&  & & & & \texttt{active}
+ \end{tabular}  
+
+\vspace{1em}         
+ \begin{tabular}{lllllll|ll}
+	$g_2$ =  & ($\only<1-2>{x_1}\only<3>{\textcolor{hgreen}{x_1}} $ & $\only<1>{x_2}\only<2->{\textcolor{red}{x_2}}) $ & $ (x_4 $ & $ x_5)$ & $ (x_7 $ & $ x_8)$&
+	 $x = \only<1-2>{x_1}\only<3>{\textcolor{hgreen}{x_1}}$ & $g.x = \only<1>{x_2}\only<2->{\textcolor{red}{x_2}} $	\\
+	& $\enspace \uparrow$ & & &  & &  &&  \only<1-2>{\texttt{active}}\only<3>{\texttt{reducer}}
+\end{tabular}
+
+
+
+
+\hspace{8em}$\cdots $
+\vfill
+\centering 
+
+\only<1>{$\alpha = \{ \phantom{\neg x_2,\neg x_3, x_1} \}$}%
+\only<2>{$\alpha = \{ \neg x_2 \phantom{,\neg x_3, x_1} \}$}%
+\only<3->{$\alpha = \{ \neg x_2, \neg x_3, x_1 \}$}
+
+\only<4>{ $g_2$ generates $\omega = \{ \neg x_1, x_2 \}$ }
+	\end{frame}
 %% ----------------------------------------------------------------------------
 
-\begin{frame}
-\frametitle{Experimental results}
-TODO\\
+\begin{frame}{Experiments: benchmark}
 
+Benchmark:
+\begin{itemize}
+	\item from SAT contests 2012 -- 2017,
+	\item retain only instances for which \bliss{} finds significant symmetries in $1000$s,
+	\item $1350$ symmetric instances (out of $3700$)
+\end{itemize}
+
+Setup:
+\begin{itemize}
+	\item four tools
+	\begin{itemize}
+		\item MiniSat (no symmetry, baseline)
+		\item MiniSat + breakID (state-of-the-art symmetry SAT solver)
+		\item MiniSat + Shatter (state-of-the-art symmetry SAT solver)
+		\item \textbf{MiniSym} = MiniSat + CDCLSym (our approach)
+	\end{itemize}
+	\item $5000$s timeout, $8$GB memory,
+	\item includes time to compute symmetries (except for MiniSat)
+\end{itemize}
+
+\end{frame}
+%----------------------------------------------------------------------------
+\begin{frame}{Experimental results}
+\begin{block}{}
+\centering 	$\bliss$ gives more generators than $\saucy$
+\end{block}
+
+\begin{figure}[t]
+\centering
+\caption{cactus plot  total number of instances}%
+\subfloat[with \saucy]{{\includegraphics[scale=0.3]{images/saucy-result}}}%
+\hfill
+\subfloat[with \bliss]{{\includegraphics[scale=0.3]{images/bliss-result}}}%
+\label{fig:cactus}%
+\end{figure}
+\vspace{-0.3cm}
+\begin{table}
+\resizebox{1 \textwidth}{!}{
+	\subfloat{%
+		\begin{tabular}{l|ccccc}
+			&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
+			\midrule
+			PAR-2 sum  & 8\,074\,348 & 7\,770\,434 & \cellcolor{gray!30}\textbf{6\,909\,999} & 7\,229\,700\\
+			PAR-2 avg  & 5\,981 & 5\,756 & \cellcolor{gray!30}\textbf{5\,119} & 5\,355\\
+			
+		\end{tabular}
+	}
+	\hspace{1em}
+	\subfloat{%
+		\begin{tabular}{l|ccccc}
+			&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
+			\hline
+			PAR-2 sum & 8\,074\,348 & 7\,517\,556 & 6\,444\,954 & \cellcolor{gray!30}\textbf{6\,245\,448}\\
+			PAR-2 avg  & 5\,981 & 5\,569 & 4\,774 & \cellcolor{gray!30}\textbf{4\,626}\\
+		\end{tabular}
+	}
+}
+\vspace*{0.1cm}
+\caption{time comparison}
+\end{table}
+
+\end{frame}
+
+\begin{frame}{Experimental results (\unsat versus \sat)}
+\begin{table}[h!]
+\resizebox{1 \textwidth}{!}{
+\subfloat[With \saucy]{%
+	\begin{tabular}{l|ccccc}
+		&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
+		\midrule
+		TOTAL (no dup)  & 261 & 302 & \cellcolor{gray!30}\textbf{371} & 345\\
+	\end{tabular}
+}
+\hspace{1em}
+\subfloat[With \bliss]{%
+	\begin{tabular}{l|ccccc}
+		&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
+		\midrule
+		TOTAL (no dup) & 261 & 324 & 415 & \cellcolor{gray!30}\textbf{439}\\
+	\end{tabular}
+}
+}
+
+\caption{comparison on \unsat instances}
+\label{table:benchUNSAT}
+\end{table}
+\begin{table}
+\resizebox{1 \textwidth}{!}{
+\subfloat[With \saucy]{%
+	\begin{tabular}{l|ccccc}
+		&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
+		\midrule
+		TOTAL (no dup)  & 325 & 323 & \cellcolor{gray!30}\textbf{337} & 335\\
+		
+	\end{tabular}
+}
+\hspace{1em}
+\subfloat[With \bliss]{%
+	\begin{tabular}{l|ccccc}
+		&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
+		\hline
+		TOTAL (no dup) & 325 & 316 & 334 & \cellcolor{gray!30}\textbf{336}\\
+	\end{tabular}
+}
+}
+\vspace*{0.1cm}
+\caption{comparison on \sat instances}
+\end{table}
 \end{frame}
 
 %% ----------------------------------------------------------------------------
