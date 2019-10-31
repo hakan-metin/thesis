@@ -4,6 +4,7 @@
 \usepackage{mathrsfs}
 \usepackage{pgf}
 
+
 \usepackage{amsmath}
 \usepackage{amsmath,times} %% times package needed only to load TNR text font
 \usepackage{array}
@@ -39,7 +40,7 @@
 \usetikzlibrary{decorations.text}
 \usetikzlibrary{patterns}
 \usetikzlibrary{arrows.meta}
-
+\usetikzlibrary{plotmarks}
 \usepackage{color, soul}
 
 \input{abbr}
@@ -1003,7 +1004,8 @@ Is it possible to attribute each group to a classroom?
 	\newcommand{\y}{-1.5}
 	\tikzstyle{highlight} = [line width=0.3mm, color=blue]
 	\tikzstyle{decision}=[circle,draw,thick,fill=blue!30,font=\scriptsize]
-	\tikzstyle{unsat}=[draw,thick,fill=red]
+%	\tikzstyle{unsat}=[draw,thick, fill=red]
+	\tikzstyle{unsat}=[scale=2, fill=white]
 	\tikzstyle{link}=[->,>=latex,rounded corners=5pt,thick]
 	\tikzstyle{transparent} = [nearly transparent]
 	\tikzstyle{mid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=1,font=\scriptsize]
@@ -1035,22 +1037,22 @@ Is it possible to attribute each group to a classroom?
 	\node[decision](rrr) at (\x+\x*0.5+\x*0.25,3*\y) {$x_5$};
 	
 	% layer 5
-	\node[unsat](llll) at (-\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
-	\node[unsat](lllr) at (-\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {};
-	\node[unsat](llrl) at (-\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-	\node[unsat](llrr) at (-\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {};
-	\node[unsat](lrll) at (-\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
-	\node[unsat](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
-	\node[unsat](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-	\node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
-	\node[unsat](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
-	\node[unsat](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {};
-	\node[unsat](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-	\node[unsat](rlrr) at (\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {};
-	\node[unsat](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
-	\node[unsat](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
-	\node[unsat](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-	\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
+	\node[unsat](llll) at (-\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+	\node[unsat](lllr) at (-\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+	\node[unsat](llrl) at (-\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+	\node[unsat](llrr) at (-\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+	\node[unsat](lrll) at (-\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+	\node[unsat](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+	\node[unsat](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+	\node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}}; 
+	\node[unsat,onslide={<2>, transparent}](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+	\node[unsat,onslide={<2>, transparent}](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+	\node[unsat,onslide={<2>, transparent}](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+	\node[unsat,onslide={<2>, transparent}](rlrr) at (\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+	\node[unsat](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+	\node[unsat](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+	\node[unsat](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+	\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}}; 
 	
 	
 	\draw[link, onslide={<2>, highlight}] (t) ->  node [mid] {$0$} (l);
@@ -1109,7 +1111,7 @@ Is it possible to attribute each group to a classroom?
 	Example:\\
 	\begin{itemize}
 		\item[]	$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8 ;  \false < \true$ 
-		\item[] 	$(x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
+		\item[] 	$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
 	\end{itemize}
 
 	\vfill
@@ -1170,7 +1172,116 @@ Is it possible to attribute each group to a classroom?
 
 %% ----------------------------------------------------------------------------
 \begin{frame}
+\frametitle{Using symmetries to accelerate tree traversal}
+
+\centering
+\begin{tikzpicture}[scale=1, every node/.style={scale=1}]
+
+\newcommand{\x}{2.07}
+\newcommand{\y}{-1.5}
+\tikzstyle{highlight} = [line width=0.3mm, color=blue]
+\tikzstyle{decision}=[circle,draw,thick,fill=blue!30,font=\scriptsize]
+%	\tikzstyle{unsat}=[draw,thick, fill=red]
+\tikzstyle{unsat}=[scale=2, fill=white]
+\tikzstyle{link}=[->,>=latex,rounded corners=5pt,thick]
+\tikzstyle{transparent} = [nearly transparent]
+\tikzstyle{mid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=1,font=\scriptsize]
+\tikzstyle{trmid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=0.3,font=\scriptsize]
+\tikzstyle{propagation}=[rectangle, minimum height=.65cm, minimum width=.65cm,draw,thick,fill=blue!15,font=\scriptsize,anchor=base]
+
+% layer 1
+\node[decision](t) at (0,0) {$x_1$};
+
+% layer 2
+\node[decision,transparent,onslide={<2->,opacity=1}](l) at (-\x,\y) {$x_2$};
+\node[decision,transparent](r) at (\x,\y) {$x_2$};
+
+
+% layer 3
+\node[decision,transparent](ll) at (-\x-\x*0.5,2*\y) {$x_4$};
+\node[propagation,transparent,onslide={<2->,opacity=1}](lr) at (-\x+\x*0.5,2*\y) {$x_4$};
+\node[decision,transparent](rl) at (\x-\x*0.5,2*\y) {$x_4$};
+\node[decision,transparent](rr) at (\x+\x*0.5,2*\y) {$x_4$};
+
+% layer 4
+\node[decision,transparent](lll) at (-\x-\x*0.5-\x*0.25,3*\y) {$x_5$};
+\node[decision,transparent](llr) at (-\x-\x*0.5+\x*0.25,3*\y) {$x_5$};
+\node[decision,transparent,onslide={<3>, propagation,fill=red!30,opacity=1}](lrl) at (-\x+\x*0.5-\x*0.25,3*\y) {$x_5$};
+\node[decision,transparent](lrr) at (-\x+\x*0.5+\x*0.25,3*\y) {$x_5$};
+\node[decision,transparent](rll) at (\x-\x*0.5-\x*0.25,3*\y) {$x_5$};
+\node[decision,transparent](rlr) at (\x-\x*0.5+\x*0.25,3*\y) {$x_5$};
+\node[decision,transparent](rrl) at (\x+\x*0.5-\x*0.25,3*\y) {$x_5$};
+\node[decision,transparent](rrr) at (\x+\x*0.5+\x*0.25,3*\y) {$x_5$};
+
+% layer 5
+\node[unsat,transparent](llll) at (-\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](lllr) at (-\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](llrl) at (-\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](llrr) at (-\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](lrll) at (-\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}}; 
+\node[unsat,transparent](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](rlrr) at (\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}}; 
+
+
+\draw[link] (t) ->  node [mid] {$0$} (l);
+\draw[link,transparent] (t) -> node [trmid] {$1$} (r);
+
+\draw[link,transparent] (l) ->  node [trmid] {$0$} (ll);
+\draw[link,transparent,onslide={<2->,opacity=1}] (l) -> node [trmid,onslide={<2->,mid}] {$1$} (lr);
+\draw[link,transparent] (r) ->  node [trmid] {$0$} (rl);
+\draw[link,transparent] (r) -> node [trmid] {$1$} (rr);
+
+\draw[link,transparent] (ll) -> node [trmid] {$0$} (lll);
+\draw[link,transparent] (ll) -> node [trmid] {$1$} (llr);
+\draw[link,transparent,onslide={<2->,opacity=1}] (lr) -> node [trmid,onslide={<2->,mid}] {$0$} (lrl);
+\draw[link,transparent] (lr) -> node [trmid] {$1$} (lrr);
+
+\draw[link,transparent] (rl) -> node [trmid] {$0$} (rll);
+\draw[link,transparent] (rl) -> node [trmid] {$1$} (rlr);
+\draw[link,transparent] (rr) -> node [trmid] {$0$} (rrl);
+\draw[link,transparent] (rr) -> node [trmid] {$1$} (rrr);
+
+
+\draw[link,transparent] (lll) -> node [trmid] {$0$} (llll);
+\draw[link,transparent] (lll) -> node [trmid] {$1$} (lllr);
+\draw[link,transparent] (llr) -> node [trmid] {$0$} (llrl);
+\draw[link,transparent] (llr) -> node [trmid] {$1$} (llrr);
+\draw[link,transparent,onslide={<3->,opacity=1}] (lrl) -> node [trmid,onslide={<3->,mid}] {$0$} (lrll);
+\draw[link,transparent] (lrl) -> node [trmid] {$1$} (lrlr);
+\draw[link,transparent] (lrr) -> node [trmid] {$0$} (lrrl);
+\draw[link,transparent] (lrr) -> node [trmid] {$1$} (lrrr);
+
+\draw[link,transparent] (rll) -> node [trmid] {$0$} (rlll);
+\draw[link,transparent] (rll) -> node [trmid] {$1$} (rllr);
+\draw[link,transparent] (rlr) -> node [trmid] {$0$} (rlrl);
+\draw[link,transparent] (rlr) -> node [trmid] {$1$} (rlrr);
+\draw[link,transparent] (rrl) -> node [trmid] {$0$} (rrll);
+\draw[link,transparent] (rrl) -> node [trmid] {$1$} (rrlr);
+\draw[link,transparent] (rrr) -> node [trmid] {$0$} (rrrl);
+\draw[link,transparent] (rrr) -> node [trmid] {$1$} (rrrr);
+\end{tikzpicture}
+\vfill
+\visible<3> {Use symmetries to deduce symmetrical facts.}
+\end{frame}
+
+
+
+\begin{frame}
 \frametitle{Dynamic Symmetry Breaking}
+
+\begin{itemize}
+	\item Accelerate SAT engine using symmetry properties
+	\item 
+\end{itemize}
 
 Modify solver behavior to accelerate tree traversal 
 
@@ -1303,8 +1414,8 @@ Build an example
 \frametitle{Symmetry status}
 
 \begin{itemize}
-	\item \texttt{reducer}: $\sigma(\alpha) \prec \alpha$
-	\item \texttt{inactive} : $\alpha \prec \sigma(\alpha)$
+	\item \texttt{reducer}: $g.\alpha. \prec \alpha$
+	\item \texttt{inactive} : $\alpha \prec g.\alpha$
 	\item \texttt{active} : \textit{not enough information}
 \end{itemize}
 
@@ -1317,11 +1428,11 @@ Build an example
 \vfill
 
 	\begin{enumerate}
-		\item $\alpha(\sigma(x)) \leq \alpha(x),$ \small then $\sigma$ is \texttt{reducer}
+		\item $\alpha(g.x) \leq \alpha(x),$ \small then $g$ is \texttt{reducer}
 		$\Rightarrow$ Effective SBP (ESBP)
-		\item $ \alpha(x) \leq \alpha(\sigma(x)),$ then $\sigma$ is \texttt{inactive}
-		$\Rightarrow \sigma$ cannot reduce $\alpha$
-		\item $\alpha(\sigma(x))$ or $\alpha(x)$ is unassigned then $\sigma$ is
+		\item $ \alpha(x) \leq \alpha(g.x),$ then $g$ is \texttt{inactive}
+		$\Rightarrow g$ cannot reduce $\alpha$
+		\item $\alpha(g.x)$ or $\alpha(x)$ is unassigned then $g$ is
 		\texttt{active}
 	\end{enumerate}
 \end{block}  
@@ -1333,7 +1444,16 @@ Update whenever variables are assigned / unassigned
 
 \begin{frame}
 \frametitle{Example}
+{\scriptsize
+\begin{enumerate}
+	\item \texttt{reducer}: $\alpha(g.x) \leq \alpha(x)$
 
+	\item \texttt{inactive}: $ \alpha(x) \leq \alpha(g.x)$
+
+	\item \texttt{active}: $\alpha(g.x)$ or $\alpha(x)$ is unassigned
+\end{enumerate}
+}
+\vfill
 	$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8  \enspace ; \enspace  \false < \true$ 
 	
 %	$(x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
@@ -1342,15 +1462,15 @@ Update whenever variables are assigned / unassigned
  \vfill 
  	
  \begin{tabular}{lllllll|ll}
-      	$g_1$ =  & ($\only<1>{x_2}\only<2->{\textcolor{red}{x_2}} $ & $\only<1-2>{x_3}\only<3->{\textcolor{red}{x_3}}) $ & $ (x_5 $ & $ x_6)$ & $ (x_8 $ & $ x_9)$ & $x = \only<1>{x_2}\only<2>{\textcolor{red}{x_2}}\only<3>{x_5}$ & $g.x = \only<1-2>{x_3}\only<3->{\textcolor{black}{x_6}} $	\\
-      	& $\only<1-2>{\enspace \uparrow}$&  & $\only<3>{\enspace \uparrow}$&  & & & & \texttt{active}
+      	$g_1$ =  & ($\only<1>{x_2}\only<2->{\textcolor{red}{x_2}} $ & $\only<1-2>{x_3}\only<3->{\textcolor{red}{x_3}}) $ & $ (x_5 $ & $ x_6)$ & $ (x_8 $ & $ x_9)$ & $x = \only<1>{x_2}\only<2>{\textcolor{red}{x_2}}\only<3->{x_5}$ & $g.x = \only<1-2>{x_3}\only<3->{\textcolor{black}{x_6}} $	\\
+      	& $\only<1-2>{\enspace \uparrow}$&  & $\only<3->{\enspace \uparrow}$&  & & & & \texttt{active}
  \end{tabular}  
 
 \vspace{1em}         
  \begin{tabular}{lllllll|ll}
-	$g_2$ =  & ($\only<1-2>{x_1}\only<3>{\textcolor{hgreen}{x_1}} $ & $\only<1>{x_2}\only<2->{\textcolor{red}{x_2}}) $ & $ (x_4 $ & $ x_5)$ & $ (x_7 $ & $ x_8)$&
-	 $x = \only<1-2>{x_1}\only<3>{\textcolor{hgreen}{x_1}}$ & $g.x = \only<1>{x_2}\only<2->{\textcolor{red}{x_2}} $	\\
-	& $\enspace \uparrow$ & & &  & &  &&  \only<1-2>{\texttt{active}}\only<3>{\texttt{reducer}}
+	$g_2$ =  & ($\only<1-2>{x_1}\only<3->{\textcolor{hgreen}{x_1}} $ & $\only<1>{x_2}\only<2->{\textcolor{red}{x_2}}) $ & $ (x_4 $ & $ x_5)$ & $ (x_7 $ & $ x_8)$&
+	 $x = \only<1-2>{x_1}\only<3->{\textcolor{hgreen}{x_1}}$ & $g.x = \only<1>{x_2}\only<2->{\textcolor{red}{x_2}} $	\\
+	& $\enspace \uparrow$ & & &  & &  &&  \only<1-2>{\texttt{active}}\only<3->{\texttt{reducer}}
 \end{tabular}
 
 
@@ -1364,6 +1484,9 @@ Update whenever variables are assigned / unassigned
 \only<2>{$\alpha = \{ \neg x_2 \phantom{,\neg x_3, x_1} \}$}%
 \only<3->{$\alpha = \{ \neg x_2, \neg x_3, x_1 \}$}
 
+\vspace{1em}
+
+\only<1-3>{ \phantom{$g_2$ generates $\omega = \{ \neg x_1, x_2 \}$ }}
 \only<4>{ $g_2$ generates $\omega = \{ \neg x_1, x_2 \}$ }
 	\end{frame}
 %% ----------------------------------------------------------------------------
