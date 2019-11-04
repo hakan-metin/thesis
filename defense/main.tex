@@ -70,7 +70,7 @@
     	\vspace{1em}
     	\textsc{Fabrice Kordon}  & Professeur, Sorbonne Université\\
     	
- 	    \textbf{Supervisors:} & \\
+ 	    \textbf{Directors:} & \\
     	\textsc{Souheib Baarir}  & Maître de conférences, Université Paris Nanterre\\
 
     	\textsc{Fabrice Kordon}  & Professeur, Sorbonne Université\\
@@ -725,6 +725,8 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 	\tikz[baseline]{\node[anchor=base] (r1){1};} & \tikz[baseline]{\node[anchor=base] (r2){2};}\\
 \end{tabular}
 
+\visible<4>{\tikz[baseline]{\node[anchor=base] (cc){$\cdots$};}}
+
 \begin{tabular}{ccc}
 	\tikz[baseline]{\node[anchor=base] (g1){};} & \tikz[baseline]{\node[anchor=base] (g2){};} & \tikz[baseline]{\node[anchor=base] (g3){};}\\
 	\includegraphics[scale=0.1]{images/south} & \includegraphics[scale=0.1]{images/simpson} & \includegraphics[scale=0.09]{images/titeuf}\\
@@ -734,29 +736,30 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \visible<2->{
 	\begin{tikzpicture}[overlay]
 	\tikzstyle{line} = [<-, line width=0.5mm];
-	\path[line]<3> (r1) edge  (g1.south);
-	\path[line]<3> (r2) edge  (g2.south);
+	\path[line]<2> (r1) edge  (g1.south);
+	\path[line]<2> (r2) edge  (g2.south);
 	
-	\path[line]<4> (r1) edge  (g2.south);
-	\path[line]<4> (r2) edge  (g1.south);
+	\path[line]<3> (r1) edge  (g2.south);
+	\path[line]<3> (r2) edge  (g1.south);
 	
-	\path[line]<5> (r1) edge  (g1.south);
-	\path[line]<5> (r2) edge  (g3.south);
 	
-	\path[line]<6> (r1) edge  (g3.south);
-	\path[line]<6> (r2) edge  (g1.south);
+%	\path[line,color=blue]<4-> (r1.west) edge  (g1.south);
+%	\path[line,color=blue]<4-> (r2) edge  (g3.south);
+%	
+%	\path[line,color=green]<4-> (r1) edge  (g3.south);
+%	\path[line,color=gren]<4> (r2.south west) edge  (g1.south);
+%	
+%	\path[line,color=red]<4-> (r1.east) edge  (g2.south);
+%	\path[line,color=red]<4-> (r2.east) edge  (g3.south);
+%	
+%	\path[line,color=purple]<4-> (r1) edge  (g3.south);
+%	\path[line,color=purple]<4-> (r2) edge  (g2.south);
 	
-	\path[line]<7> (r1) edge  (g2.south);
-	\path[line]<7> (r2) edge  (g3.south);
-	
-	\path[line]<8> (r1) edge  (g3.south);
-	\path[line]<8> (r2) edge  (g2.south);
-	
-	\visible<9>{
-	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (-1.75, 4.25) {};
-  	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (1.8, 4.25) {};
+	\visible<5>{
+	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (-1.75, 4.75) {};
+  	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (1.8, 4.75) {};
   	
-	\node[draw, minimum width=3.5cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (-3.5, 1.5) {};
+	\node[draw, minimum width=3.5cm, minimum height=1.6cm,line width=0.5mm, color=blue](a) at (-3.5, 1.5) {};
 	\node[draw, minimum width=3.1cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (0.25, 1.5) {};
 	\node[draw, minimum width=3.5cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (3.9, 1.5) {};
 	}
@@ -766,9 +769,9 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \vfill
 Is it possible to attribute each group to a classroom?
 \begin{center}
-	\visible<8->{No!}
+	\visible<4->{No!}
 	\vfill
-	\visible<9->{Presence of symmetries hinders the performance of the solver}
+	\visible<5->{Presence of symmetries hinders the performance of the solver}
 \end{center}
 
 \end{frame}
@@ -1278,30 +1281,44 @@ Is it possible to attribute each group to a classroom?
 \begin{frame}
 \frametitle{Dynamic Symmetry Breaking}
 
+\begin{center}
+	\begin{tikzpicture}[scale=1,every node/.style={scale=1}]
+	\tikzstyle{box} = [draw, minimum width=1.5cm]
+	
+	\node[box,minimum height=1.2cm] (cnf) at (-5, 0) {CNF};
+	\node[box] (sym) at (-2, -2) { Symmetries};
+	
+	
+	\node[box,minimum width=3cm,minimum height=3.5cm,label={[yshift=-1cm]SAT Solver}] (solver) at (1, -1) { };
+	\node[box,text width=2cm] (symcomp) at (1, -1.5) {Symmetry component};
+	\draw[->, thick, bend left = 30] (cnf) to [bend right=30] node [midway, left, fill=white, align=center] {compute\\symmetries} (sym);
+	
+	\draw[->, thick,bend left = 30] (cnf) to [] (solver);
+	\draw[->, thick] (sym) to [] (symcomp);
+	\end{tikzpicture}
+\end{center}
+\vfill
+Different approaches:
 \begin{itemize}
-	\item Accelerate SAT engine using symmetry properties
-	\item 
+	\item Symmetry Propagation (SP)~\cite{Devriendt12}
+	\visible<2>{
+	\begin{itemize}
+		\item[] Need to keep track of active symmetries 
+	\end{itemize}
+}
+	\item Symmetry Learning Scheme (SLS)~\cite{benhamou2010enhancing}
+	\item Symmetry Explanation Leaning (SEL)~\cite{devriendt2017symmetric}
 \end{itemize}
 
-Modify solver behavior to accelerate tree traversal 
 
-modify solver \\
-
-Different tools SP, SLS, SEL, ...
 \end{frame}
 %% ----------------------------------------------------------------------------
-\begin{frame}
-\frametitle{Symmetry Propagation}
-TODO\\
-Present SP
-\end{frame}
-%% ---------
 
-\begin{frame}
-\frametitle{Example}
-TODO\\
-Build an example
-\end{frame}
+%\begin{frame}
+%\frametitle{Example}
+%TODO\\
+%Build an example
+%\end{frame}
 %% ----------------------------------------------------------------------------
 
 \begin{frame}
@@ -1345,8 +1362,11 @@ Build an example
 \begin{frame}
 \frametitle{Our contribution CDCL[Sym]}
 
-\centering
+Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 
+\vspace{1em}
+
+\centering
 \begin{tikzpicture}[scale=0.9,every node/.style={scale=0.5,fill=white, font=\sffamily}, align=center]
 % Specification of nodes (position, etc.)
 \tikzset{%	
@@ -1368,22 +1388,22 @@ Build an example
 }
 
 \node (isfin) [question] {All vars\\ assign?};
-\node (dec)     [process, below = of isfin]          {Choose decision var};
+\node (dec)     [process] at ($(isfin) + (0pt, -50pt)$)    {Choose decision var};
 \node (sdec)     [right = of dec]          {};
 \node (idec) [left = of isfin]  {};
 \node (prop)    [process] at ($(dec) + (0pt, -30pt)$)          {Unit Propagation};
 
 
-\node (conf)    [question] at ($(prop) + (0pt, -50pt)$){ Is Conflict?};
-\node (confanalyse) [process, below = of conf] {Conflict Analysis};
+\node (conf)    [question] at ($(prop) + (0pt, -40pt)$){ Is Conflict?};
+\node (confanalyse) [process] at ($(conf) + (0pt, -60pt)$) {Conflict Analysis};
 \node (learn) [process] at ($(prop) + (90pt, 0)$) {Learn conflict clause};
 \node (isend) [question] at ($(confanalyse) + (90pt, 0)$) {is level\\zero?};
 \node (end) [unsat] at ($(isend) + (90pt, 0)$) {$unsatiasfiable$};
-\node (ends) [sat] at ($(isfin.north east) + (+90pt, 0)$){$satisfiable$};
+\node (ends) [sat] at ($(isfin) + (+90pt, 0)$){$satisfiable$};
 
-\node[opacity=0,onslide={<2>,opacity=1},draw, rounded corners=4pt,draw=blue, line width=0.4mm, minimum width=4cm,minimum height=7cm,label={[opacity=0,onslide={<2>,opacity=1},fill=white,xshift=-1.0cm, yshift=-7.5cm]\textcolor{blue}{Symmetry controller}}]  at (-90pt, -160pt){};
+\node[opacity=0,onslide={<2>,opacity=1},draw, rounded corners=4pt,draw=blue, line width=0.4mm, minimum width=4cm,minimum height=6.5cm,label={[opacity=0,onslide={<2>,opacity=1},fill=white,xshift=-1.0cm, yshift=-7cm]\textcolor{blue}{Symmetry controller}}]  at (-90pt, -140pt){};
 \node (ismin)  [question,opacity=0,onslide={<2>,opacity=1}] at ($(conf) + (-90pt, 0pt)$)  {Is assignment\\minimal?};
-\node (genesbp)  [process,opacity=0,onslide={<2>,opacity=1}] at ($(confanalyse) + (-90pt, 0pt)$)  {Generate ESBP};
+\node (genesbp)  [process,opacity=0,onslide={<2>,opacity=1}] at ($(confanalyse) + (-90pt, 0pt)$)  {Generate SBP};
 
 
 
@@ -1396,7 +1416,7 @@ Build an example
 \draw[line]     (isfin) -- node {no}(dec);
 \draw[line]     (confanalyse) --(isend);
 \draw[line]     (isend) -- node {yes}(end);
-\draw[line]     (isfin.north east) -- node {yes}(ends);
+\draw[line]     (isfin) -- node {yes}(ends);
 \draw[line]     (learn) -- (prop);
 \draw[line]     (isend) -- node [] {no}(learn);	
 

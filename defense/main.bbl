@@ -1,10 +1,32 @@
-\begin{thebibliography}{MSS99}
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{DBdC{\etalchar{+}}12}
+
+\bibitem[BNOS10]{benhamou2010enhancing}
+Belaid Benhamou, Tarek Nabhani, Richard Ostrowski, and Mohamed~Reda Saidi.
+\newblock Enhancing clause learning by symmetry in sat solvers.
+\newblock In {\em 2010 22nd IEEE International Conference on Tools with
+  Artificial Intelligence}, volume~1, pages 329--335. IEEE, 2010.
 
 \bibitem[Coo71]{cook1971complexity}
 Stephen~A Cook.
 \newblock The complexity of theorem-proving procedures.
 \newblock In {\em Proceedings of the third annual ACM symposium on Theory of
   computing}, pages 151--158. ACM, 1971.
+
+\bibitem[DBB17]{devriendt2017symmetric}
+Jo~Devriendt, Bart Bogaerts, and Maurice Bruynooghe.
+\newblock Symmetric explanation learning: Effective dynamic symmetry handling
+  for sat.
+\newblock In {\em International Conference on Theory and Applications of
+  Satisfiability Testing}, pages 83--100. Springer, 2017.
+
+\bibitem[DBdC{\etalchar{+}}12]{Devriendt12}
+Jo~Devriendt, Bart Bogaerts, Broes de~Cat, Marc Denecker, and Christopher
+  Mears.
+\newblock Symmetry propagation: Improved dynamic symmetry breaking in {SAT}.
+\newblock In {\em {IEEE} 24th International Conference on Tools with Artificial
+  Intelligence, {ICTAI} 2012, Athens, Greece, November 7-9, 2012}, pages
+  49--56, 2012.
 
 \bibitem[DLL62]{dpll_62}
 Martin Davis, George Logemann, and Donald Loveland.
