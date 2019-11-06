@@ -38,4 +38,9 @@ Joao~P Marques-Silva and Karem~A Sakallah.
 \newblock Grasp: A search algorithm for propositional satisfiability.
 \newblock {\em IEEE Transactions on Computers}, 48(5):506--521, 1999.
 
+\bibitem[Sab05]{sabharwal2005symchaff}
+Ashish Sabharwal.
+\newblock Symchaff: A structure-aware satisfiability solver.
+\newblock In {\em AAAI}, volume~5, pages 467--474, 2005.
+
 \end{thebibliography}
