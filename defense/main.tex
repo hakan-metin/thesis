@@ -52,7 +52,8 @@
 \author{Hakan \textsc{METIN}}
 
 \begin{frame}
-\frametitle{Exploitation des symétries dynamiques pour la résolution des problèmes SAT}
+\frametitle{Exploitation of dynamic symmetries for solving SAT problems}
+%\frametitle{Exploitation des symétries dynamiques pour la résolution des problèmes SAT}
 \framesubtitle{Thèse de doctorat de Sorbonne Université}
  
    Hakan \textsc{Metin}\\
@@ -92,14 +93,14 @@
 \begin{frame}
 
 \frametitle{Motivation}
-SAT is widely used in different domains:
+SAT is widely used in different domains
 
 \begin{itemize}
 	\item Artificial intelligence (planning, games, ...)
 	\item Bioinformatics (haplotype inference, ...)
-	\item Security (cryptanalysis, inversion attack on hash function)
+	\item Security (cryptanalysis, inversion attack on hash , ...)
 	\item Computationally hard problems (graph coloring, ...)
-	\item Formal Methods (hardware model checking, ...)
+	\item Formal methods (hardware model checking, ...)
 \end{itemize}
 
 \end{frame}
@@ -302,7 +303,8 @@ Is it possible to attribute each group to a classroom?\\
 %\end{frame}
 %% ----------------------------------------------------------------------------
 \begin{frame}
-\frametitle{SAT}
+\frametitle{Boolean SATisfiability problem}
+\vspace{1em}
 \centering
 \begin{tikzpicture}
 \tikzstyle{box} = [draw, minimum width=3.5cm,
@@ -310,12 +312,12 @@ Is it possible to attribute each group to a classroom?\\
 \tikzstyle{result} = [draw, minimum width=2.5cm, minimum height=1cm]
 
 \node[box] (hlp) {High level problem};    
-\node[box] (input) at ($(hlp) + (0pt, -50pt)$){Logic Formula};    
+\node[box] (input) at ($(hlp) + (0pt, -50pt)$){Logic formula};    
 
-\node[box, line width=0.4mm, minimum width=10cm,minimum height=5cm,label={[fill=white,xshift=4.0cm, yshift=-0.3cm]SAT}]  at (0pt, -100pt){};
+\node[box, line width=0.4mm, minimum width=10cm,minimum height=4.5cm,label={[fill=white,xshift=4.0cm, yshift=-0.3cm]SAT}]  at (0pt, -100pt){};
 %\node<2->[draw, ellipse] (cnf) at ($(input) + (0pt, -10pt)$) {\scriptsize CNF};
 
-\node[box] (solver) at ($(input) + (0pt, -30pt)$) {Solver};
+\node[box] (solver) at ($(input) + (0pt, -30pt)$) {SAT solver};
 %\node<3->[draw, ellipse] (cnf) at ($(solver) + (-25pt, -10pt)$) {\scriptsize DPLL};
 %\node<3->[draw, ellipse] (cnf) at ($(solver) + (25pt, -10pt)$) {\scriptsize CDCL};
 
@@ -323,15 +325,16 @@ Is it possible to attribute each group to a classroom?\\
 \node[result] (unsat) at ($(solver) + (70pt, -60pt)$) {Unsatisfiable ($\UNSAT$)};
 
 \visible<1>{\draw[->] (hlp) -> (input);}
-\visible<2->{\draw[->] (hlp) -> node [midway, fill=white]{CNF} (input);}
+\visible<2->{\draw[->] (hlp) -> node [midway, fill=white]{Conjunctive Normal Form (CNF)} (input);}
 \draw[->] (input) -> (solver);
-\draw[->] (solver) -> node[midway,fill=white] {Assignment ($\alpha$)}  (sat);
-\draw[->] (solver) -> node[midway,fill=white] {Proof}(unsat);
+\draw[->] (solver) -> node[midway,fill=white] {assignment}  (sat);
+\draw[->] (solver) -> node[midway,fill=white] {proof}(unsat);
 \end{tikzpicture}
 \vfill
 \begin{overlayarea}{\textwidth}{.2\textwidth}
 	\vfill
-	\visible<2->{CNF Representation:\\}
+	\only<2-3>{CNF representation:\\}
+	\only<4>{Clause representation as a set:\\}
 	\centering
 \only<2>{
 $\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{\text{Clause with literals } x_1, x_2, \neg x_3}$
@@ -357,16 +360,17 @@ $\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{\text{Clause with literals } x_1, x_
 
 	Solving SAT formula is known to be \textbf{NP-complete}~\cite{cook1971complexity}
 	\vfill
-	Enumerative Algorithm:
+	Enumerative algorithm:
 	\begin{itemize}
 		\item Davis, Putnam, Logemann, and Loveland (DPLL)~\cite{dpll_62}
 		\begin{itemize}
 			\item Boolean Constraint Propagation (BCP)
 		\end{itemize}
+	\vfill
 		\item Conflict Driven Clause Learning (CDCL)~\cite{marques1999grasp}
 		\begin{itemize}
-			\item derived from DPLL
-			\item clause learning
+			\item Derived from DPLL
+			\item Clause learning
 		\end{itemize}
 	\end{itemize}
 	
@@ -803,6 +807,9 @@ Is it possible to attribute each group to a classroom?
 \everymath{\displaystyle}
 
 	\frametitle{Symmetry}
+	\normalsize
+	A symmetry (permuation) $g$ is a bijective function (on variables) that leaves the formula invariant.
+	\vfill
 	\scriptsize
 	\mbox{$g$ = \bigg(\begin{tabular}{ccccccccc}
 		$x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & $x_7$ & $x_8$ & $x_9$\\
@@ -865,9 +872,7 @@ Is it possible to attribute each group to a classroom?
 
 \end{tikzpicture}
 %	Symmetry of formula:
-\vfill
-\normalsize
-	A symmetry (permuation) $g$ is a bijective function (on variables) that leaves $\varphi$ invariant.
+
 %	
 %	\vfill
 %	Equi-satisfiability
@@ -900,7 +905,6 @@ Is it possible to attribute each group to a classroom?
 				(\neg x_6 \lor \neg x_9)$\\
 		\end{tabular}}\\
 		\only<2> {
-			
 			$\Downarrow$ & $\Downarrow$  \\
 			
 			colored graph & 
@@ -914,11 +918,14 @@ Is it possible to attribute each group to a classroom?
 			colored graph & 
 			\includegraphics[scale=0.05]{images/graph}\\ \\
 		}
+	
+	
 		\visible<3-> {
 			$\|$ & $\|$  \\
 			graph automorphism & 
-			\small{(\texttt{bliss} \footnote{http://www.tcs.hut.fi/Software/bliss/} or 
-				\texttt{saucy} \footnote{http://vlsicad.eecs.umich.edu/BK/SAUCY/})} 
+			\small{(\texttt{bliss}\footnote{http://www.tcs.hut.fi/Software/bliss/},
+				\texttt{saucy} \footnote{http://vlsicad.eecs.umich.edu/BK/SAUCY/},$\cdots$)
+			} 
 			\\
 		}
 		
@@ -926,62 +933,7 @@ Is it possible to attribute each group to a classroom?
 		\visible<4-> {
 			$\Downarrow$ & $\Downarrow$  \\
 			
-			set of symmetries & %\begin{frame}
-			%\tikzstyle{every picture}+=[remember picture]
-			%\frametitle{An UNSAT example}
-			%\everymath{\displaystyle}
-			%\centering
-			%
-			%\begin{tabular}{cc}
-			%	\includegraphics[scale=0.07]{images/room} & \includegraphics[scale=0.07]{images/room}\\
-			%	\tikz[baseline]{\node[anchor=base] (r1){1};} & \tikz[baseline]{\node[anchor=base] (r2){2};}\\
-			%\end{tabular}
-			%
-			%\begin{tabular}{ccc}
-			%	\tikz[baseline]{\node[anchor=base] (g1){};} & \tikz[baseline]{\node[anchor=base] (g2){};} & \tikz[baseline]{\node[anchor=base] (g3){};}\\
-			%	\includegraphics[scale=0.1]{images/south} & \includegraphics[scale=0.1]{images/simpson} & \includegraphics[scale=0.09]{images/titeuf}\\
-			%	A                                        & B                                           & C\\
-			%\end{tabular}
-			%
-			%\visible<2->{
-			%	\begin{tikzpicture}[overlay]
-			%	\tikzstyle{line} = [<-, line width=0.5mm];
-			%	\path[line]<3> (r1) edge  (g1.south);
-			%	\path[line]<3> (r2) edge  (g2.south);
-			%	
-			%	\path[line]<4> (r1) edge  (g2.south);
-			%	\path[line]<4> (r2) edge  (g1.south);
-			%	
-			%	\path[line]<5> (r1) edge  (g1.south);
-			%	\path[line]<5> (r2) edge  (g3.south);
-			%	
-			%	\path[line]<6> (r1) edge  (g3.south);
-			%	\path[line]<6> (r2) edge  (g1.south);
-			%	
-			%	\path[line]<7> (r1) edge  (g2.south);
-			%	\path[line]<7> (r2) edge  (g3.south);
-			%	
-			%	\path[line]<8> (r1) edge  (g3.south);
-			%	\path[line]<8> (r2) edge  (g2.south);
-			%	
-			%	\visible<9>{
-			%	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (-1.75, 4.25) {};
-			%  	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (1.8, 4.25) {};
-			%  	
-			%	\node[draw, minimum width=3.5cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (-3.5, 1.5) {};
-			%	\node[draw, minimum width=3.1cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (0.25, 1.5) {};
-			%	\node[draw, minimum width=3.5cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (3.9, 1.5) {};
-			%	}
-			%	\end{tikzpicture}
-			%}
-			%
-			%\vfill
-			%Is it possible to attribute each group to a classroom?\\
-			%\begin{center}
-			%	\visible<8->{No!}
-			%\end{center}
-			%
-			%\end{frame}
+			set of symmetries & 
 			\scriptsize
 			\begin{tabular}{c}
 				$g_1 = (x_2 \enspace x_3)(x_5 \enspace x_6)(x_8 \enspace x_9)$\\
@@ -996,6 +948,8 @@ Is it possible to attribute each group to a classroom?
 %% ----------------------------------------------------------------------------
 \begin{frame}
 	\frametitle{Using symmetries to prune search space}
+\only<1>{$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\}
+\only<2>{$g = \textcolor{blue}{(x_1 \enskip x_2)}(x_4 \enskip x_5)(x_7 \enskip x_8) $\\}
 	\centering
 	\begin{tikzpicture}[scale=1, every node/.style={scale=1}]
 	
@@ -1172,7 +1126,8 @@ Is it possible to attribute each group to a classroom?
 %% ----------------------------------------------------------------------------
 \begin{frame}
 \frametitle{Using symmetries to accelerate tree traversal}
-
+\only<1-2>{$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\}
+\only<3>{$g = (x_1 \enskip x_2)\textcolor{red!70}{(x_4 \enskip x_5)}(x_7 \enskip x_8) $\\}
 \centering
 \begin{tikzpicture}[scale=1, every node/.style={scale=1}]
 
@@ -1298,15 +1253,13 @@ Different approaches:
 \begin{itemize}
 	\item Symmchaff~\cite{sabharwal2005symchaff}
 	\item Symmetry Propagation (SP)~\cite{Devriendt12}
-	\visible<2>{
-	\begin{itemize}
-		\item[] Need to keep track of active symmetries 
-	\end{itemize}
-}
 	\item Symmetry Learning Scheme (SLS)~\cite{benhamou2010enhancing}
 	\item Symmetry Explanation Leaning (SEL)~\cite{devriendt2017symmetric}
 \end{itemize}
 
+\vfill 
+
+\visible<2>{\centering Works under \textbf{some conditions}}
 
 \end{frame}
 %% ----------------------------------------------------------------------------
@@ -1317,29 +1270,29 @@ Different approaches:
 %Build an example
 %\end{frame}
 %% ----------------------------------------------------------------------------
-
-\begin{frame}
-\frametitle{Outline}
-\begin{enumerate}
-	\item \textcolor{UPMCEngagementBlueB}{SAT overview}
-	\begin{itemize}
-		\item[] SAT basics
-		\item[] SAT and symmetries
-	\end{itemize}
-	\vspace{5pt}
-	\item \textcolor{UPMCEngagementBlueB}{Existing approaches}
-	\begin{itemize}
-		\item[] Static symmetry breaking
-		\item[] Dynamic symmetry breaking
-	\end{itemize}
-	\vspace{5pt}
-	\item \textcolor{UPMCEngagementBlueB}{Contribution and results} 
-	\begin{itemize}
-		\item[] CDCL [Sym]
-		\item[] Combination of different approaches
-	\end{itemize}
-\end{enumerate}
-\end{frame}
+%
+%\begin{frame}
+%\frametitle{Outline}
+%\begin{enumerate}
+%	\item \textcolor{UPMCEngagementBlueB}{SAT overview}
+%	\begin{itemize}
+%		\item[] SAT basics
+%		\item[] SAT and symmetries
+%	\end{itemize}
+%	\vspace{5pt}
+%	\item \textcolor{UPMCEngagementBlueB}{Existing approaches}
+%	\begin{itemize}
+%		\item[] Static symmetry breaking
+%		\item[] Dynamic symmetry breaking
+%	\end{itemize}
+%	\vspace{5pt}
+%	\item \textcolor{UPMCEngagementBlueB}{Contribution and results} 
+%	\begin{itemize}
+%		\item[] CDCL [Sym]
+%		\item[] Combination of different approaches
+%	\end{itemize}
+%\end{enumerate}
+%\end{frame}
 
 %% ----------------------------------------------------------------------------
 %\begin{frame}
@@ -1395,8 +1348,8 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 \node (confanalyse) [process] at ($(conf) + (0pt, -60pt)$) {Conflict Analysis};
 \node (learn) [process] at ($(prop) + (90pt, 0)$) {Learn conflict clause};
 \node (isend) [question] at ($(confanalyse) + (90pt, 0)$) {is level\\zero?};
-\node (end) [unsat] at ($(isend) + (90pt, 0)$) {$unsatiasfiable$};
-\node (ends) [sat] at ($(isfin) + (+90pt, 0)$){$satisfiable$};
+\node (end) [unsat,double=black!10,double distance=0.5mm] at ($(isend) + (90pt, 0)$) {$unsatiasfiable$};
+\node (ends) [sat,double=black!10,double distance=0.5mm] at ($(isfin) + (+90pt, 0)$){$satisfiable$};
 
 \node[opacity=0,onslide={<2>,opacity=1},draw, rounded corners=4pt,draw=blue, line width=0.4mm, minimum width=4cm,minimum height=6.5cm,label={[opacity=0,onslide={<2>,opacity=1},fill=white,xshift=-1.0cm, yshift=-7cm]\textcolor{blue}{Symmetry controller}}]  at (-90pt, -140pt){};
 \node (ismin)  [question,opacity=0,onslide={<2>,opacity=1}] at ($(conf) + (-90pt, 0pt)$)  {Is assignment\\minimal?};
@@ -1404,7 +1357,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 
 
 
-\draw[line]     (sdec) -- (dec);
+\draw[line,color=orange!50]     (sdec) -- (dec);
 \draw[line]     (dec) -- (prop);
 \draw[line]     (prop) -- (conf);
 \draw[line,opacity=1,onslide={<2>,opacity=0}]     (conf) -| node [yshift=4.5 cm] {no}(idec.center) -- (isfin);
@@ -1431,7 +1384,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 \frametitle{Symmetry status}
 
 \begin{itemize}
-	\item \texttt{reducer}: $g.\alpha. \prec \alpha$
+	\item \texttt{reducer}: $g.\alpha \prec \alpha$
 	\item \texttt{inactive} : $\alpha \prec g.\alpha$
 	\item \texttt{active} : \textit{not enough information}
 \end{itemize}
@@ -1442,7 +1395,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 
 \centering 	Keep track the smallest unassigned variable $x$ :
 
-\vfill
+\vspace{1em}
 
 	\begin{enumerate}
 		\item $\alpha(g.x) \leq \alpha(x),$ \small then $g$ is \texttt{reducer}
@@ -1455,7 +1408,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 \end{block}  
 \vspace{2em}
 
-Update whenever variables are assigned / unassigned
+\centering Update whenever variables are assigned / unassigned
 \end{frame}
 %% ----------------------------------------------------------------------------
 
@@ -1492,7 +1445,6 @@ Update whenever variables are assigned / unassigned
 
 
 
-
 \hspace{8em}$\cdots $
 \vfill
 \centering 
@@ -1508,25 +1460,25 @@ Update whenever variables are assigned / unassigned
 	\end{frame}
 %% ----------------------------------------------------------------------------
 \begin{frame}
-\frametitle{CDCLSym Implementation}
+\frametitle{CDCL[Sym] Implementation}
 \begin{itemize}
-	\item Packaged as a library \textbf{\libdsb}\footnote{\url{https://github.com/lip6/cosy}},\\
+	\item Packaged as a library \textbf{\libdsb}\footnote{\url{https://github.com/lip6/cosy}},
 	to be combined with your solver\\{\color{blue}\hfill$\rightarrow$ e.g. +3\% LOC on \minisat}.
 	
 	\item Follows symmetry status
 	
-	\item Should work with any enumerative SAT solver.
+	\item Should work with any enumerative SAT solver
 
 \end{itemize}
 
 \end{frame}
 
-\begin{frame}{Experiments: benchmark}
+\begin{frame}{Experiments}
 
 Benchmark:
 \begin{itemize}
-	\item from SAT contests 2012 -- 2017,
-	\item retain only instances for which \bliss{} finds significant symmetries in $1000$s,
+	\item from SAT contests 2012 -- 2017
+	\item retain only instances for which \bliss{} finds significant symmetries in $1000$s
 	\item $1350$ symmetric instances (out of $3700$)
 \end{itemize}
 
@@ -1535,11 +1487,11 @@ Setup:
 	\item four tools
 	\begin{itemize}
 		\item MiniSat (no symmetry, baseline)
-		\item MiniSat + breakID (state-of-the-art symmetry SAT solver)
-		\item MiniSat + Shatter (state-of-the-art symmetry SAT solver)
-		\item \textbf{MiniSym} = MiniSat + CDCLSym (our approach)
+		\item MiniSat + BreakID (SOTA SAT solver using symmetries)
+		\item MiniSat + Shatter (SOTA SAT solver using symmetries)
+		\item \textbf{MiniSym} = MiniSat + CDCL[Sym] (our approach)
 	\end{itemize}
-	\item $5000$s timeout, $8$GB memory,
+	\item $5000$s timeout, $8$GB memory
 	\item includes time to compute symmetries (except for MiniSat)
 \end{itemize}
 
@@ -1552,7 +1504,7 @@ Setup:
 
 \begin{figure}[t]
 \centering
-\caption{cactus plot  total number of instances}%
+\caption{Cactus plot  total number of instances}%
 \subfloat[with \saucy]{{\includegraphics[scale=0.3]{images/saucy-result}}}%
 \hfill
 \subfloat[with \bliss]{{\includegraphics[scale=0.3]{images/bliss-result}}}%
@@ -1581,7 +1533,7 @@ Setup:
 	}
 }
 \vspace*{0.1cm}
-\caption{time comparison}
+\caption{Time comparison}
 \end{table}
 
 \end{frame}
@@ -1605,8 +1557,7 @@ Setup:
 	\end{tabular}
 }
 }
-
-\caption{comparison on \unsat instances}
+\caption{Comparison on \unsat instances}
 \label{table:benchUNSAT}
 \end{table}
 \begin{table}
@@ -1615,7 +1566,7 @@ Setup:
 	\begin{tabular}{l|ccccc}
 		&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
 		\midrule
-		TOTAL (no dup)  & 325 & 323 & \cellcolor{gray!30}\textbf{337} & 335\\
+		TOTAL  & 325 & 323 & \cellcolor{gray!30}\textbf{337} & 335\\
 		
 	\end{tabular}
 }
@@ -1624,12 +1575,12 @@ Setup:
 	\begin{tabular}{l|ccccc}
 		&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
 		\hline
-		TOTAL (no dup) & 325 & 316 & 334 & \cellcolor{gray!30}\textbf{336}\\
+		TOTAL & 325 & 316 & 334 & \cellcolor{gray!30}\textbf{336}\\
 	\end{tabular}
 }
 }
 \vspace*{0.1cm}
-\caption{comparison on \sat instances}
+\caption{Comparison on \sat instances}
 \end{table}
 \end{frame}
 
@@ -1638,12 +1589,14 @@ Setup:
 \begin{frame}
 \frametitle{ESBP + SP}
 
-Compose the symmetry propagation and the ESBP:\\
-\textit{prune the decision tree while accelerating its traversal}
+Compose the symmetry propagation and the ESBP\\
+\begin{center}
+	\textit{prune the decision tree while accelerating its traversal}
+\end{center}
 
 \vfill
 
-Problem:
+Problems
 \begin{itemize}
 	\item ESBP breaks symmetries (incrementally)
 	\item SP considers the manipulated symmetries valid all the time
@@ -1651,7 +1604,7 @@ Problem:
 
 \vfill
 \centering
-In hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}.
+In hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 \end{frame}
 %% ----------------------------------------------------------------------------
 \begin{frame}
@@ -1659,15 +1612,16 @@ In hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}.
 
   \begin{columns}[t]
 	\begin{column}[c]{.4\textwidth}
-		Formula $\leftarrow$ (symmetries)
+		Formula $\leftarrow$ (Symmetries)
 	\end{column}
 	\begin{column}[c]{.5\textwidth}
 		\begin{itemize}
-			\item[] $\omega_1 \leftarrow$ (local symmetries)
-			\item[] $\omega_2 \leftarrow$ (local symmetries)
-			\item[] $\omega_3 \leftarrow$ (local symmetries)
-			\item[] $\omega_4 \leftarrow$ (local symmetries)
-			\visible<2->{\item[] $\omega_{l_1}$} \visible<3>{$\leftarrow$ (local symmetries)}
+			\item[] $\omega_1 \leftarrow$ (Local symmetries)
+			\item[] $\omega_2 \leftarrow$ (Local symmetries)
+			\item[] $\omega_3 \leftarrow$ (Local symmetries)
+			\item[] $\omega_4 \leftarrow$ (Local symmetries)
+			\smallskip
+			\visible<2->{\item[] $\omega_{5}$} \visible<3>{$\leftarrow$ (Local symmetries)}
 		\end{itemize}
 \end{column}
 \end{columns}
@@ -1676,10 +1630,10 @@ In hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}.
 
   \begin{columns}[t]
 	\begin{column}[c]{.3\textwidth}
-		macro level
+		Macro level
 	\end{column}
 	\begin{column}[c]{.5\textwidth}
-		$\rightarrow \qquad$ micro level
+		$\rightarrow \qquad$ Micro level
 	\end{column}
 \end{columns}
 
@@ -1696,8 +1650,8 @@ In hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}.
 \scriptsize
 \textbf{Benchmark:}
 \begin{itemize}
-	\item from SAT contests 2012 -- 2018,
-	\item retain only instances for which \bliss{} finds significant symmetries in $1000$s,
+	\item from SAT contests 2012 -- 2018
+	\item retain only instances for which \bliss{} finds significant symmetries in $1000$s
 	\item $1400$ symmetric instances (out of $4000$)
 \end{itemize}
 
@@ -1709,7 +1663,7 @@ In hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}.
 	
 	\begin{itemize}
 		\item \scriptsize MiniSat SP (Minisat with Symmetry Propagation)
-		\item \scriptsize MiniSat ESBP (Minisat with CDCLSym)
+		\item \scriptsize MiniSat ESBP (Minisat with CDCL[Sym])
 		\item \scriptsize \textbf{Minisat ESBP-SP (our approach)}
 	\end{itemize}
 	\item $7200$s timeout
@@ -2134,6 +2088,81 @@ In hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}.
 		%	\end{itemize}
 	\end{column}
 \end{columns}
+\end{frame}
+
+
+\begin{frame}[noframenumbering]
+\frametitle{Weakly active symmetries}
+
+\begin{block}{Logical consequence}
+	When $\omega$ is satisfied in all satisfying assignments of $\varphi$, we say that $\omega$ is a
+	logical consequence of $\varphi$, and we denote this by $\varphi \vdash \omega$.
+\end{block}	
+
+\visible<2->{
+	\begin{block}{Weakly active symmetries}	
+		Let a subset $\delta \subseteq \alpha $, a symmetry $\sigma$ of $\varphi$ such that\\ $\varphi \cup \delta \vdash \varphi \cup \alpha \land \sigma.\delta \subseteq \alpha $ then $\sigma$ is weakly active symmetry.
+	\end{block}
+}
+
+\visible<3->{
+	\begin{block}{Symmetry propagation}
+		Let $\sigma$ a weakly active symmetry, then 
+		$$ \varphi \cup \alpha  \vdash \{l\} \Leftrightarrow \varphi \cup \alpha  \vdash \sigma.\{l\}$$
+		
+	\end{block}
+}
+\end{frame}
+
+
+\begin{frame}[noframenumbering]
+\frametitle{Local symmetries}
+\newcommand{\symm}[0]{\ensuremath{\mathfrak{S}}}
+
+\begin{block}{Logical consequence}
+	When $\omega$ is satisfied in all satisfying assignments of $\varphi$, we say that $\omega$ is a
+	logical consequence of $\varphi$, and we denote this by $\varphi \vdash \omega$.
+\end{block}	
+
+\begin{block}{Local Symmetries}
+	Let $\varphi$ be a formula. We define $L_{\omega,\varphi}$, 
+	the set of \textit{local symmetries} for a clause $\omega$, and with respect to 
+	a formula $\varphi$, as follows:
+	
+	$$L_{\omega,\varphi}=\{\sigma \in \symm \mid \varphi \vdash \sigma.\omega\}$$
+\end{block}
+
+\visible<2-> {
+	\vfill
+	We can state that:
+	\begin{align*}
+	\underset{\omega \in \varphi}{\bigcap}L_{\omega,\varphi} \subseteq G. %S(\varphi).
+	\end{align*}
+}
+
+\end{frame}
+%% ----------------------------------------------------------------------------
+\begin{frame}[noframenumbering]
+\frametitle{Computing local symmetries}
+
+Formula can be decomposed as : $\varphi = \varphi_o \cup \varphi_e \cup \varphi_d$ where
+\begin{itemize}
+\item $\varphi_o$ is the set of the original clauses
+\item $\varphi_e$ is the set of ESBPs 
+\item $\varphi_d$ is the set of deduced clauses.
+\end{itemize}
+
+\vfill
+
+Local symmetries
+\begin{itemize}
+\item $\omega \in \varphi_o, L_{\omega,\varphi} \supseteq G $ %S(\varphi)
+\item $\omega \in \varphi_e, L_{\omega,\varphi} \supseteq Stab(\omega)=\{\sigma \in G \mid
+\omega = \sigma.\omega\}$
+\item $\omega \in \varphi_d, L_{\omega,\varphi} \supseteq (\underset{\omega^\prime \in
+	\varphi_1}{\bigcap}L_{\omega^\prime,\varphi}) \cup Stab(\omega)$ \\  where $\varphi_1$ is the set of clauses that derives $\omega$.
+\end{itemize}
+
 \end{frame}
 
 %
