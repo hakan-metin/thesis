@@ -53,10 +53,10 @@ l'on ne connait pas d'algorithme capable de résoudre le problème avec une comp
 
 
 Malgré cette complexité, les solveurs SAT sont capables de résoudre de plus en plus de problèmes complexes.
-Ce succès vient de l'introduction de différentes heuristiques sophistiquées et de 
-l'algorithme de résolution utilisé, $\guillemotleft$ Conflict Driven Clause Learning$\guillemotright$ (CDCL).
+Ce succès vient de l'introduction de différentes heuristiques sophistiquées dans 
+l'algorithme de résolution le plus répandu, $\guillemotleft$ Conflict Driven Clause Learning$\guillemotright$ (CDCL).
 Il est basé sur l'algorithme DPLL nommé suivant ses auteurs Davis, Putnam, Logemann et Loveland~\cite{dpll_62},
-l'un des premiers algorithmes avec une utilisation non intensive de la mémoire.
+et est l'un des premiers algorithmes avec une utilisation non intensive de la mémoire.
 
 %
 %Cet algorithme est basé sur  
@@ -68,19 +68,30 @@ l'un des premiers algorithmes avec une utilisation non intensive de la mémoire.
 %algorithme (avec une utilisation non intensive de la  mémoire) nommé par ses auteurs Davis, Putnam, Logemann
 %et Loveland (DPLL)\cite{dpll_62}.
 
-Le CDCL peut être vu suivant l'exploration d'un arbre binaire avec au total $2^n$ branches, avec $n$ le nombre de variables du problème.
-La première étape consiste à choisir une variable dite de décision, puis d'effectuer les déductions logiques à partir de l'affection. 
-Si l'algorithme se trouve dans une situation de conflit, c'est-à-dire que l'affectation courante n'est pas capable de satisfaire au moins une contrainte du problème, l'algorithme  calcule une clause dite de conflit qui permet d'élaguer 
-cet espace de recherche. Avec cette contrainte le solveur effectue un \textit{backjump}, c'est-à-dire qu'il remonte dans l'arbre
-de recherche pour explorer une autre branche.
-%Cette clause est une information redondante par rapport au problème initial.
-Si aucun conflit n'est présent, l'algorithme choisit à nouveau une variable de décision. L'algorithme termine  soit lorsque toutes les variables sont affectées auquel cas le problème est satisfaisable, soit lorsque un conflit est apparu avec uniquement des déductions logiques auquel cas le
-problème est non satisfaisable.
-La Figure~\ref{fig:cdclflow} présente sous forme d'un organigramme le fonctionnement de l'algorithme CDCL.
-\input{fig/flowcdcl}
+%Le CDCL peut être vu suivant l'exploration d'un arbre binaire avec au total $2^n$ branches, avec $n$ le nombre de variables du problème.
+%La première étape consiste à choisir une variable dite de décision, puis d'effectuer les déductions logiques à partir de l'affection. 
+%Si l'algorithme se trouve dans une situation de conflit, c'est-à-dire que 
+%
+% que l'affectation courante n'est pas capable de satisfaire au moins une contrainte du problème, l'algorithme  calcule une clause dite de conflit qui permet d'élaguer 
+%cet espace de recherche. Avec cette contrainte le solveur effectue un \textit{backjump}, c'est-à-dire qu'il remonte dans l'arbre
+%de recherche pour explorer une autre branche.
+%%Cette clause est une information redondante par rapport au problème initial.
+%Si aucun conflit n'est présent, l'algorithme choisit à nouveau une variable de décision. L'algorithme termine  soit lorsque toutes les variables sont affectées auquel cas le problème est satisfaisable, soit lorsque un conflit est apparu avec uniquement des déductions logiques auquel cas le
+%problème est non satisfaisable.
+%La Figure~\ref{fig:cdclflow} présente sous forme d'un organigramme le fonctionnement de l'algorithme CDCL.
+%\input{fig/flowcdcl}
 
 
-Certains problèmes présentent des symétries, dans ce cas, des branches de l'espace de recherche 
+
+%Parmi eux, certains problèmes présentent des symétries et créent une
+%explosion combinatoire qui entrave les performances du solveur. Celui-ci explore en vain
+%les parties identiques (isomorphes) de l’espace de recherche. 
+%
+
+
+
+Même si les solveurs sont de plus en plus efficace, certains problèmes ne peuvent pas être résolus.
+Parmi eux, certains problèmes présentent des symétries, dans ce cas, des branches de l'espace de recherche 
 sont identiques à une permutation près, on dit que cet espace de recherche est isomorphe.
 Si une branche de l'espace de recherche est solution du problème alors toutes les branches symétriques
 sont également des solutions. Dans le cas inverse si il n'existe pas de solution dans une branche alors il n'en
@@ -90,7 +101,6 @@ En parcourant les espaces isomorphes, le solveur effectue donc du travail inutil
 Pour illustrer ce problème, prenons comme exemple le problème des tiroirs (\textit{pigeonhole problem}) dans lequel nous avons un ensemble de pigeons qui doivent êtres attribués à des nids différents. Dans ce problème il y a un nid de moins que le nombre de pigeons.
 Le but de ce problème est de déterminer s'il est possible d'attribuer un nid différent à chaque pigeon.
 La figure~\ref{fig:holefr} présente une instance de ce problème.
-
 
 \begin{figure}[!htbp]
 	\centering
@@ -113,8 +123,8 @@ La figure~\ref{fig:holefr} présente une instance de ce problème.
 
 Pour un humain, la réponse à ce problème est évidente, mais un solveur de l'état de l'art va parcourir toutes 
 les combinaisons possibles de couples (pigeon, nid) et cela le mène à une explosion combinatoire.
-Pour cette raison, résoudre ce problème avec un solveur SAT standard s'avère très chronophage et même impossible dans des temps raisonnables
-pour un nombre de pigeons supérieur à 15.
+Pour cette raison, résoudre ce problème avec un solveur SAT standard s'avère très chronophage et même impossible 
+dans des temps raisonnables pour un nombre de pigeons supérieur à 15.
 
 %Cependant, certains problèmes possèdent un espace de recherche énorme et ne peuvent pas 
 %être traité par un solveur SAT. Un exemple d'un tel problème peut être le problème de tournées de véhicules (VRP). 
@@ -127,6 +137,7 @@ pour un nombre de pigeons supérieur à 15.
 De manière plus  générale, une symétrie est une transformation qui laisse un objet (ou un aspect de l'objet) inchangé. Les symétries sont généralement définies comme une propriété syntaxique d'un problème lorsque leur présence est inhérente à l'encodage du problème.
 Dans ce cas, une permutation des variables préserve la spécification originale du problème.
 Dans le cas où les symétries sont indépendantes d'une représentation particulière du problème, il s'agit de symétries sémantiques.
+
 
 La présence de symétrie dans un problème force l'algorithme de recherche à explorer en vain l'espace de recherche symétrique et impacte considérablement ses performances.  La rupture de symétrie est une approche qui évite au solveur de visiter les espaces de recherche isomorphes.
 
@@ -143,20 +154,19 @@ Si l'on considère l'exemple précédent avec les pigeons, le premier pigeon est
 exactement un nid, la symétrie est alors «rompue».
 
 Plusieurs outils, tels que $\shatter$~\cite{aloul06} et $\breakid$~\cite{devriendt2016improved}, utilisent cette technique pour accélérer le calcul du solveur en présence de symétries.
-En général, cette approche aboutit à de bons résultats dans différentes instances symétriques, cependant elle possède des défauts. Parmi eux, nous pouvons citer le nombre de contraintes ajoutées qui peut être exponentiel par rapport à la taille du problème. Ceci 
-a pour conséquence de ralentir l'algorithme principal du solveur.
-De plus, étant donné que ce calcul est effectué avant le lancement du solveur, cette approche peut être difficilement combinée avec d'autres techniques de rupture de symétries. Aussi, cette approche ne peut pas distinguer les contraintes originales du problème avec les contraintes de rupture de symétrie. Avec cette information, le solveur peut modifier ses heuristiques pour augmenter ses performances.
-Pour ces raisons, certains problèmes avec de nombreuses symétries ne peuvent pas être traités efficacement avec cette approche.
+En général, cette approche aboutit à de bons résultats dans différentes instances symétriques, cependant elle possède des défauts. Parmi eux, nous pouvons citer le nombre de contraintes ajoutées qui peut être exponentiel par rapport à la taille du problème. Ceci a pour conséquence de ralentir l'algorithme principal du solveur au lieu de l'accélérer.
+De plus, étant donné que ce calcul est effectué avant le lancement du solveur, cette approche peut être difficilement combinée avec d'autres techniques de rupture de symétries. Aussi, cette approche ne peut pas distinguer les contraintes originales du problème avec les contraintes de rupture de symétrie. Avec cette information, le solveur peut modifier ses heuristiques pour augmenter ses performances. Pour ces raisons, certains problèmes avec de nombreuses symétries ne peuvent pas être traités efficacement avec cette approche.
 
-Une autre approche dite rupture de symétrie dynamique consiste à utiliser les symétries durant l'algorithme de recherche du solveur SAT, plus précisément, à modifier son comportement pour exploiter les propriétés de symétrie du problème. Cette approche consiste à déduire des faits symétriques par rapport aux déductions effectuées par le solveur. Lorsque ces faits sont ignorés, le solveur va explorer en vain l'espace de recherche symétrique.
+Une autre approche dite rupture de symétrie dynamique consiste à utiliser les symétries durant l'algorithme de recherche du solveur SAT, plus précisément, à modifier son comportement pour exploiter les propriétés de symétrie du problème. Cette approche consiste à déduire des faits symétriques par rapport aux déductions effectuées par le solveur. Lorsque ces faits sont ignorés, le solveur explore en vain l'espace de recherche symétrique.
 Ces déductions réduisent le nombre de décisions, qui sont des suppositions du solveur choisies de 
 manière heuristique, et augmentent le nombre de propagations qui sont les déductions logiques faites par le solveur. 
-Cette approche transforme donc les suppositions du solveur en déductions logiques.
+Cette approche transforme donc les suppositions du solveur en déductions logiques et accélère donc le solveur.
 Différents outils utilisent cette approche, nous pouvons citer \textit{Symmchaff}
 qui n'exploite que certains types spécifiques de symétries, \textit{Symmetry Propagation (SP)}, \textit{Symmetry Learning Scheme (SLS)} et \textit{Symmetry Explanation Learning (SEL)} qui ajoutent les symétriques des
 clauses apprises pour permettre les déductions symétriques.
 Étant donné que cette approche est dynamique, il est possible pour le solveur 
 d'intégrer des heuristiques spécifiques ou encore de combiner les différentes techniques de rupture de symétrie.
+Cependant cette approche n'est pas efficace sur certaines instances qui sont très facilement résolues avec l'approche statique. 
 
 
 Cette thèse vise à améliorer l'existant et rendre les solveurs plus performants en présence de symétries et
@@ -219,6 +229,9 @@ Le problème avec cette approche est que l'ensemble vide est très vite atteint 
 
 \vspace{2em}
 
+
+\hakan{NIVEAU MACROSCOPIQUE FORMULE MICROSCOPIQUE CLAUSE}
+
 \begin{table}[!htbp]\footnotesize
 	\centering
 	\resizebox{1 \textwidth}{!}{
@@ -277,11 +290,54 @@ Cependant l'approche combinée apporte de meilleures résultats dans le nombre t
 %Cette deuxième contribution réponds à la question, Est-il possible d'accélérer la traversée de l'espace de recherche tout en éliminant l'espace de symétrique ?
 %La réponse est positive grâce à l'introduction des symétries locales. 
 
+
+\chapter*{Résumé}
+
+Aujourd'hui, la satisfaction booléenne (SAT) est un domaine de recherche actif qui trouve son application dans différents domaines tels que l'optimisation logique, la génération de motifs de test, la vérification formelle et la simulation fonctionnelle, etc.
+Par conséquent, l'élaboration d'approches qui pourraient traiter des problèmes SAT 
+de plus en plus complexes est devenue une priorité.
+Certains problèmes présentent des symétries et créent une explosion combinatoire qui entrave les performances du solveur. Celui-ci explore en vain les parties symétriques de l'espace de recherche.
+
+Dans l'état de l'art, il existe deux approches qui traitent de ce problème, la première, appelée \textit{rupture de symétrie statique}, vise à enrichir le problème d'origine avec des contraintes qui empêchent le solveur d'explorer
+les espaces de recherches symétriques. Le second appelé \textit{rupture de symétrie dynamique} ajoute une composante de symétrie dans le noyau du solveur et modifier son comportement pour l'accélérer le parcours de l'espace de recherche en utilisant les symétries présentes dans le problème initial. Ces approches sont efficaces mais n'arrivent néanmoins pas à traiter l'ensemble des instances symétriques.
+
+
+Dans cette thèse, nous avons cherché à mieux exploiter les propriétés de symétrie des problèmes.
+Pour ce faire, nous proposons deux contributions majeures qui visent à améliorer les approches de l'état de l'art et à augmenter le nombre d'instances résolues. La première imite le comportement de l'approche de \textit{rupture de symmétrie statique} mais fonctionne dynamiquement. Un contrôleur de symétrie au sein du solveur observe son comportement  et génère des contraintes de rupture de symétries de manière opportuniste.
+La seconde vise à combiner l'approche précédente avec une approche dynamique. Le but est de prendre le meilleur de deux mondes,
+accélérer le parcours du solveur en utilisant des symétries tout en l'empêchant de visiter les parties symétriques de l'espace de recherche.
+
+Des expériences approfondies sur le benchmark des compétitions SAT montrent que nos approches sont compétitives et même meilleures dans certains cas avec les meilleures approches de l'état de l'art.
+
+
 \chapter*{Abstract}
-Nowadays, logic is omnipresent and it is used in different domains such as logic optimization, test pattern generation, formal verification and functional simulation, etc.
-One method to solve this kind of problem is satisfiability problem (SAT).
-SAT solvers are more and more powerful and can handle large problems which seemed to be infeasible 
-few years ago. However, some problems present symmetries which force the solver to explore fruitlessly
-the symmetric part of the search space and hinders the performance. 
+
+%
+%Nowadays, logic is omnipresent and it is used in different domains such as 
+%One method to solve this kind of problem is satisfiability problem (SAT).
+%SAT solvers are more and more powerful and can handle large problems which seemed to be infeasible 
+%few years ago. However, some problems present symmetries which force the solver to explore fruitlessly
+%the symmetric part of the search space and hinders the performance. 
+
+
+Nowadays, Boolean satisfiability (SAT) is an active research area finding its application in different domains
+such as logic optimization, test pattern generation, formal verification, functional simulation, etc.
+Hence, the development of approaches that could treat increasingly challenging SAT problem has become a focus.
+Some problems exhibit symmetries and create a combinatorial explosion that hinders solver performance.
+This one explores fruitlessly the symmetric parts of the search space.
+
+In the state-of-the-art two majors approaches that address  this problem, the first, called \textit{static symmetry breaking}
+aims to enrich the original problem problem with constraints that prevents the solver from exploring
+symmetric parts of the search space. 
+The second called \textit{dynamic symmetry breaking} adds a symmetry component to the solver core
+and modifies its behavior to accelerate it using symmetries presents in the initial problem.
+These approaches are effective but are not able to handle all symmetric instances.
+
 In this thesis, we set out to exploit symmetry properties of the problems in better ways.
-For this purpose, we propose two major contributions that aims to improve the state-of-the-art techniques and augment the number of solved instances. With an evaluation over the instances presented in the SAT competition, we show that our approach overcomes the state-of-the-art ones and is able to solve more instances. 
+For this purpose, we propose two major contributions that aims to improve the state-of-the-art approaches and augment the number of solved symmetric instances. The first one mimics the behavior of \textit{static symmetry breaking} approach but operates
+dynamically. A symmetry controller observes the behavior of the solver and generates constraints opportunistically.
+The second one aims to combine the previous approach with a dynamic one. The goal is to take best of both worlds,
+accelerate the solver's tree traversal  by using symmetries while preventing him from visiting the symmetrical parts of the research space.
+
+Extensive experiments on the benchmark of SAT competitions show that our approaches are competitive and even better 
+in some cases with the best state-of-the-art approaches.
