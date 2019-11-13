@@ -161,22 +161,25 @@ Une autre approche dite rupture de symétrie dynamique consiste à utiliser les 
 Ces déductions réduisent le nombre de décisions, qui sont des suppositions du solveur choisies de 
 manière heuristique, et augmentent le nombre de propagations qui sont les déductions logiques faites par le solveur. 
 Cette approche transforme donc les suppositions du solveur en déductions logiques et accélère donc le solveur.
-Différents outils utilisent cette approche, nous pouvons citer \textit{Symmchaff}
-qui n'exploite que certains types spécifiques de symétries, \textit{Symmetry Propagation (SP)}, \textit{Symmetry Learning Scheme (SLS)} et \textit{Symmetry Explanation Learning (SEL)} qui ajoutent les symétriques des
-clauses apprises pour permettre les déductions symétriques.
+Différents outils utilisent cette approche, nous pouvons citer \textit{Symmchaff}~\cite{sabharwal2005symchaff}
+qui n'exploite que certains types spécifiques de symétries, \textit{Symmetry Propagation (SP)}~\cite{Devriendt12}, \textit{Symmetry Learning Scheme (SLS)}~\cite{benhamou2010enhancing} et \textit{Symmetry Explanation Learning (SEL)}~\cite{devriendt2017symmetric} qui ajoutent les symétriques des clauses apprises pour permettre les déductions symétriques.
 Étant donné que cette approche est dynamique, il est possible pour le solveur 
 d'intégrer des heuristiques spécifiques ou encore de combiner les différentes techniques de rupture de symétrie.
-Cependant cette approche n'est pas efficace sur certaines instances qui sont très facilement résolues avec l'approche statique. 
+Cependant cette approche n'est pas efficace sur certaines instances qui sont très facilement résolues avec l'approche statique
+et vice-versa.
 
 
 Cette thèse vise à améliorer l'existant et rendre les solveurs plus performants en présence de symétries et
 propose différentes contributions allant dans ce sens.  
 
 
+
 Notre première contribution mime le comportement de la rupture de symétrie statique, mais 
-opère dynamiquement, pendant l'exécution du solveur. On ajoute dans le solveur un composant de symétrie opportuniste qui va détecter que le solveur parcourt un espace de recherche symétrique et va ajouter à celui-ci une contrainte appelée $\guillemotleft$ effectective symmetry breaking predicate $\guillemotright$ qui va empêcher le solveur de rester dans
-l'espace de recherche en question. Cela a pour conséquence de réduire le nombre de contraintes et donc 
-ne ralentit pas le solveur.
+opère dynamiquement, pendant l'exécution du solveur. On ajoute dans le solveur un composant de symétrie
+qui va détecter que le solveur parcourt un espace de recherche symétrique et va ajouter à celui-ci de une contrainte appelée $\guillemotleft$ effectective symmetry breaking predicate $\guillemotright$ qui va empêcher le solveur de rester dans
+l'espace de recherche en question. 
+
+
 
 % Cette contrainte est dite effective, car 
 % à l'inverse de l'approche 
@@ -184,7 +187,7 @@ ne ralentit pas le solveur.
 %inutile n’est insérée dans le solveur. 
 
 Ce composant de symétrie est fourni sous forme d'une bibliothèque codée en C++ et se nomme $\libdsb$.
-Elle peut s'interfacer avec n'importe quelle solveur de type CDCL. 
+Elle peut s'interfacer avec n'importe quelle solveur de type CDCL avec très peu de ligne de code. 
 Pour conduire nos expériences, nous l'avons interfacée avec un solveur de l'état de l'art nommé $\minisat$~\cite{een2003extensible}. Au total, l'intégration de $\libdsb$ ajoute environ 60 lignes de code 
 et augmente le code de $\minisat$ de 3\%.
 $\libdsb$ est $\guillemotleft$ open source $\guillemotright$, fourni sous une licence GPLv3 et est disponible sur Github \footnote{\url{https://github.com/lip6/cosy}}.
@@ -206,9 +209,9 @@ un nombre d'instances résolues de 775 alors que le deuxième meilleur outil $\b
 Ces expériences nous démontrent que notre approche est aussi performante que les approches de rupture de symétrie statique.
 \begin{figure}[!htbp]
 	\centering
-	\subfloat[avec \saucy]{{\includegraphics[scale=0.36]{img/saucy-result}}}%
+	\subfloat[avec \saucy]{{\includegraphics[scale=0.36]{img/saucy-fr}}}%
 	\qquad
-	\subfloat[with \bliss]{{\includegraphics[scale=0.36]{img/bliss-result}}}%
+	\subfloat[with \bliss]{{\includegraphics[scale=0.36]{img/bliss-fr}}}%
 	\caption{Cactus plot  présentant le nombre total d'intances résolues}%
 	\label{fig:frcactus}%
 \end{figure}
@@ -221,71 +224,64 @@ symétriques. %Ces deux approches sont donc orthogonales.
 Notre deuxième contribution consiste à déterminer si cette combinaison est possible. Elle se résume donc à la question suivante:
 Est-il possible d'accélérer la traversée de l'espace de recherche tout en éliminant les espaces de symétriques ?
 
-Pour que cette approche soit correcte, la contrainte qu'il faut absolument respecter est que la symétrie utilisée pour déduire les
-faits symétriques doit être valide dans le problème. En effet, les clauses ajoutées pour éliminer l'espace de recherche
+Pour que cette approche soit correcte, la contrainte qu'il faut absolument respecter est que la symétrie utilisée pour déduire les faits symétriques doit être valide dans le problème. En effet, les clauses ajoutées pour éliminer l'espace de recherche
 symétrique vont rompre cette symétrie. Cette dernière ne peut donc plus être utilisée pour propager les faits symétriques.
 Une approche naïve est de supprimer chacune des symétries dès lors qu'une contrainte de rupture de symétrie a été ajoutée.
-Le problème avec cette approche est que l'ensemble vide est très vite atteint et donc que plus aucune déduction symétrique ne peux être faite. Notre approche consiste à traquer les clauses utilisées par le solveur et à connaître à tout instant l'ensemble des symétries valide grâce à l'introduction dite de la notion de symétrie locale pour chaque clause.
+Le problème avec cette approche est que l'ensemble vide est très vite atteint et donc que plus aucune déduction symétrique ne peux être faite. Notre approche consiste à traquer les clauses utilisées par le solveur et à connaître à tout instant l'ensemble des symétries valide. Au lieu de considérer les symétries au niveau de la formule,
+notre approche consiste a utiliser les symétries au niveau de la clause (locale).
+
 
 \vspace{2em}
 
 
-\hakan{NIVEAU MACROSCOPIQUE FORMULE MICROSCOPIQUE CLAUSE}
-
 \begin{table}[!htbp]\footnotesize
 	\centering
-	\resizebox{1 \textwidth}{!}{
-		\begin{tabular}{l|ccc}
-			\toprule
-			Benchmark  &\texttt{minisat-Sp} & \texttt{minisat-Sym} & \texttt{minisat-SymSP}\\
-			\hline 
-			Permutations 0–20 (704) & 194&197&\cellcolor{gray!30,}\textbf{198}\\
-			Permutations 20–40 (136) & 33&\cellcolor{gray!30}\textbf{34}&\cellcolor{gray!30}\textbf{34}\\
-			Permutations 40–60 (141) & 28&28&\cellcolor{gray!30}\textbf{29}\\
-			Permutations 60–80 (168) & \cellcolor{gray!30}\textbf{65}&64&\cellcolor{gray!30}\textbf{65}\\
-			Permutations 80–100 (51) & 28&\cellcolor{gray!30}\textbf{34}&\cellcolor{gray!30}\textbf{34}\\
-			Permutations  \textgreater100 (200) & 58&59&\cellcolor{gray!30}\textbf{60}\\
-			\hline 
-			TOTAL no dup (1400) & 406 & 416 & \cellcolor{gray!30,}\textbf{420}\\
-			\bottomrule
-		\end{tabular}
+	\resizebox{.65 \textwidth}{!}{
+	\begin{tabular}{lcccc}
+		Solver & PAR-2 & TOTAL & SAT & UNSAT\\
+		\toprule
+		\texttt{Minisat SP} & 1674h00 & 876 & 406 & 470 \\
+		\texttt{Minisat Sym} & 1578h30 & 904 & 416 & 488\\
+		\texttt{Minisat SymSP} & \cellcolor{gray!30}\textbf{1570h15} & \cellcolor{gray!30}\textbf{911} & \cellcolor{gray!30}\textbf{420} & \cellcolor{gray!30}\textbf{491}\\	
+	\end{tabular}
+	
 	}
-	\caption{Comparaison des approches sur les instances SAT.}
+	\caption{Comparaison du nombre de problèmes résolus par chaque approche.}
 	\label{tab:satfr}
 \end{table}%
 
 
-\begin{table}[!htbp]\footnotesize
-	\centering
-	\resizebox{1 \textwidth}{!}{
-		\begin{tabular}{l|ccc}
-			\toprule
-			Benchmark  &\texttt{minisat-Sp} & \texttt{minisat-Sym} & \texttt{minisat-SymSP}\\
-			\hline 
-			Permutations 0–20 (704) & \cellcolor{gray!30,}\textbf{233}&220&226\\
-			Permutations 20–40 (136) & 50&\cellcolor{gray!30}\textbf{54}&\cellcolor{gray!30}\textbf{54}\\
-			Permutations 40–60 (141) & 75&\cellcolor{gray!30}\textbf{83}&\cellcolor{gray!30}\textbf{83}\\
-			Permutations 60–80 (168) & \cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}&10\\
-			Permutations 80–100 (51) & \cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}\\
-			Permutations \textgreater100 (200) & 90&\cellcolor{gray!30,}\textbf{109}&107\\
-			\hline 
-			TOTAL no dup (1400) & 470&488&\cellcolor{gray!30,}\textbf{491}\\
-			\bottomrule
-		\end{tabular}
-	}
-	\caption{Comparaison des approches sur les instances UNSAT.}
-	\label{tab:unsatfr}
-\end{table}
+%\begin{table}[!htbp]\footnotesize
+%	\centering
+%	\resizebox{1 \textwidth}{!}{
+%		\begin{tabular}{l|ccc}
+%			\toprule
+%			Benchmark  &\texttt{minisat-Sp} & \texttt{minisat-Sym} & \texttt{minisat-SymSP}\\
+%			\hline 
+%			Permutations 0–20 (704) & \cellcolor{gray!30,}\textbf{233}&220&226\\
+%			Permutations 20–40 (136) & 50&\cellcolor{gray!30}\textbf{54}&\cellcolor{gray!30}\textbf{54}\\
+%			Permutations 40–60 (141) & 75&\cellcolor{gray!30}\textbf{83}&\cellcolor{gray!30}\textbf{83}\\
+%			Permutations 60–80 (168) & \cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}&10\\
+%			Permutations 80–100 (51) & \cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}\\
+%			Permutations \textgreater100 (200) & 90&\cellcolor{gray!30,}\textbf{109}&107\\
+%			\hline 
+%			TOTAL no dup (1400) & 470&488&\cellcolor{gray!30,}\textbf{491}\\
+%			\bottomrule
+%		\end{tabular}
+%	}
+%	\caption{Comparaison des approches sur les instances UNSAT.}
+%	\label{tab:unsatfr}
+%\end{table}
 
-Les expérimentations pour évaluer les performances de l'approche se sont effectuées sur les instances de la SAT Competiton sur sept années 
-(2012 - 2018) pour lesquelles $\bliss$ a trouver des symétries. Au total, nous avons obtenu un total de 1400 instances. 
-Les tables \ref{tab:satfr} et \ref{tab:unsatfr} présentent respectivement
-les résultats obtenues four les problèmes $\sat$ et $\unsat$.
-La première colonne de chaque tableau énumère les classes de problèmes sur lesquelles nous avons effectué nos expériences: nous classons les problèmes en fonction du nombre de symétries qu'ils admettent. Une ligne notée $\guillemotleft$permutations X-Y (Z)$\guillemotright$ regroupe les problèmes Z ayant entre X et Y générateurs (symétries). Les autres colonnes indiquent le nombre de problèmes résolus par chaque approche. Les trois solveurs comparés sont respectivement
-\texttt{minisat-Sp}, le solveur $\minisat$ avec l'approche SP; \texttt{minisat-Sym} le solveur $\minisat$ avec $\libdsb$ et \texttt{minisat-SymSP} le solveur avec l'approche combiné.
- 
-Globalement, nous observons que l'approche combinée est efficace dans de nombreuses classes de problèmes symétriques. Pour les problèmes de SAT, la combinaison a de meilleurs résultats que les deux autres approches (4 problèmes de SAT en plus par rapport au meilleur des deux autres). Lorsqu'on examine les problèmes de l'UNSAT, les résultats sont plus mitigés. Cela est du au coût mis en place pour maintenir à jour les structures de chacune des deux approches de manière indépendante.
-Cependant l'approche combinée apporte de meilleures résultats dans le nombre total d'instances résolues.
+Les expérimentations pour évaluer les performances de l'approche se sont effectuées sur les instances de la SAT Competiton sur sept années (2012 - 2018) pour lesquelles $\bliss$ a trouver des symétries. Au total, nous avons obtenu un total de 1400 instances.Les trois solveurs comparés sont respectivement \texttt{Minisat SP}, le solveur $\minisat$ avec l'approche SP; \texttt{Minisat Sym} le solveur $\minisat$ avec $\libdsb$ et \texttt{Minisat-SymSP} le solveur avec l'approche combiné.
+La table \ref{tab:satfr} présentent les résultats obtenues pour les problèmes SAT et UNSAT.
+Les différent solveurs sont comparés selon quatre mesures, PAR-2 qui représente le temps cumulé de chaque solveur 
+avec une pénalité pour les instances non résolues, \-TOTAL qui représente le nombre total d'instances résolues, SAT le nombre d'instances satisfaisable résolues et UNSAT le nombre d'instances  non satisfaisable résolues.
+Globalement, nous observons que l'approche combinée améliore les résultats avec un gain d'environ 8 heures par rapport
+à \texttt{Minisat Sym} et de 104 heures par rapport à \texttt{Minisat SP}. Le nombre total d'instances résolues est également
+supérieur aux autres solveurs.
+
+
 
 %Cette deuxième contribution réponds à la question, Est-il possible d'accélérer la traversée de l'espace de recherche tout en éliminant l'espace de symétrique ?
 %La réponse est positive grâce à l'introduction des symétries locales. 
@@ -293,21 +289,40 @@ Cependant l'approche combinée apporte de meilleures résultats dans le nombre t
 
 \chapter*{Résumé}
 
-Aujourd'hui, la satisfaction booléenne (SAT) est un domaine de recherche actif qui trouve son application dans différents domaines tels que l'optimisation logique, la génération de motifs de test, la vérification formelle et la simulation fonctionnelle, etc.
-Par conséquent, l'élaboration d'approches qui pourraient traiter des problèmes SAT 
-de plus en plus complexes est devenue une priorité.
-Certains problèmes présentent des symétries et créent une explosion combinatoire qui entrave les performances du solveur. Celui-ci explore en vain les parties symétriques de l'espace de recherche.
-
-Dans l'état de l'art, il existe deux approches qui traitent de ce problème, la première, appelée \textit{rupture de symétrie statique}, vise à enrichir le problème d'origine avec des contraintes qui empêchent le solveur d'explorer
-les espaces de recherches symétriques. Le second appelé \textit{rupture de symétrie dynamique} ajoute une composante de symétrie dans le noyau du solveur et modifier son comportement pour l'accélérer le parcours de l'espace de recherche en utilisant les symétries présentes dans le problème initial. Ces approches sont efficaces mais n'arrivent néanmoins pas à traiter l'ensemble des instances symétriques.
+Le problème de satisfaisabilité booléenne consiste à trouver une solution à une formule  propositionnelle.
+Ce problème NP-complet peut modéliser une grande variété de problèmes industriels et académiques couvrant la planification, la résolution des dépendances, la vérification formelle, l'optimisation logique, la cryptographie, etc.
+Les  progrès récents ont permis de mettre au point des solveurs SAT très efficaces, capables de traiter des millions de variables et des millions de contraintes. 
+Les compétitions internationales SAT mettant en vedette des modèles industriels mettent au défi et stimulent le développement de solveurs SAT de plus en plus efficaces.
 
 
-Dans cette thèse, nous avons cherché à mieux exploiter les propriétés de symétrie des problèmes.
-Pour ce faire, nous proposons deux contributions majeures qui visent à améliorer les approches de l'état de l'art et à augmenter le nombre d'instances résolues. La première imite le comportement de l'approche de \textit{rupture de symmétrie statique} mais fonctionne dynamiquement. Un contrôleur de symétrie au sein du solveur observe son comportement  et génère des contraintes de rupture de symétries de manière opportuniste.
-La seconde vise à combiner l'approche précédente avec une approche dynamique. Le but est de prendre le meilleur de deux mondes,
-accélérer le parcours du solveur en utilisant des symétries tout en l'empêchant de visiter les parties symétriques de l'espace de recherche.
+Dans la pratique, de nombreux systèmes présentent des symétries ce qui permet de raisonner sur une abstraction quotient de l'espace de recherche, basée sur des classes d'équivalence par rapport aux symétries, et réduire exponentiellement l'espace de recherche dans les cas favorables.
+Dans cette thèse, nous explorons comment exploiter les réductions de symétrie pour améliorer les performances des solveurs SAT.
 
-Des expériences approfondies sur le benchmark des compétitions SAT montrent que nos approches sont compétitives et même meilleures dans certains cas avec les meilleures approches de l'état de l'art.
+
+Les approches existantes pour exploiter les symétries dans la résolution SAT, consistent à calculer les symétries du problème puis à générer des "prédicats de rupture de symétrie statique" qui s'ajoutent au problème, obligeant le solveur à adopter un seul représentant pour chaque classe d'équivalence des solutions.
+Le problème avec cette approche est que le nombre de contraintes supplémentaires peut être plus important que le problème original et peut surcharger le solveur. La première contribution de cette thèse appelée CDCL[sym] est un nouvel algorithme léger et dynamique, qui n'introduit ces contraintes supplémentaires de rupture de symétrie que de manière opportuniste au fur et à mesure que le solveur progresse.
+
+Une deuxième approche pour exploiter les symétries consiste en ce qu'on appelle la rupture de symétrie dynamique qui s'intéresse à la propagation symétrique des \textit{deductions} du solveur lorsque cela est possible.
+Cette approche résout certains modèles que la rupture de symétrie statique ne peut résoudre, et vice-versa, mais à notre connaissance, ces approches n'avaient jamais été combinées avec succès. 
+Dans notre deuxième contribution de cette thèse, nous combinons cette stratégie avec la précédente. permettant pour la première fois la propagation à la volée de déductions symétriques tout en continuant à bénéficier des avantages de CDCL[sym].
+
+Tous les algorithmes présentés dans cette thèse ont été mis en implémentés et largement testés à l'aide de grands benchmarks issus de compétitions SAT. Le solveur SAT sensible à la symétrie développé au cours de cette thèse s'avère compétitif par rapport à l'état de l'art et, dans de nombreux cas symétriques, est capable de surpasser les autres solveurs.
+
+%Aujourd'hui, la satisfaction booléenne (SAT) est un domaine de recherche actif qui trouve son application dans différents domaines tels que l'optimisation logique, la génération de motifs de test, la vérification formelle et la simulation fonctionnelle, etc.
+%Par conséquent, l'élaboration d'approches qui pourraient traiter des problèmes SAT 
+%de plus en plus complexes est devenue une priorité.
+%Certains problèmes présentent des symétries et créent une explosion combinatoire qui entrave les performances du solveur. Celui-ci explore en vain les parties symétriques de l'espace de recherche.
+%
+%Dans l'état de l'art, il existe deux approches qui traitent de ce problème, la première, appelée \textit{rupture de symétrie statique}, vise à enrichir le problème d'origine avec des contraintes qui empêchent le solveur d'explorer
+%les espaces de recherches symétriques. Le second appelé \textit{rupture de symétrie dynamique} ajoute une composante de symétrie dans le noyau du solveur et modifier son comportement pour l'accélérer le parcours de l'espace de recherche en utilisant les symétries présentes dans le problème initial. Ces approches sont efficaces mais n'arrivent néanmoins pas à traiter l'ensemble des instances symétriques.
+%
+%
+%Dans cette thèse, nous avons cherché à mieux exploiter les propriétés de symétrie des problèmes.
+%Pour ce faire, nous proposons deux contributions majeures qui visent à améliorer les approches de l'état de l'art et à augmenter le nombre d'instances résolues. La première imite le comportement de l'approche de \textit{rupture de symmétrie statique} mais fonctionne dynamiquement. Un contrôleur de symétrie au sein du solveur observe son comportement  et génère des contraintes de rupture de symétries de manière opportuniste.
+%La seconde vise à combiner l'approche précédente avec une approche dynamique. Le but est de prendre le meilleur de deux mondes,
+%accélérer le parcours du solveur en utilisant des symétries tout en l'empêchant de visiter les parties symétriques de l'espace de recherche.
+%
+%Des expériences approfondies sur le benchmark des compétitions SAT montrent que nos approches sont compétitives et même meilleures dans certains cas avec les meilleures approches de l'état de l'art.
 
 
 \chapter*{Abstract}
@@ -320,24 +335,61 @@ Des expériences approfondies sur le benchmark des compétitions SAT montrent qu
 %the symmetric part of the search space and hinders the performance. 
 
 
-Nowadays, Boolean satisfiability (SAT) is an active research area finding its application in different domains
-such as logic optimization, test pattern generation, formal verification, functional simulation, etc.
-Hence, the development of approaches that could treat increasingly challenging SAT problem has become a focus.
-Some problems exhibit symmetries and create a combinatorial explosion that hinders solver performance.
-This one explores fruitlessly the symmetric parts of the search space.
+% SAT important : NP-complete, solver efficaces depuis 2000+, problèmes de taille croissante (indus), 
+% benchmarks + compétitions reconnues
+Boolean satisfiability (SAT) solves the problem of finding a solution to a propositional Boolean formula.
+This NP-complete problem can model a wide variety of industrial and academic problems
+covering planning, dependency resolution, formal verification, logic optimization, cryptography\ldots
+Recent advances have led to very efficient SAT solvers, able to deal with millions of variables and 
+constraints. International SAT competitions featuring industrial models challenge and drive the
+ development of ever more efficient SAT solvers.
+ 
+% symmetry important
+Many systems in practice exhibit symmetries, that can allow to reason on a quotient abstraction of the 
+search space, based on equivalence classes with respect to the symmetries, that can be exponentially smaller than the full search space in favorable cases.
+In this thesis, we explore how to exploit symmetry reductions to improve the performance of SAT solvers.
 
-In the state-of-the-art two majors approaches that address  this problem, the first, called \textit{static symmetry breaking}
-aims to enrich the original problem problem with constraints that prevents the solver from exploring
-symmetric parts of the search space. 
-The second called \textit{dynamic symmetry breaking} adds a symmetry component to the solver core
-and modifies its behavior to accelerate it using symmetries presents in the initial problem.
-These approaches are effective but are not able to handle all symmetric instances.
+% SOTA 1 : static
+Existing approaches to exploit symmetries in SAT solving, consist in computing the symmetries of the problem 
+then generating so-called "static symmetry breaking predicates" that are added to the problem, forcing the solver to 
+adopt only one representative for each equivalence class of solutions.
+% limite + contrib
+% contribution 1 : CDCL-sym online symmetry breaking
+The problem with this approach is that the number of additional constraints can be larger than the original system,
+ and may overload the solver. The first contribution of this thesis called CDCL[sym] is a novel lightweight and dynamic algorithm,  that only introduces these additional symmetry breaking constraints opportunistically as the solver progresses.
+ 
+% SOTA 2 : dynamic
+A second approach to exploit symmetries consists in so-called \textit{dynamic symmetry breaking} that
+is concerned with symmetric propagation of the \textit{deductions} of the solver when possible.
+This approach solves some models that static symmetry breaking cannot solve, and vice-versa,
+but to our knowledge these approaches had never been successfully combined. 
+In our second contribution of this thesis, we combine this strategy with the previous
+approach,  enabling for the first time on the fly propagation of symmetric deductions 
+ while still gaining the benefits of CDCL[sym].
 
-In this thesis, we set out to exploit symmetry properties of the problems in better ways.
-For this purpose, we propose two major contributions that aims to improve the state-of-the-art approaches and augment the number of solved symmetric instances. The first one mimics the behavior of \textit{static symmetry breaking} approach but operates
-dynamically. A symmetry controller observes the behavior of the solver and generates constraints opportunistically.
-The second one aims to combine the previous approach with a dynamic one. The goal is to take best of both worlds,
-accelerate the solver's tree traversal  by using symmetries while preventing him from visiting the symmetrical parts of the research space.
+All the algorithms presented in this thesis have been implemented and extensively tested using large benchmarks taken from SAT competitions. The symmetry aware SAT solver developed during this thesis is shown to be competitive with the state of the art
+and in many symmetric cases is able to outperform all other solvers.
 
-Extensive experiments on the benchmark of SAT competitions show that our approaches are competitive and even better 
-in some cases with the best state-of-the-art approaches.
+
+
+%adds a symmetry component to the solver core
+%and modifies its behavior to accelerate it using symmetries presents in the initial problem.
+%These approaches are effective but are not able to handle all symmetric instances.
+%% contrib 2 : symmetry propagation + breaking
+%The second one aims to combine the previous approach with a dynamic one. The goal is to take best of both worlds,
+%accelerate the solver's tree traversal  by using symmetries while preventing him from visiting the symmetrical parts of the research space.
+%
+%
+%
+%In the state-of-the-art two majors approaches that address  this problem, the first, called \textit{static symmetry breaking}
+%aims to enrich the original problem problem with constraints that prevents the solver from exploring
+%symmetric parts of the search space. 
+%
+%In this thesis, we set out to exploit symmetry properties of the problems in better ways.
+%For this purpose, we propose two major contributions that aims to improve the state-of-the-art approaches and augment the number of solved symmetric instances.
+%% contrib 2 : symmetry propagation + breaking
+%The second one aims to combine the previous approach with a dynamic one. The goal is to take best of both worlds,
+%accelerate the solver's tree traversal  by using symmetries while preventing him from visiting the symmetrical parts of the research space.
+%% contrib 3 : tool + mesures + experiments
+%Extensive experiments on the benchmark of SAT competitions show that our approaches are competitive and even better 
+%in some cases with the best state-of-the-art approaches.
