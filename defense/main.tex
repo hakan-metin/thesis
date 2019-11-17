@@ -66,7 +66,7 @@
     	\textsc{Pascal \textsc{Fontaine}}  &  Maître de conférences, Université de Liège\\
     	\textsc{Laure Petrucci}  & Professeur, Université Paris 13\\
     	\textsc{Jean-Michel	Couvreur}  & Professeur, Université d'Orléans\\
-    	\textsc{Emanuelle Encrenaz}  & Maître de conférences, Sorbonne Université\\
+    	\textsc{Emmanuelle Encrenaz}  & Maître de conférences, Sorbonne Université\\
     	\textsc{Souheib Baarir}  & Maître de conférences, Université Paris Nanterre\\
     	\vspace{1em}
     	\textsc{Fabrice Kordon}  & Professeur, Sorbonne Université\\
@@ -728,7 +728,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \visible<4>{\tikz[baseline]{\node[anchor=base] (cc){$\cdots$};}}
 
 \begin{tabular}{ccc}
-	\tikz[baseline]{\node[anchor=base] (g1){};} & \tikz[baseline]{\node[anchor=base] (g2){};} & \tikz[baseline]{\node[anchor=base] (g3){};}\\
+	\tikz[baseline]{\node[anchor=base] (g1){};} & \tikz[baseline]{\node[anchor=base] (g2){};} & \tikz[baseline,opacity=0,scale=8,onslide={<2-3>,opacity=1}]{\node[anchor=base] (g3){?};}\\
 	\includegraphics[scale=0.1]{images/south} & \includegraphics[scale=0.1]{images/simpson} & \includegraphics[scale=0.09]{images/titeuf}\\
 	A                                        & B                                           & C\\
 \end{tabular}
@@ -778,28 +778,28 @@ Is it possible to attribute each group to a classroom?
 
 %% ----------------------------------------------------------------------------
 
-%\begin{frame}
-%	\frametitle{Outline}
-%	\begin{enumerate}
-%		\item \textcolor{UPMCEngagementBlueB}{SAT overview}
-%		\begin{itemize}
-%			\item[] SAT basics
-%			\item[] SAT and symmetries
-%		\end{itemize}
-%		\vspace{5pt}
-%		\item \textcolor{UPMCEngagementBlueB}{Existing approaches}
-%		\begin{itemize}
-%			\item[] Static symmetry breaking
-%			\item[] Dynamic symmetry breaking
-%		\end{itemize}
-%		\vspace{5pt}
-%		\item \textcolor{UPMCEngagementBlueB}{Contribution and results} 
-%		\begin{itemize}
-%			\item[] \phantom{CDCL [Sym]}
-%			\item[] \phantom{Combination of different approaches}
-%		\end{itemize}
-%	\end{enumerate}
-%\end{frame}
+\begin{frame}
+	\frametitle{Outline}
+	\begin{enumerate}
+		\item \textcolor{UPMCEngagementBlueB}{SAT overview}
+		\begin{itemize}
+			\item[] SAT basics
+			\item[] SAT and symmetries
+		\end{itemize}
+		\vspace{5pt}
+		\item \textcolor{UPMCEngagementBlueB}{Existing approaches}
+		\begin{itemize}
+			\item[] Static symmetry breaking
+			\item[] Dynamic symmetry breaking
+		\end{itemize}
+		\vspace{5pt}
+		\item \textcolor{UPMCEngagementBlueB}{Contribution and results} 
+		\begin{itemize}
+			\item[] \phantom{CDCL [Sym]}
+			\item[] \phantom{Combination of different approaches}
+		\end{itemize}
+	\end{enumerate}
+\end{frame}
 
 %% ----------------------------------------------------------------------------
 \tikzstyle{every picture}+=[remember picture]
@@ -871,15 +871,11 @@ Is it possible to attribute each group to a classroom?
 \path[line] (a12) edge  (b12);
 
 \end{tikzpicture}
-%	Symmetry of formula:
-
-%	
-%	\vfill
-%	Equi-satisfiability
-%	Let $\alpha$ an assignment, $\varphi$ a SAT problem and $g$ a symmetry:
-%	$\alpha \models \varphi \Leftrightarrow g.\alpha \models \varphi$
+\vfill
+\normalsize
+	Equi-satisfiability:
+	$$\alpha \models \varphi \Leftrightarrow g.\alpha \models \varphi$$
 	
-	\vfill
 \end{frame}
 
 \begin{frame}
@@ -923,8 +919,7 @@ Is it possible to attribute each group to a classroom?
 		\visible<3-> {
 			$\|$ & $\|$  \\
 			graph automorphism & 
-			\small{(\texttt{bliss}\footnote{http://www.tcs.hut.fi/Software/bliss/},
-				\texttt{saucy} \footnote{http://vlsicad.eecs.umich.edu/BK/SAUCY/},$\cdots$)
+			\small{(\texttt{bliss},	\texttt{saucy} ,$\cdots$)
 			} 
 			\\
 		}
@@ -943,7 +938,7 @@ Is it possible to attribute each group to a classroom?
 			\end{tabular}
 		}
 	\end{tabular}
-\end{frame}
+	\end{frame}
 
 %% ----------------------------------------------------------------------------
 \begin{frame}
@@ -1046,7 +1041,7 @@ Is it possible to attribute each group to a classroom?
 	\draw[link] (rrr) -> node [mid] {$1$} (rrrr);
 	\end{tikzpicture}
 	\vfill
-\visible<2> {Adds additional constraints to prune search space.}
+\visible<2> {Adds symmetry breaking predicates to prune search space.}
 \end{frame}
  
 \begin{frame}
@@ -1116,183 +1111,29 @@ Is it possible to attribute each group to a classroom?
 \end{tikzpicture}
 \end{center}
 \vfill
-\begin{itemize}
-	\item<3-> \textcolor{hgreen}{Works well on many symmetric instances}
-	\vfill
-	\item<3-> \textcolor{red}{The solver can "explode" instead of being helped}
-\end{itemize}
-\end{frame}
 
-%% ----------------------------------------------------------------------------
-\begin{frame}
-\frametitle{Using symmetries to accelerate tree traversal}
-\only<1-2>{$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\}
-\only<3>{$g = (x_1 \enskip x_2)\textcolor{red!70}{(x_4 \enskip x_5)}(x_7 \enskip x_8) $\\}
-\centering
-\begin{tikzpicture}[scale=1, every node/.style={scale=1}]
-
-\newcommand{\x}{2.07}
-\newcommand{\y}{-1.5}
-\tikzstyle{highlight} = [line width=0.3mm, color=blue]
-\tikzstyle{decision}=[circle,draw,thick,fill=blue!30,font=\scriptsize]
-%	\tikzstyle{unsat}=[draw,thick, fill=red]
-\tikzstyle{unsat}=[scale=2, fill=white]
-\tikzstyle{link}=[->,>=latex,rounded corners=5pt,thick]
-\tikzstyle{transparent} = [nearly transparent]
-\tikzstyle{mid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=1,font=\scriptsize]
-\tikzstyle{trmid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=0.3,font=\scriptsize]
-\tikzstyle{propagation}=[rectangle, minimum height=.65cm, minimum width=.65cm,draw,thick,fill=blue!15,font=\scriptsize,anchor=base]
-
-% layer 1
-\node[decision](t) at (0,0) {$x_1$};
-
-% layer 2
-\node[decision,transparent,onslide={<2->,opacity=1}](l) at (-\x,\y) {$x_2$};
-\node[decision,transparent](r) at (\x,\y) {$x_2$};
-
-
-% layer 3
-\node[decision,transparent](ll) at (-\x-\x*0.5,2*\y) {$x_4$};
-\node[propagation,transparent,onslide={<2->,opacity=1}](lr) at (-\x+\x*0.5,2*\y) {$x_4$};
-\node[decision,transparent](rl) at (\x-\x*0.5,2*\y) {$x_4$};
-\node[decision,transparent](rr) at (\x+\x*0.5,2*\y) {$x_4$};
-
-% layer 4
-\node[decision,transparent](lll) at (-\x-\x*0.5-\x*0.25,3*\y) {$x_5$};
-\node[decision,transparent](llr) at (-\x-\x*0.5+\x*0.25,3*\y) {$x_5$};
-\node[decision,transparent,onslide={<3>, propagation,fill=red!30,opacity=1}](lrl) at (-\x+\x*0.5-\x*0.25,3*\y) {$x_5$};
-\node[decision,transparent](lrr) at (-\x+\x*0.5+\x*0.25,3*\y) {$x_5$};
-\node[decision,transparent](rll) at (\x-\x*0.5-\x*0.25,3*\y) {$x_5$};
-\node[decision,transparent](rlr) at (\x-\x*0.5+\x*0.25,3*\y) {$x_5$};
-\node[decision,transparent](rrl) at (\x+\x*0.5-\x*0.25,3*\y) {$x_5$};
-\node[decision,transparent](rrr) at (\x+\x*0.5+\x*0.25,3*\y) {$x_5$};
-
-% layer 5
-\node[unsat,transparent](llll) at (-\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-\node[unsat,transparent](lllr) at (-\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-\node[unsat,transparent](llrl) at (-\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-\node[unsat,transparent](llrr) at (-\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-\node[unsat,transparent](lrll) at (-\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-\node[unsat,transparent](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-\node[unsat,transparent](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-\node[unsat,transparent](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}}; 
-\node[unsat,transparent](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-\node[unsat,transparent](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-\node[unsat,transparent](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-\node[unsat,transparent](rlrr) at (\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-\node[unsat,transparent](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-\node[unsat,transparent](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-\node[unsat,transparent](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-\node[unsat,transparent](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}}; 
-
-
-\draw[link] (t) ->  node [mid] {$0$} (l);
-\draw[link,transparent] (t) -> node [trmid] {$1$} (r);
-
-\draw[link,transparent] (l) ->  node [trmid] {$0$} (ll);
-\draw[link,transparent,onslide={<2->,opacity=1}] (l) -> node [trmid,onslide={<2->,mid}] {$1$} (lr);
-\draw[link,transparent] (r) ->  node [trmid] {$0$} (rl);
-\draw[link,transparent] (r) -> node [trmid] {$1$} (rr);
-
-\draw[link,transparent] (ll) -> node [trmid] {$0$} (lll);
-\draw[link,transparent] (ll) -> node [trmid] {$1$} (llr);
-\draw[link,transparent,onslide={<2->,opacity=1}] (lr) -> node [trmid,onslide={<2->,mid}] {$0$} (lrl);
-\draw[link,transparent] (lr) -> node [trmid] {$1$} (lrr);
-
-\draw[link,transparent] (rl) -> node [trmid] {$0$} (rll);
-\draw[link,transparent] (rl) -> node [trmid] {$1$} (rlr);
-\draw[link,transparent] (rr) -> node [trmid] {$0$} (rrl);
-\draw[link,transparent] (rr) -> node [trmid] {$1$} (rrr);
-
-
-\draw[link,transparent] (lll) -> node [trmid] {$0$} (llll);
-\draw[link,transparent] (lll) -> node [trmid] {$1$} (lllr);
-\draw[link,transparent] (llr) -> node [trmid] {$0$} (llrl);
-\draw[link,transparent] (llr) -> node [trmid] {$1$} (llrr);
-\draw[link,transparent,onslide={<3->,opacity=1}] (lrl) -> node [trmid,onslide={<3->,mid}] {$0$} (lrll);
-\draw[link,transparent] (lrl) -> node [trmid] {$1$} (lrlr);
-\draw[link,transparent] (lrr) -> node [trmid] {$0$} (lrrl);
-\draw[link,transparent] (lrr) -> node [trmid] {$1$} (lrrr);
-
-\draw[link,transparent] (rll) -> node [trmid] {$0$} (rlll);
-\draw[link,transparent] (rll) -> node [trmid] {$1$} (rllr);
-\draw[link,transparent] (rlr) -> node [trmid] {$0$} (rlrl);
-\draw[link,transparent] (rlr) -> node [trmid] {$1$} (rlrr);
-\draw[link,transparent] (rrl) -> node [trmid] {$0$} (rrll);
-\draw[link,transparent] (rrl) -> node [trmid] {$1$} (rrlr);
-\draw[link,transparent] (rrr) -> node [trmid] {$0$} (rrrl);
-\draw[link,transparent] (rrr) -> node [trmid] {$1$} (rrrr);
-\end{tikzpicture}
-\vfill
-\visible<3> {Use symmetries to deduce symmetrical facts.}
-\end{frame}
-
-
-
-\begin{frame}
-\frametitle{Dynamic Symmetry Breaking}
-
-\begin{center}
-	\begin{tikzpicture}[scale=1,every node/.style={scale=1}]
-	\tikzstyle{box} = [draw, minimum width=1.5cm]
-	
-	\node[box,minimum height=1.2cm] (cnf) at (-5, 0) {CNF};
-	\node[box] (sym) at (-2, -2) { Symmetries};
-	
-	
-	\node[box,minimum width=3cm,minimum height=3.5cm,label={[yshift=-1cm]SAT Solver}] (solver) at (1, -1) { };
-	\node[box,text width=2cm] (symcomp) at (1, -1.5) {Symmetry component};
-	\draw[->, thick, bend left = 30] (cnf) to [bend right=30] node [midway, left, fill=white, align=center] {compute\\symmetries} (sym);
-	
-	\draw[->, thick,bend left = 30] (cnf) to [] (solver);
-	\draw[->, thick] (sym) to [] (symcomp);
-	\end{tikzpicture}
-\end{center}
-\vfill
 Different approaches:
 \begin{itemize}
-	\item Symmchaff~\cite{sabharwal2005symchaff}
-	\item Symmetry Propagation (SP)~\cite{Devriendt12}
-	\item Symmetry Learning Scheme (SLS)~\cite{benhamou2010enhancing}
-	\item Symmetry Explanation Leaning (SEL)~\cite{devriendt2017symmetric}
+	\item Shatter \cite{aloul06}
+	\item BreakID \cite{devriendt2016improved}
+	\item $...$
 \end{itemize}
 
-\vfill 
+\vfill
 
-\visible<2>{\centering Works under \textbf{some conditions}}
-
+\visible<3>{
+Pros/Cons:
+\begin{itemize}
+	\item \textcolor{hgreen}{Works well on many symmetric instances}
+	\item \textcolor{red}{The solver can "explode" instead of being helped}
+\end{itemize}
+}
 \end{frame}
-%% ----------------------------------------------------------------------------
 
-%\begin{frame}
-%\frametitle{Example}
-%TODO\\
-%Build an example
-%\end{frame}
-%% ----------------------------------------------------------------------------
-%
-%\begin{frame}
-%\frametitle{Outline}
-%\begin{enumerate}
-%	\item \textcolor{UPMCEngagementBlueB}{SAT overview}
-%	\begin{itemize}
-%		\item[] SAT basics
-%		\item[] SAT and symmetries
-%	\end{itemize}
-%	\vspace{5pt}
-%	\item \textcolor{UPMCEngagementBlueB}{Existing approaches}
-%	\begin{itemize}
-%		\item[] Static symmetry breaking
-%		\item[] Dynamic symmetry breaking
-%	\end{itemize}
-%	\vspace{5pt}
-%	\item \textcolor{UPMCEngagementBlueB}{Contribution and results} 
-%	\begin{itemize}
-%		\item[] CDCL [Sym]
-%		\item[] Combination of different approaches
-%	\end{itemize}
-%\end{enumerate}
-%\end{frame}
+
+
+
+
 
 %% ----------------------------------------------------------------------------
 %\begin{frame}
@@ -1585,8 +1426,192 @@ Setup:
 
 %% ----------------------------------------------------------------------------
 
+
+
+
+%% ----------------------------------------------------------------------------
+\begin{frame}
+\frametitle{Using symmetries to accelerate tree traversal}
+\only<1-2>{$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\}
+\only<3>{$g = (x_1 \enskip x_2)\textcolor{red!70}{(x_4 \enskip x_5)}(x_7 \enskip x_8) $\\}
+\centering
+\begin{tikzpicture}[scale=1, every node/.style={scale=1}]
+
+\newcommand{\x}{2.07}
+\newcommand{\y}{-1.5}
+\tikzstyle{highlight} = [line width=0.3mm, color=blue]
+\tikzstyle{decision}=[circle,draw,thick,fill=blue!30,font=\scriptsize]
+%	\tikzstyle{unsat}=[draw,thick, fill=red]
+\tikzstyle{unsat}=[scale=2, fill=white]
+\tikzstyle{link}=[->,>=latex,rounded corners=5pt,thick]
+\tikzstyle{transparent} = [nearly transparent]
+\tikzstyle{mid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=1,font=\scriptsize]
+\tikzstyle{trmid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=0.3,font=\scriptsize]
+\tikzstyle{propagation}=[rectangle, minimum height=.65cm, minimum width=.65cm,draw,thick,fill=blue!15,font=\scriptsize,anchor=base]
+
+% layer 1
+\node[decision](t) at (0,0) {$x_1$};
+
+% layer 2
+\node[decision,transparent,onslide={<2->,opacity=1}](l) at (-\x,\y) {$x_2$};
+\node[decision,transparent](r) at (\x,\y) {$x_2$};
+
+
+% layer 3
+\node[decision,transparent](ll) at (-\x-\x*0.5,2*\y) {$x_4$};
+\node[propagation,transparent,onslide={<2->,opacity=1}](lr) at (-\x+\x*0.5,2*\y) {$x_4$};
+\node[decision,transparent](rl) at (\x-\x*0.5,2*\y) {$x_4$};
+\node[decision,transparent](rr) at (\x+\x*0.5,2*\y) {$x_4$};
+
+% layer 4
+\node[decision,transparent](lll) at (-\x-\x*0.5-\x*0.25,3*\y) {$x_5$};
+\node[decision,transparent](llr) at (-\x-\x*0.5+\x*0.25,3*\y) {$x_5$};
+\node[decision,transparent,onslide={<3>, propagation,fill=red!30,opacity=1}](lrl) at (-\x+\x*0.5-\x*0.25,3*\y) {$x_5$};
+\node[decision,transparent](lrr) at (-\x+\x*0.5+\x*0.25,3*\y) {$x_5$};
+\node[decision,transparent](rll) at (\x-\x*0.5-\x*0.25,3*\y) {$x_5$};
+\node[decision,transparent](rlr) at (\x-\x*0.5+\x*0.25,3*\y) {$x_5$};
+\node[decision,transparent](rrl) at (\x+\x*0.5-\x*0.25,3*\y) {$x_5$};
+\node[decision,transparent](rrr) at (\x+\x*0.5+\x*0.25,3*\y) {$x_5$};
+
+% layer 5
+\node[unsat,transparent](llll) at (-\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](lllr) at (-\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](llrl) at (-\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](llrr) at (-\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](lrll) at (-\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}}; 
+\node[unsat,transparent](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](rlrr) at (\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+\node[unsat,transparent](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}}; 
+
+
+\draw[link] (t) ->  node [mid] {$0$} (l);
+\draw[link,transparent] (t) -> node [trmid] {$1$} (r);
+
+\draw[link,transparent] (l) ->  node [trmid] {$0$} (ll);
+\draw[link,transparent,onslide={<2->,opacity=1}] (l) -> node [trmid,onslide={<2->,mid}] {$1$} (lr);
+\draw[link,transparent] (r) ->  node [trmid] {$0$} (rl);
+\draw[link,transparent] (r) -> node [trmid] {$1$} (rr);
+
+\draw[link,transparent] (ll) -> node [trmid] {$0$} (lll);
+\draw[link,transparent] (ll) -> node [trmid] {$1$} (llr);
+\draw[link,transparent,onslide={<2->,opacity=1}] (lr) -> node [trmid,onslide={<2->,mid}] {$0$} (lrl);
+\draw[link,transparent] (lr) -> node [trmid] {$1$} (lrr);
+
+\draw[link,transparent] (rl) -> node [trmid] {$0$} (rll);
+\draw[link,transparent] (rl) -> node [trmid] {$1$} (rlr);
+\draw[link,transparent] (rr) -> node [trmid] {$0$} (rrl);
+\draw[link,transparent] (rr) -> node [trmid] {$1$} (rrr);
+
+
+\draw[link,transparent] (lll) -> node [trmid] {$0$} (llll);
+\draw[link,transparent] (lll) -> node [trmid] {$1$} (lllr);
+\draw[link,transparent] (llr) -> node [trmid] {$0$} (llrl);
+\draw[link,transparent] (llr) -> node [trmid] {$1$} (llrr);
+\draw[link,transparent,onslide={<3->,opacity=1}] (lrl) -> node [trmid,onslide={<3->,mid}] {$0$} (lrll);
+\draw[link,transparent] (lrl) -> node [trmid] {$1$} (lrlr);
+\draw[link,transparent] (lrr) -> node [trmid] {$0$} (lrrl);
+\draw[link,transparent] (lrr) -> node [trmid] {$1$} (lrrr);
+
+\draw[link,transparent] (rll) -> node [trmid] {$0$} (rlll);
+\draw[link,transparent] (rll) -> node [trmid] {$1$} (rllr);
+\draw[link,transparent] (rlr) -> node [trmid] {$0$} (rlrl);
+\draw[link,transparent] (rlr) -> node [trmid] {$1$} (rlrr);
+\draw[link,transparent] (rrl) -> node [trmid] {$0$} (rrll);
+\draw[link,transparent] (rrl) -> node [trmid] {$1$} (rrlr);
+\draw[link,transparent] (rrr) -> node [trmid] {$0$} (rrrl);
+\draw[link,transparent] (rrr) -> node [trmid] {$1$} (rrrr);
+\end{tikzpicture}
+\vfill
+\visible<3> {Use symmetries to deduce symmetrical facts.}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Dynamic Symmetry Breaking}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8,every node/.style={scale=0.8}]
+\tikzstyle{box} = [draw, minimum width=1.5cm]
+
+\node[box,minimum height=1.2cm] (cnf) at (-5, 0) {CNF};
+\node[box] (sym) at (-2, -2) { Symmetries};
+
+
+\node[box,minimum width=3cm,minimum height=3.5cm,label={[yshift=-1cm]SAT Solver}] (solver) at (1, -1) { };
+\node[box,text width=2cm] (symcomp) at (1, -1.5) {Symmetry component};
+\draw[->, thick, bend left = 30] (cnf) to [bend right=30] node [midway, left, fill=white, align=center] {compute\\symmetries} (sym);
+
+\draw[->, thick,bend left = 30] (cnf) to [] (solver);
+\draw[->, thick] (sym) to [] (symcomp);
+\end{tikzpicture}
+\end{center}
+\vfill
+
+Different approaches:
+\begin{itemize}
+\item Symmchaff~\cite{sabharwal2005symchaff}
+\item Symmetry Propagation (SP)~\cite{Devriendt12}
+\item Symmetry Learning Scheme (SLS)~\cite{benhamou2010enhancing}
+\item Symmetry Explanation Leaning (SEL)~\cite{devriendt2017symmetric}
+\item $...$
+\end{itemize}
+
+\vfill 
+
+\visible<2>{
+Pros/Cons:
+\begin{itemize}
+	\item \textcolor{hgreen}{Works well on many symmetric instances}
+	\item \textcolor{red}{Cannot handle some instances solved by static approach}
+\end{itemize}
+}
+
+\end{frame}
+%% ----------------------------------------------------------------------------
+
+%\begin{frame}
+%\frametitle{Example}
+%TODO\\
+%Build an example
+%\end{frame}
+%% ----------------------------------------------------------------------------
+%
+%\begin{frame}
+%\frametitle{Outline}
+%\begin{enumerate}
+%\item \textcolor{UPMCEngagementBlueB}{SAT overview}
+%\begin{itemize}
+%\item[] SAT basics
+%\item[] SAT and symmetries
+%\end{itemize}
+%\vspace{5pt}
+%\item \textcolor{UPMCEngagementBlueB}{Existing approaches}
+%\begin{itemize}
+%\item[] Static symmetry breaking
+%\item[] Dynamic symmetry breaking
+%\end{itemize}
+%\vspace{5pt}
+%\item \textcolor{UPMCEngagementBlueB}{Contribution and results} 
+%\begin{itemize}
+%\item[] CDCL [Sym]
+%\item[] Combination of different approaches
+%\end{itemize}
+%\end{enumerate}
+%\end{frame}
+%
+
 \begin{frame}
 \frametitle{ESBP + SP}
+
 
 Compose the symmetry propagation and the ESBP\\
 \begin{center}
@@ -1595,7 +1620,7 @@ Compose the symmetry propagation and the ESBP\\
 
 \vfill
 
-Problems
+Problems:
 \begin{itemize}
 	\item ESBP breaks symmetries (incrementally)
 	\item SP considers the manipulated symmetries valid all the time
@@ -1701,6 +1726,7 @@ In hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 	
 	\begin{itemize}
 		\item Take advantage of static and dynamic approach
+		\item Introduce local symmetries
 	\end{itemize}	
 \end{itemize}	
 

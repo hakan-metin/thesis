@@ -1,6 +1,11 @@
 \newcommand{\etalchar}[1]{$^{#1}$}
 \begin{thebibliography}{DBdC{\etalchar{+}}12}
 
+\bibitem[ASM06]{aloul06}
+{Fadi A.} Aloul, {Karem A.} Sakallah, and {Igor L.} Markov.
+\newblock Efficient symmetry breaking for boolean satisfiability.
+\newblock {\em {IEEE} Trans. Computers}, 55(5):549--558, 2006.
+
 \bibitem[BNOS10]{benhamou2010enhancing}
 Belaid Benhamou, Tarek Nabhani, Richard Ostrowski, and Mohamed~Reda Saidi.
 \newblock Enhancing clause learning by symmetry in sat solvers.
@@ -19,6 +24,12 @@ Jo~Devriendt, Bart Bogaerts, and Maurice Bruynooghe.
   for sat.
 \newblock In {\em International Conference on Theory and Applications of
   Satisfiability Testing}, pages 83--100. Springer, 2017.
+
+\bibitem[DBBD16]{devriendt2016improved}
+Jo~Devriendt, Bart Bogaerts, Maurice Bruynooghe, and Marc Denecker.
+\newblock Improved static symmetry breaking for sat.
+\newblock In {\em International Conference on Theory and Applications of
+  Satisfiability Testing}, pages 104--122. Springer, 2016.
 
 \bibitem[DBdC{\etalchar{+}}12]{Devriendt12}
 Jo~Devriendt, Bart Bogaerts, Broes de~Cat, Marc Denecker, and Christopher
