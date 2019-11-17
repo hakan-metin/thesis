@@ -190,8 +190,8 @@ syntactic symmetries depend of the encoding of the problem and can lead to diffe
 \section{Symmetry detection in SAT}
 For the detection of symmetries in SAT, we first introduce the notion of graph automorphism.
 Given a colored graph $Gr = (V, E, \gamma)$, with a set of vertices set $V \in  [1, n] $, a set of edges $E$ and
-$\gamma$ a mapping: $V \rightarrow C$, where C is a set of \emph{colors}.
-An automorphism of $Gr$ is a permutation on its vertices, $aut :V \rightarrow V$,
+$\gamma$ a mapping: $V \rightarrow C$, where C is a set of \emph{colors},
+an automorphism of $Gr$ is a permutation on its vertices, $aut :V \rightarrow V$,
 such that:
 \begin{itemize}
  \item $\forall (u, v) \in E \implies (aut.u, aut.v) \in E$
@@ -285,8 +285,7 @@ we can remove from the graph as many nodes and edges as those are binary clauses
   \label{fig:graph_opt}
 \end{figure}
 
-After the construction of such a graph, it is given to an automorphism tool.
-This last will produce its set of generators.
+After the construction of such a graph, it is given to an automorphism tool which will produce its set of generators.
 With the previous graph, the following generators are obtained using $\bliss$ as the automorphism tool:
 \begin{center}
  \begin{minipage}[c]{.635\textwidth}
@@ -324,7 +323,7 @@ Solving this problem with a standard SAT solver, like MiniSAT~\cite{een2003exten
  turns out to be very time consuming (and even impossible, in a reasonable time, for high values of $n$). 
 To avoid this combinatorial explosion, a technique called \emph{symmetry breaking} allows a SAT solver to avoid the visit of symmetric search space. For this purpose, there are two principles , known as \emph{static symmetry breaking}
 and \emph{dynamic symmetry breaking}. In the general case, visiting one assignment for each orbit is sufficient to determine the satisfiability of the whole formula.
-So, in the first case, symmetry breaking constraints that invalidate symmetric assignments are added to the initial problem before the start of solving (statically). The second one alters
+In the first case, symmetry breaking constraints that invalidate symmetric assignments are added to the initial problem before the start of solving (statically). The second one alters
 the search space during the solving (dynamically), it will like in the static approach prune symmetric search space or it can accelerate tree traversal using symmetrical facts.
 In fact, some decisions will be transformed into propagations and so accelerate the overall solving time.
   
@@ -352,7 +351,7 @@ omitted.% to deduce the satisfiability of the formula by adding constraints.
 This leads us to the following questions:
 \begin{enumerate}
  \item How to generate constraints that forbid symmetrical assignments?
- \item How  to choose branch that is equivalent to all symmetric ones?
+ \item How  to choose a branch that is equivalent to all symmetric ones?
 \end{enumerate}
 To answer question 2, we need to introduce an ordering relation between assignments
 
