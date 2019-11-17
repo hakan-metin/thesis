@@ -1,36 +1,38 @@
 \chapter{The Boolean Satisfiability Problem}\label{chap:preliminaries}
 \minitoc
 In this thesis, our goal is to exploit the symmetry properties of SAT problems.
-Before, we get to the heart of the matter, we first introduce the Boolean satisfiability (SAT)  problem.
+Before we get to the heart of the matter, we first introduce the Boolean satisfiability (SAT)  problem.
 %This is a propositional formula representing constraints.
 %A tool that aims to satisfy such formulas is called a SAT solver. 
 %It answers $\sat$ when all constraints
 %present in the formula can be satisfied and $\unsat$ otherwise.
 \section{SAT basics}
-The goal of SAT is to determine whether a propositional formula is satisfiable (i.e, all constraint can be satisfied)
-or unsatisfiable (i.e there us no way to satisfy all constraint at the same time).
+\hakan{REGARDER TOUS LES I.E.}
+
+The goal of SAT is to determine whether a propositional formula is satisfiable (i.e. all constraints can be satisfied)
+or unsatisfiable (i.e there us no way to satisfy all constraints at the same time).
 The formula is constituted of \emph{Boolean} or \emph{propositional variables},
 i.e. each variable has two possible values: true or false (noted respectively $\true$ or $\false$).
-We call \emph{literal}, a propositional variable or its negation.
+We call \emph{literal} a propositional variable or its negation.
 For a given variable $x$, the positive literal is represented by $x$ and the negative one by $\neg x$.
 Given a formula $\varphi$, we denote $\Vars_\varphi$ (respectively $\Lits_\varphi$) the set of variables (respectively literals) used in the formula (the index in $\Vars_\varphi$ and $\Lits_\varphi$ is usually omitted when
 clear from context).
 To build complex formulas, it is sufficient to use, $\neg, \lor$ and $\land$ which are respectively negation, disjunction and conjunction. The remaining operators like, $\Rightarrow, \Leftrightarrow$ and
-$\oplus, \cdots$ expressed using combinations of the basic ones.
+$\oplus, \cdots$ are expressed using combinations of the basic ones.
 For example, $a \Rightarrow b$, can be expressed by $ \neg a \lor b$.
 Every binary operator adds a pair of parentheses to define explicitly the semantic of the formula.
 In the absence of parentheses, the following priority order applies (from the highest to the lowest priority):
 negation ($\neg$), conjunction ($\land$), disjunction ($\lor$).
-An \emph{assignment}, noted $\alpha$, is defined as the function that assigns a value to each variable of $\varphi$.
+An \emph{assignment}, noted $\alpha$, is defined as the function that assigns a value to each variable of $\varphi$:
  $$\alpha: \Vars \mapsto \{ \true, \false \}$$
  As usual, $\alpha$ is said \emph{total}, or \emph{complete}, when all elements of $\Vars$ have an image by
 $\alpha$, otherwise it is \emph{partial}. By abuse of notation, an assignment is
 often represented by the set of its true literals. For example, $\alpha = \{\neg x_1, x_3 \}$ means that $x_1$
-is set to false value and $x_3$ is set to true value.
+is set to the false value and $x_3$ is set to the true value.
   The set of all (possibly partial) assignments of $\Vars$ is noted $\Assignments(\Vars)$.
 A \emph{truth table} gives an evaluation of all possible assignments for a given formula.
 \Cref{tab:truthtable} shows the evaluation of the negation ($\neg$), the conjunction ($\land$), and the disjunction ($\lor$) operators.
-For convenience, true value (\true) is also represented by $1$, and false value (\false) is represented by $0$.
+For convenience, the true value (\true) is also represented by $1$, and the false value (\false) is represented by $0$.
 When a formula is always true, independently from the assignment, it is called a \emph{tautology}: $x \lor \neg x$ is 
 an example of tautologous formula.
 
@@ -56,7 +58,7 @@ an example of tautologous formula.
 A formula is said to be
 \emph{satisfiable} (\sat) if there is at least one assignment that satisfies it;
 otherwise the formula is \emph{unsatisfiable} (\unsat).
-In order to compare different formulas, we define here the concepts of logical equivalence and logical consequence
+In order to compare different formulas, the concepts of logical equivalence and logical consequence
 respectively defined in Definition~\ref{def:equiv} and Definition~\ref{def:logcons}.
 
 \vspace{1em}
@@ -73,7 +75,7 @@ respectively defined in Definition~\ref{def:equiv} and Definition~\ref{def:logco
 \end{definition}
 
 \subsection{Normal forms}
-In Boolean logic, there are some particular form of formula, called \emph{normal form}.
+In Boolean logic, there are some particular form of formulae, called \emph{normal forms}.
  To introduce some of them, we first need to present the concepts of \emph{cube} and \emph{clause}.
 \begin{definition}[Cube]
 A cube $\gamma$ is a finite conjunction of literals represented equivalently by:
@@ -90,18 +92,19 @@ With respect to its size, a clause is said to be \emph{unary, binary, ternary,} 
 Clauses have the following property that can be exploited to simplify the formula.
 When a clause $\omega_1$ is a subset of another clause $\omega_2$, noted $\omega_1 \subset \omega_2$,
 we say that $\omega_{1}$ subsumes $\omega_{2}$.
- And any assignment that satisfies $\omega_1$ will also satisfy $\omega_2$. So, $\omega_2$ is \emph{redundant} \textit{w.r.t.}  can be removed from the formula.
+ And any assignment that satisfies $\omega_1$ will also satisfy $\omega_2$. So, $\omega_2$ is \emph{redundant} \textit{w.r.t.}  
+ $\omega_{1}$ can be removed from the formula.
  
  \clearpage
  
 \begin{definition}[Conjunctive Normal Form]
- \emph{Conjunctive Normal Form} (CNF) of a formula is a finite conjunction of clauses represented by
+ The \emph{Conjunctive Normal Form} (CNF) of a formula is a finite conjunction of clauses represented by
  $$\varphi = \bigwedge_{i=1}^k \omega_i \text{ (or by the set of its clauses } \varphi = \{\omega_i\}_{i \in \llbracket 1,k \rrbracket}\text{)}$$
 \end{definition}
 
  \begin{definition}[Disjunctive normal form]
-\emph{Disjunctive normal form} (DNF) of a formula is finite disjunction of cubes represented by
-$$\varphi = \bigvee_{i=1}^k \gamma_i \text{ (or by the set of its cubes } \varphi = \{\gamma_i\}_{i \in \llbracket 1,k \rrbracket}\text{)}$$
+The \emph{Disjunctive normal form} (DNF) of a formula is finite disjunction of cubes represented by
+$$\varphi = \bigvee_{i=1}^k \gamma_i$$
  \end{definition}
 
 The following table is a summary of the laws that allow to transform any formula to
@@ -141,7 +144,7 @@ a normal form.
 \end{table}
 Every formula can be transformed into a normal form with different complexity and the resulting formula is 
 satisfiability \emph{equivalent}.
-Conjunctive normal form is the input form of state-of-the-art SAT solvers. Any propositional
+The Conjunctive normal form is the input form of state-of-the-art SAT solvers. Any propositional
 formula can be transformed in CNF form with polynomial time\cite{Russell1994ArtiCI}. Conversely, DNF form has
 an exponential memory complexity during the transformation\cite{darwiche2002knowledge}.
 Note that each cube in the problem in DNF form is a solution in the equivalent CNF formula.
@@ -194,6 +197,7 @@ one of the most important unsolved problems in theoretical computer science: the
 Some particular instances of the SAT problem can be computed in polynomial time.
 
 \paragraph{2-SAT~\cite{aspvall1979linear}.}
+\hakan{REVOIR CORRECTION}
 In this particular form, the given CNF formula contains only binary clauses.
 In this case, a graph in which each clause is transformed into implication is created.
 For example, the clause $x \lor y$ will be transformed into $ \neg x \Rightarrow y$ and $\neg y \Rightarrow x$.
@@ -216,13 +220,13 @@ There are three forms of Horn clauses:
 \item \emph{positive Horn clause} that contains only one positive literal and no negative literals
 \item \emph{negative Horn clause} that contains only negative literals.
 \end{itemize}
-To solve this particular form of formula, it suffices to  apply \emph{Boolean constraint propagation} (BCP) (or \emph{unit propagation}) explained, in \cref{sec:dpll} until a fix point
+To solve this particular form of formula, it suffices to  apply \emph{Boolean constraint propagation} (BCP) (or \emph{unit propagation}) explained in \cref{sec:dpll} until a fix point
 is reached.
 Roughly speaking, it satisfies all unit clauses in cascades. At the end of the procedure, either an empty clause is deduced and the problem
 is declared $\unsat$ or the fix point is reached and the formula is declared \sat.
  Like 2-SAT, this algorithm can also be computed in linear time complexity.
  
-\paragraph{XOR SAT.}\cite{moore2011nature} In this particular form, each clause contains xor ($\oplus$) operator rather than or ($\lor$).
+\paragraph{XOR SAT.}\cite{moore2011nature} In this particular form, each clause contains the xor ($\oplus$) operator rather than or ($\lor$).
 This problem can be seen as a system of linear equations. Gaussian elimination is an algorithm that allows to solve this kind of
 problem is polynomial time, more exactly in $O(n^3)$.
 
@@ -238,7 +242,7 @@ $\forall$ are present in the formula. For example, $\forall x\, \exists y\, \exi
 This particular form is a generalization of the SAT problem with PSPACE complexity~\cite{garey2002computers}.
 \subsection{Solving a SAT problem}
 Two kinds of algorithms exist to solve satisfiability problems.
-First, the \emph{incomplete} algorithms~\cite{kautz2009incomplete} which do not provide any guarantee that they will eventually report,
+First, the \emph{incomplete} algorithms~\cite{kautz2009incomplete} which do not provide any guarantee that they will eventually report
 either a satisfiable assignment or declare the formula unsatisfiable. This kind of algorithm is out of scope of this thesis. 
 Second, the \emph{complete} algorithms, which provide a guarantee that if an assignment exists,
 it will be found or declare that formula is unsatisfiable.
@@ -267,11 +271,11 @@ One of the first, non-memory-intensive, algorithm developed to solve SAT problem
 the Davis Putnam Logemann Loveland algorithm (DPLL)~\cite{dpll_62}. 
 It explores a binary tree using depth first search, as shown in \Cref{algo:dpll}.
 The construction of the tree  relies on a \emph{decision} variable  that is chosen on \cref{algo:dpll:decision}.
-Both value of this variable is checked, the true value on \cref{algo:dpll:pos} and the false value on \cref{algo:dpll:neg}.
+Both values of this variable are checked, the true value on \cref{algo:dpll:pos} and the false value on \cref{algo:dpll:neg}.
 When a leaf of the tree is inconsistent (i.e. a variable needs to be set to true and false at the same time), called a \textit{conflict}
  (\cref{algo:dpll:unsatbranch}), the opposite value of the decision is explored.
-Recursively, when both value of a variable reach a conflict,
-the solver \emph{backtracks} one level (\emph{chronological backtracking}), i.e. try the opposite value of 
+Recursively, when both values of a variable reach a conflict,
+the solver \emph{backtracks} one level (\emph{chronological backtracking}), i.e. tries the opposite value of 
 the previous decision.
 When the top of the tree is reached and a conflict occurs, it means that the formula cannot be satisfied and the 
 solver reports $\unsat$ (\cref{algo:dpll:unsat}). However, if the formula is empty in any branch, 
@@ -297,6 +301,8 @@ Its objective is to find a literal that will generate a maximum of unit propagat
 Intuitively, decision literals can be viewed as “guesses” and propagated literals can be viewed as “deductions”. 
 Finding the optimal variable that will generate the maximum number of propagation is NP-Hard\cite{biere2009handbook}.
 Different heuristics exists to choose the decision variable, some of them are presented in Section~\ref{sec:heuristics}.
+\hakan{Probleme numerotation}
+
 %\input{algo/puredpll}
 %Another idea introduced by DPLL was \emph{elimination of pure literals},
 %a literal is said pure if it only appear on one sign (positive or negative) in the problem.
@@ -310,7 +316,7 @@ Conflict Driven Clause Learning (CDCL) \cite{marques1999grasp} is a sound and co
 that overcomes this weakness.
 \Cref{algo:cdcl} gives an overview of CDCL, like DPLL,  it walks on a binary search tree.
 Initially, the  assignment is empty and the decision level that 
-indicates the depth of the search tree, noted by $dl$, is set to zero.
+indicates the depth of the search tree, noted by $\mathit{dl}$, is set to zero.
 The algorithm first applies unit propagation to the formula $\varphi$ for the  assignment $\alpha$ (\cref{alg:cdcl:unit}).
 %Note that it is  the same procedure as the one used for DPLL.
 An inconsistency or a \emph{conflict} at level zero indicates that the formula is unsatisfiable, and the algorithm
@@ -339,13 +345,13 @@ it needs to be set to $\false$. As a variable cannot have both values, a conflic
  \caption{Decisions/Propagations that leads to a  conflict}
  \label{fig:conflict}
 \end{figure}
-Applied another time, this serie of decisions would provoke the same propagation and leads to the same conflict. 
-To escape this situation, one needs to analyze the situation and feed the algorithm with the information that prevent it to do the 
+Applied another time, this series of decisions would provoke the same propagation and lead to the same conflict. 
+To escape this situation, one needs to analyze the situation and feed the algorithm with the information that prevents it to do the 
 same mistake again. This is done by use of the so-called \emph{implication graph}.
 %the solver needs to analyze the reason of the conflict with 
 It represents the current state of the solver and records all dependencies between  variables. It is updated when a variable is assigned 
 (on decision/propagation), or unassigned (on backjumping operation). The implication graph is a directed acyclic graph (DAG) in which a vertex represents an assigned variable labeled by $l@dl(l)$ where $l$ represents assigned literal and $dl(l)$ represents the decision level of the literal $l$.
-Root vertice , that have no incoming edges, represent decision literal. The remaining vertices represent
+Root vertices that have no incoming edges represent decision literals. The remaining vertices represent
 propagations.
 Each incoming arc, labeled by a clause, represents the \emph{reason} of this propagation.
 This clause must be \textit{assertive} (i.e., all  literals are false except one that is not yet assigned).
@@ -359,7 +365,7 @@ This clause must be \textit{assertive} (i.e., all  literals are false except one
 \texttt{analyzeConflict} procedure analyzes this graph to find the reason of the conflict. To do that, a search of a
 \emph{unique implication point (UIP)} is performed. A UIP of the last decision level of the implication graph is a variable
 which lies on every path from the decision to the conflict. Note that, there are many UIPs for a given decision level.
-In such case, UIPs are ordered according to the distance with the contradiction. The First UIP (FUIP) is the closest to
+In such a case, UIPs are ordered according to the distance with the contradiction. The First UIP (FUIP) is the closest to
 the conflict. It is well known that the FUIP provides the smallest set of assignment that is responsible for the
 contradiction~\cite{zhang2001efficient}.
 A UIP divides the implication graph in two sides with a \emph{cut}; the \emph{reason side} contains decision variables 
@@ -373,21 +379,23 @@ the original formula, it can be added without any  restriction. The conflict cla
 using the implication graph to reduce its size (by detecting redundancies~\cite{sorensson2009minimizing}).
  All learned clauses are stored in a clauses database.
  
-  \texttt{backjumpAndRestartPolicies} procedure is executed after producing the conflict clause.
+The \texttt{backjumpAndRestartPolicies} procedure is executed after producing the conflict clause.
 All variables from the highest decision level to the current decision level are unassigned and so 
 the current decision level and assignment are updated accordingly.
 If a conflict implies only one level, the decision variable must be assigned 
 to the opposite value at level 0. This means that this literal must be true without any decision.
 Adding the conflict clause prunes the search space that obviously contains no solution.
-This is the key point of the CDCL algorithm and the big difference with DPLL algorithm.
+This is the key point of the CDCL algorithm and the big difference with the DPLL algorithm.
  In our example \Cref{fig:implication-graph}, the target decision level is 1.
 After backtracking, the conflict clause will be assertive and the FUIP is the only variable that has
 not a value and so will be propagated in the next step of the algorithm.
+\hakan{DETAIL EXAMPLE}
+ 
  
 \subsection{Heuristics}\label{sec:heuristics}
 This section gives an overview of different heuristics implemented in modern SAT solvers.
-\paragraph{Decision heuristics}.
- Decision variable has a huge impact on the 
+\paragraph{Decision heuristics} \hakan{REVOIR}
+ The decision variable has a huge impact on the 
 overall solving time. It influences the number of propagations and so 
 the depth of the search tree.
  The Variable State Independent Decaying Sum (VSIDS)~\cite{moskewicz2001chaff} measure is one of the most famous decision heuristics and is used
@@ -407,7 +415,7 @@ weighted average} (ERWA))  value taken by its LR over the time. Unassigned varia
 
 \paragraph{Restarts}
 Another important mechanism is \emph{restart}. Basically, the solver abandons its current assignment and 
-restart from the top of the tree, while maintaining some information, like learned clauses, scores of variables, etc.
+restarts from the top of the tree, while maintaining some information, like learned clauses, scores of variables, etc.
  The restart prevents the solver to get stuck in the same part of the search space (phenomenon known as heavy tailing~\cite{gomes1997heavy}).
 Detecting this phenomenon has been widely treated in the literature~\cite{audemard2012refining,biere2008adaptive}.
 These strategies are based on counting the number of conflicts or on the monitoring the current search’s depth.
@@ -446,11 +454,11 @@ the \emph{resolvent} as it results from solving two clauses on the literal $x_1$
 \emph{The subsumption} aims at removing  clauses. Consider two clauses $\omega_1$ and $\omega_2$, such that
 $\omega_1 \subset  \omega_2$, then $\omega_2$ can be safely removed from the original formula.
 \emph{Self subsuming resolution} uses resolution rules and subsumption. at the same time,
-the resolvent clause subsumes the original one. For example, $\omega_1 = \{x_1, \neg x_2, x_3\}$ and $\omega_2 = \{x_1, \neg x_2, x_3, x_4\}$,
+the resolvent clause subsumes the original one. For example, $\omega_1 = \{x_1, \neg x_2, x_3\}$ and $\omega_2 = \{x_1, \neg x_2, x_3, x_4\}$, \hakan{CORRIGER EXAMPLE}
  then the resolvent clause will be $\omega_3 = \{x_1, x_3\}$ which subsumes $\omega_2$. This principle
 is implemented in the \texttt{SatElite}~\cite{een2005effective} preprocessor engine and is used in almost all modern SAT solvers.
-Other simplification techniques exist such that \emph{Gaussian elimination} which detects sub formula in a XOR-SAT
-form and solve it in a polynomial time~\cite{moore2011nature}. This technique can also be used in inprocessing~\cite{soos2010enhanced}. 
+Other simplification techniques exist such that \emph{Gaussian elimination} which detects a sub formula in a XOR-SAT
+form and solves it in a polynomial time~\cite{moore2011nature}. This technique can also be used in inprocessing~\cite{soos2010enhanced}. 
 Some techniques exploit the structure of the original formula and add relevant clauses to speed up the resolution
 time of the SAT solver. One of them uses the \textit{community structure} of the formula to find good clauses to add into.
 A preprocessor engine doing that is \texttt{modprep}~\cite{ansotegui2015using}.
