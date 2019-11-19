@@ -252,6 +252,11 @@ J.~P. Marques-Silva and K.~A. Sakallah.
 \newblock Grasp: A search algorithm for propositional satisfiability.
 \newblock {\em IEEE Transactions on Computers}, 48(5):506--521, 1999.
 
+\bibitem{crypto_00}
+F.~Massacci and L.~Marraro.
+\newblock Logical cryptanalysis as a sat problem.
+\newblock {\em Journal of Automated Reasoning}, 24(1):165--203, 2000.
+
 \bibitem{mckay2003nauty}
 B.~D. McKay.
 \newblock nauty user’s guide (version 2.2).

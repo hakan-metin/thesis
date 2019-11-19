@@ -5,45 +5,45 @@ The style file: abbrv.bst
 Database file #1: main.bib
 Warning--empty booktitle in le2008sat
 Warning--empty booktitle in Russell1994ArtiCI
-You've used 57 entries,
+You've used 58 entries,
             2118 wiz_defined-function locations,
-            806 strings with 12696 characters,
-and the built_in function-call counts, 23410 in all, are:
-= -- 2421
-> -- 978
+            813 strings with 12821 characters,
+and the built_in function-call counts, 23743 in all, are:
+= -- 2456
+> -- 991
 < -- 37
-+ -- 396
-- -- 324
-* -- 1521
-:= -- 3576
-add.period$ -- 195
-call.type$ -- 57
-change.case$ -- 323
++ -- 401
+- -- 328
+* -- 1547
+:= -- 3631
+add.period$ -- 198
+call.type$ -- 58
+change.case$ -- 328
 chr.to.int$ -- 0
-cite$ -- 59
-duplicate$ -- 987
-empty$ -- 1880
-format.name$ -- 324
-if$ -- 5174
+cite$ -- 60
+duplicate$ -- 998
+empty$ -- 1907
+format.name$ -- 328
+if$ -- 5242
 int.to.chr$ -- 0
-int.to.str$ -- 57
-missing$ -- 62
-newline$ -- 288
-num.names$ -- 116
-pop$ -- 409
+int.to.str$ -- 58
+missing$ -- 63
+newline$ -- 293
+num.names$ -- 118
+pop$ -- 412
 preamble$ -- 1
-purify$ -- 271
+purify$ -- 275
 quote$ -- 0
-skip$ -- 753
+skip$ -- 761
 stack$ -- 0
-substring$ -- 1641
-swap$ -- 358
+substring$ -- 1671
+swap$ -- 359
 text.length$ -- 37
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 216
+type$ -- 220
 warning$ -- 2
-while$ -- 240
-width$ -- 59
-write$ -- 648
+while$ -- 244
+width$ -- 60
+write$ -- 659
 (There were 2 warnings)

@@ -7,10 +7,9 @@ Before we get to the heart of the matter, we first introduce the Boolean satisfi
 %It answers $\sat$ when all constraints
 %present in the formula can be satisfied and $\unsat$ otherwise.
 \section{SAT basics}
-\hakan{REGARDER TOUS LES I.E.}
 
 The goal of SAT is to determine whether a propositional formula is satisfiable (i.e. all constraints can be satisfied)
-or unsatisfiable (i.e there us no way to satisfy all constraints at the same time).
+or unsatisfiable (i.e. there us no way to satisfy all constraints at the same time).
 The formula is constituted of \emph{Boolean} or \emph{propositional variables},
 i.e. each variable has two possible values: true or false (noted respectively $\true$ or $\false$).
 We call \emph{literal} a propositional variable or its negation.
@@ -59,7 +58,7 @@ A formula is said to be
 \emph{satisfiable} (\sat) if there is at least one assignment that satisfies it;
 otherwise the formula is \emph{unsatisfiable} (\unsat).
 In order to compare different formulas, the concepts of logical equivalence and logical consequence
-respectively defined in Definition~\ref{def:equiv} and Definition~\ref{def:logcons}.
+are defined in Definition~\ref{def:equiv} and Definition~\ref{def:logcons} respectively.
 
 \vspace{1em}
 
@@ -95,7 +94,6 @@ we say that $\omega_{1}$ subsumes $\omega_{2}$.
  And any assignment that satisfies $\omega_1$ will also satisfy $\omega_2$. So, $\omega_2$ is \emph{redundant} \textit{w.r.t.}  
  $\omega_{1}$ can be removed from the formula.
  
- \clearpage
  
 \begin{definition}[Conjunctive Normal Form]
  The \emph{Conjunctive Normal Form} (CNF) of a formula is a finite conjunction of clauses represented by
@@ -199,7 +197,7 @@ Some particular instances of the SAT problem can be computed in polynomial time.
 \paragraph{2-SAT~\cite{aspvall1979linear}.}
 \hakan{REVOIR CORRECTION}
 In this particular form, the given CNF formula contains only binary clauses.
-In this case, a graph in which each clause is transformed into implication is created.
+In this case, the formula is transformed into a so called binary implication graph where each clause is transformed into an implication.
 For example, the clause $x \lor y$ will be transformed into $ \neg x \Rightarrow y$ and $\neg y \Rightarrow x$.
 Then, a \emph{strong connected component} (SCC) is computed to determine the satisfiability of the formula.
 If the same variable is present in both its positive and negative values in the same SCC then the formula is declared unsatisfiable,
@@ -240,7 +238,12 @@ is applied on the remaining clauses called \emph{soft} clauses.
 The last related problem is quantified Boolean formula (QBF) where the quantifiers $\exists$ and
 $\forall$ are present in the formula. For example, $\forall x\, \exists y\, \exists z \, (x \lor y) \land z$.
 This particular form is a generalization of the SAT problem with PSPACE complexity~\cite{garey2002computers}.
-\subsection{Solving a SAT problem}
+
+
+\section{Solving a SAT problem}
+
+\subsection{Algorithm}
+
 Two kinds of algorithms exist to solve satisfiability problems.
 First, the \emph{incomplete} algorithms~\cite{kautz2009incomplete} which do not provide any guarantee that they will eventually report
 either a satisfiable assignment or declare the formula unsatisfiable. This kind of algorithm is out of scope of this thesis. 
@@ -354,7 +357,7 @@ It represents the current state of the solver and records all dependencies betwe
 Root vertices that have no incoming edges represent decision literals. The remaining vertices represent
 propagations.
 Each incoming arc, labeled by a clause, represents the \emph{reason} of this propagation.
-This clause must be \textit{assertive} (i.e., all  literals are false except one that is not yet assigned).
+This clause must be \textit{assertive} (i.e. all  literals are false except one that is not yet assigned).
 \Cref{fig:implication-graph} shows the implication graph of the previous example (\Cref{fig:conflict}).
 \begin{figure}[!htbp]
  \centering
