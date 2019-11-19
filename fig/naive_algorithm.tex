@@ -8,9 +8,17 @@
     child {node [circle,draw] (x3_1) {$x_3$}
       child {node  (xn_1) {$\vdots$}
         child {node [circle,draw] (x6_1) {$x_6$}
-         child { node (a1) {$\alpha_1$} edge from parent[draw=none]}}
+        	child {node (x6_1f) {}
+        	child[level distance=0.75cm] { node (a1) {$\alpha_1$} edge from parent[draw=none]}
+        }
+       		child {node (x6_1t) {}
+       			child[level distance=0.75cm] { node (a2) {$\alpha_2$} edge from parent[draw=none]}
+         }}
         child {node [circle,draw] (x6_2) {$x_6$}
-        	child { node (a2) {$\alpha_2$} edge from parent[draw=none]}}
+        		child {node (x6_2f) {}}
+        				child {node (x6_2t) {}
+        	}
+        }
       } 
       child {node (xn_2) {$\vdots$}}
     }
@@ -28,15 +36,21 @@
     child {node (xn_7) {$\vdots$}}
     child {node (xn_8) {$\vdots$}
       child {node [circle,draw] (x6_3) {$x_6$}
-        child { node (an_1) {$\alpha_{63}$} edge from parent[draw=none]}}
+      	       child {node (x6_3f) {}}
+      	child {node (x6_3t) {}
+        }}
       child {node [circle,draw] (x6_4) {$x_6$}
-        child { node (an) {$\alpha_{64}$} edge from parent[draw=none]}}
-      }
+      	child {node (x6_4f) {}
+        child[level distance=0.75cm] { node (an_1) {$\alpha_{63}$} edge from parent[draw=none]}
+    	}
+	    child {node (x6_4t) {}
+    		child[level distance=0.75cm] { node (an) {$\alpha_{64}$} edge from parent[draw=none]}
+      }}}
   }
 };
 
 \path (x6_2) -- (x6_3) node (x) [midway] {$\cdots$}
-        child { node (a_11) {$\alpha_{11}$} edge from parent[draw=none]};
+        child[level distance=2.25cm] { node (a_11) {$\alpha_{11}$} edge from parent[draw=none]};
 
 
 \path (a2) -- (a_11) node (b1) [midway] {$\cdots$};
@@ -66,6 +80,19 @@
 \path (x3_4) -- (xn_8) node [midway, fill=white] {$1$};
 \path (xn_8) -- (x6_3) node [midway, fill=white] {$0$};
 \path (xn_8) -- (x6_4) node [midway, fill=white] {$1$};
+
+
+\path (x6_1) -- (x6_1f) node [midway, fill=white] {$0$};
+\path (x6_1) -- (x6_1t) node [midway, fill=white] {$1$};
+
+\path (x6_2) -- (x6_2f) node [midway, fill=white] {$0$};
+\path (x6_2) -- (x6_2t) node [midway, fill=white] {$1$};
+
+\path (x6_3) -- (x6_3f) node [midway, fill=white] {$0$};
+\path (x6_3) -- (x6_3t) node [midway, fill=white] {$1$};
+
+\path (x6_4) -- (x6_4f) node [midway, fill=white] {$0$};
+\path (x6_4) -- (x6_4t) node [midway, fill=white] {$1$};
 
 \end{tikzpicture}
 \end{minipage}

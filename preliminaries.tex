@@ -195,14 +195,23 @@ one of the most important unsolved problems in theoretical computer science: the
 Some particular instances of the SAT problem can be computed in polynomial time.
 
 \paragraph{2-SAT~\cite{aspvall1979linear}.}
-\hakan{REVOIR CORRECTION}
+
 In this particular form, the given CNF formula contains only binary clauses.
-In this case, the formula is transformed into a so called binary implication graph where each clause is transformed into an implication.
+Each clause is transformed into an implication and the conjunction of these form a directed graph called
+binary implication graph.
 For example, the clause $x \lor y$ will be transformed into $ \neg x \Rightarrow y$ and $\neg y \Rightarrow x$.
 Then, a \emph{strong connected component} (SCC) is computed to determine the satisfiability of the formula.
 If the same variable is present in both its positive and negative values in the same SCC then the formula is declared unsatisfiable,
 otherwise a solution can be deduced and so the problem is satisfiable. 
 This algorithm can be computed in linear time complexity.
+
+%In this case, the formula that contains only binary clauses is transformed into a so called binary implication graph where each clause is transformed into an implication.
+
+
+%Then, a \emph{strong connected component} (SCC) is computed to determine the satisfiability of the formula.
+%If the same variable is present in both its positive and negative values in the same SCC then the formula is declared unsatisfiable,
+%otherwise a solution can be deduced and so the problem is satisfiable. 
+%This algorithm can be computed in linear time complexity.
 %In this case, it suffices to create a graph in which each clause is transformed into implication. For example, the clause $x \lor y$ will be transformed into $ \neg x \Rightarrow y$ and $\neg y \Rightarrow x$.
 %To determine the satisfiability of the formula, we need 
 %\hakan{REDO}
@@ -211,7 +220,7 @@ This algorithm can be computed in linear time complexity.
 % If it is the case, the formula is \unsat. Otherwise 
 %a solution can be deduce and the problem is \sat. 
 
-\paragraph{Horn SAT.}\cite{dowling1984linear} In this particular form, the given CNF formula contains only Horn clauses. 
+\paragraph{Horn SAT\cite{dowling1984linear}.} In this particular form, the given CNF formula contains only Horn clauses. 
 There are three forms of Horn clauses: 
 \begin{itemize}[topsep=0pt,itemsep=1pt]
 \item \emph{strict Horn clause} that contains only one positive literal and at least one negative \\literal
@@ -224,7 +233,7 @@ Roughly speaking, it satisfies all unit clauses in cascades. At the end of the p
 is declared $\unsat$ or the fix point is reached and the formula is declared \sat.
  Like 2-SAT, this algorithm can also be computed in linear time complexity.
  
-\paragraph{XOR SAT.}\cite{moore2011nature} In this particular form, each clause contains the xor ($\oplus$) operator rather than or ($\lor$).
+\paragraph{XOR SAT\cite{moore2011nature}.} In this particular form, each clause contains the xor ($\oplus$) operator rather than or ($\lor$).
 This problem can be seen as a system of linear equations. Gaussian elimination is an algorithm that allows to solve this kind of
 problem is polynomial time, more exactly in $O(n^3)$.
 
