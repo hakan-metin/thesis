@@ -249,6 +249,7 @@ $\forall$ are present in the formula. For example, $\forall x\, \exists y\, \exi
 This particular form is a generalization of the SAT problem with PSPACE complexity~\cite{garey2002computers}.
 
 
+\clearpage
 \section{Solving a SAT problem}
 
 \subsection{Algorithm}
@@ -301,7 +302,9 @@ until a fix point is reached and will end either, there
 are no more unit clauses in the formula or an inconsistency 
 is found this means that the current assignment cannot satisfy the formula. 
 In the later case, the solver will backtrack and another branch will be explored.
+
 \input{algo/unitdpll}
+
 When DPLL is executed on the formula of \Cref{fig:naive_algo}, after making decisions on literals
 $\neg x_1$ and $\neg x_2$, unit propagation detects that $x_3$ must be assigned to true.
 This propagation prevents to explore non-interesting assignments. Actually, when $x_3$ is set to false,
@@ -313,7 +316,7 @@ Its objective is to find a literal that will generate a maximum of unit propagat
 Intuitively, decision literals can be viewed as “guesses” and propagated literals can be viewed as “deductions”. 
 Finding the optimal variable that will generate the maximum number of propagation is NP-Hard\cite{biere2009handbook}.
 Different heuristics exists to choose the decision variable, some of them are presented in Section~\ref{sec:heuristics}.
-\hakan{Probleme numerotation}
+
 
 %\input{algo/puredpll}
 %Another idea introduced by DPLL was \emph{elimination of pure literals},
@@ -343,7 +346,11 @@ The analysis is completed by the computation of a \emph{backjumps level}, the as
 Finally, if no conflict appears, the algorithm chooses a new decision literal 
 (\cref{alg:cdcl:pick_start,alg:cdcl:pick_end}).
 The above steps are repeated until the satisfiability status of the formula is determined.
+
 \input{algo/cdcl}
+
+
+
 \subsection{Conflict Analysis}
 A conflict is an inconsistency discovered by the solver, a situation that requires for a variable to be set 
 simultaneously to the true and false values. \Cref{fig:conflict} shows an example that leads to a conflict.
@@ -351,29 +358,33 @@ First, the solver chooses $\neg x_1$ as a decision (noted D ($\neg x_1$) in the 
 which in turn propagates $x_2$ and $x_3$.
 To satisfy $\omega_1$, $x_3$ needs to be set to $\true$, and  to satisfy $\omega_5$, 
 it needs to be set to $\false$. As a variable cannot have both values, a conflict appears (noted C in the figure).
+
 \begin{figure}[!htbp]
  \centering
   \input{fig/conflict}
  \caption{Decisions/Propagations that leads to a  conflict}
  \label{fig:conflict}
 \end{figure}
+
 Applied another time, this series of decisions would provoke the same propagation and lead to the same conflict. 
 To escape this situation, one needs to analyze the situation and feed the algorithm with the information that prevents it to do the 
 same mistake again. This is done by use of the so-called \emph{implication graph}.
 %the solver needs to analyze the reason of the conflict with 
 It represents the current state of the solver and records all dependencies between  variables. It is updated when a variable is assigned 
-(on decision/propagation), or unassigned (on backjumping operation). The implication graph is a directed acyclic graph (DAG) in which a vertex represents an assigned variable labeled by $l@dl(l)$ where $l$ represents assigned literal and $dl(l)$ represents the decision level of the literal $l$.
+(on decision/propagation), or unassigned (on backjumping operation). The implication graph is a directed acyclic graph (DAG) in which a vertex represents an assigned variable labeled by $\mathit{l@dl(l)}$ where $l$ represents assigned literal and $\mathit{dl(l)}$ represents the decision level of the literal $l$.
 Root vertices that have no incoming edges represent decision literals. The remaining vertices represent
 propagations.
 Each incoming arc, labeled by a clause, represents the \emph{reason} of this propagation.
 This clause must be \textit{assertive} (i.e. all  literals are false except one that is not yet assigned).
 \Cref{fig:implication-graph} shows the implication graph of the previous example (\Cref{fig:conflict}).
+
 \begin{figure}[!htbp]
  \centering
  \input{fig/implication_graph}
  \caption{Implication graph}
  \label{fig:implication-graph}
 \end{figure}
+
 \texttt{analyzeConflict} procedure analyzes this graph to find the reason of the conflict. To do that, a search of a
 \emph{unique implication point (UIP)} is performed. A UIP of the last decision level of the implication graph is a variable
 which lies on every path from the decision to the conflict. Note that, there are many UIPs for a given decision level.
@@ -382,7 +393,7 @@ the conflict. It is well known that the FUIP provides the smallest set of assign
 contradiction~\cite{zhang2001efficient}.
 A UIP divides the implication graph in two sides with a \emph{cut}; the \emph{reason side} contains decision variables 
 that are responsible of the contradiction and the \emph{conflict side} that contains the conflict. 
- A UIP is always in the reason side. \Cref{fig:implication-graph} depicts two cuts in the implication graph.
+ A UIP is always in the reason side. \Cref{fig:implication-graph} depicts the cuts in the implication graph.
 Once the reason side of a conflict is established, a conflict-driven clause (or simply conflict clause) is produced.
 To build this clause, it suffices to negate the
 literals that have an ongoing arc to the  cut that contains the UIP. In \Cref{fig:implication-graph}, the produced
@@ -398,15 +409,19 @@ If a conflict implies only one level, the decision variable must be assigned
 to the opposite value at level 0. This means that this literal must be true without any decision.
 Adding the conflict clause prunes the search space that obviously contains no solution.
 This is the key point of the CDCL algorithm and the big difference with the DPLL algorithm.
- In our example \Cref{fig:implication-graph}, the target decision level is 1.
+ In our example \Cref{fig:implication-graph}, the target decision level is 1 because the 
+ highest decision level different that the current one constructed in the conflict clause is 1.
 After backtracking, the conflict clause will be assertive and the FUIP is the only variable that has
-not a value and so will be propagated in the next step of the algorithm.
-\hakan{DETAIL EXAMPLE}
+not a value and so will be propagated in the next step of the algorithm. In our example, at the decision level 1 the
+literal $x_1$ is set to the false value and the assertive conflict clause $\omega_l = \{x_1, \neg x_4 \}$ propagates $x_4$ to 
+the false value .
+
  
  
 \subsection{Heuristics}\label{sec:heuristics}
+ \hakan{REVOIR}
 This section gives an overview of different heuristics implemented in modern SAT solvers.
-\paragraph{Decision heuristics} \hakan{REVOIR}
+\paragraph{Decision heuristics}
  The decision variable has a huge impact on the 
 overall solving time. It influences the number of propagations and so 
 the depth of the search tree.
@@ -466,9 +481,10 @@ the \emph{resolvent} as it results from solving two clauses on the literal $x_1$
 \emph{The subsumption} aims at removing  clauses. Consider two clauses $\omega_1$ and $\omega_2$, such that
 $\omega_1 \subset  \omega_2$, then $\omega_2$ can be safely removed from the original formula.
 \emph{Self subsuming resolution} uses resolution rules and subsumption. at the same time,
-the resolvent clause subsumes the original one. For example, $\omega_1 = \{x_1, \neg x_2, x_3\}$ and $\omega_2 = \{x_1, \neg x_2, x_3, x_4\}$, \hakan{CORRIGER EXAMPLE}
+the resolvent clause subsumes the original one. For example, $\omega_1 = \{x_1, \neg x_2\}$ and $\omega_2 = \{x_1, x_2, x_3\}$,
  then the resolvent clause will be $\omega_3 = \{x_1, x_3\}$ which subsumes $\omega_2$. This principle
 is implemented in the \texttt{SatElite}~\cite{een2005effective} preprocessor engine and is used in almost all modern SAT solvers.
+
 Other simplification techniques exist such that \emph{Gaussian elimination} which detects a sub formula in a XOR-SAT
 form and solves it in a polynomial time~\cite{moore2011nature}. This technique can also be used in inprocessing~\cite{soos2010enhanced}. 
 Some techniques exploit the structure of the original formula and add relevant clauses to speed up the resolution

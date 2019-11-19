@@ -37,6 +37,7 @@ Proposition~\ref{prop:status} restates this definition in terms of variables
 and is the basis of an efficient algorithm to track the status of a
 permutation during the solving. Let us, first, recall that the \emph{support}
  of a permutation $g$, $\support_g$, is the set $\{ v \in \Vars \mid g.v \neq v\}$.
+ \clearpage
 \begin{proposition}
  \label{prop:status}
  Let $\alpha \in \Assignments(\Vars)$ be an assignment, $g \in \Group$, a permutation and $ \support_g \subseteq  \Vars$ the support of $g$. We say that $g$ is:
@@ -56,6 +57,7 @@ permutation during the solving. Let us, first, recall that the \emph{support}
   \item  \emph{active} on $\alpha$, otherwise.
  \end{enumerate}
 \end{proposition}
+
 When $g$ is a \textit{reducer} of $\alpha$ we can define a predicate that contradicts $\alpha$ yet preserves the satisfiability of the formula. Such a predicate will be used to discard $\alpha$, and all its extensions, from a further visit and hence pruning the search tree.
 \begin{definition}[Effective Symmetry Breaking Predicate]
  \label{def:esbp}

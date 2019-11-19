@@ -87,7 +87,7 @@ So the permutation in cycle notation will be
  $g$ = ($x_1 \enskip x_2 \enskip x_3$) ($x_5 \enskip x_6$)
 \end{center}
 \begin{definition}[Support of a permutation]
- The \emph{support} of the permutation $g$, noted $\mathit{supp_{g}}$, is the set of elements that are not mapped to themselves:
+ The \emph{support} of the permutation $g$, noted $\support_{g}$, is the set of elements that are not mapped to themselves:
  \begin{center}
   $\support_{g} = \{ x \in X \mid g.x \neq x\}$
  \end{center}
@@ -95,7 +95,7 @@ So the permutation in cycle notation will be
 
 \hakan{REVOIR}
 \begin{definition}[Stabilized variable over permutation]
- A variable $x$ is \emph{stable} by a permutation $g$  iff $x \notin \support_g$.
+ A variable $x$ is \emph{stabilized} by a permutation $g$  iff $x \notin \support_g$.
 \end{definition}
  
 %\hakan{mettre ailleurs A clause $\omega$ is \emph{stabilized} by a permutation $g$ if $\omega \cap \support_g = \emptyset$.}
@@ -259,7 +259,7 @@ using graph edges instead of graph vertices.  However, in some particular cases,
 spurious permutations (i.e. Boolean consistency is not respected~\cite{aloul2003solving}).
 To ensure that the permutation is valid, the following condition must be satisfied:
 $$\forall x \in \support_g, g.\neg x == \neg g.x$$
-\hakan{EXPLAIN}
+
 In other words, we check if the image of the negation of $x$ is equals to the negation of the image of $x$,
 or each element $x$ in the support of the permutation.
 This optimization reduces considerably the size of the 
@@ -380,7 +380,7 @@ Furthermore, the $<$ relation is monotonic as expressed by the following proposi
  $$\text{If}~\alpha \subseteq \alpha'~\text{and}~\beta \subseteq \beta',~\text{then}~\alpha < \beta \implies \alpha' < \beta'$$
 \end{proposition}
 \begin{proof}
-The proposition is a direct result of definition~\ref{def:assignment_ordering}.
+The proposition is a direct result of Definition~\ref{def:assignment_ordering}.
 \end{proof}
 Given a formula $\varphi$ and its group of symmetries $G$,
 the \emph{orbit of $\alpha$ under $G$} (or
@@ -408,10 +408,9 @@ To answer the second question, the set of lex-leader predicates for a permutatio
 $$LL_g = \forall i : (\forall j < i : x_j = g.x_j) \Rightarrow  x_i \preceq g.x_i$$
 
 
-\hakan{METTRE TOUT LES SBPS en sbps}
 \hakan{REVOIR}
-In other words, each assignment that has a variable such that its image under $g$ is smaller according to the ordering relation $\prec$, is pruned by $LL_g$.
-The conjunction of $LL_g$, for all permutations  $g \in G_{\varphi} $ produces a sound and complete set of symmetry breaking predicates also called \emph{full symmetry breaking}.
+In other words, each assignment that has a variable such that its image under $g$ is smaller according to the ordering relation $\prec$, is eliminated from the search space by $LL_g$.
+The conjunction of $LL_g$, for all permutations  $g \in G_{\varphi} $ produces a sound and complete set of symmetry breaking predicates(sbps) also called \emph{full symmetry breaking}.
 In this case, only the lex-leader assignment will be visited for each orbit.
 However, the size of the \textit{sbps} can be exponential in the number of variables of the problem and so, they cannot be totally computed.
 To overcome this problem, only a subgroup is considered, in this case the
@@ -477,7 +476,7 @@ $$ LL_g = \forall i : (\forall j < i : x_j = g.x_j) \Rightarrow  \neg x_i \lor g
  
  \begin{figure}[!htbp]
   \input{fig/example-sbp}
-  \caption{Example of generated SBPs for one permutation}
+  \caption{Example of generated sbps for one permutation}
   \label{fig:esbp_gen}
  \end{figure}
 Here, the number of clauses generated per constraint increase exponentially by the 
@@ -499,7 +498,10 @@ The following clauses encode a compact lex-leader for a permutation:
  
 \end{tabular}
 \end{center}
-where $\{y_0,\cdots, y_{n} \}$ is the set of auxiliary variables, $y_0$ is a unit clause that encodes the first equality and $\{x_1,...,x_n\}$ be the set of variables sorted with the lexicographic order.
+where $\{y_0,\cdots, y_{n} \}$ is the set of auxiliary variables, $y_0$ is a unit clause that encodes the first equality and $\{x_1,...,x_n\}$ is the set of variables sorted with the lexicographic order.
+\hakan{give result of reduction}
+
+
 
 \Cref{fig:esbp_compact_gen} shows the compact encoding of generated constraints. This form grows linearly w.r.t. the number of variables.
 The auxiliary variables that encode the equality of two literals provide this reduction. 
@@ -521,7 +523,9 @@ number of \textit{sbps} generated and the number of auxiliary variables added on
 battleship (the battleship puzzle), chnl (channel routing instances), fpga (routing of global wires in integrated circuits),
  hole (the pigeonhole problem), urq (randomized instance based on expanded graphs), xor (exclusive or chain).\\
 We can observe that the number of produced \textit{sbps} and added auxiliary variables can be much larger than
-respectively the number of initial clauses and variables.
+respectively the number of initial clauses and variables. On the urq and xor categories it is not the case because
+these problems present a special permutation that maps one literal to the opposite one. In this case, a lot of sbps
+are tautologies and few auxiliary variables are produced.
 
 %\hakan{mettre tableauw nombre de SBP generÃƒÂ©}
 %
@@ -585,10 +589,8 @@ It uses the size of the orbit and occurrences of variables in the set of generat
 the biggest orbit produces more binary clauses and variables with few occurrences allow to disable less generators.
 
 \subsubsection{BreakID}
-As summary, $\breakid$ combines three ideas:i) It searches if produced the generators by the automorphism tool 
-have the row interchangeability special form and exploit;
-ii) It generates a maximum number of binary lex-leader constraints; iii) The classical \textit{sbps} are 
-generated.
+As a summary, $\breakid$ combines three ideas: i) It investigates whether the generators produced by the automorphism tool have the row interchangeability special form  and exploit it if so;
+ii) It generates a maximum number of binary lex-leader constraints; iii) It generates the classical \textit{sbps}.
 
 %The exploitation of symmetries statically is called \emph{static symmetry breaking}.
 %It acts like a preprocessor which add \emph{symmetry breaking predicates} (SBPs) at the 
@@ -681,6 +683,9 @@ These deductions will reduce the overall tree traversal depth and hence will eve
  $\alpha$ satisfying $\varphi$, also satisfies $\phi$. Two formulas are \emph{logically equivalent} if each is a logical
  consequence of the other.
 \end{definition}
+
+\clearpage
+
 \begin{proposition}[Symmetry propagation]
  \label{prop:symmetry_propagation}
  Let $\varphi$ be a formula, $\alpha$ an assignment and $l$ a literal. 
@@ -746,8 +751,8 @@ The overall performance of the symmetry propagation is intrinsically related to 
 \subsubsection{Symmetry Explanation Learning}
 
 
-Another approach to exploit symmetry without removing any satisfiable assignment of the problem
-is \emph{Symmetry Explanation Learning}~\cite{devriendt2017symmetric} (SEL). 
+%Another approach to exploit symmetry without removing any satisfiable assignment of the problem
+%is \emph{Symmetry Explanation Learning}~\cite{devriendt2017symmetric} (SEL). 
 
 All learned clauses are logical consequences of the problem and the symmetric of these clauses are also valid and 
 can be added to the formula without restrictions. Symmetry learning scheme (SLS)~\cite{benhamou2010enhancing} 
@@ -793,7 +798,7 @@ Nonetheless, the negative point is that SEL may flood the solver if the used set
 %Like SP no satisfying assignment is discarded.
 %Nonetheless, the negative point is that SEL may flood the solver if the used set of symmetries is big. 
 
-\subsection{Conclusion} 
+\subsubsection{Conclusion} 
 Dynamic symmetry breaking approaches exploit the symmetry property of the formula during the solving.
 It prevents the creation, as in static symmetry breaking, of potentially useless clause that increases the size of the original formula.
 Different approaches exist, one uses k-branching that allows to visit only lex-leader assignment but can be applied only in particular form group.

@@ -1,6 +1,6 @@
 \documentclass[12pt,a4paper]{memoir}
 
-
+\setsecnumdepth{subsubsection}
 %\usepackage{DejaVuSans}
 
 \usepackage[a4paper,     inner=3cm, % Inner margin
@@ -109,6 +109,8 @@ outer=3.8cm, % Outer margin
 \input{style}
 \input{abbreviations}
 
+
+
 \begin{document}
 	
 	
@@ -121,7 +123,10 @@ outer=3.8cm, % Outer margin
 \input{preface}
 
 \newpage
+
+%\setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{2}
+
 \tableofcontents
 
 %\newpage

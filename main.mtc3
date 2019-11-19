@@ -1,20 +1,20 @@
 {\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {2.1}SAT basics}{\reset@font\mtcSfont 8}{section.2.1}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Normal forms}{\reset@font\mtcSSfont 9}{section*.14}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode An NP-complete problem}{\reset@font\mtcSSfont 11}{section*.16}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Some easy to solve forms}{\reset@font\mtcSSfont 11}{section*.17}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode 2-SAT\nobreakspace {}\cite {aspvall1979linear}.}{\reset@font\mtcPfont 11}{section*.18}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Horn SAT\cite {dowling1984linear}.}{\reset@font\mtcPfont 11}{section*.19}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode XOR SAT\cite {moore2011nature}.}{\reset@font\mtcPfont 12}{section*.20}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Some related problems}{\reset@font\mtcSSfont 12}{section*.21}}
-{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {2.2}Solving a SAT problem}{\reset@font\mtcSfont 12}{section.2.2}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Algorithm}{\reset@font\mtcSSfont 12}{section*.22}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode A naive algorithm}{\reset@font\mtcSSSfont 13}{section*.23}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Davis Putnam Logemann Loveland algorithm (DPLL)}{\reset@font\mtcSSSfont 13}{section*.25}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Conflict Driven Clause Learning (CDCL) algorithm}{\reset@font\mtcSSSfont 15}{section*.28}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Conflict Analysis}{\reset@font\mtcSSfont 15}{section*.30}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Heuristics}{\reset@font\mtcSSfont 18}{section*.33}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Decision heuristics}{\reset@font\mtcPfont 18}{section*.34}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Restarts}{\reset@font\mtcPfont 18}{section*.35}}
-{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Cleaning clause database.}{\reset@font\mtcPfont 19}{section*.36}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Preprocessing / Inprocessing}{\reset@font\mtcSSfont 19}{section*.37}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode Optimizing SAT solving}{\reset@font\mtcSSfont 20}{section*.38}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {2.1.1}Normal forms}{\reset@font\mtcSSfont 9}{subsection.2.1.1}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {2.1.2}An NP-complete problem}{\reset@font\mtcSSfont 11}{subsection.2.1.2}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {2.1.3}Some easy to solve forms}{\reset@font\mtcSSfont 11}{subsection.2.1.3}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode 2-SAT\nobreakspace {}\cite {aspvall1979linear}.}{\reset@font\mtcPfont 11}{section*.15}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Horn SAT\cite {dowling1984linear}.}{\reset@font\mtcPfont 11}{section*.16}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode XOR SAT\cite {moore2011nature}.}{\reset@font\mtcPfont 12}{section*.17}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {2.1.4}Some related problems}{\reset@font\mtcSSfont 12}{subsection.2.1.4}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {2.2}Solving a SAT problem}{\reset@font\mtcSfont 13}{section.2.2}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {2.2.1}Algorithm}{\reset@font\mtcSSfont 13}{subsection.2.2.1}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {2.2.1.1}A naive algorithm}{\reset@font\mtcSSSfont 13}{subsubsection.2.2.1.1}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {2.2.1.2}Davis Putnam Logemann Loveland algorithm (DPLL)}{\reset@font\mtcSSSfont 14}{subsubsection.2.2.1.2}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {2.2.1.3}Conflict Driven Clause Learning (CDCL) algorithm}{\reset@font\mtcSSSfont 15}{subsubsection.2.2.1.3}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {2.2.2}Conflict Analysis}{\reset@font\mtcSSfont 16}{subsection.2.2.2}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {2.2.3}Heuristics}{\reset@font\mtcSSfont 18}{subsection.2.2.3}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Decision heuristics}{\reset@font\mtcPfont 18}{section*.24}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Restarts}{\reset@font\mtcPfont 19}{section*.25}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Cleaning clause database.}{\reset@font\mtcPfont 19}{section*.26}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {2.2.4}Preprocessing / Inprocessing}{\reset@font\mtcSSfont 20}{subsection.2.2.4}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {2.2.5}Optimizing SAT solving}{\reset@font\mtcSSfont 20}{subsection.2.2.5}}
