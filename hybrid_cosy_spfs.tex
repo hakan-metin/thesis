@@ -1,6 +1,6 @@
-\chapter{Compose dynamic symmetry handling}\label{chap:compose}
+\chapter{Composing dynamic symmetry handling}\label{chap:compose}
 \minitoc
-\section{Composition of SP and SymmSAT}
+\section{General idea}
 In the previous chapter, we presented an approach that reuses the
 principles of the static approaches, but operates dynamically (namely, the effective symmetry breaking approach~\cite{metin2018cdclsym}):
  the symmetries are broken during the search process without any pre-generation of the \textit{sbps}. The main
@@ -51,8 +51,8 @@ We propose here to improve the aforementioned solution by alleviating the issue 
 We first present the intuition, then we will detail and formalize it. 
 %The idea here is to keep track of particular symmetries for each clause. For a deduced clause, this set of symmetries captures which esbp's were involved in a deduced clause's derivation. The intersection of these sets is a superset of the globally unbroken symmetries, and a strict superset after clause deletion.
 Consider formula $\varphi^\prime$ as before. It can be rewritten as:
-$$\varphi^\prime=\varphi \, \underset{i}{\bigcup}(\varphi_e^i \cup \varphi_d^i) \text{ , such that } \varphi_e \cup \varphi_d = \underset{i}{\bigcup}(\varphi_e^i \cup \varphi_d^i) \text{ and } \varphi \cup \varphi_e^i \models \varphi_d^i  \text{ for all } i$$
-So, $GUS_i = \underset{\omega_e \in \varphi_e^i}{\bigcap}Stab(\omega_e) \cap G_{\varphi}$ is a valid set of symmetries for the sub-formula $\varphi \cup \varphi_e^i \cup \varphi_d^i$, and $GUS$ can be obtained by $GUS = \underset{i}{\bigcap} GUS_i$. If some esbp clauses are added to $\varphi^\prime$, then the new $GUS$ is computed as described in (1). The novelty here comes with the retrieval of some set of clauses: by keeping track of the symmetries associated to each sub-formula ($GUS_i$), it is now easy to recompute a valid set of symmetries for $\varphi^\prime$ when some set
+$$\varphi^\prime=\varphi \, \underset{i}{\bigcup}(\varphi_e \cup \varphi_d) \text{ , such that } \varphi_e \cup \varphi_d = \underset{i}{\bigcup}(\varphi_e^i \cup \varphi_d^i) \text{ and } \varphi \cup \varphi_e^i \models \varphi_d^i  \text{ for all } i$$
+So, $GUS_i = \underset{\omega_e \in \varphi_e^i}{\bigcap}Stab(\omega_e) \cap G_{\varphi}$ is a valid set of symmetries for the sub-formula $\varphi \cup \varphi_e^i \cup \varphi_d^i$, and $GUS$ can be obtained by $GUS = \underset{i}{\bigcap} GUS_i$. If some esbp clauses are added to $\varphi^\prime$, then the new $GUS$ is computed as described in (1). The novelty here comes with the retrieval of some set of clauses: by keeping track of the symmetries associated with each sub-formula ($GUS_i$), it is now easy to recompute a valid set of symmetries for $\varphi^\prime$ when some set
 $\varphi_e^k \cup \varphi_d^k$ is retrieved. It suffices to operate the intersection on the valid symmetries of the rest of the sub-formulas: $GUS = \underset{i \neq k}{\bigcap} GUS_i$.
 %Just say your approach keeps track of a set of particular symmetries for each clause. For a deduced clause, this set of symmetry captures which esbp's were involved in a deduced clause's derivation. The intersection of these sets is a superset of the globally unbroken symmetries, and a strict superset after clause deletion.
 \subsection{Local Symmetries}
@@ -89,7 +89,7 @@ Proposition \ref{prop:lsc-prop} establishes the relationship between the local s
  Let $\varphi_1$ and $\varphi_2$ be two formulas, with $\varphi_2 \subseteq \varphi_1$. 
  Let $\omega$ be a clause such that $\varphi_2 \models \omega$. Then, 
  $(\underset{\omega^\prime \in \varphi_2}{\bigcap}L_{\omega^\prime,\varphi_1})
- \cup Stab(\omega) \subseteq L_{\omega,\varphi_1}$;
+ \cup Stab(\omega) \subseteq L_{\omega,\varphi_1}$
 \end{proposition} 
 \begin{proof}
  Let us consider a clause $\omega$ and a permutation $g \in 
@@ -100,7 +100,8 @@ Proposition \ref{prop:lsc-prop} establishes the relationship between the local s
  (\underset{\omega^\prime \in \varphi_2}{\bigcap}L_{\omega^\prime,\varphi_1})
  \cup Stab(\omega)$, then we have $\varphi_1 \models g.\varphi_2$ (from Def.~\ref{def:ls}). Hence, $\varphi_1 \models g.\varphi_2 \models g.\omega$, and then, $g \in L_{\omega,\varphi_1}$ (by definition). 
 \end{proof}
-\subsection{Algorithm}
+
+\section{Algorithm}
 This section shows how to integrate the propositions developed in the previous
 section as the basis of our combo approach in a concrete
 Conflict-Driven Clause Learning (CDCL)-like solver.
@@ -122,14 +123,14 @@ Let us detail the critical points.
 \begin{itemize}[topsep=2pt]
  \item \Cref{algo:start_stab}: when a conflict is detected, then the analyzing
  procedure is triggered. According to Proposition \ref{prop:lsc-prop}, the
- generated conflicting clause $\omega$, should be associated with the
+ generated conflicting clause $\omega$ should be associated with the
  computation of its set of local symmetries. Thus, we update the classical
  \texttt{analyzeConflict} procedure to \texttt{analyzeConflictSymSp} that produces such
  a set: $\varphi_1$ contains all the clauses that are used to derive $\omega$\footnote{These are clauses of the \textit{conflict side} of the implication graph when applying the classical conflict analysis algorithm.}. So, at the end of the conflict analysis, we operate the intersection of a local symmetry of these clauses to get the set of local symmetries of $\omega$. We can thus complete this set with the stabilizer set (see Proposition \ref{prop:lsc-prop}).
  
  In the classical algorithm of symmSAT, when a non lex-leader assignment is detected, then the esbp generation function, \texttt{generateEsbp}, is
  called. In the new algorithm this function is replaced by a new one called
- \texttt{generateEsbpSp}. In addition to compute the esbp clause $\omega$, it
+ \texttt{generateEsbpSp}. In addition to computing the esbp clause $\omega$, it
  produces the stabilizer set of $\omega$\footnote{The only allowed  local symmetries in case of an esbp.}.
 % , according to point~2 of  section~\ref{sec:pc}.}.
  
@@ -147,11 +148,11 @@ Let us detail the critical points.
 Consider the following permutation $G = \{ g_1 = (x_1 x_2) (x_3 x_4)  , g_2 = (x_3 x_4) (x_5 x_6) \}$,
 the lexicographic ordering relation of variables with $\true < \false$ and 
 the current assignment $\alpha = \{\neg x_7 \}$.
-Suppose the permutation $g_1$ already generates the $esbp$ $\omega_e = \{ x_1 \neg x_2\}$ then, associated local symmetry is 
+Suppose the permutation $g_1$ already generate the $esbp$ $\omega_e = \{ x_1 \neg x_2\}$ then the associated local symmetry is 
 $g_2$ because it stabilizes $\omega_e$ ($g_2.\omega_e = \omega_e)$. Then, suppose a conflict occurs and the resulting clause is
-$\omega_d = \{x_4\, x_7\}$. In the conflict analysis, this clause is deduced by original clauses and $\omega_e$.
+$\omega_d = \{x_4\, x_7\}$. In the conflict analysis, this clause is deduced by the original clauses and $\omega_e$.
  So, it has the same valid symmetries as $\omega_e$. As $g_2.\omega_d = \{x_3\, x_7\}$ is an assertive clause and $g_2$ is a valid 
- permutation for this clause SP can propagate $x_3$ (the symmetrical of $\omega_d)$
+ permutation for this clause, SP can propagate $x_3$ (the symmetrical of $\omega_d)$.
 
 \subsection{Implementation}
 We have implemented our combo on top of the
@@ -167,7 +168,8 @@ symmetries. This can be a hard limit to treat certain big problems from the
 memory point of view.
 The implemented combo solver can be found at:\\
 \mbox{\url{https://github.com/lip6/minisat-SymSp}}
-\subsection{Evaluation}
+
+\section{Evaluation}
 This section compares our combo approach against ESBA and SPA. All experiments
 have been performed with a modified version of the well-known \minisat{} solver \cite{een2003extensible}: \texttt{minisat-Sp}, for
 SPA; \texttt{minisat-Sym}, for ESBA; and \texttt{minisat-SymSP}, for the
@@ -185,11 +187,11 @@ $4000$ proposed by the seven editions of the contest (from 2012 to 2018).
   \toprule
   Benchmark  &\texttt{minisat-Sp} & \texttt{minisat-Sym} & \texttt{minisat-SymSP}\\
   \hline 
-  Generators 0â€“20 (704) & 194&197&\cellcolor{gray!30,}\textbf{198}\\
-  Generators 20â€“40 (136) & 33&\cellcolor{gray!30}\textbf{34}&\cellcolor{gray!30}\textbf{34}\\
-  Generators 40â€“60 (141) & 28&28&\cellcolor{gray!30}\textbf{29}\\
-  Generators 60â€“80 (168) & \cellcolor{gray!30}\textbf{65}&64&\cellcolor{gray!30}\textbf{65}\\
-  Generators 80â€“100 (51) & 28&\cellcolor{gray!30}\textbf{34}&\cellcolor{gray!30}\textbf{34}\\
+  Generators 0-20 (704) & 194&197&\cellcolor{gray!30,}\textbf{198}\\
+  Generators 20-40 (136) & 33&\cellcolor{gray!30}\textbf{34}&\cellcolor{gray!30}\textbf{34}\\
+  Generators 40-60 (141) & 28&28&\cellcolor{gray!30}\textbf{29}\\
+  Generators 60-80 (168) & \cellcolor{gray!30}\textbf{65}&64&\cellcolor{gray!30}\textbf{65}\\
+  Generators 80-100 (51) & 28&\cellcolor{gray!30}\textbf{34}&\cellcolor{gray!30}\textbf{34}\\
   Generators  \textgreater100 (200) & 58&59&\cellcolor{gray!30}\textbf{60}\\
   \hline 
   TOTAL no dup (1400) & 406 & 416 & \cellcolor{gray!30,}\textbf{420}\\
@@ -206,11 +208,11 @@ $4000$ proposed by the seven editions of the contest (from 2012 to 2018).
   \toprule
   Benchmark  &\texttt{minisat-Sp} & \texttt{minisat-Sym} & \texttt{minisat-SymSP}\\
   \hline 
-  Generators 0â€“20 (704) & \cellcolor{gray!30,}\textbf{233}&220&226\\
-  Generators 20â€“40 (136) & 50&\cellcolor{gray!30}\textbf{54}&\cellcolor{gray!30}\textbf{54}\\
-  Generators 40â€“60 (141) & 75&\cellcolor{gray!30}\textbf{83}&\cellcolor{gray!30}\textbf{83}\\
-  Generators 60â€“80 (168) & \cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}&10\\
-  Generators 80â€“100 (51) & \cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}\\
+  Generators 0-20 (704) & \cellcolor{gray!30,}\textbf{233}&220&226\\
+  Generators 20-40 (136) & 50&\cellcolor{gray!30}\textbf{54}&\cellcolor{gray!30}\textbf{54}\\
+  Generators 40-60 (141) & 75&\cellcolor{gray!30}\textbf{83}&\cellcolor{gray!30}\textbf{83}\\
+  Generators 60-80 (168) & \cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}&10\\
+  Generators 80-100 (51) & \cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}&\cellcolor{gray!30}\textbf{11}\\
   Generators \textgreater100 (200) & 90&\cellcolor{gray!30,}\textbf{109}&107\\
   \hline 
   TOTAL no dup (1400) & 470&488&\cellcolor{gray!30,}\textbf{491}\\
