@@ -62,18 +62,19 @@
 
 	\scriptsize
     \begin{tabular}{ll}
- 	    \textbf{Jury Members:} & \\
+ 	    \textbf{Rapporteurs:} & \\
     	\textsc{Pascal \textsc{Fontaine}}  &  Maître de conférences, Université de Liège\\
+    	    	\vspace{1em}
     	\textsc{Laure Petrucci}  & Professeur, Université Paris 13\\
+    	
+ 	    \textbf{Reviewers:} & \\
     	\textsc{Jean-Michel	Couvreur}  & Professeur, Université d'Orléans\\
+    	    	\vspace{1em}
     	\textsc{Emmanuelle Encrenaz}  & Maître de conférences, Sorbonne Université\\
-    	\textsc{Souheib Baarir}  & Maître de conférences, Université Paris Nanterre\\
-    	\vspace{1em}
-    	\textsc{Fabrice Kordon}  & Professeur, Sorbonne Université\\
+
     	
  	    \textbf{Directors:} & \\
     	\textsc{Souheib Baarir}  & Maître de conférences, Université Paris Nanterre\\
-
     	\textsc{Fabrice Kordon}  & Professeur, Sorbonne Université\\
     \end{tabular}\\
  % \end{center}
@@ -93,7 +94,7 @@
 \begin{frame}
 
 \frametitle{Motivation}
-SAT is widely used in different domains
+SATisfiability is widely used in different domains
 
 \begin{itemize}
 	\item Artificial intelligence (planning, games, ...)
@@ -360,7 +361,7 @@ $\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{\text{Clause with literals } x_1, x_
 
 	Solving SAT formula is known to be \textbf{NP-complete}~\cite{cook1971complexity}
 	\vfill
-	Enumerative algorithm:
+	Enumerative algorithms:
 	\begin{itemize}
 		\item Davis, Putnam, Logemann, and Loveland (DPLL)~\cite{dpll_62}
 		\begin{itemize}
@@ -942,7 +943,7 @@ Is it possible to attribute each group to a classroom?
 
 %% ----------------------------------------------------------------------------
 \begin{frame}
-	\frametitle{Using symmetries to prune search space}
+	\frametitle{Using symmetries to prune the search space}
 \only<1>{$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\}
 \only<2>{$g = \textcolor{blue}{(x_1 \enskip x_2)}(x_4 \enskip x_5)(x_7 \enskip x_8) $\\}
 	\centering
@@ -1041,7 +1042,7 @@ Is it possible to attribute each group to a classroom?
 	\draw[link] (rrr) -> node [mid] {$1$} (rrrr);
 	\end{tikzpicture}
 	\vfill
-\visible<2> {Adds symmetry breaking predicates to prune search space.}
+\visible<2> {Add symmetry breaking predicates to prune the  search space.}
 \end{frame}
  
 \begin{frame}
@@ -1052,7 +1053,7 @@ Is it possible to attribute each group to a classroom?
 		\item Define total order on variables
 		\item Define minimal value
 	\end{itemize}
-	\item Forbid non minimal assignment with addition of SBP
+	\item Forbid non minimal assignment for each orbit %with addition of SBP
 \end{itemize}	
 
 	\vfill
@@ -1063,16 +1064,50 @@ Is it possible to attribute each group to a classroom?
 	\end{itemize}
 
 	\vfill
-	\begin{tabular} {ll}
-		 $x_1 \leq x_2$	& $x_1 \lor \neg x_2$\\
-		 \hline
-		 $x_1 = x_2 \rightarrow x_4 \leq x_5$ &  $ x_1 \lor x_2 \lor x_4 \lor \neg x_5 $\\
-		 									  &  $ \neg  x_1 \lor \neg x_2 \lor x_4 \lor \neg x_5 $\\
-		 									  \hline 
-		 $x_1 = x_2 \land x_4 = x_5 \rightarrow x_8 \leq x_3$ & $ x_1 \lor x_2 \lor x_4 \lor x_5 \lor x_7 \lor \neg x_8 $\\
-		 													  & $ \neg x_1 \lor  \neg x_2 \lor x_4 \lor x_5 \lor x_7 \lor \neg x_8 $\\
-		 													  & $\cdots$
-	\end{tabular}
+	
+	
+		\begin{center}
+%		\begin{tabular}{|c|c|c|c|c|}
+%			\toprule
+%			$x_1$ & $x_2$  & $\cdots$     & lex-leader &\\
+%			\midrule
+%			\visible<3->{\false & \false & $\cdots$ & \cmark &}\\
+%			\midrule
+%			\visible<4->{\false & \true  & $\cdots$ & \cmark &}\\
+%			\visible<5->{\true  & \false & $\cdots$ & \xmark &  $\rightarrow$ SBP: $(x_1 \vee \neg x_2)$}\\
+%			\midrule
+%			\visible<6->{\true  & \true  & $\cdots$ & \cmark &}\\
+%			\bottomrule
+%		\end{tabular}
+
+		\begin{tabular}{c|c|c|c|c|c|c|c|c}
+	\toprule
+	& $x_1$ & $x_2$ & \textcolor{gray}{$x_3$} & $x_4$ & $x_5$ & $\cdots$     & lex-leader & SBP\\
+	\midrule
+	\multirow{2}{*}{\visible<2->{$O_1$}}&\visible<2->{\false & \true  & \--- & \--- & \--- & $\cdots$ & \cmark &}\\
+	\visible<3->{& \true  & \false & \--- & \--- & \--- & $\cdots$ & \xmark &  $\rightarrow$  $\neg x_1 \vee  x_2$}\\
+	\midrule
+	\multirow{2}{*}{\visible<4->{$O_2$}}&\visible<4->{\false & \false & \--- & \false & \true &$\cdots$ & \cmark &}\\
+	\visible<5->{& \false & \false & \--- & \true & \false &$\cdots$ & \xmark & $\rightarrow x_1 \lor x_2 \lor \neg x_4 \lor  x_5$}\\
+	\midrule
+	\multicolumn{9}{c}{\visible<6->{$\cdots$}}\\
+%	\visible<6->{$\cdots$  &  &  & &   &  &  &}\\
+%	\visible<6->{\true  & \true  & X & X & X  & $\cdots$ & \cmark &}\\
+	\bottomrule
+\end{tabular}
+	\end{center}
+
+	
+%	\begin{tabular} {ll}
+%		 $x_1 \leq x_2$	& $x_1 \lor \neg x_2$\\
+%		 \hline
+%		 $x_1 = x_2 \rightarrow x_4 \leq x_5$ &  $ x_1 \lor x_2 \lor x_4 \lor \neg x_5 $\\
+%		 									  &  $ \neg  x_1 \lor \neg x_2 \lor x_4 \lor \neg x_5 $\\
+%		 									  \hline 
+%		 $x_1 = x_2 \land x_4 = x_5 \rightarrow x_8 \leq x_3$ & $ x_1 \lor x_2 \lor x_4 \lor x_5 \lor x_7 \lor \neg x_8 $\\
+%		 													  & $ \neg x_1 \lor  \neg x_2 \lor x_4 \lor x_5 \lor x_7 \lor \neg x_8 $\\
+%		 													  & $\cdots$
+%	\end{tabular}
 	
 %	TODO\\
 %	
@@ -1192,7 +1227,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 \node (end) [unsat,double=black!10,double distance=0.5mm] at ($(isend) + (90pt, 0)$) {$unsatiasfiable$};
 \node (ends) [sat,double=black!10,double distance=0.5mm] at ($(isfin) + (+90pt, 0)$){$satisfiable$};
 
-\node[opacity=0,onslide={<2>,opacity=1},draw, rounded corners=4pt,draw=blue, line width=0.4mm, minimum width=4cm,minimum height=6.5cm,label={[opacity=0,onslide={<2>,opacity=1},fill=white,xshift=-1.0cm, yshift=-7cm]\textcolor{blue}{Symmetry controller}}]  at (-90pt, -140pt){};
+\node[opacity=0,onslide={<2>,opacity=1},draw, rounded corners=4pt,draw=blue, line width=0.8mm, minimum width=4cm,minimum height=6.5cm,label={[opacity=0,onslide={<2>,opacity=1},fill=white,xshift=-1.0cm, yshift=-7cm]\textcolor{blue}{Symmetry controller}}]  at (-90pt, -140pt){};
 \node (ismin)  [question,opacity=0,onslide={<2>,opacity=1}] at ($(conf) + (-90pt, 0pt)$)  {Is assignment\\minimal?};
 \node (genesbp)  [process,opacity=0,onslide={<2>,opacity=1}] at ($(confanalyse) + (-90pt, 0pt)$)  {Generate SBP};
 
@@ -1385,7 +1420,7 @@ Setup:
 	\begin{tabular}{l|ccccc}
 		&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
 		\midrule
-		TOTAL (no dup)  & 261 & 302 & \cellcolor{gray!30}\textbf{371} & 345\\
+		TOTAL   & 261 & 302 & \cellcolor{gray!30}\textbf{371} & 345\\
 	\end{tabular}
 }
 \hspace{1em}
@@ -1393,7 +1428,7 @@ Setup:
 	\begin{tabular}{l|ccccc}
 		&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
 		\midrule
-		TOTAL (no dup) & 261 & 324 & 415 & \cellcolor{gray!30}\textbf{439}\\
+		TOTAL  & 261 & 324 & 415 & \cellcolor{gray!30}\textbf{439}\\
 	\end{tabular}
 }
 }
@@ -1431,7 +1466,7 @@ Setup:
 
 %% ----------------------------------------------------------------------------
 \begin{frame}
-\frametitle{Using symmetries to accelerate tree traversal}
+\frametitle{Using symmetries to accelerate the tree traversal}
 \only<1-2>{$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\}
 \only<3>{$g = (x_1 \enskip x_2)\textcolor{red!70}{(x_4 \enskip x_5)}(x_7 \enskip x_8) $\\}
 \centering
@@ -1623,12 +1658,12 @@ Compose the symmetry propagation and the ESBP\\
 Problems:
 \begin{itemize}
 	\item ESBP breaks symmetries (incrementally)
-	\item SP considers the manipulated symmetries valid all the time
+	\item SP considers the manipulated symmetries valid all time
 \end{itemize}
 
 \vfill
 \centering
-In hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
+In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 \end{frame}
 %% ----------------------------------------------------------------------------
 \begin{frame}
