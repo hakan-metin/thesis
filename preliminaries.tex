@@ -419,9 +419,8 @@ the false value .
  
  
 \subsection{Heuristics}\label{sec:heuristics}
- \hakan{REVOIR}
-This section gives an overview of different heuristics implemented in modern SAT solvers.
-\paragraph{Decision heuristics}
+
+\paragraph{Decision heuristics.}
  The decision variable has a huge impact on the 
 overall solving time. It influences the number of propagations and so 
 the depth of the search tree.
@@ -440,7 +439,7 @@ learned clauses. The LRB of a variable is the weighted average (computed with \e
 weighted average} (ERWA))  value taken by its LR over the time. Unassigned variable with the highest LRB is chosen as a decision. 
 %\hakan{A VOIR The idea behind this heuristics is to keep variables that used to generate learned clause in the search tree.}
 
-\paragraph{Restarts}
+\paragraph{Restarts heuristics.}
 Another important mechanism is \emph{restart}. Basically, the solver abandons its current assignment and 
 restarts from the top of the tree, while maintaining some information, like learned clauses, scores of variables, etc.
  The restart prevents the solver to get stuck in the same part of the search space (phenomenon known as heavy tailing~\cite{gomes1997heavy}).

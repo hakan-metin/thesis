@@ -93,7 +93,6 @@ So the permutation in cycle notation will be
  \end{center}
 \end{definition}
 
-\hakan{REVOIR}
 \begin{definition}[Stabilized variable over permutation]
  A variable $x$ is \emph{stabilized} by a permutation $g$  iff $x \notin \support_g$.
 \end{definition}
@@ -298,7 +297,63 @@ With the previous graph, the following generators are obtained using $\bliss$ as
  \end{minipage}
 \end{center}
  
- \hakan{conclusion / hint }
+ 
+ In the graphical representation of these generators presented in Figure~\ref{fig:genegraph} such as 
+ $g_1$ in green, $g_2$ in blue and $g_3$ in red,  we can see that all variables belongs to the same equivalence class.
+ 
+ 
+ \begin{figure}[htbp!]
+ 	\centering
+ \begin{tikzpicture}[level/.style={sibling distance=60mm/#1},every node/.style={scale=0.6}, scale=0.6]
+ \tikzstyle{orbit-node}=[draw,circle,minimum size=35pt,inner sep=0pt]
+ \tikzstyle{g1}=[->, draw, color=blue_1, line width=1pt]
+ \tikzstyle{g2}=[->, draw, color=green_1, line width=1pt]
+ \tikzstyle{g3}=[->, draw, color=red_1, line width=1pt]
+ 
+ \tikzstyle{g}=[->, draw, color=black, line width=1pt]
+ 
+ \node[orbit-node] (1) {$x_1$};
+ \node[orbit-node] (2) at ($(1) + (5, 0)$) {$x_2$};
+ \node[orbit-node] (3) at ($(2) + (5, 0)$) {$x_3$};
+ \node[orbit-node] (4) at ($(1) + (0, -4)$) {$x_4$};
+ \node[orbit-node] (5) at ($(1) + (5, -4)$) {$x_5$};
+ \node[orbit-node] (6) at ($(2) + (5, -4)$) {$x_6$};
+ 
+ % g1
+ \draw[g1] (1) to [bend right=10] (2);
+ \draw[g1] (2) to [bend right=10] (1);
+ 
+ \draw[g1] (4) to [bend right=10] (5);
+ \draw[g1] (5) to [bend right=10] (4);
+ 
+ 
+ %g2
+ 
+ \draw[g2] (2) to [bend right=10] (3);
+ \draw[g2] (3) to [bend right=10] (2);
+ 
+ \draw[g2] (5) to [bend right=10] (6);
+ \draw[g2] (6) to [bend right=10] (5);
+ 
+ % g3
+ \draw[g3] (1) to [bend right=10] (4);
+ \draw[g3] (4) to [bend right=10] (1);
+ 
+ \draw[g3] (2) to [bend right=10] (5);
+ \draw[g3] (5) to [bend right=10] (2);
+ 
+ \draw[g3] (3) to [bend right=10] (6);
+ \draw[g3] (6) to [bend right=10] (3);
+ 
+ %\draw[g] (1) to [bend left=25] (3);
+ %\draw[g] (1) to [] (5);
+ %\draw[g] (1) to [bend left=0] (6);
+ \end{tikzpicture}
+\caption{Graphical representation of generators.}
+\label{fig:genegraph}
+\end{figure}
+ 
+ \clearpage
  
 \section{Usage of symmetries}
 
@@ -383,14 +438,15 @@ Furthermore, the $<$ relation is monotonic as expressed by the following proposi
 The proposition is a direct result of Definition~\ref{def:assignment_ordering}.
 \end{proof}
 Given a formula $\varphi$ and its group of symmetries $G$,
-the \emph{orbit of $\alpha$ under $G$} (or
+the \emph{orbit} of $\alpha$ under $G$ (or
 simply the \emph{orbit of $\alpha$} when $G$ is clear from the context) is the set
 $ [\alpha]_G=\{ g.\alpha \mid g \in G \}$. 
-The lexicographic leader (\textit{lex-leader} for short) of an orbit $[\alpha]_G$ is defined by
+
+The optimal approach to solve a symmetric SAT problem would be to explore
+only one assignment per orbit (for instance each \textit{lex-leader}).
+The lexicographic leader (\textit{lex-leader}) of an orbit $[\alpha]_G$ is defined by
 $min_<([\alpha]_G)$. This \textit{lex-leader} is unique because the lexicographic
 order is a total order.
-The optimal approach to solve a symmetric SAT problem would be to explore
-only one assignment per orbit (for instance each lex-leader).
 % \Cref{fig:lex-leader} shows different orbits, each dot in an orbit (ellipse in the figure) is an assignment, and the lex-leader is the empty red one.
 %To avoid exploring 
 %symmetry search space, \emph{symmetry breaking predicates} (SBP) also called \emph{lex-leader constraints} 
@@ -404,13 +460,40 @@ only one assignment per orbit (for instance each lex-leader).
 % \label{fig:lex-leader}  
 %\end{figure}
 
-To answer the second question, the set of lex-leader predicates for a permutation $g \in G_\varphi$ is defined as:
+%Once the assignments can be sorted numerically with the ordering relation $<$, we define the lex-leader predicates to
+%choose the lex-leader in each equivalence class.
+%
+%the goal of the constraints called \textit{symmetry breaking predicates} (sbps), that answer the second question, is to be true for the lex-leader of each equivalence class.
+
+To answer the second question, the set of \textit{lex-leader} predicates for a permutation $g \in G_\varphi$ is defined as:
 $$LL_g = \forall i : (\forall j < i : x_j = g.x_j) \Rightarrow  x_i \preceq g.x_i$$
 
 
-\hakan{REVOIR}
-In other words, each assignment that has a variable such that its image under $g$ is smaller according to the ordering relation $\prec$, is eliminated from the search space by $LL_g$.
-The conjunction of $LL_g$, for all permutations  $g \in G_{\varphi} $ produces a sound and complete set of symmetry breaking predicates(sbps) also called \emph{full symmetry breaking}.
+Each predicate is evaluated using the current assignment $\alpha$ used by the solver. 
+If there exists symmetrical assignment g.$\alpha$ such that $g.\alpha < \alpha$, the predicated is evaluated to false and 
+to true otherwise.
+For example, let $\alpha_1 \alpha_2, \alpha_3$ the orbit of the permutation $g$ 
+(g maps $\alpha_1 \rightarrow \alpha_2 \rightarrow \alpha_3 \rightarrow \alpha_1$) and $\alpha_2$ is the lex-leader 
+according to the ordering relation, so the predicate is evaluated to true only by $\alpha_2$ and to false by the others.
+
+
+
+%For each predicate, we set
+
+
+
+
+
+
+
+%Each predicate is evaluated to  \textit{true} if there exist an assignment $\alpha$ such that $\alpha \leq g.\alpha$,
+%and is evaluated to  \textit{false} otherwise. In other word, it evaluates to \textit{true}  each assignment that is smaller
+%numerically than their successor as we traverse the orbit.
+
+%\hakan{REVOIR}
+%In other words, each assignment that has a variable such that its image under $g$ is smaller according to the ordering relation $\prec$, is eliminated from the search space by $LL_g$.
+
+The conjunction of $LL_g$, for all permutations  $g \in G_{\varphi} $ produces a sound and complete set of symmetry breaking predicates (sbps) also called \emph{full symmetry breaking}.
 In this case, only the lex-leader assignment will be visited for each orbit.
 However, the size of the \textit{sbps} can be exponential in the number of variables of the problem and so, they cannot be totally computed.
 To overcome this problem, only a subgroup is considered, in this case the
@@ -484,7 +567,6 @@ cardinality of the support  of the permutation. Hence, Aloul et al~\cite{aloul06
 These variables encode equality of literals and are disjoint from the support of the permutation.
 The following clauses encode a compact lex-leader for a permutation:
 
-\hakan{REVOIR}
 
 %Let $g$ for a permutation, let $\support_g$ = $\{x_1, \cdots, x_n\}$ the support of $g$ be ordered 
 % such that $x_i \preceq x_j$ iff $i \leq j$  and let $\{y_0,\cdots, y_{n} \}$ be a set of auxiliary variables
@@ -499,10 +581,6 @@ The following clauses encode a compact lex-leader for a permutation:
 \end{tabular}
 \end{center}
 where $\{y_0,\cdots, y_{n} \}$ is the set of auxiliary variables, $y_0$ is a unit clause that encodes the first equality and $\{x_1,...,x_n\}$ is the set of variables sorted with the lexicographic order.
-\hakan{give result of reduction}
-
-
-
 \Cref{fig:esbp_compact_gen} shows the compact encoding of generated constraints. This form grows linearly w.r.t. the number of variables.
 The auxiliary variables that encode the equality of two literals provide this reduction. 
 Three auxiliary variables are introduced in this example $x_7,\ x_8,\ x_9$ such that $x_7$ encodes the equality of $x_1$ and $x_4$, $x_8$ encodes the equality of $x_2$ and $x_5$, and $x_9$ encodes the equality of $x_3$ and $x_6$.

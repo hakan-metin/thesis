@@ -58,7 +58,6 @@ permutation during the solving. Let us, first, recall that the \emph{support}
  \end{enumerate}
 \end{proposition}
 
-\hakan{PROOF}
 
 When $g$ is a \textit{reducer} of $\alpha$ we can define a predicate that contradicts $\alpha$ and yet preserves the satisfiability of the formula. Such a predicate will be used to discard $\alpha$, and all its extensions, from a further visit and hence pruning the search tree.
 \begin{definition}[Effective Symmetry Breaking Predicate]
@@ -648,6 +647,7 @@ The right figure shows the number of generated esbp by solvers in a log scale. O
 approximately the same number of esbps. But the difference can an order of magnitude higher. This can be due to the time of
 execution of the solver and/or the impact of the sign of the constraints.
 
+\clearpage
 \begin{figure}[!htbp]
  \subfloat[Time]{%
   \includegraphics[width=.3\textheight]{img/scatter_compare}%
@@ -661,10 +661,10 @@ execution of the solver and/or the impact of the sign of the constraints.
  \label{table:compare_sign_order}
 \end{figure}
 
+
 \texttt{MiniSymTF} is generally better and is the default choice in the library.
 If it is running on a specific application, reverse order can be chosen if it performs better.
 
-\hakan{ATTENTION PLACEMENT FIGURES}
 
 \section{Conclusion}
 SymmSAT uses same the principles as static symmetry breaking approaches but operates dynamically by 

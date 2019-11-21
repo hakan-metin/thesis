@@ -148,7 +148,7 @@ Let us detail the critical points.
 Consider the following permutation $G = \{ g_1 = (x_1 x_2) (x_3 x_4)  , g_2 = (x_3 x_4) (x_5 x_6) \}$,
 the lexicographic ordering relation of variables with $\true < \false$ and 
 the current assignment $\alpha = \{\neg x_7 \}$.
-Suppose the permutation $g_1$ already generate the $esbp$ $\omega_e = \{ x_1 \neg x_2\}$ then the associated local symmetry is 
+Suppose the permutation $g_1$ already generated the $esbp$ $\omega_e = \{ x_1 \neg x_2\}$ then the associated local symmetry is 
 $g_2$ because it stabilizes $\omega_e$ ($g_2.\omega_e = \omega_e)$. Then, suppose a conflict occurs and the resulting clause is
 $\omega_d = \{x_4\, x_7\}$. In the conflict analysis, this clause is deduced by the original clauses and $\omega_e$.
  So, it has the same valid symmetries as $\omega_e$. As $g_2.\omega_d = \{x_3\, x_7\}$ is an assertive clause and $g_2$ is a valid 
@@ -274,31 +274,31 @@ by all solvers). While PAR-2 value gives a global indication on the
 effectiveness of an approach, CTI is a good measure to evaluate its speed compared
 to other approaches.
 Hence, we observe that the combo has a better PAR-2 score, and this shows its
-effectiveness. However, it is the least fast when coming to solved intersection.
+effectiveness. However, it is the less fast when coming to solved intersection.
 This is clearly due to the double cost paid for tracking the symmetries’ status
 (one for ESBA and the other for SPA). Having a unified management of
 symmetries tracking would probably reduce this cost.
 \begin{center}
 \begin{figure}[!htbp]
  \centering
+  \includegraphics[scale=0.6]{img/full-INFGB-ratio-vsspfs.pdf}%
  \includegraphics[scale=0.6]{img/full-INFGB-ratio-vscosy.pdf}%
- \includegraphics[scale=0.6]{img/full-INFGB-ratio-vsspfs.pdf}%
  \caption{Comparison of the ratio between the number of decisions and the number of propagation for the combo w.r.t. ESBA and SPA.}
  \label{fig:ratio}
 \end{figure}
 \end{center}
-To go further in our analyze, we also compared the ratio between the number of
-decisions and the number of propagation. This is a fair measure to assess the
+To go further in our analysis, we also compared the ratio between the number of
+decisions and the number of propagations. This is a fair measure to assess the
 quality of a SAT solving approach: if the ratio is small, then this means that
 the developed algorithm is producing more deduced facts than making guesses,
 which is the best way to conclude quickly on a problem!
 The scatter plots of Fig.\ref{fig:ratio} show a comparison between the
 aforementioned ratios. When comparing \texttt{minisat-Sp} to
-\texttt{minisat-SymSp} (right-hand side scatter plot), we observe that the
+\texttt{minisat-SymSp} (left-hand side scatter plot), we observe that the
 ratio goes in favor of \texttt{minisat-Sp} for the problems solved by both
 approaches. This is an expected result since the main objective of SPA is to
 minimize the number of decisions while augmenting the number of propagation.
-What is important to underline here is highlighted on the left-hand side
+What is important to underline here is highlighted on the right-hand side
 scatter plot: on a large majority of UNSAT problems, the ratio goes in favor
 of \texttt{minisat-SymSp} w.r.t. \texttt{minisat-Sym}. This confirms the
 positive impact of SPA when applied in conjunction with ESBA.

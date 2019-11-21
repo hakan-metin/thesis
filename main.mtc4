@@ -1,16 +1,16 @@
-{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {3.1}Group theory basics}{\reset@font\mtcSfont 24}{section.3.1}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {3.1.1}Groups}{\reset@font\mtcSSfont 24}{subsection.3.1.1}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {3.1.2}Permutation group}{\reset@font\mtcSSfont 25}{subsection.3.1.2}}
-{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {3.2}Symmetries in SAT}{\reset@font\mtcSfont 26}{section.3.2}}
-{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {3.3}Symmetry detection in SAT}{\reset@font\mtcSfont 27}{section.3.3}}
-{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {3.4}Usage of symmetries}{\reset@font\mtcSfont 29}{section.3.4}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {3.4.1}Static symmetry breaking}{\reset@font\mtcSSfont 30}{subsection.3.4.1}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {3.4.1.1}Special form of the group}{\reset@font\mtcSSSfont 35}{subsubsection.3.4.1.1}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {3.4.1.2}Binary lex-leader constraints}{\reset@font\mtcSSSfont 35}{subsubsection.3.4.1.2}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {3.4.1.3}BreakID}{\reset@font\mtcSSSfont 37}{subsubsection.3.4.1.3}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {3.4.1.4}Conclusion}{\reset@font\mtcSSSfont 37}{subsubsection.3.4.1.4}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {3.4.2}Dynamic symmetry breaking}{\reset@font\mtcSSfont 37}{subsection.3.4.2}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {3.4.2.1}SymChaff}{\reset@font\mtcSSSfont 38}{subsubsection.3.4.2.1}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {3.4.2.2}Symmetry Propagation}{\reset@font\mtcSSSfont 38}{subsubsection.3.4.2.2}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {3.4.2.3}Symmetry Explanation Learning}{\reset@font\mtcSSSfont 40}{subsubsection.3.4.2.3}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {3.4.2.4}Conclusion}{\reset@font\mtcSSSfont 41}{subsubsection.3.4.2.4}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {3.1}Group theory basics}{\reset@font\mtcSfont 22}{section.3.1}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {3.1.1}Groups}{\reset@font\mtcSSfont 22}{subsection.3.1.1}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {3.1.2}Permutation group}{\reset@font\mtcSSfont 23}{subsection.3.1.2}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {3.2}Symmetries in SAT}{\reset@font\mtcSfont 24}{section.3.2}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {3.3}Symmetry detection in SAT}{\reset@font\mtcSfont 25}{section.3.3}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {3.4}Usage of symmetries}{\reset@font\mtcSfont 28}{section.3.4}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {3.4.1}Static symmetry breaking}{\reset@font\mtcSSfont 28}{subsection.3.4.1}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {3.4.1.1}Special form of the group}{\reset@font\mtcSSSfont 33}{subsubsection.3.4.1.1}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {3.4.1.2}Binary lex-leader constraints}{\reset@font\mtcSSSfont 34}{subsubsection.3.4.1.2}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {3.4.1.3}BreakID}{\reset@font\mtcSSSfont 35}{subsubsection.3.4.1.3}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {3.4.1.4}Conclusion}{\reset@font\mtcSSSfont 35}{subsubsection.3.4.1.4}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {3.4.2}Dynamic symmetry breaking}{\reset@font\mtcSSfont 36}{subsection.3.4.2}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {3.4.2.1}SymChaff}{\reset@font\mtcSSSfont 36}{subsubsection.3.4.2.1}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {3.4.2.2}Symmetry Propagation}{\reset@font\mtcSSSfont 37}{subsubsection.3.4.2.2}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {3.4.2.3}Symmetry Explanation Learning}{\reset@font\mtcSSSfont 39}{subsubsection.3.4.2.3}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {3.4.2.4}Conclusion}{\reset@font\mtcSSSfont 40}{subsubsection.3.4.2.4}}
