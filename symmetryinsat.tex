@@ -584,18 +584,24 @@ where $\{y_0,\cdots, y_{n} \}$ is the set of auxiliary variables, $y_0$ is a uni
 \Cref{fig:esbp_compact_gen} shows the compact encoding of generated constraints. This form grows linearly w.r.t. the number of variables.
 The auxiliary variables that encode the equality of two literals provide this reduction. 
 Three auxiliary variables are introduced in this example $x_7,\ x_8,\ x_9$ such that $x_7$ encodes the equality of $x_1$ and $x_4$, $x_8$ encodes the equality of $x_2$ and $x_5$, and $x_9$ encodes the equality of $x_3$ and $x_6$.
+
+\clearpage
+
  \begin{figure}[!htbp]
  \input{fig/example-compact-sbp}
  \caption{Example of compact generated SBPs for one permutation}
  \label{fig:esbp_compact_gen}
 \end{figure}
+
+
 $\shatter$ is a tool~\cite{aloul06} for partial symmetry breaking.
 It computes a compact lex-leader \textit{sbps} with the symmetries produced by $\saucy$~\cite{katebi2010symmetry}.
-The following table shows the number of symmetry breaking predicates and the
+Table~\ref{tab:numsbp} shows the number of symmetry breaking predicates and the
 number of auxiliary variables added to the original formula.
 
-\input{sbp-table}
+\clearpage
 
+\input{sbp-table}
 \Cref{tab:numsbp} presents the number of variables and clauses present in the formula and also the  
 number of \textit{sbps} generated and the number of auxiliary variables added on different problem categories that are:
 battleship (the battleship puzzle), chnl (channel routing instances), fpga (routing of global wires in integrated circuits),
@@ -616,6 +622,9 @@ are tautologies and few auxiliary variables are produced.
 %called $\breakid$. It exploits some properties from the structure of the generators. On some cases, 
 %a linear number of constraints can break all group. It also tries to add a maximum of binary clauses.
 %These can accelerate the unit propagation and participate to the conflict analysis.
+
+
+
 \subsubsection{Special form of the group} \label{sec:matrix-sbp}
 Some formulas exhibit a specific type of symmetry, called \emph{row (column) interchangeability}. These are
 a subset of variables structured as a two-dimensional matrix. Each row (column) is interchangeable,
@@ -762,7 +771,6 @@ These deductions will reduce the overall tree traversal depth and hence will eve
  consequence of the other.
 \end{definition}
 
-\clearpage
 
 \begin{proposition}[Symmetry propagation]
  \label{prop:symmetry_propagation}
