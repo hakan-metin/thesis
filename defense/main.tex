@@ -951,17 +951,20 @@ The set of symmetries of a formula is a group noted $G$
 \begin{frame}
 \frametitle{Orbit}
 
-Orbit of an assignment $\alpha = G.\alpha = \{ g.\alpha \mid g \in G \}$
+\begin{center}
+	Orbit of an assignment $\alpha = G.\alpha = \{ g.\alpha \mid g \in G \}$
+\end{center}
 
 \vfill
-
+\visible<2->{
+Example:
 \begin{columns}[t]
 	\begin{column}[T]{.3\textwidth}
 		\begin{tabular}{cl}
 			\begin{tikzpicture}
 			\node[point] at (0,0){};
 			\end{tikzpicture} & full assignment \\
-			\visible<2->{
+			\visible<3->{
 				\begin{tikzpicture}
 				\node[class2, scale=0.2] at (0,0){};
 				\end{tikzpicture} & orbit  \\
@@ -974,7 +977,7 @@ Orbit of an assignment $\alpha = G.\alpha = \{ g.\alpha \mid g \in G \}$
 		\tikzstyle{class2}=[ellipse, draw, minimum width=2cm, minimum height=1cm]
 		\tikzstyle{class1}=[ellipse, draw, minimum width=1cm, minimum height=1cm]
 		
-		\visible<1-> {
+		\visible<2-> {
 			\begin{scope}
 			\node[point] (p1) at (0, 0){};
 			%	\node[](a3) at (0, 0.25) {$\alpha_3$};
@@ -1011,7 +1014,7 @@ Orbit of an assignment $\alpha = G.\alpha = \{ g.\alpha \mid g \in G \}$
 			\end{scope}
 		}
 		
-		\visible<2-> {
+		\visible<3-> {
 			\begin{scope}
 			
 			%\node[class2] (c1) at (0.5,0){};
@@ -1050,10 +1053,10 @@ Orbit of an assignment $\alpha = G.\alpha = \{ g.\alpha \mid g \in G \}$
 		\end{tikzpicture}
 	\end{column}
 \end{columns}
-
+}
 \vfill
 
-\visible<3->{
+\visible<4->{
 	All or nothing property:
 	\begin{itemize}
 		\item Either $G.\alpha$ contains no solution
@@ -1512,47 +1515,74 @@ Setup:
 \end{frame}
 %----------------------------------------------------------------------------
 \begin{frame}{Experimental results}
-\begin{block}{}
-\centering 	$\bliss$ gives more generators than $\saucy$
-\end{block}
+%\begin{block}{}
+%\centering 	$\bliss$ gives more generators than $\saucy$
+%\end{block}
 
 \begin{figure}[t]
 \centering
-\caption{Cactus plot  total number of instances}%
-\subfloat[with \saucy]{{\includegraphics[scale=0.3]{images/saucy-result}}}%
-\hfill
-\subfloat[with \bliss]{{\includegraphics[scale=0.3]{images/bliss-result}}}%
+%\caption{Cactus plot  total number of instances}%
+%\subfloat[with \saucy]{{\includegraphics[scale=0.3]{images/saucy-result}}}%
+%\hfill
+%\subfloat[with \bliss]{
+	{\includegraphics[scale=0.3]{images/bliss-result}}
+%}%
 \label{fig:cactus}%
 \end{figure}
-\vspace{-0.3cm}
+
+%\vspace{-0.3cm}
 \begin{table}
-\resizebox{1 \textwidth}{!}{
-	\subfloat{%
-		\begin{tabular}{l|ccccc}
-			&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
-			\midrule
-			PAR-2 sum  & 8\,074\,348 & 7\,770\,434 & \cellcolor{gray!30}\textbf{6\,909\,999} & 7\,229\,700\\
-			PAR-2 avg  & 5\,981 & 5\,756 & \cellcolor{gray!30}\textbf{5\,119} & 5\,355\\
-			
-		\end{tabular}
-	}
-	\hspace{1em}
-	\subfloat{%
-		\begin{tabular}{l|ccccc}
-			&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
-			\hline
-			PAR-2 sum & 8\,074\,348 & 7\,517\,556 & 6\,444\,954 & \cellcolor{gray!30}\textbf{6\,245\,448}\\
-			PAR-2 avg  & 5\,981 & 5\,569 & 4\,774 & \cellcolor{gray!30}\textbf{4\,626}\\
-		\end{tabular}
-	}
-}
-\vspace*{0.1cm}
-\caption{Time comparison}
+%\resizebox{.75\textwidth}{!}{
+%	\subfloat{%
+%		\begin{tabular}{l|ccccc}
+%			&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
+%			\midrule
+%			PAR-2 sum  & 8\,074\,348 & 7\,770\,434 & \cellcolor{gray!30}\textbf{6\,909\,999} & 7\,229\,700\\
+%			PAR-2 avg  & 5\,981 & 5\,756 & \cellcolor{gray!30}\textbf{5\,119} & 5\,355\\
+%			
+%		\end{tabular}
+%	}
+%	\hspace{1em}
+%	\subfloat{%
+
+\begin{tabular}{lcccc}
+	Solver & PAR-2 & ALL & SAT & UNSAT\\
+	\toprule
+	\texttt{MiniSAT} & 2243h & 586 &325 &261 \\
+	\texttt{Shatter} &2088h & 640 & 316 &324 \\
+	\texttt{BreakID} &1790h & 749 &334 &415 \\
+	\texttt{MiniSym} &  \cellcolor{gray!30}\textbf{1735h} &  \cellcolor{gray!30}\textbf{775} & \cellcolor{gray!30}\textbf{336} &  \cellcolor{gray!30}\textbf{439} \\
+	
+\end{tabular}
+
+
+%		\begin{tabular}{l|ccccc}
+%			&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
+%			\hline
+%			PAR-2 sum & 8\,074\,348 & 7\,517\,556 & 6\,444\,954 & \cellcolor{gray!30}\textbf{6\,245\,448}\\
+%			PAR-2 avg  & 5\,981 & 5\,569 & 4\,774 & \cellcolor{gray!30}\textbf{4\,626}\\
+%		\end{tabular}
+%	}
+%}
+%\vspace*{0.1cm}
+%\caption{Time comparison}
 \end{table}
 
 \end{frame}
 
 \begin{frame}{Experimental results (\unsat versus \sat)}
+
+\begin{tabular}{lcccc}
+	Solver & PAR-2 & ALL & SAT & UNSAT\\
+	\toprule
+	\texttt{MiniSAT} & 2243h & 586 &325 &261 \\
+	\texttt{Shatter} &2088h & 640 & 316 &324 \\
+	\texttt{BreakID} &1790h & 749 &334 &415 \\
+    \texttt{MiniSym} &  \cellcolor{gray!30}\textbf{1735h} &  \cellcolor{gray!30}\textbf{775} & \cellcolor{gray!30}\textbf{336} &  \cellcolor{gray!30}\textbf{439} \\
+		
+\end{tabular}
+
+
 \begin{table}[h!]
 \resizebox{1 \textwidth}{!}{
 \subfloat[With \saucy]{%
@@ -1807,7 +1837,6 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 %% ----------------------------------------------------------------------------
 \begin{frame}
 \frametitle{Local symmetries}
-
   \begin{columns}[t]
 	\begin{column}[c]{.4\textwidth}
 		Formula $\leftarrow$ (Symmetries)
@@ -1836,9 +1865,16 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 \end{columns}
 
 \vfill
-	\visible<3>{Compute valid local symmetries on-the-fly at a minimal cost.}
+\visible<3->{Compute valid local symmetries on-the-fly at a minimal cost.}
 
-
+\vfill
+\visible<4>{
+\begin{itemize}
+	\item 	Inductive construction of the valid symmetries
+	\item	During the solving 
+	\item	Ar a minimal cost 
+\end{itemize}
+}
 \end{frame}
 
 %% ----------------------------------------------------------------------------
