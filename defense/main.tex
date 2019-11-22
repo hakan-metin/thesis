@@ -809,7 +809,7 @@ Is it possible to attribute each group to a classroom?
 
 	\frametitle{Symmetry}
 	\normalsize
-	A symmetry (permuation) $g$ is a bijective function (on variables) that leaves the formula invariant.
+	A symmetry (permuation) $g$ is a bijective function (on variables) that leaves the formula invariant
 	\vfill
 	\scriptsize
 	\mbox{$g$ = \bigg(\begin{tabular}{ccccccccc}
@@ -874,10 +874,15 @@ Is it possible to attribute each group to a classroom?
 \end{tikzpicture}
 \vfill
 \normalsize
-	Equi-satisfiability:
-	$$\alpha \models \varphi \Leftrightarrow g.\alpha \models \varphi$$
-	
+The set of symmetries of a formula is a group noted $G$
+%
+%	Equi-satisfiability:
+%	$$\alpha \models \varphi \Leftrightarrow g.\alpha \models \varphi$$	
 \end{frame}
+
+
+
+
 
 \begin{frame}
 	\frametitle{Computing symmetries of a SAT problem}
@@ -940,6 +945,140 @@ Is it possible to attribute each group to a classroom?
 		}
 	\end{tabular}
 	\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Orbit}
+
+Orbit of an assignment $\alpha = G.\alpha = \{ g.\alpha \mid g \in G \}$
+
+\vfill
+
+\begin{columns}[t]
+	\begin{column}[T]{.3\textwidth}
+		\begin{tabular}{cl}
+			\begin{tikzpicture}
+			\node[point] at (0,0){};
+			\end{tikzpicture} & full assignment \\
+			\visible<2->{
+				\begin{tikzpicture}
+				\node[class2, scale=0.2] at (0,0){};
+				\end{tikzpicture} & orbit  \\
+			}
+		\end{tabular}
+	\end{column}
+	\begin{column}[T]{0.6\textwidth}
+		\begin{tikzpicture}
+		
+		\tikzstyle{class2}=[ellipse, draw, minimum width=2cm, minimum height=1cm]
+		\tikzstyle{class1}=[ellipse, draw, minimum width=1cm, minimum height=1cm]
+		
+		\visible<1-> {
+			\begin{scope}
+			\node[point] (p1) at (0, 0){};
+			%	\node[](a3) at (0, 0.25) {$\alpha_3$};
+			
+			\node[point] (p2) at (1, 0){};
+			%	\node[](a5) at (1, 0.25) {$\alpha_5$};
+			
+			\node[point] (p3) at (-2, -1){};
+			%	\node[](a6) at (-2, -0.75) {$\alpha_6$};
+			
+			\node[point] (p4) at (-3, -1){};
+			%	\node[](a4) at (-3, -0.75) {$\alpha_4$};
+			
+			\node[point] (p5) at (-1.7, 0.5){};
+			%	\node[](a1) at (-1.7, 0.75) {$\alpha_1$};
+			
+			\node[point] (p6) at (-2, 1.5){};
+			
+			\node[point] (p6) at (-1.5, 1.69){};
+			
+			\node[point] (p6) at (-1.15, 1.12){};
+			
+			\node[point] (p6) at (-2, 2.1){};
+			%	\node[](a2) at (-2, 1.75) {$\alpha_2$};
+			
+			\node[point] (p7) at (0.5, -1.5){};
+			
+			\node[point] (p7) at (0.9, -0.87){};
+			%	\node[](a7) at (0.5, -1.25) {$\alpha_7$};
+			
+			\node[point] (p8) at (-1, 2){};
+			%	\node[](a8) at (-1, 2.25) {$\alpha_8$};
+			
+			\end{scope}
+		}
+		
+		\visible<2-> {
+			\begin{scope}
+			
+			%\node[class2] (c1) at (0.5,0){};
+			\node[class2] (c2) at (-2.5, -1){};
+			
+			\node[ellipse, draw, minimum width=2cm, minimum height=2.6cm] (c3) at (-1.5, 1.5) {};
+			\node[ellipse, draw, minimum width=2cm, minimum height=2.75cm] (c4) at (0.5, -0.75) {};
+			%\node[class1] (c3) at (-1.7, 0.5){};ellipse, draw, minimum width=1cm, minimum height=1cm
+			%\node[class1] (c4) at (-2, 1.5){};
+			%\node[class1] (c5) at (0.5, -1.5){};
+			%\node[class1] (c6) at (-1, 2){};
+			\end{scope}
+		}
+		%	\visible<3> {
+		%		\begin{scope}
+		%		\node[point+] (p1) at (0, 0){};
+		%		\node[point] (p2) at (1, 0){};
+		%		\node[point] (p3) at (-2, -1){};
+		%		\node[point+] (p4) at (-3, -1){};
+		%		
+		%		\node[point+] (p5) at (-1.7, 0.5){};
+		%		\node[point+] (p6) at (-2, 1.5){};
+		%		\node[point+] (p7) at (0.5, -1.5){};
+		%		\node[point+] (p8) at (-1, 2){};
+		%		
+		%		\node[class2] (c1) at (0.5,0){};
+		%		\node[class2] (c2) at (-2.5, -1){};
+		%		
+		%		\node[class1] (c3) at (-1.7, 0.5){};
+		%		\node[class1] (c4) at (-2, 1.5){};
+		%		\node[class1] (c5) at (0.5, -1.5){};
+		%		\node[class1] (c6) at (-1, 2){};
+		%		\end{scope}
+		%	}
+		%	
+		\end{tikzpicture}
+	\end{column}
+\end{columns}
+
+\vfill
+
+\visible<3->{
+	All or nothing property:
+	\begin{itemize}
+		\item Either $G.\alpha$ contains no solution
+		\item Or all elements of $G.\alpha$ are solutions
+	\end{itemize}
+}
+%\textbf{Legend:}\\
+%\begin{tabular}{cl}
+%\begin{tikzpicture}
+%\node[point] at (0,0){};
+%\end{tikzpicture} & full assignment \\
+%\visible<2->{
+%	\begin{tikzpicture}
+%	\node[class2, scale=0.2] at (0,0){};
+%	\end{tikzpicture} & orbits } \\
+%\visible<3->{
+%	\begin{tikzpicture}
+%	\node[point+] at (0,0){};
+%	\end{tikzpicture} & representant of the orbit\\
+%}
+%\end{tabular}
+
+
+\end{frame}
+
 
 %% ----------------------------------------------------------------------------
 \begin{frame}
