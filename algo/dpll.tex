@@ -13,7 +13,7 @@
 	{	
 		$\varphi, \alpha \gets$ \unitPropagation{$\varphi, \alpha$}\;
 	\label{algo:dpll:unit}
-		\If{$\{\} \in \varphi$}{\Return \false \tcp*{Conflict}}	 \label{algo:dpll:unsatbranch}
+		\If{$\{\} \in \varphi$}{\Return \unsat \tcp*{Conflict}}	 \label{algo:dpll:unsatbranch}
 		
 		\If{$\varphi = \{\}$}{\Return $\alpha$ \tcp*{$\varphi$ is $\sat$}}
 		
