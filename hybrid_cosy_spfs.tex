@@ -37,7 +37,7 @@ this would be an intractable solution generating a huge complexity.
 A  computationally less expensive solution would be to keep track of all globally unbroken symmetries as the clauses of $\varphi_e$ are injected during the solving process: considering formula $\varphi$ and 
 a set of esbps $\varphi_e$ then the set of global unbroken symmetries is:
 $$GUS = \underset{\omega_e \in \varphi_e}{\bigcap}Stab(\omega_e) \cap G_{\varphi}$$
- Where  $Stab(\omega_e)=\{g \in \Group \mid
+ where  $Stab(\omega_e)=\{g \in \Group \mid
 \omega_e=g.\omega_e\}$ is the stabilizer set of $\omega_e$ and $G_{\varphi}$ is the set of symmetries of $\varphi$. 
 Since $\varphi \cup \varphi_e  \models \varphi_d$, then $GUS$ is a valid set of symmetries for $\varphi \cup \varphi_e \cup \varphi_d$.
 Then, (1) each time a new set of esbp clauses is added, its stabilizer will be used to reduce $GUS$;\label{prop:one}

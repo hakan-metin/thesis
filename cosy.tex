@@ -15,7 +15,7 @@ will not be that interesting and its effectiveness depends heavily on the
 heuristically chosen symmetries \cite{biere2009handbook}. Besides, these approaches
 are preprocessors, so their combination with other techniques, such as
 \emph{symmetry propagation}~\cite{Devriendt12}, can be very hard. Also, tuning
-their parameters during the solving turns out to be tough. For all
+their parameters during  solving time turns out to be tough. For all
 these reasons, some classes of SAT problems cannot be solved easily yet despite
 the presence of symmetries.
 To handle these issues, we propose a new
@@ -59,7 +59,7 @@ permutation during the solving. Let us, first, recall that the \emph{support}
 \end{proposition}
 
 
-When $g$ is a \textit{reducer} of $\alpha$ we can define a predicate that contradicts $\alpha$ and yet preserves the satisfiability of the formula. Such a predicate will be used to discard $\alpha$, and all its extensions, from a further visit and hence pruning the search tree.
+When $g$ is a \textit{reducer} of $\alpha$ we can define a predicate that contradicts $\alpha$ and yet preserves the satisfiability of the formula. Such a predicate will be used to discard $\alpha$, and all its extensions, from a further visit and hence prune the search tree.
 \begin{definition}[Effective Symmetry Breaking Predicate]
  \label{def:esbp}
  Let $\alpha \in \Assignments(\Vars)$, and $g \in \Group_{\Vars}$.
@@ -127,7 +127,7 @@ injection of an \emph{esbp} computed on the fly.
 \Cref{algorithm:cdcl_cosy} explains how to extend the CDCL algorithm described in \Cref{sec:cdcl}  with a \emph{symmetry controller} component.% which guides the behavior of CDCL algorithm depending on the status of symmetries.
 \input{algo/cdcl_cosy}
  
- The symmetry controller is initially given a set of symmetries $G$ \footnote{The generators of the group of symmetries.}. It observes the behavior of the SAT engine and updates its internal data according to the current assignment, to keep track of the status of the symmetries. This observation is \emph{incremental}: whenever a literal is assigned or canceled, the symmetry controller updates the status of all the symmetries. This corresponds to \cref{algo:cdcl_sym:notify,algo:cdcl_sym:cancel} of Algorithm~\ref{algorithm:cdcl_cosy}. When the controller detects that the
+ The symmetry controller is initially given a set of symmetries $G$, the generators of the group of symmetries. It observes the behavior of the SAT engine and updates its internal data according to the current assignment, to keep track of the status of the symmetries. This observation is \emph{incremental}: whenever a literal is assigned or canceled, the symmetry controller updates the status of all the symmetries. This corresponds to \cref{algo:cdcl_sym:notify,algo:cdcl_sym:cancel} of Algorithm~\ref{algorithm:cdcl_cosy}. When the controller detects that the
  current assignment cannot be a \emph{lex-leader} (\cref{algo:cdcl_sym:not_minimal}), it generates the
  corresponding \emph{esbp} (\cref{algo:cdcl_sym:gen_esbp}).
  
@@ -142,7 +142,7 @@ injection of an \emph{esbp} computed on the fly.
  by permutations. Initially, $\track[g] = \min_{\prec}(\support_g)$ for all $g \in G$ according to the ordering relation and all
  permutations are marked \textit{active}. 
  
- For each permutation, $g$, the symmetry controller keeps track of the smallest
+ For each permutation $g$, the symmetry controller keeps track of the smallest
  variable $\track[g]$ in the support of $g$ such that $\track[g]$ and
  $g^{-1}(\track[g])$ do not have the same value in the current assignment. If
  one of the two variables is not assigned, they are considered  to have different values.
@@ -230,7 +230,7 @@ the effective symmetry-breaking predicate of Proposition~\ref{prop:eta}. This wi
  
  
  \subsection{Illustrative example}
-  Let us illustrate the previous concepts and algorithms on a simple example. Let the ordering relation $x_1 \prec x_2 \prec x_3 \prec x_4
+  Let us illustrate the previous concepts and algorithms on a simple example. Let the ordering relation be $x_1 \prec x_2 \prec x_3 \prec x_4
  \prec x_5 \prec x_6\ \mid \false < \true$, and two generators:\\
  $G = \{
   g_1 = (x_1 \enskip x_2)(x_4 \enskip x_5),g_2 = (x_1 \enskip x_4)(x_2 \enskip x_5)(x_3 \enskip x_6)\}$
@@ -337,8 +337,8 @@ We compare \cdclsym{} using the occurrence order, value symmetries, and without
 \end{itemize}
 
 Each $\sat$ solution was successfully checked against the initial CNF. For $\unsat$
-situations, there is no way to provide an $\unsat\,$ certificate in presence of
-symmetries. Nevertheless, we checked our results were also computed by the
+situations, there is actually currently no way to provide an $\unsat\,$ certificate in presence of
+symmetries, no checker take into account the presence of sbps. Nevertheless, we checked our results were also computed by the
 other measured tools. Unfortunately, out of the 1350 benchmarked formulas, we
 have no proof or evidence for the 15 $\unsat$ formulas computed by $\cdclsym{}$
 only.
@@ -361,6 +361,8 @@ typeset in bold and grayed out. Table~\ref{tab:par2} shows the cumulative and
 average PAR-2 times of the evaluated tools. PAR-2 measure is used in SAT competition,
 it corresponds to the sum of cumulative time of solved instances with twice the
 timeout of unsolved instances.
+ 
+ \clearpage
  
 \begin{table}[!htbp]
  \resizebox{1 \textwidth}{!}{
@@ -609,7 +611,7 @@ benchmark.
 \end{table}
 
 \section{Some optimization}
-The usage of symmetry property dynamically allows the solver to adapt classical heuristics and symmetry based one on-the-fly.
+Dynamic usage of symmetry properties allows the solver to adapt classical heuristics and symmetry based one on-the-fly.
 For example, some restart heuristics are based on the number of conflicts, taking into account injection of esbp may impact
 the performance of the overall SAT solver. 
 \subsection{Adapt heuristics dynamically}
@@ -644,7 +646,7 @@ a scatter plot that compares the same variable order with $\true < \false$ and $
 On the left, we compare the computation time of the solver. 
 As we can observe \texttt{MiniSymTF} is more efficient on some $\unsat$ instances (red points in the figure).
 The right figure shows the number of generated esbp by solvers in a log scale. On the large majority of instances, they generate 
-approximately the same number of esbps. But the difference can an order of magnitude higher. This can be due to the time of
+approximately the same number of esbps. But the difference can be an order of magnitude higher. This can be due to the time of
 execution of the solver and/or the impact of the sign of the constraints.
 
 \clearpage
@@ -672,7 +674,7 @@ injecting \textit{effective symmetry breaking} during the search.
 This overcomes the main problem of the static approaches, i.e. that they
 generate many \textit{sbps} that are not effective in the solving (size of the
 generated formulas, overburden of the unit propagation procedure, etc.).
-The idea we brought it is to break symmetries \emph{on-the-fly}: when the current
+The idea we brought is to break symmetries \emph{on-the-fly}: when the current
 partial assignment cannot be a prefix of a \textit{lex-leader} (of an orbit),
 an \textit{esbp} that prunes this forbidden assignment and all its extensions is generated. 
 This approach is implemented in the C++ library called \libdsb{}. It is an

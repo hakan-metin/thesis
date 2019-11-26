@@ -2,7 +2,7 @@
 {\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.1.1}Algorithm}{\reset@font\mtcSSfont 46}{subsection.4.1.1}}
 {\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {4.1.1.1}Symmetries Status Tracking.}{\reset@font\mtcSSSfont 48}{subsubsection.4.1.1.1}}
 {\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {4.1.1.2}Generation of the \emph {esbp}.}{\reset@font\mtcSSSfont 48}{subsubsection.4.1.1.2}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.1.2}Illustrative example}{\reset@font\mtcSSfont 50}{subsection.4.1.2}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.1.2}Illustrative example}{\reset@font\mtcSSfont 48}{subsection.4.1.2}}
 {\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {4.2}Implementation and Evaluation}{\reset@font\mtcSfont 50}{section.4.2}}
 {\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.2.1}\textsf {cosy}{}: an efficient implementation of the symmetry controller}{\reset@font\mtcSSfont 50}{subsection.4.2.1}}
 {\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode \numberline {4.2.1.1}Heuristics and Options.}{\reset@font\mtcSSSfont 50}{subsubsection.4.2.1.1}}

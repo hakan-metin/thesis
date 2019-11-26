@@ -900,11 +900,11 @@ Dynamic symmetry breaking approaches exploit the symmetry property of the formul
 It avoids the creation, as in static symmetry breaking, of potentially useless clauses that increase
 the size of the original formula.
 Different approaches exist, one uses k-branching that allows to visit only lex-leader assignment but can be applied only in groups of particular form.
-Others use the symmetry to propagate symmetrical facts.
+Others use symmetries to propagate symmetrical facts.
 Mainly, they transform decisions (guesses) into propagations (deductions), that accelerate the tree traversal and may improve the overall performance of the solver. 
 Moreover, as they are integrated directly to the search engine, solvers can adapt their heuristics dynamically, like for
 example the restart.
-However, the integration of dynamic approach must be done carefully, CDCL algorithm is a highly optimized and 
+However, the integration of a dynamic approach must be done carefully, since the CDCL algorithm is a highly optimized and 
 fine-tuned search engine. The integration of symmetry breaking can slow down its core engine.
 
 %Moreover, the computation of \textit{local symmetries} becomes possible. Effectively, some symmetry can 
