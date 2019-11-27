@@ -55,7 +55,7 @@
 \frametitle{Exploitation of dynamic symmetries for solving SAT problems}
 %\frametitle{Exploitation des symétries dynamiques pour la résolution des problèmes SAT}
 \framesubtitle{Thèse de doctorat de Sorbonne Université}
- 
+
    Hakan \textsc{Metin}\\
   \vfill
   %\begin{center}
@@ -66,7 +66,7 @@
     	\textsc{Pascal \textsc{Fontaine}}  &  Maître de conférences, Université de Liège\\
     	\vspace{1em}%
     	\textsc{Laure Petrucci}  & Professeur, Université Paris 13\\
-    	
+
  	    \textbf{Reviewers:} & \\
    		\textsc{Bart Bogaerts} & Assistant Professor, Vrije Universiteit Brussel\\
     	\textsc{Jean-Michel	Couvreur}  & Professeur, Université d'Orléans\\
@@ -74,8 +74,8 @@
     	\textsc{Emmanuelle Encrenaz}  & Maître de conférences, Sorbonne Université\\
 
 
-		
-    	
+
+
  	    \textbf{Directors:} & \\
     	\textsc{Souheib Baarir}  & Maître de conférences, Université Paris Nanterre\\
     	\textsc{Fabrice Kordon}  & Professeur, Sorbonne Université\\
@@ -126,7 +126,7 @@ Boolean SATisfiability is widely used in different domains
 %		\item[] \phantom{Dynamic symmetry breaking}
 %	\end{itemize}
 %\vspace{5pt}
-%	\item \textcolor{UPMCEngagementBlueB}{Contribution and results} 
+%	\item \textcolor{UPMCEngagementBlueB}{Contribution and results}
 %	\begin{itemize}
 %		\item[] \phantom{CDCL [Sym]}
 %		\item[] \phantom{Combination of different approaches}
@@ -315,8 +315,8 @@ Is it possible to attribute each group to a classroom?\\
 				]
 \tikzstyle{result} = [draw, minimum width=2.5cm, minimum height=1cm]
 
-\node[box] (hlp) {High level problem};    
-\node[box] (input) at ($(hlp) + (0pt, -50pt)$){Logic formula};    
+\node[box] (hlp) {High level problem};
+\node[box] (input) at ($(hlp) + (0pt, -50pt)$){Logic formula};
 
 \node[box, line width=0.4mm, minimum width=10cm,minimum height=4.5cm,label={[fill=white,xshift=4.0cm, yshift=-0.3cm]SAT}]  at (0pt, -100pt){};
 %\node<2->[draw, ellipse] (cnf) at ($(input) + (0pt, -10pt)$) {\scriptsize CNF};
@@ -377,7 +377,7 @@ $\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{\text{Clause with literals } x_1, x_
 			\item Clause learning
 		\end{itemize}
 	\end{itemize}
-	
+
 \end{frame}
 %% ----------------------------------------------------------------------------
 %\begin{frame}
@@ -387,7 +387,7 @@ $\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{\text{Clause with literals } x_1, x_
 %
 %\begin{tikzpicture}[scale=1,every node/.style={scale=0.6,fill=white, font=\sffamily}, align=center]
 %	% Specification of nodes (position, etc.)
-%	\tikzset{%	
+%	\tikzset{%
 %		>={Latex[width=2mm,length=2mm]},
 %		% Specifications for style of nodes:
 %		base/.style = {rectangle, rounded corners, draw=black,
@@ -415,7 +415,7 @@ $\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{\text{Clause with literals } x_1, x_
 %	\node (isend) [question] at ($(confanalyse) + (90pt, 0)$) {is level\\zero?};
 %	\node (end) [unsat] at ($(isend) + (90pt, 0)$) {$unsatiasfiable$};
 %	\node (ends) [sat] at ($(isfin.north east) + (+90pt, 0)$){$satisfiable$};
-%	
+%
 %	\draw[line]     (sdec) -- (dec);
 %	\draw[line]     (dec) -- (prop);
 %	\draw[line]     (prop) -- (conf);
@@ -426,7 +426,7 @@ $\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{\text{Clause with literals } x_1, x_
 %	\draw[line]     (isend) -- node {yes}(end);
 %	\draw[line]     (isfin.north east) -- node {yes}(ends);
 %	\draw[line]     (learn) -- (prop);
-%	\draw[line]     (isend) -- node [] {no}(learn);	
+%	\draw[line]     (isend) -- node [] {no}(learn);
 %	\end{tikzpicture}
 %
 %\end{frame}
@@ -435,7 +435,7 @@ $\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{\text{Clause with literals } x_1, x_
 
 
 \begin{frame}
-\frametitle{CDCL in action}	
+\frametitle{CDCL in action}
 
  \begin{columns}[t]
 	\begin{column}[T]{.6\textwidth}
@@ -487,7 +487,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \node[unsat](lrll) at (-\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
 \node[unsat](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
 \node[unsat](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-\node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
+\node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {};
 
 \node[unsat](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
 \node[unsat](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {};
@@ -496,7 +496,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \node[unsat](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
 \node[sat,onslide={<9->,opacity=1}](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
 %\node[unsat](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-%\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
+%\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {};
 
 
 \draw[link,onslide={<2->,opacity=1}] (t) ->  node [trmid, onslide={<2->,mid}] {$0$} (l);
@@ -535,7 +535,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \end{tikzpicture}
 \end{column}
 \begin{column}[T]{.4\textwidth}
-	
+
 	\only<1>{
 		\begin{itemize}
 			\item[] $\omega_1 = \{x_1, x_2, x_3, x_4\}$
@@ -566,7 +566,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 			\item[] $\omega_6 = \{x_3, x_4\}$
 		\end{itemize}
 	}
-	
+
 	\only<4>{
 		\begin{itemize}
 			\item[] $\textcolor{green}{\omega_1} = \{\textcolor{green}{x_1}, x_2, x_3,
@@ -655,7 +655,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 		\begin{itemize}
 			\item[] $\textcolor{green}{\omega_8} = \{\textcolor{green}{x_2}\}$
 		\end{itemize}
-	}	
+	}
 \end{column}
 \end{columns}
 
@@ -667,7 +667,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 %\begin{frame}
 %	\begin{tikzpicture}[every node/.style={scale=0.59}, scale=0.59]
 %	\node[text width=3cm] (a) {
-%		$\omega_1 = \{\cred{x_1}, x_2, x_3\}$ 
+%		$\omega_1 = \{\cred{x_1}, x_2, x_3\}$
 %		$\omega_2 = \{x_4, x_5, x_6\}$
 %		$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \neg x_5\}$
 %		$\omega_4 = \{\neg x_2, \neg x_4\}$
@@ -676,7 +676,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 %	};
 %
 %	\node[text width=3cm] (b) at ($(a) + (3.5, 0)$) {
-%		$\omega_1 = \{\cred{x_1}, x_2, x_3\}$ 
+%		$\omega_1 = \{\cred{x_1}, x_2, x_3\}$
 %		$\omega_2 = \{x_4, x_5, \cred{x_6\}}$
 %		$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \neg x_5\}$
 %		$\omega_4 = \{\neg x_2, \neg x_4\}$
@@ -684,9 +684,9 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 %		$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
 %	};
 %
-%	
+%
 %	\node[text width=3cm] (c) at ($(b) + (3.5, 0)$) {
-%		$\omega_1 = \{\cred{x_1}, x_2, x_3\}$ 
+%		$\omega_1 = \{\cred{x_1}, x_2, x_3\}$
 %		$\omega_2 = \{\cprop{x_4}, \cred{x_5}, \cred{x_6\}}$
 %		$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \cgreen{\neg x_5\}}$
 %		$\omega_4 = \{\neg x_2, \neg x_4\}$
@@ -694,9 +694,9 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 %		$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
 %	};
 %
-%	
+%
 %	\node[text width=3cm] (d) at ($(c) + (3.5, 0)$) {
-%		$\omega_1 = \{\cred{x_1}, x_2, x_3\}$ 
+%		$\omega_1 = \{\cred{x_1}, x_2, x_3\}$
 %		$\cgreen{\omega_2} = \{\cgreen{x_4}, \cred{x_5}, \cred{x_6\}}$
 %		$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \cgreen{\neg x_5\}}$
 %		$\omega_4 = \{\cprop{\neg x_2}, \cred{\neg x_4}\}$
@@ -706,7 +706,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 %
 %
 %	\node[text width=3cm] (e) at ($(d) + (3.5, 0)$) {
-%		$\omega_1 = \{\cred{x_1}, \cred{x_2}, \cblue{x_3}\}$ 
+%		$\omega_1 = \{\cred{x_1}, \cred{x_2}, \cblue{x_3}\}$
 %		$\cgreen{\omega_2} = \{\cgreen{x_4}, \cred{x_5}, \cred{x_6\}}$
 %		$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \cgreen{\neg x_5\}}$
 %		$\cgreen{\omega_4} = \{\cgreen{\neg x_2}, \cred{\neg x_4}\}$
@@ -742,27 +742,27 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 	\tikzstyle{line} = [<-, line width=0.5mm];
 	\path[line]<2> (r1) edge  (g1.south);
 	\path[line]<2> (r2) edge  (g2.south);
-	
+
 	\path[line]<3> (r1) edge  (g2.south);
 	\path[line]<3> (r2) edge  (g1.south);
-	
-	
+
+
 %	\path[line,color=blue]<4-> (r1.west) edge  (g1.south);
 %	\path[line,color=blue]<4-> (r2) edge  (g3.south);
-%	
+%
 %	\path[line,color=green]<4-> (r1) edge  (g3.south);
 %	\path[line,color=gren]<4> (r2.south west) edge  (g1.south);
-%	
+%
 %	\path[line,color=red]<4-> (r1.east) edge  (g2.south);
 %	\path[line,color=red]<4-> (r2.east) edge  (g3.south);
-%	
+%
 %	\path[line,color=purple]<4-> (r1) edge  (g3.south);
 %	\path[line,color=purple]<4-> (r2) edge  (g2.south);
-	
+
 	\visible<5>{
 	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (-1.75, 4.75) {};
   	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (1.8, 4.75) {};
-  	
+
 	\node[draw, minimum width=3.5cm, minimum height=1.6cm,line width=0.5mm, color=blue](a) at (-3.5, 1.5) {};
 	\node[draw, minimum width=3.1cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (0.25, 1.5) {};
 	\node[draw, minimum width=3.5cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (3.9, 1.5) {};
@@ -782,28 +782,28 @@ Is it possible to attribute each group to a classroom?
 
 %% ----------------------------------------------------------------------------
 
-\begin{frame}
-	\frametitle{Outline}
-	\begin{enumerate}
-		\item \textcolor{UPMCEngagementBlueB}{SAT overview}
-		\begin{itemize}
-			\item[] SAT basics
-			\item[] SAT and symmetries
-		\end{itemize}
-		\vspace{5pt}
-		\item \textcolor{UPMCEngagementBlueB}{Existing approaches}
-		\begin{itemize}
-			\item[] Static symmetry breaking
-			\item[] Dynamic symmetry breaking
-		\end{itemize}
-		\vspace{5pt}
-		\item \textcolor{UPMCEngagementBlueB}{Contribution and results} 
-		\begin{itemize}
-			\item[] \phantom{CDCL [Sym]}
-			\item[] \phantom{Combination of different approaches}
-		\end{itemize}
-	\end{enumerate}
-\end{frame}
+%\begin{frame}
+%	\frametitle{Outline}
+%	\begin{enumerate}
+%		\item \textcolor{UPMCEngagementBlueB}{SAT overview}
+%		\begin{itemize}
+%			\item[] SAT basics
+%			\item[] SAT and symmetries
+%		\end{itemize}
+%		\vspace{5pt}
+%		\item \textcolor{UPMCEngagementBlueB}{Existing approaches}
+%		\begin{itemize}
+%			\item[] Static symmetry breaking
+%			\item[] Dynamic symmetry breaking
+%		\end{itemize}
+%		\vspace{5pt}
+%		\item \textcolor{UPMCEngagementBlueB}{Contribution and results}
+%		\begin{itemize}
+%			\item[] \phantom{CDCL [Sym]}
+%			\item[] \phantom{Combination of different approaches}
+%		\end{itemize}
+%	\end{enumerate}
+%\end{frame}
 
 %% ----------------------------------------------------------------------------
 \tikzstyle{every picture}+=[remember picture]
@@ -817,7 +817,7 @@ Is it possible to attribute each group to a classroom?
 	\scriptsize
 	\mbox{$g$ = \bigg(\begin{tabular}{ccccccccc}
 		$x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & $x_7$ & $x_8$ & $x_9$\\
-		$x_2$ & $x_1$ & $x_3$ & $x_5$ & $x_4$ & $x_6$ & $x_8$ & $x_7$ & $x_9$ 
+		$x_2$ & $x_1$ & $x_3$ & $x_5$ & $x_4$ & $x_6$ & $x_8$ & $x_7$ & $x_9$
 	\end{tabular}\bigg)}\hfill $\rightarrow$\hfill
 	$(x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
 	%(\neg x_1 \neg x_2)(\neg x_4 \neg x_5)(\neg x_7 \neg x_8)$\\
@@ -825,7 +825,7 @@ Is it possible to attribute each group to a classroom?
 	 \begin{columns}[t]
 		\begin{column}[T]{.3\textwidth}
 		\tiny
-		\begin{itemize} 
+		\begin{itemize}
 		\item[] $\omega_{1} = \{x_1  ,  x_2  ,  x_3\} \tikz[baseline]{\node[anchor=base] (a1){};}$
 		\item[] $\omega_{2} = \{x_4  ,  x_5  ,  x_6\} \tikz[baseline]{\node[anchor=base] (a2){};}$
 		\item[] $\omega_{3} = \{x_7  ,  x_8  ,  x_9\} \tikz[baseline]{\node[anchor=base] (a3){};}$
@@ -842,7 +842,7 @@ Is it possible to attribute each group to a classroom?
 		\end{column}
 		\begin{column}[T]{.3\textwidth}
 		\tiny
-		\begin{itemize} 
+		\begin{itemize}
 		\item[] $\tikz[baseline]{\node[anchor=base] (b1){};} \omega_{1} = \{x_2  ,  x_1  ,  x_3\}$
 		\item[] $\tikz[baseline]{\node[anchor=base] (b2){};} \omega_{2} = \{x_5  ,  x_4  ,  x_6\} $
 		\item[] $\tikz[baseline]{\node[anchor=base] (b3){};} \omega_{3} = \{x_8  ,  x_7  ,  x_9\} $
@@ -877,10 +877,10 @@ Is it possible to attribute each group to a classroom?
 \end{tikzpicture}
 \vfill
 \normalsize
-The set of symmetries of a formula is a group noted $G$
+\centering The set of symmetries of a formula is a group noted $G$
 %
 %	Equi-satisfiability:
-%	$$\alpha \models \varphi \Leftrightarrow g.\alpha \models \varphi$$	
+%	$$\alpha \models \varphi \Leftrightarrow g.\alpha \models \varphi$$
 \end{frame}
 
 
@@ -890,7 +890,7 @@ The set of symmetries of a formula is a group noted $G$
 \begin{frame}
 	\frametitle{Computing symmetries of a SAT problem}
 	% \setlength{\tabcolsep}{35pt}
-	
+
 	\newcolumntype{C}{ >{\centering\arraybackslash} m{5cm} }
 	\newcolumntype{D}{ >{\centering\arraybackslash} m{1cm} }
 	\begin{tabular}{CC}
@@ -911,33 +911,33 @@ The set of symmetries of a formula is a group noted $G$
 		\end{tabular}}\\
 		\only<2> {
 			$\Downarrow$ & $\Downarrow$  \\
-			
-			colored graph & 
+
+			colored graph &
 			\includegraphics[scale=0.1]{images/graph}\\ \\
 		}
-		
+
 		\visible<3-> {
-			
+
 			$\Downarrow$ & $\Downarrow$  \\
-			
-			colored graph & 
+
+			colored graph &
 			\includegraphics[scale=0.05]{images/graph}\\ \\
 		}
-	
-	
+
+
 		\visible<3-> {
 			$\|$ & $\|$  \\
-			graph automorphism & 
-			\small{(\texttt{bliss},	\texttt{saucy} ,$\cdots$)
-			} 
+			graph automorphism &
+			\small{(\texttt{bliss},	\texttt{saucy}, $\ldots$)
+			}
 			\\
 		}
-		
-		
+
+
 		\visible<4-> {
 			$\Downarrow$ & $\Downarrow$  \\
-			
-			set of symmetries & 
+
+			set of symmetries &
 			\scriptsize
 			\begin{tabular}{c}
 				$g_1 = (x_2 \enspace x_3)(x_5 \enspace x_6)(x_8 \enspace x_9)$\\
@@ -976,53 +976,53 @@ Example:
 	\end{column}
 	\begin{column}[T]{0.6\textwidth}
 		\begin{tikzpicture}
-		
+
 		\tikzstyle{class2}=[ellipse, draw, minimum width=2cm, minimum height=1cm]
 		\tikzstyle{class1}=[ellipse, draw, minimum width=1cm, minimum height=1cm]
-		
+
 		\visible<2-> {
 			\begin{scope}
 			\node[point] (p1) at (0, 0){};
 			%	\node[](a3) at (0, 0.25) {$\alpha_3$};
-			
+
 			\node[point] (p2) at (1, 0){};
 			%	\node[](a5) at (1, 0.25) {$\alpha_5$};
-			
+
 			\node[point] (p3) at (-2, -1){};
 			%	\node[](a6) at (-2, -0.75) {$\alpha_6$};
-			
+
 			\node[point] (p4) at (-3, -1){};
 			%	\node[](a4) at (-3, -0.75) {$\alpha_4$};
-			
+
 			\node[point] (p5) at (-1.7, 0.5){};
 			%	\node[](a1) at (-1.7, 0.75) {$\alpha_1$};
-			
+
 			\node[point] (p6) at (-2, 1.5){};
-			
+
 			\node[point] (p6) at (-1.5, 1.69){};
-			
+
 			\node[point] (p6) at (-1.15, 1.12){};
-			
+
 			\node[point] (p6) at (-2, 2.1){};
 			%	\node[](a2) at (-2, 1.75) {$\alpha_2$};
-			
+
 			\node[point] (p7) at (0.5, -1.5){};
-			
+
 			\node[point] (p7) at (0.9, -0.87){};
 			%	\node[](a7) at (0.5, -1.25) {$\alpha_7$};
-			
+
 			\node[point] (p8) at (-1, 2){};
 			%	\node[](a8) at (-1, 2.25) {$\alpha_8$};
-			
+
 			\end{scope}
 		}
-		
+
 		\visible<3-> {
 			\begin{scope}
-			
+
 			%\node[class2] (c1) at (0.5,0){};
 			\node[class2] (c2) at (-2.5, -1){};
-			
+
 			\node[ellipse, draw, minimum width=2cm, minimum height=2.6cm] (c3) at (-1.5, 1.5) {};
 			\node[ellipse, draw, minimum width=2cm, minimum height=2.75cm] (c4) at (0.5, -0.75) {};
 			%\node[class1] (c3) at (-1.7, 0.5){};ellipse, draw, minimum width=1cm, minimum height=1cm
@@ -1037,22 +1037,22 @@ Example:
 		%		\node[point] (p2) at (1, 0){};
 		%		\node[point] (p3) at (-2, -1){};
 		%		\node[point+] (p4) at (-3, -1){};
-		%		
+		%
 		%		\node[point+] (p5) at (-1.7, 0.5){};
 		%		\node[point+] (p6) at (-2, 1.5){};
 		%		\node[point+] (p7) at (0.5, -1.5){};
 		%		\node[point+] (p8) at (-1, 2){};
-		%		
+		%
 		%		\node[class2] (c1) at (0.5,0){};
 		%		\node[class2] (c2) at (-2.5, -1){};
-		%		
+		%
 		%		\node[class1] (c3) at (-1.7, 0.5){};
 		%		\node[class1] (c4) at (-2, 1.5){};
 		%		\node[class1] (c5) at (0.5, -1.5){};
 		%		\node[class1] (c6) at (-1, 2){};
 		%		\end{scope}
 		%	}
-		%	
+		%
 		\end{tikzpicture}
 	\end{column}
 \end{columns}
@@ -1060,7 +1060,7 @@ Example:
 \vfill
 
 \visible<4->{
-	All or nothing property:
+	Equivalence relation with respect to SAT:
 	\begin{itemize}
 		\item Either $G.\alpha$ contains no solution
 		\item Or all elements of $G.\alpha$ are solutions
@@ -1093,7 +1093,7 @@ Example:
 \only<2>{$g = \textcolor{blue}{(x_1 \enskip x_2)}(x_4 \enskip x_5)(x_7 \enskip x_8) $\\}
 	\centering
 	\begin{tikzpicture}[scale=1, every node/.style={scale=1}]
-	
+
 	\newcommand{\x}{2.07}
 	\newcommand{\y}{-1.5}
 	\tikzstyle{highlight} = [line width=0.3mm, color=blue]
@@ -1104,22 +1104,22 @@ Example:
 	\tikzstyle{transparent} = [nearly transparent]
 	\tikzstyle{mid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=1,font=\scriptsize]
 	\tikzstyle{trmid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=0.3,font=\scriptsize]
-	
+
 	% layer 1
 	\node[decision](t) at (0,0) {$x_1$};
-	
+
 	% layer 2
 	\node[decision](l) at (-\x,\y) {$x_2$};
 	\node[decision](r) at (\x,\y) {$x_2$};
-	
+
 	\visible<2>{\node[highlight, scale=2](equiv) at (0,\y) {$\leftrightarrow$};}
-	
+
 	% layer 3
 	\node[decision](ll) at (-\x-\x*0.5,2*\y) {$x_4$};
 	\node[decision](lr) at (-\x+\x*0.5,2*\y) {$x_4$};
 	\node[decision,onslide={<2>, transparent}](rl) at (\x-\x*0.5,2*\y) {$x_4$};
 	\node[decision](rr) at (\x+\x*0.5,2*\y) {$x_4$};
-	
+
 	% layer 4
 	\node[decision](lll) at (-\x-\x*0.5-\x*0.25,3*\y) {$x_5$};
 	\node[decision](llr) at (-\x-\x*0.5+\x*0.25,3*\y) {$x_5$};
@@ -1129,7 +1129,7 @@ Example:
 	\node[decision,onslide={<2>, transparent}](rlr) at (\x-\x*0.5+\x*0.25,3*\y) {$x_5$};
 	\node[decision](rrl) at (\x+\x*0.5-\x*0.25,3*\y) {$x_5$};
 	\node[decision](rrr) at (\x+\x*0.5+\x*0.25,3*\y) {$x_5$};
-	
+
 	% layer 5
 	\node[unsat](llll) at (-\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
 	\node[unsat](lllr) at (-\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
@@ -1138,7 +1138,7 @@ Example:
 	\node[unsat](lrll) at (-\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
 	\node[unsat](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
 	\node[unsat](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-	\node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}}; 
+	\node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
 	\node[unsat,onslide={<2>, transparent}](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
 	\node[unsat,onslide={<2>, transparent}](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
 	\node[unsat,onslide={<2>, transparent}](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
@@ -1146,28 +1146,28 @@ Example:
 	\node[unsat](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
 	\node[unsat](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
 	\node[unsat](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-	\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}}; 
-	
-	
+	\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
+
+
 	\draw[link, onslide={<2>, highlight}] (t) ->  node [mid] {$0$} (l);
 	\draw[link, onslide={<2>, highlight}] (t) -> node [mid] {$1$} (r);
-	
+
 	\draw[link] (l) ->  node [mid] {$0$} (ll);
 	\draw[link,onslide={<2>, highlight}] (l) -> node [mid] {$1$} (lr);
 	\draw[link,onslide={<2>, highlight}] (r) ->  node [mid] {$0$} (rl);
 	\draw[link] (r) -> node [mid] {$1$} (rr);
-	
+
 	\draw[link] (ll) -> node [mid] {$0$} (lll);
 	\draw[link] (ll) -> node [mid] {$1$} (llr);
 	\draw[link] (lr) -> node [mid] {$0$} (lrl);
 	\draw[link] (lr) -> node [mid] {$1$} (lrr);
-	
+
 	\draw[link,onslide={<2>, transparent}] (rl) -> node [mid,onslide={<2>, trmid}] {$0$} (rll);
 	\draw[link,onslide={<2>, transparent}] (rl) -> node [mid,onslide={<2>, trmid}] {$1$} (rlr);
 	\draw[link] (rr) -> node [mid] {$0$} (rrl);
 	\draw[link] (rr) -> node [mid] {$1$} (rrr);
-	
-	
+
+
 	\draw[link] (lll) -> node [mid] {$0$} (llll);
 	\draw[link] (lll) -> node [mid] {$1$} (lllr);
 	\draw[link] (llr) -> node [mid] {$0$} (llrl);
@@ -1176,7 +1176,7 @@ Example:
 	\draw[link] (lrl) -> node [mid] {$1$} (lrlr);
 	\draw[link] (lrr) -> node [mid] {$0$} (lrrl);
 	\draw[link] (lrr) -> node [mid] {$1$} (lrrr);
-	
+
 	\draw[link,onslide={<2>, transparent}] (rll) -> node [mid,onslide={<2>, trmid}] {$0$} (rlll);
 	\draw[link,onslide={<2>, transparent}] (rll) -> node [mid,onslide={<2>, trmid}] {$1$} (rllr);
 	\draw[link,onslide={<2>, transparent}] (rlr) -> node [mid,onslide={<2>, trmid}] {$0$} (rlrl);
@@ -1189,7 +1189,86 @@ Example:
 	\vfill
 %\visible<2> {Add symmetry breaking predicates to prune the  search space.}
 \end{frame}
- 
+
+
+\begin{frame}
+ \frametitle{Representative assignment}
+
+
+\begin{center}
+
+		\begin{tikzpicture}
+		
+		\tikzstyle{class2}=[ellipse, draw, minimum width=2cm, minimum height=1cm]
+		\tikzstyle{class1}=[ellipse, draw, minimum width=1cm, minimum height=1cm]
+		
+
+			\begin{scope}
+			
+			\node[point+] (p1) at (0, 0){};
+			%	\node[](a3) at (0, 0.25) {$\alpha_3$};
+			
+			\node[point] (p2) at (1, 0){};
+			%	\node[](a5) at (1, 0.25) {$\alpha_5$};
+			
+			\node[point] (p3) at (-2, -1){};
+			%	\node[](a6) at (-2, -0.75) {$\alpha_6$};
+			
+			\node[point+] (p4) at (-3, -1){};
+			%	\node[](a4) at (-3, -0.75) {$\alpha_4$};
+			
+			\node[point] (p5) at (-1.7, 0.5){};
+			%	\node[](a1) at (-1.7, 0.75) {$\alpha_1$};
+			
+			\node[point] (p6) at (-2, 1.5){};
+			
+			\node[point] (p6) at (-1.5, 1.69){};
+			
+			\node[point] (p6) at (-1.15, 1.12){};
+			
+			\node[point] (p6) at (-2, 2.1){};
+			%	\node[](a2) at (-2, 1.75) {$\alpha_2$};
+			
+			\node[point] (p7) at (0.5, -1.5){};
+			
+			\node[point] (p7) at (0.9, -0.87){};
+			%	\node[](a7) at (0.5, -1.25) {$\alpha_7$};
+			
+			\node[point+] (p8) at (-1, 2){};
+			%	\node[](a8) at (-1, 2.25) {$\alpha_8$};
+			
+			\end{scope}
+		
+		
+			\begin{scope}
+			
+			%\node[class2] (c1) at (0.5,0){};
+			\node[class2] (c2) at (-2.5, -1){};
+			
+			\node[ellipse, draw, minimum width=2cm, minimum height=2.6cm] (c3) at (-1.5, 1.5) {};
+			\node[ellipse, draw, minimum width=2cm, minimum height=2.75cm] (c4) at (0.5, -0.75) {};
+
+			\end{scope}
+		
+
+		\end{tikzpicture}
+\end{center}
+
+		\begin{tabular}{cl}
+	\begin{tikzpicture}
+	\node[point] at (0,0){};
+	\end{tikzpicture} & full assignment \\
+	\begin{tikzpicture}
+	\node[class2, scale=0.2] at (0,0){};
+	\end{tikzpicture} & orbit  \\
+	\begin{tikzpicture}
+	\node[point+] at (0,0){};
+	\end{tikzpicture} & representative assignment  \\
+\end{tabular}
+\end{frame}
+
+
+
 \begin{frame}
 	\frametitle{Generates symmetry breaking predicates (SBP)}
 \begin{itemize}
@@ -1199,18 +1278,18 @@ Example:
 		\item Define minimal value
 	\end{itemize}
 	\item Forbid non minimal assignment for each orbit %with addition of SBP
-\end{itemize}	
+\end{itemize}
 
 	\vfill
 	Example:\\
 	\begin{itemize}
-		\item[]	$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8 ;  \false < \true$ 
+		\item[]	$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8 ;  \false < \true$
 		\item[] 	$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
 	\end{itemize}
 
 	\vfill
-	
-	
+
+
 		\begin{center}
 %		\begin{tabular}{|c|c|c|c|c|}
 %			\toprule
@@ -1242,26 +1321,26 @@ Example:
 \end{tabular}
 	\end{center}
 
-	
+
 %	\begin{tabular} {ll}
 %		 $x_1 \leq x_2$	& $x_1 \lor \neg x_2$\\
 %		 \hline
 %		 $x_1 = x_2 \rightarrow x_4 \leq x_5$ &  $ x_1 \lor x_2 \lor x_4 \lor \neg x_5 $\\
 %		 									  &  $ \neg  x_1 \lor \neg x_2 \lor x_4 \lor \neg x_5 $\\
-%		 									  \hline 
+%		 									  \hline
 %		 $x_1 = x_2 \land x_4 = x_5 \rightarrow x_8 \leq x_3$ & $ x_1 \lor x_2 \lor x_4 \lor x_5 \lor x_7 \lor \neg x_8 $\\
 %		 													  & $ \neg x_1 \lor  \neg x_2 \lor x_4 \lor x_5 \lor x_7 \lor \neg x_8 $\\
 %		 													  & $\cdots$
 %	\end{tabular}
-	
+
 %	TODO\\
-%	
+%
 %	Tree example with hide symmetric search space\\
-%	
+%
 %	Easy to use, no modification of the solver \\
-%	
+%
 %	Inject additional constraints to the problem symmetry breaking predicates sbp\\
-%	
+%
 %Different tools Shatter, BreakID
 
 \end{frame}
@@ -1272,21 +1351,21 @@ Example:
 \begin{frame}
 \frametitle{Static symmetry breaking}
 \begin{center}
-	
+
 
 \begin{tikzpicture}
 	\tikzstyle{box} = [draw, minimum width=1.5cm]
-	
+
 	\node[box,minimum height=1.2cm] (cnf) {CNF};
 	\node[box] (sym) at (-3, -1) { Symmetries};
 	\node[box,minimum height=1.2cm] (sbp) at (0, -2) { SBPs};
-	
+
 	\node[box, minimum height=3.5cm, minimum width=2cm, line width=0.5mm, opacity=0,onslide={<2->, opacity=1}] at (0, -1) (full) {$\land$};
 	\node[box,minimum height=1.2cm, opacity=0, onslide={<2->,opacity=1}] (solver) at (3, -1) { SAT solver};
-	
+
 	\draw[->, thick, bend left = 30] (cnf) to [bend right=30] node [midway, left, fill=white] {compute symmetries} (sym);
 	\draw[->, thick, bend left = 30] (sym) to [bend right=30] node [midway, left, fill=white] {generates SBPs} (sbp);
-	
+
 	\draw[->, thick, opacity=0, onslide={<2->,opacity=1}] (full) to [] (solver);
 \end{tikzpicture}
 \end{center}
@@ -1302,11 +1381,14 @@ Different approaches:
 \vfill
 
 \visible<3>{
-Pros/Cons:
-\begin{itemize}
-	\item \textcolor{hgreen}{Works well on many symmetric instances}
-	\item \textcolor{red}{The solver can "explode" instead of being helped}
-\end{itemize}
+
+%Pros/Cons:
+%\begin{itemize}
+%	\item \textcolor{hgreen}{Works well on many symmetric instances}
+%	\item \textcolor{red}{The solver can "explode" instead of being helped}
+%\end{itemize}
+
+\centering \textcolor{red}{The solver can "explode" instead of being helped}
 }
 \end{frame}
 
@@ -1331,7 +1413,7 @@ Pros/Cons:
 %% ----------------------------------------------------------------------------
 
 \begin{frame}
-\frametitle{Our contribution CDCL[Sym]}
+\frametitle{Our contribution CDCL[Sym]~\cite{metin2018cdclsym}}
 
 Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 
@@ -1340,7 +1422,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 \centering
 \begin{tikzpicture}[scale=0.9,every node/.style={scale=0.5,fill=white, font=\sffamily}, align=center]
 % Specification of nodes (position, etc.)
-\tikzset{%	
+\tikzset{%
 	>={Latex[width=2mm,length=2mm]},
 	% Specifications for style of nodes:
 	base/.style = {rectangle, rounded corners, draw=black,
@@ -1389,11 +1471,11 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 \draw[line]     (isend) -- node {yes}(end);
 \draw[line]     (isfin) -- node {yes}(ends);
 \draw[line]     (learn) -- (prop);
-\draw[line]     (isend) -- node [] {no}(learn);	
+\draw[line]     (isend) -- node [] {no}(learn);
 
 \draw[line,opacity=0,onslide={<2>,opacity=1}]     (ismin) |- node [] {yes}(idec.center) -- (isfin);
-\draw[line,opacity=0,onslide={<2>,opacity=1}]     (ismin) -- node [] {no} (genesbp);	
-\draw[line,opacity=0,onslide={<2>,opacity=1}]     (conf) -- node [] {no} (ismin);	
+\draw[line,opacity=0,onslide={<2>,opacity=1}]     (ismin) -- node [] {no} (genesbp);
+\draw[line,opacity=0,onslide={<2>,opacity=1}]     (conf) -- node [] {no} (ismin);
 \draw[line,opacity=0,onslide={<2>,opacity=1}]     (genesbp) -- (confanalyse);
 
 \end{tikzpicture}
@@ -1426,13 +1508,118 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 		\item $\alpha(g.x)$ or $\alpha(x)$ is unassigned then $g$ is
 		\texttt{active}
 	\end{enumerate}
-\end{block}  
+\end{block}
 \vspace{2em}
 
 \centering Update whenever variables are assigned / unassigned
 \end{frame}
 %% ----------------------------------------------------------------------------
 
+\begin{frame}
+	\frametitle{Example}
+
+
+	$g_1 = (x_2 \enspace x_3)(x_5 \enspace x_6)(x_8 \enspace x_9)$ \hfill
+	$g_2 = (x_1 \enspace x_2)(x_4 \enspace x_5)(x_7 \enspace x_8)$\\
+
+
+	
+\vfill
+
+	
+	
+	\centering
+	 \begin{tikzpicture}
+	 	\tikzstyle{line} = [<-, line width=0.2mm]
+
+	 	\node (a) {$\alpha = $};
+	 	
+	 	\node (g1) at ($(a) + (0pt, 25pt)$) {\textcolor{blue}{\dunderline[8pt]{1pt}{\textcolor{black}{$g_1$}}}};
+	 	\node (g2) at ($(a) + (0pt, -25pt)$) {\textcolor{orange}{\dunderline[-3pt]{1pt}{\textcolor{black}{$g_2$}}}};
+	 	
+	 	
+	 	
+	 	\node[onslide={<4->,opacity=0}] (x1) at ($(a) + (30pt, 0pt)$) {$\udef$};
+	 	
+	 	
+	 	\node[opacity=0, onslide={<4->,opacity=1}] (x11) at ($(a) + (30pt, 0pt)$) {$\true$};
+	 	
+	 	\node[onslide={<2->,opacity=0}] (x2) at ($(x1) + (30pt, 0pt)$) {$\udef$};
+	 	\node[opacity=0,onslide={<2->,opacity=1}] (x22) at ($(x1) + (30pt, 0pt)$) {$\false$};
+	 	
+	 	\node[onslide={<3->,opacity=0}] (x3) at ($(x2) + (30pt, 0pt)$) {$\udef$};
+	 	\node[opacity=0, onslide={<3->,opacity=1}] (x33) at ($(x2) + (30pt, 0pt)$) {$\false$};
+	 	\node (x4) at ($(x3) + (30pt, 0pt)$) {$\udef$};
+	 	\node (x5) at ($(x4) + (30pt, 0pt)$) {$\udef$};
+	 	\node (x6) at ($(x5) + (30pt, 0pt)$) {$\udef$};
+	 	\node (x7) at ($(x6) + (30pt, 0pt)$) {$\udef$};
+	 	\node (x8) at ($(x7) + (30pt, 0pt)$) {$\udef$};
+	 	\node (x9) at ($(x8) + (30pt, 0pt)$) {$\udef$};
+
+
+
+	 	\node  at ($(x1) + (-1pt, 0pt)$) {\textcolor{orange}{\dunderline[-3pt]{1pt}{\textcolor{black}{\phantom{$\udef$}}}}};
+	 	\node[onslide={<3->,opacity=0}]  at ($(x2) + (-2pt, 0pt)$) {\textcolor{blue}{\dunderline[9pt]{1pt}{\textcolor{black}{\phantom{$\udef$}}}}};
+	 	
+	 	
+	 	\node[opacity=0,onslide={<3->,opacity=1}]  at ($(x5) + (-2pt, 0pt)$) {\textcolor{blue}{\dunderline[9pt]{1pt}{\textcolor{black}{\phantom{$\udef$}}}}};
+	 	
+%		\draw[->] (g1)  to [bend left=30] (x1);
+%		\draw[->] (g2)  to [bend right=30] (x2);
+
+	 	\node  at ($(a) + (0pt, 50pt)$) {$\false < \true$};
+	 	\node  at ($(a) + (30pt, 50pt)$) {$x_1$};
+		\node  at ($(x1) + (30pt, 50pt)$) {$x_2$};
+		\node  at ($(x2) + (30pt, 50pt)$) {$x_3$};
+		\node  at ($(x3) + (30pt, 50pt)$) {$x_4$};
+		\node  at ($(x4) + (30pt, 50pt)$) {$x_5$};
+		\node  at ($(x5) + (30pt, 50pt)$) {$x_6$};
+		\node  at ($(x6) + (30pt, 50pt)$) {$x_7$};
+		\node  at ($(x7) + (30pt, 50pt)$) {$x_8$};
+		\node  at ($(x8) + (30pt, 50pt)$) {$x_9$};
+
+	 	\node (t1) at ($(a) + (45pt, 50pt)$) {$\leq$};
+		\node (t2) at ($(x1) + (45pt, 50pt)$) {$\leq$};
+		\node (t3) at ($(x2) + (45pt, 50pt)$) {$\leq$};
+		\node (t4) at ($(x3) + (45pt, 50pt)$) {$\leq$};
+		\node (t5) at ($(x4) + (45pt, 50pt)$) {$\leq$};
+		\node (t6) at ($(x5) + (45pt, 50pt)$) {$\leq$};
+		\node (t7) at ($(x6) + (45pt, 50pt)$) {$\leq$};
+		\node (t8) at ($(x7) + (45pt, 50pt)$) {$\leq$};
+%		\node (t9) at ($(x8) + (45t, 50pt)$) {$\leq$};
+
+
+
+	 	\node (x1t) at ($(x1) + (15pt, -30pt)$) {};
+	 	\node (x4t) at ($(x4) + (15pt, -30pt)$) {};
+	 	\node (x7t) at ($(x7) + (15pt, -30pt)$) {};
+
+	 	\draw[line] (x1.south) |-  (x1t.center);
+ 	 	\draw[line] (x2.south) |-  (x1t.center);
+	 	\draw[line] (x4.south) |-  (x4t.center);
+ 	 	\draw[line] (x5.south) |-  (x4t.center);
+	 	\draw[line] (x7.south) |-  (x7t.center);
+	 	\draw[line] (x8.south) |-  (x7t.center);
+
+	 	\node (x2b) at ($(x2) + (15pt, 30pt)$) {};
+	 	\node (x5b) at ($(x5) + (15pt, 30pt)$) {};
+	 	\node (x8b) at ($(x8) + (15pt, 30pt)$) {};
+
+	 	\draw[line] (x2.north) |-  (x2b.center);
+	 	\draw[line] (x3.north) |-  (x2b.center);
+
+	 	\draw[line] (x5.north) |-  (x5b.center);
+	 	\draw[line] (x6.north) |-  (x5b.center);
+
+	 	\draw[line] (x8.north) |-  (x8b.center);
+	 	\draw[line] (x9.north) |-  (x8b.center);
+
+	 \end{tikzpicture}
+	 \vfill
+\only<1-4>{ \phantom{$g_2$ generates ESBP $\omega = \{ \neg x_1, x_2 \}$ }}
+\only<5>{ $g_2$ generates ESBP $\omega = \{ \neg x_1, x_2 \}$ }
+\end{frame}
+%% ----------------------------------------------------------------------------
 \begin{frame}
 \frametitle{Example}
 {\scriptsize
@@ -1445,19 +1632,21 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 \end{enumerate}
 }
 \vfill
-	$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8  \enspace ; \enspace  \false < \true$ 
-	
+	\begin{center}
+		$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8  \enspace ; \enspace  \false < \true$
+	\end{center}
+
 %	$(x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
  %                 	$g_1 = (x_2 \enspace x_3)(x_5 \enspace x_6)(x_8 \enspace x_9)$\\
-                  	
- \vfill 
- 	
+
+ \vfill
+
  \begin{tabular}{lllllll|ll}
       	$g_1$ =  & ($\only<1>{x_2}\only<2->{\textcolor{red}{x_2}} $ & $\only<1-2>{x_3}\only<3->{\textcolor{red}{x_3}}) $ & $ (x_5 $ & $ x_6)$ & $ (x_8 $ & $ x_9)$ & $x = \only<1>{x_2}\only<2>{\textcolor{red}{x_2}}\only<3->{x_5}$ & $g.x = \only<1-2>{x_3}\only<3->{\textcolor{black}{x_6}} $	\\
       	& $\only<1-2>{\enspace \uparrow}$&  & $\only<3->{\enspace \uparrow}$&  & & & & \texttt{active}
- \end{tabular}  
+ \end{tabular}
 
-\vspace{1em}         
+\vspace{1em}
  \begin{tabular}{lllllll|ll}
 	$g_2$ =  & ($\only<1-2>{x_1}\only<3->{\textcolor{hgreen}{x_1}} $ & $\only<1>{x_2}\only<2->{\textcolor{red}{x_2}}) $ & $ (x_4 $ & $ x_5)$ & $ (x_7 $ & $ x_8)$&
 	 $x = \only<1-2>{x_1}\only<3->{\textcolor{hgreen}{x_1}}$ & $g.x = \only<1>{x_2}\only<2->{\textcolor{red}{x_2}} $	\\
@@ -1468,7 +1657,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 
 \hspace{8em}$\cdots $
 \vfill
-\centering 
+\centering
 
 \only<1>{$\alpha = \{ \phantom{\neg x_2,\neg x_3, x_1} \}$}%
 \only<2>{$\alpha = \{ \neg x_2 \phantom{,\neg x_3, x_1} \}$}%
@@ -1483,11 +1672,16 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 \begin{frame}
 \frametitle{CDCL[Sym] Implementation}
 \begin{itemize}
-	\item Packaged as a library \textbf{\libdsb}\footnote{\url{https://github.com/lip6/cosy}}, to be combined with your solver\\{\color{blue}\hfill$\rightarrow$ e.g. +3\% LOC on \minisat}.
-	
+	\item Packaged as a library \textbf{\libdsb}\footnote{\url{https://github.com/lip6/cosy}}
+%	, to be combined with your solver\\{\color{blue}\hfill$\rightarrow$ e.g. +3\% LOC on \minisat}.
+
+	\item Lightweight
+	\item Fast Update and low memory
 	\item Follows symmetry status
-	
-	\item Should work with any enumerative SAT solver
+
+	\vfill
+
+	\item  Works with any enumerative SAT solver
 
 \end{itemize}
 
@@ -1495,14 +1689,14 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 
 \begin{frame}{Experiments}
 
-Benchmark:
+\textbf{Benchmark:}
 \begin{itemize}
 	\item from SAT contests 2012 -- 2017
-	\item retain only instances for which \bliss{} finds significant symmetries in $1000$s
-	\item $1350$ symmetric instances (out of $3700$)
+	\item filter: \bliss{} finds significant symmetries in $1000$s
+	\item 36 \% of instances, $1\,350 / 3\,700$
 \end{itemize}
 
-Setup:
+\textbf{Setup:}
 \begin{itemize}
 	\item four tools
 	\begin{itemize}
@@ -1528,7 +1722,7 @@ Setup:
 %\subfloat[with \saucy]{{\includegraphics[scale=0.3]{images/saucy-result}}}%
 %\hfill
 %\subfloat[with \bliss]{
-	{\includegraphics[scale=0.3]{images/bliss-result}}
+	{\includegraphics[scale=0.45]{images/bliss-result}}
 %}%
 \label{fig:cactus}%
 \end{figure}
@@ -1542,7 +1736,7 @@ Setup:
 %			\midrule
 %			PAR-2 sum  & 8\,074\,348 & 7\,770\,434 & \cellcolor{gray!30}\textbf{6\,909\,999} & 7\,229\,700\\
 %			PAR-2 avg  & 5\,981 & 5\,756 & \cellcolor{gray!30}\textbf{5\,119} & 5\,355\\
-%			
+%
 %		\end{tabular}
 %	}
 %	\hspace{1em}
@@ -1555,7 +1749,7 @@ Setup:
 	\texttt{Shatter} &2088h & 640 & 316 &324 \\
 	\texttt{BreakID} &1790h & 749 &334 &415 \\
 	\texttt{MiniSym} &  \cellcolor{gray!30}\textbf{1735h} &  \cellcolor{gray!30}\textbf{775} & \cellcolor{gray!30}\textbf{336} &  \cellcolor{gray!30}\textbf{439} \\
-	
+
 \end{tabular}
 
 
@@ -1573,63 +1767,63 @@ Setup:
 
 \end{frame}
 
-\begin{frame}{Experimental results (\unsat versus \sat)}
-
-\begin{tabular}{lcccc}
-	Solver & PAR-2 & ALL & SAT & UNSAT\\
-	\toprule
-	\texttt{MiniSAT} & 2243h & 586 &325 &261 \\
-	\texttt{Shatter} &2088h & 640 & 316 &324 \\
-	\texttt{BreakID} &1790h & 749 &334 &415 \\
-    \texttt{MiniSym} &  \cellcolor{gray!30}\textbf{1735h} &  \cellcolor{gray!30}\textbf{775} & \cellcolor{gray!30}\textbf{336} &  \cellcolor{gray!30}\textbf{439} \\
-		
-\end{tabular}
-
-
-\begin{table}[h!]
-\resizebox{1 \textwidth}{!}{
-\subfloat[With \saucy]{%
-	\begin{tabular}{l|ccccc}
-		&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
-		\midrule
-		TOTAL   & 261 & 302 & \cellcolor{gray!30}\textbf{371} & 345\\
-	\end{tabular}
-}
-\hspace{1em}
-\subfloat[With \bliss]{%
-	\begin{tabular}{l|ccccc}
-		&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
-		\midrule
-		TOTAL  & 261 & 324 & 415 & \cellcolor{gray!30}\textbf{439}\\
-	\end{tabular}
-}
-}
-\caption{Comparison on \unsat instances}
-\label{table:benchUNSAT}
-\end{table}
-\begin{table}
-\resizebox{1 \textwidth}{!}{
-\subfloat[With \saucy]{%
-	\begin{tabular}{l|ccccc}
-		&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
-		\midrule
-		TOTAL  & 325 & 323 & \cellcolor{gray!30}\textbf{337} & 335\\
-		
-	\end{tabular}
-}
-\hspace{1em}
-\subfloat[With \bliss]{%
-	\begin{tabular}{l|ccccc}
-		&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
-		\hline
-		TOTAL & 325 & 316 & 334 & \cellcolor{gray!30}\textbf{336}\\
-	\end{tabular}
-}
-}
-\vspace*{0.1cm}
-\caption{Comparison on \sat instances}
-\end{table}
-\end{frame}
+%\begin{frame}{Experimental results (\unsat versus \sat)}
+%
+%\begin{tabular}{lcccc}
+%	Solver & PAR-2 & ALL & SAT & UNSAT\\
+%	\toprule
+%	\texttt{MiniSAT} & 2243h & 586 &325 &261 \\
+%	\texttt{Shatter} &2088h & 640 & 316 &324 \\
+%	\texttt{BreakID} &1790h & 749 &334 &415 \\
+%    \texttt{MiniSym} &  \cellcolor{gray!30}\textbf{1735h} &  \cellcolor{gray!30}\textbf{775} & \cellcolor{gray!30}\textbf{336} &  \cellcolor{gray!30}\textbf{439} \\
+%
+%\end{tabular}
+%
+%
+%\begin{table}[h!]
+%\resizebox{1 \textwidth}{!}{
+%\subfloat[With \saucy]{%
+%	\begin{tabular}{l|ccccc}
+%		&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
+%		\midrule
+%		TOTAL   & 261 & 302 & \cellcolor{gray!30}\textbf{371} & 345\\
+%	\end{tabular}
+%}
+%\hspace{1em}
+%\subfloat[With \bliss]{%
+%	\begin{tabular}{l|ccccc}
+%		&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
+%		\midrule
+%		TOTAL  & 261 & 324 & 415 & \cellcolor{gray!30}\textbf{439}\\
+%	\end{tabular}
+%}
+%}
+%\caption{Comparison on \unsat instances}
+%\label{table:benchUNSAT}
+%\end{table}
+%\begin{table}
+%\resizebox{1 \textwidth}{!}{
+%\subfloat[With \saucy]{%
+%	\begin{tabular}{l|ccccc}
+%		&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
+%		\midrule
+%		TOTAL  & 325 & 323 & \cellcolor{gray!30}\textbf{337} & 335\\
+%
+%	\end{tabular}
+%}
+%\hspace{1em}
+%\subfloat[With \bliss]{%
+%	\begin{tabular}{l|ccccc}
+%		&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
+%		\hline
+%		TOTAL & 325 & 316 & 334 & \cellcolor{gray!30}\textbf{336}\\
+%	\end{tabular}
+%}
+%}
+%\vspace*{0.1cm}
+%\caption{Comparison on \sat instances}
+%\end{table}
+%\end{frame}
 
 %% ----------------------------------------------------------------------------
 
@@ -1688,7 +1882,7 @@ Setup:
 \node[unsat,transparent](lrll) at (-\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
 \node[unsat,transparent](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
 \node[unsat,transparent](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-\node[unsat,transparent](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}}; 
+\node[unsat,transparent](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
 \node[unsat,transparent](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
 \node[unsat,transparent](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
 \node[unsat,transparent](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
@@ -1696,7 +1890,7 @@ Setup:
 \node[unsat,transparent](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
 \node[unsat,transparent](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
 \node[unsat,transparent](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
-\node[unsat,transparent](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}}; 
+\node[unsat,transparent](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {\pgfuseplotmark{triangle}};
 
 
 \draw[link] (t) ->  node [mid] {$0$} (l);
@@ -1772,14 +1966,16 @@ Different approaches:
 \item $...$
 \end{itemize}
 
-\vfill 
+\vfill
 
 \visible<2>{
-Pros/Cons:
-\begin{itemize}
-	\item \textcolor{hgreen}{Works well on many symmetric instances}
-	\item \textcolor{red}{Cannot handle some instances solved by static approach}
-\end{itemize}
+%Pros/Cons:
+%\begin{itemize}
+%	\item \textcolor{hgreen}{Works well on many symmetric instances}
+%	\item \textcolor{red}{Cannot handle some instances solved by static approach}
+%\end{itemize}
+
+\centering \textcolor{red}{Cannot handle some instances solved by static approach}
 }
 
 \end{frame}
@@ -1807,7 +2003,7 @@ Pros/Cons:
 %\item[] Dynamic symmetry breaking
 %\end{itemize}
 %\vspace{5pt}
-%\item \textcolor{UPMCEngagementBlueB}{Contribution and results} 
+%\item \textcolor{UPMCEngagementBlueB}{Contribution and results}
 %\begin{itemize}
 %\item[] CDCL [Sym]
 %\item[] Combination of different approaches
@@ -1817,7 +2013,7 @@ Pros/Cons:
 %
 
 \begin{frame}
-\frametitle{ESBP + SP}
+\frametitle{ESBP + SP~\cite{metin2019composing}}
 
 
 Compose the symmetry propagation and the ESBP\\
@@ -1869,13 +2065,11 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 
 \vfill
 \visible<3->{Compute valid local symmetries on-the-fly at a minimal cost.}
-
-\vfill
 \visible<4>{
 \begin{itemize}
-	\item 	Inductive construction of the valid symmetries
-	\item	During the solving 
-	\item	Ar a minimal cost 
+	\item Inductive construction of the valid symmetries
+	\item During the solving
+	\item At a minimal cost
 \end{itemize}
 }
 \end{frame}
@@ -1884,7 +2078,7 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 
 \begin{frame}
 \frametitle{Experimental results}
-\scriptsize
+
 \textbf{Benchmark:}
 \begin{itemize}
 	\item from SAT contests 2012 -- 2018
@@ -1896,38 +2090,49 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 
 \textbf{Setup:}
 \begin{itemize}
-	\item Three tools
-	
+	\item three tools
+
 	\begin{itemize}
 		\item \scriptsize MiniSat SP (Minisat with Symmetry Propagation)
 		\item \scriptsize MiniSat ESBP (Minisat with CDCL[Sym])
-		\item \scriptsize \textbf{Minisat ESBP-SP (our approach)}
+		\item \scriptsize \textbf{Minisat ESBP-SP} (our approach)
 	\end{itemize}
 	\item $7200$s timeout
 \end{itemize}
 
-\vfill
-\textbf{Results:}
-
 \centering
 %\resizebox{.7\textwidth}{!}{
 
-\begin{tabular}{lcccc}
-	Solver & PAR-2 & ALL & SAT & UNSAT\\
-	\toprule
-	SP & 1674h00 & 876 & 406 & 470 \\
-	ESBP & 1578h30 & 904 & 416 & 488\\
-	ESBP-SP & \cellcolor{gray!30}\textbf{1570h15} & \cellcolor{gray!30}\textbf{911} & \cellcolor{gray!30}\textbf{420} & \cellcolor{gray!30}\textbf{491}\\	
-\end{tabular}
+
 %}
 \end{frame}
 
 %% ----------------------------------------------------------------------------
 
+\begin{frame}{Experimental results}
+%\begin{block}{}
+%\centering 	$\bliss$ gives more generators than $\saucy$
+%\end{block}
+
+\begin{figure}[t]
+	\centering
+	{\includegraphics[scale=0.45]{images/combores}}
+
+\end{figure}
+\centering
+\begin{tabular}{lcccc}
+	Solver & PAR-2 & ALL & SAT & UNSAT\\
+	\toprule
+	SP & 1674h00 & 876 & 406 & 470 \\
+	ESBP & 1578h30 & 904 & 416 & 488\\
+	ESBP-SP & \cellcolor{gray!30}\textbf{1570h15} & \cellcolor{gray!30}\textbf{911} & \cellcolor{gray!30}\textbf{420} & \cellcolor{gray!30}\textbf{491}\\
+\end{tabular}
+\end{frame}
+
 \begin{frame}
 \frametitle{Conclusion}
 \begin{itemize}
-	\item A new dynamic symmetry breaking approach 
+	\item A new dynamic symmetry breaking approach
 	\begin{itemize}
 		\item Generation of SBP on the fly
 		\item Package as a library $\libdsb$ usable with any CDCL solver
@@ -1936,12 +2141,12 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 
 \vfill
 	\item A new hybrid approach (ESBP-SP)
-	
+
 	\begin{itemize}
 		\item Take advantage of static and dynamic approach
 		\item Introduce local symmetries
-	\end{itemize}	
-\end{itemize}	
+	\end{itemize}
+\end{itemize}
 
 \end{frame}
 %% ----------------------------------------------------------------------------
@@ -1952,10 +2157,10 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 
 	\vfill
 	\item Exploitation of partial symmetries
-	
 
-		
-\end{itemize}	
+
+
+\end{itemize}
 
 \vfill
 \flushright
@@ -1986,32 +2191,32 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 %			(\neg x_6 \lor \neg x_9)$\\
 %	\end{tabular}}\\
 %	\only<2> {
-%		
+%
 %		$\Downarrow$ & $\Downarrow$  \\
-%		
-%		colored graph & 
+%
+%		colored graph &
 %		\includegraphics[scale=0.1]{images/graph}\\ \\
 %	}
-%	
+%
 %	\visible<3-> {
-%		
+%
 %		$\Downarrow$ & $\Downarrow$  \\
-%		
-%		colored graph & 
+%
+%		colored graph &
 %		\includegraphics[scale=0.05]{images/graph}\\ \\
 %	}
 %	\visible<3-> {
 %		$\|$ & $\|$  \\
-%		graph automorphism & 
-%		\small{(\texttt{bliss} \footnote{http://www.tcs.hut.fi/Software/bliss/} or 
-%			\texttt{saucy} \footnote{http://vlsicad.eecs.umich.edu/BK/SAUCY/})} 
+%		graph automorphism &
+%		\small{(\texttt{bliss} \footnote{http://www.tcs.hut.fi/Software/bliss/} or
+%			\texttt{saucy} \footnote{http://vlsicad.eecs.umich.edu/BK/SAUCY/})}
 %		\\
 %	}
-%	
-%	
+%
+%
 %	\visible<4-> {
 %		$\Downarrow$ & $\Downarrow$  \\
-%		
+%
 %		set of symmetries & %\begin{frame}
 %		%\tikzstyle{every picture}+=[remember picture]
 %		%\frametitle{An UNSAT example}
@@ -2034,26 +2239,26 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 %		%	\tikzstyle{line} = [<-, line width=0.5mm];
 %		%	\path[line]<3> (r1) edge  (g1.south);
 %		%	\path[line]<3> (r2) edge  (g2.south);
-%		%	
+%		%
 %		%	\path[line]<4> (r1) edge  (g2.south);
 %		%	\path[line]<4> (r2) edge  (g1.south);
-%		%	
+%		%
 %		%	\path[line]<5> (r1) edge  (g1.south);
 %		%	\path[line]<5> (r2) edge  (g3.south);
-%		%	
+%		%
 %		%	\path[line]<6> (r1) edge  (g3.south);
 %		%	\path[line]<6> (r2) edge  (g1.south);
-%		%	
+%		%
 %		%	\path[line]<7> (r1) edge  (g2.south);
 %		%	\path[line]<7> (r2) edge  (g3.south);
-%		%	
+%		%
 %		%	\path[line]<8> (r1) edge  (g3.south);
 %		%	\path[line]<8> (r2) edge  (g2.south);
-%		%	
+%		%
 %		%	\visible<9>{
 %		%	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (-1.75, 4.25) {};
 %		%  	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (1.8, 4.25) {};
-%		%  	
+%		%
 %		%	\node[draw, minimum width=3.5cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (-3.5, 1.5) {};
 %		%	\node[draw, minimum width=3.1cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (0.25, 1.5) {};
 %		%	\node[draw, minimum width=3.5cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (3.9, 1.5) {};
@@ -2101,12 +2306,12 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 		\begin{tikzpicture}[scale=0.8, every node/.style={scale=0.8}]
 		\newcommand{\x}{1}
 		\newcommand{\y}{-1.5}
-		
+
 		\tikzstyle{inv} = [opacity=0]
 		\tikzstyle{visible} = [opacity=1]
-		
+
 		\tikzstyle{textvisible} = [text opacity=1]
-		
+
 		\tikzstyle{decision}=[circle,draw,thick,fill=blue!30,font=\scriptsize,anchor=base, opacity=1]
 		\tikzstyle{propagation}=[rectangle, minimum height=.65cm, minimum width=.65cm,draw,thick,fill=blue!15,font=\scriptsize,anchor=base]
 		\tikzstyle{space}=[regular polygon, regular polygon sides=3, minimum height=1cm, anchor=base,xshift=-0.25cm,yshift=-0.25cm,
@@ -2116,22 +2321,22 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 		\tikzstyle{trlink}=[link,nearly transparent]
 		\tikzstyle{mid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=1,font=\scriptsize]
 		\tikzstyle{invmid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=0.0,font=\scriptsize]
-		
+
 		% layer 1
 		\node[decision](t) at (0,0) {$x_1$};
-		
+
 		% layer 2
 		\node[decision, inv, onslide={<3-7>, visible}](l) at (-\x,\y) {$x_6$};
-		
+
 		\node[propagation, inv, onslide={<8>, visible}](l) at (-\x,\y) {$x_4$};
 		% \node[space](r) at (\x,\y) {};
-		
+
 		% layer 3
 		\node[decision, inv, onslide={<4-7>, visible}](ll) at (-\x-\x*0.5,2*\y) {$x_5$};
 		%\node[decision](lr) at (-\x+\x*0.5,2*\y) {$x_3$};
 		%    \node[decision](rl) at (\x-\x*0.5,2*\y) {$x_3$};
 		%    \node[decision](rr) at (\x+\x*0.5,2*\y) {$x_3$};
-		
+
 		% layer 4
 		\node[propagation, inv, onslide={<5-7>, visible}](lll) at (-\x-\x*0.5-\x*0.25,3*\y) {$x_4$};
 		%\node[decision](llr) at (-\x-\x*0.5+\x*0.25,3*\y) {$x_4$};
@@ -2141,7 +2346,7 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 		%    \node[decision](rlr) at (\x-\x*0.5+\x*0.25,3*\y) {$x_4$};
 		%    \node[decision](rrl) at (\x+\x*0.5-\x*0.25,3*\y) {$x_4$};
 		%    \node[decision](rrr) at (\x+\x*0.5+\x*0.25,3*\y) {$x_4$};
-		
+
 		% layer 5
 		%\node[unsat](llll) at (-\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
 		\node[propagation, inv, onslide={<6-7>, visible}](lllr) at (-\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {$x_2$};
@@ -2150,8 +2355,8 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 		%\node[unsat](lrll) at (-\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
 		%\node[unsat](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
 		%\node[unsat](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-		%\node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
-		
+		%\node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {};
+
 		%    \node[unsat](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
 		%	\node[unsat](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {};
 		%	\node[unsat](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
@@ -2159,42 +2364,42 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 		%	\node[unsat](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
 		%	\node[unsat](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
 		%	\node[unsat](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-		%	\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
-		
+		%	\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {};
+
 		\node[propagation, inv, onslide={<6-7>, visible}](lllrl) at (-\x-\x*0.5-\x*0.25,5*\y) {$x_3$};
-		
+
 		\node[scale=1.5, inv, onslide={<7-7>, visible}](lllrl) at (-\x-\x*0.5-\x*0.25,5*\y) {\ko};
-		
+
 		\draw[link, inv, onslide={<2->, visible}] (t) ->  node [invmid, onslide={<2->, textvisible}] {$0$} (l);
 		%	\draw[link] (t) -> node [mid] {$1$} (r.north);
 		\draw[link, inv, onslide={<3-7>, visible}] (l) ->  node [invmid, onslide={<3-7>, textvisible}] {$0$} (ll);
 		%\draw[link] (l) -> node [mid] {$1$} (lr);
 		%	\draw[link] (r) ->  node [mid] {$0$} (rl);
 		%	\draw[link] (r) -> node [mid] {$1$} (rr);
-		
+
 		\draw[link, inv, onslide={<4-7>, visible}] (ll) -> node [invmid, onslide={<4-7>, textvisible}] {$0$} (lll);
 		%\draw[link] (ll) -> node [mid] {$1$} (llr);
 		%\draw[link] (lr) -> node [mid] {$0$} (lrl);
 		%\draw[link] (lr) -> node [mid] {$1$} (lrr);
-		
+
 		%	\draw[link] (rl) -> node [mid] {$0$} (rll);
 		%	\draw[link] (rl) -> node [mid] {$1$} (rlr);
 		%	\draw[link] (rr) -> node [mid] {$0$} (rrl);
 		%	\draw[link] (rr) -> node [mid] {$1$} (rrr);
-		
-		
+
+
 		%\draw[link] (lll) -> node [mid] {$0$} (llll);
 		\draw[link, inv, onslide={<5-7>, visible}] (lll) -> node [invmid, onslide={<5-7>, textvisible}] {$1$} (lllr);
-		
+
 		\draw[link, inv, onslide={<6-7>, visible}] (lllr) -> node [invmid, onslide={<6-7>, textvisible}] {$0$} (lllrl);
-		
+
 		%\draw[link] (llr) -> node [mid] {$0$} (llrl);
 		%\draw[link] (llr) -> node [mid] {$1$} (llrr);
 		%\draw[link] (lrl) -> node [mid] {$0$} (lrll);
 		%\draw[link] (lrl) -> node [mid] {$1$} (lrlr);
 		%\draw[link] (lrr) -> node [mid] {$0$} (lrrl);
 		%\draw[link] (lrr) -> node [mid] {$1$} (lrrr);
-		
+
 		%	\draw[link] (rll) -> node [mid] {$0$} (rlll);
 		%	\draw[link] (rll) -> node [mid] {$1$} (rllr);
 		%	\draw[link] (rlr) -> node [mid] {$0$} (rlrl);
@@ -2206,13 +2411,13 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 		\end{tikzpicture}
 	\end{column}
 	\begin{column}[T]{.4\textwidth}
-		
+
 		\begin{tikzpicture}
 		\tikzstyle{tr}=[text width=3cm, opacity=0]
-		
+
 		\node[text width=3cm] (a) {
 			\smallskip
-			$\omega_1 = \{x_1, x_2, x_3\}$ 
+			$\omega_1 = \{x_1, x_2, x_3\}$
 			\smallskip
 			$\omega_2 = \{x_4, x_5, x_6\}$
 			\smallskip
@@ -2224,10 +2429,10 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 			\smallskip
 			$\omega_6 = \{\neg x_3, \neg x_6\}$
 		};
-		
+
 		\node[tr, onslide={<2>, opacity=1}] (a) {
 			\smallskip
-			$\omega_1 = \{\cred{x_1}, x_2, x_3\}$ 
+			$\omega_1 = \{\cred{x_1}, x_2, x_3\}$
 			\smallskip
 			$\omega_2 = \{x_4, x_5, x_6\}$
 			\smallskip
@@ -2239,10 +2444,10 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 			\smallskip
 			$\omega_6 = \{\neg x_3, \neg x_6\}$
 		};
-		
+
 		\node[tr, onslide={<3>, opacity=1}] (a) {
 			\smallskip
-			$\omega_1 = \{\cred{x_1}, x_2, x_3\}$ 
+			$\omega_1 = \{\cred{x_1}, x_2, x_3\}$
 			\smallskip
 			$\omega_2 = \{x_4, x_5, \cred{x_6\}}$
 			\smallskip
@@ -2254,11 +2459,11 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 			\smallskip
 			$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
 		};
-		
-		
+
+
 		\node[tr, onslide={<4>, opacity=1}] (a) {
 			\smallskip
-			$\omega_1 = \{\cred{x_1}, x_2, x_3\}$ 
+			$\omega_1 = \{\cred{x_1}, x_2, x_3\}$
 			\smallskip
 			$\omega_2 = \{\cprop{x_4}, \cred{x_5}, \cred{x_6\}}$
 			\smallskip
@@ -2270,11 +2475,11 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 			\smallskip
 			$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
 		};
-		
-		
+
+
 		\node[tr, onslide={<5>, opacity=1}] (a) {
 			\smallskip
-			$\omega_1 = \{\cred{x_1}, x_2, x_3\}$ 
+			$\omega_1 = \{\cred{x_1}, x_2, x_3\}$
 			\smallskip
 			$\cgreen{\omega_2} = \{\cgreen{x_4}, \cred{x_5}, \cred{x_6\}}$
 			\smallskip
@@ -2286,10 +2491,10 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 			\smallskip
 			$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
 		};
-		
+
 		\node[tr, onslide={<6-7>, opacity=1}] (a) {
 			\smallskip
-			$\omega_1 = \{\cred{x_1}, \cred{x_2}, \cblue{x_3}\}$ 
+			$\omega_1 = \{\cred{x_1}, \cred{x_2}, \cblue{x_3}\}$
 			\smallskip
 			$\cgreen{\omega_2} = \{\cgreen{x_4}, \cred{x_5}, \cred{x_6\}}$
 			\smallskip
@@ -2301,16 +2506,16 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 			\smallskip
 			$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
 		};
-		
+
 		\node[tr, onslide={<8->, opacity=1}] (a)  at (0, -3) {
 			$\omega_7 = \{x_1, \neg x_4\}$
 		};
-		
-		
+
+
 		\end{tikzpicture}
-		
+
 		%	\scriptsize
-		%	\begin{itemize} 
+		%	\begin{itemize}
 		%	\item[] $\omega_{1} = \{x_1  ,  x_2  ,  x_3\}$
 		%	\item[] $\omega_{2} = \{x_4  ,  x_5  ,  x_6\} $
 		%	\item[] $\omega_{3} = \{x_7  ,  x_8  ,  x_9\} $
@@ -2335,19 +2540,19 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 \begin{block}{Logical consequence}
 	When $\omega$ is satisfied in all satisfying assignments of $\varphi$, we say that $\omega$ is a
 	logical consequence of $\varphi$, and we denote this by $\varphi \vdash \omega$.
-\end{block}	
+\end{block}
 
 \visible<2->{
-	\begin{block}{Weakly active symmetries}	
+	\begin{block}{Weakly active symmetries}
 		Let a subset $\delta \subseteq \alpha $, a symmetry $\sigma$ of $\varphi$ such that\\ $\varphi \cup \delta \vdash \varphi \cup \alpha \land \sigma.\delta \subseteq \alpha $ then $\sigma$ is weakly active symmetry.
 	\end{block}
 }
 
 \visible<3->{
 	\begin{block}{Symmetry propagation}
-		Let $\sigma$ a weakly active symmetry, then 
+		Let $\sigma$ a weakly active symmetry, then
 		$$ \varphi \cup \alpha  \vdash \{l\} \Leftrightarrow \varphi \cup \alpha  \vdash \sigma.\{l\}$$
-		
+
 	\end{block}
 }
 \end{frame}
@@ -2360,13 +2565,13 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 \begin{block}{Logical consequence}
 	When $\omega$ is satisfied in all satisfying assignments of $\varphi$, we say that $\omega$ is a
 	logical consequence of $\varphi$, and we denote this by $\varphi \vdash \omega$.
-\end{block}	
+\end{block}
 
 \begin{block}{Local Symmetries}
-	Let $\varphi$ be a formula. We define $L_{\omega,\varphi}$, 
-	the set of \textit{local symmetries} for a clause $\omega$, and with respect to 
+	Let $\varphi$ be a formula. We define $L_{\omega,\varphi}$,
+	the set of \textit{local symmetries} for a clause $\omega$, and with respect to
 	a formula $\varphi$, as follows:
-	
+
 	$$L_{\omega,\varphi}=\{\sigma \in \symm \mid \varphi \vdash \sigma.\omega\}$$
 \end{block}
 
@@ -2386,7 +2591,7 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 Formula can be decomposed as : $\varphi = \varphi_o \cup \varphi_e \cup \varphi_d$ where
 \begin{itemize}
 \item $\varphi_o$ is the set of the original clauses
-\item $\varphi_e$ is the set of ESBPs 
+\item $\varphi_e$ is the set of ESBPs
 \item $\varphi_d$ is the set of deduced clauses.
 \end{itemize}
 
@@ -2432,7 +2637,7 @@ Local symmetries
 %(\neg x_5 \lor \neg x_8) \land
 %(\neg x_3 \lor \neg x_6) \land
 %(\neg x_3 \lor \neg x_9) \land
-%(\neg x_6 \lor \neg x_9) 
+%(\neg x_6 \lor \neg x_9)
 %$
 %\end{frame}
 %
@@ -2481,7 +2686,7 @@ Local symmetries
 %\node[unsat](lrll) at (-\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
 %\node[unsat](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
 %\node[unsat](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-%\node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
+%\node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {};
 %\node[unsat](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
 %\node[unsat](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {};
 %\node[unsat](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
@@ -2489,7 +2694,7 @@ Local symmetries
 %\node[unsat](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
 %\node[unsat](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
 %\node[unsat](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-%\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
+%\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {};
 %
 %
 %\draw[link] (t) ->  node [trmid] {$0$} (l);
@@ -2552,19 +2757,19 @@ Local symmetries
 %
 %	% layer 1
 %    \node[decision](t) at (0,0) {$x_1$};
-%    
+%
 %    % layer 2
 %    \node[decision, opacity=0, onslide={<2-8>, opacity=1}](l) at (-\x,\y) {$x_6$};
-%    
+%
 %%    \node[decision, opacity=0, onslide={<10>, opacity=1}](l) at (-\x,\y) {$x_4$};
 %   % \node[space](r) at (\x,\y) {};
-%    
+%
 %    % layer 3
 %    \node[propagation](ll) at (-\x-\x*0.5,2*\y) {$x_8$};
 %    \node[propagation](lr) at (-\x-\x*0.5,2*\y) {$x_4$};
 %%    \node[decision](rl) at (\x-\x*0.5,2*\y) {$x_3$};
 %%    \node[decision](rr) at (\x+\x*0.5,2*\y) {$x_3$};
-%    
+%
 %	% layer 4
 %%    \node[decision](lll) at (-\x-\x*0.5-\x*0.25,3*\y) {$x_5$};
 %%    \node[decision](llr) at (-\x-\x*0.5+\x*0.25,3*\y) {$x_4$};
@@ -2584,8 +2789,8 @@ Local symmetries
 %    \node[scale=1.5](lrll) at (-\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {\ko};
 %%    \node[unsat](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
 %%    \node[unsat](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-%%    \node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
-%    
+%%    \node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {};
+%
 %%    \node[unsat](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
 %%	\node[unsat](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {};
 %%	\node[unsat](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
@@ -2593,7 +2798,7 @@ Local symmetries
 %%	\node[unsat](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
 %%	\node[unsat](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
 %%	\node[unsat](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-%%	\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
+%%	\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {};
 %
 %
 %	\draw[link,opacity=0, onslide={<2->, opacity=1}] (t) ->  node [trmid,onslide={<2->, text opacity=1}] {$0$} (l);
@@ -2602,18 +2807,18 @@ Local symmetries
 %	\draw[link] (l) -> node [mid] {$1$} (lr);
 %%	\draw[link] (r) ->  node [mid] {$0$} (rl);
 %%	\draw[link] (r) -> node [mid] {$1$} (rr);
-%	
+%
 %%	\draw[link] (ll) -> node [mid] {$0$} (lll);
 %%	\draw[link] (ll) -> node [mid] {$1$} (llr);
 %	\draw[link] (lr) -> node [mid] {$0$} (lrl);
 %%	\draw[link] (lr) -> node [mid] {$1$} (lrr);
-%	
+%
 %%	\draw[link] (rl) -> node [mid] {$0$} (rll);
 %%	\draw[link] (rl) -> node [mid] {$1$} (rlr);
 %%	\draw[link] (rr) -> node [mid] {$0$} (rrl);
 %%	\draw[link] (rr) -> node [mid] {$1$} (rrr);
-%	
-%	
+%
+%
 %%	\draw[link] (lll) -> node [mid] {$0$} (llll);
 %%	\draw[link] (lll) -> node [mid] {$1$} (lllr);
 %%	\draw[link] (llr) -> node [mid] {$0$} (llrl);
@@ -2622,7 +2827,7 @@ Local symmetries
 %%	\draw[link] (lrl) -> node [mid] {$1$} (lrlr);
 %%	\draw[link] (lrr) -> node [mid] {$0$} (lrrl);
 %%	\draw[link] (lrr) -> node [mid] {$1$} (lrrr);
-%	
+%
 %%	\draw[link] (rll) -> node [mid] {$0$} (rlll);
 %%	\draw[link] (rll) -> node [mid] {$1$} (rllr);
 %%	\draw[link] (rlr) -> node [mid] {$0$} (rlrl);
@@ -2680,7 +2885,7 @@ Local symmetries
 %\node[unsat](lrll) at (-\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
 %\node[unsat](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
 %\node[unsat](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-%\node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
+%\node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {};
 %
 %%    \node[unsat](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
 %%	\node[unsat](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {};
@@ -2689,7 +2894,7 @@ Local symmetries
 %%	\node[unsat](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
 %%	\node[unsat](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
 %%	\node[unsat](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-%%	\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {}; 
+%%	\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {};
 %
 %
 %\draw[link] (t) ->  node [mid] {$0$} (l);

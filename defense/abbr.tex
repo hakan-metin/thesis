@@ -59,6 +59,7 @@ align=center,fill=propa-grey]
 
 \def\true{\textcolor{green}{\texttt{T}}}
 \def\false{\textcolor{red}{\texttt{F}}}
+\def\udef{\textcolor{black}{\texttt{U}}}
 
 \def\ok{\textcolor{green}{\cmark}}
 \def\ko{\textcolor{red}{\xmark}}
@@ -86,3 +87,8 @@ align=center,fill=propa-grey]
 \newcommand{\sat}{\textsc{sat}\xspace}
 \newcommand{\ltv}{\ensuremath{<_{\scriptsize\mathcal{V}}}}
 %\newcommand{\lto}{\ensuremath{<_{\scriptsize v}}}
+
+
+\newcommand\dunderline[3][-1pt]{{%
+		\setbox0=\hbox{#3}
+		\ooalign{\copy0\cr\rule[\dimexpr#1-#2\relax]{\wd0}{#2}}}}

@@ -61,6 +61,19 @@ In{\^e}s Lynce and Joao Marques-Silva.
 \newblock In {\em International Conference on Theory and Applications of
   Satisfiability Testing}, pages 136--141. Springer, 2006.
 
+\bibitem[MBCK18]{metin2018cdclsym}
+Hakan Metin, Souheib Baarir, Maximilien Colange, and Fabrice Kordon.
+\newblock Cdclsym: Introducing effective symmetry breaking in sat solving.
+\newblock In {\em International Conference on Tools and Algorithms for the
+  Construction and Analysis of Systems}, pages 99--114. Springer, 2018.
+
+\bibitem[MBK19]{metin2019composing}
+Hakan Metin, Souheib Baarir, and Fabrice Kordon.
+\newblock Composing symmetry propagation and effective symmetry breaking for
+  sat solving.
+\newblock In {\em NASA Formal Methods Symposium}, pages 316--332. Springer,
+  2019.
+
 \bibitem[MM00]{crypto_00}
 Fabio Massacci and Laura Marraro.
 \newblock Logical cryptanalysis as a sat problem.
