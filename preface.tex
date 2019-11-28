@@ -25,23 +25,22 @@
 \chapter*{Remerciements}
 
 Je souhaite en premier lieu remercier mes encadrants Fabrice Kordon, 
-Soheib Barrir qui m'ont accompagné durant ma thèse et également Maximilien Colange
+Soheib Barrir qui m'ont accompagné durant ma thèse ainsi que Maximilien Colange
 qui m'a suivi la première année.
-Les discussions que nous avons eu m'ont permis d'avancer dans mes travaux de recherches.
+Nos discussions m'ont permis d'avancer dans mes travaux de recherche.
 
 Merci aux deux rapporteurs de ce travail, 
-Laure Petrucci et Pascal Fontaine qui ont accepté de relire et évaluer ce manuscrit et également à 
+Laure Petrucci et Pascal Fontaine qui ont accepté de relire et d'évaluer ce manuscrit. Merci également à 
 tous les autres membres de mon jury Jean-Michel Couvreur, Emmanuelle Encrenaz et Bart Bogoerts.
 
 
-Merci A Yann Thierry-Mieg pour toutes les discussions a propos des solveurs SAT et SMT et 
-Julien Sopena  qui m'a fait découvrir le SAT durant mon stage de Master 1.
+Merci à Yann Thierry-Mieg pour toutes les discussions à propos des solveurs SAT et SMT et 
+Julien Sopena  qui m'a fait découvrir le SAT durant mon stage de master 1.
 
 
-Je souhaite également remercier tous mes collègues des équipes Move, Delys et \textit{Whisper} du LIP6.
-Et plus particulièrement Damien Carver, 
-et Gauthier Voron, l'inventeur du tri fusoon,
-avec qui j'ai partagé mes années de master et de thèse.
+Je souhaite également remercier tous mes collègues des équipes Move, Delys et Whisper du LIP6,
+et plus particulièrement Damien Carver, le Hammer Down 
+et Gauthier Voron, l'inventeur du tri \emph{fusoon}, avec qui j'ai partagé mes années de master et de thèse.
 
 
 Merci également à Ilyas Toumlilt, le deep-tech;
@@ -49,20 +48,32 @@ Redha Gouicem, grand défenseur de Patrick;
 Saalik Hatia, qui étudie la tech sur le trône de fer;
 Arnaud Favier, le chef de la tech;
 Marjorie Bournat et Denis Jeanneau, qui ont réussi leur thèse sans caféine;
-Francis Laniel, le freestyler stéphanois;
-Jonathan Sid-Otmane, attention a tes chevilles;
-Darius Mercadier, pour sa douceur sans égal;
-Maxime Bittan, pour qui rien n'est jamais vrai mais toujours pas faux.
+Francis Laniel, le freestyler stéphanois.
+%Jonathan Sid-Otmane, attention a tes chevilles;
+%Darius Mercadier, pour sa douceur sans égal.
+%Maxime Bittan, pour qui rien n'est jamais vrai mais toujours pas faux.
 
 
 Merci ensuite à mes co-bureau, Ludovic Le Frioux, ultime adversaire du Clash of Code,
-Vincent Vallade, la définition d'optimiste
+Vincent Vallade, la définition d'optimiste.
 
-Je remercie également tous mes collègues, Lyes Hamidouche, Lucas Serrano, Antoine Blin,
-Mathieu Lehaut, Rémi Oudin, Dimitrios Vasilas, Florent Coriat, Daniel Wilhelm
-Anissa Kheireddine, Samir Tigane, Djamel Eddine Khelladi
- avec qui j’ai partagé maintes conversations passionantes 
- et aussi tous les permanents du LIP6 avec qui j'ai pu enrichir mes compétences en informatique.
+Je remercie également tous mes collègues 
+Lucas Serrano,
+Antoine Blin,
+Florent Coriat,
+Maxime Bittan,
+Jonathan Sid-Otmane,
+Mathieu Lehaut,
+Lyes Hamidouche,
+Rémi Oudin,
+Darius Mercadier,
+Dimitrios Vasilas, 
+Daniel Wilhelm,
+Anissa Kheireddine,
+Samir Tigane,
+Djamel Eddine Khelladi
+avec qui j’ai partagé maintes conversations passionnantes 
+ainsi que tous les permanents du LIP6 qui m'ont aidé a approfondir mes compétences en informatique.
 
 
 Ve son olarak, sevgili ailem, hep yanimda olduğunuz için size teşekkür ederim.
@@ -70,15 +81,10 @@ Ve son olarak, sevgili ailem, hep yanimda olduğunuz için size teşekkür ederi
 
 
 
-
-
-
-
-
-%
 %\`A tous, \textbf{merci infiniment} !
-%
-%
+
+
+
 %\chapter*{Résumé Long}
 %
 %
@@ -103,7 +109,7 @@ Ve son olarak, sevgili ailem, hep yanimda olduğunuz için size teşekkür ederi
 %%La résolution du problème est l'un des sept prix du millénaire, à savoir P = NP.
 %
 %
-%Malgré cette complexité, les solveurs SAT sont capables de résoudre de plus en plus de problèmes complexes.
+%Malgré cette complexité, les solveurs SAT sont capables de résoudre des problèmes de plus en plus complexes.
 %Ce succès vient de l'introduction de différentes heuristiques sophistiquées dans 
 %l'algorithme de résolution le plus répandu, $\guillemotleft$ Conflict Driven Clause Learning$\guillemotright$ (CDCL).
 %Il est basé sur l'algorithme DPLL nommé suivant ses auteurs Davis, Putnam, Logemann et Loveland~\cite{dpll_62},
@@ -190,10 +196,10 @@ Ve son olarak, sevgili ailem, hep yanimda olduğunuz için size teşekkür ederi
 %Dans le cas où les symétries sont indépendantes d'une représentation particulière du problème, il s'agit de symétries sémantiques.
 %
 %
-%La présence de symétrie dans un problème force l'algorithme de recherche à explorer en vain l'espace de recherche symétrique et impacte considérablement ses performances.  La rupture de symétrie est une approche qui évite au solveur de visiter les espaces de recherche isomorphes.
+%La présence de symétries dans un problème force l'algorithme de recherche à explorer en vain l'espace de recherche symétrique ce qui impacte considérablement ses performances.  La rupture de symétrie est une approche qui évite au solveur de visiter les espaces de recherche isomorphes.
 %
 %Pour pouvoir exploiter les symétries, la première étape consiste à les trouver. Dans le contexte de la satisfaction booléenne, la détection des symétries syntaxiques se fait tout d'abord par la transformation de la spécification en un graphe coloré et ensuite par l'application d'un outil d'automorphisme de graphe sur celui-ci.
-%Différents outils traitent de ce problème dans l'état de l'art, tels que, $\bliss$~\cite{JunttilaKaski:ALENEX2007}, $\saucy$~\cite{katebi2010symmetry}, …
+%Différents outils traitent de ce problème dans l'état de l'art, par exemple, $\bliss$~\cite{JunttilaKaski:ALENEX2007} et $\saucy$~\cite{katebi2010symmetry}
 %
 %
 %Lorsque les symétries sont obtenues, la façon la plus courante pour les exploiter est d'utiliser une approche de rupture de symétrie statique. Elle est dite statique, car le traitement de cette approche  est effectuée avant la résolution du problème SAT.
@@ -324,8 +330,8 @@ Ve son olarak, sevgili ailem, hep yanimda olduğunuz için size teşekkür ederi
 %%	\label{tab:unsatfr}
 %%\end{table}
 %
-%Les expérimentations pour évaluer les performances de l'approche se sont effectuées sur les instances de la SAT Competiton sur sept années (2012 - 2018) pour lesquelles $\bliss$ a trouver des symétries. Au total, nous avons obtenu un total de 1400 instances.Les trois solveurs comparés sont respectivement \texttt{Minisat SP}, le solveur $\minisat$ avec l'approche SP; \texttt{Minisat Sym} le solveur $\minisat$ avec $\libdsb$ et \texttt{Minisat-SymSP} le solveur avec l'approche combiné.
-%La table \ref{tab:satfr} présentent les résultats obtenues pour les problèmes SAT et UNSAT.
+%Les expérimentations pour évaluer les performances de l'approche se sont effectuées sur les instances de la SAT Competiton sur sept années (2012 - 2018) pour lesquelles $\bliss$ a trouvé des symétries. Au total, nous avons obtenu 1400 instances.Les trois solveurs comparés sont respectivement \texttt{Minisat SP}, le solveur $\minisat$ avec l'approche SP; \texttt{Minisat Sym} le solveur $\minisat$ avec $\libdsb$ et \texttt{Minisat-SymSP} le solveur avec l'approche combiné.
+%La table \ref{tab:satfr} présentent les résultats obtenus pour les problèmes SAT et UNSAT.
 %Les différent solveurs sont comparés selon quatre mesures, PAR-2 qui représente le temps cumulé de chaque solveur 
 %avec une pénalité pour les instances non résolues, \-TOTAL qui représente le nombre total d'instances résolues, SAT le nombre d'instances satisfaisable résolues et UNSAT le nombre d'instances  non satisfaisable résolues.
 %Globalement, nous observons que l'approche combinée améliore les résultats avec un gain d'environ 8 heures par rapport

@@ -137,7 +137,7 @@ Boolean SATisfiability is widely used in different domains
 \begin{frame}
 
 \tikzstyle{every picture}+=[remember picture]
-\frametitle{SAT an example}
+\frametitle{SAT: an example}
 \everymath{\displaystyle}
 \centering
 
@@ -185,13 +185,42 @@ Boolean SATisfiability is widely used in different domains
 \vfill
 Is it possible to attribute each group to a classroom?\\
 \begin{center}
-	\visible<2->{YES!}
+	\visible<2->{YES! \SAT}
 	\visible<3->{Many solutions}
 \end{center}
 
 
 \end{frame}
 %% ----------------------------------------------------------------------------
+
+\begin{frame}
+\tikzstyle{every picture}+=[remember picture]
+\frametitle{An UNSAT example}
+\everymath{\displaystyle}
+\centering
+
+\begin{tabular}{cc}
+	\includegraphics[scale=0.07]{images/room} & \includegraphics[scale=0.07]{images/room}\\
+	\tikz[baseline]{\node[anchor=base] (r1){1};} & \tikz[baseline]{\node[anchor=base] (r2){2};}\\
+\end{tabular}
+
+
+\begin{tabular}{ccc}
+	\tikz[baseline]{\node[anchor=base] (g1){};} & \tikz[baseline]{\node[anchor=base] (g2){};} & \tikz[baseline]{\node[anchor=base] (g3){};}\\
+	\includegraphics[scale=0.1]{images/south} & \includegraphics[scale=0.1]{images/simpson} & \includegraphics[scale=0.09]{images/titeuf}\\
+	A                                        & B                                           & C\\
+\end{tabular}
+
+
+\vfill
+Is it possible to attribute each group to a classroom?
+\begin{center}
+	\visible<2->{No! \UNSAT}
+
+\end{center}
+
+\end{frame}
+
 
 
 
@@ -1449,7 +1478,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 
 \node (conf)    [question] at ($(prop) + (0pt, -40pt)$){ Is Conflict?};
 \node (confanalyse) [process] at ($(conf) + (0pt, -60pt)$) {Conflict Analysis};
-\node (learn) [process] at ($(prop) + (90pt, 0)$) {Learn conflict clause};
+\node (learn) [process] at ($(prop) + (90pt, 0)$) {Learn conflict clause\\ and backjump};
 \node (isend) [question] at ($(confanalyse) + (90pt, 0)$) {is level\\zero?};
 \node (end) [unsat,double=black!10,double distance=0.5mm] at ($(isend) + (90pt, 0)$) {$unsatiasfiable$};
 \node (ends) [sat,double=black!10,double distance=0.5mm] at ($(isfin) + (+90pt, 0)$){$satisfiable$};
