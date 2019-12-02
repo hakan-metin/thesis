@@ -39,6 +39,7 @@
 \usetikzlibrary{calc,decorations.markings}
 \usetikzlibrary{decorations.text}
 \usetikzlibrary{patterns}
+\usetikzlibrary{fit}
 \usetikzlibrary{arrows.meta}
 \usetikzlibrary{plotmarks}
 \usepackage{color, soul}
@@ -51,23 +52,24 @@
 
 \author{Hakan \textsc{METIN}}
 
+
 \begin{frame}
 \frametitle{Exploitation of dynamic symmetries for solving SAT problems}
 %\frametitle{Exploitation des symétries dynamiques pour la résolution des problèmes SAT}
-\framesubtitle{Thèse de doctorat de Sorbonne Université}
+\framesubtitle{Doctorat de Sorbonne Université}
 
-   Hakan \textsc{Metin}\\
+   Hakan \textsc{Metin} \hfill {\scriptsize  Le, 18 décembre 2019}\\
   \vfill
   %\begin{center}
 
 	\scriptsize
     \begin{tabular}{ll}
  	    \textbf{Rapporteurs:} & \\
-    	\textsc{Pascal \textsc{Fontaine}}  &  Maître de conférences, Université de Liège\\
+    	\textsc{Pascal \textsc{Fontaine}}  & Professeur, Université de Liège\\
     	\vspace{1em}%
     	\textsc{Laure Petrucci}  & Professeur, Université Paris 13\\
 
- 	    \textbf{Reviewers:} & \\
+ 	    \textbf{Examinateurs:} & \\
    		\textsc{Bart Bogaerts} & Assistant Professor, Vrije Universiteit Brussel\\
     	\textsc{Jean-Michel	Couvreur}  & Professeur, Université d'Orléans\\
     	\vspace{1em}%
@@ -76,7 +78,7 @@
 
 
 
- 	    \textbf{Directors:} & \\
+ 	    \textbf{Directeurs:} & \\
     	\textsc{Souheib Baarir}  & Maître de conférences, Université Paris Nanterre\\
     	\textsc{Fabrice Kordon}  & Professeur, Sorbonne Université\\
     \end{tabular}\\
@@ -109,6 +111,37 @@ Boolean SATisfiability is widely used in different domains
 
 \end{frame}
 %% ----------------------------------------------------------------------------
+\begin{frame}
+\frametitle{Motivation}
+	\begin{tikzpicture}
+		\tikzstyle{arr} = [->,thick]
+		\node[](coc) at ($(0pt, 40pt)$){\includegraphics[width=.2\textwidth]{images/cokpit}};
+		
+		\node[](gr) at ($(coc) + (0pt, 130pt)$) {\includegraphics[width=.2\textwidth]{images/graphcoloring2}};
+		
+	%	\node[opacity=0, onslide={<2>,opacity=1}](gr) at ($(coc) + (0pt, 130pt)$) {\includegraphics[width=.2\textwidth]{images/graphcoloring}};
+		
+		
+		\node[](c) at ($(coc) + (0pt, 60pt)$) {\includegraphics[width=.2\textwidth]{images/crypto}};		
+		\node[](p) at ($(coc) + (0pt, -60pt)$) {\includegraphics[width=.25\textwidth]{images/plan2}};
+		
+	   	\node[rounded, fill=black!20, minimum height=2cm, minimum width=2cm] (sat) at ($(coc) + (120pt, 40pt)$) {SAT};
+		\node[square, minimum height=2cm, minimum width=2cm] (sol) at ($(sat) + (100pt, 0pt)$) {Solution};
+		
+		\draw[arr] (coc)  -- (sat);
+		\draw[arr] (gr)  to [bend left=30] (sat);
+		\draw[arr] (c)  -- (sat);		
+		\draw[arr] (p)  to [bend right=30] (sat);
+		
+		\draw[arr] (sat)  -- (sol);
+		
+	\end{tikzpicture}
+\end{frame}
+
+
+
+
+%% ----------------------------------------------------------------------------
 %\begin{frame}
 % %Tackling the explosion in the static symmetry breaking approach
 % %Taking the maximum benefits from static and dynamic approaches
@@ -137,7 +170,7 @@ Boolean SATisfiability is widely used in different domains
 \begin{frame}
 
 \tikzstyle{every picture}+=[remember picture]
-\frametitle{SAT: an example}
+\frametitle{SAT: an example (1/2)}
 \everymath{\displaystyle}
 \centering
 
@@ -183,19 +216,21 @@ Boolean SATisfiability is widely used in different domains
 \end{tikzpicture}
 
 \vfill
-Is it possible to attribute each group to a classroom?\\
+Is it possible to attribute each group to a unique classroom?\\
 \begin{center}
-	\visible<2->{YES! \SAT}
-	\visible<3->{Many solutions}
+	\visible<2->{YES! SAT $\alpha = (A,1), (B,2), (C, 3)$\\ }
+	\visible<3->{Many solutions $\alpha = (A,2), (B,3), (C, 1)$; $\cdots$
+		\\ }
 \end{center}
 
 
 \end{frame}
-%% ----------------------------------------------------------------------------
+
+
 
 \begin{frame}
 \tikzstyle{every picture}+=[remember picture]
-\frametitle{An UNSAT example}
+\frametitle{SAT: an example (2/2)}
 \everymath{\displaystyle}
 \centering
 
@@ -213,11 +248,62 @@ Is it possible to attribute each group to a classroom?\\
 
 
 \vfill
-Is it possible to attribute each group to a classroom?
+Is it possible to attribute each group to a unique classroom?
 \begin{center}
-	\visible<2->{No! \UNSAT}
+	\visible<2->{No! UNSAT}
 
 \end{center}
+
+\end{frame}
+%% ----------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Encoding the problem}
+	
+	\begin{center}
+		Conjunctive Normal Form (CNF)
+	\end{center}
+
+	\vfill
+	
+\begin{columns}
+	\begin{column}{0.1\textwidth}
+		\small
+		$(A,1) (A,2) (A,3)$\\
+		$(B,1) (B,2) (B,3)$\\
+		$(C,1) (C,2) (C,3)$\\
+		\vspace{1em}
+		$ \neg (A,1)  \neg (B,1)$\\
+		$ \neg (A,1)  \neg (C,1)$\\
+		$ \neg (B,1)  \neg (C,1)$\\
+		\vspace{1em}
+		$ \neg (A,2)  \neg (B,2)$\\
+		$ \neg (A,2)  \neg (C,2)$\\
+		$ \neg (B,2)  \neg (C,2)$\\
+		\vspace{1em}
+		$ \neg (A,3)  \neg (B,3)$\\
+		$ \neg (A,3)  \neg (C,3)$\\
+		$ \neg (B,3)  \neg (C,3)$\\
+	\end{column}
+	\begin{column}{0.2\textwidth}  %%<--- here
+		\small
+		$x_1 \lor  x_2 \lor x_3$\\%
+		$x_4 \lor  x_5 \lor x_6 $ \\
+		$x_7 \lor  x_8 \lor x_9 $ \\
+		\vspace{1em}
+		$ \neg x_1 \lor  \neg x_4 $ \\
+		$ \neg x_1 \lor  \neg x_7 $ \\
+		$ \neg x_4 \lor  \neg x_7 $ \\
+		\vspace{1em}
+		$\neg x_2 \lor  \neg x_5 $ \\
+		$ \neg x_2 \lor  \neg x_8 $ \\
+		$ \neg x_5 \lor  \neg x_8 $ \\
+		\vspace{1em}
+		$ \neg x_3 \lor  \neg x_6 $ \\
+		$ \neg x_3 \lor  \neg x_9 $ \\
+		$ \neg x_6 \lor  \neg x_9 $ \\
+	\end{column}
+\end{columns}
 
 \end{frame}
 
@@ -283,8 +369,7 @@ Is it possible to attribute each group to a classroom?
 \vspace{1em}
 \centering
 \begin{tikzpicture}
-\tikzstyle{box} = [draw, minimum width=3.5cm,
-				]
+\tikzstyle{box} = [draw, minimum width=3.5cm, thick]
 \tikzstyle{result} = [draw, minimum width=2.5cm, minimum height=1cm]
 
 \node[box] (hlp) {High level problem};
@@ -293,9 +378,8 @@ Is it possible to attribute each group to a classroom?
 \node[box, line width=0.4mm, minimum width=10cm,minimum height=4.5cm,label={[fill=white,xshift=4.0cm, yshift=-0.3cm]SAT}]  at (0pt, -100pt){};
 %\node<2->[draw, ellipse] (cnf) at ($(input) + (0pt, -10pt)$) {\scriptsize CNF};
 
-\node[box] (solver) at ($(input) + (0pt, -30pt)$) {SAT solver};
-%\node<3->[draw, ellipse] (cnf) at ($(solver) + (-25pt, -10pt)$) {\scriptsize DPLL};
-%\node<3->[draw, ellipse] (cnf) at ($(solver) + (25pt, -10pt)$) {\scriptsize CDCL};
+\node[rounded,minimum width=3.5cm] (solver) at ($(input) + (0pt, -30pt)$) {SAT solver};
+
 
 \node[result] (sat) at ($(solver) + (-70pt, -60pt)$) {Satisfiable ($\SAT$)};
 \node[result] (unsat) at ($(solver) + (70pt, -60pt)$) {Unsatisfiable ($\UNSAT$)};
@@ -743,7 +827,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 }
 
 \vfill
-Is it possible to attribute each group to a classroom?
+Is it possible to attribute each group to a unique classroom?
 \begin{center}
 	\visible<4->{No!}
 	\vfill
@@ -1648,13 +1732,14 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 %	, to be combined with your solver\\{\color{blue}\hfill$\rightarrow$ e.g. +3\% LOC on \minisat}.
 
 	\item Lightweight
-	\item Fast Update and low memory
+	\item Fast update and low memory
 	\item Follows symmetry status
 
 	\vfill
 
-	\item  Works with any enumerative SAT solver
-
+	\item Works with any enumerative SAT solver
+	\item Can be integrated easily
+		\\{\color{blue}\hfill$\rightarrow$ e.g. +3\% LOC on \minisat}.
 \end{itemize}
 
 \end{frame}
@@ -2019,7 +2104,7 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 			\item[] $\omega_3 \leftarrow$ (Local symmetries)
 			\item[] $\omega_4 \leftarrow$ (Local symmetries)
 			\smallskip
-			\visible<2->{\item[] $\omega_{5}$} \visible<3>{$\leftarrow$ (Local symmetries)}
+			\visible<2->{\item[] $\omega_{5}$} \visible<3->{$\leftarrow$ (Local symmetries)}
 		\end{itemize}
 \end{column}
 \end{columns}
@@ -2126,6 +2211,10 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 \frametitle{Perspectives}
 \begin{itemize}
 	\item Combination of CDCL[Sym] with other dynamic symmetry breaking approach
+
+
+	\vfill
+	\item Combination with parallel SAT solver
 
 	\vfill
 	\item Exploitation of partial symmetries
