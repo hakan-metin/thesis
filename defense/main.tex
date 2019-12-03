@@ -36,6 +36,7 @@
 \usetikzlibrary{calc, chains, decorations.pathmorphing}
 \usetikzlibrary{shapes.geometric}
 \usetikzlibrary{arrows,shapes,positioning}
+\usetikzlibrary{shapes.symbols}
 \usetikzlibrary{calc,decorations.markings}
 \usetikzlibrary{decorations.text}
 \usetikzlibrary{patterns}
@@ -96,20 +97,20 @@
 \end{frame}
 
 %% ----------------------------------------------------------------------------
-\begin{frame}
-
-\frametitle{Motivation}
-Boolean SATisfiability is widely used in different domains
-
-\begin{itemize}
-	\item Artificial intelligence (planning  ~\cite{planning_92}, ...)
-	\item Bioinformatics  (haplotype inference~\cite{biology_06}, ...)
-	\item Security (cryptanalysis~\cite{crypto_00}, ...)
-	\item Computationally hard problems (ramsey numbers, graph coloring, ...)
-	\item Formal methods,(bounded model checking~\cite{bmc_99}, ...)
-\end{itemize}
-
-\end{frame}
+%\begin{frame}
+%
+%\frametitle{Motivation}
+%Boolean SATisfiability is widely used in different domains
+%
+%\begin{itemize}
+%	\item Artificial intelligence (planning  ~\cite{planning_92}, ...)
+%	\item Bioinformatics  (haplotype inference~\cite{biology_06}, ...)
+%	\item Security (cryptanalysis~\cite{crypto_00}, ...)
+%	\item Computationally hard problems (ramsey numbers, graph coloring, ...)
+%	\item Formal methods,(bounded model checking~\cite{bmc_99}, ...)
+%\end{itemize}
+%
+%\end{frame}
 %% ----------------------------------------------------------------------------
 \begin{frame}
 \frametitle{Motivation}
@@ -125,15 +126,21 @@ Boolean SATisfiability is widely used in different domains
 		\node[](c) at ($(coc) + (0pt, 60pt)$) {\includegraphics[width=.2\textwidth]{images/crypto}};		
 		\node[](p) at ($(coc) + (0pt, -60pt)$) {\includegraphics[width=.25\textwidth]{images/plan2}};
 		
-	   	\node[rounded, fill=black!20, minimum height=2cm, minimum width=2cm] (sat) at ($(coc) + (120pt, 40pt)$) {SAT};
-		\node[square, minimum height=2cm, minimum width=2cm] (sol) at ($(sat) + (100pt, 0pt)$) {Solution};
+	   	\node[square, fill=black!20, minimum height=2cm, minimum width=2cm] (sat) at ($(coc) + (120pt, 40pt)$) {SAT};
+		%\node[square, minimum height=2cm, minimum width=2cm] (sol) at ($(sat) + (100pt, 0pt)$) {Solution};
 		
+		
+		\node[align=center] at ($(coc) + (-100pt, 0pt)$) {Hardware model\\ checking};
+		\node at ($(gr) + (-100pt, 0pt)$) {Graph coloring};
+		\node[align=center] at ($(c) + (-100pt, 0pt)$) {Cryptanalysis};
+		\node[align=center] at ($(p) + (-100pt, 0pt)$) {Planning};
+				
 		\draw[arr] (coc)  -- (sat);
 		\draw[arr] (gr)  to [bend left=30] (sat);
 		\draw[arr] (c)  -- (sat);		
 		\draw[arr] (p)  to [bend right=30] (sat);
 		
-		\draw[arr] (sat)  -- (sol);
+%		\draw[arr] (sat)  -- (sol);
 		
 	\end{tikzpicture}
 \end{frame}
@@ -218,7 +225,7 @@ Boolean SATisfiability is widely used in different domains
 \vfill
 Is it possible to attribute each group to a unique classroom?\\
 \begin{center}
-	\visible<2->{YES! SAT $\alpha = (A,1), (B,2), (C, 3)$\\ }
+	\visible<2->{YES!  SAT!  $\enspace \alpha = (A,1), (B,2), (C, 3)$\\ }
 	\visible<3->{Many solutions $\alpha = (A,2), (B,3), (C, 1)$; $\cdots$
 		\\ }
 \end{center}
@@ -260,10 +267,11 @@ Is it possible to attribute each group to a unique classroom?
 \begin{frame}
 \frametitle{Encoding the problem}
 	
+	\visible<2>{
 	\begin{center}
 		Conjunctive Normal Form (CNF)
 	\end{center}
-
+}
 	\vfill
 	
 \begin{columns}
@@ -287,24 +295,29 @@ Is it possible to attribute each group to a unique classroom?
 	\end{column}
 	\begin{column}{0.2\textwidth}  %%<--- here
 		\small
-		$x_1 \lor  x_2 \lor x_3$\\%
-		$x_4 \lor  x_5 \lor x_6 $ \\
-		$x_7 \lor  x_8 \lor x_9 $ \\
+		$(x_1 \lor  x_2 \lor x_3) \enspace \land$\\
+		$(x_4 \lor  x_5 \lor x_6) \enspace \land$\\
+		$(x_7 \lor  x_8 \lor x_9) \enspace \land$\\
 		\vspace{1em}
-		$ \neg x_1 \lor  \neg x_4 $ \\
-		$ \neg x_1 \lor  \neg x_7 $ \\
-		$ \neg x_4 \lor  \neg x_7 $ \\
+		$(\neg x_1 \lor  \neg x_4) \enspace \land$\\
+		$(\neg x_1 \lor  \neg x_7) \enspace \land$\\
+		$(\neg x_4 \lor  \neg x_7) \enspace \land$\\
 		\vspace{1em}
-		$\neg x_2 \lor  \neg x_5 $ \\
-		$ \neg x_2 \lor  \neg x_8 $ \\
-		$ \neg x_5 \lor  \neg x_8 $ \\
+		$(\neg x_2 \lor  \neg x_5) \enspace \land$\\
+		$(\neg x_2 \lor  \neg x_8) \enspace \land$\\
+		$(\neg x_5 \lor  \neg x_8) \enspace \land$\\
 		\vspace{1em}
-		$ \neg x_3 \lor  \neg x_6 $ \\
-		$ \neg x_3 \lor  \neg x_9 $ \\
-		$ \neg x_6 \lor  \neg x_9 $ \\
+		$(\neg x_3 \lor  \neg x_6) \enspace \land$\\
+		$(\neg x_3 \lor  \neg x_9) \enspace \land$\\
+		$(\neg x_6 \lor  \neg x_9) \enspace \land$\\
 	\end{column}
 \end{columns}
 
+\begin{tikzpicture}[overlay]
+	\node[rounded, thick, minimum width=2cm, minimum height=0.5cm] at (208pt, 169pt) {};
+	
+	\node[rounded, thick, minimum width=3cm, minimum height=6.5cm] at (208pt, 88pt) {};
+\end{tikzpicture}
 \end{frame}
 
 
@@ -365,7 +378,7 @@ Is it possible to attribute each group to a unique classroom?
 %\end{frame}
 %% ----------------------------------------------------------------------------
 \begin{frame}
-\frametitle{Boolean SATisfiability problem}
+\frametitle{SAT}
 \vspace{1em}
 \centering
 \begin{tikzpicture}
@@ -375,41 +388,46 @@ Is it possible to attribute each group to a unique classroom?
 \node[box] (hlp) {High level problem};
 \node[box] (input) at ($(hlp) + (0pt, -50pt)$){Logic formula};
 
-\node[box, line width=0.4mm, minimum width=10cm,minimum height=4.5cm,label={[fill=white,xshift=4.0cm, yshift=-0.3cm]SAT}]  at (0pt, -100pt){};
+\node[box, line width=0.4mm, minimum width=10cm,minimum height=5cm]  at (0pt, -100pt){};
 %\node<2->[draw, ellipse] (cnf) at ($(input) + (0pt, -10pt)$) {\scriptsize CNF};
 
-\node[rounded,minimum width=3.5cm] (solver) at ($(input) + (0pt, -30pt)$) {SAT solver};
+\node[rounded,minimum width=3.5cm, minimum height=1cm,onslide={<2>,opacity=0}] (solver) at ($(input) + (0pt, -40pt)$) {SAT solver};
 
+\node[rounded,minimum width=3.5cm, minimum height=1cm,opacity=0,line width=0.7mm,onslide={<2>,opacity=1}] (so) at ($(input) + (0pt, -40pt)$) {SAT solver};
 
-\node[result] (sat) at ($(solver) + (-70pt, -60pt)$) {Satisfiable ($\SAT$)};
-\node[result] (unsat) at ($(solver) + (70pt, -60pt)$) {Unsatisfiable ($\UNSAT$)};
+\node[result,align=center] (sat) at ($(solver) + (-70pt, -50pt)$) {Satisfiable ($\texttt{SAT}$) \\ + assignment};
+\node[result,align=center] (unsat) at ($(solver) + (70pt, -50pt)$) {Unsatisfiable ($\texttt{UNSAT}$) \\ + proof};
 
-\visible<1>{\draw[->] (hlp) -> (input);}
-\visible<2->{\draw[->] (hlp) -> node [midway, fill=white]{Conjunctive Normal Form (CNF)} (input);}
-\draw[->] (input) -> (solver);
-\draw[->] (solver) -> node[midway,fill=white] {assignment}  (sat);
-\draw[->] (solver) -> node[midway,fill=white] {proof}(unsat);
+\draw[->, thick] (hlp) -> (input);
+%\visible<2->{\draw[->, thick] (hlp) -> node [midway, fill=white]{Conjunctive Normal Form (CNF)} (input);}
+\draw[->, thick] (input) -> (solver);
+\draw[->, thick] (solver) ->   (sat);
+\draw[->, thick] (solver) -> (unsat);
+
+%\draw[->] (solver) -> node[midway,fill=white] {assignment}  (sat);
+%\draw[->] (solver) -> node[midway,fill=white] {proof}(unsat);
+
 \end{tikzpicture}
-\vfill
-\begin{overlayarea}{\textwidth}{.2\textwidth}
-	\vfill
-	\only<2-3>{CNF representation:\\}
-	\only<4>{Clause representation as a set:\\}
-	\centering
-\only<2>{
-$\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{\text{Clause with literals } x_1, x_2, \neg x_3}$
-}% visible 2
-
-\vfill
-\only<3>{
-	$\overbrace{\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{Clause}\land (\neg x_1 \lor \neg x_2) \land (x_2 \lor \neg x_4)}^\text{Formula (CNF)}$
-}% visible 3
-
-\only<4>{
-	\vspace{1em}
-	$(x_1 \lor x_2 \lor \neg x_3) \rightarrow \{x_1 , x_2 , \neg x_3\}$
-}
-\end{overlayarea}
+%\vfill
+%\begin{overlayarea}{\textwidth}{.2\textwidth}
+%	\vfill
+%	\only<2-3>{CNF representation:\\}
+%	\only<4>{Clause representation as a set:\\}
+%	\centering
+%\only<2>{
+%$\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{\text{Clause with literals } x_1, x_2, \neg x_3}$
+%}% visible 2
+%
+%\vfill
+%\only<3>{
+%	$\overbrace{\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{Clause}\land (\neg x_1 \lor \neg x_2) \land (x_2 \lor \neg x_4)}^\text{Formula (CNF)}$
+%}% visible 3
+%
+%\only<4>{
+%	\vspace{1em}
+%	$(x_1 \lor x_2 \lor \neg x_3) \rightarrow \{x_1 , x_2 , \neg x_3\}$
+%}
+%\end{overlayarea}
 
 \end{frame}
 
@@ -426,13 +444,21 @@ $\underbrace{(x_1 \lor x_2 \lor \neg x_3)}_{\text{Clause with literals } x_1, x_
 		\begin{itemize}
 			\item Boolean Constraint Propagation (BCP)
 		\end{itemize}
-	\vfill
+	
 		\item Conflict Driven Clause Learning (CDCL)~\cite{marques1999grasp}
 		\begin{itemize}
 			\item Derived from DPLL
 			\item Clause learning
 		\end{itemize}
 	\end{itemize}
+
+\vfill 
+
+Good performance in practice:
+\begin{itemize}
+	\item Handle large problem (million variables and clauses)
+	\item International SAT competition compete each year on academic and industrial problems
+\end{itemize}
 
 \end{frame}
 %% ----------------------------------------------------------------------------
@@ -776,21 +802,23 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 
 \begin{frame}
 \tikzstyle{every picture}+=[remember picture]
-\frametitle{An UNSAT example}
+\frametitle{Presence of symmetries}
 \everymath{\displaystyle}
 \centering
 
 \begin{tabular}{cc}
 	\includegraphics[scale=0.07]{images/room} & \includegraphics[scale=0.07]{images/room}\\
-	\tikz[baseline]{\node[anchor=base] (r1){1};} & \tikz[baseline]{\node[anchor=base] (r2){2};}\\
+	\tikz[baseline]{\node[anchor=base] (r1){\only<1-4>{1} \only<5->{2}};} & \tikz[baseline]{\node[anchor=base] (r2){\only<1-4>{2} \only<5->{1}};}\\
+
+	
 \end{tabular}
 
-\visible<4>{\tikz[baseline]{\node[anchor=base] (cc){$\cdots$};}}
+
 
 \begin{tabular}{ccc}
 	\tikz[baseline]{\node[anchor=base] (g1){};} & \tikz[baseline]{\node[anchor=base] (g2){};} & \tikz[baseline,opacity=0,scale=8,onslide={<2-3>,opacity=1}]{\node[anchor=base] (g3){?};}\\
 	\includegraphics[scale=0.1]{images/south} & \includegraphics[scale=0.1]{images/simpson} & \includegraphics[scale=0.09]{images/titeuf}\\
-	A                                        & B                                           & C\\
+	A     & \only<1-4>{B} \only<5->{C}         & \only<1-4>{C} \only<5->{B}\\
 \end{tabular}
 
 \visible<2->{
@@ -815,24 +843,18 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 %	\path[line,color=purple]<4-> (r1) edge  (g3.south);
 %	\path[line,color=purple]<4-> (r2) edge  (g2.south);
 
-	\visible<5>{
-	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (-1.75, 4.75) {};
-  	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (1.8, 4.75) {};
+	\visible<4->{
+	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (-1.75, 4.5) {};
+  	\node[draw, minimum width=3cm, minimum height=2cm,line width=0.5mm, color=orange](a) at (1.8, 4.5) {};
 
-	\node[draw, minimum width=3.5cm, minimum height=1.6cm,line width=0.5mm, color=blue](a) at (-3.5, 1.5) {};
+	\node[draw, minimum width=3.5cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (-3.5, 1.5) {};
 	\node[draw, minimum width=3.1cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (0.25, 1.5) {};
 	\node[draw, minimum width=3.5cm, minimum height=1.75cm,line width=0.5mm, color=blue](a) at (3.9, 1.5) {};
 	}
 	\end{tikzpicture}
 }
 
-\vfill
-Is it possible to attribute each group to a unique classroom?
-\begin{center}
-	\visible<4->{No!}
-	\vfill
-	\visible<5->{Presence of symmetries hinders the performance of the solver}
-\end{center}
+
 
 \end{frame}
 
@@ -866,7 +888,7 @@ Is it possible to attribute each group to a unique classroom?
 \begin{frame}
 \everymath{\displaystyle}
 
-	\frametitle{Symmetry}
+	\frametitle{Symmetry (Syntactic)}
 	\normalsize
 	A symmetry (permuation) $g$ is a bijective function (on variables) that leaves the formula invariant
 	\vfill
@@ -933,14 +955,11 @@ Is it possible to attribute each group to a unique classroom?
 \end{tikzpicture}
 \vfill
 \normalsize
-\centering The set of symmetries of a formula is a group noted $G$
-%
-%	Equi-satisfiability:
-%	$$\alpha \models \varphi \Leftrightarrow g.\alpha \models \varphi$$
+%\centering The set of symmetries of a formula is a group noted $G$
+
+Equi-satisfiability:
+	$$\alpha \models \varphi \Leftrightarrow g.\alpha \models \varphi$$
 \end{frame}
-
-
-
 
 
 \begin{frame}
@@ -1003,9 +1022,16 @@ Is it possible to attribute each group to a unique classroom?
 			\end{tabular}
 		}
 	\end{tabular}
-	\end{frame}
+\vfill
+	\visible<4-> {\centering The set of symmetries of a formula is a group noted $G$}
+\end{frame}
 
-
+\begin{frame}
+	\centering
+	\textcolor{UPMCEngagementBlueB}{\Large Exploitation of symmetries}\\
+\vspace{2em}
+	\textcolor{UPMCEngagementBlueB}{\Large Static symmetry breaking}
+\end{frame}
 
 \begin{frame}
 \frametitle{Orbit}
@@ -1325,82 +1351,6 @@ Example:
 
 
 
-\begin{frame}
-	\frametitle{Generates symmetry breaking predicates (SBP)}
-\begin{itemize}
-	\item Define lexicographic order
-	\begin{itemize}
-		\item Define total order on variables
-		\item Define minimal value
-	\end{itemize}
-	\item Forbid non minimal assignment for each orbit %with addition of SBP
-\end{itemize}
-
-	\vfill
-	Example:\\
-	\begin{itemize}
-		\item[]	$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8 ;  \false < \true$
-		\item[] 	$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
-	\end{itemize}
-
-	\vfill
-
-
-		\begin{center}
-%		\begin{tabular}{|c|c|c|c|c|}
-%			\toprule
-%			$x_1$ & $x_2$  & $\cdots$     & lex-leader &\\
-%			\midrule
-%			\visible<3->{\false & \false & $\cdots$ & \cmark &}\\
-%			\midrule
-%			\visible<4->{\false & \true  & $\cdots$ & \cmark &}\\
-%			\visible<5->{\true  & \false & $\cdots$ & \xmark &  $\rightarrow$ SBP: $(x_1 \vee \neg x_2)$}\\
-%			\midrule
-%			\visible<6->{\true  & \true  & $\cdots$ & \cmark &}\\
-%			\bottomrule
-%		\end{tabular}
-
-		\begin{tabular}{c|c|c|c|c|c|c|c|c}
-	\toprule
-	& $x_1$ & $x_2$ & \textcolor{gray}{$x_3$} & $x_4$ & $x_5$ & $\cdots$     & lex-leader & SBP\\
-	\midrule
-	\multirow{2}{*}{\visible<2->{$O_1$}}&\visible<2->{\false & \true  & \--- & \--- & \--- & $\cdots$ & \cmark &}\\
-	\visible<3->{& \true  & \false & \--- & \--- & \--- & $\cdots$ & \xmark &  $\rightarrow$  $\neg x_1 \vee  x_2$}\\
-	\midrule
-	\multirow{2}{*}{\visible<4->{$O_2$}}&\visible<4->{\false & \false & \--- & \false & \true &$\cdots$ & \cmark &}\\
-	\visible<5->{& \false & \false & \--- & \true & \false &$\cdots$ & \xmark & $\rightarrow x_1 \lor x_2 \lor \neg x_4 \lor  x_5$}\\
-	\midrule
-	\multicolumn{9}{c}{\visible<6->{$\cdots$}}\\
-%	\visible<6->{$\cdots$  &  &  & &   &  &  &}\\
-%	\visible<6->{\true  & \true  & X & X & X  & $\cdots$ & \cmark &}\\
-	\bottomrule
-\end{tabular}
-	\end{center}
-
-
-%	\begin{tabular} {ll}
-%		 $x_1 \leq x_2$	& $x_1 \lor \neg x_2$\\
-%		 \hline
-%		 $x_1 = x_2 \rightarrow x_4 \leq x_5$ &  $ x_1 \lor x_2 \lor x_4 \lor \neg x_5 $\\
-%		 									  &  $ \neg  x_1 \lor \neg x_2 \lor x_4 \lor \neg x_5 $\\
-%		 									  \hline
-%		 $x_1 = x_2 \land x_4 = x_5 \rightarrow x_8 \leq x_3$ & $ x_1 \lor x_2 \lor x_4 \lor x_5 \lor x_7 \lor \neg x_8 $\\
-%		 													  & $ \neg x_1 \lor  \neg x_2 \lor x_4 \lor x_5 \lor x_7 \lor \neg x_8 $\\
-%		 													  & $\cdots$
-%	\end{tabular}
-
-%	TODO\\
-%
-%	Tree example with hide symmetric search space\\
-%
-%	Easy to use, no modification of the solver \\
-%
-%	Inject additional constraints to the problem symmetry breaking predicates sbp\\
-%
-%Different tools Shatter, BreakID
-
-\end{frame}
-
 
 
 %% ----------------------------------------------------------------------------
@@ -1414,8 +1364,9 @@ Example:
 
 	\node[box,minimum height=1.2cm] (cnf) {CNF};
 	\node[box] (sym) at (-3, -1) { Symmetries};
-	\node[box,minimum height=1.2cm] (sbp) at (0, -2) { SBPs};
+	\node[box,minimum height=1.2cm,onslide={<3>, starburst}] (sbp) at (0, -2) { SBPs};
 
+	
 	\node[box, minimum height=3.5cm, minimum width=2cm, line width=0.5mm, opacity=0,onslide={<2->, opacity=1}] at (0, -1) (full) {$\land$};
 	\node[box,minimum height=1.2cm, opacity=0, onslide={<2->,opacity=1}] (solver) at (3, -1) { SAT solver};
 
@@ -1427,7 +1378,7 @@ Example:
 \end{center}
 \vfill
 
-Different approaches:
+State-of-the-art:
 \begin{itemize}
 	\item Shatter \cite{aloul06}
 	\item BreakID \cite{devriendt2016improved}
@@ -1450,6 +1401,12 @@ Different approaches:
 
 
 
+\begin{frame}
+\centering
+\textcolor{UPMCEngagementBlueB}{\Large Our contribution CDCL[sym] }\\
+\vspace{2em}
+\textcolor{UPMCEngagementBlueB}{\Large  TACAS'18~\cite{metin2018cdclsym}}
+\end{frame}
 
 
 
@@ -1469,7 +1426,7 @@ Different approaches:
 %% ----------------------------------------------------------------------------
 
 \begin{frame}
-\frametitle{Our contribution CDCL[Sym]~\cite{metin2018cdclsym}}
+\frametitle{Our contribution CDCL[Sym]}
 
 Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 
@@ -1571,159 +1528,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 \end{frame}
 %% ----------------------------------------------------------------------------
 
-\begin{frame}
-	\frametitle{Example}
 
-
-	$g_1 = (x_2 \enspace x_3)(x_5 \enspace x_6)(x_8 \enspace x_9)$ \hfill
-	$g_2 = (x_1 \enspace x_2)(x_4 \enspace x_5)(x_7 \enspace x_8)$\\
-
-
-	
-\vfill
-
-	
-	
-	\centering
-	 \begin{tikzpicture}
-	 	\tikzstyle{line} = [<-, line width=0.2mm]
-
-	 	\node (a) {$\alpha = $};
-	 	
-	 	\node (g1) at ($(a) + (0pt, 25pt)$) {\textcolor{blue}{\dunderline[8pt]{1pt}{\textcolor{black}{$g_1$}}}};
-	 	\node (g2) at ($(a) + (0pt, -25pt)$) {\textcolor{orange}{\dunderline[-3pt]{1pt}{\textcolor{black}{$g_2$}}}};
-	 	
-	 	
-	 	
-	 	\node[onslide={<4->,opacity=0}] (x1) at ($(a) + (30pt, 0pt)$) {$\udef$};
-	 	
-	 	
-	 	\node[opacity=0, onslide={<4->,opacity=1}] (x11) at ($(a) + (30pt, 0pt)$) {$\true$};
-	 	
-	 	\node[onslide={<2->,opacity=0}] (x2) at ($(x1) + (30pt, 0pt)$) {$\udef$};
-	 	\node[opacity=0,onslide={<2->,opacity=1}] (x22) at ($(x1) + (30pt, 0pt)$) {$\false$};
-	 	
-	 	\node[onslide={<3->,opacity=0}] (x3) at ($(x2) + (30pt, 0pt)$) {$\udef$};
-	 	\node[opacity=0, onslide={<3->,opacity=1}] (x33) at ($(x2) + (30pt, 0pt)$) {$\false$};
-	 	\node (x4) at ($(x3) + (30pt, 0pt)$) {$\udef$};
-	 	\node (x5) at ($(x4) + (30pt, 0pt)$) {$\udef$};
-	 	\node (x6) at ($(x5) + (30pt, 0pt)$) {$\udef$};
-	 	\node (x7) at ($(x6) + (30pt, 0pt)$) {$\udef$};
-	 	\node (x8) at ($(x7) + (30pt, 0pt)$) {$\udef$};
-	 	\node (x9) at ($(x8) + (30pt, 0pt)$) {$\udef$};
-
-
-
-	 	\node  at ($(x1) + (-1pt, 0pt)$) {\textcolor{orange}{\dunderline[-3pt]{1pt}{\textcolor{black}{\phantom{$\udef$}}}}};
-	 	\node[onslide={<3->,opacity=0}]  at ($(x2) + (-2pt, 0pt)$) {\textcolor{blue}{\dunderline[9pt]{1pt}{\textcolor{black}{\phantom{$\udef$}}}}};
-	 	
-	 	
-	 	\node[opacity=0,onslide={<3->,opacity=1}]  at ($(x5) + (-2pt, 0pt)$) {\textcolor{blue}{\dunderline[9pt]{1pt}{\textcolor{black}{\phantom{$\udef$}}}}};
-	 	
-%		\draw[->] (g1)  to [bend left=30] (x1);
-%		\draw[->] (g2)  to [bend right=30] (x2);
-
-	 	\node  at ($(a) + (0pt, 50pt)$) {$\false < \true$};
-	 	\node  at ($(a) + (30pt, 50pt)$) {$x_1$};
-		\node  at ($(x1) + (30pt, 50pt)$) {$x_2$};
-		\node  at ($(x2) + (30pt, 50pt)$) {$x_3$};
-		\node  at ($(x3) + (30pt, 50pt)$) {$x_4$};
-		\node  at ($(x4) + (30pt, 50pt)$) {$x_5$};
-		\node  at ($(x5) + (30pt, 50pt)$) {$x_6$};
-		\node  at ($(x6) + (30pt, 50pt)$) {$x_7$};
-		\node  at ($(x7) + (30pt, 50pt)$) {$x_8$};
-		\node  at ($(x8) + (30pt, 50pt)$) {$x_9$};
-
-	 	\node (t1) at ($(a) + (45pt, 50pt)$) {$\leq$};
-		\node (t2) at ($(x1) + (45pt, 50pt)$) {$\leq$};
-		\node (t3) at ($(x2) + (45pt, 50pt)$) {$\leq$};
-		\node (t4) at ($(x3) + (45pt, 50pt)$) {$\leq$};
-		\node (t5) at ($(x4) + (45pt, 50pt)$) {$\leq$};
-		\node (t6) at ($(x5) + (45pt, 50pt)$) {$\leq$};
-		\node (t7) at ($(x6) + (45pt, 50pt)$) {$\leq$};
-		\node (t8) at ($(x7) + (45pt, 50pt)$) {$\leq$};
-%		\node (t9) at ($(x8) + (45t, 50pt)$) {$\leq$};
-
-
-
-	 	\node (x1t) at ($(x1) + (15pt, -30pt)$) {};
-	 	\node (x4t) at ($(x4) + (15pt, -30pt)$) {};
-	 	\node (x7t) at ($(x7) + (15pt, -30pt)$) {};
-
-	 	\draw[line] (x1.south) |-  (x1t.center);
- 	 	\draw[line] (x2.south) |-  (x1t.center);
-	 	\draw[line] (x4.south) |-  (x4t.center);
- 	 	\draw[line] (x5.south) |-  (x4t.center);
-	 	\draw[line] (x7.south) |-  (x7t.center);
-	 	\draw[line] (x8.south) |-  (x7t.center);
-
-	 	\node (x2b) at ($(x2) + (15pt, 30pt)$) {};
-	 	\node (x5b) at ($(x5) + (15pt, 30pt)$) {};
-	 	\node (x8b) at ($(x8) + (15pt, 30pt)$) {};
-
-	 	\draw[line] (x2.north) |-  (x2b.center);
-	 	\draw[line] (x3.north) |-  (x2b.center);
-
-	 	\draw[line] (x5.north) |-  (x5b.center);
-	 	\draw[line] (x6.north) |-  (x5b.center);
-
-	 	\draw[line] (x8.north) |-  (x8b.center);
-	 	\draw[line] (x9.north) |-  (x8b.center);
-
-	 \end{tikzpicture}
-	 \vfill
-\only<1-4>{ \phantom{$g_2$ generates ESBP $\omega = \{ \neg x_1, x_2 \}$ }}
-\only<5>{ $g_2$ generates ESBP $\omega = \{ \neg x_1, x_2 \}$ }
-\end{frame}
-%% ----------------------------------------------------------------------------
-%\begin{frame}
-%\frametitle{Example}
-%{\scriptsize
-%\begin{enumerate}
-%	\item \texttt{reducer}: $\alpha(g.x) \leq \alpha(x)$
-%
-%	\item \texttt{inactive}: $ \alpha(x) \leq \alpha(g.x)$
-%
-%	\item \texttt{active}: $\alpha(g.x)$ or $\alpha(x)$ is unassigned
-%\end{enumerate}
-%}
-%\vfill
-%	\begin{center}
-%		$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8  \enspace ; \enspace  \false < \true$
-%	\end{center}
-%
-%%	$(x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
-% %                 	$g_1 = (x_2 \enspace x_3)(x_5 \enspace x_6)(x_8 \enspace x_9)$\\
-%
-% \vfill
-%
-% \begin{tabular}{lllllll|ll}
-%      	$g_1$ =  & ($\only<1>{x_2}\only<2->{\textcolor{red}{x_2}} $ & $\only<1-2>{x_3}\only<3->{\textcolor{red}{x_3}}) $ & $ (x_5 $ & $ x_6)$ & $ (x_8 $ & $ x_9)$ & $x = \only<1>{x_2}\only<2>{\textcolor{red}{x_2}}\only<3->{x_5}$ & $g.x = \only<1-2>{x_3}\only<3->{\textcolor{black}{x_6}} $	\\
-%      	& $\only<1-2>{\enspace \uparrow}$&  & $\only<3->{\enspace \uparrow}$&  & & & & \texttt{active}
-% \end{tabular}
-%
-%\vspace{1em}
-% \begin{tabular}{lllllll|ll}
-%	$g_2$ =  & ($\only<1-2>{x_1}\only<3->{\textcolor{hgreen}{x_1}} $ & $\only<1>{x_2}\only<2->{\textcolor{red}{x_2}}) $ & $ (x_4 $ & $ x_5)$ & $ (x_7 $ & $ x_8)$&
-%	 $x = \only<1-2>{x_1}\only<3->{\textcolor{hgreen}{x_1}}$ & $g.x = \only<1>{x_2}\only<2->{\textcolor{red}{x_2}} $	\\
-%	& $\enspace \uparrow$ & & &  & &  &&  \only<1-2>{\texttt{active}}\only<3->{\texttt{reducer}}
-%\end{tabular}
-%
-%
-%
-%\hspace{8em}$\cdots $
-%\vfill
-%\centering
-%
-%\only<1>{$\alpha = \{ \phantom{\neg x_2,\neg x_3, x_1} \}$}%
-%\only<2>{$\alpha = \{ \neg x_2 \phantom{,\neg x_3, x_1} \}$}%
-%\only<3->{$\alpha = \{ \neg x_2, \neg x_3, x_1 \}$}
-%
-%\vspace{1em}
-%
-%\only<1-3>{ \phantom{$g_2$ generates $\omega = \{ \neg x_1, x_2 \}$ }}
-%\only<4>{ $g_2$ generates $\omega = \{ \neg x_1, x_2 \}$ }
-%	\end{frame}
 %% ----------------------------------------------------------------------------
 \begin{frame}
 \frametitle{CDCL[Sym] Implementation}
@@ -1749,7 +1554,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 \textbf{Benchmark:}
 \begin{itemize}
 	\item from SAT contests 2012 -- 2017
-	\item filter: \bliss{} finds significant symmetries in $1000$s
+	\item filter: \bliss{} finds symmetries in $1000$s
 	\item 36 \% of instances, $1\,350 / 3\,700$
 \end{itemize}
 
@@ -1822,6 +1627,14 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 %\caption{Time comparison}
 \end{table}
 
+\end{frame}
+
+
+\begin{frame}
+\centering
+\textcolor{UPMCEngagementBlueB}{\Large Exploitation of symmetries}\\
+\vspace{2em}
+\textcolor{UPMCEngagementBlueB}{\Large Dynamic symmetry breaking}
 \end{frame}
 
 %\begin{frame}{Experimental results (\unsat versus \sat)}
@@ -2014,7 +1827,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 \end{center}
 \vfill
 
-Different approaches:
+State-of-the-art:
 \begin{itemize}
 \item Symmchaff~\cite{sabharwal2005symchaff}
 \item Symmetry Propagation (SP)~\cite{Devriendt12}
@@ -2035,6 +1848,90 @@ Different approaches:
 \centering \textcolor{red}{Cannot handle some instances solved by static approach}
 }
 
+\end{frame}
+
+\begin{frame}
+	\frametitle{Learning symmetrical clause}
+	
+\begin{columns}[t]
+	\begin{column}[T]{.3\textwidth}
+		\begin{tabular}{cl}
+			\begin{tikzpicture}
+				\node[class2, scale=0.2] at (0,0){};
+			\end{tikzpicture} & formula  \\
+					
+			\begin{tikzpicture}
+				\node[point] at (0,0){};
+			\end{tikzpicture} & clause \\
+			
+			\begin{tikzpicture}
+			\node[pointl] at (0,0){};
+			\end{tikzpicture} & learnt clause \\
+			
+			
+		\end{tabular}
+	\end{column}
+	\begin{column}[T]{0.6\textwidth}
+		\begin{tikzpicture}
+		
+
+		\tikzstyle{class1}=[ellipse, draw, minimum width=6cm, minimum height=5cm]
+		
+		\visible<2-> {
+			\begin{scope}
+			\node[point] (p1) at (0, 0){};
+			%	\node[](a3) at (0, 0.25) {$\alpha_3$};
+			
+			\node[point] (p2) at (1, 0){};
+			%	\node[](a5) at (1, 0.25) {$\alpha_5$};
+			
+			\node[point] (p3) at (-2, -1){};
+			%	\node[](a6) at (-2, -0.75) {$\alpha_6$};
+			
+			\node[point] (p4) at (-3, -1){};
+			%	\node[](a4) at (-3, -0.75) {$\alpha_4$};
+			
+			\node[point] (p5) at (-1.7, 0.5){};
+			%	\node[](a1) at (-1.7, 0.75) {$\alpha_1$};
+			
+			\node[point] (p6) at (-2, 1.5){};
+			
+			\node[point] (p6) at (-1.5, 1.69){};
+			
+			\node[point] (p6) at (-1.15, 1.12){};
+			
+			\node[point] (p6) at (-2, 2.1){};
+			%	\node[](a2) at (-2, 1.75) {$\alpha_2$};
+			
+			\node[point] (p7) at (0.5, -1.5){};
+			
+			\node[point] (p7) at (0.9, -0.87){};
+			%	\node[](a7) at (0.5, -1.25) {$\alpha_7$};
+			
+			\node[point] (p8) at (-1, 2){};
+			%	\node[](a8) at (-1, 2.25) {$\alpha_8$};
+			
+			\end{scope}
+		}
+		
+
+			\begin{scope}
+			
+			%\node[class2] (c1) at (0.5,0){};
+			
+
+			\node[ellipse, draw, minimum width=6cm, minimum height=5cm] (c4) at (-1, 0) {};
+			%\node[class1] (c3) at (-1.7, 0.5){};ellipse, draw, minimum width=1cm, minimum height=1cm
+			%\node[class1] (c4) at (-2, 1.5){};
+			%\node[class1] (c5) at (0.5, -1.5){};
+			%\node[class1] (c6) at (-1, 2){};
+			\end{scope}
+			
+
+		\end{tikzpicture}
+	\end{column}
+\end{columns}
+	
 \end{frame}
 %% ----------------------------------------------------------------------------
 
@@ -2669,6 +2566,239 @@ Local symmetries
 
 \end{frame}
 
+
+
+\begin{frame}[noframenumbering]
+\frametitle{Generates symmetry breaking predicates (SBP)}
+\begin{itemize}
+	\item Define lexicographic order
+	\begin{itemize}
+		\item Define total order on variables
+		\item Define minimal value
+	\end{itemize}
+	\item Forbid non minimal assignment for each orbit %with addition of SBP
+\end{itemize}
+
+\vfill
+Example:\\
+\begin{itemize}
+	\item[]	$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8 ;  \false < \true$
+	\item[] 	$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
+\end{itemize}
+
+\vfill
+
+
+\begin{center}
+	%		\begin{tabular}{|c|c|c|c|c|}
+	%			\toprule
+	%			$x_1$ & $x_2$  & $\cdots$     & lex-leader &\\
+	%			\midrule
+	%			\visible<3->{\false & \false & $\cdots$ & \cmark &}\\
+	%			\midrule
+	%			\visible<4->{\false & \true  & $\cdots$ & \cmark &}\\
+	%			\visible<5->{\true  & \false & $\cdots$ & \xmark &  $\rightarrow$ SBP: $(x_1 \vee \neg x_2)$}\\
+	%			\midrule
+	%			\visible<6->{\true  & \true  & $\cdots$ & \cmark &}\\
+	%			\bottomrule
+	%		\end{tabular}
+	
+	\begin{tabular}{c|c|c|c|c|c|c|c|c}
+		\toprule
+		& $x_1$ & $x_2$ & \textcolor{gray}{$x_3$} & $x_4$ & $x_5$ & $\cdots$     & lex-leader & SBP\\
+		\midrule
+		\multirow{2}{*}{\visible<2->{$O_1$}}&\visible<2->{\false & \true  & \--- & \--- & \--- & $\cdots$ & \cmark &}\\
+		\visible<3->{& \true  & \false & \--- & \--- & \--- & $\cdots$ & \xmark &  $\rightarrow$  $\neg x_1 \vee  x_2$}\\
+		\midrule
+		\multirow{2}{*}{\visible<4->{$O_2$}}&\visible<4->{\false & \false & \--- & \false & \true &$\cdots$ & \cmark &}\\
+		\visible<5->{& \false & \false & \--- & \true & \false &$\cdots$ & \xmark & $\rightarrow x_1 \lor x_2 \lor \neg x_4 \lor  x_5$}\\
+		\midrule
+		\multicolumn{9}{c}{\visible<6->{$\cdots$}}\\
+		%	\visible<6->{$\cdots$  &  &  & &   &  &  &}\\
+		%	\visible<6->{\true  & \true  & X & X & X  & $\cdots$ & \cmark &}\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+
+
+%	\begin{tabular} {ll}
+%		 $x_1 \leq x_2$	& $x_1 \lor \neg x_2$\\
+%		 \hline
+%		 $x_1 = x_2 \rightarrow x_4 \leq x_5$ &  $ x_1 \lor x_2 \lor x_4 \lor \neg x_5 $\\
+%		 									  &  $ \neg  x_1 \lor \neg x_2 \lor x_4 \lor \neg x_5 $\\
+%		 									  \hline
+%		 $x_1 = x_2 \land x_4 = x_5 \rightarrow x_8 \leq x_3$ & $ x_1 \lor x_2 \lor x_4 \lor x_5 \lor x_7 \lor \neg x_8 $\\
+%		 													  & $ \neg x_1 \lor  \neg x_2 \lor x_4 \lor x_5 \lor x_7 \lor \neg x_8 $\\
+%		 													  & $\cdots$
+%	\end{tabular}
+
+%	TODO\\
+%
+%	Tree example with hide symmetric search space\\
+%
+%	Easy to use, no modification of the solver \\
+%
+%	Inject additional constraints to the problem symmetry breaking predicates sbp\\
+%
+%Different tools Shatter, BreakID
+
+\end{frame}
+
+
+
+\begin{frame}[noframenumbering]
+\frametitle{Example}
+
+
+$g_1 = (x_2 \enspace x_3)(x_5 \enspace x_6)(x_8 \enspace x_9)$ \hfill
+$g_2 = (x_1 \enspace x_2)(x_4 \enspace x_5)(x_7 \enspace x_8)$\\
+
+
+
+\vfill
+
+
+
+\centering
+\begin{tikzpicture}
+\tikzstyle{line} = [<-, line width=0.2mm]
+
+\node (a) {$\alpha = $};
+
+\node (g1) at ($(a) + (0pt, 25pt)$) {\textcolor{blue}{\dunderline[8pt]{1pt}{\textcolor{black}{$g_1$}}}};
+\node (g2) at ($(a) + (0pt, -25pt)$) {\textcolor{orange}{\dunderline[-3pt]{1pt}{\textcolor{black}{$g_2$}}}};
+
+
+
+\node[onslide={<4->,opacity=0}] (x1) at ($(a) + (30pt, 0pt)$) {$\udef$};
+
+
+\node[opacity=0, onslide={<4->,opacity=1}] (x11) at ($(a) + (30pt, 0pt)$) {$\true$};
+
+\node[onslide={<2->,opacity=0}] (x2) at ($(x1) + (30pt, 0pt)$) {$\udef$};
+\node[opacity=0,onslide={<2->,opacity=1}] (x22) at ($(x1) + (30pt, 0pt)$) {$\false$};
+
+\node[onslide={<3->,opacity=0}] (x3) at ($(x2) + (30pt, 0pt)$) {$\udef$};
+\node[opacity=0, onslide={<3->,opacity=1}] (x33) at ($(x2) + (30pt, 0pt)$) {$\false$};
+\node (x4) at ($(x3) + (30pt, 0pt)$) {$\udef$};
+\node (x5) at ($(x4) + (30pt, 0pt)$) {$\udef$};
+\node (x6) at ($(x5) + (30pt, 0pt)$) {$\udef$};
+\node (x7) at ($(x6) + (30pt, 0pt)$) {$\udef$};
+\node (x8) at ($(x7) + (30pt, 0pt)$) {$\udef$};
+\node (x9) at ($(x8) + (30pt, 0pt)$) {$\udef$};
+
+
+
+\node  at ($(x1) + (-1pt, 0pt)$) {\textcolor{orange}{\dunderline[-3pt]{1pt}{\textcolor{black}{\phantom{$\udef$}}}}};
+\node[onslide={<3->,opacity=0}]  at ($(x2) + (-2pt, 0pt)$) {\textcolor{blue}{\dunderline[9pt]{1pt}{\textcolor{black}{\phantom{$\udef$}}}}};
+
+
+\node[opacity=0,onslide={<3->,opacity=1}]  at ($(x5) + (-2pt, 0pt)$) {\textcolor{blue}{\dunderline[9pt]{1pt}{\textcolor{black}{\phantom{$\udef$}}}}};
+
+%		\draw[->] (g1)  to [bend left=30] (x1);
+%		\draw[->] (g2)  to [bend right=30] (x2);
+
+\node  at ($(a) + (0pt, 50pt)$) {$\false < \true$};
+\node  at ($(a) + (30pt, 50pt)$) {$x_1$};
+\node  at ($(x1) + (30pt, 50pt)$) {$x_2$};
+\node  at ($(x2) + (30pt, 50pt)$) {$x_3$};
+\node  at ($(x3) + (30pt, 50pt)$) {$x_4$};
+\node  at ($(x4) + (30pt, 50pt)$) {$x_5$};
+\node  at ($(x5) + (30pt, 50pt)$) {$x_6$};
+\node  at ($(x6) + (30pt, 50pt)$) {$x_7$};
+\node  at ($(x7) + (30pt, 50pt)$) {$x_8$};
+\node  at ($(x8) + (30pt, 50pt)$) {$x_9$};
+
+\node (t1) at ($(a) + (45pt, 50pt)$) {$\leq$};
+\node (t2) at ($(x1) + (45pt, 50pt)$) {$\leq$};
+\node (t3) at ($(x2) + (45pt, 50pt)$) {$\leq$};
+\node (t4) at ($(x3) + (45pt, 50pt)$) {$\leq$};
+\node (t5) at ($(x4) + (45pt, 50pt)$) {$\leq$};
+\node (t6) at ($(x5) + (45pt, 50pt)$) {$\leq$};
+\node (t7) at ($(x6) + (45pt, 50pt)$) {$\leq$};
+\node (t8) at ($(x7) + (45pt, 50pt)$) {$\leq$};
+%		\node (t9) at ($(x8) + (45t, 50pt)$) {$\leq$};
+
+
+
+\node (x1t) at ($(x1) + (15pt, -30pt)$) {};
+\node (x4t) at ($(x4) + (15pt, -30pt)$) {};
+\node (x7t) at ($(x7) + (15pt, -30pt)$) {};
+
+\draw[line] (x1.south) |-  (x1t.center);
+\draw[line] (x2.south) |-  (x1t.center);
+\draw[line] (x4.south) |-  (x4t.center);
+\draw[line] (x5.south) |-  (x4t.center);
+\draw[line] (x7.south) |-  (x7t.center);
+\draw[line] (x8.south) |-  (x7t.center);
+
+\node (x2b) at ($(x2) + (15pt, 30pt)$) {};
+\node (x5b) at ($(x5) + (15pt, 30pt)$) {};
+\node (x8b) at ($(x8) + (15pt, 30pt)$) {};
+
+\draw[line] (x2.north) |-  (x2b.center);
+\draw[line] (x3.north) |-  (x2b.center);
+
+\draw[line] (x5.north) |-  (x5b.center);
+\draw[line] (x6.north) |-  (x5b.center);
+
+\draw[line] (x8.north) |-  (x8b.center);
+\draw[line] (x9.north) |-  (x8b.center);
+
+\end{tikzpicture}
+\vfill
+\only<1-4>{ \phantom{$g_2$ generates ESBP $\omega = \{ \neg x_1, x_2 \}$ }}
+\only<5>{ $g_2$ generates ESBP $\omega = \{ \neg x_1, x_2 \}$ }
+\end{frame}
+%% ----------------------------------------------------------------------------
+\begin{frame}[noframenumbering]
+\frametitle{Example}
+{\scriptsize
+\begin{enumerate}
+	\item \texttt{reducer}: $\alpha(g.x) \leq \alpha(x)$
+	
+	\item \texttt{inactive}: $ \alpha(x) \leq \alpha(g.x)$
+	
+	\item \texttt{active}: $\alpha(g.x)$ or $\alpha(x)$ is unassigned
+\end{enumerate}
+}
+\vfill
+\begin{center}
+$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8  \enspace ; \enspace  \false < \true$
+\end{center}
+
+%	$(x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
+%                 	$g_1 = (x_2 \enspace x_3)(x_5 \enspace x_6)(x_8 \enspace x_9)$\\
+
+\vfill
+
+\begin{tabular}{lllllll|ll}
+$g_1$ =  & ($\only<1>{x_2}\only<2->{\textcolor{red}{x_2}} $ & $\only<1-2>{x_3}\only<3->{\textcolor{red}{x_3}}) $ & $ (x_5 $ & $ x_6)$ & $ (x_8 $ & $ x_9)$ & $x = \only<1>{x_2}\only<2>{\textcolor{red}{x_2}}\only<3->{x_5}$ & $g.x = \only<1-2>{x_3}\only<3->{\textcolor{black}{x_6}} $	\\
+& $\only<1-2>{\enspace \uparrow}$&  & $\only<3->{\enspace \uparrow}$&  & & & & \texttt{active}
+\end{tabular}
+
+\vspace{1em}
+\begin{tabular}{lllllll|ll}
+$g_2$ =  & ($\only<1-2>{x_1}\only<3->{\textcolor{hgreen}{x_1}} $ & $\only<1>{x_2}\only<2->{\textcolor{red}{x_2}}) $ & $ (x_4 $ & $ x_5)$ & $ (x_7 $ & $ x_8)$&
+$x = \only<1-2>{x_1}\only<3->{\textcolor{hgreen}{x_1}}$ & $g.x = \only<1>{x_2}\only<2->{\textcolor{red}{x_2}} $	\\
+& $\enspace \uparrow$ & & &  & &  &&  \only<1-2>{\texttt{active}}\only<3->{\texttt{reducer}}
+\end{tabular}
+
+
+
+\hspace{8em}$\cdots $
+\vfill
+\centering
+
+\only<1>{$\alpha = \{ \phantom{\neg x_2,\neg x_3, x_1} \}$}%
+\only<2>{$\alpha = \{ \neg x_2 \phantom{,\neg x_3, x_1} \}$}%
+\only<3->{$\alpha = \{ \neg x_2, \neg x_3, x_1 \}$}
+
+\vspace{1em}
+
+\only<1-3>{ \phantom{$g_2$ generates $\omega = \{ \neg x_1, x_2 \}$ }}
+\only<4>{ $g_2$ generates $\omega = \{ \neg x_1, x_2 \}$ }
+\end{frame}
 
 \begin{frame}[noframenumbering]
 \frametitle{Encoding the problem}
