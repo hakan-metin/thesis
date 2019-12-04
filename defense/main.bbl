@@ -6,12 +6,6 @@
 \newblock Efficient symmetry breaking for boolean satisfiability.
 \newblock {\em {IEEE} Trans. Computers}, 55(5):549--558, 2006.
 
-\bibitem[BCCZ99]{bmc_99}
-Armin Biere, Alessandro Cimatti, Edmund Clarke, and Yunshan Zhu.
-\newblock Symbolic model checking without bdds.
-\newblock {\em Tools and Algorithms for the Construction and Analysis of
-  Systems}, pages 193--207, 1999.
-
 \bibitem[BNOS10]{benhamou2010enhancing}
 Belaid Benhamou, Tarek Nabhani, Richard Ostrowski, and Mohamed~Reda Saidi.
 \newblock Enhancing clause learning by symmetry in sat solvers.
@@ -50,17 +44,6 @@ Martin Davis, George Logemann, and Donald Loveland.
 \newblock A machine program for theorem-proving.
 \newblock {\em Commun. ACM}, 5(7):394--397, July 1962.
 
-\bibitem[KS{\etalchar{+}}92]{planning_92}
-Henry~A Kautz, Bart Selman, et~al.
-\newblock Planning as satisfiability.
-\newblock In {\em ECAI}, volume~92, pages 359--363, 1992.
-
-\bibitem[LMS06]{biology_06}
-In{\^e}s Lynce and Joao Marques-Silva.
-\newblock Sat in bioinformatics: Making the case with haplotype inference.
-\newblock In {\em International Conference on Theory and Applications of
-  Satisfiability Testing}, pages 136--141. Springer, 2006.
-
 \bibitem[MBCK18]{metin2018cdclsym}
 Hakan Metin, Souheib Baarir, Maximilien Colange, and Fabrice Kordon.
 \newblock Cdclsym: Introducing effective symmetry breaking in sat solving.
@@ -73,11 +56,6 @@ Hakan Metin, Souheib Baarir, and Fabrice Kordon.
   sat solving.
 \newblock In {\em NASA Formal Methods Symposium}, pages 316--332. Springer,
   2019.
-
-\bibitem[MM00]{crypto_00}
-Fabio Massacci and Laura Marraro.
-\newblock Logical cryptanalysis as a sat problem.
-\newblock {\em Journal of Automated Reasoning}, 24(1):165--203, 2000.
 
 \bibitem[MSS99]{marques1999grasp}
 Joao~P Marques-Silva and Karem~A Sakallah.

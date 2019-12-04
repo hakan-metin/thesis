@@ -267,12 +267,7 @@ Is it possible to attribute each group to a unique classroom?
 \begin{frame}
 \frametitle{Encoding the problem}
 	
-	\visible<2>{
-	\begin{center}
-		Conjunctive Normal Form (CNF)
-	\end{center}
-}
-	\vfill
+
 	
 \begin{columns}
 	\begin{column}{0.1\textwidth}
@@ -314,10 +309,22 @@ Is it possible to attribute each group to a unique classroom?
 \end{columns}
 
 \begin{tikzpicture}[overlay]
-	\node[rounded, thick, minimum width=2cm, minimum height=0.5cm] at (208pt, 169pt) {};
+	\node[rounded, thick, minimum width=2cm, minimum height=0.5cm,opacity=0,onslide={<2->,opacity=1}] (c) at (208pt, 169pt) {};
+	\node[,opacity=0,onslide={<2->,opacity=1}] (ct) at ($(c) + (+90pt, 10pt)$)  {Clause};
+	\draw [->,thick,opacity=0,onslide={<2->,opacity=1}] (ct.west) to [bend right=30] (c);
 	
-	\node[rounded, thick, minimum width=3cm, minimum height=6.5cm] at (208pt, 88pt) {};
+	\node[rounded, thick, minimum width=3cm, minimum height=6.5cm,opacity=0,onslide={<3->,opacity=1}](f) at (210pt, 88pt) {};
+	\node[,opacity=0,onslide={<3->,opacity=1}] (ft) at ($(f) + (+90pt, 0pt)$) {CNF};
+	\draw [->,thick,opacity=0,onslide={<3->,opacity=1}] (ft.west) to [bend right=0] (f);
 \end{tikzpicture}
+
+\visible<3->{
+	\begin{center}
+		Conjunctive Normal Form (CNF)
+	\end{center}
+	}
+\vfill
+
 \end{frame}
 
 
@@ -388,6 +395,11 @@ Is it possible to attribute each group to a unique classroom?
 \node[box] (hlp) {High level problem};
 \node[box] (input) at ($(hlp) + (0pt, -50pt)$){Logic formula};
 
+
+\node[](p) at ($(hlp) + (100pt, 0pt)$) {\includegraphics[width=.25\textwidth]{images/plan2}};
+
+\node[](p) at ($(input) + (100pt, 0pt)$) {\includegraphics[width=.25\textwidth]{images/plan2}};
+
 \node[box, line width=0.4mm, minimum width=10cm,minimum height=5cm]  at (0pt, -100pt){};
 %\node<2->[draw, ellipse] (cnf) at ($(input) + (0pt, -10pt)$) {\scriptsize CNF};
 
@@ -438,6 +450,12 @@ Is it possible to attribute each group to a unique classroom?
 
 	Solving SAT formula is known to be \textbf{NP-complete}~\cite{cook1971complexity}
 	\vfill
+	Good performance in practice:
+	\begin{itemize}
+		\item Handle large problem (million variables and clauses)
+		\item International SAT competition each year on academic and industrial problems
+	\end{itemize}
+\vfill
 	Enumerative algorithms:
 	\begin{itemize}
 		\item Davis, Putnam, Logemann, and Loveland (DPLL)~\cite{dpll_62}
@@ -452,14 +470,63 @@ Is it possible to attribute each group to a unique classroom?
 		\end{itemize}
 	\end{itemize}
 
-\vfill 
+\end{frame}
 
-Good performance in practice:
-\begin{itemize}
-	\item Handle large problem (million variables and clauses)
-	\item International SAT competition compete each year on academic and industrial problems
-\end{itemize}
 
+\begin{frame}
+	\frametitle{CDCL in detail}
+	\centering
+	\begin{tikzpicture}[scale=0.9,every node/.style={scale=0.5,fill=white, font=\sffamily}, align=center]
+	% Specification of nodes (position, etc.)
+	\tikzset{%
+		>={Latex[width=2mm,length=2mm]},
+		% Specifications for style of nodes:
+		base/.style = {rectangle, rounded corners, draw=black,
+			minimum width=2cm, minimum height=1cm,
+			text centered, font=\sffamily},
+		question/.style = {base, diamond, fill=blue!15},
+		question/.style = {base, diamond, fill=blue!15},
+		unsat/.style = {base, fill=red!30,minimum width=3cm},
+		sat/.style = {base, fill=green!30,minimum width=3cm},
+		process/.style = {base, minimum width=2.5cm, fill=orange!25,
+			font=\ttfamily},
+		processcurr/.style = {process, thick, line width=0.7mm, draw=purple!80 },
+		questioncurr/.style = {question,line width=0.7mm, draw=purple!80},
+		line/.style = {->, thick },
+		linecurr/.style = {line, line width=0.7mm, draw=purple!80},
+	}
+	
+	\node (isfin) [question] {All vars\\ assign?};
+	\node (dec)     [process] at ($(isfin) + (0pt, -50pt)$)    {Choose decision var};
+	\node (sdec)     [right = of dec]          {};
+	\node (idec) [left = of isfin]  {};
+	\node (prop)    [process] at ($(dec) + (0pt, -30pt)$)          {Unit Propagation};
+	
+	
+	\node (conf)    [question] at ($(prop) + (0pt, -40pt)$){ Is Conflict?};
+	\node (confanalyse) [process] at ($(conf) + (0pt, -60pt)$) {Conflict Analysis};
+	\node (learn) [process] at ($(prop) + (90pt, 0)$) {Learn conflict clause\\ and backjump};
+	\node (isend) [question] at ($(confanalyse) + (90pt, 0)$) {is level\\zero?};
+	\node (end) [unsat,double=black!10,double distance=0.5mm] at ($(isend) + (90pt, 0)$) {$unsatiasfiable$};
+	\node (ends) [sat,double=black!10,double distance=0.5mm] at ($(isfin) + (+90pt, 0)$){$satisfiable$};
+	
+	
+	\draw[line,color=orange!50]     (sdec) -- (dec);
+	\draw[line]     (dec) -- (prop);
+	\draw[line]     (prop) -- (conf);
+	\draw[line,opacity=1]     (conf) -| node [yshift=4.5 cm] {no}(idec.center) -- (isfin);
+	
+	\draw[line]     (conf) -- node {yes} (confanalyse);
+	\draw[line]     (isfin) -- node {no}(dec);
+	\draw[line]     (confanalyse) --(isend);
+	\draw[line]     (isend) -- node {yes}(end);
+	\draw[line]     (isfin) -- node {yes}(ends);
+	\draw[line]     (learn) -- (prop);
+	\draw[line]     (isend) -- node [] {no}(learn);
+	
+
+	
+	\end{tikzpicture}
 \end{frame}
 %% ----------------------------------------------------------------------------
 %\begin{frame}
@@ -744,6 +811,11 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \end{frame}
 
 
+\begin{frame}
+	\centering
+	\textcolor{UPMCEngagementBlueB}{\Large SAT and symmetries}\\
+
+\end{frame}
 
 
 %\begin{frame}
@@ -1023,7 +1095,7 @@ Equi-satisfiability:
 		}
 	\end{tabular}
 \vfill
-	\visible<4-> {\centering The set of symmetries of a formula is a group noted $G$}
+	\visible<4-> {\small \centering The set of symmetries of a formula is a group noted $G$}
 \end{frame}
 
 \begin{frame}
@@ -1032,6 +1104,9 @@ Equi-satisfiability:
 \vspace{2em}
 	\textcolor{UPMCEngagementBlueB}{\Large Static symmetry breaking}
 \end{frame}
+
+
+
 
 \begin{frame}
 \frametitle{Orbit}
@@ -1054,6 +1129,11 @@ Example:
 				\node[class2, scale=0.2] at (0,0){};
 				\end{tikzpicture} & orbit  \\
 			}
+		\visible<5>{
+			\begin{tikzpicture}
+		\node[point+] at (0,0){};
+		\end{tikzpicture} & representative   \\
+		}
 		\end{tabular}
 	\end{column}
 	\begin{column}[T]{0.6\textwidth}
@@ -1096,6 +1176,11 @@ Example:
 			\node[point] (p8) at (-1, 2){};
 			%	\node[](a8) at (-1, 2.25) {$\alpha_8$};
 
+\visible<5>{
+			\node[point+] (p1) at (0, 0){};
+			\node[point+] (p4) at (-3, -1){};
+			\node[point+] (p8) at (-1, 2){};
+}
 			\end{scope}
 		}
 
@@ -1167,6 +1252,23 @@ Example:
 
 \end{frame}
 
+
+\begin{frame}
+	\frametitle{Compare assignment}
+	
+	Define an ordering relation to compare assignment
+	\begin{itemize}
+		\item Total ordering on variables
+		\item Minimum value: $\false < \true$ or $\true < \false$
+	\end{itemize}
+\vfill
+
+	Allow only minimal (maximal) value\\
+	\vfill
+	Forbids other assignment in each orbit\\
+	Adds Symmetry breaking predicates (SBP)
+	
+\end{frame}
 
 %% ----------------------------------------------------------------------------
 \begin{frame}
@@ -1273,82 +1375,84 @@ Example:
 \end{frame}
 
 
-\begin{frame}
- \frametitle{Representative assignment}
-
-
-\begin{center}
-
-		\begin{tikzpicture}
-		
-		\tikzstyle{class2}=[ellipse, draw, minimum width=2cm, minimum height=1cm]
-		\tikzstyle{class1}=[ellipse, draw, minimum width=1cm, minimum height=1cm]
-		
-
-			\begin{scope}
-			
-			\node[point+] (p1) at (0, 0){};
-			%	\node[](a3) at (0, 0.25) {$\alpha_3$};
-			
-			\node[point] (p2) at (1, 0){};
-			%	\node[](a5) at (1, 0.25) {$\alpha_5$};
-			
-			\node[point] (p3) at (-2, -1){};
-			%	\node[](a6) at (-2, -0.75) {$\alpha_6$};
-			
-			\node[point+] (p4) at (-3, -1){};
-			%	\node[](a4) at (-3, -0.75) {$\alpha_4$};
-			
-			\node[point] (p5) at (-1.7, 0.5){};
-			%	\node[](a1) at (-1.7, 0.75) {$\alpha_1$};
-			
-			\node[point] (p6) at (-2, 1.5){};
-			
-			\node[point] (p6) at (-1.5, 1.69){};
-			
-			\node[point] (p6) at (-1.15, 1.12){};
-			
-			\node[point] (p6) at (-2, 2.1){};
-			%	\node[](a2) at (-2, 1.75) {$\alpha_2$};
-			
-			\node[point] (p7) at (0.5, -1.5){};
-			
-			\node[point] (p7) at (0.9, -0.87){};
-			%	\node[](a7) at (0.5, -1.25) {$\alpha_7$};
-			
-			\node[point+] (p8) at (-1, 2){};
-			%	\node[](a8) at (-1, 2.25) {$\alpha_8$};
-			
-			\end{scope}
-		
-		
-			\begin{scope}
-			
-			%\node[class2] (c1) at (0.5,0){};
-			\node[class2] (c2) at (-2.5, -1){};
-			
-			\node[ellipse, draw, minimum width=2cm, minimum height=2.6cm] (c3) at (-1.5, 1.5) {};
-			\node[ellipse, draw, minimum width=2cm, minimum height=2.75cm] (c4) at (0.5, -0.75) {};
-
-			\end{scope}
-		
-
-		\end{tikzpicture}
-\end{center}
-
-		\begin{tabular}{cl}
-	\begin{tikzpicture}
-	\node[point] at (0,0){};
-	\end{tikzpicture} & full assignment \\
-	\begin{tikzpicture}
-	\node[class2, scale=0.2] at (0,0){};
-	\end{tikzpicture} & orbit  \\
-	\begin{tikzpicture}
-	\node[point+] at (0,0){};
-	\end{tikzpicture} & representative assignment  \\
-\end{tabular}
-\end{frame}
-
+%\begin{frame}
+% \frametitle{Representative assignment}
+%
+%
+%\begin{center}
+%
+%		\begin{tikzpicture}
+%		
+%		\tikzstyle{class2}=[ellipse, draw, minimum width=2cm, minimum height=1cm]
+%		\tikzstyle{class1}=[ellipse, draw, minimum width=1cm, minimum height=1cm]
+%		
+%
+%			\begin{scope}
+%			
+%
+%			%	\node[](a3) at (0, 0.25) {$\alpha_3$};
+%			
+%			\node[point] (p2) at (1, 0){};
+%			%	\node[](a5) at (1, 0.25) {$\alpha_5$};
+%			
+%			\node[point] (p3) at (-2, -1){};
+%			%	\node[](a6) at (-2, -0.75) {$\alpha_6$};
+%			
+%
+%			%	\node[](a4) at (-3, -0.75) {$\alpha_4$};
+%			
+%			\node[point] (p5) at (-1.7, 0.5){};
+%			%	\node[](a1) at (-1.7, 0.75) {$\alpha_1$};
+%			
+%			\node[point] (p6) at (-2, 1.5){};
+%			
+%			\node[point] (p6) at (-1.5, 1.69){};
+%			
+%			\node[point] (p6) at (-1.15, 1.12){};
+%			
+%			\node[point] (p6) at (-2, 2.1){};
+%			%	\node[](a2) at (-2, 1.75) {$\alpha_2$};
+%			
+%			\node[point] (p7) at (0.5, -1.5){};
+%			
+%			\node[point] (p7) at (0.9, -0.87){};
+%			%	\node[](a7) at (0.5, -1.25) {$\alpha_7$};
+%			
+%						\node[point+] (p1) at (0, 0){};
+%						\node[point+] (p4) at (-3, -1){};
+%			\node[point+] (p8) at (-1, 2){};
+%			%	\node[](a8) at (-1, 2.25) {$\alpha_8$};
+%			
+%			\end{scope}
+%		
+%		
+%			\begin{scope}
+%			
+%			%\node[class2] (c1) at (0.5,0){};
+%			\node[class2] (c2) at (-2.5, -1){};
+%			
+%			\node[ellipse, draw, minimum width=2cm, minimum height=2.6cm] (c3) at (-1.5, 1.5) {};
+%			\node[ellipse, draw, minimum width=2cm, minimum height=2.75cm] (c4) at (0.5, -0.75) {};
+%
+%			\end{scope}
+%		
+%
+%		\end{tikzpicture}
+%\end{center}
+%
+%		\begin{tabular}{cl}
+%	\begin{tikzpicture}
+%	\node[point] at (0,0){};
+%	\end{tikzpicture} & full assignment \\
+%	\begin{tikzpicture}
+%	\node[class2, scale=0.2] at (0,0){};
+%	\end{tikzpicture} & orbit  \\
+%	\begin{tikzpicture}
+%	\node[point+] at (0,0){};
+%	\end{tikzpicture} & representative assignment  \\
+%\end{tabular}
+%\end{frame}
+%
 
 
 
@@ -1376,15 +1480,6 @@ Example:
 	\draw[->, thick, opacity=0, onslide={<2->,opacity=1}] (full) to [] (solver);
 \end{tikzpicture}
 \end{center}
-\vfill
-
-State-of-the-art:
-\begin{itemize}
-	\item Shatter \cite{aloul06}
-	\item BreakID \cite{devriendt2016improved}
-	\item $...$
-\end{itemize}
-
 \vfill
 
 \visible<3>{
@@ -1637,6 +1732,42 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 \textcolor{UPMCEngagementBlueB}{\Large Dynamic symmetry breaking}
 \end{frame}
 
+
+\begin{frame}
+	\frametitle{Dynamic Symmetry Breaking}
+	
+	\begin{center}
+		\begin{tikzpicture}[scale=0.8,every node/.style={scale=0.8}]
+		\tikzstyle{box} = [draw, minimum width=1.5cm]
+		
+		\node[box,minimum height=1.2cm] (cnf) at (-5, 0) {CNF};
+		\node[box] (sym) at (-2, -2) { Symmetries};
+		
+		
+		\node[box,minimum width=3cm,minimum height=3.5cm,label={[yshift=-1cm]SAT Solver}] (solver) at (1, -1) { };
+		\node[box,text width=2cm] (symcomp) at (1, -1.5) {Symmetry component};
+		\draw[->, thick, bend left = 30] (cnf) to [bend right=30] node [midway, left, fill=white, align=center] {compute\\symmetries} (sym);
+		
+		\draw[->, thick,bend left = 30] (cnf) to [] (solver);
+		\draw[->, thick] (sym) to [] (symcomp);
+		\end{tikzpicture}
+	\end{center}
+	\vfill
+	
+	State-of-the-art:
+	\begin{itemize}
+		\item Symmchaff~\cite{sabharwal2005symchaff}
+		\item Symmetry Propagation (SP)~\cite{Devriendt12}
+		\item Symmetry Learning Scheme (SLS)~\cite{benhamou2010enhancing}
+		\item Symmetry Explanation Leaning (SEL)~\cite{devriendt2017symmetric}
+		\item $...$
+	\end{itemize}
+	
+	\vfill
+	
+	
+\end{frame}
+
 %\begin{frame}{Experimental results (\unsat versus \sat)}
 %
 %\begin{tabular}{lcccc}
@@ -1697,7 +1828,87 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 
 %% ----------------------------------------------------------------------------
 
-
+\begin{frame}
+	\frametitle{Learning symmetrical clauses}
+	
+	\begin{columns}[t]
+		\begin{column}[T]{.3\textwidth}
+			\begin{tabular}{cl}
+				\begin{tikzpicture}
+				\node[class2, scale=0.2] at (0,0){};
+				\end{tikzpicture} & formula  \\
+				
+				\begin{tikzpicture}
+				\node[point] at (0,0){};
+				\end{tikzpicture} & clause \\
+				\visible<2->{
+					\begin{tikzpicture}
+					\node[pointl] at (0,0){};
+					\end{tikzpicture} & learnt clause \\
+				}
+				
+			\end{tabular}
+		\end{column}
+		\begin{column}[T]{0.6\textwidth}
+			\begin{tikzpicture}
+			
+			
+			\tikzstyle{class1}=[ellipse, draw, minimum width=6cm, minimum height=5cm]
+			
+			\node[point] (p1) at (0, 0){};
+			%	\node[](a3) at (0, 0.25) {$\alpha_3$};
+			
+			\node[point] (p2) at (1, 0){};
+			%	\node[](a5) at (1, 0.25) {$\alpha_5$};
+			
+			\node[point] (p3) at (-2, -1){};
+			%	\node[](a6) at (-2, -0.75) {$\alpha_6$};
+			
+			\node[point] (p4) at (-3, -1){};
+			%	\node[](a4) at (-3, -0.75) {$\alpha_4$};
+			
+			\node[point] (p5) at (-1.7, 0.5){};
+			%	\node[](a1) at (-1.7, 0.75) {$\alpha_1$};
+			
+			\node[point] (p6) at (-2, 1.5){};
+			
+			\node[point] (p6) at (-1.5, 1.69){};
+			
+			\node[point] (p6) at (-1.15, 1.12){};
+			
+			\node[point] (p6) at (-2, 2.1){};
+			%	\node[](a2) at (-2, 1.75) {$\alpha_2$};
+			
+			
+			
+			\node[pointl,opacity=0, onslide={<3>,opacity=1}] (p7) at (0.5, -1.5){};
+			
+			\node[pointl,opacity=0, onslide={<3>,opacity=1}] (pl) at (0.5, 1.5){};
+			
+			\node[point] (p7a) at (0.9, -0.87){};
+			%	\node[](a7) at (0.5, -1.25) {$\alpha_7$};
+			
+			\node[point] (p8) at (-1, 2){};
+			
+			\node[point] (po) at (-3 , -0.2){};
+			%	\node[](a8) at (-1, 2.25) {$\alpha_8$};
+			
+			\node[pointl,opacity=0, onslide={<2->,opacity=1}] (l) at (-1, 0.1){};
+			
+			
+			
+			\node[ellipse, draw, minimum width=6cm, minimum height=5cm] (c4) at (-1, 0) {};
+			
+			\draw[->,opacity=0, onslide={<3>,opacity=1}] (l) to [bend right=30] node [midway, left, align=center,opacity=0, onslide={<3>,opacity=1}] {$g_1$}  (p7);
+			
+			\draw[->,opacity=0, onslide={<3>,opacity=1}] (l) to [bend right=30] node [midway, left, align=center,opacity=0, onslide={<3>,opacity=1}] {$g_2$}  (pl);
+			\draw[->,opacity=0, onslide={<3>,opacity=1}] (l) to [bend right=10] node [midway, fill=white, align=center,opacity=0, onslide={<3>,opacity=1}] {$g_3$}  (po);
+			
+			\end{tikzpicture}
+		\end{column}
+	\end{columns}
+	
+\end{frame}
 
 
 %% ----------------------------------------------------------------------------
@@ -1850,89 +2061,7 @@ State-of-the-art:
 
 \end{frame}
 
-\begin{frame}
-	\frametitle{Learning symmetrical clause}
-	
-\begin{columns}[t]
-	\begin{column}[T]{.3\textwidth}
-		\begin{tabular}{cl}
-			\begin{tikzpicture}
-				\node[class2, scale=0.2] at (0,0){};
-			\end{tikzpicture} & formula  \\
-					
-			\begin{tikzpicture}
-				\node[point] at (0,0){};
-			\end{tikzpicture} & clause \\
-			
-			\begin{tikzpicture}
-			\node[pointl] at (0,0){};
-			\end{tikzpicture} & learnt clause \\
-			
-			
-		\end{tabular}
-	\end{column}
-	\begin{column}[T]{0.6\textwidth}
-		\begin{tikzpicture}
-		
 
-		\tikzstyle{class1}=[ellipse, draw, minimum width=6cm, minimum height=5cm]
-		
-		\visible<2-> {
-			\begin{scope}
-			\node[point] (p1) at (0, 0){};
-			%	\node[](a3) at (0, 0.25) {$\alpha_3$};
-			
-			\node[point] (p2) at (1, 0){};
-			%	\node[](a5) at (1, 0.25) {$\alpha_5$};
-			
-			\node[point] (p3) at (-2, -1){};
-			%	\node[](a6) at (-2, -0.75) {$\alpha_6$};
-			
-			\node[point] (p4) at (-3, -1){};
-			%	\node[](a4) at (-3, -0.75) {$\alpha_4$};
-			
-			\node[point] (p5) at (-1.7, 0.5){};
-			%	\node[](a1) at (-1.7, 0.75) {$\alpha_1$};
-			
-			\node[point] (p6) at (-2, 1.5){};
-			
-			\node[point] (p6) at (-1.5, 1.69){};
-			
-			\node[point] (p6) at (-1.15, 1.12){};
-			
-			\node[point] (p6) at (-2, 2.1){};
-			%	\node[](a2) at (-2, 1.75) {$\alpha_2$};
-			
-			\node[point] (p7) at (0.5, -1.5){};
-			
-			\node[point] (p7) at (0.9, -0.87){};
-			%	\node[](a7) at (0.5, -1.25) {$\alpha_7$};
-			
-			\node[point] (p8) at (-1, 2){};
-			%	\node[](a8) at (-1, 2.25) {$\alpha_8$};
-			
-			\end{scope}
-		}
-		
-
-			\begin{scope}
-			
-			%\node[class2] (c1) at (0.5,0){};
-			
-
-			\node[ellipse, draw, minimum width=6cm, minimum height=5cm] (c4) at (-1, 0) {};
-			%\node[class1] (c3) at (-1.7, 0.5){};ellipse, draw, minimum width=1cm, minimum height=1cm
-			%\node[class1] (c4) at (-2, 1.5){};
-			%\node[class1] (c5) at (0.5, -1.5){};
-			%\node[class1] (c6) at (-1, 2){};
-			\end{scope}
-			
-
-		\end{tikzpicture}
-	\end{column}
-\end{columns}
-	
-\end{frame}
 %% ----------------------------------------------------------------------------
 
 %\begin{frame}
@@ -1965,6 +2094,14 @@ State-of-the-art:
 %\end{enumerate}
 %\end{frame}
 %
+
+\begin{frame}
+	\centering
+	\textcolor{UPMCEngagementBlueB}{\Large Our contribution CDCL[sym] }\\
+	\vspace{2em}
+	\textcolor{UPMCEngagementBlueB}{\Large  NFM'19~\cite{metin2019composing}}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{ESBP + SP~\cite{metin2019composing}}
