@@ -316,6 +316,8 @@ Is it possible to attribute each group to a unique classroom?
 	\node[rounded, thick, minimum width=3cm, minimum height=6.5cm,opacity=0,onslide={<3->,opacity=1}](f) at (210pt, 88pt) {};
 	\node[,opacity=0,onslide={<3->,opacity=1}] (ft) at ($(f) + (+90pt, 0pt)$) {CNF};
 	\draw [->,thick,opacity=0,onslide={<3->,opacity=1}] (ft.west) to [bend right=0] (f);
+	
+	\node[](p) at (20pt, 88pt) {\includegraphics[width=.25\textwidth]{images/plan2}};
 \end{tikzpicture}
 
 \visible<3->{
@@ -396,9 +398,9 @@ Is it possible to attribute each group to a unique classroom?
 \node[box] (input) at ($(hlp) + (0pt, -50pt)$){Logic formula};
 
 
-\node[](p) at ($(hlp) + (100pt, 0pt)$) {\includegraphics[width=.25\textwidth]{images/plan2}};
+%\node[](p) at ($(hlp) + (100pt, 0pt)$) {\includegraphics[width=.25\textwidth]{images/plan2}};
 
-\node[](p) at ($(input) + (100pt, 0pt)$) {\includegraphics[width=.25\textwidth]{images/plan2}};
+%\node[](p) at ($(input) + (80pt, 0pt)$) {\includegraphics[width=.08\textwidth]{images/form}};
 
 \node[box, line width=0.4mm, minimum width=10cm,minimum height=5cm]  at (0pt, -100pt){};
 %\node<2->[draw, ellipse] (cnf) at ($(input) + (0pt, -10pt)$) {\scriptsize CNF};
@@ -1266,7 +1268,8 @@ Example:
 	Allow only minimal (maximal) value\\
 	\vfill
 	Forbids other assignment in each orbit\\
-	Adds Symmetry breaking predicates (SBP)
+	\vfill
+	\centering 	Adds Symmetry breaking predicates (SBP)
 	
 \end{frame}
 
@@ -1482,6 +1485,14 @@ Example:
 \end{center}
 \vfill
 
+State-of-the-art approaches:
+\begin{itemize}
+	\item Shatter \cite{aloul06}
+	\item BreakID \cite{devriendt2016improved}
+	\item $...$
+\end{itemize}
+
+\vfill
 \visible<3>{
 
 %Pros/Cons:
@@ -1498,7 +1509,7 @@ Example:
 
 \begin{frame}
 \centering
-\textcolor{UPMCEngagementBlueB}{\Large Our contribution CDCL[sym] }\\
+\textcolor{UPMCEngagementBlueB}{\Large CDCL[sym] Introducing Effective Symmetry Breaking in SAT Solving }\\
 \vspace{2em}
 \textcolor{UPMCEngagementBlueB}{\Large  TACAS'18~\cite{metin2018cdclsym}}
 \end{frame}
@@ -1521,7 +1532,7 @@ Example:
 %% ----------------------------------------------------------------------------
 
 \begin{frame}
-\frametitle{Our contribution CDCL[Sym]}
+\frametitle{CDCL[Sym]}
 
 Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 
@@ -1564,7 +1575,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 
 \node[opacity=0,onslide={<2>,opacity=1},draw, rounded corners=4pt,draw=blue, line width=0.8mm, minimum width=4cm,minimum height=6.5cm,label={[opacity=0,onslide={<2>,opacity=1},fill=white,xshift=-1.0cm, yshift=-7cm]\textcolor{blue}{Symmetry controller}}]  at (-90pt, -140pt){};
 \node (ismin)  [question,opacity=0,onslide={<2>,opacity=1}] at ($(conf) + (-90pt, 0pt)$)  {Is assignment\\minimal?};
-\node (genesbp)  [process,opacity=0,onslide={<2>,opacity=1}] at ($(confanalyse) + (-90pt, 0pt)$)  {Generate SBP};
+\node (genesbp)  [process,opacity=0,onslide={<2>,opacity=1}] at ($(confanalyse) + (-90pt, 0pt)$)  {Generate ESBP};
 
 
 
@@ -1733,40 +1744,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 \end{frame}
 
 
-\begin{frame}
-	\frametitle{Dynamic Symmetry Breaking}
-	
-	\begin{center}
-		\begin{tikzpicture}[scale=0.8,every node/.style={scale=0.8}]
-		\tikzstyle{box} = [draw, minimum width=1.5cm]
-		
-		\node[box,minimum height=1.2cm] (cnf) at (-5, 0) {CNF};
-		\node[box] (sym) at (-2, -2) { Symmetries};
-		
-		
-		\node[box,minimum width=3cm,minimum height=3.5cm,label={[yshift=-1cm]SAT Solver}] (solver) at (1, -1) { };
-		\node[box,text width=2cm] (symcomp) at (1, -1.5) {Symmetry component};
-		\draw[->, thick, bend left = 30] (cnf) to [bend right=30] node [midway, left, fill=white, align=center] {compute\\symmetries} (sym);
-		
-		\draw[->, thick,bend left = 30] (cnf) to [] (solver);
-		\draw[->, thick] (sym) to [] (symcomp);
-		\end{tikzpicture}
-	\end{center}
-	\vfill
-	
-	State-of-the-art:
-	\begin{itemize}
-		\item Symmchaff~\cite{sabharwal2005symchaff}
-		\item Symmetry Propagation (SP)~\cite{Devriendt12}
-		\item Symmetry Learning Scheme (SLS)~\cite{benhamou2010enhancing}
-		\item Symmetry Explanation Leaning (SEL)~\cite{devriendt2017symmetric}
-		\item $...$
-	\end{itemize}
-	
-	\vfill
-	
-	
-\end{frame}
+
 
 %\begin{frame}{Experimental results (\unsat versus \sat)}
 %
@@ -1829,7 +1807,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 %% ----------------------------------------------------------------------------
 
 \begin{frame}
-	\frametitle{Learning symmetrical clauses}
+	\frametitle{Learn symmetrical clauses}
 	
 	\begin{columns}[t]
 		\begin{column}[T]{.3\textwidth}
@@ -1854,7 +1832,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 			
 			
 			\tikzstyle{class1}=[ellipse, draw, minimum width=6cm, minimum height=5cm]
-			
+			Our contribution C
 			\node[point] (p1) at (0, 0){};
 			%	\node[](a3) at (0, 0.25) {$\alpha_3$};
 			
@@ -2097,14 +2075,14 @@ State-of-the-art:
 
 \begin{frame}
 	\centering
-	\textcolor{UPMCEngagementBlueB}{\Large Our contribution CDCL[sym] }\\
+	\textcolor{UPMCEngagementBlueB}{\Large Composing Symmetry Propagation and Effective Symmetry Breaking for SAT Solving }\\
 	\vspace{2em}
 	\textcolor{UPMCEngagementBlueB}{\Large  NFM'19~\cite{metin2019composing}}
 \end{frame}
 
 
 \begin{frame}
-\frametitle{ESBP + SP~\cite{metin2019composing}}
+\frametitle{ESBP + SP}
 
 
 Compose the symmetry propagation and the ESBP\\
@@ -2129,16 +2107,16 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 \frametitle{Local symmetries}
   \begin{columns}[t]
 	\begin{column}[c]{.4\textwidth}
-		Formula $\leftarrow$ (Symmetries)
+		Formula $\leftarrow$ ($\{g_1, g_2, g_3\}$)
 	\end{column}
 	\begin{column}[c]{.5\textwidth}
 		\begin{itemize}
-			\item[] $\omega_1 \leftarrow$ (Local symmetries)
-			\item[] $\omega_2 \leftarrow$ (Local symmetries)
-			\item[] $\omega_3 \leftarrow$ (Local symmetries)
-			\item[] $\omega_4 \leftarrow$ (Local symmetries)
+			\item[] $\omega_1 \leftarrow$ ($\{g_1, g_2, g_3\}$)
+			\item[] $\omega_2 \leftarrow$ ($\{g_1, g_2, g_3\}$)
+			\item[] $\omega_3 \leftarrow$ ($\{g_1, g_2, g_3\}$)
+			\item[] $\omega_4 \leftarrow$ ($\{g_1, g_2, g_3\}$)
 			\smallskip
-			\visible<2->{\item[] $\omega_{5}$} \visible<3->{$\leftarrow$ (Local symmetries)}
+			\visible<2->{\item[] $\omega_{5}$} \visible<3->{$\leftarrow$ ($\{g_1, g_3\}$)}
 		\end{itemize}
 \end{column}
 \end{columns}
