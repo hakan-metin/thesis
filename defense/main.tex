@@ -1744,7 +1744,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 \begin{frame}
 \frametitle{CDCL[Sym] Implementation}
 \begin{itemize}
-	\item Packaged as a library \textbf{\libdsb}\footnote{\url{https://github.com/lip6/cosy}}
+	\item Packaged as a library \textbf{\libdsb}\footnote{\url{https://github.com/lip6/cosy}} (Controller of Symmetry)
 %	, to be combined with your solver\\{\color{blue}\hfill$\rightarrow$ e.g. +3\% LOC on \minisat}.
 
 	\item Lightweight
@@ -1768,7 +1768,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 	\item filter: \bliss{} finds symmetries in $1000$ seconds
 	\item 36 \% of instances, $1\,350 / 3\,700$
 \end{itemize}
-
+\vfill
 \textbf{Setup:}
 \begin{itemize}
 	\item four tools
@@ -1821,7 +1821,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 	\texttt{MiniSAT} & 2243h & 586 &325 &261 \\
 	\texttt{Shatter} &2088h & 640 & 316 &324 \\
 	\texttt{BreakID} &1790h & 749 &334 &415 \\
-	\texttt{MiniSym} &  \cellcolor{gray!30}\textbf{1735h} &  \cellcolor{gray!30}\textbf{775} & \cellcolor{gray!30}\textbf{336} &  \cellcolor{gray!30}\textbf{439} \\
+	\textbf{\texttt{MiniSym}} &  \cellcolor{gray!30}\textbf{1735h} &  \cellcolor{gray!30}\textbf{775} & \cellcolor{gray!30}\textbf{336} &  \cellcolor{gray!30}\textbf{439} \\
 
 \end{tabular}
 
@@ -1918,15 +1918,15 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 		\begin{column}[T]{.3\textwidth}
 			\begin{tabular}{cl}
 				\begin{tikzpicture}
-				\node[class2, scale=0.2] at (0,0){};
+				\node[draw,thick, scale=0.5] at (0,0){};
 				\end{tikzpicture} & formula  \\
 				
 				\begin{tikzpicture}
-				\node[point] at (0,0){};
+				\node[] at (0,0){$\omega$};
 				\end{tikzpicture} & clause \\
 				\visible<2->{
 					\begin{tikzpicture}
-					\node[pointl] at (0,0){};
+					\node[] at (0,0){ \textcolor{orange}{$\omega$}};
 					\end{tikzpicture} & learnt clause \\
 				}
 				
@@ -1936,51 +1936,51 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 			\begin{tikzpicture}
 			
 			
-			\tikzstyle{class1}=[ellipse, draw, minimum width=6cm, minimum height=5cm]
+			\tikzstyle{class1}=[draw, minimum width=6cm, minimum height=5cm]
 			Our contribution C
-			\node[point] (p1) at (0, 0){};
+			\node[] (p1) at (0, 0){$\omega$};
 			%	\node[](a3) at (0, 0.25) {$\alpha_3$};
 			
-			\node[point] (p2) at (1, 0){};
+			\node[] (p2) at (1, 0){$\omega$};
 			%	\node[](a5) at (1, 0.25) {$\alpha_5$};
 			
-			\node[point] (p3) at (-2, -1){};
+			\node[] (p3) at (-2, -1){$\omega$};
 			%	\node[](a6) at (-2, -0.75) {$\alpha_6$};
 			
-			\node[point] (p4) at (-3, -1){};
+			\node[] (p4) at (-3, -1){$\omega$};
 			%	\node[](a4) at (-3, -0.75) {$\alpha_4$};
 			
-			\node[point] (p5) at (-1.7, 0.5){};
+			\node[] (p5) at (-1.7, 0.5){$\omega$};
 			%	\node[](a1) at (-1.7, 0.75) {$\alpha_1$};
 			
-			\node[point] (p6) at (-2, 1.5){};
+			\node[] (p6) at (-2, 1.5){$\omega$};
 			
-			\node[point] (p6) at (-1.5, 1.69){};
+			\node[] (p6) at (-1.5, 1.69){$\omega$};
 			
-			\node[point] (p6) at (-1.15, 1.12){};
+			\node[] (p6) at (-1.15, 1.12){$\omega$};
 			
-			\node[point] (p6) at (-2, 2.1){};
+			\node[] (p6) at (-2, 2.1){$\omega$};
 			%	\node[](a2) at (-2, 1.75) {$\alpha_2$};
 			
 			
 			
-			\node[pointl,opacity=0, onslide={<3>,opacity=1}] (p7) at (0.5, -1.5){};
+			\node[,opacity=0, onslide={<3>,opacity=1}] (p7) at (0.5, -1.5){\textcolor{orange}{$\omega$}};
 			
-			\node[pointl,opacity=0, onslide={<3>,opacity=1}] (pl) at (0.5, 1.5){};
+			\node[,opacity=0, onslide={<3>,opacity=1}] (pl) at (0.5, 1.5){\textcolor{orange}{$\omega$}};
 			
-			\node[point] (p7a) at (0.9, -0.87){};
+			\node[] (p7a) at (0.9, -0.87){$\omega$};
 			%	\node[](a7) at (0.5, -1.25) {$\alpha_7$};
 			
-			\node[point] (p8) at (-1, 2){};
+			\node[] (p8) at (-1, 2){$\omega$};
 			
-			\node[point] (po) at (-3 , -0.2){};
+			\node[] (po) at (-3 , -0.2){$\omega$};
 			%	\node[](a8) at (-1, 2.25) {$\alpha_8$};
 			
-			\node[pointl,opacity=0, onslide={<2->,opacity=1}] (l) at (-1, 0.1){};
+			\node[,opacity=0, onslide={<2->,opacity=1}] (l) at (-1, 0.1){\textcolor{orange}{$\omega$}};
 			
 			
 			
-			\node[ellipse, draw, minimum width=6cm, minimum height=5cm] (c4) at (-1, 0) {};
+			\node[thick, draw, minimum width=6cm, minimum height=5cm] (c4) at (-1, 0) {};
 			
 			\draw[->,opacity=0, onslide={<3>,opacity=1}] (l) to [bend right=30] node [midway, left, align=center,opacity=0, onslide={<3>,opacity=1}] {$g_1$}  (p7);
 			
@@ -2208,45 +2208,151 @@ Problems:
 In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 \end{frame}
 %% ----------------------------------------------------------------------------
+
 \begin{frame}
-\frametitle{Local symmetries}
-  \begin{columns}[t]
-	\begin{column}[c]{.4\textwidth}
-		Formula $\leftarrow$ ($\{g_1, g_2, g_3\}$)
+	\frametitle{Local symmetry}
+		\begin{columns}[t]
+		\begin{column}[T]{.3\textwidth}
+			\begin{tabular}{cl}
+				\begin{tikzpicture}
+				\node[draw,thick, scale=0.5] at (0,0){};
+				\end{tikzpicture} & formula  \\
+				
+				\begin{tikzpicture}
+				\node[] at (0,0){$\omega$};
+				\end{tikzpicture} & clause \\
+				\visible<1->{
+					\begin{tikzpicture}
+					\node[] at (0,0){ \textcolor{orange}{$\omega$}};
+					\end{tikzpicture} & learnt clause \\
+				}
+					\visible<2->{
+					\begin{tikzpicture}
+					\node[] at (0,0){ \textcolor{purple}{$\omega$}};
+					\end{tikzpicture} & esbp \\
+				}
+			\end{tabular}
+		\end{column}
+		\begin{column}[T]{0.6\textwidth}
+			\begin{tikzpicture}
+			
+			
+			\tikzstyle{class1}=[draw, minimum width=6cm, minimum height=5cm]
+			Our contribution C
+			\node[] (p1) at (0, 0){$\omega$};
+
+			
+			\node[] (p2) at (1, 0){$\omega$};
+			%	\node[](a5) at (1, 0.25) {$\alpha_5$};
+			
+			\node[] (p3) at (-2, -1){$\omega$};
+			%	\node[](a6) at (-2, -0.75) {$\alpha_6$};
+			
+			\node[] (p4) at (-3, -1){$\omega$};
+			%	\node[](a4) at (-3, -0.75) {$\alpha_4$};
+			
+			\node[] (p5) at (-1.7, 0.5){$\omega$};
+			%	\node[](a1) at (-1.7, 0.75) {$\alpha_1$};
+			
+			\node[] (p6) at (-2, 1.5){$\omega$};
+			
+			\node[] (p6) at (-1.5, 1.69){$\omega$};
+			
+			\node[] (p6) at (-1.15, 1.12){$\omega$};
+			
+			\node[] (p6) at (-2, 2.1){$\omega$};
+			%	\node[](a2) at (-2, 1.75) {$\alpha_2$};
+			
+			
+			
+			\node[,opacity=0, onslide={<5->,opacity=1}] (p7) at (0.5, -1.5){\textcolor{orange}{$\omega$}};
+			
+			%\node[,opacity=0, onslide={<4->,opacity=1}] (pl) at (0.5, 1.5){\textcolor{orange}{$\omega$}};
+			
+			\node[] (p7a) at (0.9, -0.87){$\omega$};
+			%	\node[](a7) at (0.5, -1.25) {$\alpha_7$};
+			
+			\node[] (p8) at (-1, 2){$\omega$};
+			
+			\node[] (po) at (-3 , -0.2){$\omega$};
+			%	\node[](a8) at (-1, 2.25) {$\alpha_8$};
+			
+			\node[,opacity=0, onslide={<4->,opacity=1}] (l) at (-1, 0.1){\textcolor{orange}{$\omega$}};
+			
+			\node[,opacity=0, onslide={<2->,opacity=1}] (lpp) at (-3, 1.75){\textcolor{purple}{$\omega$}};
+			
+			\node[thick, draw, minimum width=6cm, minimum height=5cm] (c4) at (-1, 0) {};
+			
+			\draw[->,opacity=0, onslide={<5->,opacity=1}] (l) to [bend right=30] node [midway, left, align=center,opacity=0, onslide={<5->,opacity=1}] {$g_1$}  (p7);
+			
+		%	\draw[->,opacity=0, onslide={<3>,opacity=1}] (l) to [bend right=30] node [midway, left, align=center,opacity=0, onslide={<3>,opacity=1}] {$g_2$}  (pl);
+			\draw[->,opacity=0, onslide={<5->,opacity=1}] (l) to [bend right=10] node [midway, fill=white, align=center,opacity=0, onslide={<5->,opacity=1}] {$g_3$}  (po);
+			
+			
+				\draw[->,opacity=0, onslide={<3->,opacity=1}] (lpp)  to[out=90, in=180,loop,looseness=4.8]node [midway, left, align=center,opacity=0, onslide={<3->,opacity=1}] {$g_1$}  (lpp);
+				
+			\end{tikzpicture}
+		\end{column}
+	\end{columns}
+
+\vfill
+\begin{columns}[t]
+	\begin{column}[t]{.3\textwidth}
+		Local symmetries:\\
+		$\omega \leftarrow \{g_1, g_2, g_3\}$\\
+		\visible<3->{\textcolor{purple}{$\omega$} $\leftarrow \{g_1 \}$}\\
+		\visible<5->{\textcolor{orange}{$\omega$} $\leftarrow \{g_1, g_3\}$}
 	\end{column}
-	\begin{column}[c]{.5\textwidth}
-		\begin{itemize}
-			\item[] $\omega_1 \leftarrow$ ($\{g_1, g_2, g_3\}$)
-			\item[] $\omega_2 \leftarrow$ ($\{g_1, g_2, g_3\}$)
-			\item[] $\omega_3 \leftarrow$ ($\{g_1, g_2, g_3\}$)
-			\item[] $\omega_4 \leftarrow$ ($\{g_1, g_2, g_3\}$)
-			\smallskip
-			\visible<2->{\item[] $\omega_{5}$} \visible<3->{$\leftarrow$ ($\{g_1, g_3\}$)}
-		\end{itemize}
+\begin{column}[t]{.6\textwidth}
+	\begin{itemize}
+	\item \visible<3->{Compute valid local symmetries}\\
+		\item \visible<3->{On the fly}\\
+	\item \visible<3->{At minimal cost}\\
+	\end{itemize}
+	\centering \visible<3->{\textbf{Inductive construction}}
 \end{column}
 \end{columns}
-
-\vfill
-
-  \begin{columns}[t]
-	\begin{column}[c]{.3\textwidth}
-		Macro level
-	\end{column}
-	\begin{column}[c]{.5\textwidth}
-		$\rightarrow \qquad$ Micro level
-	\end{column}
-\end{columns}
-
-\vfill
-\visible<3->{Compute valid local symmetries on-the-fly at a minimal cost.}
-\visible<4>{
-\begin{itemize}
-	\item Inductive construction of the valid symmetries
-	\item During the solving
-	\item At a minimal cost
-\end{itemize}
-}
 \end{frame}
+
+%\begin{frame}
+%\frametitle{Local symmetries}
+%  \begin{columns}[t]
+%	\begin{column}[c]{.4\textwidth}
+%		Formula $\leftarrow$ ($\{g_1, g_2, g_3\}$)
+%	\end{column}
+%	\begin{column}[t]{.5\textwidth}
+%		\begin{itemize}
+%			\item[] $\omega_1 \leftarrow$ ($\{g_1, g_2, g_3\}$)
+%			\item[] $\omega_2 \leftarrow$ ($\{g_1, g_2, g_3\}$)
+%			\item[] $\omega_3 \leftarrow$ ($\{g_1, g_2, g_3\}$)
+%			\item[] $\omega_4 \leftarrow$ ($\{g_1, g_2, g_3\}$)
+%			\smallskip
+%			\visible<2->{\item[] $\omega_{5}$} \visible<3->{$\leftarrow$ ($\{g_1, g_3\}$)}
+%		\end{itemize}
+%\end{column}
+%\end{columns}
+%
+%\vfill
+%
+%  \begin{columns}[t]
+%	\begin{column}[c]{.3\textwidth}
+%		Macro level
+%	\end{column}
+%	\begin{column}{.7\textwidth}
+%		$\rightarrow \qquad$ Micro level
+%	\end{column}
+%\end{columns}
+%
+%\vfill
+%\visible<3->{Compute valid local symmetries on-the-fly at a minimal cost.}
+%\visible<4>{
+%\begin{itemize}
+%	\item Inductive construction of the valid symmetries
+%	\item During the solving
+%	\item At a minimal cost
+%\end{itemize}
+%}
+%\end{frame}
 
 %% ----------------------------------------------------------------------------
 
