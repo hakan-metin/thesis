@@ -508,7 +508,7 @@ Is it possible to attribute each group to a unique classroom?
 	
 	\node (isfin) [question] {All vars\\ assign?};
 	\node (dec)     [process] at ($(isfin) + (0pt, -50pt)$)    {Choose decision var};
-	\node (sdec)     [right = of dec]          {};
+	\node (sdec)     [right = of dec]          {Start};
 	\node (idec) [left = of isfin]  {};
 	\node (prop)    [process] at ($(dec) + (0pt, -30pt)$)          {Unit Propagation};
 	
@@ -521,7 +521,7 @@ Is it possible to attribute each group to a unique classroom?
 	\node (ends) [sat,double=black!10,double distance=0.5mm] at ($(isfin) + (+90pt, 0)$){$satisfiable$};
 	
 	
-	\draw[line,color=orange!50]     (sdec) -- (dec);
+	\draw[line]     (sdec) -- (dec);
 	\draw[line]     (dec) -- (prop);
 	\draw[line]     (prop) -- (conf);
 	\draw[line,opacity=1]     (conf) -| node [yshift=4.5 cm] {no}(idec.center) -- (isfin);
@@ -532,7 +532,7 @@ Is it possible to attribute each group to a unique classroom?
 	\draw[line]     (isend) -- node {yes}(end);
 	\draw[line]     (isfin) -- node {yes}(ends);
 	\draw[line]     (learn) -- (prop);
-	\draw[line]     (isend) -- node [] {no}(learn);
+	\draw[line]     (isend) -- node [thick] {no}(learn);
 	
 
 	
@@ -1042,8 +1042,9 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 
 	\frametitle{Symmetry (Syntactic)}
 	\normalsize
-	A symmetry (permuation) $g$ is a bijective function (on variables) that leaves the formula invariant
+	A symmetry (permuation) $g$ is a bijective function (on variables) that leaves the formula $\varphi$ invariant
 	\vfill
+	\visible<2->{
 	\scriptsize
 	\mbox{$g$ = \bigg(\begin{tabular}{ccccccccc}
 		$x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & $x_7$ & $x_8$ & $x_9$\\
@@ -1105,12 +1106,14 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \path[line] (a12) edge  (b12);
 
 \end{tikzpicture}
+}
 \vfill
 \normalsize
 %\centering The set of symmetries of a formula is a group noted $G$
-
+	\visible<3->{
 Equi-satisfiability:
 	$$\alpha \models \varphi \Leftrightarrow g.\alpha \models \varphi$$
+}
 \end{frame}
 
 
@@ -1349,6 +1352,7 @@ Example:
 	
 	\vfill
 	
+	\scriptsize
 Example:\\
 \begin{itemize}
 	\item[]	$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8 ;  \false < \true$
@@ -1362,12 +1366,15 @@ Example:\\
 
 		& $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & $x_7$& $x_8$ \\
 		\toprule
-		$\alpha$ &\false & \true  & \false & \false & \false & \false& \false& \false \\
-		 &&&&$\prec$&&&\\
-		$g.\alpha$ &\false & \true  & \false & \false & \false & \false& \false& \false \\
+		 \visible<2->{$g.\alpha$ &\false & \true  & \false & \false & \false & \false& \false& \false} \\
+		 \visible<3->{&&&&$\prec$&&&}\\
+		 $\alpha$ &\true & \false  & \false & \false & \false & \false& \false& \false \\
+
 	\end{tabular}
 \end{center}
-	
+\vfill
+	\normalsize
+	\visible<4->{Generate SBP $\omega = \{ \neg x_1, x_2\}$}
 	
 \end{frame}
 
@@ -1659,7 +1666,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 
 \node (isfin) [question] {All vars\\ assign?};
 \node (dec)     [process] at ($(isfin) + (0pt, -50pt)$)    {Choose decision var};
-\node (sdec)     [right = of dec]          {};
+\node[] (sdec)     [right = of dec]          {Start};
 \node (idec) [left = of isfin]  {};
 \node (prop)    [process] at ($(dec) + (0pt, -30pt)$)          {Unit Propagation};
 
@@ -1677,7 +1684,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 
 
 
-\draw[line,color=orange!50]     (sdec) -- (dec);
+\draw[line]     (sdec) -- (dec);
 \draw[line]     (dec) -- (prop);
 \draw[line]     (prop) -- (conf);
 \draw[line,opacity=1,onslide={<2>,opacity=0}]     (conf) -| node [yshift=4.5 cm] {no}(idec.center) -- (isfin);
@@ -1758,7 +1765,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 \textbf{Benchmark:}
 \begin{itemize}
 	\item from SAT contests 2012 -- 2017
-	\item filter: \bliss{} finds symmetries in $1000$s
+	\item filter: \bliss{} finds symmetries in $1000$ seconds
 	\item 36 \% of instances, $1\,350 / 3\,700$
 \end{itemize}
 
@@ -1771,7 +1778,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 		\item MiniSat + Shatter (SOTA SAT solver using symmetries)
 		\item \textbf{MiniSym} = MiniSat + CDCL[Sym] (our approach)
 	\end{itemize}
-	\item $5000$s timeout, $8$GB memory
+	\item $5000$ seconds timeout, $8$GB memory
 	\item includes time to compute symmetries (except for MiniSat)
 \end{itemize}
 
@@ -2249,7 +2256,7 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 \textbf{Benchmark:}
 \begin{itemize}
 	\item from SAT contests 2012 -- 2018
-	\item retain only instances for which \bliss{} finds significant symmetries in $1000$s
+	\item retain only instances for which \bliss{} finds significant symmetries in $1000$ seconds
 	\item $1400$ symmetric instances (out of $4000$)
 \end{itemize}
 
@@ -2263,7 +2270,7 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 		\item  MiniSat ESBP (Minisat with CDCL[Sym])
 		\item  \textbf{Minisat ESBP-SP} (our approach)
 	\end{itemize}
-	\item $7200$s timeout
+	\item $7200$ seconds timeout
 \end{itemize}
 
 \centering
