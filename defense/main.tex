@@ -304,7 +304,7 @@ Is it possible to attribute each group to a unique classroom?
 		\vspace{1em}
 		$(\neg x_3 \lor  \neg x_6) \enspace \land$\\
 		$(\neg x_3 \lor  \neg x_9) \enspace \land$\\
-		$(\neg x_6 \lor  \neg x_9) \enspace \land$\\
+		$(\neg x_6 \lor  \neg x_9) \enspace $\\
 	\end{column}
 \end{columns}
 
@@ -314,19 +314,27 @@ Is it possible to attribute each group to a unique classroom?
 	\draw [->,thick,opacity=0,onslide={<2->,opacity=1}] (ct.west) to [bend right=30] (c);
 	
 	\node[rounded, thick, minimum width=3cm, minimum height=6.5cm,opacity=0,onslide={<3->,opacity=1}](f) at (210pt, 88pt) {};
-	\node[,opacity=0,onslide={<3->,opacity=1}] (ft) at ($(f) + (+90pt, 0pt)$) {CNF};
+	\node[,opacity=0,onslide={<3->,opacity=1},align=center] (ft) at ($(f) + (+90pt, 0pt)$) {Conjunctive\\ Normal\\ Form (CNF)};
 	\draw [->,thick,opacity=0,onslide={<3->,opacity=1}] (ft.west) to [bend right=0] (f);
 	
 	\node[](p) at (20pt, 88pt) {\includegraphics[width=.25\textwidth]{images/plan2}};
+	
+	\draw[thick] (5.5, 0) -- (5.5, 6);
 \end{tikzpicture}
 
-\visible<3->{
-	\begin{center}
-		Conjunctive Normal Form (CNF)
-	\end{center}
-	}
+%\visible<3>{
+%	\begin{center}
+%		Conjunctive Normal Form (CNF)
+%	\end{center}
+%	}
 \vfill
 
+\visible<4->{
+	Clause represented as a set:
+	\begin{center}
+		$(x_1 \lor x_2 \lor x_3) \rightarrow \{x_1, x_2, x_3\}$
+	\end{center}
+}
 \end{frame}
 
 
@@ -387,7 +395,7 @@ Is it possible to attribute each group to a unique classroom?
 %\end{frame}
 %% ----------------------------------------------------------------------------
 \begin{frame}
-\frametitle{SAT}
+\frametitle{SAT design}
 \vspace{1em}
 \centering
 \begin{tikzpicture}
@@ -407,7 +415,7 @@ Is it possible to attribute each group to a unique classroom?
 
 \node[rounded,minimum width=3.5cm, minimum height=1cm,onslide={<2>,opacity=0}] (solver) at ($(input) + (0pt, -40pt)$) {SAT solver};
 
-\node[rounded,minimum width=3.5cm, minimum height=1cm,opacity=0,line width=0.7mm,onslide={<2>,opacity=1}] (so) at ($(input) + (0pt, -40pt)$) {SAT solver};
+\node[rounded,minimum width=3.5cm, minimum height=1cm,opacity=0,draw=olive,line width=0.7mm,onslide={<2>,opacity=1}] (so) at ($(input) + (0pt, -40pt)$) {SAT solver};
 
 \node[result,align=center] (sat) at ($(solver) + (-70pt, -50pt)$) {Satisfiable ($\texttt{SAT}$) \\ + assignment};
 \node[result,align=center] (unsat) at ($(solver) + (70pt, -50pt)$) {Unsatisfiable ($\texttt{UNSAT}$) \\ + proof};
@@ -606,19 +614,19 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \tikzstyle{trmid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=0.3,font=\scriptsize]
 
 % layer 1
-\node[decision,onslide={<2->,opacity=1},onslide={<4->,propagation}](t) at (0,0) {$x_1$};
+\node[decision,onslide={<2-3>,opacity=1},onslide={<5->,propagation,opacity=1}](t) at (0,0) {$x_1$};
 
 % layer 2
 \node[decision](l) at (-\x,\y) {$x_2$};
-\node[scale=2,opacity=0,onslide={<4->, opacity=1}](lko) at (-\x,\y) {\ko};
-\node[decision,onslide={<5->,opacity=1},onslide={<7->,propagation}](r) at (\x,\y) {$x_2$};
+\node[scale=2,opacity=0,onslide={<5->, opacity=1}](lko) at (-\x,\y) {\ko};
+\node[decision,onslide={<6-7>,opacity=1},onslide={<9->,propagation,opacity=1}](r) at (\x,\y) {$x_2$};
 
 % layer 3
 \node[decision](ll) at (-\x-\x*0.5,2*\y) {$x_3$};
 \node[decision](lr) at (-\x+\x*0.5,2*\y) {$x_3$};
 \node[decision](rl) at (\x-\x*0.5,2*\y) {$x_3$};
-\node[scale=2,opacity=0,onslide={<7->,opacity=1}](rlko) at (\x-\x*0.5,2*\y) {\ko};
-\node[decision,onslide={<8->,opacity=1}](rr) at (\x+\x*0.5,2*\y) {$x_3$};
+\node[scale=2,opacity=0,onslide={<9->,opacity=1}](rlko) at (\x-\x*0.5,2*\y) {\ko};
+\node[decision,onslide={<10->,opacity=1}](rr) at (\x+\x*0.5,2*\y) {$x_3$};
 
 % layer 4
 \node[decision](lll) at (-\x-\x*0.5-\x*0.25,3*\y) {$x_4$};
@@ -627,7 +635,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \node[decision](lrr) at (-\x+\x*0.5+\x*0.25,3*\y) {$x_4$};
 \node[decision](rll) at (\x-\x*0.5-\x*0.25,3*\y) {$x_4$};
 \node[decision](rlr) at (\x-\x*0.5+\x*0.25,3*\y) {$x_4$};
-\node[decision,onslide={<9->,opacity=1,propagation}](rrl) at (\x+\x*0.5-\x*0.25,3*\y) {$x_4$};
+\node[decision,onslide={<11->,opacity=1,propagation}](rrl) at (\x+\x*0.5-\x*0.25,3*\y) {$x_4$};
 %\node[decision](rrr) at (\x+\x*0.5+\x*0.25,3*\y) {$x_4$};
 
 % layer 5
@@ -645,17 +653,18 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \node[unsat](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
 \node[unsat](rlrr) at (\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {};
 \node[unsat](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
-\node[sat,onslide={<9->,opacity=1}](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+\node[sat,onslide={<11->,opacity=1}](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
 %\node[unsat](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
 %\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {};
 
 
-\draw[link,onslide={<2->,opacity=1}] (t) ->  node [trmid, onslide={<2->,mid}] {$0$} (l);
-\draw[link,onslide={<4->,opacity=1}] (t) -> node [trmid, onslide={<4->,mid}] {$1$} (r);
+\draw[link,onslide={<2-3>,opacity=1}] (t) ->  node [trmid, onslide={<2-3>,mid}] {$0$} (l);
+\draw[link,onslide={<5->,opacity=1}] (t) -> node [trmid, onslide={<5->,mid}] {$1$} (r);
+
 \draw[link] (l) ->  node [trmid] {$0$} (ll);
 \draw[link] (l) -> node [trmid] {$1$} (lr);
-\draw[link,onslide={<5->,opacity=1}] (r) ->  node [trmid,onslide={<5->,mid}] {$0$} (rl);
-\draw[link,onslide={<7->,opacity=1}] (r) -> node [trmid,onslide={<7->,mid}] {$1$} (rr);
+\draw[link,onslide={<6-7>,opacity=1}] (r) ->  node [trmid,onslide={<6-7>,mid}] {$0$} (rl);
+\draw[link,onslide={<9->,opacity=1}] (r) -> node [trmid,onslide={<9->,mid}] {$1$} (rr);
 
 \draw[link] (ll) -> node [trmid] {$0$} (lll);
 \draw[link] (ll) -> node [trmid] {$1$} (llr);
@@ -663,7 +672,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \draw[link] (lr) -> node [trmid] {$1$} (lrr);
 \draw[link] (rl) -> node [trmid] {$0$} (rll);
 \draw[link] (rl) -> node [trmid] {$1$} (rlr);
-\draw[link,onslide={<8->,opacity=1}] (rr) -> node [trmid,onslide={<8->,text opacity=1}] {$0$} (rrl);
+\draw[link,onslide={<10->,opacity=1}] (rr) -> node [trmid,onslide={<10->,text opacity=1}] {$0$} (rrl);
 %	\draw[link] (rr) -> node [trmid] {$1$} (rrr);
 
 
@@ -680,7 +689,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \draw[link] (rlr) -> node [trmid] {$0$} (rlrl);
 \draw[link] (rlr) -> node [trmid] {$1$} (rlrr);
 \draw[link] (rrl) -> node [trmid] {$0$} (rrll);
-\draw[link,onslide={<9->,opacity=1}] (rrl) -> node [trmid,onslide={<9->,text opacity=1}] {$1$} (rrlr);
+\draw[link,onslide={<11->,opacity=1}] (rrl) -> node [trmid,onslide={<11->,text opacity=1}] {$1$} (rrlr);
 %	\draw[link] (rrr) -> node [trmid] {$0$} (rrrl);
 %	\draw[link] (rrr) -> node [trmid] {$1$} (rrrr);
 \end{tikzpicture}
@@ -720,17 +729,27 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 
 	\only<4>{
 		\begin{itemize}
-			\item[] $\textcolor{green}{\omega_1} = \{\textcolor{green}{x_1}, x_2, x_3,
-			x_4\}$
-			\item[] $\textcolor{green}{\omega_2} = \{\textcolor{green}{x_1}, \neg x_4
-			\}$
-			\item[] $\textcolor{green}{\omega_3} = \{\textcolor{green}{x_1}, x_4\}$
-			\item[] $\omega_4 = \{x_2, \neg x_4\}$
-			\item[] $\omega_5 = \{x_2, x_4\}$
-			\item[] $\omega_6 = \{x_3, x_4\}$
+			\item[] $\omega_1 = \{x_1, x_2, x_3, x_4\}$
+		\item[] $\omega_2 = \{x_1, \neg x_4\}$
+		\item[] $\omega_3 = \{x_1, x_4\}$
+		\item[] $\omega_4 = \{x_2, \neg x_4\}$
+		\item[] $\omega_5 = \{x_2, x_4\}$
+		\item[] $\omega_6 = \{x_3, x_4\}$
 		\end{itemize}
 	}
 	\only<5>{
+	\begin{itemize}
+		\item[] $\textcolor{green}{\omega_1} = \{\textcolor{green}{x_1}, x_2, x_3,
+		x_4\}$
+		\item[] $\textcolor{green}{\omega_2} = \{\textcolor{green}{x_1}, \neg x_4
+		\}$
+		\item[] $\textcolor{green}{\omega_3} = \{\textcolor{green}{x_1}, x_4\}$
+		\item[] $\omega_4 = \{x_2, \neg x_4\}$
+		\item[] $\omega_5 = \{x_2, x_4\}$
+		\item[] $\omega_6 = \{x_3, x_4\}$
+	\end{itemize}
+}
+	\only<6>{
 		\begin{itemize}
 			\item[] $\textcolor{green}{\omega_1} = \{\textcolor{green}{x_1},
 			\textcolor{red}{x_2}, x_3, x_4\}$
@@ -742,7 +761,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 			\item[] $\omega_6 = \{x_3, x_4\}$
 		\end{itemize}
 	}
-	\only<6>{
+	\only<7>{
 		\begin{itemize}
 			\item[] $\textcolor{green}{\omega_1} = \{\textcolor{green}{x_1},
 			\textcolor{red}{x_2}, x_3, x_4\}$
@@ -754,7 +773,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 			\item[] $\omega_6 = \{x_3, x_4\}$
 		\end{itemize}
 	}
-	\only<7>{
+	\only<8-9>{
 		\begin{itemize}
 			\item[] $\textcolor{green}{\omega_1} = \{\textcolor{green}{x_1},
 			\textcolor{green}{x_2}, x_3, x_4\}$
@@ -767,7 +786,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 			\item[] $\omega_6 = \{x_3, x_4\}$
 		\end{itemize}
 	}
-	\only<8>{
+	\only<10>{
 		\begin{itemize}
 			\item[] $\textcolor{green}{\omega_1} = \{\textcolor{green}{x_1},
 			\textcolor{green}{x_2}, \textcolor{red}{x_3}, x_4\}$
@@ -780,7 +799,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 			\item[] $\omega_6 = \{\textcolor{red}{x_3}, x_4\}$
 		\end{itemize}
 	}
-	\only<9->{
+	\only<11->{
 		\begin{itemize}
 			\item[] $\textcolor{green}{\omega_1} = \{\textcolor{green}{x_1},
 			\textcolor{green}{x_2}, \textcolor{red}{x_3}\textcolor{green}{, x_4}
@@ -797,26 +816,85 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 			\textcolor{green}{x_4}\}$
 		\end{itemize}
 	}
-	\visible<4->{
+	\only<4>{
 		\begin{itemize}
-			\item[] $\textcolor{green}{\omega_7} = \{\textcolor{green}{x_1}\}$
+			\item[] $\textcolor{black}{\omega_7} = \{\textcolor{black}{x_1}\}$
 		\end{itemize}
 	}
-	\visible<7->{
+	\visible<5->{
+	\begin{itemize}
+		\item[] $\textcolor{green}{\omega_7} = \{\textcolor{green}{x_1}\}$
+	\end{itemize}
+}
+	\only<8>{
 		\begin{itemize}
-			\item[] $\textcolor{green}{\omega_8} = \{\textcolor{green}{x_2}\}$
+			\item[] $\textcolor{black}{\omega_8} = \{\textcolor{black}{x_2}\}$
 		\end{itemize}
 	}
+
+\visible<9->{
+	\begin{itemize}
+		\item[] $\textcolor{green}{\omega_8} = \{\textcolor{green}{x_2}\}$
+	\end{itemize}
+}
 \end{column}
 \end{columns}
 
+\begin{tikzpicture}[overlay,scale=0.9,every node/.style={scale=0.5,fill=white, font=\sffamily}, align=center]
+% Specification of nodes (position, etc.)
+\tikzset{%
+	>={Latex[width=2mm,length=2mm]},
+	% Specifications for style of nodes:
+	base/.style = {rectangle, rounded corners, draw=black,
+		minimum width=2cm, minimum height=1cm,
+		text centered, font=\sffamily},
+	question/.style = {base, diamond, fill=blue!15},
+	question/.style = {base, diamond, fill=blue!15},
+	unsat/.style = {base, fill=red!30,minimum width=3cm},
+	sat/.style = {base, fill=green!30,minimum width=3cm},
+	process/.style = {base, minimum width=2.5cm, fill=orange!25,
+		font=\ttfamily},
+	processcurr/.style = {process, thick, line width=0.7mm, draw=purple!80 },
+	questioncurr/.style = {question,line width=0.7mm, draw=purple!80},
+	line/.style = {->, thick },
+	linecurr/.style = {line, line width=0.7mm, draw=purple!80},
+}
+
+%\node (isfin) [question] {All vars\\ assign?};
+\node[opacity=0,onslide={<2,6,10>,opacity=1}] (dec)     [process] at (220pt, 200pt)   {Choose decision var};
+\node[opacity=0,onslide={<2,6,10>,opacity=1}] (prop)    [process]  at (310pt, 200pt)          {Unit Propagation};
+\draw[->,thick,opacity=0,onslide={<2,6,10>,opacity=1}] (dec) -> (prop);
+
+\node[opacity=0,onslide={<5,9,11>,opacity=1}] (propm)    [process]  at (280pt, 200pt)          {Unit Propagation};
+%\node[opacity=0,onslide={<8>,opacity=1}] (conf)    [question]  at (280pt, 200pt){ Is Conflict?};
+\node[opacity=0,onslide={<3,7>,opacity=1}] (confanalyse) [process]  at (280pt, 200pt) {Conflict Analysis};
+\node[opacity=0,onslide={<4,8>,opacity=1}] (learn) [process]  at (280pt, 200pt) {Learn conflict clause\\ and backjump};
+%\node[opacity=0,onslide={<2>,opacity=1}] (isend) [question] at (280pt, 200pt) {is level\\zero?};
+%\node[opacity=0,onslide={<2>,opacity=1}] (end) [unsat,double=black!10,double distance=0.5mm] at (280pt, 200pt) {$unsatiasfiable$};
+\node[opacity=0,onslide={<12>,opacity=1}] (ends) [sat,double=black!10,double distance=0.5mm]  at (280pt, 200pt){$satisfiable$};
+
+
+\end{tikzpicture}
+
+\vfill 
+\centering 
+\only<1> {$\alpha = \{ \}$}
+\only<2> {$\alpha = \{ \neg x_1 \}$}
+\only<3> {$\alpha = \{ \neg x_1 \}$}
+\only<4> {$\alpha = \{  \}$}
+\only<5> {$\alpha = \{  x_1 \}$}
+\only<6> {$\alpha = \{  x_1, \neg x_2 \}$}
+\only<7> {$\alpha = \{  x_1, \neg x_2 \}$}
+\only<8> {$\alpha = \{  x_1 \}$}
+\only<9> {$\alpha = \{  x_1, x_2 \}$}
+\only<10> {$\alpha = \{  x_1, x_2, \neg x_3 \}$}
+\only<11-> {$\alpha = \{  x_1, x_2, \neg x_3, x_4 \}$}
 \end{frame}
 
 
 \begin{frame}
 	\centering
 	\textcolor{UPMCEngagementBlueB}{\Large SAT and symmetries}\\
-
 \end{frame}
 
 
@@ -1114,7 +1192,7 @@ Equi-satisfiability:
 \frametitle{Orbit}
 
 \begin{center}
-	Orbit of an assignment $\alpha = G.\alpha = \{ g.\alpha \mid g \in G \}$
+	Orbit of an assignment $\alpha$ for a group $G$: $$G.\alpha = \{ g.\alpha \mid g \in G \}$$
 \end{center}
 
 \vfill
@@ -1258,18 +1336,38 @@ Example:
 \begin{frame}
 	\frametitle{Compare assignment}
 	
-	Define an ordering relation to compare assignment
+	Define an ordering relation to compare assignment ($\prec$)
 	\begin{itemize}
 		\item Total ordering on variables
 		\item Minimum value: $\false < \true$ or $\true < \false$
 	\end{itemize}
 \vfill
-
 	Allow only minimal (maximal) value\\
 	\vfill
 	Forbids other assignment in each orbit\\
+	$\rightarrow$ Add Symmetry breaking predicates (SBP)
+	
 	\vfill
-	\centering 	Adds Symmetry breaking predicates (SBP)
+	
+Example:\\
+\begin{itemize}
+	\item[]	$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8 ;  \false < \true$
+	\item[] 	$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
+\end{itemize}
+
+\vfill
+
+\begin{center}
+	\begin{tabular}{cccccccccc}
+
+		& $x_1$ & $x_2$ & $x_3$ & $x_4$ & $x_5$ & $x_6$ & $x_7$& $x_8$ \\
+		\toprule
+		$\alpha$ &\false & \true  & \false & \false & \false & \false& \false& \false \\
+		 &&&&$\prec$&&&\\
+		$g.\alpha$ &\false & \true  & \false & \false & \false & \false& \false& \false \\
+	\end{tabular}
+\end{center}
+	
 	
 \end{frame}
 
@@ -2021,8 +2119,8 @@ State-of-the-art:
 \item Symmchaff~\cite{sabharwal2005symchaff}
 \item Symmetry Propagation (SP)~\cite{Devriendt12}
 \item Symmetry Learning Scheme (SLS)~\cite{benhamou2010enhancing}
-\item Symmetry Explanation Leaning (SEL)~\cite{devriendt2017symmetric}
-\item $...$
+\item Symmetry Explanation Learning (SEL)~\cite{devriendt2017symmetric}
+
 \end{itemize}
 
 \vfill
@@ -2160,11 +2258,10 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 \textbf{Setup:}
 \begin{itemize}
 	\item three tools
-
 	\begin{itemize}
-		\item \scriptsize MiniSat SP (Minisat with Symmetry Propagation)
-		\item \scriptsize MiniSat ESBP (Minisat with CDCL[Sym])
-		\item \scriptsize \textbf{Minisat ESBP-SP} (our approach)
+		\item  MiniSat SP (Minisat with Symmetry Propagation)
+		\item  MiniSat ESBP (Minisat with CDCL[Sym])
+		\item  \textbf{Minisat ESBP-SP} (our approach)
 	\end{itemize}
 	\item $7200$s timeout
 \end{itemize}
