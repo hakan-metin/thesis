@@ -1228,7 +1228,7 @@ Example:
 			\begin{tikzpicture}
 			\node[point] at (0,0){};
 			\end{tikzpicture} & full assignment \\
-			\visible<3->{
+			\visible<4->{
 				\begin{tikzpicture}
 				\node[class2, scale=0.2] at (0,0){};
 				\end{tikzpicture} & orbit  \\
@@ -1249,20 +1249,10 @@ Example:
 		\visible<2-> {
 			\begin{scope}
 			\node[point] (p1) at (0, 0){};
-			%	\node[](a3) at (0, 0.25) {$\alpha_3$};
-
 			\node[point] (p2) at (1, 0){};
-			%	\node[](a5) at (1, 0.25) {$\alpha_5$};
-
 			\node[point] (p3) at (-2, -1){};
-			%	\node[](a6) at (-2, -0.75) {$\alpha_6$};
-
 			\node[point] (p4) at (-3, -1){};
-			%	\node[](a4) at (-3, -0.75) {$\alpha_4$};
-
 			\node[point] (p5) at (-1.7, 0.5){};
-			%	\node[](a1) at (-1.7, 0.75) {$\alpha_1$};
-
 			\node[point] (p6) at (-2, 1.5){};
 
 			\node[point] (p6) at (-1.5, 1.69){};
@@ -1270,16 +1260,19 @@ Example:
 			\node[point] (p6) at (-1.15, 1.12){};
 
 			\node[point] (p6) at (-2, 2.1){};
-			%	\node[](a2) at (-2, 1.75) {$\alpha_2$};
 
-			\node[point] (p7) at (0.5, -1.5){};
 
-			\node[point] (p7) at (0.9, -0.87){};
-			%	\node[](a7) at (0.5, -1.25) {$\alpha_7$};
+			\node[point] (p66) at (0.5, -1.5){};
+
+			\node[point] (p77) at (0.9, -0.87){};
+
 
 			\node[point] (p8) at (-1, 2){};
-			%	\node[](a8) at (-1, 2.25) {$\alpha_8$};
-
+\visible<3->{
+			\draw[,<->] (p1) to [bend left=30] node [midway,  align=center,yshift=.5em] {$g_1$}  (p2);
+			\draw[,<->] (p1)  to [bend right=30] node [midway, align=center,left] {$g_2$} (p66);
+			\draw[,<->] (p2)  to [bend left=30] node [midway, align=center,right] {$g_3$} (p77);
+		}
 \visible<5>{
 			\node[point+] (p1) at (0, 0){};
 			\node[point+] (p4) at (-3, -1){};
@@ -1288,14 +1281,14 @@ Example:
 			\end{scope}
 		}
 
-		\visible<3-> {
+		\visible<4-> {
 			\begin{scope}
 
 			%\node[class2] (c1) at (0.5,0){};
 			\node[class2] (c2) at (-2.5, -1){};
 
 			\node[ellipse, draw, minimum width=2cm, minimum height=2.6cm] (c3) at (-1.5, 1.5) {};
-			\node[ellipse, draw, minimum width=2cm, minimum height=2.75cm] (c4) at (0.5, -0.75) {};
+			\node[ellipse, draw, minimum width=2.75cm, minimum height=3.25cm] (c4) at (0.5, -0.75) {};
 			%\node[class1] (c3) at (-1.7, 0.5){};ellipse, draw, minimum width=1cm, minimum height=1cm
 			%\node[class1] (c4) at (-2, 1.5){};
 			%\node[class1] (c5) at (0.5, -1.5){};
@@ -1687,15 +1680,15 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 	linecurr/.style = {line, line width=0.7mm, draw=purple!80},
 }
 
-\node (isfin) [question] {All vars\\ assign?};
+\node (isfin) [question] {All vars\\ assigned?};
 \node (dec)     [process] at ($(isfin) + (0pt, -50pt)$)    {Choose decision var};
 \node[] (sdec)     [right = of dec]          {Start};
 \node (idec) [left = of isfin]  {};
-\node (prop)    [process] at ($(dec) + (0pt, -30pt)$)          {Unit Propagation};
+\node (prop)    [process] at ($(dec) + (0pt, -30pt)$)          {Unit propagation};
 
 
-\node (conf)    [question] at ($(prop) + (0pt, -40pt)$){ Is Conflict?};
-\node (confanalyse) [process] at ($(conf) + (0pt, -60pt)$) {Conflict Analysis};
+\node (conf)    [question] at ($(prop) + (0pt, -40pt)$){ Is conflict?};
+\node (confanalyse) [process] at ($(conf) + (0pt, -60pt)$) {Conflict analysis};
 \node (learn) [process] at ($(prop) + (90pt, 0)$) {Learn conflict clause\\ and backjump};
 \node (isend) [question] at ($(confanalyse) + (90pt, 0)$) {is level\\zero?};
 \node (end) [unsat,double=black!10,double distance=0.5mm] at ($(isend) + (90pt, 0)$) {$unsatiasfiable$};
@@ -1806,7 +1799,7 @@ Compute and inject SBP \textcolor{hgreen}{opportunistically}, during the solving
 
 	\item Works with any enumerative SAT solver
 	\item Can be integrated easily
-		\\{\color{blue}\hfill$\rightarrow$ e.g. +3\% LOC on \minisat}.
+	\\{\color{blue}\hfill$\rightarrow$ e.g. +3\% LOC on \minisat\footnote{90 lines out of 3090}}.
 \end{itemize}
 
 \end{frame}
@@ -2415,7 +2408,7 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 \textbf{Benchmark:}
 \begin{itemize}
 	\item from SAT contests 2012 -- 2018
-	\item retain only instances for which \bliss{} finds significant symmetries in $1000$ seconds
+	\item filter: \bliss{} finds  symmetries in $1000$ seconds
 	\item $1400$ symmetric instances (out of $4000$)
 \end{itemize}
 
@@ -2475,18 +2468,20 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 	\item A new hybrid approach (ESBP-SP)
 	\begin{itemize}
 		\item Take advantage of static and dynamic approach
-		\item \textcolor{orange}{Combination of  CDCL[Sym] with SEL}
+		\visible<2->{\item \textcolor{orange}{Combination of  CDCL[Sym] with SEL}}
 	\end{itemize}
 \end{itemize}
 \vfill
+\visible<3->{
  Perspectives
  \begin{itemize}
  	\item 	Symmetries and parallel SAT solver
  	\item 	Exploitation of partial symmetries
  \end{itemize}
+}
 \vfill
 \flushright
-\visible<2>{\textbf{Thanks !}}
+\visible<4>{\textbf{Thanks !}}
 \end{frame}
 %% ----------------------------------------------------------------------------
 %\begin{frame}
