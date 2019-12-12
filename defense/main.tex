@@ -904,9 +904,10 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \end{tikzpicture}
 
 %legend
+
 \begin{tabular}{llcll}
-	\begin{tikzpicture}\node[scale=0.75,circle,draw,thick,fill=blue!30]{};\end{tikzpicture} & decision &
-	\begin{tikzpicture}\node[rectangle,draw,thick,fill=blue!30]{};\end{tikzpicture} & propagation\\
+	\begin{tikzpicture}\node[scale=0.75,circle,draw,thick,fill=blue!30,nearly transparent ,onslide={<2->,opacity=1}]{};\end{tikzpicture} & \only<1>{\textcolor{fg!35}{decision}}\only<2->{decision} &&
+	\begin{tikzpicture}\node[rectangle,draw,thick,fill=blue!30,nearly transparent ,onslide={<5->,opacity=1}]{};\end{tikzpicture} & \only<-4>{\textcolor{fg!35}{propagation}}\only<5->{propagation}\\
 \end{tabular}
 
 
@@ -1090,7 +1091,12 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \end{tikzpicture}
 }
 
-
+\visible<3>{
+\begin{tikzpicture}[overlay]
+\node[](p) at (15pt, 75pt) {\includegraphics[width=.2\textwidth]{images/plan2}};
+\node[](p) at (300pt, 75pt) {\includegraphics[width=.2\textwidth]{images/plan2}};
+\end{tikzpicture}
+}
 \end{frame}
 
 
@@ -2245,7 +2251,7 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 					\visible<2->{
 					\begin{tikzpicture}
 					\node[] at (0,0){ \textcolor{purple}{$\omega$}};
-					\end{tikzpicture} & esbp \\
+					\end{tikzpicture} & ESBP \\
 				}
 			\end{tabular}
 		\end{column}
