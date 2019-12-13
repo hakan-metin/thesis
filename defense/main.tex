@@ -132,7 +132,7 @@
 		%\node[square, minimum height=2cm, minimum width=2cm] (sol) at ($(sat) + (100pt, 0pt)$) {Solution};
 		
 		
-		\node[align=center] at ($(coc) + (-100pt, 0pt)$) {Hardware verification};
+		\node[align=center] at ($(coc) + (-100pt, 0pt)$) {Hardware and sofware\\ verification};
 		\node at ($(gr) + (-100pt, 0pt)$) {Graph coloring};
 		\node[align=center] at ($(c) + (-100pt, 0pt)$) {Cryptanalysis};
 		\node[align=center] at ($(p) + (-100pt, 0pt)$) {Planning};
@@ -176,6 +176,8 @@
 %\end{enumerate}
 %\end{frame}
 %% ----------------------------------------------------------------------------
+
+
 \begin{frame}
 
 \tikzstyle{every picture}+=[remember picture]
@@ -229,9 +231,9 @@
 \vfill
 Is it possible to attribute each group to a unique classroom?\\
 \begin{center}
-	\visible<2->{YES!  \texttt{SAT}isfiable  $\enspace \alpha = (A,1), (B,2), (C, 3)$\\ }
-	\visible<3->{Many solutions $\alpha' = (A,2), (B,3), (C, 1)$}\\
-		 \visible<4->{$\alpha'' = \cdots$}
+	\visible<2->{YES!  \texttt{SAT}isfiable  $\enspace \alpha = \{(A,1), (B,2), (C, 3)\}$\\ }
+	\visible<3->{Many solutions $\alpha' = \{(A,2), (B,3), (C, 1)\}$}\\
+		 \visible<4->{$\vdots$}
 \end{center}
 
 
@@ -277,29 +279,33 @@ Is it possible to attribute each group to a unique classroom?
 \tikzstyle{result} = [draw, minimum width=2.5cm, minimum height=1cm]
 
 \node[box] (hlp) {High level problem};
-\node[box] (input) at ($(hlp) + (0pt, -50pt)$){Logic formula};
+\node[box, opacity=0, thick,onslide={<2>,opacity=1}] (input) at ($(hlp) + (0pt, -70pt)$){Logic formula};
 
 
-%\node[box, line width=0.4mm, minimum width=10cm,minimum height=5cm]  at (0pt, -100pt){};
+\node[box, line width=0.4mm, minimum width=10cm,minimum height=4.5cm] (boit) at (0pt, -90pt){};
 %\node<2->[draw, ellipse] (cnf) at ($(input) + (0pt, -10pt)$) {\scriptsize CNF};
 
-\node[rounded,minimum width=3.5cm, minimum height=1cm] (solver) at ($(input) + (0pt, -40pt)$) {SAT solver};
+%\node[rounded,minimum width=3.5cm, minimum height=1cm] (solver) at ($(input) + (0pt, -40pt)$) {SAT solver};
+%\node[box,result,align=center] (sat) at ($(solver) + (-70pt, -50pt)$) {Satisfiable ($\texttt{SAT}$) \\ + assignment};
+%\node[box,result,align=center] (unsat) at ($(solver) + (70pt, -50pt)$) {Unsatisfiable ($\texttt{UNSAT}$) \\ + proof};
 
 
-\node[box,result,align=center] (sat) at ($(solver) + (-70pt, -50pt)$) {Satisfiable ($\texttt{SAT}$) \\ + assignment};
-\node[box,result,align=center] (unsat) at ($(solver) + (70pt, -50pt)$) {Unsatisfiable ($\texttt{UNSAT}$) \\ + proof};
+\node[box,result,align=center] (sol) at ($(input) + (0pt, -115pt)$) {High level solution};
 
+\draw[->, opacity=0, thick,onslide={<2>,opacity=1}] (hlp) to node[fill=white,yshift=-0.5em]{encoding} (input);
 
-\node[box,result,align=center] (sol) at ($(solver) + (0pt, -100pt)$) {High level solution};
+\draw[->, thick, opacity=1, thick,onslide={<2>,opacity=0}] (hlp) -> (boit);
 
-\draw[->, thick] (hlp) to node[fill=white]{encoding} (input);
+\draw[->, thick] (boit) -> (sol);
+
 %\visible<2->{\draw[->, thick] (hlp) -> node [midway, fill=white]{Conjunctive Normal Form (CNF)} (input);}
-\draw[->, thick] (input) -> (solver);
-\draw[->, thick] (solver) ->   (sat);
-\draw[->, thick] (solver) -> (unsat);
 
-\draw[->, thick] (sat) ->   (sol);
-\draw[->, thick] (unsat) -> (sol);
+%\draw[->, thick] (input) -> (solver);
+%\draw[->, thick] (solver) ->   (sat);
+%\draw[->, thick] (solver) -> (unsat);
+%
+%\draw[->, thick] (sat) ->   (sol);
+%\draw[->, thick] (unsat) -> (sol);
 
 \end{tikzpicture}
 
@@ -382,8 +388,10 @@ Is it possible to attribute each group to a unique classroom?
 %	\end{center}
 %	}
 \vfill
-
-\visible<6->{
+\visible<6>{
+Any Boolean formula can be transformed into CNF in polynomial time
+}
+\visible<7->{
 	Clause represented as a set:
 	\begin{center}
 		$(x_1 \lor x_2 \lor x_3) \rightarrow \{x_1, x_2, x_3\}$
@@ -458,10 +466,10 @@ Is it possible to attribute each group to a unique classroom?
 \tikzstyle{result} = [draw, minimum width=2.5cm, minimum height=1cm]
 
 \node[box] (hlp) {High level problem};
-\node[box] (input) at ($(hlp) + (0pt, -50pt)$){Logic formula};
+\node[box] (input) at ($(hlp) + (0pt, -40pt)$){Logic formula};
 
 
-%\node[box, line width=0.4mm, minimum width=10cm,minimum height=5cm]  at (0pt, -100pt){};
+%\node[box, line width=0.4mm, minimum width=10cm,minimum height=4.75cm]  at (0pt, -85pt){};
 %\node<2->[draw, ellipse] (cnf) at ($(input) + (0pt, -10pt)$) {\scriptsize CNF};
 
 \node[rounded,minimum width=3.5cm, minimum height=1cm] (solver) at ($(input) + (0pt, -40pt)$) {SAT solver};
@@ -493,12 +501,15 @@ Is it possible to attribute each group to a unique classroom?
 
 	Solving SAT formula is known to be \textbf{NP-complete}~\cite{cook1971complexity}
 	\vfill
-	Good performance in practice:
+	\visible<2->{
+			Good performance in practice:
 	\begin{itemize}
 		\item Handle large problem (million variables and clauses)
 		\item International SAT competition each year on academic and industrial problems
 	\end{itemize}
+}
 \vfill
+\visible<3->{
 	Enumerative algorithms:
 	\begin{itemize}
 		\item Davis, Putnam, Logemann, and Loveland (DPLL)~\cite{dpll_62}
@@ -512,7 +523,7 @@ Is it possible to attribute each group to a unique classroom?
 			\item Clause learning
 		\end{itemize}
 	\end{itemize}
-
+}
 \end{frame}
 
 
@@ -524,7 +535,7 @@ Is it possible to attribute each group to a unique classroom?
 	\tikzset{%
 		>={Latex[width=2mm,length=2mm]},
 		% Specifications for style of nodes:
-		base/.style = {rectangle, rounded corners, draw=black,
+		base/.style = {rectangle, rounded corners, draw=black,opacity=0,
 			minimum width=2cm, minimum height=1cm,
 			text centered, font=\sffamily},
 		question/.style = {base, diamond, fill=blue!15},
@@ -534,39 +545,45 @@ Is it possible to attribute each group to a unique classroom?
 		process/.style = {base, minimum width=2.5cm, fill=orange!25,
 			font=\ttfamily},
 		processcurr/.style = {process, thick, line width=0.7mm, draw=purple!80 },
-		focus/.style = {draw=blue,line width=0.5mm},
+		focus/.style = {opacity=1},
 		questioncurr/.style = {question,line width=0.7mm, draw=purple!80},
-		line/.style = {->, thick },
+		line/.style = {->, thick,opacity=0},
 		linecurr/.style = {line, line width=0.7mm, draw=purple!80},
 	}
 	
-	\node (isfin) [question,onslide={<10>,focus}] {All vars\\ assigned?};
-	\node (dec)     [process,onslide={<2>,focus}] at ($(isfin) + (0pt, -50pt)$)    {Choose decision var};
-	\node (sdec)     [right = of dec]          {Start};
+	\node (isfin) [question,onslide={<8->,focus}] {All clauses\\ satisfied?};
+	\node (dec)     [process,onslide={<1->,focus}] at ($(isfin) + (0pt, -50pt)$)    {Choose decision var};
+	\node (sdec)    at ($(dec) + (180pt, 0pt)$)          {Start};
 	\node (idec) [left = of isfin]  {};
-	\node (prop)    [process,onslide={<3,8>,focus}] at ($(dec) + (0pt, -30pt)$)          {Unit propagation};
+	\node (prop)    [process,onslide={<2->,focus}] at ($(dec) + (0pt, -30pt)$)      {Unit propagation};
 	
 	
-	\node (conf)    [question,onslide={<4,9>,focus}] at ($(prop) + (0pt, -40pt)$){ Is conflict?};
-	\node (confanalyse) [process,onslide={<5>,focus}] at ($(conf) + (0pt, -60pt)$) {Conflict analysis};
-	\node (learn) [process,onslide={<7>,focus}] at ($(prop) + (90pt, 0)$) {Learn conflict clause\\ and backjump};
-	\node (isend) [question,onslide={<6>,focus}] at ($(confanalyse) + (90pt, 0)$) {is level\\zero?};
-	\node (end) [unsat,double=black!10,double distance=0.5mm] at ($(isend) + (90pt, 0)$) {$unsatiasfiable$};
-	\node (ends) [sat,double=black!10,double distance=0.5mm,,onslide={<11>,focus}] at ($(isfin) + (+90pt, 0)$){$satisfiable$};
+	\node (conf)    [question,onslide={<3->,focus}] at ($(prop) + (0pt, -40pt)$){ Is conflict?};
+	\node (confanalyse) [process,onslide={<4->,focus}] at ($(conf) + (0pt, -60pt)$) {Conflict analysis};
+	\node (learn) [process,onslide={<7->,focus}] at ($(prop) + (90pt, 0)$) {Learn conflict clause\\ and backjump};
+	\node (isend) [question,onslide={<5->,focus}] at ($(confanalyse) + (90pt, 0)$) {is level\\zero?};
+	
+	\node (end) [unsat,double=black!10,double distance=0.5mm,onslide={<6->,focus}] at ($(isend) + (90pt, 0)$) {$unsatiasfiable$};
+	
+	\node (ends) [sat,double=black!10,double distance=0.5mm,,onslide={<10->,focus}] at ($(isfin) + (+180pt, 0)$){$satisfiable$};
 	
 	
-	\draw[line]     (sdec) -- (dec);
-	\draw[line]     (dec) -- (prop);
-	\draw[line]     (prop) -- (conf);
-	\draw[line,opacity=1]     (conf) -| node [yshift=4.5 cm] {no}(idec.center) -- (isfin);
+	\draw[line,onslide={<1->,focus}]     (sdec) -- (dec);
+	\draw[line,onslide={<2->,focus}]     (dec) -- (prop);
+	\draw[line,onslide={<3->,focus}]     (prop) -- (conf);
+	\draw[line,onslide={<8->,focus}]     (conf) -| node [yshift=4.5 cm] {no}(idec.center) -- (isfin);
 	
-	\draw[line]     (conf) -- node {yes} (confanalyse);
-	\draw[line]     (isfin) -- node {no}(dec);
-	\draw[line]     (confanalyse) --(isend);
-	\draw[line]     (isend) -- node {yes}(end);
-	\draw[line]     (isfin) -- node {yes}(ends);
-	\draw[line]     (learn) -- (prop);
-	\draw[line]     (isend) -- node [thick] {no}(learn);
+	\draw[line,onslide={<4->,focus}]     (conf) -- node {yes} (confanalyse);
+	\draw[line,onslide={<5->,focus}]     (confanalyse) --(isend);
+	\draw[line,onslide={<6->,focus}]     (isend) -- node {yes}(end);
+	\draw[line,onslide={<7->,focus}]     (learn) -- (prop);
+			
+	\draw[line,onslide={<9->,focus}]     (isfin) -- node {no}(dec);
+
+
+	\draw[line,onslide={<10->,focus}]     (isfin) -- node {yes}(ends);
+
+	\draw[line,onslide={<7->,focus}]     (isend) -- node [thick] {no}(learn);
 	
 
 	
@@ -995,8 +1012,8 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 
 \begin{frame}
 	\frametitle{Symmetry in high level}
-		\centering
-	Let g a symmetry
+	\centering
+	 g a symmetry
 	\vfill
 
 	\begin{tikzpicture}
@@ -1014,6 +1031,15 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 		\end{block}
 		
 	}
+
+	\vfill
+\visible<3->{
+
+\begin{itemize}
+	\item Semantic symmetries \hfill \textcolor{UPMCEngagementBlueB}{$\bullet$} \textbf{Syntactic symmetries}
+\end{itemize}
+	
+}
 \end{frame}
 
 %% ----------------------------------------------------------------------------
@@ -1052,6 +1078,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 		\item[] $\omega_{10} = \{\neg x_3  ,  \neg x_6\} \tikz[baseline]{\node[anchor=base] (a10){};}$
 		\item[] $\omega_{11} = \{\neg x_3  ,  \neg x_9\} \tikz[baseline]{\node[anchor=base] (a11){};}$
 		\item[] $\omega_{12} = \{\neg x_6  ,  \neg x_9\} \tikz[baseline]{\node[anchor=base] (a12){};}$
+%		\item[] \qquad \qquad \normalfont{P}
 		\end{itemize}
 		\end{column}
 		\begin{column}[T]{.3\textwidth}
@@ -1069,6 +1096,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 		\item[] $\tikz[baseline]{\node[anchor=base] (b10){};} \omega_{10} = \{\neg x_3  ,  \neg x_6\} $
 		\item[] $\tikz[baseline]{\node[anchor=base] (b11){};} \omega_{11} = \{\neg x_3  ,  \neg x_9\} $
 		\item[] $\tikz[baseline]{\node[anchor=base] (b12){};} \omega_{12} = \{\neg x_6  ,  \neg x_9\} $
+%				\item[] \qquad \normalfont{g.P = P' = P}
 	\end{itemize}
 	\end{column}
 \end{columns}
@@ -1094,7 +1122,10 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \visible<3>{
 \begin{tikzpicture}[overlay]
 \node[](p) at (15pt, 75pt) {\includegraphics[width=.2\textwidth]{images/plan2}};
-\node[](p) at (300pt, 75pt) {\includegraphics[width=.2\textwidth]{images/plan2}};
+\node[](p) at (300pt, 75pt) {\includegraphics[width=.2\textwidth]{images/planinv}};
+\node[](p) at (80pt, -10pt) {P};
+\node[](p) at (232pt, -10pt) {g.P = P' = P};
+
 \end{tikzpicture}
 }
 \end{frame}
@@ -1166,7 +1197,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 
 \begin{frame}
 	\centering
-	\textcolor{UPMCEngagementBlueB}{\Large Exploitation of symmetries}\\
+	\textcolor{UPMCEngagementBlueB}{\Large Exploitation of symmetries:}\\
 \vspace{2em}
 	\textcolor{UPMCEngagementBlueB}{\Large Static symmetry breaking}
 \end{frame}
@@ -1289,37 +1320,48 @@ Example:
 
 
 \begin{frame}
-	\frametitle{Comparing assignments (1/2)}
+	\frametitle{Comparing assignments: Assessments}
 	
 	Define an ordering relation to compare assignments ($\prec$)
 	\begin{itemize}
 		\item Total ordering on variables
 		\item Minimum value: $\false < \true$ or $\true < \false$
 	\end{itemize}
+
 \vfill
+\visible<2->{
 	\begin{center}
-			Allow only minimal value (lex-leader)\\
+			\textbf{Allow only minimal value (lex-leader)}\\
 	\end{center}
+}
+
 	\vfill
+	\visible<3>{
 	Forbid other assignments in each orbit\\
-	\vfill
 	$\enspace \rightarrow$ Add Symmetry breaking predicates (SBP)
-	
+	}
 
 
 \end{frame}
 
 \begin{frame}
-		\frametitle{Comparing assignments (2/2)}
+		\frametitle{Comparing assignments: Example}
 
-		\begin{itemize}
-			\item[]	$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8 ;  \false < \true$
-			\item[]
-			\item[] 	$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
-		\end{itemize}
-		
-		\vfill
-		
+Ordering relation: $x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8 ;  \false < \true$
+%		\begin{itemize}
+%			\item[]	$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8 ;  \false < \true$
+%		\end{itemize}
+	
+\vfill		
+Symmetry:	$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
+%		\begin{itemize}
+%
+%			\item[] 	$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
+%		\end{itemize}
+%		\vfill
+
+\vfill		
+Assignments:		
 		\begin{center}
 			\begin{tabular}{cccccccccc}
 				
@@ -1331,15 +1373,17 @@ Example:
 				
 			\end{tabular}
 		\end{center}
-		\vfill
-		\normalsize
-		\centering \visible<3->{ $g.\alpha \prec \alpha$} \visible<4->{$\Rightarrow$ Generate SBP $\omega = \{ \neg x_1, x_2\}$}
+\vfill
+\visible<3->{
+Comparing:
+}		
+		\centering \visible<3->{ $g.\alpha \prec \alpha$} \visible<4->{$\Rightarrow$  SBP: $\omega = \{ \neg x_1, x_2\}$}
 \end{frame}
 %% ----------------------------------------------------------------------------
 \begin{frame}
 	\frametitle{Using symmetries to prune the search space}
-\only<1>{$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\}
-\only<2>{$g = \textcolor{blue}{(x_1 \enskip x_2)}(x_4 \enskip x_5)(x_7 \enskip x_8) $\\}
+\only<1>{$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $ \hfill $\omega = \{ \neg x_1, x_2\}$\\}
+\only<2>{$g = \textcolor{blue}{(x_1 \enskip x_2)}(x_4 \enskip x_5)(x_7 \enskip x_8) $\hfill $\omega = \{ \neg x_1, x_2\}$\\}
 	\centering
 	\begin{tikzpicture}[scale=1, every node/.style={scale=1}]
 
@@ -1524,16 +1568,21 @@ Example:
 
 %% ----------------------------------------------------------------------------
 \begin{frame}
-\frametitle{Static symmetry breaking}
+\frametitle{State-of-the-art static symmetry breaking}
+
+
+State-of-the-art:
+\begin{itemize}
+	\item Shatter \cite{aloul06} \hfill \textcolor{UPMCEngagementBlueB}{$\bullet$}  BreakID \cite{devriendt2016improved}
+\end{itemize}
+\vfill
 \begin{center}
-
-
 \begin{tikzpicture}
 	\tikzstyle{box} = [draw, minimum width=1.5cm]
 
 	\node[box,minimum height=1.2cm] (cnf) {CNF};
 	\node[box] (sym) at (-3, -1) { Symmetries};
-	\node[box,minimum height=1.2cm,onslide={<3>, starburst,draw=red,line width=0.5mm}] (sbp) at (0, -2) { SBPs};
+	\node[box,minimum height=1.2cm,onslide={<4>, starburst,draw=red,line width=0.5mm}] (sbp) at (0, -2) { SBPs};
 
 	
 	\node[box, minimum height=3.5cm, minimum width=2cm, line width=0.5mm, opacity=0,onslide={<2->, opacity=1}] at (0, -1) (full) {$\land$};
@@ -1547,20 +1596,14 @@ Example:
 \end{center}
 \vfill
 
-State-of-the-art approaches:
-\begin{itemize}
-	\item Shatter \cite{aloul06} \hspace{2em} \textcolor{UPMCEngagementBlueB}{$\bullet$}  BreakID \cite{devriendt2016improved}
-\end{itemize}
+
 
 \vfill
-\visible<3>{
-
-%Pros/Cons:
-%\begin{itemize}
-%	\item \textcolor{hgreen}{Works well on many symmetric instances}
-%	\item \textcolor{red}{The solver can "explode" instead of being helped}
-%\end{itemize}
-
+\visible<3->{
+\textcolor{green}{Works well on many symmetrical problems}\\
+}
+\vfill
+\visible<4>{
  \textcolor{red}{The solver can "explode" instead of being helped}
 \begin{itemize}
 	\item \color{red}generate not needed clause
@@ -1573,7 +1616,7 @@ State-of-the-art approaches:
 
 \begin{frame}
 \centering
-\textcolor{UPMCEngagementBlueB}{\Large First contribution }\\
+\textcolor{UPMCEngagementBlueB}{\Large First contribution: }\\
 \vspace{2em}
 \textcolor{UPMCEngagementBlueB}{\Large CDCL[sym] Introducing Effective Symmetry Breaking in SAT Solving }\\
 \vspace{2em}
@@ -1621,9 +1664,9 @@ State-of-the-art approaches:
 	
 	Symmetry controller:
 	\begin{itemize}
-		\item generates SBP on the fly 
-		\item only when needed
-		\item intrusive on solver
+		\item \textcolor{green}{Generates SBP on-the-fly}
+		\item \textcolor{green}{Only when needed}
+		\item \textcolor{red}{Intrusive on solver}
 	\end{itemize}
 
 \end{frame}
@@ -1671,7 +1714,7 @@ Compute and inject SBP \textcolor{blue}{opportunistically}, during the solving
 \node (ends) [sat,double=black!10,double distance=0.5mm,onslide={<2->,fill=black!30}] at ($(isfin) + (+90pt, 0)$){$satisfiable$};
 
 \node[opacity=0,onslide={<2>,opacity=1},draw, rounded corners=4pt,draw=blue, line width=0.8mm, minimum width=4cm,minimum height=6.5cm,label={[opacity=0,onslide={<2>,opacity=1},fill=white,xshift=-1.0cm, yshift=-7cm]\textcolor{blue}{Symmetry controller}}]  at (-90pt, -140pt){};
-\node (ismin)  [question,opacity=0,onslide={<2>,opacity=1}] at ($(conf) + (-90pt, 0pt)$)  {Is assignment\\minimal?};
+\node (ismin)  [question,opacity=0,onslide={<2->,opacity=1},onslide={<3>,line width=0.5mm}] at ($(conf) + (-90pt, 0pt)$)  {Is assignment\\minimal?};
 \node (genesbp)  [process,opacity=0,onslide={<2>,opacity=1}] at ($(confanalyse) + (-90pt, 0pt)$)  {Generate ESBP};
 
 
@@ -1700,7 +1743,9 @@ Compute and inject SBP \textcolor{blue}{opportunistically}, during the solving
 %% ----------------------------------------------------------------------------
 
 \begin{frame}
-\frametitle{Is assignment minimal? Symmetry status}
+\frametitle{Is assignment minimal? }
+
+Our proposal: Symmetry status
 
 \begin{itemize}
 	\item \texttt{reducer}: $g.\alpha \prec \alpha$
@@ -1710,7 +1755,7 @@ Compute and inject SBP \textcolor{blue}{opportunistically}, during the solving
 
 \vfill
 \visible<2->{
-\begin{block}{Efficient implementation of symmetry status}
+\begin{block}{Efficient implementation of symmetry status tracking}
 
 \centering 	\textbf{Keep track the smallest unassigned variable $x$:}
 
@@ -1753,11 +1798,11 @@ Compute and inject SBP \textcolor{blue}{opportunistically}, during the solving
 	\vfill
 	\end{center}
 \vfill
-			$g.\alpha$ \visible<4->{$\prec$} $\alpha$
+			$g.\alpha$ \enspace \visible<4->{$\prec$} \enspace $\alpha$
 	\vfill		
 	status of permutation g: \only<1-3>{\texttt{active}}\only<4->{\texttt{reducer}}
 	\vfill
-\visible<5->{Generate ESBP $\omega = \{\neg x_1, x_2\}$}
+\visible<5->{On-the-fly generation of ESBP: $\omega = \{\neg x_1, x_2\}$}
 \end{frame}
 
 
@@ -1765,19 +1810,18 @@ Compute and inject SBP \textcolor{blue}{opportunistically}, during the solving
 \begin{frame}
 \frametitle{CDCL[Sym] implementation}
 \begin{itemize}
-	\item C++ Implementation 
-	\item Packaged as a library \textbf{\libdsb}\footnote{\url{https://github.com/lip6/cosy}} (Controller of Symmetry)
+	\item C++ Implementation:  1780 Loc
+	\item Packaged as a library \textbf{\libdsb} (Controller of Symmetry)
+	\item[] \url{https://github.com/lip6/cosy}
 %	, to be combined with your solver\\{\color{blue}\hfill$\rightarrow$ e.g. +3\% LOC on \minisat}.
-	\item Lightweight
-	\item Fast update
 	\item Low memory consumption
-	\item Follows symmetry status
 
 	\vfill
 
-	\item Works with any enumerative SAT solver
+	\item Virtually works with any enumerative CDCL SAT solver
 	\item Can be integrated easily
-	\\{\color{blue}\hfill$\rightarrow$ e.g. +3\% LOC on \minisat\footnote{90 lines out of 3090}}.
+	\\{\color{blue}\hfill$\rightarrow$ e.g. +3\% LOC on \minisat}
+	\item[]{\color{blue}\hfill 90 lines out of 3090}
 \end{itemize}
 
 \end{frame}
@@ -1847,6 +1891,7 @@ Compute and inject SBP \textcolor{blue}{opportunistically}, during the solving
 %	
 %\end{tabular}
 
+\only<1>{
 \begin{tabular}{lccc}
 	Solver & PAR-2  & SAT & UNSAT\\
 	\toprule
@@ -1854,10 +1899,17 @@ Compute and inject SBP \textcolor{blue}{opportunistically}, during the solving
 	\textcolor{green}{\texttt{Shatter}} &2088h  & 316 &324 \\
 	\textcolor{red}{\texttt{BreakID}} &1790h  &334 &415 \\
 	\textcolor{blue}{\textbf{\texttt{MiniSym}}} &  \cellcolor{gray!30}\textbf{1735h} & \cellcolor{gray!30}\textbf{336} &  \cellcolor{gray!30}\textbf{439} \\
-
 \end{tabular}
-
-
+}
+\only<2>{
+\begin{tabular}{l|c|c}
+	Number of SBPs & \texttt{BreakID}  & \texttt{MiniSym}\\
+	\hline
+	\unsat (399)	&  2\,576\,349 &  \cellcolor{gray!30}913\,339\\
+	\sat  (320) & 12\,179\,513  & \  \cellcolor{gray!30}457\,452 
+	\label{sbp-bliss}
+\end{tabular}
+}
 %		\begin{tabular}{l|ccccc}
 %			&\texttt{MiniSAT} & \texttt{Shatter} & \texttt{BreakID} & \texttt{MiniSym}\\
 %			\hline
@@ -1872,10 +1924,13 @@ Compute and inject SBP \textcolor{blue}{opportunistically}, during the solving
 
 \end{frame}
 
+\begin{frame}
+	\frametitle{recul}
+\end{frame}
 
 \begin{frame}
 \centering
-\textcolor{UPMCEngagementBlueB}{\Large Exploitation of symmetries}\\
+\textcolor{UPMCEngagementBlueB}{\Large Exploitation of symmetries:}\\
 \vspace{2em}
 \textcolor{UPMCEngagementBlueB}{\Large Dynamic symmetry breaking}
 \end{frame}
@@ -2418,7 +2473,7 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 
 \begin{figure}[t]
 	\centering
-	{\includegraphics[scale=0.45]{images/combores}}
+	{\includegraphics[scale=0.45]{images/combores2}}
 
 \end{figure}
 \centering
