@@ -278,7 +278,7 @@ Is it possible to attribute each group to a unique classroom?
 \tikzstyle{box} = [draw, minimum width=3.5cm, thick]
 \tikzstyle{result} = [draw, minimum width=2.5cm, minimum height=1cm]
 
-\node[box] (hlp) {High level problem};
+\node[box,result] (hlp) {High level problem};
 \node[box, opacity=0, thick,onslide={<2>,opacity=1}] (input) at ($(hlp) + (0pt, -70pt)$){Logic formula};
 
 
@@ -465,7 +465,7 @@ Any Boolean formula can be transformed into CNF in polynomial time
 \tikzstyle{box} = [draw, minimum width=3.5cm, thick]
 \tikzstyle{result} = [draw, minimum width=2.5cm, minimum height=1cm]
 
-\node[box] (hlp) {High level problem};
+\node[box,result] (hlp) {High level problem};
 \node[box] (input) at ($(hlp) + (0pt, -40pt)$){Logic formula};
 
 
@@ -1338,7 +1338,7 @@ Example:
 	\vfill
 	\visible<3>{
 	Forbid other assignments in each orbit\\
-	$\enspace \rightarrow$ Add Symmetry breaking predicates (SBP)
+	$\enspace \rightarrow$ Add all symmetry breaking predicates (SBP) statically
 	}
 
 
@@ -1699,9 +1699,9 @@ Compute and inject SBP \textcolor{blue}{opportunistically}, during the solving
 	linecurr/.style = {line, line width=0.7mm, draw=purple!80},
 }
 
-\node (isfin) [question,onslide={<2->,fill=black!30}] {All vars\\ assigned?};
+\node (isfin) [question,onslide={<2->,fill=black!30}] {All clauses\\ satisfied?};
 \node (dec)     [process,onslide={<2->,fill=black!30}] at ($(isfin) + (0pt, -50pt)$)    {Choose decision var};
-\node[] (sdec)     [right = of dec]          {Start};
+\node[] (sdec)    at ($(dec) + (180pt, 0pt)$)         {Start};
 \node (idec) [left = of isfin]  {};
 \node (prop)    [process,onslide={<2->,fill=black!30}] at ($(dec) + (0pt, -30pt)$)          {Unit propagation};
 
@@ -1711,19 +1711,17 @@ Compute and inject SBP \textcolor{blue}{opportunistically}, during the solving
 \node (learn) [process,onslide={<2->,fill=black!30}] at ($(prop) + (90pt, 0)$) {Learn conflict clause\\ and backjump};
 \node (isend) [question,onslide={<2->,fill=black!30}] at ($(confanalyse) + (90pt, 0)$) {is level\\zero?};
 \node (end) [unsat,double=black!10,double distance=0.5mm,onslide={<2->,fill=black!30}] at ($(isend) + (90pt, 0)$) {$unsatiasfiable$};
-\node (ends) [sat,double=black!10,double distance=0.5mm,onslide={<2->,fill=black!30}] at ($(isfin) + (+90pt, 0)$){$satisfiable$};
+\node (ends) [sat,double=black!10,double distance=0.5mm,onslide={<2->,fill=black!30}] at ($(isfin) + (+180pt, 0)$){$satisfiable$};
 
-\node[opacity=0,onslide={<2>,opacity=1},draw, rounded corners=4pt,draw=blue, line width=0.8mm, minimum width=4cm,minimum height=6.5cm,label={[opacity=0,onslide={<2>,opacity=1},fill=white,xshift=-1.0cm, yshift=-7cm]\textcolor{blue}{Symmetry controller}}]  at (-90pt, -140pt){};
+\node[opacity=0,onslide={<2->,opacity=1},draw, rounded corners=4pt,draw=blue, line width=0.8mm, minimum width=4cm,minimum height=6.5cm,label={[opacity=0,onslide={<2->,opacity=1},fill=white,xshift=-1.0cm, yshift=-7cm]\textcolor{blue}{Symmetry controller}}]  at (-90pt, -140pt){};
 \node (ismin)  [question,opacity=0,onslide={<2->,opacity=1},onslide={<3>,line width=0.5mm}] at ($(conf) + (-90pt, 0pt)$)  {Is assignment\\minimal?};
-\node (genesbp)  [process,opacity=0,onslide={<2>,opacity=1}] at ($(confanalyse) + (-90pt, 0pt)$)  {Generate ESBP};
-
+\node (genesbp)  [process,opacity=0,onslide={<2->,opacity=1}] at ($(confanalyse) + (-90pt, 0pt)$)  {Generate ESBP};
 
 
 \draw[line]     (sdec) -- (dec);
 \draw[line]     (dec) -- (prop);
 \draw[line]     (prop) -- (conf);
-\draw[line,opacity=1,onslide={<2>,opacity=0}]     (conf) -| node [yshift=4.5 cm] {no}(idec.center) -- (isfin);
-
+\draw[line,opacity=1,onslide={<2->,opacity=0}]     (conf) -| node [yshift=4.5 cm] {no}(idec.center) -- (isfin);
 \draw[line]     (conf) -- node {yes} (confanalyse);
 \draw[line]     (isfin) -- node {no}(dec);
 \draw[line]     (confanalyse) --(isend);
@@ -1732,10 +1730,10 @@ Compute and inject SBP \textcolor{blue}{opportunistically}, during the solving
 \draw[line]     (learn) -- (prop);
 \draw[line]     (isend) -- node [] {no}(learn);
 
-\draw[line,opacity=0,onslide={<2>,opacity=1}]     (ismin) |- node [] {yes}(idec.center) -- (isfin);
-\draw[line,opacity=0,onslide={<2>,opacity=1}]     (ismin) -- node [] {no} (genesbp);
-\draw[line,opacity=0,onslide={<2>,opacity=1}]     (conf) -- node [] {no} (ismin);
-\draw[line,opacity=0,onslide={<2>,opacity=1}]     (genesbp) -- (confanalyse);
+\draw[line,opacity=0,onslide={<2->,opacity=1}]     (ismin) |- node [] {yes}(idec.center) -- (isfin);
+\draw[line,opacity=0,onslide={<2->,opacity=1}]     (ismin) -- node [] {no} (genesbp);
+\draw[line,opacity=0,onslide={<2->,opacity=1}]     (conf) -- node [] {no} (ismin);
+\draw[line,opacity=0,onslide={<2->,opacity=1}]     (genesbp) -- (confanalyse);
 
 \end{tikzpicture}
 
@@ -1745,7 +1743,7 @@ Compute and inject SBP \textcolor{blue}{opportunistically}, during the solving
 \begin{frame}
 \frametitle{Is assignment minimal? }
 
-Our proposal: Symmetry status
+Our proposal: Symmetry status tracking
 
 \begin{itemize}
 	\item \texttt{reducer}: $g.\alpha \prec \alpha$
@@ -1905,8 +1903,8 @@ Our proposal: Symmetry status
 \begin{tabular}{l|c|c}
 	Number of SBPs & \texttt{BreakID}  & \texttt{MiniSym}\\
 	\hline
-	\unsat (399)	&  2\,576\,349 &  \cellcolor{gray!30}913\,339\\
-	\sat  (320) & 12\,179\,513  & \  \cellcolor{gray!30}457\,452 
+	\unsat (399)	&  2\,576\,349 &  \cellcolor{gray!30}\textbf{913\,339}\\
+	\sat  (320) & 12\,179\,513  & \  \cellcolor{gray!30}\textbf{457\,452} 
 	\label{sbp-bliss}
 \end{tabular}
 }
@@ -1925,7 +1923,29 @@ Our proposal: Symmetry status
 \end{frame}
 
 \begin{frame}
-	\frametitle{recul}
+	\frametitle{Discussion of improvements}
+	
+	Change ordering relation
+		\begin{itemize}
+				\item Choose another lex-leader
+				\item Generate other SBP
+		\end{itemize}
+	\vfill
+	\visible<2->{
+	 Composing permutations
+		\begin{itemize}
+			\item Observe more variables
+			\item Allow faster detection 
+		\end{itemize}
+	}
+\vfill
+	\visible<3->{
+	Adapt solver heuristic dynamically
+	\begin{itemize}
+		\item Restart
+		\item Cleaning database
+	\end{itemize}
+}
 \end{frame}
 
 \begin{frame}
@@ -2014,7 +2034,7 @@ Our proposal: Symmetry status
 				\visible<2->{
 					\begin{tikzpicture}
 					\node[] at (0,0){ \textcolor{orange}{$\omega$}};
-					\end{tikzpicture} & learnt clause \\
+					\end{tikzpicture} & \textcolor{orange}{learnt clause} \\
 				}
 				
 			\end{tabular}
@@ -2040,9 +2060,9 @@ Our proposal: Symmetry status
 			
 			\node[] (p6) at (-2, 2.1){$\omega_9$};
 			
-			\node[,opacity=0, onslide={<3>,opacity=1}] (p7) at (0.5, -1.5){\textcolor{orange}{$g_1.\omega_{13}$}};
+			\node[,opacity=0, onslide={<3->,opacity=1}] (p7) at (0.5, -1.5){\textcolor{orange}{$g_1.\omega_{13}$}};
 			
-			\node[,opacity=0, onslide={<3>,opacity=1}] (pl) at (0.5, 1.5){\textcolor{orange}{$g_2.\omega_{13}$}};
+			\node[,opacity=0, onslide={<3->,opacity=1}] (pl) at (0.5, 1.5){\textcolor{orange}{$g_2.\omega_{13}$}};
 			
 			\node[] (p7a) at (0.9, -0.87){$\omega_{11}$};
 			
@@ -2056,15 +2076,26 @@ Our proposal: Symmetry status
 			
 			\node[thick, draw, minimum width=6cm, minimum height=5cm] (c4) at (-1, 0) {};
 			
-			\draw[->,opacity=0, onslide={<3>,opacity=1}] (l) to [bend right=30] node [midway, left, align=center,opacity=0, onslide={<3>,opacity=1}] {$g_1$}  (p7);
+			\draw[->,opacity=0, onslide={<3->,opacity=1}] (l) to [bend right=30] node [midway, left, align=center,opacity=0, onslide={<3->,opacity=1}] {$g_1$}  (p7);
 			
-			\draw[->,opacity=0, onslide={<3>,opacity=1}] (l) to [bend right=30] node [midway, left, align=center,opacity=0, onslide={<3>,opacity=1}] {$g_2$}  (pl);
-			\draw[->,opacity=0, onslide={<3>,opacity=1}] (l) to [bend right=10] node [midway, fill=white, align=center,opacity=0, onslide={<3>,opacity=1}] {$g_3$}  (po);
+			\draw[->,opacity=0, onslide={<3->,opacity=1}] (l) to [bend right=30] node [midway, left, align=center,opacity=0, onslide={<3->,opacity=1}] {$g_2$}  (pl);
+			\draw[->,opacity=0, onslide={<3->,opacity=1}] (l) to [bend right=10] node [midway, fill=white, align=center,opacity=0, onslide={<3->,opacity=1}] {$g_3$}  (po);
 			
 			\end{tikzpicture}
 		\end{column}
 	\end{columns}
 	
+	
+	\vfill
+	
+	\visible<2->{
+		Learnt clauses are logical consequence of the formula\\
+	}
+	\visible<3>{
+		\vfill
+		$g \in G$ are symmetries of the formula \\$\rightarrow$ symmetrical learnt clause are logical consequence too
+	}
+
 \end{frame}
 
 
@@ -2175,8 +2206,16 @@ Our proposal: Symmetry status
 
 
 \begin{frame}
-\frametitle{Dynamic Symmetry Breaking}
+\frametitle{State-of-the-art dynamic symmetry breaking}
+State-of-the-art:
+\begin{itemize}
+	\item Symmchaff~\cite{sabharwal2005symchaff}
+	\item Symmetry Learning Scheme (SLS)~\cite{benhamou2010enhancing}
+	\item Symmetry Propagation (SP)~\cite{Devriendt12}
+	\item Symmetry Explanation Learning (SEL)~\cite{devriendt2017symmetric}
+\end{itemize}
 
+\vfill
 \begin{center}
 \begin{tikzpicture}[scale=0.8,every node/.style={scale=0.8}]
 \tikzstyle{box} = [draw, minimum width=1.5cm]
@@ -2195,16 +2234,6 @@ Our proposal: Symmetry status
 \end{center}
 \vfill
 
-State-of-the-art:
-\begin{itemize}
-\item Symmchaff~\cite{sabharwal2005symchaff}
-\item Symmetry Propagation (SP)~\cite{Devriendt12}
-\item Symmetry Learning Scheme (SLS)~\cite{benhamou2010enhancing}
-\item Symmetry Explanation Learning (SEL)~\cite{devriendt2017symmetric}
-
-\end{itemize}
-
-\vfill
 
 \visible<2>{
 %Pros/Cons:
@@ -2213,8 +2242,10 @@ State-of-the-art:
 %	\item \textcolor{red}{Cannot handle some instances solved by static approach}
 %\end{itemize}
 
-Observation:\\
-\centering \textcolor{orange}{Cannot handle some instances solved by static approach}
+Observations:\\
+ 
+\textcolor{green}{Solve some instances very quicly}\\
+\textcolor{orange}{Cannot handle some instances solved by static approach}
 }
 
 \end{frame}
@@ -2286,6 +2317,24 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 \end{frame}
 %% ----------------------------------------------------------------------------
 
+
+\begin{frame}
+	\frametitle{Is valid symmetry?}
+	
+	Our proposal: Local symmetries
+	
+	\vfill
+	
+	Consider the symmetry at clause level instead of formula level
+	
+	\vfill
+	
+	\begin{center}
+		\textbf{Guarantee that symmetrical clauses are logical consequence of the formula}
+	\end{center}
+	
+\end{frame}
+
 \begin{frame}
 	\frametitle{Local symmetry}
 		\begin{columns}[t]
@@ -2301,12 +2350,12 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 				\visible<1->{
 					\begin{tikzpicture}
 					\node[] at (0,0){ \textcolor{orange}{$\omega$}};
-					\end{tikzpicture} & learnt clause \\
+					\end{tikzpicture} & \textcolor{orange}{learnt clause} \\
 				}
 					\visible<2->{
 					\begin{tikzpicture}
 					\node[] at (0,0){ \textcolor{purple}{$\omega$}};
-					\end{tikzpicture} & ESBP \\
+					\end{tikzpicture} & \textcolor{purple}{ESBP} \\
 				}
 			\end{tabular}
 		\end{column}
@@ -2378,8 +2427,9 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 	\begin{column}[t]{.3\textwidth}
 		Local symmetries:\\
 		$\omega \leftarrow \{g_1, g_2, g_3\}$\\
-		\visible<3->{\textcolor{purple}{$\omega$} $\leftarrow \{g_1 \}$}\\
-		\visible<5->{\textcolor{orange}{$\omega$} $\leftarrow \{g_1, g_3\}$}
+		\visible<3->{\textcolor{purple}{$\omega_{13}$} $\leftarrow \{g_1 \}$}\\
+		\visible<5->{\textcolor{orange}{$\omega_{14
+				}$} $\leftarrow \{g_1, g_3\}$}
 	\end{column}
 \begin{column}[t]{.6\textwidth}
 	\begin{itemize}
@@ -2387,7 +2437,7 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 		\item \visible<3->{On the fly}\\
 	\item \visible<3->{At minimal cost}\\
 	\end{itemize}
-	\centering \visible<4->{\textbf{Inductive construction}}
+	\centering \visible<5->{\textbf{Inductive construction}}
 \end{column}
 \end{columns}
 \end{frame}
@@ -2495,6 +2545,22 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 \end{frame}
 
 \begin{frame}
+	\frametitle{Discussion of improvements}
+	
+	SP and ESBP have its own update $\rightarrow$ costly
+	
+	\vfill
+	\visible<2>{
+	
+	Combine ESBP with Symmetry Explanation Learning (SEL)
+	\begin{itemize}
+		\item SEL have few requirements than SP
+		\item We hope that improve more the performance
+	\end{itemize}
+}
+\end{frame}
+
+\begin{frame}
 \frametitle{Conclusion \& Perspectives}
 
 	 Conclusion
@@ -2507,8 +2573,7 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 
 	\item A new hybrid approach (ESBP-SP)
 	\begin{itemize}
-		\item Take advantage of static and dynamic approach
-		\visible<2->{\item \textcolor{orange}{Combination of  CDCL[Sym] with SEL}}
+		\item Take advantage of static and dynamic approaches
 	\end{itemize}
 \end{itemize}
 \vfill
@@ -2674,242 +2739,6 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 \end{frame}
 
 
-
-\begin{frame}[noframenumbering]
-\frametitle{CDCL in action TODO}
-%Present unit propagation + conflit (clause learning)
-
-\begin{columns}[t]
-	\begin{column}[T]{.6\textwidth}
-		\begin{tikzpicture}[scale=0.8, every node/.style={scale=0.8}]
-		\newcommand{\x}{1}
-		\newcommand{\y}{-1.5}
-
-		\tikzstyle{inv} = [opacity=0]
-		\tikzstyle{visible} = [opacity=1]
-
-		\tikzstyle{textvisible} = [text opacity=1]
-
-		\tikzstyle{decision}=[circle,draw,thick,fill=blue!30,font=\scriptsize,anchor=base, opacity=1]
-		\tikzstyle{propagation}=[rectangle, minimum height=.65cm, minimum width=.65cm,draw,thick,fill=blue!15,font=\scriptsize,anchor=base]
-		\tikzstyle{space}=[regular polygon, regular polygon sides=3, minimum height=1cm, anchor=base,xshift=-0.25cm,yshift=-0.25cm,
-		draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
-		\tikzstyle{unsat}=[draw,thick,fill=red]
-		\tikzstyle{link}=[->,>=latex,rounded corners=5pt,thick]
-		\tikzstyle{trlink}=[link,nearly transparent]
-		\tikzstyle{mid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=1,font=\scriptsize]
-		\tikzstyle{invmid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=0.0,font=\scriptsize]
-
-		% layer 1
-		\node[decision](t) at (0,0) {$x_1$};
-
-		% layer 2
-		\node[decision, inv, onslide={<3-7>, visible}](l) at (-\x,\y) {$x_6$};
-
-		\node[propagation, inv, onslide={<8>, visible}](l) at (-\x,\y) {$x_4$};
-		% \node[space](r) at (\x,\y) {};
-
-		% layer 3
-		\node[decision, inv, onslide={<4-7>, visible}](ll) at (-\x-\x*0.5,2*\y) {$x_5$};
-		%\node[decision](lr) at (-\x+\x*0.5,2*\y) {$x_3$};
-		%    \node[decision](rl) at (\x-\x*0.5,2*\y) {$x_3$};
-		%    \node[decision](rr) at (\x+\x*0.5,2*\y) {$x_3$};
-
-		% layer 4
-		\node[propagation, inv, onslide={<5-7>, visible}](lll) at (-\x-\x*0.5-\x*0.25,3*\y) {$x_4$};
-		%\node[decision](llr) at (-\x-\x*0.5+\x*0.25,3*\y) {$x_4$};
-		%\node[decision](lrl) at (-\x+\x*0.5-\x*0.25,3*\y) {$x_4$};
-		%\node[decision](lrr) at (-\x+\x*0.5+\x*0.25,3*\y) {$x_4$};
-		%    \node[decision](rll) at (\x-\x*0.5-\x*0.25,3*\y) {$x_4$};
-		%    \node[decision](rlr) at (\x-\x*0.5+\x*0.25,3*\y) {$x_4$};
-		%    \node[decision](rrl) at (\x+\x*0.5-\x*0.25,3*\y) {$x_4$};
-		%    \node[decision](rrr) at (\x+\x*0.5+\x*0.25,3*\y) {$x_4$};
-
-		% layer 5
-		%\node[unsat](llll) at (-\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
-		\node[propagation, inv, onslide={<6-7>, visible}](lllr) at (-\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {$x_2$};
-		%\node[unsat](llrl) at (-\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-		%\node[unsat](llrr) at (-\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {};
-		%\node[unsat](lrll) at (-\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
-		%\node[unsat](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
-		%\node[unsat](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-		%\node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {};
-
-		%    \node[unsat](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
-		%	\node[unsat](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {};
-		%	\node[unsat](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-		%	\node[unsat](rlrr) at (\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {};
-		%	\node[unsat](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
-		%	\node[unsat](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
-		%	\node[unsat](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
-		%	\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {};
-
-		\node[propagation, inv, onslide={<6-7>, visible}](lllrl) at (-\x-\x*0.5-\x*0.25,5*\y) {$x_3$};
-
-		\node[scale=1.5, inv, onslide={<7-7>, visible}](lllrl) at (-\x-\x*0.5-\x*0.25,5*\y) {\ko};
-
-		\draw[link, inv, onslide={<2->, visible}] (t) ->  node [invmid, onslide={<2->, textvisible}] {$0$} (l);
-		%	\draw[link] (t) -> node [mid] {$1$} (r.north);
-		\draw[link, inv, onslide={<3-7>, visible}] (l) ->  node [invmid, onslide={<3-7>, textvisible}] {$0$} (ll);
-		%\draw[link] (l) -> node [mid] {$1$} (lr);
-		%	\draw[link] (r) ->  node [mid] {$0$} (rl);
-		%	\draw[link] (r) -> node [mid] {$1$} (rr);
-
-		\draw[link, inv, onslide={<4-7>, visible}] (ll) -> node [invmid, onslide={<4-7>, textvisible}] {$0$} (lll);
-		%\draw[link] (ll) -> node [mid] {$1$} (llr);
-		%\draw[link] (lr) -> node [mid] {$0$} (lrl);
-		%\draw[link] (lr) -> node [mid] {$1$} (lrr);
-
-		%	\draw[link] (rl) -> node [mid] {$0$} (rll);
-		%	\draw[link] (rl) -> node [mid] {$1$} (rlr);
-		%	\draw[link] (rr) -> node [mid] {$0$} (rrl);
-		%	\draw[link] (rr) -> node [mid] {$1$} (rrr);
-
-
-		%\draw[link] (lll) -> node [mid] {$0$} (llll);
-		\draw[link, inv, onslide={<5-7>, visible}] (lll) -> node [invmid, onslide={<5-7>, textvisible}] {$1$} (lllr);
-
-		\draw[link, inv, onslide={<6-7>, visible}] (lllr) -> node [invmid, onslide={<6-7>, textvisible}] {$0$} (lllrl);
-
-		%\draw[link] (llr) -> node [mid] {$0$} (llrl);
-		%\draw[link] (llr) -> node [mid] {$1$} (llrr);
-		%\draw[link] (lrl) -> node [mid] {$0$} (lrll);
-		%\draw[link] (lrl) -> node [mid] {$1$} (lrlr);
-		%\draw[link] (lrr) -> node [mid] {$0$} (lrrl);
-		%\draw[link] (lrr) -> node [mid] {$1$} (lrrr);
-
-		%	\draw[link] (rll) -> node [mid] {$0$} (rlll);
-		%	\draw[link] (rll) -> node [mid] {$1$} (rllr);
-		%	\draw[link] (rlr) -> node [mid] {$0$} (rlrl);
-		%	\draw[link] (rlr) -> node [mid] {$1$} (rlrr);
-		%	\draw[link] (rrl) -> node [mid] {$0$} (rrll);
-		%	\draw[link] (rrl) -> node [mid] {$1$} (rrlr);
-		%	\draw[link] (rrr) -> node [mid] {$0$} (rrrl);
-		%	\draw[link] (rrr) -> node [mid] {$1$} (rrrr);
-		\end{tikzpicture}
-	\end{column}
-	\begin{column}[T]{.4\textwidth}
-
-		\begin{tikzpicture}
-		\tikzstyle{tr}=[text width=3cm, opacity=0]
-
-		\node[text width=3cm] (a) {
-			\smallskip
-			$\omega_1 = \{x_1, x_2, x_3\}$
-			\smallskip
-			$\omega_2 = \{x_4, x_5, x_6\}$
-			\smallskip
-			$\omega_3 = \{\neg x_1, \neg x_5\}$
-			\smallskip
-			$\omega_4 = \{\neg x_2, \neg x_4\}$
-			\smallskip
-			$\omega_5 = \{\neg x_3, \neg x_4\}$
-			\smallskip
-			$\omega_6 = \{\neg x_3, \neg x_6\}$
-		};
-
-		\node[tr, onslide={<2>, opacity=1}] (a) {
-			\smallskip
-			$\omega_1 = \{\cred{x_1}, x_2, x_3\}$
-			\smallskip
-			$\omega_2 = \{x_4, x_5, x_6\}$
-			\smallskip
-			$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \neg x_5\}$
-			\smallskip
-			$\omega_4 = \{\neg x_2, \neg x_4\}$
-			\smallskip
-			$\omega_5 = \{\neg x_3, \neg x_4\}$
-			\smallskip
-			$\omega_6 = \{\neg x_3, \neg x_6\}$
-		};
-
-		\node[tr, onslide={<3>, opacity=1}] (a) {
-			\smallskip
-			$\omega_1 = \{\cred{x_1}, x_2, x_3\}$
-			\smallskip
-			$\omega_2 = \{x_4, x_5, \cred{x_6\}}$
-			\smallskip
-			$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \neg x_5\}$
-			\smallskip
-			$\omega_4 = \{\neg x_2, \neg x_4\}$
-			\smallskip
-			$\omega_5 = \{\neg x_3, \neg x_4\}$
-			\smallskip
-			$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
-		};
-
-
-		\node[tr, onslide={<4>, opacity=1}] (a) {
-			\smallskip
-			$\omega_1 = \{\cred{x_1}, x_2, x_3\}$
-			\smallskip
-			$\omega_2 = \{\cprop{x_4}, \cred{x_5}, \cred{x_6\}}$
-			\smallskip
-			$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \cgreen{\neg x_5\}}$
-			\smallskip
-			$\omega_4 = \{\neg x_2, \neg x_4\}$
-			\smallskip
-			$\omega_5 = \{\neg x_3, \neg x_4\}$
-			\smallskip
-			$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
-		};
-
-
-		\node[tr, onslide={<5>, opacity=1}] (a) {
-			\smallskip
-			$\omega_1 = \{\cred{x_1}, x_2, x_3\}$
-			\smallskip
-			$\cgreen{\omega_2} = \{\cgreen{x_4}, \cred{x_5}, \cred{x_6\}}$
-			\smallskip
-			$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \cgreen{\neg x_5\}}$
-			\smallskip
-			$\omega_4 = \{\cprop{\neg x_2}, \cred{\neg x_4}\}$
-			\smallskip
-			$\omega_5 = \{\cprop{\neg x_3}, \cred{\neg x_4}\}$
-			\smallskip
-			$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
-		};
-
-		\node[tr, onslide={<6-7>, opacity=1}] (a) {
-			\smallskip
-			$\omega_1 = \{\cred{x_1}, \cred{x_2}, \cblue{x_3}\}$
-			\smallskip
-			$\cgreen{\omega_2} = \{\cgreen{x_4}, \cred{x_5}, \cred{x_6\}}$
-			\smallskip
-			$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \cgreen{\neg x_5\}}$
-			\smallskip
-			$\cgreen{\omega_4} = \{\cgreen{\neg x_2}, \cred{\neg x_4}\}$
-			\smallskip
-			$\omega_5 = \{\cblue{\neg x_3}, \cred{\neg x_4}\}$
-			\smallskip
-			$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
-		};
-
-		\node[tr, onslide={<8->, opacity=1}] (a)  at (0, -3) {
-			$\omega_7 = \{x_1, \neg x_4\}$
-		};
-
-
-		\end{tikzpicture}
-
-		%	\scriptsize
-		%	\begin{itemize}
-		%	\item[] $\omega_{1} = \{x_1  ,  x_2  ,  x_3\}$
-		%	\item[] $\omega_{2} = \{x_4  ,  x_5  ,  x_6\} $
-		%	\item[] $\omega_{3} = \{x_7  ,  x_8  ,  x_9\} $
-		%	\item[] $\omega_{4} = \{\neg x_1  ,  \neg x_4\} $
-		%	\item[] $\omega_{5} = \{\neg x_1  ,  \neg x_7\} $
-		%	\item[] $\omega_{6} = \{\neg x_4  ,  \neg x_7\} $
-		%	\item[] $\omega_{7} = \{\neg x_2  ,  \neg x_5\} $
-		%	\item[] $\omega_{8} = \{\neg x_2  ,  \neg x_8\} $
-		%	\item[] $\omega_{9} = \{\neg x_5  ,  \neg x_8\} $
-		%	\item[] $\omega_{10} = \{\neg x_3  ,  \neg x_6\} $
-		%	\item[] $\omega_{11} = \{\neg x_3  ,  \neg x_9\} $
-		%	\item[] $\omega_{12} = \{\neg x_6  ,  \neg x_9) $
-		%	\end{itemize}
-	\end{column}
-\end{columns}
-\end{frame}
 
 
 \begin{frame}[noframenumbering]
@@ -3221,63 +3050,300 @@ $x = \only<1-2>{x_1}\only<3->{\textcolor{hgreen}{x_1}}$ & $g.x = \only<1>{x_2}\o
 \end{frame}
 
 \begin{frame}[noframenumbering]
-\frametitle{Encoding the problem}
-\begin{columns}
-	\begin{column}{0.1\textwidth}
-		\small
-		$(A,1) (A,2) (A,3)$\\
-		$(B,1) (B,2) (B,3)$\\
-		$(C,1) (C,2) (C,3)$\\
-		\vspace{1em}
-		$ \neg (A,1)  \neg (B,1)$\\
-		$ \neg (A,1)  \neg (C,1)$\\
-		$ \neg (B,1)  \neg (C,1)$\\
-		\vspace{1em}
-		$ \neg (A,2)  \neg (B,2)$\\
-		$ \neg (A,2)  \neg (C,2)$\\
-		$ \neg (B,2)  \neg (C,2)$\\
-		\vspace{1em}
-		$ \neg (A,3)  \neg (B,3)$\\
-		$ \neg (A,3)  \neg (C,3)$\\
-		$ \neg (B,3)  \neg (C,3)$\\
-	\end{column}
-	\begin{column}{0.2\textwidth}  %%<--- here
-		\small
-		$ x_1 \lor  x_2 \lor x_3 $ \\
-		$x_4 \lor  x_5 \lor x_6 $ \\
-		$x_7 \lor  x_8 \lor x_9 $ \\
-		\vspace{1em}
-		$ \neg x_1 \lor  \neg x_4 $ \\
-		$ \neg x_1 \lor  \neg x_7 $ \\
-		$ \neg x_4 \lor  \neg x_7 $ \\
-		\vspace{1em}
-		$\neg x_2 \lor  \neg x_5 $ \\
-		$ \neg x_2 \lor  \neg x_8 $ \\
-		$ \neg x_5 \lor  \neg x_8 $ \\
-		\vspace{1em}
-		$ \neg x_3 \lor  \neg x_6 $ \\
-		$ \neg x_3 \lor  \neg x_9 $ \\
-		$ \neg x_6 \lor  \neg x_9 $ \\
-	\end{column}
-\end{columns}
-
-%$\omega_1 = x_1 \lor  x_2 \lor x_3 $ \\
-%$\omega_2 = x_4 \lor  x_5 \lor x_6 $ \\
-%$\omega_3 = x_7 \lor  x_8 \lor x_9 $ \\
-%\vspace{1em}
-%$\omega_4 = \neg x_1 \lor  \neg x_4 $ \\
-%$\omega_5 = \neg x_1 \lor  \neg x_7 $ \\
-%$\omega_6 = \neg x_4 \lor  \neg x_7 $ \\
-%\vspace{1em}
-%$\omega_7 = \neg x_2 \lor  \neg x_5 $ \\
-%$\omega_8 = \neg x_2 \lor  \neg x_8 $ \\
-%$\omega_9 = \neg x_5 \lor  \neg x_8 $ \\
-%\vspace{1em}
-%$\omega_{10} = \neg x_3 \lor  \neg x_6 $ \\
-%$\omega_{11} = \neg x_3 \lor  \neg x_9 $ \\
-%$\omega_{12} = \neg x_6 \lor  \neg x_9 $ \\
-
+	\frametitle{CDCL in action TODO}
+	%Present unit propagation + conflit (clause learning)
+	
+	\begin{columns}[t]
+		\begin{column}[T]{.6\textwidth}
+			\begin{tikzpicture}[scale=0.8, every node/.style={scale=0.8}]
+			\newcommand{\x}{1}
+			\newcommand{\y}{-1.5}
+			
+			\tikzstyle{inv} = [opacity=0]
+			\tikzstyle{visible} = [opacity=1]
+			
+			\tikzstyle{textvisible} = [text opacity=1]
+			
+			\tikzstyle{decision}=[circle,draw,thick,fill=blue!30,font=\scriptsize,anchor=base, opacity=1]
+			\tikzstyle{propagation}=[rectangle, minimum height=.65cm, minimum width=.65cm,draw,thick,fill=blue!15,font=\scriptsize,anchor=base]
+			\tikzstyle{space}=[regular polygon, regular polygon sides=3, minimum height=1cm, anchor=base,xshift=-0.25cm,yshift=-0.25cm,
+			draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
+			\tikzstyle{unsat}=[draw,thick,fill=red]
+			\tikzstyle{link}=[->,>=latex,rounded corners=5pt,thick]
+			\tikzstyle{trlink}=[link,nearly transparent]
+			\tikzstyle{mid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=1,font=\scriptsize]
+			\tikzstyle{invmid}=[midway,fill=white,nearly transparent,opacity=1, text opacity=0.0,font=\scriptsize]
+			
+			% layer 1
+			\node[decision](t) at (0,0) {$x_1$};
+			
+			% layer 2
+			\node[decision, inv, onslide={<3-7>, visible}](l) at (-\x,\y) {$x_6$};
+			
+			\node[propagation, inv, onslide={<8>, visible}](l) at (-\x,\y) {$x_4$};
+			% \node[space](r) at (\x,\y) {};
+			
+			% layer 3
+			\node[decision, inv, onslide={<4-7>, visible}](ll) at (-\x-\x*0.5,2*\y) {$x_5$};
+			%\node[decision](lr) at (-\x+\x*0.5,2*\y) {$x_3$};
+			%    \node[decision](rl) at (\x-\x*0.5,2*\y) {$x_3$};
+			%    \node[decision](rr) at (\x+\x*0.5,2*\y) {$x_3$};
+			
+			% layer 4
+			\node[propagation, inv, onslide={<5-7>, visible}](lll) at (-\x-\x*0.5-\x*0.25,3*\y) {$x_4$};
+			%\node[decision](llr) at (-\x-\x*0.5+\x*0.25,3*\y) {$x_4$};
+			%\node[decision](lrl) at (-\x+\x*0.5-\x*0.25,3*\y) {$x_4$};
+			%\node[decision](lrr) at (-\x+\x*0.5+\x*0.25,3*\y) {$x_4$};
+			%    \node[decision](rll) at (\x-\x*0.5-\x*0.25,3*\y) {$x_4$};
+			%    \node[decision](rlr) at (\x-\x*0.5+\x*0.25,3*\y) {$x_4$};
+			%    \node[decision](rrl) at (\x+\x*0.5-\x*0.25,3*\y) {$x_4$};
+			%    \node[decision](rrr) at (\x+\x*0.5+\x*0.25,3*\y) {$x_4$};
+			
+			% layer 5
+			%\node[unsat](llll) at (-\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+			\node[propagation, inv, onslide={<6-7>, visible}](lllr) at (-\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {$x_2$};
+			%\node[unsat](llrl) at (-\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+			%\node[unsat](llrr) at (-\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {};
+			%\node[unsat](lrll) at (-\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+			%\node[unsat](lrlr) at (-\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+			%\node[unsat](lrrl) at (-\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+			%\node[unsat](lrrr) at (-\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {};
+			
+			%    \node[unsat](rlll) at (\x-\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+			%	\node[unsat](rllr) at (\x-\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+			%	\node[unsat](rlrl) at (\x-\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+			%	\node[unsat](rlrr) at (\x-\x*0.5+\x*0.25+\x*0.125,4*\y) {};
+			%	\node[unsat](rrll) at (\x+\x*0.5-\x*0.25-\x*0.125,4*\y) {};
+			%	\node[unsat](rrlr) at (\x+\x*0.5-\x*0.25+\x*0.125,4*\y) {};
+			%	\node[unsat](rrrl) at (\x+\x*0.5+\x*0.25-\x*0.125,4*\y) {};
+			%	\node[unsat](rrrr) at (\x+\x*0.5+\x*0.25+\x*0.125,4*\y) {};
+			
+			\node[propagation, inv, onslide={<6-7>, visible}](lllrl) at (-\x-\x*0.5-\x*0.25,5*\y) {$x_3$};
+			
+			\node[scale=1.5, inv, onslide={<7-7>, visible}](lllrl) at (-\x-\x*0.5-\x*0.25,5*\y) {\ko};
+			
+			\draw[link, inv, onslide={<2->, visible}] (t) ->  node [invmid, onslide={<2->, textvisible}] {$0$} (l);
+			%	\draw[link] (t) -> node [mid] {$1$} (r.north);
+			\draw[link, inv, onslide={<3-7>, visible}] (l) ->  node [invmid, onslide={<3-7>, textvisible}] {$0$} (ll);
+			%\draw[link] (l) -> node [mid] {$1$} (lr);
+			%	\draw[link] (r) ->  node [mid] {$0$} (rl);
+			%	\draw[link] (r) -> node [mid] {$1$} (rr);
+			
+			\draw[link, inv, onslide={<4-7>, visible}] (ll) -> node [invmid, onslide={<4-7>, textvisible}] {$0$} (lll);
+			%\draw[link] (ll) -> node [mid] {$1$} (llr);
+			%\draw[link] (lr) -> node [mid] {$0$} (lrl);
+			%\draw[link] (lr) -> node [mid] {$1$} (lrr);
+			
+			%	\draw[link] (rl) -> node [mid] {$0$} (rll);
+			%	\draw[link] (rl) -> node [mid] {$1$} (rlr);
+			%	\draw[link] (rr) -> node [mid] {$0$} (rrl);
+			%	\draw[link] (rr) -> node [mid] {$1$} (rrr);
+			
+			
+			%\draw[link] (lll) -> node [mid] {$0$} (llll);
+			\draw[link, inv, onslide={<5-7>, visible}] (lll) -> node [invmid, onslide={<5-7>, textvisible}] {$1$} (lllr);
+			
+			\draw[link, inv, onslide={<6-7>, visible}] (lllr) -> node [invmid, onslide={<6-7>, textvisible}] {$0$} (lllrl);
+			
+			%\draw[link] (llr) -> node [mid] {$0$} (llrl);
+			%\draw[link] (llr) -> node [mid] {$1$} (llrr);
+			%\draw[link] (lrl) -> node [mid] {$0$} (lrll);
+			%\draw[link] (lrl) -> node [mid] {$1$} (lrlr);
+			%\draw[link] (lrr) -> node [mid] {$0$} (lrrl);
+			%\draw[link] (lrr) -> node [mid] {$1$} (lrrr);
+			
+			%	\draw[link] (rll) -> node [mid] {$0$} (rlll);
+			%	\draw[link] (rll) -> node [mid] {$1$} (rllr);
+			%	\draw[link] (rlr) -> node [mid] {$0$} (rlrl);
+			%	\draw[link] (rlr) -> node [mid] {$1$} (rlrr);
+			%	\draw[link] (rrl) -> node [mid] {$0$} (rrll);
+			%	\draw[link] (rrl) -> node [mid] {$1$} (rrlr);
+			%	\draw[link] (rrr) -> node [mid] {$0$} (rrrl);
+			%	\draw[link] (rrr) -> node [mid] {$1$} (rrrr);
+			\end{tikzpicture}
+		\end{column}
+		\begin{column}[T]{.4\textwidth}
+			
+			\begin{tikzpicture}
+			\tikzstyle{tr}=[text width=3cm, opacity=0]
+			
+			\node[text width=3cm] (a) {
+				\smallskip
+				$\omega_1 = \{x_1, x_2, x_3\}$
+				\smallskip
+				$\omega_2 = \{x_4, x_5, x_6\}$
+				\smallskip
+				$\omega_3 = \{\neg x_1, \neg x_5\}$
+				\smallskip
+				$\omega_4 = \{\neg x_2, \neg x_4\}$
+				\smallskip
+				$\omega_5 = \{\neg x_3, \neg x_4\}$
+				\smallskip
+				$\omega_6 = \{\neg x_3, \neg x_6\}$
+			};
+			
+			\node[tr, onslide={<2>, opacity=1}] (a) {
+				\smallskip
+				$\omega_1 = \{\cred{x_1}, x_2, x_3\}$
+				\smallskip
+				$\omega_2 = \{x_4, x_5, x_6\}$
+				\smallskip
+				$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \neg x_5\}$
+				\smallskip
+				$\omega_4 = \{\neg x_2, \neg x_4\}$
+				\smallskip
+				$\omega_5 = \{\neg x_3, \neg x_4\}$
+				\smallskip
+				$\omega_6 = \{\neg x_3, \neg x_6\}$
+			};
+			
+			\node[tr, onslide={<3>, opacity=1}] (a) {
+				\smallskip
+				$\omega_1 = \{\cred{x_1}, x_2, x_3\}$
+				\smallskip
+				$\omega_2 = \{x_4, x_5, \cred{x_6\}}$
+				\smallskip
+				$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \neg x_5\}$
+				\smallskip
+				$\omega_4 = \{\neg x_2, \neg x_4\}$
+				\smallskip
+				$\omega_5 = \{\neg x_3, \neg x_4\}$
+				\smallskip
+				$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
+			};
+			
+			
+			\node[tr, onslide={<4>, opacity=1}] (a) {
+				\smallskip
+				$\omega_1 = \{\cred{x_1}, x_2, x_3\}$
+				\smallskip
+				$\omega_2 = \{\cprop{x_4}, \cred{x_5}, \cred{x_6\}}$
+				\smallskip
+				$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \cgreen{\neg x_5\}}$
+				\smallskip
+				$\omega_4 = \{\neg x_2, \neg x_4\}$
+				\smallskip
+				$\omega_5 = \{\neg x_3, \neg x_4\}$
+				\smallskip
+				$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
+			};
+			
+			
+			\node[tr, onslide={<5>, opacity=1}] (a) {
+				\smallskip
+				$\omega_1 = \{\cred{x_1}, x_2, x_3\}$
+				\smallskip
+				$\cgreen{\omega_2} = \{\cgreen{x_4}, \cred{x_5}, \cred{x_6\}}$
+				\smallskip
+				$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \cgreen{\neg x_5\}}$
+				\smallskip
+				$\omega_4 = \{\cprop{\neg x_2}, \cred{\neg x_4}\}$
+				\smallskip
+				$\omega_5 = \{\cprop{\neg x_3}, \cred{\neg x_4}\}$
+				\smallskip
+				$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
+			};
+			
+			\node[tr, onslide={<6-7>, opacity=1}] (a) {
+				\smallskip
+				$\omega_1 = \{\cred{x_1}, \cred{x_2}, \cblue{x_3}\}$
+				\smallskip
+				$\cgreen{\omega_2} = \{\cgreen{x_4}, \cred{x_5}, \cred{x_6\}}$
+				\smallskip
+				$\cgreen{\omega_3} = \{\cgreen{\neg x_1}, \cgreen{\neg x_5\}}$
+				\smallskip
+				$\cgreen{\omega_4} = \{\cgreen{\neg x_2}, \cred{\neg x_4}\}$
+				\smallskip
+				$\omega_5 = \{\cblue{\neg x_3}, \cred{\neg x_4}\}$
+				\smallskip
+				$\cgreen{\omega_6} = \{\neg x_3, \cgreen{\neg x_6\}}$
+			};
+			
+			\node[tr, onslide={<8->, opacity=1}] (a)  at (0, -3) {
+				$\omega_7 = \{x_1, \neg x_4\}$
+			};
+			
+			
+			\end{tikzpicture}
+			
+			%	\scriptsize
+			%	\begin{itemize}
+			%	\item[] $\omega_{1} = \{x_1  ,  x_2  ,  x_3\}$
+			%	\item[] $\omega_{2} = \{x_4  ,  x_5  ,  x_6\} $
+			%	\item[] $\omega_{3} = \{x_7  ,  x_8  ,  x_9\} $
+			%	\item[] $\omega_{4} = \{\neg x_1  ,  \neg x_4\} $
+			%	\item[] $\omega_{5} = \{\neg x_1  ,  \neg x_7\} $
+			%	\item[] $\omega_{6} = \{\neg x_4  ,  \neg x_7\} $
+			%	\item[] $\omega_{7} = \{\neg x_2  ,  \neg x_5\} $
+			%	\item[] $\omega_{8} = \{\neg x_2  ,  \neg x_8\} $
+			%	\item[] $\omega_{9} = \{\neg x_5  ,  \neg x_8\} $
+			%	\item[] $\omega_{10} = \{\neg x_3  ,  \neg x_6\} $
+			%	\item[] $\omega_{11} = \{\neg x_3  ,  \neg x_9\} $
+			%	\item[] $\omega_{12} = \{\neg x_6  ,  \neg x_9) $
+			%	\end{itemize}
+		\end{column}
+	\end{columns}
 \end{frame}
+
+%
+%\begin{frame}[noframenumbering]
+%\frametitle{Encoding the problem}
+%\begin{columns}
+%	\begin{column}{0.1\textwidth}
+%		\small
+%		$(A,1) (A,2) (A,3)$\\
+%		$(B,1) (B,2) (B,3)$\\
+%		$(C,1) (C,2) (C,3)$\\
+%		\vspace{1em}
+%		$ \neg (A,1)  \neg (B,1)$\\
+%		$ \neg (A,1)  \neg (C,1)$\\
+%		$ \neg (B,1)  \neg (C,1)$\\
+%		\vspace{1em}
+%		$ \neg (A,2)  \neg (B,2)$\\
+%		$ \neg (A,2)  \neg (C,2)$\\
+%		$ \neg (B,2)  \neg (C,2)$\\
+%		\vspace{1em}
+%		$ \neg (A,3)  \neg (B,3)$\\
+%		$ \neg (A,3)  \neg (C,3)$\\
+%		$ \neg (B,3)  \neg (C,3)$\\
+%	\end{column}
+%	\begin{column}{0.2\textwidth}  %%<--- here
+%		\small
+%		$ x_1 \lor  x_2 \lor x_3 $ \\
+%		$x_4 \lor  x_5 \lor x_6 $ \\
+%		$x_7 \lor  x_8 \lor x_9 $ \\
+%		\vspace{1em}
+%		$ \neg x_1 \lor  \neg x_4 $ \\
+%		$ \neg x_1 \lor  \neg x_7 $ \\
+%		$ \neg x_4 \lor  \neg x_7 $ \\
+%		\vspace{1em}
+%		$\neg x_2 \lor  \neg x_5 $ \\
+%		$ \neg x_2 \lor  \neg x_8 $ \\
+%		$ \neg x_5 \lor  \neg x_8 $ \\
+%		\vspace{1em}
+%		$ \neg x_3 \lor  \neg x_6 $ \\
+%		$ \neg x_3 \lor  \neg x_9 $ \\
+%		$ \neg x_6 \lor  \neg x_9 $ \\
+%	\end{column}
+%\end{columns}
+%
+%%$\omega_1 = x_1 \lor  x_2 \lor x_3 $ \\
+%%$\omega_2 = x_4 \lor  x_5 \lor x_6 $ \\
+%%$\omega_3 = x_7 \lor  x_8 \lor x_9 $ \\
+%%\vspace{1em}
+%%$\omega_4 = \neg x_1 \lor  \neg x_4 $ \\
+%%$\omega_5 = \neg x_1 \lor  \neg x_7 $ \\
+%%$\omega_6 = \neg x_4 \lor  \neg x_7 $ \\
+%%\vspace{1em}
+%%$\omega_7 = \neg x_2 \lor  \neg x_5 $ \\
+%%$\omega_8 = \neg x_2 \lor  \neg x_8 $ \\
+%%$\omega_9 = \neg x_5 \lor  \neg x_8 $ \\
+%%\vspace{1em}
+%%$\omega_{10} = \neg x_3 \lor  \neg x_6 $ \\
+%%$\omega_{11} = \neg x_3 \lor  \neg x_9 $ \\
+%%$\omega_{12} = \neg x_6 \lor  \neg x_9 $ \\
+%
+%\end{frame}
 
 %
 %\begin{frame}
