@@ -320,22 +320,24 @@ Is it possible to attribute each group to a unique classroom?
 	\begin{column}{0.1\textwidth}
 		\small
 		$ \overbrace{(A,1)}^{x_1} \overbrace{(A,2)}^{x_2} \overbrace{(A,3)}^{x_3}$\\
+		\visible<2->{
 		$(B,1) (B,2) (B,3)$\\
 		$(C,1) (C,2) (C,3)$\\
+	}
 		\vspace{1em}
-		\visible<2->{
+		\visible<3->{
 		$ \neg (A,1)  \neg (B,1)$\\
 		$ \neg (A,1)  \neg (C,1)$\\
 		$ \neg (B,1)  \neg (C,1)$\\
 		}
 		\vspace{1em}
-		\visible<3->{
+		\visible<4->{
 		$ \neg (A,2)  \neg (B,2)$\\
 		$ \neg (A,2)  \neg (C,2)$\\
 		$ \neg (B,2)  \neg (C,2)$\\
 		}
 		\vspace{1em}
-		\visible<3->{
+		\visible<4->{
 		$ \neg (A,3)  \neg (B,3)$\\
 		$ \neg (A,3)  \neg (C,3)$\\
 		$ \neg (B,3)  \neg (C,3)$\\
@@ -344,23 +346,25 @@ Is it possible to attribute each group to a unique classroom?
 	\begin{column}{0.2\textwidth}  %%<--- here
 		\small
 		$(x_1 \lor  x_2 \lor x_3) \enspace \land$\\
+			\visible<2->{
 		$(x_4 \lor  x_5 \lor x_6) \enspace \land$\\
 		$(x_7 \lor  x_8 \lor x_9) \enspace \land$\\
+	}
 		\vspace{1em}
-		\visible<2->{
+		\visible<3->{
 		$(\neg x_1 \lor  \neg x_4) \enspace \land$\\
 		$(\neg x_1 \lor  \neg x_7) \enspace \land$\\
 		$(\neg x_4 \lor  \neg x_7) \enspace \land$\\
 	}
 
 		\vspace{1em}
-		\visible<3->{
+		\visible<4->{
 		$(\neg x_2 \lor  \neg x_5) \enspace \land$\\
 		$(\neg x_2 \lor  \neg x_8) \enspace \land$\\
 		$(\neg x_5 \lor  \neg x_8) \enspace \land$\\
 	}
 		\vspace{1em}
-		\visible<3->{
+		\visible<4->{
 		$(\neg x_3 \lor  \neg x_6) \enspace \land$\\
 		$(\neg x_3 \lor  \neg x_9) \enspace \land$\\
 		$(\neg x_6 \lor  \neg x_9) \enspace $\\
@@ -369,13 +373,13 @@ Is it possible to attribute each group to a unique classroom?
 \end{columns}
 
 \begin{tikzpicture}[overlay]
-	\node[rounded, thick, minimum width=2cm, minimum height=0.5cm,opacity=0,onslide={<4->,opacity=1}] (c) at (208pt, 176pt) {};
-	\node[,opacity=0,onslide={<4->,opacity=1}] (ct) at ($(c) + (+90pt, 10pt)$)  {Clause};
-	\draw [->,thick,opacity=0,onslide={<4->,opacity=1}] (ct.west) to [bend right=30] (c);
+	\node[rounded, thick, minimum width=2cm, minimum height=0.5cm,opacity=0,onslide={<5->,opacity=1}] (c) at (208pt, 176pt) {};
+	\node[,opacity=0,onslide={<5->,opacity=1}] (ct) at ($(c) + (+90pt, 10pt)$)  {Clause};
+	\draw [->,thick,opacity=0,onslide={<5->,opacity=1}] (ct.west) to [bend right=30] (c);
 	
-	\node[rounded, thick, minimum width=3cm, minimum height=6.5cm,opacity=0,onslide={<5->,opacity=1}](f) at (210pt, 93pt) {};
-	\node[,opacity=0,onslide={<5->,opacity=1},align=center] (ft) at ($(f) + (+90pt, 0pt)$) {Conjunctive\\ Normal\\ Form (CNF)};
-	\draw [->,thick,opacity=0,onslide={<5->,opacity=1}] (ft.west) to [bend right=0] (f);
+	\node[rounded, thick, minimum width=3cm, minimum height=6.5cm,opacity=0,onslide={<6->,opacity=1}](f) at (210pt, 93pt) {};
+	\node[,opacity=0,onslide={<6->,opacity=1},align=center] (ft) at ($(f) + (+90pt, 0pt)$) {Conjunctive\\ Normal\\ Form (CNF)};
+	\draw [->,thick,opacity=0,onslide={<6->,opacity=1}] (ft.west) to [bend right=0] (f);
 	
 	\node[](p) at (20pt, 88pt) {\includegraphics[width=.25\textwidth]{images/plan2}};
 	
@@ -478,7 +482,7 @@ Any Boolean formula can be transformed into CNF in polynomial time
 \node[box,result,align=center] (sat) at ($(solver) + (-70pt, -50pt)$) {Satisfiable ($\texttt{SAT}$) \\ + assignment};
 \node[box,result,align=center] (unsat) at ($(solver) + (70pt, -50pt)$) {Unsatisfiable ($\texttt{UNSAT}$) \\ + proof};
 
-
+\node[box, line width=0.4mm, minimum width=10cm,minimum height=4.75cm] (boit) at (0pt, -90pt){};
 \node[box,result,align=center] (sol) at ($(solver) + (0pt, -100pt)$) {High level solution};
 
 \draw[->, thick] (hlp) -> (input);
@@ -501,7 +505,7 @@ Any Boolean formula can be transformed into CNF in polynomial time
 
 	Solving SAT formula is known to be \textbf{NP-complete}~\cite{cook1971complexity}
 	\vfill
-	\visible<2->{
+	\visible<1->{
 			Good performance in practice:
 	\begin{itemize}
 		\item Handle large problem (million variables and clauses)
@@ -509,7 +513,7 @@ Any Boolean formula can be transformed into CNF in polynomial time
 	\end{itemize}
 }
 \vfill
-\visible<3->{
+\visible<2->{
 	Enumerative algorithms:
 	\begin{itemize}
 		\item Davis, Putnam, Logemann, and Loveland (DPLL)~\cite{dpll_62}
@@ -552,10 +556,10 @@ Any Boolean formula can be transformed into CNF in polynomial time
 	}
 	
 	\node (isfin) [question,onslide={<8->,focus}] {All clauses\\ satisfied?};
-	\node (dec)     [process,onslide={<1->,focus}] at ($(isfin) + (0pt, -50pt)$)    {Choose decision var};
+	\node (dec)     [process,onslide={<1->,focus}] at ($(isfin) + (0pt, -50pt)$)    {Choose decision};
 	\node (sdec)    at ($(dec) + (180pt, 0pt)$)          {Start};
 	\node (idec) [left = of isfin]  {};
-	\node (prop)    [process,onslide={<2->,focus}] at ($(dec) + (0pt, -30pt)$)      {Unit propagation};
+	\node (prop)    [process,onslide={<2->,focus}] at ($(dec) + (0pt, -30pt)$)      {Unit propagation\\(BCP)};
 	
 	
 	\node (conf)    [question,onslide={<3->,focus}] at ($(prop) + (0pt, -40pt)$){ Is conflict?};
@@ -910,10 +914,10 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 	linecurr/.style = {line, line width=0.7mm, draw=purple!80},
 }
 
-\node[opacity=0,onslide={<2,6,10>,opacity=1}] (dec)     [process] at (220pt, 200pt)   {Choose decision var};%
-\node[opacity=0,onslide={<2,6,10>,opacity=1}] (prop)    [process]  at (310pt, 200pt)          {Unit Propagation};%
+\node[opacity=0,onslide={<2,6,10>,opacity=1}] (dec)     [process] at (220pt, 200pt)   {Choose decision};%
+\node[opacity=0,onslide={<2,6,10>,opacity=1}] (prop)    [process]  at (310pt, 200pt)          {Unit Propagation\\(BCP)};%
 \draw[->,thick,opacity=0,onslide={<2,6,10>,opacity=1}] (dec) -> (prop);%
-\node[opacity=0,onslide={<5,9>,opacity=1}] (propm)    [process]  at (280pt, 200pt)          {Unit Propagation};%
+\node[opacity=0,onslide={<5,9>,opacity=1}] (propm)    [process]  at (280pt, 200pt)          {Unit Propagation\\(BCP)};%
 \node[opacity=0,onslide={<3,7>,opacity=1}] (confanalyse) [process]  at (280pt, 200pt) {Conflict Analysis};%
 \node[opacity=0,onslide={<4,8>,opacity=1}] (learn) [process]  at (280pt, 200pt) {Learn conflict clause\\ and backjump};%
 \node[opacity=0,onslide={<11>,opacity=1}] (ends) [sat,double=black!10,double distance=0.5mm]  at (280pt, 200pt){$satisfiable$};
@@ -924,7 +928,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 
 \begin{tabular}{llcll}
 	\begin{tikzpicture}\node[scale=0.75,circle,draw,thick,fill=blue!30,nearly transparent ,onslide={<2->,opacity=1}]{};\end{tikzpicture} & \only<1>{\textcolor{fg!35}{decision}}\only<2->{decision} &&
-	\begin{tikzpicture}\node[rectangle,draw,thick,fill=blue!30,nearly transparent ,onslide={<5->,opacity=1}]{};\end{tikzpicture} & \only<-4>{\textcolor{fg!35}{propagation}}\only<5->{propagation}\\
+	\begin{tikzpicture}\node[rectangle,draw,thick,fill=blue!30,nearly transparent ,onslide={<5->,opacity=1}]{};\end{tikzpicture} & \only<-4>{\textcolor{fg!35}{BCP}}\only<5->{BCP}\\
 \end{tabular}
 
 
@@ -1013,7 +1017,7 @@ draw,thick,fill=blue!30,rotate=0,font=\scriptsize]
 \begin{frame}
 	\frametitle{Symmetry in high level}
 	\centering
-	 g a symmetry
+	 g: a symmetry
 	\vfill
 
 	\begin{tikzpicture}
@@ -1377,6 +1381,7 @@ Assignments:
 \visible<3->{
 Comparing:
 }		
+
 		\centering \visible<3->{ $g.\alpha \prec \alpha$} \visible<4->{$\Rightarrow$  SBP: $\omega = \{ \neg x_1, x_2\}$}
 \end{frame}
 %% ----------------------------------------------------------------------------
@@ -1700,10 +1705,10 @@ Compute and inject SBP \textcolor{blue}{opportunistically}, during the solving
 }
 
 \node (isfin) [question,onslide={<2->,fill=black!30}] {All clauses\\ satisfied?};
-\node (dec)     [process,onslide={<2->,fill=black!30}] at ($(isfin) + (0pt, -50pt)$)    {Choose decision var};
+\node (dec)     [process,onslide={<2->,fill=black!30}] at ($(isfin) + (0pt, -50pt)$)    {Choose decision};
 \node[] (sdec)    at ($(dec) + (180pt, 0pt)$)         {Start};
 \node (idec) [left = of isfin]  {};
-\node (prop)    [process,onslide={<2->,fill=black!30}] at ($(dec) + (0pt, -30pt)$)          {Unit propagation};
+\node (prop)    [process,onslide={<2->,fill=black!30}] at ($(dec) + (0pt, -30pt)$)          {Unit propagation\\(BCP)};
 
 
 \node (conf)    [question,onslide={<2->,fill=black!30}] at ($(prop) + (0pt, -40pt)$){ Is conflict?};
@@ -1775,12 +1780,18 @@ Our proposal: Symmetry status tracking
 \begin{frame}
 	\frametitle{Example}
 	\centering
+	Ordering relation: $x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8 ;  \false < \true$
 	
-	\begin{itemize}
-		\item[]	$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8 ;  \false < \true$
-		\item[]
-		\item[] 	$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
-	\end{itemize}
+	\vfill
+	
+	Symmetry: 	$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
+	
+	
+%	\begin{itemize}
+%		\item[]	$x_1 \leq x_2 \leq x_3  \leq x_4 \leq x_5 \leq x_6 \leq x_7 \leq x_8 ;  \false < \true$
+%		\item[]
+%		\item[] 	$g = (x_1 \enskip x_2)(x_4 \enskip x_5)(x_7 \enskip x_8) $\\
+%	\end{itemize}
 	
 	\vfill
 	\begin{center}
@@ -1923,9 +1934,9 @@ Our proposal: Symmetry status tracking
 \end{frame}
 
 \begin{frame}
-	\frametitle{Discussion of improvements}
+	\frametitle{Discussion of the results}
 	
-	Change ordering relation
+	Change the ordering relation
 		\begin{itemize}
 				\item Choose another lex-leader
 				\item Generate other SBP
@@ -1935,12 +1946,12 @@ Our proposal: Symmetry status tracking
 	 Composing permutations
 		\begin{itemize}
 			\item Observe more variables
-			\item Allow faster detection 
+			\item Earlier generation of ESBP 
 		\end{itemize}
 	}
 \vfill
 	\visible<3->{
-	Adapt solver heuristic dynamically
+	Adapt the solver heuristics dynamically
 	\begin{itemize}
 		\item Restart
 		\item Cleaning database
@@ -2089,11 +2100,11 @@ Our proposal: Symmetry status tracking
 	\vfill
 	
 	\visible<2->{
-		Learnt clauses are logical consequence of the formula\\
+		Learnt clauses are logical consequences of the formula\\
 	}
 	\visible<3>{
 		\vfill
-		$g \in G$ are symmetries of the formula \\$\rightarrow$ symmetrical learnt clause are logical consequence too
+		$g \in G$ are symmetries of the formula \\$\rightarrow$ symmetrical learnt clauses are logical consequences too
 	}
 
 \end{frame}
@@ -2295,7 +2306,7 @@ Observations:\\
 
 
 \begin{frame}
-\frametitle{ESBP + SP}
+\frametitle{Composing ESBP and SP}
 
 
 Compose the symmetry propagation and the ESBP\\
@@ -2330,7 +2341,7 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 	\vfill
 	
 	\begin{center}
-		\textbf{Guarantee that symmetrical clauses are logical consequence of the formula}
+		\textbf{Guarantee that symmetrical clauses are logical consequences of the formula}
 	\end{center}
 	
 \end{frame}
@@ -2404,10 +2415,11 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 			\node[] (po) at (-3 , -0.2){$\omega_{10}$};
 			%	\node[](a8) at (-1, 2.25) {$\alpha_8$};
 			
-			\node[,opacity=0, onslide={<4->,opacity=1}] (l) at (-1, 0.1){\textcolor{orange}{$\omega_{14}$}};
+			\node[,opacity=0, onslide={<5->,opacity=1}] (l) at (-0.85, 0.1){\textcolor{orange}{$\omega_{15}$}};
 			
-			\node[,opacity=0, onslide={<2->,opacity=1}] (lpp) at (-2.75, 1.60){\textcolor{purple}{$\omega_{13}$}};
+			\node[,opacity=0, onslide={<2->,opacity=1}] (lpp) at (-2.25, 0.8){\textcolor{purple}{$\omega_{13}$}};
 			
+			\node[,opacity=0, onslide={<4->,opacity=1}] (lpp2) at (1.55, 1.40){\textcolor{purple}{$\omega_{14}$}};
 			\node[thick, draw, minimum width=6cm, minimum height=5cm] (c4) at (-1, 0) {};
 			
 			\draw[->,opacity=0, onslide={<5->,opacity=1}] (l) to [bend right=30] node [midway, left, align=center,opacity=0, onslide={<5->,opacity=1}] {$g_1$}  (p7);
@@ -2416,7 +2428,9 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 			\draw[->,opacity=0, onslide={<5->,opacity=1}] (l) to [bend right=10] node [midway, fill=white, align=center,opacity=0, onslide={<5->,opacity=1}] {$g_3$}  (po);
 			
 			
-				\draw[->,opacity=0, onslide={<3->,opacity=1}] (lpp)  to[out=90, in=180,loop,looseness=4.8]node [midway, left, align=center,opacity=0, onslide={<3->,opacity=1}] {$g_1$}  (lpp);
+				\draw[->,opacity=0, onslide={<3->,opacity=1}] (lpp)  to[out=90, in=180,loop,looseness=4.8]node [midway, left, align=center,opacity=0, onslide={<3->,opacity=1}] {$g_1, g_2$}  (lpp);
+				
+				\draw[->,opacity=0, onslide={<4->,opacity=1}] (lpp2)  to[out=90, in=180,loop,looseness=4.8]node [midway, left, align=center,opacity=0, onslide={<4->,opacity=1}] {$g_1, g_3$}  (lpp2);
 				
 			\end{tikzpicture}
 		\end{column}
@@ -2427,8 +2441,9 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 	\begin{column}[t]{.3\textwidth}
 		Local symmetries:\\
 		$\omega \leftarrow \{g_1, g_2, g_3\}$\\
-		\visible<3->{\textcolor{purple}{$\omega_{13}$} $\leftarrow \{g_1 \}$}\\
-		\visible<5->{\textcolor{orange}{$\omega_{14
+		\visible<3->{\textcolor{purple}{$\omega_{13}$} $\leftarrow \{g_1, g_2 \}$}\\
+		\visible<4->{\textcolor{purple}{$\omega_{14}$} $\leftarrow \{g_1, g_3 \}$}\\
+		\visible<5->{\textcolor{orange}{$\omega_{15
 				}$} $\leftarrow \{g_1, g_3\}$}
 	\end{column}
 \begin{column}[t]{.6\textwidth}
@@ -2545,17 +2560,17 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Discussion of improvements}
+	\frametitle{Discussion of the results}
 	
-	SP and ESBP have its own update $\rightarrow$ costly
+	SP and ESBP have separated symmetry  $\rightarrow$ costly
 	
 	\vfill
 	\visible<2>{
 	
 	Combine ESBP with Symmetry Explanation Learning (SEL)
 	\begin{itemize}
-		\item SEL have few requirements than SP
-		\item We hope that improve more the performance
+		\item SEL have less  requirements than SP
+		\item We believe that this will improves the performance
 	\end{itemize}
 }
 \end{frame}
