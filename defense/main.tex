@@ -1851,7 +1851,7 @@ Our proposal: Symmetry status tracking
 		\item MiniSat (no symmetry, baseline)
 		\item MiniSat + BreakID (SOTA SAT solver using symmetries)
 		\item MiniSat + Shatter (SOTA SAT solver using symmetries)
-		\item \textbf{MiniSym} = MiniSat + CDCL[Sym] (our approach)
+		\item \textbf{MiniSym} = MiniSat + cosy (our approach)
 	\end{itemize}
 	\item $5000$ seconds timeout, $8$GB memory
 	\item includes time to compute symmetries (except for MiniSat)
@@ -2516,7 +2516,7 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 	\item three tools
 	\begin{itemize}
 		\item  MiniSat SP (Minisat with Symmetry Propagation)
-		\item  MiniSat ESBP (Minisat with CDCL[Sym])
+		\item  MiniSat ESBP (Minisat with cosy)
 		\item  \textbf{Minisat ESBP-SP} (our approach)
 	\end{itemize}
 	\item $7200$ seconds timeout
