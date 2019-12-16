@@ -2246,7 +2246,7 @@ State-of-the-art:
 \vfill
 
 
-\visible<2>{
+\visible<2->{
 %Pros/Cons:
 %\begin{itemize}
 %	\item \textcolor{hgreen}{Works well on many symmetric instances}
@@ -2255,7 +2255,9 @@ State-of-the-art:
 
 Observations:\\
  
-\textcolor{green}{Solve some instances very quicly}\\
+\textcolor{green}{Solve some instances very quickly}\\
+}
+\visible<3>{
 \textcolor{orange}{Cannot handle some instances solved by static approach}
 }
 
@@ -2826,18 +2828,6 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 %% ----------------------------------------------------------------------------
 
 
-\begin{frame}[noframenumbering]
-\frametitle{Experimental results}
-\begin{figure}[t]
-	\centering
-	%\caption{cactus plot  total number of instances}%
-	\subfloat[with \saucy]{{\includegraphics[scale=0.3]{images/saucy-result}}}%
-	\hfill
-	\subfloat[with \bliss]{{\includegraphics[scale=0.3]{images/bliss-result}}}%
-	\label{fig:cactus}%
-\end{figure}
-\end{frame}
-
 
 \begin{frame}[noframenumbering]
 \frametitle{Computing local symmetries}
@@ -2862,6 +2852,18 @@ Local symmetries
 
 \end{frame}
 
+
+\begin{frame}[noframenumbering]
+	\frametitle{Experimental results}
+	\begin{figure}[t]
+		\centering
+		%\caption{cactus plot  total number of instances}%
+		\subfloat[with \saucy]{{\includegraphics[scale=0.3]{images/saucy-result}}}%
+		\hfill
+		\subfloat[with \bliss]{{\includegraphics[scale=0.3]{images/bliss-result}}}%
+		\label{fig:cactus}%
+	\end{figure}
+\end{frame}
 
 
 \begin{frame}[noframenumbering]
