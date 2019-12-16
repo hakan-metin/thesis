@@ -1828,7 +1828,7 @@ Our proposal: Symmetry status tracking
 	\vfill
 
 	\item Virtually works with any enumerative CDCL SAT solver
-	\item Can be integrated easily
+	\item Can be easily integrated 
 	\\{\color{blue}\hfill$\rightarrow$ e.g. +3\% LOC on \minisat}
 	\item[]{\color{blue}\hfill 90 lines out of 3090}
 \end{itemize}
@@ -2315,30 +2315,47 @@ Compose the symmetry propagation and the ESBP\\
 \end{center}
 
 \vfill
-
+\visible<2->{
 Problems:
 \begin{itemize}
 	\item ESBP breaks symmetries (incrementally)
 	\item SP considers the manipulated symmetries valid all time
 \end{itemize}
+}
 
+\visible<3->{
 \vfill
 \centering
 In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
+}
 \end{frame}
 %% ----------------------------------------------------------------------------
 
 
 \begin{frame}
 	\frametitle{Is valid symmetry?}
-	
+	\newcommand{\symm}[0]{\ensuremath{\mathfrak{S}}}
 	Our proposal: Local symmetries
 	
+%	\vfill
+	
+%	Consider the symmetry at clause level instead of formula level
+	
 	\vfill
 	
-	Consider the symmetry at clause level instead of formula level
+	\begin{block}{}
+		Let $\varphi$ be a formula. We define $L_{\omega,\varphi}$,
+		the set of \textit{local symmetries} for a clause $\omega$, and with respect to
+		a formula $\varphi$, as follows:
+		
+		$$L_{\omega,\varphi}=\{\sigma \in \symm \mid \varphi \vdash \sigma.\omega\}$$
+	\end{block}
 	
-	\vfill
+		\vfill
+		We can state that:
+		\begin{align*}
+		\underset{\omega \in \varphi}{\bigcap}L_{\omega,\varphi} \subseteq G. %S(\varphi).
+		\end{align*}
 	
 	\begin{center}
 		\textbf{Guarantee that symmetrical clauses are logical consequences of the formula}
@@ -2562,7 +2579,7 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 \begin{frame}
 	\frametitle{Discussion of the results}
 	
-	SP and ESBP have separated symmetry  $\rightarrow$ costly
+	SP and ESBP have separated symmetry managers $\rightarrow$ costly
 	
 	\vfill
 	\visible<2>{
@@ -2807,6 +2824,21 @@ In a hybrid approach, SP must be able to identify\\ \textbf{valid symmetries}
 
 \end{frame}
 %% ----------------------------------------------------------------------------
+
+
+\begin{frame}[noframenumbering]
+\frametitle{Experimental results}
+\begin{figure}[t]
+	\centering
+	%\caption{cactus plot  total number of instances}%
+	\subfloat[with \saucy]{{\includegraphics[scale=0.3]{images/saucy-result}}}%
+	\hfill
+	\subfloat[with \bliss]{{\includegraphics[scale=0.3]{images/bliss-result}}}%
+	\label{fig:cactus}%
+\end{figure}
+\end{frame}
+
+
 \begin{frame}[noframenumbering]
 \frametitle{Computing local symmetries}
 
