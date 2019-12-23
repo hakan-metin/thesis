@@ -4,15 +4,15 @@ The interest of using computers for logic deduction and reasoning can be traced 
 In 1869,  William Stanley Jevons designed and built the first machine doing logic inference.
 With the progress of computers, logic is used in different domains such as design automation process 
 (logic optimization, test pattern generation, formal verification, functional simulation, etc.).
-Nowadays, one of the methods used in Boolean reasoning is the automatic satisfiability (SAT).
+Nowadays, one of the methods used in Boolean reasoning is the  satisfiability (SAT).
 
 Given a propositional formula (generally the constraints of an encoded problem),
-SAT solving consists in deciding whether the formula is satisfiable (i.e., all constraints can be
-satisfied) or unsatisfiable (i.e., there is no way to satisfy all constraints at the same time).
+SAT solving consists in deciding whether the formula  satisfiable (i.e., all constraints can be
+satisfied simultaneously) or unsatisfiable (i.e., there is no way to satisfy all constraints at the same time).
 This computation is made by a SAT solver that answers $\sat$ when the formula is satisfiable
 and $\unsat$ otherwise.
 SAT is the first problem that has been proven to be NP-complete in 1971~\cite{cook1971complexity}. 
-Every NP problem can be solved by encoding it into a SAT one. Solving this problem in 
+Every problem in NP can be solved by encoding it into a SAT one. Solving this problem in 
 polynomial time would solve the P versus NP question, one of the seven millennium prize problems.
 
 
@@ -22,18 +22,17 @@ In recent work, researchers have succeeded in proving, using a SAT solver, a max
 for the problem of coloring Pythagorean triples~\cite{heule2016solving}, with a proof weighing 200 TB.
 The success of SAT comes from the introduction of sophisticated heuristics and optimization of the solving 
 algorithm called Conflict Driven Clause Learning (CDCL) algorithm~\cite{marques1999grasp}.
- It is based on the first non memory intensive algorithm DPLL~\cite{dpll_62} named by its authors Davis, Putnam, Logemann, and Loveland.
+ It is based on a non memory intensive algorithm DPLL~\cite{dpll_62} named by its authors Davis, Putnam, Logemann, and Loveland.
 
 Nevertheless, some problems have a huge search space and some of their instances cannot be handled.
 An example of such a problem can be the vehicle routing problem (VRP).
 It concerns the service of a delivery company, in which
 given a fleet of vehicles based in a depot, they must make rounds between several customers  who have requested
 each a certain amount of goods. The tour of the vehicle refers to all clients being visited by it. 
-The goal of this problem is to find the tour that minimizes the delivery cost with different criteria monetary, distance, time, …
-Finding the optimal solution for the VRP problem is NP-Hard~\cite{toth2002vehicle}.
+The goal of this problem is to find the tour that minimizes the delivery cost with different criteria monetary, distance, time, …~\cite{toth2002vehicle}.
 When we look in more detail at an instance of this problem, renaming the set of identical vehicles will give us exactly the same problem,
 this is called a \textit{symmetry}. More precisely, a symmetry is a transformation that leaves an object (or some aspect of the object) unchanged. Symmetries are typically defined as a \textit{syntactical} property of a problem when its presence is inherent to the encoding of the problem and so a permutation of variables preserves the original specification. In the case where symmetries are independent of any 
-particular representation of the problem, we speak of \textit{semantic} symmetry.
+particular representation of the problem, we speak of \textit{semantic} symmetries.
 
 The presence of symmetries in a problem leads the search algorithm to fruitlessly explore symmetric
 search spaces and greatly hinders its performance.
@@ -167,7 +166,7 @@ symmetry breaking approach and so takes the best of two worlds. This combination
 important theoretical step for the usage of \emph{partial symmetry breaking} and \emph{local symmetries}. 
  
 %\section{Structure of the manuscript}
-The remaining of this document is organized in 6 chapters. Chapter 2 describes the state-of-the-art
+This document is organized in 6 chapters. Chapter 2 describes the state-of-the-art
  for the Boolean satisfiability problem, Chapter 3 focuses on the symmetries present in SAT.
 Chapter 4 focuses on the first contribution that dynamically uses the symmetries.
 Chapter 5 describes our second proposal and Chapter 6 concludes the thesis. More precisely:

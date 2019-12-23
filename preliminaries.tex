@@ -8,7 +8,7 @@ Before we get to the heart of the matter, we first introduce the Boolean satisfi
 %present in the formula can be satisfied and $\unsat$ otherwise.
 \section{SAT basics}
 
-The goal of SAT is to determine whether a propositional formula is satisfiable (i.e. all constraints can be satisfied)
+The goal of SAT is to determine whether a propositional formula is satisfiable (i.e. all constraints can be satisfied simultaneously)
 or unsatisfiable (i.e. there is no way to satisfy all constraints at the same time).
 The formula is constituted of \emph{Boolean} or \emph{propositional variables},
 i.e. each variable has two possible values: true or false (noted respectively $\true$ or $\false$).
@@ -23,7 +23,7 @@ For example, $a \Rightarrow b$, can be expressed as $ \neg a \lor b$.
 Every binary operator adds a pair of parentheses to define explicitly the semantic of the formula.
 In the absence of parentheses, the following priority order applies (from the highest to the lowest priority):
 negation ($\neg$), conjunction ($\land$), disjunction ($\lor$).
-An \emph{assignment}, noted $\alpha$, is defined as the function that assigns a value to each variable of $\varphi$:
+An \emph{assignment}, noted $\alpha$, is defined as a function that assigns a value to each variable of $\varphi$:
  $$\alpha: \Vars \mapsto \{ \true, \false \}$$
  As usual, $\alpha$ is said \emph{total}, or \emph{complete}, when all elements of $\Vars$ have an image by
 $\alpha$, otherwise it is \emph{partial}. By abuse of notation, an assignment is
@@ -97,12 +97,12 @@ we say that $\omega_{1}$ subsumes $\omega_{2}$.
  
  
 \begin{definition}[Conjunctive Normal Form]
- The \emph{Conjunctive Normal Form} (CNF) of a formula is a finite conjunction of clauses. It can also be represented by
+ A formula is in \emph{Conjunctive Normal Form} (CNF) if it is a finite conjunction of clauses. It can also be represented by
  $$\varphi = \bigwedge_{i=1}^k \omega_i \text{ (or by the set of its clauses } \varphi = \{\omega_i\}_{i \in \llbracket 1,k \rrbracket}\text{)}$$
 \end{definition}
 
  \begin{definition}[Disjunctive normal form]
-The \emph{Disjunctive normal form} (DNF) of a formula is finite disjunction of cubes.
+A formula is in \emph{Disjunctive normal form} (DNF) if it is a finite disjunction of cubes.
 I can be also represented by
 $$\varphi = \bigvee_{i=1}^k \gamma_i$$
  \end{definition}
@@ -127,10 +127,10 @@ a normal form.
   \multirow{2}{*}{Domination laws} & $x \lor \true \equiv \true$\\
            &  $x \land \false \equiv \false$\\
   \hline        
-  \multirow{2}{*}{Idempotent laws} & $x \lor x \equiv x$\\
+  \multirow{2}{*}{Idempotency laws} & $x \lor x \equiv x$\\
                & $x \land x \equiv x$\\     
   \hline        
-  \multirow{2}{*}{Distributive laws} & $x \lor (y \land z) \equiv (x \lor y) \land (x \lor z)$\\
+  \multirow{2}{*}{Distributivity laws} & $x \lor (y \land z) \equiv (x \lor y) \land (x \lor z)$\\
            & $x \land (y \lor z) \equiv (x \land y) \lor (x \land z)$\\
  \hline        
  \multirow{2}{*}{Negation laws}  & $x \lor \neg x \equiv \true$\\
@@ -190,7 +190,7 @@ formula can be transformed in CNF form with polynomial time\cite{Russell1994Arti
 %\emph{satisfiable} (\sat) if there is at least one assignment that satisfies it;
 %otherwise the formula is \emph{unsatisfiable} (\unsat).
 \subsection{An NP-complete problem}
-The SAT problem is the first NP-complete problem proven by Stephen Cook in 1971~\cite{cook1971complexity}.
+The SAT problem is the first problem to be proven to be NP-complete by Stephen Cook in 1971~\cite{cook1971complexity}.
 NP-completeness means that a SAT problem can be solved with a non-deterministic Turing machine in polynomial time (NP) and is also NP-hard.
 A problem is said to be NP-hard (non-deterministic polynomial-time hard) if 
 any NP problem can be reduced to this problem in polynomial time.
@@ -265,15 +265,15 @@ Two kinds of algorithms exist to solve satisfiability problems.
 First, \emph{incomplete} algorithms~\cite{kautz2009incomplete} which do not provide any guarantee that they will eventually report
 either a satisfiable assignment or declare the formula unsatisfiable. This kind of algorithm is out of scope of this thesis. 
 Second, the \emph{complete} algorithms, which provide a guarantee that if an assignment exists,
-it will be found or declare that the formula is unsatisfiable.
+it will be found and declare the formula satisfiable or no assignment that satisfies all constraints exists and declare that the formula is unsatisfiable.
 This section describes different \emph{complete} algorithms to solve propositional formulas.
 
 \subsubsection{A naive algorithm}
 A naive approach to solve a SAT problem is to try all possible assignments.
 For a propositional formula with $n$ variables, we have to verify, in the worse case, $2^n$ assignments.  
 The algorithm first tries an assignment, for example all literals are set to false and then if
-the formula is not satisfiable, it tries other assignments. 
-This algorithm is finished when either a satisfiable assignment is found and so
+the formula is not satisfied, it tries other assignments. 
+This algorithm is finished when either a satisfying assignment is found and so
 the formula is declared $\sat$  or no assignment is satisfying the formula and so the formula is declared $\unsat$.
 \Cref{fig:naive_algo} illustrates the search tree for a given problem with six variables.
 The  formula presented in the figure has 6 clauses, with 2 ternary clauses and 4 binary clauses.
@@ -291,10 +291,10 @@ In the general case, due to the number of variables in problems, this algorithm 
 \end{figure}
 
 \subsubsection{Davis Putnam Logemann Loveland algorithm (DPLL)}\label{sec:dpll}
-One of the first, non-memory-intensive, algorithm developed to solve SAT problems is 
+One of the first, non-memory-intensive, algorithms developed to solve SAT problems is 
 the Davis Putnam Logemann Loveland algorithm (DPLL)~\cite{dpll_62}. 
 It explores a binary tree using depth first search, as shown in \Cref{algo:dpll}.
-The construction of the tree  relies  on the unit propagation (\cref{algo:dpll:unit}) presented in detail in \Cref{algo:unitdpll} and on a \emph{decision} variable  that is chosen on \cref{algo:dpll:decision}.
+The construction of the tree  relies  on unit propagation (\cref{algo:dpll:unit}) presented in detail in \Cref{algo:unitdpll} and on a \emph{decision} variable  that is chosen on \cref{algo:dpll:decision}.
 Both values of this variable are checked, the true value on \cref{algo:dpll:pos} and the false value on \cref{algo:dpll:neg}.
 When a leaf of the tree is inconsistent (i.e. a variable needs to be set to true and false at the same time), called a \textit{conflict} (\cref{algo:dpll:unsatbranch}), the opposite value of the decision is explored.
 Recursively, when both values of a variable lead to a conflict,
@@ -327,7 +327,7 @@ The performance of the DPLL algorithm is highly impacted by the choice of decisi
 \texttt{assignDecisionLiteral} is the procedure responsible of choosing it.
 Its objective is to find a literal that will generate a maximum of unit propagations.
 Intuitively, decision literals can be viewed as “guesses” and propagated literals can be viewed as “deductions”. 
-Finding the optimal variable that will generate the maximum number of propagation is NP-Hard\cite{biere2009handbook}.
+%Finding the optimal variable that will generate the maximum number of propagation is NP-Hard\cite{biere2009handbook}.
 Different heuristics exists to choose the decision variable, some of them are presented in Section~\ref{sec:heuristics}.
 
 
@@ -372,7 +372,7 @@ simultaneously to the true and false. \Cref{fig:conflict} shows an example that 
 First, the solver chooses $\neg x_1$ as a decision (noted D ($\neg x_1$) in the figure) then, $\neg x_6$ and, then $\neg x_5$. This last one propagates $x_4$ (marked with P ($x_4$) in the figure),
 which in turn propagates $x_2$ and $x_3$.
 To satisfy $\omega_1$, $x_3$ needs to be set to $\true$, and  to satisfy $\omega_5$, 
-it needs to be set to $\false$. As a variable cannot have both values, a conflict appears (noted C in the figure).
+it needs to be set to $\false$. As a variable cannot have both values, a conflict appears (denoted C in the figure).
 
 \begin{figure}[!htbp]
  \centering
@@ -454,7 +454,7 @@ Decision heuristics choose the unassigned variable with the highest activity.
 Learning rate based branching (LRB~\cite{liang2016learning}) is the latest decision heuristic. It is a
 generalization of VSIDS and its goal is to optimize the \emph{learning rate} (LR), defined as the ability to generate
 learned clauses. The LRB of a variable is the weighted average (computed with \emph{exponential recency
-weighted average} (ERWA))  value taken by its LR over the time. Unassigned variable with the highest LRB is chosen as a decision. 
+weighted average} (ERWA))  value taken by its LR over the time. The unassigned variable with the highest LRB is chosen as a decision. 
 %\hakan{A VOIR The idea behind this heuristics is to keep variables that used to generate learned clause in the search tree.}
 
 \paragraph{Restarts heuristics.}
@@ -463,7 +463,7 @@ restarts from the top of the tree, while maintaining some information, like lear
  The restart prevents the solver to get stuck in the same part of the search space (phenomenon known as heavy tailing~\cite{gomes1997heavy}).
 Detecting this phenomenon has been widely treated in the literature~\cite{audemard2012refining,biere2008adaptive}.
 These strategies are based on counting the number of conflicts or on the monitoring the current search’s depth.
-Theoretically, a solver with restarts has a better result~\cite{huang2007effect} and is today
+Theoretically, a solver with restarts has a better result~\cite{huang2007effect}. Restarts are today
 used in almost all state-of-the-art solvers.
 
 \paragraph{Cleaning clause database.}
@@ -472,9 +472,9 @@ Storing  all learned clauses will end up with memory exhaustion and the cost of 
  problem, removing them will not affect the satisfiability of the formula.
   In the literature, different criteria exist.
  The size of the clause is one of them and is very often used by solvers. 
- A small clause has a better chance to participate to the unit propagation and so be useful for the solving.
+ A small clause has a better chance to participate in the unit propagation and so be useful for the solving.
  As a consequence, large clauses are removed.\\
-\emph{Clause activity} is another criterion, a clause augments its activity when it participates to conflict analysis. 
+\emph{Clause activity} is another criterion, a clause augments its activity when it participates in conflict analysis. 
 Clauses with a lower activity that are not implied in the resolution of conflicts are removed.
  The last, often, used criterion is based on the Literal Block Distance (LBD) measure. It is a measure that computes the \emph{quality} of a clause.
 It is based on the number of decision levels present in the clause. The more a clause has a high value of LBD and 
@@ -486,7 +486,7 @@ In current state-of-the-art solvers, multiple criteria are used and half of the 
 In order to optimize solving time, some transformation can be applied to simplify the original formula.
 This is done by \emph{preprocessing} the formula before the start of the solving.
 When it is used during the solving (usually after a restart), it is called \emph{inprocessing}.
-Simplification of the formula is made by removing clauses and/or variables.\\
+%Simplification of the formula is made by removing clauses and/or variables.\\
 \emph{Variable elimination} simplification is based on the \emph{resolution inference rule}~\cite{robinson1965machine}.
 Consider the two clauses $\omega_1 = \{x_1, x_i, ..., x_j \}$ and $\omega_2 = \{\neg x_1, y_i, ..., y_j\}$.
 The resolution inference rule allows to derive a clause $\omega_3 = \{x_i, ..., x_j, y_i, ..., y_j\}$ which is called
@@ -505,7 +505,7 @@ is implemented in the \texttt{SatElite}~\cite{een2005effective} preprocessor eng
 Other simplification techniques exist such as \emph{Gaussian elimination} which detects a sub formula in a XOR-SAT
 form and solves it in a polynomial time~\cite{moore2011nature}. This technique can also be used in inprocessing~\cite{soos2010enhanced}. 
 Some techniques exploit the structure of the original formula and add relevant clauses to speed up the resolution
-time of the SAT solver. One of them uses the \textit{community structure} of the formula to find good clauses to add into.
+time of the SAT solver. One of them uses the \textit{community structure} of the formula to find good clauses.
 A preprocessor engine doing that is \texttt{modprep}~\cite{ansotegui2015using}.
 %The usage of symmetries also adds relevant clauses in the formula and will be detailed in the next chapter.
 \subsection{Optimizing SAT solving}

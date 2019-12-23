@@ -528,7 +528,7 @@ We observe that performances our tool are better with \bliss{} than with
 known to compute fewer generators for the group of symmetries than \bliss{}.
 Since the larger the symmetries set is, the earlier the detection of an
 \emph{evidence} that an assignment is not a \textit{lex-leader} will be, we
-generate less symmetry-breaking predicates (only the effective ones). This is
+generate fewer symmetry-breaking predicates (only the effective ones). This is
 shown in Table~\ref{tab:sbp}; \cdclsym{} generates an order of magnitude fewer
 predicates than \breakid{}.
 
@@ -684,5 +684,4 @@ solver. \libdsb{} is released under GPL license and is available at
  
 The extensive evaluation of our approach on the symmetric formulas of the 
  SAT contests from 2012 to 2017 shows that it outperforms the state-of-the-art techniques, in
-particular on unsatisfiable instances, which are the hardest class of the
-problem.
+particular on unsatisfiable instances, in which the whole search space must be explored.
